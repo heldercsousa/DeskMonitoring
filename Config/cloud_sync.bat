@@ -18,9 +18,3 @@ for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') d
     --checkers 8 ^
     --fast-list ^
 	--exclude "logs/**"    
-
-:: Copy logs to B2 (copy, not sync — never deletes from B2, keeps 30+ days history)
-"%RCLONE%" copy "C:\Sync\Logs" "%REMOTE%/logs" ^
-    --config "%CONFIG%" ^
-    --log-file "%LOG%" ^
-    --log-level INFO

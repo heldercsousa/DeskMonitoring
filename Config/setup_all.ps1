@@ -228,8 +228,7 @@ if (Test-Path "C:\Sync\Logs\firewall.log") {
 Write-Step "Step 10 - FolderSync-CloudBackup task (SYSTEM, every 5 min)"
 $existingBackup = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
 if (-not $existingBackup) {
-    $action1   = New-ScheduledTaskAction -Execute 'powershell.exe' `
-        -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
+    $action1 = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1"
     $trigger1  = @(
         $(New-ScheduledTaskTrigger -AtStartup),
         $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 5) -Once -At (Get-Date))

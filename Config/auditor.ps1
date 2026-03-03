@@ -129,7 +129,10 @@ function Start-FileWatcher {
             
             $line | Add-Content -LiteralPath $logFile -Encoding UTF8
             
-            if ($type -eq 'DELETED') { & 'C:\Sync\Config\cloud_sync.ps1' }
+            if ($type -eq 'DELETED') { 
+                # Dispara o sync de forma totalmente oculta e independente
+                Start-Process powershell.exe -ArgumentList "-NoProfile -WindowStyle Hidden -File C:\Sync\Config\cloud_sync.ps1" -WindowStyle Hidden -CreateNoWindow
+            }
         } | Out-Null
     }
 

@@ -1,0 +1,2682 @@
+2026/03/03 00:00:04 INFO  : There was nothing to transfer
+2026/03/03 00:00:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               110 / 110, 100%, Listed 260
+Elapsed time:         1.3s
+
+2026/03/03 00:00:07 INFO  : cloud_sync_2026-03-03.log: Copied (new)
+2026/03/03 00:00:08 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:00:08 INFO  : cloud_sync_2026-03-02.log: Copied (replaced existing)
+2026/03/03 00:00:08 INFO  : 
+Transferred:   	  468.234 KiB / 468.234 KiB, 100%, 112.106 KiB/s, ETA 0s
+Checks:                38 / 38, 100%, Listed 77
+Transferred:            3 / 3, 100%
+Elapsed time:         2.5s
+
+2026/03/03 00:04:32 INFO  : There was nothing to transfer
+2026/03/03 00:04:32 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               110 / 110, 100%, Listed 261
+Elapsed time:         1.2s
+
+2026/03/03 00:04:35 INFO  : auditor_svc.log: Updated modification time in destination
+2026/03/03 00:04:36 INFO  : auditor_svc_err.log: Updated modification time in destination
+2026/03/03 00:04:36 INFO  : file_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:04:36 ERROR : cloud_sync_2026-03-03.log: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "abed256ae8fed190219bea9f3c855d5bfd9f973f" vs dst(B2 bucket helder-sync-mirror path logs) "2a873d9477211b0f736f29174d8da51299b67f7b"
+2026/03/03 00:04:36 INFO  : cloud_sync_2026-03-03.log: Removing failed copy
+2026/03/03 00:04:36 INFO  : watchdog_svc.log: Updated modification time in destination
+2026/03/03 00:04:36 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:04:36 INFO  : security_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:04:37 INFO  : watchdog_svc_err.log: Updated modification time in destination
+2026/03/03 00:04:37 INFO  : firewall.log: Copied (replaced existing)
+2026/03/03 00:04:37 ERROR : Attempt 1/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "abed256ae8fed190219bea9f3c855d5bfd9f973f" vs dst(B2 bucket helder-sync-mirror path logs) "2a873d9477211b0f736f29174d8da51299b67f7b"
+2026/03/03 00:04:38 INFO  : cloud_sync_2026-03-03.log: Copied (new)
+2026/03/03 00:04:38 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:04:38 INFO  : 
+Transferred:   	    1.485 MiB / 1.485 MiB, 100%, 204.874 KiB/s, ETA 0s
+Checks:                79 / 79, 100%, Listed 161
+Transferred:            5 / 5, 100%
+Elapsed time:         4.7s
+
+2026/03/03 00:05:03 INFO  : There was nothing to transfer
+2026/03/03 00:05:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               110 / 110, 100%, Listed 263
+Elapsed time:         1.3s
+
+2026/03/03 00:05:07 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 00:05:07 INFO  : mirror_2026-03-03.log: Copied (new)
+2026/03/03 00:05:07 INFO  : 
+Transferred:   	   89.910 KiB / 89.910 KiB, 100%, 44.955 KiB/s, ETA 0s
+Checks:                41 / 41, 100%, Listed 83
+Transferred:            2 / 2, 100%
+Elapsed time:         2.4s
+
+2026/03/03 00:06:47 INFO  : 2026-03-03/motion_2026-03-03_00.06.41_645.avi: Copied (new)
+2026/03/03 00:06:47 INFO  : 2026-03-03/motion_2026-03-03_00.06.36_100.avi: Copied (new)
+2026/03/03 00:06:47 INFO  : logs/cloud_sync_2026-02-26.log: Deleted
+2026/03/03 00:06:47 INFO  : logs/security_audit_2026-02-27.log: Deleted
+2026/03/03 00:06:47 INFO  : logs/firewall.log.old: Deleted
+2026/03/03 00:06:47 INFO  : logs/path_check.txt: Deleted
+2026/03/03 00:06:47 INFO  : logs/cloud_sync_2026-02-27.log: Deleted
+2026/03/03 00:06:47 INFO  : logs/security_audit_2026-02-28.log: Deleted
+2026/03/03 00:06:47 INFO  : logs/mirror.log: Deleted
+2026/03/03 00:06:47 INFO  : logs/cloud_sync_2026-02-23.log: Deleted
+2026/03/03 00:06:47 INFO  : logs/watchdog.log: Deleted
+2026/03/03 00:06:47 INFO  : logs/security_audit_full_2026-03-01_13-02.txt: Deleted
+2026/03/03 00:06:47 INFO  : logs/file_audit_2026-02-26.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/Novo(a) Documento de Texto.txt: Deleted
+2026/03/03 00:06:48 INFO  : logs/file_audit_2026-02-28.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/cloud_sync_2026-03-03.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/firewall.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/watchdog_svc.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/security_audit_2026-02-26.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/file_audit_2026-03-02.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/cloud_sync_2026-02-25.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/security_audit_2026-03-02.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/auditor_svc.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/file_audit_2026-03-03.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/cloud_sync_2026-02-24.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/security_audit_2026-03-03.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/watchdog_svc_err.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/cloud_sync_2026-03-01.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/file_audit_2026-03-01.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/intrusion_2026-03-01_12-45-53.txt: Deleted
+2026/03/03 00:06:48 INFO  : logs/mirror_2026-03-02.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/security_audit_2026-03-01.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/security_audit_full_2026-03-01_13-00.txt: Deleted
+2026/03/03 00:06:48 INFO  : logs/cloud_sync_2026-02-28.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/cloud_sync_2026-03-02.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/auditor_deletion_evidence.txt: Deleted
+2026/03/03 00:06:48 INFO  : logs/auditor_svc_err.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/all_services_2026-03-01_13-20.txt: Deleted
+2026/03/03 00:06:48 INFO  : logs/mirror_2026-03-03.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/cloud_sync.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/security_audit_2026-02-25.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/file_audit_2026-02-25.log: Deleted
+2026/03/03 00:06:48 INFO  : logs/connections_now.txt: Deleted
+2026/03/03 00:06:48 INFO  : logs/file_audit_2026-02-27.log: Deleted
+2026/03/03 00:06:48 INFO  : 
+Transferred:   	    1.177 MiB / 1.177 MiB, 100%, 96 KiB/s, ETA 0s
+Checks:               152 / 152, 100%, Listed 267
+Deleted:               42 (files), 0 (dirs), 21.088 MiB (freed)
+Transferred:            2 / 2, 100%
+Elapsed time:         4.1s
+
+2026/03/03 00:06:48 INFO  : 2026-03-03/motion_2026-03-03_00.06.41_645.avi: Copied (new)
+2026/03/03 00:06:49 INFO  : 2026-03-03/motion_2026-03-03_00.06.36_100.avi: Copied (new)
+2026/03/03 00:06:49 INFO  : logs/file_audit_2026-02-26.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/security_audit_2026-03-02.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/security_audit_full_2026-03-01_13-00.txt: Deleted
+2026/03/03 00:06:49 INFO  : logs/file_audit_2026-02-28.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/cloud_sync_2026-02-26.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/security_audit_2026-02-25.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/watchdog.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/cloud_sync_2026-02-24.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/security_audit_2026-03-03.log: Deleted
+2026/03/03 00:06:49 INFO  : logs/cloud_sync_2026-02-25.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/firewall.log.old: Deleted
+2026/03/03 00:06:50 INFO  : logs/auditor_svc.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/cloud_sync_2026-03-02.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/cloud_sync_2026-03-01.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/mirror_2026-03-03.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/watchdog_svc_err.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/intrusion_2026-03-01_12-45-53.txt: Deleted
+2026/03/03 00:06:50 INFO  : logs/firewall.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/mirror_2026-03-02.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/Novo(a) Documento de Texto.txt: Deleted
+2026/03/03 00:06:50 INFO  : logs/cloud_sync_2026-03-03.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/watchdog_svc.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/file_audit_2026-02-27.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/cloud_sync_2026-02-27.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/mirror.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/security_audit_2026-02-26.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/security_audit_2026-02-27.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/security_audit_2026-03-01.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/cloud_sync_2026-02-23.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/cloud_sync_2026-02-28.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/file_audit_2026-03-01.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/auditor_deletion_evidence.txt: Deleted
+2026/03/03 00:06:50 INFO  : logs/file_audit_2026-03-03.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/security_audit_2026-02-28.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/cloud_sync.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/file_audit_2026-03-02.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/path_check.txt: Deleted
+2026/03/03 00:06:50 INFO  : logs/security_audit_full_2026-03-01_13-02.txt: Deleted
+2026/03/03 00:06:50 INFO  : logs/all_services_2026-03-01_13-20.txt: Deleted
+2026/03/03 00:06:50 INFO  : logs/auditor_svc_err.log: Deleted
+2026/03/03 00:06:50 INFO  : logs/connections_now.txt: Deleted
+2026/03/03 00:06:50 INFO  : logs/file_audit_2026-02-25.log: Deleted
+2026/03/03 00:06:50 INFO  : 
+Transferred:   	    1.177 MiB / 1.177 MiB, 100%, 401.853 KiB/s, ETA 0s
+Checks:               152 / 152, 100%, Listed 267
+Deleted:               42 (files), 0 (dirs), 21.088 MiB (freed)
+Transferred:            2 / 2, 100%
+Elapsed time:         4.4s
+
+2026/03/03 00:06:57 INFO  : 2026-03-03/motion_2026-03-03_00.06.49_560.avi: Copied (new)
+2026/03/03 00:06:57 INFO  : 
+Transferred:   	  663.959 KiB / 663.959 KiB, 100%, 221.319 KiB/s, ETA 0s
+Checks:               112 / 112, 100%, Listed 228
+Transferred:            1 / 1, 100%
+Elapsed time:         3.0s
+
+2026/03/03 00:07:06 INFO  : 2026-03-03/motion_2026-03-03_00.06.59_616.avi: Copied (new)
+2026/03/03 00:07:06 INFO  : 
+Transferred:   	  652.977 KiB / 652.977 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               113 / 113, 100%, Listed 230
+Transferred:            1 / 1, 100%
+Elapsed time:         2.9s
+
+2026/03/03 00:07:46 INFO  : 2026-03-03/motion_2026-03-03_00.07.38_900.avi: Copied (new)
+2026/03/03 00:07:46 INFO  : 
+Transferred:   	  664.451 KiB / 664.451 KiB, 100%, 64 KiB/s, ETA 0s
+Checks:               114 / 114, 100%, Listed 232
+Transferred:            1 / 1, 100%
+Elapsed time:         2.8s
+
+2026/03/03 00:08:01 ERROR : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Failed to copy: Post "https://pod-050-1037-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501037_t0041": can't copy - source file is being updated (size changed from 220898 to 285410)
+2026/03/03 00:08:02 INFO  : 2026-03-03/motion_2026-03-03_00.07.54_727.avi: Copied (new)
+2026/03/03 00:08:02 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:02 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:02 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1037-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501037_t0041": can't copy - source file is being updated (size changed from 220898 to 285410)
+2026/03/03 00:08:03 ERROR : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Failed to copy: Post "https://pod-050-1037-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501037_t0041": can't copy - source file is being updated (size changed from 460834 to 494192)
+2026/03/03 00:08:03 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:03 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:03 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1037-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501037_t0041": can't copy - source file is being updated (size changed from 460834 to 494192)
+2026/03/03 00:08:04 ERROR : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "f1e456e2b2eab3643916b9600c1e150086665522" vs dst(B2 bucket helder-sync-mirror) "cb1a98ea12e3c96bf892532ea6349673ac7ca9d4"
+2026/03/03 00:08:04 INFO  : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Removing failed copy
+2026/03/03 00:08:04 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:04 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:04 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "f1e456e2b2eab3643916b9600c1e150086665522" vs dst(B2 bucket helder-sync-mirror) "cb1a98ea12e3c96bf892532ea6349673ac7ca9d4"
+2026/03/03 00:08:04 INFO  : 
+Transferred:   	    1.302 MiB / 1.302 MiB, 100%, 48 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               347 / 347, 100%, Listed 707
+Transferred:            1 / 1, 100%
+Elapsed time:         5.3s
+
+2026/03/03 00:08:04 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "f1e456e2b2eab3643916b9600c1e150086665522" vs dst(B2 bucket helder-sync-mirror) "cb1a98ea12e3c96bf892532ea6349673ac7ca9d4"
+2026/03/03 00:08:05 ERROR : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Failed to copy: Post "https://pod-050-1010-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0039": can't copy - source file is being updated (size changed from 605516 to 661262)
+2026/03/03 00:08:05 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:05 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:05 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1010-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0039": can't copy - source file is being updated (size changed from 605516 to 661262)
+2026/03/03 00:08:06 ERROR : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Failed to copy: Post "https://pod-050-1010-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0039": can't copy - source file is being updated (size changed from 749540 to 782060)
+2026/03/03 00:08:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:06 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1010-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0039": can't copy - source file is being updated (size changed from 749540 to 782060)
+2026/03/03 00:08:07 ERROR : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Failed to copy: Post "https://pod-050-1010-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0039": can't copy - source file is being updated (size changed from 890292 to 934090)
+2026/03/03 00:08:07 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:07 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:07 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1010-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0039": can't copy - source file is being updated (size changed from 890292 to 934090)
+2026/03/03 00:08:07 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               348 / 348, 100%, Listed 708
+Elapsed time:         4.4s
+
+2026/03/03 00:08:07 NOTICE: Failed to sync: Post "https://pod-050-1010-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0039": can't copy - source file is being updated (size changed from 890292 to 934090)
+2026/03/03 00:08:20 ERROR : 2026-03-03/motion_2026-03-03_00.08.19_985.avi: Failed to copy: Post "https://pod-050-1018-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501018_t0048": can't copy - source file is being updated (size changed from 33134 to 87912)
+2026/03/03 00:08:21 INFO  : 2026-03-03/motion_2026-03-03_00.08.14_265.avi: Copied (new)
+2026/03/03 00:08:22 INFO  : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Copied (new)
+2026/03/03 00:08:22 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:22 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:22 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1018-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501018_t0048": can't copy - source file is being updated (size changed from 33134 to 87912)
+2026/03/03 00:08:23 ERROR : 2026-03-03/motion_2026-03-03_00.08.19_985.avi: Failed to copy: Post "https://pod-050-1018-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501018_t0048": can't copy - source file is being updated (size changed from 328774 to 361672)
+2026/03/03 00:08:23 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:23 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:23 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1018-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501018_t0048": can't copy - source file is being updated (size changed from 328774 to 361672)
+2026/03/03 00:08:24 ERROR : 2026-03-03/motion_2026-03-03_00.08.23_742.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "e17be47ea71d3f249fdcc60a3a1cce95eb374072" vs dst(B2 bucket helder-sync-mirror) "c97df0ef5671d7ba3ed9415fbf02d4cf65c14fea"
+2026/03/03 00:08:24 INFO  : 2026-03-03/motion_2026-03-03_00.08.23_742.avi: Removing failed copy
+2026/03/03 00:08:24 INFO  : 2026-03-03/motion_2026-03-03_00.08.19_985.avi: Copied (new)
+2026/03/03 00:08:24 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:24 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:24 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "e17be47ea71d3f249fdcc60a3a1cce95eb374072" vs dst(B2 bucket helder-sync-mirror) "c97df0ef5671d7ba3ed9415fbf02d4cf65c14fea"
+2026/03/03 00:08:24 INFO  : 
+Transferred:   	    2.504 MiB / 2.504 MiB, 100%, 711.700 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               352 / 352, 100%, Listed 719
+Transferred:            3 / 3, 100%
+Elapsed time:         5.5s
+
+2026/03/03 00:08:24 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "e17be47ea71d3f249fdcc60a3a1cce95eb374072" vs dst(B2 bucket helder-sync-mirror) "c97df0ef5671d7ba3ed9415fbf02d4cf65c14fea"
+2026/03/03 00:08:31 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1033-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501033_t0020": can't copy - source file is being updated (size changed from 383464 to 438354)
+2026/03/03 00:08:32 INFO  : 2026-03-03/motion_2026-03-03_00.08.23_742.avi: Copied (new)
+2026/03/03 00:08:32 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:32 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:32 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1033-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501033_t0020": can't copy - source file is being updated (size changed from 383464 to 438354)
+2026/03/03 00:08:33 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1033-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501033_t0020": can't copy - source file is being updated (size changed from 602814 to 635754)
+2026/03/03 00:08:33 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:33 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:33 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1033-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501033_t0020": can't copy - source file is being updated (size changed from 602814 to 635754)
+2026/03/03 00:08:33 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1040-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0018": can't copy - source file is being updated (size changed from 602814 to 668672)
+2026/03/03 00:08:33 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1007-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501007_t0020": can't copy - source file is being updated (size changed from 701626 to 712584)
+2026/03/03 00:08:33 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:33 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:33 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1007-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501007_t0020": can't copy - source file is being updated (size changed from 701626 to 712584)
+2026/03/03 00:08:33 INFO  : 
+Transferred:   	  354.463 KiB / 354.463 KiB, 100%, 48 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               359 / 359, 100%, Listed 731
+Transferred:            1 / 1, 100%
+Elapsed time:         4.3s
+
+2026/03/03 00:08:33 NOTICE: Failed to sync: Post "https://pod-050-1007-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501007_t0020": can't copy - source file is being updated (size changed from 701626 to 712584)
+2026/03/03 00:08:33 INFO  : 2026-03-03/motion_2026-03-03_00.08.23_742.avi: Copied (new)
+2026/03/03 00:08:33 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:33 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:33 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0018": can't copy - source file is being updated (size changed from 602814 to 668672)
+2026/03/03 00:08:34 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0029": can't copy - source file is being updated (size changed from 712584 to 767388)
+2026/03/03 00:08:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:34 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0029": can't copy - source file is being updated (size changed from 712584 to 767388)
+2026/03/03 00:08:34 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1040-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0018": can't copy - source file is being updated (size changed from 789090 to 821754)
+2026/03/03 00:08:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:34 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0018": can't copy - source file is being updated (size changed from 789090 to 821754)
+2026/03/03 00:08:35 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0029": can't copy - source file is being updated (size changed from 854428 to 887238)
+2026/03/03 00:08:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:35 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0029": can't copy - source file is being updated (size changed from 854428 to 887238)
+2026/03/03 00:08:35 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1035-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0048": can't copy - source file is being updated (size changed from 887238 to 909162)
+2026/03/03 00:08:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:35 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1035-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0048": can't copy - source file is being updated (size changed from 887238 to 909162)
+2026/03/03 00:08:35 INFO  : 
+Transferred:   	  898.463 KiB / 898.463 KiB, 100%, 48 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               359 / 359, 100%, Listed 731
+Transferred:            1 / 1, 100%
+Elapsed time:         4.4s
+
+2026/03/03 00:08:35 NOTICE: Failed to sync: Post "https://pod-050-1035-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0048": can't copy - source file is being updated (size changed from 887238 to 909162)
+2026/03/03 00:08:36 ERROR : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Failed to copy: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0029": can't copy - source file is being updated (size changed from 942158 to 975086)
+2026/03/03 00:08:36 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:36 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:36 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0029": can't copy - source file is being updated (size changed from 942158 to 975086)
+2026/03/03 00:08:36 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               360 / 360, 100%, Listed 732
+Elapsed time:         3.8s
+
+2026/03/03 00:08:36 NOTICE: Failed to sync: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0029": can't copy - source file is being updated (size changed from 942158 to 975086)
+2026/03/03 00:08:53 ERROR : 2026-03-03/motion_2026-03-03_00.08.48_006.avi: Failed to copy: Post "https://pod-050-1001-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0049": can't copy - source file is being updated (size changed from 899022 to 942282)
+2026/03/03 00:08:55 INFO  : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Copied (new)
+2026/03/03 00:08:55 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:55 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:55 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1001-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0049": can't copy - source file is being updated (size changed from 899022 to 942282)
+2026/03/03 00:08:56 ERROR : 2026-03-03/motion_2026-03-03_00.08.48_006.avi: Failed to copy: Post "https://pod-050-1001-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0049": can't copy - source file is being updated (size changed from 1138644 to 1171652)
+2026/03/03 00:08:56 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:56 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:56 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1001-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0049": can't copy - source file is being updated (size changed from 1138644 to 1171652)
+2026/03/03 00:08:57 ERROR : 2026-03-03/motion_2026-03-03_00.08.48_006.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "f480048c2e1b6d3a582755f99253e2c266ecdd5f" vs dst(B2 bucket helder-sync-mirror) "f055d784550928c77b4434cf85cc9b456fdd3eda"
+2026/03/03 00:08:57 INFO  : 2026-03-03/motion_2026-03-03_00.08.48_006.avi: Removing failed copy
+2026/03/03 00:08:57 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:08:57 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:08:57 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "f480048c2e1b6d3a582755f99253e2c266ecdd5f" vs dst(B2 bucket helder-sync-mirror) "f055d784550928c77b4434cf85cc9b456fdd3eda"
+2026/03/03 00:08:57 INFO  : 
+Transferred:   	    2.395 MiB / 2.395 MiB, 100%, 62 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               362 / 362, 100%, Listed 737
+Transferred:            1 / 1, 100%
+Elapsed time:         5.3s
+
+2026/03/03 00:08:57 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "f480048c2e1b6d3a582755f99253e2c266ecdd5f" vs dst(B2 bucket helder-sync-mirror) "f055d784550928c77b4434cf85cc9b456fdd3eda"
+2026/03/03 00:09:09 ERROR : 2026-03-03/motion_2026-03-03_00.09.03_457.avi: Failed to copy: Post "https://pod-050-1042-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0032": can't copy - source file is being updated (size changed from 879264 to 933790)
+2026/03/03 00:09:10 INFO  : 2026-03-03/motion_2026-03-03_00.08.48_006.avi: Copied (new)
+2026/03/03 00:09:10 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:09:10 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:09:10 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0032": can't copy - source file is being updated (size changed from 879264 to 933790)
+2026/03/03 00:09:11 ERROR : 2026-03-03/motion_2026-03-03_00.09.03_457.avi: Failed to copy: Post "https://pod-050-1042-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0032": can't copy - source file is being updated (size changed from 1179128 to 1213406)
+2026/03/03 00:09:11 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:09:11 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:09:11 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0032": can't copy - source file is being updated (size changed from 1179128 to 1213406)
+2026/03/03 00:09:13 ERROR : 2026-03-03/motion_2026-03-03_00.09.03_457.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "d280a9bad40547ee19436d6ef91238ee5361bd2c" vs dst(B2 bucket helder-sync-mirror) "096a85f1c4c7f493d9cf611135559fdd03be51ee"
+2026/03/03 00:09:13 INFO  : 2026-03-03/motion_2026-03-03_00.09.03_457.avi: Removing failed copy
+2026/03/03 00:09:13 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:09:13 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:09:13 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "d280a9bad40547ee19436d6ef91238ee5361bd2c" vs dst(B2 bucket helder-sync-mirror) "096a85f1c4c7f493d9cf611135559fdd03be51ee"
+2026/03/03 00:09:13 INFO  : 
+Transferred:   	    2.752 MiB / 2.752 MiB, 100%, 522.040 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               365 / 365, 100%, Listed 743
+Transferred:            1 / 1, 100%
+Elapsed time:         5.7s
+
+2026/03/03 00:09:13 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "d280a9bad40547ee19436d6ef91238ee5361bd2c" vs dst(B2 bucket helder-sync-mirror) "096a85f1c4c7f493d9cf611135559fdd03be51ee"
+2026/03/03 00:09:48 ERROR : 2026-03-03/motion_2026-03-03_00.09.45_883.avi: Failed to copy: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 344290 to 413180)
+2026/03/03 00:09:49 INFO  : 2026-03-03/motion_2026-03-03_00.09.41_640.avi: Copied (new)
+2026/03/03 00:09:49 INFO  : 2026-03-03/motion_2026-03-03_00.09.03_457.avi: Copied (new)
+2026/03/03 00:09:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:09:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:09:49 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 344290 to 413180)
+2026/03/03 00:09:50 ERROR : 2026-03-03/motion_2026-03-03_00.09.45_883.avi: Failed to copy: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 620058 to 643940)
+2026/03/03 00:09:50 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:09:50 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:09:50 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 620058 to 643940)
+2026/03/03 00:09:51 INFO  : 2026-03-03/motion_2026-03-03_00.09.45_883.avi: Copied (new)
+2026/03/03 00:09:51 ERROR : Attempt 3/3 succeeded
+2026/03/03 00:09:51 INFO  : 
+Transferred:   	    2.955 MiB / 2.955 MiB, 100%, 798.955 KiB/s, ETA 0s
+Checks:               370 / 370, 100%, Listed 754
+Transferred:            3 / 3, 100%
+Elapsed time:         5.5s
+
+2026/03/03 00:09:52 INFO  : There was nothing to transfer
+2026/03/03 00:09:52 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               125 / 125, 100%, Listed 253
+Elapsed time:         1.3s
+
+2026/03/03 00:10:05 INFO  : There was nothing to transfer
+2026/03/03 00:10:05 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               125 / 125, 100%, Listed 253
+Elapsed time:         1.4s
+
+2026/03/03 00:10:08 INFO  : Novo(a) Documento de Texto.txt: Copied (new)
+2026/03/03 00:10:09 INFO  : auditor_svc_err.log: Copied (new)
+2026/03/03 00:10:09 INFO  : auditor_deletion_evidence.txt: Copied (new)
+2026/03/03 00:10:09 INFO  : auditor_svc.log: Copied (new)
+2026/03/03 00:10:09 INFO  : all_services_2026-03-01_13-20.txt: Copied (new)
+2026/03/03 00:10:09 INFO  : cloud_sync_2026-02-23.log: Copied (new)
+2026/03/03 00:10:10 INFO  : cloud_sync_2026-02-24.log: Copied (new)
+2026/03/03 00:10:10 INFO  : cloud_sync_2026-02-26.log: Copied (new)
+2026/03/03 00:10:10 INFO  : cloud_sync_2026-02-27.log: Copied (new)
+2026/03/03 00:10:10 INFO  : cloud_sync_2026-02-25.log: Copied (new)
+2026/03/03 00:10:10 INFO  : cloud_sync.log: Copied (new)
+2026/03/03 00:10:11 INFO  : cloud_sync_2026-03-03.log: Copied (new)
+2026/03/03 00:10:11 INFO  : cloud_sync_2026-03-01.log: Copied (new)
+2026/03/03 00:10:11 INFO  : connections_now.txt: Copied (new)
+2026/03/03 00:10:12 INFO  : file_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:10:12 INFO  : file_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:10:12 INFO  : file_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:10:12 INFO  : cloud_sync_2026-02-28.log: Copied (new)
+2026/03/03 00:10:12 INFO  : file_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:10:12 INFO  : file_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:10:12 INFO  : file_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:10:13 INFO  : file_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:10:13 INFO  : cloud_sync_2026-03-02.log: Copied (new)
+2026/03/03 00:10:13 INFO  : intrusion_2026-03-01_12-45-53.txt: Copied (new)
+2026/03/03 00:10:13 INFO  : firewall.log: Copied (new)
+2026/03/03 00:10:13 INFO  : mirror_2026-03-02.log: Copied (new)
+2026/03/03 00:10:14 INFO  : mirror_2026-03-03.log: Copied (new)
+2026/03/03 00:10:14 INFO  : mirror.log: Copied (new)
+2026/03/03 00:10:14 INFO  : security_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:10:14 INFO  : security_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:10:14 INFO  : path_check.txt: Copied (new)
+2026/03/03 00:10:14 INFO  : firewall.log.old: Copied (new)
+2026/03/03 00:10:14 INFO  : security_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:10:14 INFO  : security_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:10:14 INFO  : security_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:10:14 INFO  : security_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:10:15 INFO  : security_audit_full_2026-03-01_13-00.txt: Copied (new)
+2026/03/03 00:10:15 INFO  : security_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:10:15 INFO  : watchdog_svc.log: Copied (new)
+2026/03/03 00:10:15 INFO  : watchdog.log: Copied (new)
+2026/03/03 00:10:15 INFO  : security_audit_full_2026-03-01_13-02.txt: Copied (new)
+2026/03/03 00:10:15 INFO  : watchdog_svc_err.log: Copied (new)
+2026/03/03 00:10:15 INFO  : 
+Transferred:   	   21.805 MiB / 21.805 MiB, 100%, 2.726 MiB/s, ETA 0s
+Checks:                 0 / 0, -, Listed 42
+Transferred:           42 / 42, 100%
+Elapsed time:         8.4s
+
+2026/03/03 00:10:23 ERROR : 2026-03-03/motion_2026-03-03_00.10.17_868.avi: Failed to copy: Post "https://pod-050-1025-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501025_t0025": can't copy - source file is being updated (size changed from 945262 to 992916)
+2026/03/03 00:10:23 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:10:23 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:10:23 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1025-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501025_t0025": can't copy - source file is being updated (size changed from 945262 to 992916)
+2026/03/03 00:10:26 INFO  : 2026-03-03/motion_2026-03-03_00.10.17_868.avi: Copied (new)
+2026/03/03 00:10:26 INFO  : logs/file_audit_2026-02-26.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/security_audit_2026-02-26.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/file_audit_2026-03-02.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/mirror_2026-03-03.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/cloud_sync_2026-02-27.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/watchdog_svc.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/cloud_sync_2026-02-26.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/all_services_2026-03-01_13-20.txt: Deleted
+2026/03/03 00:10:26 INFO  : logs/cloud_sync_2026-02-28.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/file_audit_2026-02-28.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/file_audit_2026-03-03.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/file_audit_2026-03-01.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/security_audit_full_2026-03-01_13-02.txt: Deleted
+2026/03/03 00:10:26 INFO  : logs/cloud_sync_2026-03-02.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/cloud_sync_2026-03-01.log: Deleted
+2026/03/03 00:10:26 INFO  : logs/mirror.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/cloud_sync_2026-03-03.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/file_audit_2026-02-27.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/Novo(a) Documento de Texto.txt: Deleted
+2026/03/03 00:10:27 INFO  : logs/security_audit_2026-02-25.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/file_audit_2026-02-25.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/firewall.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/intrusion_2026-03-01_12-45-53.txt: Deleted
+2026/03/03 00:10:27 INFO  : logs/cloud_sync_2026-02-24.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/auditor_deletion_evidence.txt: Deleted
+2026/03/03 00:10:27 INFO  : logs/watchdog.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/security_audit_2026-02-28.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/path_check.txt: Deleted
+2026/03/03 00:10:27 INFO  : logs/cloud_sync.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/security_audit_2026-03-02.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/security_audit_2026-03-03.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/watchdog_svc_err.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/auditor_svc.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/auditor_svc_err.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/cloud_sync_2026-02-25.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/firewall.log.old: Deleted
+2026/03/03 00:10:27 INFO  : logs/connections_now.txt: Deleted
+2026/03/03 00:10:27 INFO  : logs/security_audit_full_2026-03-01_13-00.txt: Deleted
+2026/03/03 00:10:27 INFO  : logs/mirror_2026-03-02.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/cloud_sync_2026-02-23.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/security_audit_2026-02-27.log: Deleted
+2026/03/03 00:10:27 INFO  : logs/security_audit_2026-03-01.log: Deleted
+2026/03/03 00:10:27 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:10:27 INFO  : 
+Transferred:   	  969.645 KiB / 969.645 KiB, 100%, 245.333 KiB/s, ETA 0s
+Checks:               292 / 292, 100%, Listed 592
+Deleted:               42 (files), 0 (dirs), 21.805 MiB (freed)
+Transferred:            1 / 1, 100%
+Elapsed time:         5.8s
+
+2026/03/03 00:10:48 ERROR : 2026-03-03/motion_2026-03-03_00.10.46_545.avi: Failed to copy: Post "https://pod-050-1032-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0036": can't copy - source file is being updated (size changed from 299596 to 357488)
+2026/03/03 00:10:49 INFO  : 2026-03-03/motion_2026-03-03_00.10.41_771.avi: Copied (new)
+2026/03/03 00:10:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:10:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:10:49 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1032-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0036": can't copy - source file is being updated (size changed from 299596 to 357488)
+2026/03/03 00:10:50 ERROR : 2026-03-03/motion_2026-03-03_00.10.46_545.avi: Failed to copy: Post "https://pod-050-1032-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0036": can't copy - source file is being updated (size changed from 577042 to 611740)
+2026/03/03 00:10:50 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:10:50 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:10:50 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1032-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0036": can't copy - source file is being updated (size changed from 577042 to 611740)
+2026/03/03 00:10:51 INFO  : 2026-03-03/motion_2026-03-03_00.10.46_545.avi: Copied (new)
+2026/03/03 00:10:51 ERROR : Attempt 3/3 succeeded
+2026/03/03 00:10:51 INFO  : 
+Transferred:   	    1.311 MiB / 1.311 MiB, 100%, 48 KiB/s, ETA 0s
+Checks:               380 / 380, 100%, Listed 773
+Transferred:            2 / 2, 100%
+Elapsed time:         4.9s
+
+2026/03/03 00:10:52 INFO  : There was nothing to transfer
+2026/03/03 00:10:52 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               128 / 128, 100%, Listed 259
+Elapsed time:         1.4s
+
+2026/03/03 00:11:16 INFO  : 2026-03-03/motion_2026-03-03_00.11.08_781.avi: Copied (new)
+2026/03/03 00:11:16 INFO  : 
+Transferred:   	  666.365 KiB / 666.365 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               128 / 128, 100%, Listed 260
+Transferred:            1 / 1, 100%
+Elapsed time:         2.8s
+
+2026/03/03 00:11:22 ERROR : 2026-03-03/motion_2026-03-03_00.11.16_251.avi: Failed to copy: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0030": can't copy - source file is being updated (size changed from 941704 to 985542)
+2026/03/03 00:11:22 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:11:22 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:11:22 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0030": can't copy - source file is being updated (size changed from 941704 to 985542)
+2026/03/03 00:11:23 ERROR : 2026-03-03/motion_2026-03-03_00.11.16_251.avi: Failed to copy: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0030": can't copy - source file is being updated (size changed from 1062176 to 1085554)
+2026/03/03 00:11:23 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:11:23 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:11:23 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0030": can't copy - source file is being updated (size changed from 1062176 to 1085554)
+2026/03/03 00:11:26 INFO  : 2026-03-03/motion_2026-03-03_00.11.16_251.avi: Copied (new)
+2026/03/03 00:11:26 ERROR : Attempt 3/3 succeeded
+2026/03/03 00:11:26 INFO  : 
+Transferred:   	    1.035 MiB / 1.035 MiB, 100%, 353.370 KiB/s, ETA 0s
+Checks:               387 / 387, 100%, Listed 786
+Transferred:            1 / 1, 100%
+Elapsed time:         5.9s
+
+2026/03/03 00:11:40 INFO  : 2026-03-03/motion_2026-03-03_00.11.33_111.avi: Copied (new)
+2026/03/03 00:11:40 INFO  : 
+Transferred:   	  694.350 KiB / 694.350 KiB, 100%, 231.449 KiB/s, ETA 0s
+Checks:               130 / 130, 100%, Listed 264
+Transferred:            1 / 1, 100%
+Elapsed time:         3.1s
+
+2026/03/03 00:11:46 INFO  : 2026-03-03/motion_2026-03-03_00.11.39_826.avi: Copied (new)
+2026/03/03 00:11:46 INFO  : 
+Transferred:   	  643.107 KiB / 643.107 KiB, 100%, 202.666 KiB/s, ETA 0s
+Checks:               131 / 131, 100%, Listed 266
+Transferred:            1 / 1, 100%
+Elapsed time:         3.4s
+
+2026/03/03 00:11:51 ERROR : 2026-03-03/motion_2026-03-03_00.11.45_876.avi: Failed to copy: Post "https://pod-050-1027-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0036": can't copy - source file is being updated (size changed from 887082 to 941704)
+2026/03/03 00:11:51 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:11:51 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:11:51 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1027-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0036": can't copy - source file is being updated (size changed from 887082 to 941704)
+2026/03/03 00:11:52 ERROR : 2026-03-03/motion_2026-03-03_00.11.45_876.avi: Failed to copy: Post "https://pod-050-1027-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0036": can't copy - source file is being updated (size changed from 1007376 to 1040134)
+2026/03/03 00:11:52 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:11:52 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:11:52 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1027-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0036": can't copy - source file is being updated (size changed from 1007376 to 1040134)
+2026/03/03 00:11:53 ERROR : 2026-03-03/motion_2026-03-03_00.11.45_876.avi: Failed to copy: Post "https://pod-050-1027-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0036": can't copy - source file is being updated (size changed from 1105802 to 1138680)
+2026/03/03 00:11:53 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:11:53 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:11:53 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1027-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0036": can't copy - source file is being updated (size changed from 1105802 to 1138680)
+2026/03/03 00:11:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               396 / 396, 100%, Listed 804
+Elapsed time:         3.6s
+
+2026/03/03 00:11:53 NOTICE: Failed to sync: Post "https://pod-050-1027-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0036": can't copy - source file is being updated (size changed from 1105802 to 1138680)
+2026/03/03 00:12:02 ERROR : 2026-03-03/motion_2026-03-03_00.11.59_863.avi: Failed to copy: Post "https://pod-050-1002-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501002_t0058": can't copy - source file is being updated (size changed from 251832 to 339262)
+2026/03/03 00:12:03 INFO  : 2026-03-03/motion_2026-03-03_00.11.55_707.avi: Copied (new)
+2026/03/03 00:12:03 INFO  : 2026-03-03/motion_2026-03-03_00.11.45_876.avi: Copied (new)
+2026/03/03 00:12:03 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:03 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:03 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1002-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501002_t0058": can't copy - source file is being updated (size changed from 251832 to 339262)
+2026/03/03 00:12:05 ERROR : 2026-03-03/motion_2026-03-03_00.11.59_863.avi: Failed to copy: Post "https://pod-050-1002-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501002_t0058": can't copy - source file is being updated (size changed from 557454 to 589464)
+2026/03/03 00:12:05 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:05 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:05 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1002-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501002_t0058": can't copy - source file is being updated (size changed from 557454 to 589464)
+2026/03/03 00:12:06 ERROR : 2026-03-03/motion_2026-03-03_00.11.59_863.avi: Failed to copy: Post "https://pod-050-1039-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0045": can't copy - source file is being updated (size changed from 709756 to 720736)
+2026/03/03 00:12:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:06 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1039-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0045": can't copy - source file is being updated (size changed from 709756 to 720736)
+2026/03/03 00:12:06 INFO  : 
+Transferred:   	    1.644 MiB / 1.644 MiB, 100%, 560.990 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               400 / 400, 100%, Listed 814
+Transferred:            2 / 2, 100%
+Elapsed time:         6.1s
+
+2026/03/03 00:12:06 NOTICE: Failed to sync: Post "https://pod-050-1039-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0045": can't copy - source file is being updated (size changed from 709756 to 720736)
+2026/03/03 00:12:09 ERROR : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: Failed to copy: Post "https://pod-050-1022-08.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0013": can't copy - source file is being updated (size changed from 141928 to 185790)
+2026/03/03 00:12:11 INFO  : 2026-03-03/motion_2026-03-03_00.11.59_863.avi: Copied (new)
+2026/03/03 00:12:11 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:11 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:11 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1022-08.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0013": can't copy - source file is being updated (size changed from 141928 to 185790)
+2026/03/03 00:12:12 ERROR : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: Failed to copy: Post "https://pod-050-1022-08.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0013": can't copy - source file is being updated (size changed from 381306 to 414104)
+2026/03/03 00:12:12 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:12 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:12 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1022-08.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0013": can't copy - source file is being updated (size changed from 381306 to 414104)
+2026/03/03 00:12:13 ERROR : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "956b657751f11cef9d8cad15f12e456601973961" vs dst(B2 bucket helder-sync-mirror) "7cc8ba63ce4e4ae9e3051ab43dd3eaed3c06d5a2"
+2026/03/03 00:12:13 INFO  : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: Removing failed copy
+2026/03/03 00:12:13 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:13 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:13 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "956b657751f11cef9d8cad15f12e456601973961" vs dst(B2 bucket helder-sync-mirror) "7cc8ba63ce4e4ae9e3051ab43dd3eaed3c06d5a2"
+2026/03/03 00:12:13 INFO  : 
+Transferred:   	    1.324 MiB / 1.324 MiB, 100%, 245.333 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               404 / 404, 100%, Listed 821
+Transferred:            1 / 1, 100%
+Elapsed time:         5.5s
+
+2026/03/03 00:12:13 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "956b657751f11cef9d8cad15f12e456601973961" vs dst(B2 bucket helder-sync-mirror) "7cc8ba63ce4e4ae9e3051ab43dd3eaed3c06d5a2"
+2026/03/03 00:12:15 ERROR : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: Failed to copy: Post "https://pod-050-1042-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0047": can't copy - source file is being updated (size changed from 732454 to 755546)
+2026/03/03 00:12:15 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:15 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:15 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0047": can't copy - source file is being updated (size changed from 732454 to 755546)
+2026/03/03 00:12:17 INFO  : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: Copied (new)
+2026/03/03 00:12:17 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:12:17 INFO  : 
+Transferred:   	  737.838 KiB / 737.838 KiB, 100%, 240 KiB/s, ETA 0s
+Checks:               270 / 270, 100%, Listed 548
+Transferred:            1 / 1, 100%
+Elapsed time:         3.9s
+
+2026/03/03 00:12:43 ERROR : 2026-03-03/motion_2026-03-03_00.12.41_518.avi: Failed to copy: Post "https://pod-050-1020-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0040": can't copy - source file is being updated (size changed from 385644 to 440646)
+2026/03/03 00:12:44 INFO  : 2026-03-03/motion_2026-03-03_00.12.35_932.avi: Copied (new)
+2026/03/03 00:12:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:44 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1020-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0040": can't copy - source file is being updated (size changed from 385644 to 440646)
+2026/03/03 00:12:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.41_518.avi: Copied (new)
+2026/03/03 00:12:45 ERROR : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: Failed to copy: Post "https://pod-050-1020-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0040": can't copy - source file is being updated (size changed from 77174 to 110174)
+2026/03/03 00:12:45 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:45 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:45 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1020-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0040": can't copy - source file is being updated (size changed from 77174 to 110174)
+2026/03/03 00:12:46 ERROR : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "265e3c55fae4b0d4ef6d37bfd0e6c3f161138556" vs dst(B2 bucket helder-sync-mirror) "0ad694e7c5da2357368c0561e98d21936abb180c"
+2026/03/03 00:12:46 INFO  : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: Removing failed copy
+2026/03/03 00:12:46 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:46 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:46 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "265e3c55fae4b0d4ef6d37bfd0e6c3f161138556" vs dst(B2 bucket helder-sync-mirror) "0ad694e7c5da2357368c0561e98d21936abb180c"
+2026/03/03 00:12:46 INFO  : 
+Transferred:   	    1.346 MiB / 1.346 MiB, 100%, 222.566 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               411 / 411, 100%, Listed 836
+Transferred:            2 / 2, 100%
+Elapsed time:         5.0s
+
+2026/03/03 00:12:46 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "265e3c55fae4b0d4ef6d37bfd0e6c3f161138556" vs dst(B2 bucket helder-sync-mirror) "0ad694e7c5da2357368c0561e98d21936abb180c"
+2026/03/03 00:12:48 ERROR : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: Failed to copy: Post "https://pod-052-1006-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0001": can't copy - source file is being updated (size changed from 352108 to 396710)
+2026/03/03 00:12:48 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:12:48 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:12:48 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-052-1006-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0001": can't copy - source file is being updated (size changed from 352108 to 396710)
+2026/03/03 00:12:50 INFO  : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: Copied (new)
+2026/03/03 00:12:50 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:12:50 INFO  : 
+Transferred:   	  387.412 KiB / 387.412 KiB, 100%, 193.706 KiB/s, ETA 0s
+Checks:               276 / 276, 100%, Listed 560
+Transferred:            1 / 1, 100%
+Elapsed time:         3.8s
+
+2026/03/03 00:12:52 INFO  : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: Copied (new)
+2026/03/03 00:12:52 INFO  : 
+Transferred:   	  387.412 KiB / 387.412 KiB, 100%, 80 KiB/s, ETA 0s
+Checks:               138 / 138, 100%, Listed 280
+Transferred:            1 / 1, 100%
+Elapsed time:         2.5s
+
+2026/03/03 00:13:03 ERROR : 2026-03-03/motion_2026-03-03_00.12.57_383.avi: Failed to copy: Post "https://pod-050-1039-08.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0052": can't copy - source file is being updated (size changed from 971260 to 1030780)
+2026/03/03 00:13:03 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:13:03 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:13:03 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1039-08.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0052": can't copy - source file is being updated (size changed from 971260 to 1030780)
+2026/03/03 00:13:06 INFO  : 2026-03-03/motion_2026-03-03_00.12.57_383.avi: Copied (new)
+2026/03/03 00:13:06 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:13:06 INFO  : 
+Transferred:   	 1006.621 KiB / 1006.621 KiB, 100%, 245.333 KiB/s, ETA 0s
+Checks:               278 / 278, 100%, Listed 564
+Transferred:            1 / 1, 100%
+Elapsed time:         4.3s
+
+2026/03/03 00:13:20 INFO  : 2026-03-03/motion_2026-03-03_00.13.12_902.avi: Copied (new)
+2026/03/03 00:13:20 INFO  : 
+Transferred:   	  797.348 KiB / 797.348 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               140 / 140, 100%, Listed 284
+Transferred:            1 / 1, 100%
+Elapsed time:         2.8s
+
+2026/03/03 00:14:58 INFO  : 2026-03-03/motion_2026-03-03_00.14.50_630.avi: Copied (new)
+2026/03/03 00:14:58 INFO  : 
+Transferred:   	  845.080 KiB / 845.080 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               141 / 141, 100%, Listed 286
+Transferred:            1 / 1, 100%
+Elapsed time:         2.8s
+
+2026/03/03 00:15:04 INFO  : There was nothing to transfer
+2026/03/03 00:15:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               142 / 142, 100%, Listed 287
+Elapsed time:         1.4s
+
+2026/03/03 00:15:07 INFO  : auditor_deletion_evidence.txt: Copied (new)
+2026/03/03 00:15:07 INFO  : auditor_svc.log: Copied (new)
+2026/03/03 00:15:07 INFO  : auditor_svc_err.log: Copied (new)
+2026/03/03 00:15:08 INFO  : all_services_2026-03-01_13-20.txt: Copied (new)
+2026/03/03 00:15:08 INFO  : Novo(a) Documento de Texto.txt: Copied (new)
+2026/03/03 00:15:08 INFO  : cloud_sync_2026-02-23.log: Copied (new)
+2026/03/03 00:15:08 INFO  : cloud_sync_2026-02-24.log: Copied (new)
+2026/03/03 00:15:08 INFO  : cloud_sync_2026-02-26.log: Copied (new)
+2026/03/03 00:15:09 INFO  : cloud_sync_2026-02-27.log: Copied (new)
+2026/03/03 00:15:09 INFO  : cloud_sync.log: Copied (new)
+2026/03/03 00:15:09 INFO  : cloud_sync_2026-02-28.log: Copied (new)
+2026/03/03 00:15:09 INFO  : cloud_sync_2026-03-01.log: Copied (new)
+2026/03/03 00:15:09 INFO  : cloud_sync_2026-03-02.log: Copied (new)
+2026/03/03 00:15:09 INFO  : file_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:15:09 ERROR : cloud_sync_2026-03-03.log: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "b77ca0afa911f5352607ffcd37b9f65b46ee42ca" vs dst(B2 bucket helder-sync-mirror path logs) "56752685570b90c1c433b5ff86ff255401f37a62"
+2026/03/03 00:15:09 INFO  : cloud_sync_2026-03-03.log: Removing failed copy
+2026/03/03 00:15:09 INFO  : connections_now.txt: Copied (new)
+2026/03/03 00:15:10 INFO  : file_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:15:10 INFO  : file_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:15:10 INFO  : cloud_sync_2026-02-25.log: Copied (new)
+2026/03/03 00:15:10 INFO  : file_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:15:10 INFO  : file_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:15:10 INFO  : file_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:15:10 INFO  : file_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:15:10 INFO  : firewall.log: Copied (new)
+2026/03/03 00:15:11 INFO  : intrusion_2026-03-01_12-45-53.txt: Copied (new)
+2026/03/03 00:15:11 INFO  : mirror_2026-03-02.log: Copied (new)
+2026/03/03 00:15:11 INFO  : path_check.txt: Copied (new)
+2026/03/03 00:15:12 INFO  : mirror_2026-03-03.log: Copied (new)
+2026/03/03 00:15:12 INFO  : firewall.log.old: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:15:12 INFO  : mirror.log: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:15:12 INFO  : watchdog.log: Copied (new)
+2026/03/03 00:15:12 INFO  : security_audit_full_2026-03-01_13-00.txt: Copied (new)
+2026/03/03 00:15:13 INFO  : watchdog_svc_err.log: Copied (new)
+2026/03/03 00:15:13 INFO  : watchdog_svc.log: Copied (new)
+2026/03/03 00:15:13 INFO  : security_audit_full_2026-03-01_13-02.txt: Copied (new)
+2026/03/03 00:15:13 ERROR : Attempt 1/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "b77ca0afa911f5352607ffcd37b9f65b46ee42ca" vs dst(B2 bucket helder-sync-mirror path logs) "56752685570b90c1c433b5ff86ff255401f37a62"
+2026/03/03 00:15:14 INFO  : file_audit_2026-03-03.log: Copied (replaced existing)
+2026/03/03 00:15:14 ERROR : cloud_sync_2026-03-03.log: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "0a2c7570655feaae2846de21ad717f1637344d2c" vs dst(B2 bucket helder-sync-mirror path logs) "a1de1f4a10753a5337ef068e58056695d5c64c23"
+2026/03/03 00:15:14 INFO  : cloud_sync_2026-03-03.log: Removing failed copy
+2026/03/03 00:15:15 ERROR : Attempt 2/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "0a2c7570655feaae2846de21ad717f1637344d2c" vs dst(B2 bucket helder-sync-mirror path logs) "a1de1f4a10753a5337ef068e58056695d5c64c23"
+2026/03/03 00:15:16 INFO  : cloud_sync_2026-03-03.log: Copied (new)
+2026/03/03 00:15:16 ERROR : Attempt 3/3 succeeded
+2026/03/03 00:15:16 INFO  : 
+Transferred:   	   22.769 MiB / 22.769 MiB, 100%, 3.232 MiB/s, ETA 0s
+Checks:                82 / 82, 100%, Listed 208
+Transferred:           43 / 43, 100%
+Elapsed time:        10.0s
+
+2026/03/03 00:15:16 INFO  : 2026-03-03/motion_2026-03-03_00.15.09_041.avi: Copied (new)
+2026/03/03 00:15:16 INFO  : logs/file_audit_2026-03-03.log: Deleted
+2026/03/03 00:15:16 INFO  : logs/security_audit_2026-02-27.log: Deleted
+2026/03/03 00:15:16 INFO  : logs/intrusion_2026-03-01_12-45-53.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-02-26.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/firewall.log.old: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_2026-02-28.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/Novo(a) Documento de Texto.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/watchdog.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/mirror.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_2026-03-01.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/auditor_svc.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-02-24.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-02-28.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/file_audit_2026-02-28.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/file_audit_2026-02-26.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-02-23.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-03-01.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/file_audit_2026-02-27.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/file_audit_2026-03-02.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/firewall.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_2026-03-02.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_full_2026-03-01_13-00.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/watchdog_svc_err.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/all_services_2026-03-01_13-20.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/file_audit_2026-03-01.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_2026-03-03.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/connections_now.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-02-27.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/path_check.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_2026-02-25.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_2026-02-26.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/mirror_2026-03-03.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/mirror_2026-03-02.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/security_audit_full_2026-03-01_13-02.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/auditor_svc_err.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/watchdog_svc.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/auditor_deletion_evidence.txt: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-02-25.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/cloud_sync_2026-03-02.log: Deleted
+2026/03/03 00:15:17 INFO  : logs/file_audit_2026-02-25.log: Deleted
+2026/03/03 00:15:17 INFO  : 
+Transferred:   	  684.326 KiB / 684.326 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               183 / 183, 100%, Listed 329
+Deleted:               41 (files), 0 (dirs), 22.563 MiB (freed)
+Transferred:            1 / 1, 100%
+Elapsed time:         4.2s
+
+2026/03/03 00:15:32 INFO  : 2026-03-03/motion_2026-03-03_00.15.24_493.avi: Copied (new)
+2026/03/03 00:15:32 INFO  : logs/cloud_sync_2026-03-03.log: Deleted
+2026/03/03 00:15:32 INFO  : 
+Transferred:   	  913.762 KiB / 913.762 KiB, 100%, 304.587 KiB/s, ETA 0s
+Checks:               144 / 144, 100%, Listed 291
+Deleted:                1 (files), 0 (dirs), 66.876 KiB (freed)
+Transferred:            1 / 1, 100%
+Elapsed time:         3.2s
+
+2026/03/03 00:15:40 ERROR : 2026-03-03/motion_2026-03-03_00.15.34_024.avi: Failed to copy: Post "https://pod-050-1042-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0057": can't copy - source file is being updated (size changed from 965524 to 1024884)
+2026/03/03 00:15:40 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:15:40 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:15:40 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0057": can't copy - source file is being updated (size changed from 965524 to 1024884)
+2026/03/03 00:15:42 INFO  : 2026-03-03/motion_2026-03-03_00.15.34_024.avi: Copied (new)
+2026/03/03 00:15:42 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:15:42 INFO  : 
+Transferred:   	    1.047 MiB / 1.047 MiB, 100%, 237.439 KiB/s, ETA 0s
+Checks:               288 / 288, 100%, Listed 584
+Transferred:            1 / 1, 100%
+Elapsed time:         4.0s
+
+2026/03/03 00:15:48 INFO  : 2026-03-03/motion_2026-03-03_00.15.41_656.avi: Copied (new)
+2026/03/03 00:15:48 INFO  : 
+Transferred:   	  441.055 KiB / 441.055 KiB, 100%, 147.018 KiB/s, ETA 0s
+Checks:               145 / 145, 100%, Listed 294
+Transferred:            1 / 1, 100%
+Elapsed time:         3.0s
+
+2026/03/03 00:16:36 INFO  : 2026-03-03/motion_2026-03-03_00.16.28_942.avi: Copied (new)
+2026/03/03 00:16:36 INFO  : 
+Transferred:   	  707.719 KiB / 707.719 KiB, 100%, 235.906 KiB/s, ETA 0s
+Checks:               146 / 146, 100%, Listed 296
+Transferred:            1 / 1, 100%
+Elapsed time:         3.0s
+
+2026/03/03 00:16:47 ERROR : 2026-03-03/motion_2026-03-03_00.16.41_023.avi: Failed to copy: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0003": can't copy - source file is being updated (size changed from 930376 to 984872)
+2026/03/03 00:16:47 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:16:47 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:16:47 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0003": can't copy - source file is being updated (size changed from 930376 to 984872)
+2026/03/03 00:16:48 ERROR : 2026-03-03/motion_2026-03-03_00.16.41_023.avi: Failed to copy: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0003": can't copy - source file is being updated (size changed from 1061286 to 1093514)
+2026/03/03 00:16:48 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:16:48 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:16:48 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0003": can't copy - source file is being updated (size changed from 1061286 to 1093514)
+2026/03/03 00:16:49 ERROR : 2026-03-03/motion_2026-03-03_00.16.41_023.avi: Failed to copy: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0003": can't copy - source file is being updated (size changed from 1158858 to 1191626)
+2026/03/03 00:16:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:16:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:16:49 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0003": can't copy - source file is being updated (size changed from 1158858 to 1191626)
+2026/03/03 00:16:49 INFO  : 
+Transferred:   	        4 KiB / 4 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               441 / 441, 100%, Listed 894
+Elapsed time:         3.8s
+
+2026/03/03 00:16:49 NOTICE: Failed to sync: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0003": can't copy - source file is being updated (size changed from 1158858 to 1191626)
+2026/03/03 00:17:14 ERROR : 2026-03-03/motion_2026-03-03_00.17.13_488.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0020": can't copy - source file is being updated (size changed from 292492 to 334788)
+2026/03/03 00:17:15 INFO  : 2026-03-03/motion_2026-03-03_00.17.07_910.avi: Copied (new)
+2026/03/03 00:17:16 INFO  : 2026-03-03/motion_2026-03-03_00.16.41_023.avi: Copied (new)
+2026/03/03 00:17:16 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:16 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:16 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0020": can't copy - source file is being updated (size changed from 292492 to 334788)
+2026/03/03 00:17:17 ERROR : 2026-03-03/motion_2026-03-03_00.17.13_488.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0020": can't copy - source file is being updated (size changed from 592498 to 624890)
+2026/03/03 00:17:17 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:17 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:17 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0020": can't copy - source file is being updated (size changed from 592498 to 624890)
+2026/03/03 00:17:18 INFO  : 2026-03-03/motion_2026-03-03_00.17.13_488.avi: Copied (new)
+2026/03/03 00:17:18 ERROR : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "b4666e0e6ca1729b260d7d2f8199202340c1fc29" vs dst(B2 bucket helder-sync-mirror) "300dddb1e369b1f51cbaf16fb0902aba6fd45572"
+2026/03/03 00:17:18 INFO  : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: Removing failed copy
+2026/03/03 00:17:18 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:18 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:18 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "b4666e0e6ca1729b260d7d2f8199202340c1fc29" vs dst(B2 bucket helder-sync-mirror) "300dddb1e369b1f51cbaf16fb0902aba6fd45572"
+2026/03/03 00:17:18 INFO  : 
+Transferred:   	    3.899 MiB / 3.899 MiB, 100%, 299.560 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               445 / 445, 100%, Listed 905
+Transferred:            3 / 3, 100%
+Elapsed time:         6.1s
+
+2026/03/03 00:17:18 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "b4666e0e6ca1729b260d7d2f8199202340c1fc29" vs dst(B2 bucket helder-sync-mirror) "300dddb1e369b1f51cbaf16fb0902aba6fd45572"
+2026/03/03 00:17:19 ERROR : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: Failed to copy: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 239114 to 292908)
+2026/03/03 00:17:20 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:20 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:20 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 239114 to 292908)
+2026/03/03 00:17:21 ERROR : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: Failed to copy: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 367774 to 399868)
+2026/03/03 00:17:21 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:21 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:21 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 367774 to 399868)
+2026/03/03 00:17:21 ERROR : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: Failed to copy: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 464174 to 485738)
+2026/03/03 00:17:21 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:21 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:21 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 464174 to 485738)
+2026/03/03 00:17:21 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               450 / 450, 100%, Listed 912
+Elapsed time:         3.8s
+
+2026/03/03 00:17:21 NOTICE: Failed to sync: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 464174 to 485738)
+2026/03/03 00:17:29 ERROR : 2026-03-03/motion_2026-03-03_00.17.24_402.avi: Failed to copy: Post "https://pod-050-1038-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0051": can't copy - source file is being updated (size changed from 538152 to 602904)
+2026/03/03 00:17:29 INFO  : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: Copied (new)
+2026/03/03 00:17:29 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:29 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:29 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1038-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0051": can't copy - source file is being updated (size changed from 538152 to 602904)
+2026/03/03 00:17:32 INFO  : 2026-03-03/motion_2026-03-03_00.17.24_402.avi: Copied (new)
+2026/03/03 00:17:32 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:17:32 INFO  : 
+Transferred:   	    1.226 MiB / 1.226 MiB, 100%, 360.369 KiB/s, ETA 0s
+Checks:               301 / 301, 100%, Listed 611
+Transferred:            2 / 2, 100%
+Elapsed time:         4.8s
+
+2026/03/03 00:17:32 INFO  : 2026-03-03/motion_2026-03-03_00.17.24_402.avi: Copied (new)
+2026/03/03 00:17:32 INFO  : 
+Transferred:   	  653.127 KiB / 653.127 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               151 / 151, 100%, Listed 306
+Transferred:            1 / 1, 100%
+Elapsed time:         2.9s
+
+2026/03/03 00:17:43 ERROR : 2026-03-03/motion_2026-03-03_00.17.37_819.avi: Failed to copy: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0014": can't copy - source file is being updated (size changed from 875192 to 927976)
+2026/03/03 00:17:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:43 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0014": can't copy - source file is being updated (size changed from 875192 to 927976)
+2026/03/03 00:17:44 ERROR : 2026-03-03/motion_2026-03-03_00.17.37_819.avi: Failed to copy: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0014": can't copy - source file is being updated (size changed from 1013206 to 1056140)
+2026/03/03 00:17:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:44 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0014": can't copy - source file is being updated (size changed from 1013206 to 1056140)
+2026/03/03 00:17:45 ERROR : 2026-03-03/motion_2026-03-03_00.17.37_819.avi: Failed to copy: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0014": can't copy - source file is being updated (size changed from 1120354 to 1152660)
+2026/03/03 00:17:45 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:17:45 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:17:45 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0014": can't copy - source file is being updated (size changed from 1120354 to 1152660)
+2026/03/03 00:17:45 INFO  : 
+Transferred:   	        4 KiB / 4 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               456 / 456, 100%, Listed 924
+Elapsed time:         3.9s
+
+2026/03/03 00:17:45 NOTICE: Failed to sync: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0014": can't copy - source file is being updated (size changed from 1120354 to 1152660)
+2026/03/03 00:18:11 INFO  : 2026-03-03/motion_2026-03-03_00.18.03_735.avi: Copied (new)
+2026/03/03 00:18:12 INFO  : 2026-03-03/motion_2026-03-03_00.17.37_819.avi: Copied (new)
+2026/03/03 00:18:12 INFO  : 
+Transferred:   	    2.826 MiB / 2.826 MiB, 100%, 723.518 KiB/s, ETA 0s
+Checks:               152 / 152, 100%, Listed 309
+Transferred:            2 / 2, 100%
+Elapsed time:         4.0s
+
+2026/03/03 00:18:17 ERROR : 2026-03-03/motion_2026-03-03_00.18.10_999.avi: Failed to copy: Post "https://pod-052-1006-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0043": can't copy - source file is being updated (size changed from 903508 to 957746)
+2026/03/03 00:18:17 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:17 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:17 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-052-1006-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0043": can't copy - source file is being updated (size changed from 903508 to 957746)
+2026/03/03 00:18:18 ERROR : 2026-03-03/motion_2026-03-03_00.18.10_999.avi: Failed to copy: Post "https://pod-052-1006-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0043": can't copy - source file is being updated (size changed from 1044242 to 1087572)
+2026/03/03 00:18:18 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:18 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:18 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-052-1006-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0043": can't copy - source file is being updated (size changed from 1044242 to 1087572)
+2026/03/03 00:18:19 ERROR : 2026-03-03/motion_2026-03-03_00.18.10_999.avi: Failed to copy: Post "https://pod-052-1006-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0043": can't copy - source file is being updated (size changed from 1152856 to 1187142)
+2026/03/03 00:18:19 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:19 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:19 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-052-1006-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0043": can't copy - source file is being updated (size changed from 1152856 to 1187142)
+2026/03/03 00:18:19 INFO  : 
+Transferred:   	        4 KiB / 4 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               462 / 462, 100%, Listed 936
+Elapsed time:         4.2s
+
+2026/03/03 00:18:19 NOTICE: Failed to sync: Post "https://pod-052-1006-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0043": can't copy - source file is being updated (size changed from 1152856 to 1187142)
+2026/03/03 00:18:37 ERROR : 2026-03-03/motion_2026-03-03_00.18.31_128.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 926518 to 970000)
+2026/03/03 00:18:38 INFO  : 2026-03-03/motion_2026-03-03_00.18.10_999.avi: Copied (new)
+2026/03/03 00:18:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:38 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 926518 to 970000)
+2026/03/03 00:18:39 ERROR : 2026-03-03/motion_2026-03-03_00.18.31_128.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 1176834 to 1189448)
+2026/03/03 00:18:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:39 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0016": can't copy - source file is being updated (size changed from 1176834 to 1189448)
+2026/03/03 00:18:40 INFO  : 2026-03-03/motion_2026-03-03_00.18.31_128.avi: Copied (new)
+2026/03/03 00:18:40 ERROR : Attempt 3/3 succeeded
+2026/03/03 00:18:40 INFO  : 
+Transferred:   	    2.266 MiB / 2.266 MiB, 100%, 386.439 KiB/s, ETA 0s
+Checks:               464 / 464, 100%, Listed 941
+Transferred:            2 / 2, 100%
+Elapsed time:         5.2s
+
+2026/03/03 00:18:47 ERROR : 2026-03-03/motion_2026-03-03_00.18.45_435.avi: Failed to copy: Post "https://pod-050-1008-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501008_t0042": can't copy - source file is being updated (size changed from 307696 to 362400)
+2026/03/03 00:18:48 INFO  : 2026-03-03/motion_2026-03-03_00.18.41_525.avi: Copied (new)
+2026/03/03 00:18:48 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:48 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:48 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1008-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501008_t0042": can't copy - source file is being updated (size changed from 307696 to 362400)
+2026/03/03 00:18:49 ERROR : 2026-03-03/motion_2026-03-03_00.18.45_435.avi: Failed to copy: Post "https://pod-050-1008-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501008_t0042": can't copy - source file is being updated (size changed from 525168 to 568772)
+2026/03/03 00:18:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:49 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1008-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501008_t0042": can't copy - source file is being updated (size changed from 525168 to 568772)
+2026/03/03 00:18:50 ERROR : 2026-03-03/motion_2026-03-03_00.18.45_435.avi: Failed to copy: Post "https://pod-050-1031-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501031_t0056": can't copy - source file is being updated (size changed from 634390 to 656222)
+2026/03/03 00:18:50 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:50 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:50 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1031-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501031_t0056": can't copy - source file is being updated (size changed from 634390 to 656222)
+2026/03/03 00:18:50 INFO  : 
+Transferred:   	    1.041 MiB / 1.041 MiB, 100%, 48 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               470 / 470, 100%, Listed 953
+Transferred:            1 / 1, 100%
+Elapsed time:         4.7s
+
+2026/03/03 00:18:50 NOTICE: Failed to sync: Post "https://pod-050-1031-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501031_t0056": can't copy - source file is being updated (size changed from 634390 to 656222)
+2026/03/03 00:18:52 ERROR : 2026-03-03/motion_2026-03-03_00.18.45_435.avi: Failed to copy: Post "https://pod-050-1017-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0048": can't copy - source file is being updated (size changed from 765394 to 820030)
+2026/03/03 00:18:52 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:18:52 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:18:52 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1017-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0048": can't copy - source file is being updated (size changed from 765394 to 820030)
+2026/03/03 00:18:54 INFO  : 2026-03-03/motion_2026-03-03_00.18.45_435.avi: Copied (new)
+2026/03/03 00:18:54 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:18:54 INFO  : 
+Transferred:   	  812.670 KiB / 812.670 KiB, 100%, 63.964 KiB/s, ETA 0s
+Checks:               314 / 314, 100%, Listed 636
+Transferred:            1 / 1, 100%
+Elapsed time:         4.2s
+
+2026/03/03 00:19:08 ERROR : 2026-03-03/motion_2026-03-03_00.19.01_351.avi: Failed to copy: Post "https://pod-050-1032-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0021": can't copy - source file is being updated (size changed from 1038164 to 1081424)
+2026/03/03 00:19:08 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:19:08 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:19:08 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1032-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0021": can't copy - source file is being updated (size changed from 1038164 to 1081424)
+2026/03/03 00:19:09 ERROR : 2026-03-03/motion_2026-03-03_00.19.01_351.avi: Failed to copy: Post "https://pod-050-1032-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0021": can't copy - source file is being updated (size changed from 1157472 to 1190060)
+2026/03/03 00:19:09 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:19:09 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:19:09 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1032-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0021": can't copy - source file is being updated (size changed from 1157472 to 1190060)
+2026/03/03 00:19:10 ERROR : 2026-03-03/motion_2026-03-03_00.19.01_351.avi: Failed to copy: Post "https://pod-050-1032-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0021": can't copy - source file is being updated (size changed from 1276936 to 1309422)
+2026/03/03 00:19:10 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:19:10 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:19:10 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1032-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0021": can't copy - source file is being updated (size changed from 1276936 to 1309422)
+2026/03/03 00:19:10 INFO  : 
+Transferred:   	        8 KiB / 8 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               474 / 474, 100%, Listed 960
+Elapsed time:         4.5s
+
+2026/03/03 00:19:10 NOTICE: Failed to sync: Post "https://pod-050-1032-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0021": can't copy - source file is being updated (size changed from 1276936 to 1309422)
+2026/03/03 00:19:26 ERROR : 2026-03-03/motion_2026-03-03_00.19.18_432.avi: Failed to copy: Post "https://pod-050-1021-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501021_t0034": can't copy - source file is being updated (size changed from 1081822 to 1116088)
+2026/03/03 00:19:27 INFO  : 2026-03-03/motion_2026-03-03_00.19.01_351.avi: Copied (new)
+2026/03/03 00:19:27 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:19:27 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:19:27 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1021-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501021_t0034": can't copy - source file is being updated (size changed from 1081822 to 1116088)
+2026/03/03 00:19:29 INFO  : 2026-03-03/motion_2026-03-03_00.19.18_432.avi: Copied (new)
+2026/03/03 00:19:29 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:19:29 INFO  : 
+Transferred:   	    2.443 MiB / 2.443 MiB, 100%, 472.025 KiB/s, ETA 0s
+Checks:               317 / 317, 100%, Listed 643
+Transferred:            2 / 2, 100%
+Elapsed time:         5.2s
+
+2026/03/03 00:19:45 INFO  : 2026-03-03/motion_2026-03-03_00.19.37_862.avi: Copied (new)
+2026/03/03 00:19:45 INFO  : 
+Transferred:   	  755.975 KiB / 755.975 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               160 / 160, 100%, Listed 324
+Transferred:            1 / 1, 100%
+Elapsed time:         2.8s
+
+2026/03/03 00:19:54 ERROR : 2026-03-03/motion_2026-03-03_00.19.48_409.avi: Failed to copy: Post "https://pod-050-1026-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501026_t0027": can't copy - source file is being updated (size changed from 930794 to 985124)
+2026/03/03 00:19:54 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:19:54 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:19:54 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1026-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501026_t0027": can't copy - source file is being updated (size changed from 930794 to 985124)
+2026/03/03 00:19:55 ERROR : 2026-03-03/motion_2026-03-03_00.19.48_409.avi: Failed to copy: Post "https://pod-050-1026-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501026_t0027": can't copy - source file is being updated (size changed from 1072100 to 1106264)
+2026/03/03 00:19:55 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:19:55 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:19:55 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1026-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501026_t0027": can't copy - source file is being updated (size changed from 1072100 to 1106264)
+2026/03/03 00:19:58 INFO  : 2026-03-03/motion_2026-03-03_00.19.48_409.avi: Copied (new)
+2026/03/03 00:19:58 ERROR : Attempt 3/3 succeeded
+2026/03/03 00:19:58 INFO  : 
+Transferred:   	    1.055 MiB / 1.055 MiB, 100%, 238 KiB/s, ETA 0s
+Checks:               483 / 483, 100%, Listed 978
+Transferred:            1 / 1, 100%
+Elapsed time:         5.2s
+
+2026/03/03 00:20:04 ERROR : 2026-03-03/motion_2026-03-03_00.20.03_186.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0028": can't copy - source file is being updated (size changed from 403172 to 457728)
+2026/03/03 00:20:04 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:20:04 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:20:04 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0028": can't copy - source file is being updated (size changed from 403172 to 457728)
+2026/03/03 00:20:05 ERROR : 2026-03-03/motion_2026-03-03_00.20.03_186.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0028": can't copy - source file is being updated (size changed from 533750 to 566454)
+2026/03/03 00:20:05 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:20:05 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:20:05 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0028": can't copy - source file is being updated (size changed from 533750 to 566454)
+2026/03/03 00:20:06 ERROR : 2026-03-03/motion_2026-03-03_00.20.03_186.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0028": can't copy - source file is being updated (size changed from 642682 to 665492)
+2026/03/03 00:20:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:20:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:20:06 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0028": can't copy - source file is being updated (size changed from 642682 to 665492)
+2026/03/03 00:20:06 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               486 / 486, 100%, Listed 984
+Elapsed time:         3.8s
+
+2026/03/03 00:20:06 NOTICE: Failed to sync: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0028": can't copy - source file is being updated (size changed from 642682 to 665492)
+2026/03/03 00:20:09 INFO  : auditor_deletion_evidence.txt: Copied (new)
+2026/03/03 00:20:09 INFO  : auditor_svc.log: Copied (new)
+2026/03/03 00:20:09 INFO  : Novo(a) Documento de Texto.txt: Copied (new)
+2026/03/03 00:20:09 INFO  : 2026-03-03/motion_2026-03-03_00.20.03_186.avi: Copied (new)
+2026/03/03 00:20:09 INFO  : 
+Transferred:   	  649.895 KiB / 649.895 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               162 / 162, 100%, Listed 328
+Transferred:            1 / 1, 100%
+Elapsed time:         2.7s
+
+2026/03/03 00:20:10 INFO  : auditor_svc_err.log: Copied (new)
+2026/03/03 00:20:10 INFO  : cloud_sync_2026-02-23.log: Copied (new)
+2026/03/03 00:20:10 INFO  : cloud_sync_2026-02-24.log: Copied (new)
+2026/03/03 00:20:11 INFO  : cloud_sync_2026-02-26.log: Copied (new)
+2026/03/03 00:20:11 INFO  : cloud_sync.log: Copied (new)
+2026/03/03 00:20:11 INFO  : cloud_sync_2026-02-25.log: Copied (new)
+2026/03/03 00:20:11 INFO  : cloud_sync_2026-02-27.log: Copied (new)
+2026/03/03 00:20:11 INFO  : cloud_sync_2026-02-28.log: Copied (new)
+2026/03/03 00:20:11 INFO  : cloud_sync_2026-03-02.log: Copied (new)
+2026/03/03 00:20:11 INFO  : cloud_sync_2026-03-01.log: Copied (new)
+2026/03/03 00:20:11 INFO  : file_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:20:11 ERROR : cloud_sync_2026-03-03.log: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "d0f1e137a5ef1480804071429a0d74a16ac9ee18" vs dst(B2 bucket helder-sync-mirror path logs) "2122bf7d38d0c277cb8bb9e94f42a736ee3713ce"
+2026/03/03 00:20:11 INFO  : cloud_sync_2026-03-03.log: Removing failed copy
+2026/03/03 00:20:11 INFO  : connections_now.txt: Copied (new)
+2026/03/03 00:20:12 INFO  : file_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:20:12 INFO  : file_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:20:12 INFO  : file_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:20:12 INFO  : file_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:20:12 INFO  : file_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:20:12 INFO  : file_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:20:12 INFO  : firewall.log: Copied (new)
+2026/03/03 00:20:13 INFO  : intrusion_2026-03-01_12-45-53.txt: Copied (new)
+2026/03/03 00:20:13 INFO  : mirror_2026-03-02.log: Copied (new)
+2026/03/03 00:20:14 INFO  : mirror.log: Copied (new)
+2026/03/03 00:20:14 INFO  : firewall.log.old: Copied (new)
+2026/03/03 00:20:14 INFO  : path_check.txt: Copied (new)
+2026/03/03 00:20:14 INFO  : mirror_2026-03-03.log: Copied (new)
+2026/03/03 00:20:14 INFO  : security_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:20:14 INFO  : all_services_2026-03-01_13-20.txt: Copied (new)
+2026/03/03 00:20:14 INFO  : security_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:20:14 INFO  : security_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:20:14 INFO  : security_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:20:15 INFO  : security_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:20:15 INFO  : security_audit_full_2026-03-01_13-00.txt: Copied (new)
+2026/03/03 00:20:15 INFO  : security_audit_full_2026-03-01_13-02.txt: Copied (new)
+2026/03/03 00:20:15 INFO  : watchdog.log: Copied (new)
+2026/03/03 00:20:15 INFO  : watchdog_svc.log: Copied (new)
+2026/03/03 00:20:15 INFO  : watchdog_svc_err.log: Copied (new)
+2026/03/03 00:20:15 INFO  : security_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:20:19 INFO  : security_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:20:19 ERROR : Attempt 1/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "d0f1e137a5ef1480804071429a0d74a16ac9ee18" vs dst(B2 bucket helder-sync-mirror path logs) "2122bf7d38d0c277cb8bb9e94f42a736ee3713ce"
+2026/03/03 00:20:25 INFO  : cloud_sync_2026-03-03.log: Copied (new)
+2026/03/03 00:20:25 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:20:25 INFO  : 
+Transferred:   	   23.946 MiB / 23.946 MiB, 100%, 1.497 MiB/s, ETA 0s
+Checks:                41 / 41, 100%, Listed 125
+Transferred:           42 / 42, 100%
+Elapsed time:        17.6s
+
+2026/03/03 00:20:32 ERROR : 2026-03-03/motion_2026-03-03_00.20.24_891.avi: Failed to copy: Post "https://pod-050-1017-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0027": can't copy - source file is being updated (size changed from 1063012 to 1120532)
+2026/03/03 00:20:32 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:20:32 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:20:32 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1017-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0027": can't copy - source file is being updated (size changed from 1063012 to 1120532)
+2026/03/03 00:20:34 INFO  : 2026-03-03/motion_2026-03-03_00.20.24_891.avi: Copied (new)
+2026/03/03 00:20:35 INFO  : logs/mirror_2026-03-02.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/path_check.txt: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_2026-02-26.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_2026-02-28.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_2026-03-01.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_2026-03-03.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync_2026-02-23.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync_2026-02-28.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync_2026-03-01.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/mirror.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/watchdog.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/watchdog_svc_err.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/auditor_deletion_evidence.txt: Deleted
+2026/03/03 00:20:35 INFO  : logs/file_audit_2026-02-25.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/firewall.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/file_audit_2026-03-02.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/file_audit_2026-02-28.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/mirror_2026-03-03.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_2026-02-27.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync_2026-02-26.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync_2026-03-03.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/file_audit_2026-02-27.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_2026-02-25.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/Novo(a) Documento de Texto.txt: Deleted
+2026/03/03 00:20:35 INFO  : logs/auditor_svc.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/auditor_svc_err.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_full_2026-03-01_13-00.txt: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync_2026-02-24.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/cloud_sync_2026-02-25.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/file_audit_2026-03-01.log: Deleted
+2026/03/03 00:20:35 INFO  : logs/connections_now.txt: Deleted
+2026/03/03 00:20:35 INFO  : logs/firewall.log.old: Deleted
+2026/03/03 00:20:35 INFO  : logs/security_audit_full_2026-03-01_13-02.txt: Deleted
+2026/03/03 00:20:36 INFO  : logs/cloud_sync_2026-03-02.log: Deleted
+2026/03/03 00:20:36 INFO  : logs/cloud_sync_2026-02-27.log: Deleted
+2026/03/03 00:20:36 INFO  : logs/file_audit_2026-03-03.log: Deleted
+2026/03/03 00:20:36 INFO  : logs/intrusion_2026-03-01_12-45-53.txt: Deleted
+2026/03/03 00:20:36 INFO  : logs/security_audit_2026-03-02.log: Deleted
+2026/03/03 00:20:36 INFO  : logs/watchdog_svc.log: Deleted
+2026/03/03 00:20:36 INFO  : logs/all_services_2026-03-01_13-20.txt: Deleted
+2026/03/03 00:20:36 INFO  : logs/file_audit_2026-02-26.log: Deleted
+2026/03/03 00:20:36 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:20:36 INFO  : 
+Transferred:   	    1.103 MiB / 1.103 MiB, 100%, 222 KiB/s, ETA 0s
+Checks:               368 / 368, 100%, Listed 744
+Deleted:               42 (files), 0 (dirs), 23.535 MiB (freed)
+Transferred:            1 / 1, 100%
+Elapsed time:         5.7s
+
+2026/03/03 00:20:49 INFO  : 2026-03-03/motion_2026-03-03_00.20.39_993.avi: Copied (new)
+2026/03/03 00:20:49 INFO  : 
+Transferred:   	  910.650 KiB / 910.650 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               164 / 164, 100%, Listed 332
+Transferred:            1 / 1, 100%
+Elapsed time:         2.9s
+
+2026/03/03 00:20:59 ERROR : 2026-03-03/motion_2026-03-03_00.20.53_628.avi: Failed to copy: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 963156 to 1017528)
+2026/03/03 00:20:59 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:20:59 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:20:59 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 963156 to 1017528)
+2026/03/03 00:21:01 ERROR : 2026-03-03/motion_2026-03-03_00.20.53_628.avi: Failed to copy: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 1093394 to 1147540)
+2026/03/03 00:21:01 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:01 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:01 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 1093394 to 1147540)
+2026/03/03 00:21:02 ERROR : 2026-03-03/motion_2026-03-03_00.20.53_628.avi: Failed to copy: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 1223596 to 1256254)
+2026/03/03 00:21:02 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:02 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:02 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 1223596 to 1256254)
+2026/03/03 00:21:02 INFO  : 
+Transferred:   	        4 KiB / 4 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               495 / 495, 100%, Listed 1002
+Elapsed time:         4.1s
+
+2026/03/03 00:21:02 NOTICE: Failed to sync: Post "https://pod-050-1042-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 1223596 to 1256254)
+2026/03/03 00:21:19 ERROR : 2026-03-03/motion_2026-03-03_00.21.12_244.avi: Failed to copy: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0052": can't copy - source file is being updated (size changed from 995824 to 1050722)
+2026/03/03 00:21:20 INFO  : 2026-03-03/motion_2026-03-03_00.20.53_628.avi: Copied (new)
+2026/03/03 00:21:20 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:20 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:20 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0052": can't copy - source file is being updated (size changed from 995824 to 1050722)
+2026/03/03 00:21:21 INFO  : 2026-03-03/motion_2026-03-03_00.21.12_244.avi: Copied (new)
+2026/03/03 00:21:21 ERROR : 2026-03-03/motion_2026-03-03_00.21.20_226.avi: Failed to copy: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0052": can't copy - source file is being updated (size changed from 175506 to 219344)
+2026/03/03 00:21:21 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:21 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:21 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1017-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501017_t0052": can't copy - source file is being updated (size changed from 175506 to 219344)
+2026/03/03 00:21:22 ERROR : 2026-03-03/motion_2026-03-03_00.21.20_226.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "80fd6502c8002296d9e4a608b1c340c9ff253a1c" vs dst(B2 bucket helder-sync-mirror) "866a4d87ad99021099648cceda70309b8b7367f5"
+2026/03/03 00:21:22 INFO  : 2026-03-03/motion_2026-03-03_00.21.20_226.avi: Removing failed copy
+2026/03/03 00:21:23 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:23 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:23 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "80fd6502c8002296d9e4a608b1c340c9ff253a1c" vs dst(B2 bucket helder-sync-mirror) "866a4d87ad99021099648cceda70309b8b7367f5"
+2026/03/03 00:21:23 INFO  : 
+Transferred:   	    3.040 MiB / 3.040 MiB, 100%, 574.666 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               498 / 498, 100%, Listed 1010
+Transferred:            2 / 2, 100%
+Elapsed time:         5.5s
+
+2026/03/03 00:21:23 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "80fd6502c8002296d9e4a608b1c340c9ff253a1c" vs dst(B2 bucket helder-sync-mirror) "866a4d87ad99021099648cceda70309b8b7367f5"
+2026/03/03 00:21:27 INFO  : 2026-03-03/motion_2026-03-03_00.21.20_226.avi: Copied (new)
+2026/03/03 00:21:27 INFO  : 
+Transferred:   	  397.113 KiB / 397.113 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               167 / 167, 100%, Listed 338
+Transferred:            1 / 1, 100%
+Elapsed time:         2.8s
+
+2026/03/03 00:21:37 ERROR : 2026-03-03/motion_2026-03-03_00.21.30_870.avi: Failed to copy: Post "https://pod-050-1042-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0044": can't copy - source file is being updated (size changed from 933098 to 976906)
+2026/03/03 00:21:37 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:37 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:37 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0044": can't copy - source file is being updated (size changed from 933098 to 976906)
+2026/03/03 00:21:38 ERROR : 2026-03-03/motion_2026-03-03_00.21.30_870.avi: Failed to copy: Post "https://pod-050-1042-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0044": can't copy - source file is being updated (size changed from 1064506 to 1097352)
+2026/03/03 00:21:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:38 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0044": can't copy - source file is being updated (size changed from 1064506 to 1097352)
+2026/03/03 00:21:39 ERROR : 2026-03-03/motion_2026-03-03_00.21.30_870.avi: Failed to copy: Post "https://pod-050-1042-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0044": can't copy - source file is being updated (size changed from 1174148 to 1208754)
+2026/03/03 00:21:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:21:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:21:39 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0044": can't copy - source file is being updated (size changed from 1174148 to 1208754)
+2026/03/03 00:21:39 INFO  : 
+Transferred:   	        4 KiB / 4 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               504 / 504, 100%, Listed 1020
+Elapsed time:         4.0s
+
+2026/03/03 00:21:39 NOTICE: Failed to sync: Post "https://pod-050-1042-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0044": can't copy - source file is being updated (size changed from 1174148 to 1208754)
+2026/03/03 00:21:54 INFO  : 2026-03-03/motion_2026-03-03_00.21.46_695.avi: Copied (new)
+2026/03/03 00:21:54 INFO  : 2026-03-03/motion_2026-03-03_00.21.30_870.avi: Copied (new)
+2026/03/03 00:21:54 INFO  : 
+Transferred:   	    1.866 MiB / 1.866 MiB, 100%, 636.895 KiB/s, ETA 0s
+Checks:               168 / 168, 100%, Listed 341
+Transferred:            2 / 2, 100%
+Elapsed time:         3.3s
+
+2026/03/03 00:22:01 INFO  : 2026-03-03/motion_2026-03-03_00.21.53_903.avi: Copied (new)
+2026/03/03 00:22:01 INFO  : 
+Transferred:   	  677.025 KiB / 677.025 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:               170 / 170, 100%, Listed 344
+Transferred:            1 / 1, 100%
+Elapsed time:         2.9s
+
+2026/03/03 00:22:50 ERROR : 2026-03-03/motion_2026-03-03_00.22.44_310.avi: Failed to copy: Post "https://pod-050-1024-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0022": can't copy - source file is being updated (size changed from 959662 to 1003672)
+2026/03/03 00:22:50 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:22:50 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:22:50 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1024-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0022": can't copy - source file is being updated (size changed from 959662 to 1003672)
+2026/03/03 00:22:51 ERROR : 2026-03-03/motion_2026-03-03_00.22.44_310.avi: Failed to copy: Post "https://pod-050-1024-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0022": can't copy - source file is being updated (size changed from 1091840 to 1124972)
+2026/03/03 00:22:51 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:22:51 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:22:51 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1024-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0022": can't copy - source file is being updated (size changed from 1091840 to 1124972)
+2026/03/03 00:22:52 ERROR : 2026-03-03/motion_2026-03-03_00.22.44_310.avi: Failed to copy: Post "https://pod-050-1024-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0022": can't copy - source file is being updated (size changed from 1191142 to 1224188)
+2026/03/03 00:22:52 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:22:52 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:22:52 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1024-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0022": can't copy - source file is being updated (size changed from 1191142 to 1224188)
+2026/03/03 00:22:52 INFO  : 
+Transferred:   	        4 KiB / 4 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               513 / 513, 100%, Listed 1038
+Elapsed time:         3.8s
+
+2026/03/03 00:22:52 NOTICE: Failed to sync: Post "https://pod-050-1024-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0022": can't copy - source file is being updated (size changed from 1191142 to 1224188)
+2026/03/03 00:23:29 ERROR : 2026-03-03/motion_2026-03-03_00.23.22_743.avi: Failed to copy: Post "https://pod-050-1040-04.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0045": can't copy - source file is being updated (size changed from 957286 to 1012222)
+2026/03/03 00:23:30 INFO  : 2026-03-03/motion_2026-03-03_00.22.44_310.avi: Copied (new)
+2026/03/03 00:23:30 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 00:23:30 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 00:23:30 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-04.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0045": can't copy - source file is being updated (size changed from 957286 to 1012222)
+2026/03/03 00:23:33 INFO  : 2026-03-03/motion_2026-03-03_00.23.22_743.avi: Copied (new)
+2026/03/03 00:23:33 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:23:33 INFO  : 
+Transferred:   	    2.344 MiB / 2.344 MiB, 100%, 450.580 KiB/s, ETA 0s
+Checks:               343 / 343, 100%, Listed 695
+Transferred:            2 / 2, 100%
+Elapsed time:         6.1s
+
+2026/03/03 00:25:05 INFO  : There was nothing to transfer
+2026/03/03 00:25:05 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 349
+Elapsed time:         1.7s
+
+2026/03/03 00:25:11 INFO  : auditor_deletion_evidence.txt: Copied (new)
+2026/03/03 00:25:11 INFO  : auditor_svc.log: Copied (new)
+2026/03/03 00:25:11 INFO  : auditor_svc_err.log: Copied (new)
+2026/03/03 00:25:11 INFO  : Novo(a) Documento de Texto.txt: Copied (new)
+2026/03/03 00:25:12 INFO  : all_services_2026-03-01_13-20.txt: Copied (new)
+2026/03/03 00:25:13 INFO  : cloud_sync_2026-02-23.log: Copied (new)
+2026/03/03 00:25:17 INFO  : cloud_sync_2026-02-24.log: Copied (new)
+2026/03/03 00:25:17 INFO  : cloud_sync.log: Copied (new)
+2026/03/03 00:25:17 INFO  : cloud_sync_2026-02-26.log: Copied (new)
+2026/03/03 00:25:17 INFO  : cloud_sync_2026-02-25.log: Copied (new)
+2026/03/03 00:25:17 INFO  : cloud_sync_2026-03-01.log: Copied (new)
+2026/03/03 00:25:18 INFO  : cloud_sync_2026-02-27.log: Copied (new)
+2026/03/03 00:25:18 INFO  : cloud_sync_2026-03-02.log: Copied (new)
+2026/03/03 00:25:18 ERROR : cloud_sync_2026-03-03.log: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "fe4b867449d4bce201aca99ee206d9a8c77ed23a" vs dst(B2 bucket helder-sync-mirror path logs) "fa78613c54b3d4be6c832845b4418732c5354b30"
+2026/03/03 00:25:18 INFO  : cloud_sync_2026-03-03.log: Removing failed copy
+2026/03/03 00:25:18 INFO  : connections_now.txt: Copied (new)
+2026/03/03 00:25:18 INFO  : cloud_sync_2026-02-28.log: Copied (new)
+2026/03/03 00:25:19 INFO  : file_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:25:19 INFO  : file_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:25:19 INFO  : file_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:25:19 INFO  : file_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:25:19 INFO  : file_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:25:19 INFO  : file_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:25:19 INFO  : file_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:25:19 INFO  : intrusion_2026-03-01_12-45-53.txt: Copied (new)
+2026/03/03 00:25:20 INFO  : firewall.log: Copied (new)
+2026/03/03 00:25:20 INFO  : mirror_2026-03-02.log: Copied (new)
+2026/03/03 00:25:20 INFO  : path_check.txt: Copied (new)
+2026/03/03 00:25:21 INFO  : security_audit_2026-02-25.log: Copied (new)
+2026/03/03 00:25:21 INFO  : security_audit_2026-02-26.log: Copied (new)
+2026/03/03 00:25:22 INFO  : security_audit_2026-02-27.log: Copied (new)
+2026/03/03 00:25:22 INFO  : mirror.log: Copied (new)
+2026/03/03 00:25:22 INFO  : mirror_2026-03-03.log: Copied (new)
+2026/03/03 00:25:22 INFO  : security_audit_2026-03-01.log: Copied (new)
+2026/03/03 00:25:22 INFO  : security_audit_2026-03-02.log: Copied (new)
+2026/03/03 00:25:22 INFO  : firewall.log.old: Copied (new)
+2026/03/03 00:25:22 INFO  : security_audit_full_2026-03-01_13-00.txt: Copied (new)
+2026/03/03 00:25:22 INFO  : security_audit_2026-03-03.log: Copied (new)
+2026/03/03 00:25:22 INFO  : security_audit_2026-02-28.log: Copied (new)
+2026/03/03 00:25:23 INFO  : watchdog_svc_err.log: Copied (new)
+2026/03/03 00:25:23 INFO  : security_audit_full_2026-03-01_13-02.txt: Copied (new)
+2026/03/03 00:25:23 INFO  : watchdog.log: Copied (new)
+2026/03/03 00:25:23 INFO  : watchdog_svc.log: Copied (new)
+2026/03/03 00:25:23 ERROR : Attempt 1/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "fe4b867449d4bce201aca99ee206d9a8c77ed23a" vs dst(B2 bucket helder-sync-mirror path logs) "fa78613c54b3d4be6c832845b4418732c5354b30"
+2026/03/03 00:25:24 INFO  : cloud_sync_2026-03-03.log: Copied (new)
+2026/03/03 00:25:24 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:25:24 INFO  : 
+Transferred:   	   24.308 MiB / 24.308 MiB, 100%, 1.727 MiB/s, ETA 0s
+Checks:                41 / 41, 100%, Listed 125
+Transferred:           42 / 42, 100%
+Elapsed time:        14.9s
+
+2026/03/03 00:30:05 INFO  : There was nothing to transfer
+2026/03/03 00:30:05 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.5s
+
+2026/03/03 00:30:10 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:30:10 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 00:30:10 INFO  : 
+Transferred:   	  265.668 KiB / 265.668 KiB, 100%, 111.761 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.5s
+
+2026/03/03 00:35:04 INFO  : There was nothing to transfer
+2026/03/03 00:35:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.3s
+
+2026/03/03 00:35:08 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:35:08 ERROR : cloud_sync_2026-03-03.log: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "7bfa8bcbf5848993fdaf2712834c04b41496961a" vs dst(B2 bucket helder-sync-mirror path logs) "1e8da6f6705640587df1d1a86f4fbf0e1ef864d2"
+2026/03/03 00:35:08 INFO  : cloud_sync_2026-03-03.log: Removing failed copy
+2026/03/03 00:35:08 ERROR : Attempt 1/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Sync/Logs) "7bfa8bcbf5848993fdaf2712834c04b41496961a" vs dst(B2 bucket helder-sync-mirror path logs) "1e8da6f6705640587df1d1a86f4fbf0e1ef864d2"
+2026/03/03 00:35:09 INFO  : cloud_sync_2026-03-03.log: Copied (new)
+2026/03/03 00:35:09 ERROR : Attempt 2/3 succeeded
+2026/03/03 00:35:09 INFO  : 
+Transferred:   	  395.170 KiB / 395.170 KiB, 100%, 133.151 KiB/s, ETA 0s
+Checks:                83 / 83, 100%, Listed 167
+Transferred:            2 / 2, 100%
+Elapsed time:         3.3s
+
+2026/03/03 00:40:03 INFO  : There was nothing to transfer
+2026/03/03 00:40:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.3s
+
+2026/03/03 00:40:07 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 00:40:07 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:40:07 INFO  : 
+Transferred:   	  267.773 KiB / 267.773 KiB, 100%, 112 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.3s
+
+2026/03/03 00:45:04 INFO  : There was nothing to transfer
+2026/03/03 00:45:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.4s
+
+2026/03/03 00:45:08 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 00:45:09 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:45:09 INFO  : 
+Transferred:   	  268.417 KiB / 268.417 KiB, 100%, 128.939 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.3s
+
+2026/03/03 00:50:05 INFO  : There was nothing to transfer
+2026/03/03 00:50:05 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.5s
+
+2026/03/03 00:50:09 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 00:50:09 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:50:09 INFO  : 
+Transferred:   	  269.143 KiB / 269.143 KiB, 100%, 129.225 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.3s
+
+2026/03/03 00:55:04 INFO  : There was nothing to transfer
+2026/03/03 00:55:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.4s
+
+2026/03/03 00:55:08 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 00:55:08 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 00:55:08 INFO  : 
+Transferred:   	  269.868 KiB / 269.868 KiB, 100%, 112 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.3s
+
+2026/03/03 01:00:03 INFO  : There was nothing to transfer
+2026/03/03 01:00:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.5s
+
+2026/03/03 01:00:07 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 01:00:07 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 01:00:07 INFO  : 
+Transferred:   	  270.512 KiB / 270.512 KiB, 100%, 129.792 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.3s
+
+2026/03/03 01:05:04 INFO  : There was nothing to transfer
+2026/03/03 01:05:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.5s
+
+2026/03/03 01:05:08 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 01:05:08 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 01:05:08 INFO  : 
+Transferred:   	  271.237 KiB / 271.237 KiB, 100%, 112 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.3s
+
+2026/03/03 01:10:04 INFO  : There was nothing to transfer
+2026/03/03 01:10:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.4s
+
+2026/03/03 01:10:07 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 01:10:07 ERROR : cloud_sync_2026-03-03.log: Failed to copy: Post "https://pod-050-1013-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0021": can't copy - source file is being updated (size changed from 135904 to 135973)
+2026/03/03 01:10:07 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1013-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0021": can't copy - source file is being updated (size changed from 135904 to 135973)
+2026/03/03 01:10:08 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 01:10:08 ERROR : Attempt 2/3 succeeded
+2026/03/03 01:10:08 INFO  : 
+Transferred:   	  400.539 KiB / 400.539 KiB, 100%, 117.620 KiB/s, ETA 0s
+Checks:                84 / 84, 100%, Listed 168
+Transferred:            2 / 2, 100%
+Elapsed time:         3.1s
+
+2026/03/03 01:15:03 INFO  : There was nothing to transfer
+2026/03/03 01:15:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.6s
+
+2026/03/03 01:15:07 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 01:15:08 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 01:15:08 INFO  : 
+Transferred:   	  273.169 KiB / 273.169 KiB, 100%, 48 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.7s
+
+2026/03/03 01:20:06 INFO  : There was nothing to transfer
+2026/03/03 01:20:06 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.4s
+
+2026/03/03 01:20:11 INFO  : cloud_sync_2026-03-03.log: Copied (replaced existing)
+2026/03/03 01:20:11 INFO  : watchdog.log: Copied (replaced existing)
+2026/03/03 01:20:11 INFO  : 
+Transferred:   	  273.890 KiB / 273.890 KiB, 100%, 112 KiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 84
+Transferred:            2 / 2, 100%
+Elapsed time:         2.4s
+
+2026/03/03 01:25:04 INFO  : There was nothing to transfer
+2026/03/03 01:25:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               173 / 173, 100%, Listed 391
+Elapsed time:         1.6s
+
+2026/03/03 01:28:04 ERROR : 2026-03-03/motion_2026-03-03_01.27.58_631.avi: Failed to copy: Post "https://pod-050-1042-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0034": can't copy - source file is being updated (size changed from 667574 to 712748)
+2026/03/03 01:28:04 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 01:28:04 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 01:28:04 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0034": can't copy - source file is being updated (size changed from 667574 to 712748)
+2026/03/03 01:28:06 ERROR : 2026-03-03/motion_2026-03-03_01.27.58_631.avi: Failed to copy: Post "https://pod-050-1042-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0034": can't copy - source file is being updated (size changed from 803198 to 837124)
+2026/03/03 01:28:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 01:28:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 01:28:06 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0034": can't copy - source file is being updated (size changed from 803198 to 837124)
+2026/03/03 01:28:06 ERROR : 2026-03-03/motion_2026-03-03_01.27.58_631.avi: Failed to copy: Post "https://pod-050-1042-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0034": can't copy - source file is being updated (size changed from 904960 to 938896)
+2026/03/03 01:28:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 01:28:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 01:28:06 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0034": can't copy - source file is being updated (size changed from 904960 to 938896)
+2026/03/03 01:28:06 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               519 / 519, 100%, Listed 1176
+Elapsed time:         3.8s
+
+2026/03/03 01:28:06 NOTICE: Failed to sync: Post "https://pod-050-1042-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0034": can't copy - source file is being updated (size changed from 904960 to 938896)
+2026/03/03 01:28:24 INFO  : 2026-03-03/motion_2026-03-03_01.28.17_091.avi: Copied (new)
+2026/03/03 01:28:24 INFO  : 2026-03-03/motion_2026-03-03_01.27.58_631.avi: Copied (new)
+2026/03/03 01:28:24 INFO  : logs/cloud_sync_2026-03-02.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/file_audit_2026-02-26.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/firewall.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/auditor_svc.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync_2026-02-28.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/firewall.log.old: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync_2026-02-27.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_2026-02-28.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync_2026-03-03.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/watchdog_svc.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/file_audit_2026-02-28.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/mirror_2026-03-02.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_2026-02-25.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_2026-03-02.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/auditor_svc_err.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/file_audit_2026-03-01.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/file_audit_2026-03-03.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/intrusion_2026-03-01_12-45-53.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/path_check.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/watchdog_svc_err.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_full_2026-03-01_13-02.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync_2026-02-26.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync_2026-03-01.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/file_audit_2026-02-27.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_2026-03-03.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/mirror_2026-03-03.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/mirror.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/Novo(a) Documento de Texto.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/file_audit_2026-02-25.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync_2026-02-23.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/file_audit_2026-03-02.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_2026-03-01.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_full_2026-03-01_13-00.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/watchdog.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/all_services_2026-03-01_13-20.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_2026-02-26.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/cloud_sync_2026-02-24.log: Deleted
+2026/03/03 01:28:25 INFO  : logs/connections_now.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/auditor_deletion_evidence.txt: Deleted
+2026/03/03 01:28:25 INFO  : logs/security_audit_2026-02-27.log: Deleted
+2026/03/03 01:28:26 INFO  : logs/cloud_sync_2026-02-25.log: Deleted
+2026/03/03 01:28:26 INFO  : 
+Transferred:   	    2.006 MiB / 2.006 MiB, 100%, 329.333 KiB/s, ETA 0s
+Checks:               215 / 215, 100%, Listed 393
+Deleted:               42 (files), 0 (dirs), 24.195 MiB (freed)
+Transferred:            2 / 2, 100%
+Elapsed time:         5.1s
+
+2026/03/03 01:30:03 INFO  : There was nothing to transfer
+2026/03/03 01:30:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               175 / 175, 100%, Listed 353
+Elapsed time:         1.3s
+
+2026/03/03 01:32:43 INFO  : 2026-03-03/motion_2026-03-03_00.19.18_432.avi: Deleted
+2026/03/03 01:32:43 INFO  : 2026-03-03/motion_2026-03-03_00.08.23_742.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.12.35_932.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.23.22_743.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.15.24_493.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.06.59_616.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.11.33_111.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.10.17_868.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.06.49_560.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.20.39_993.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.15.34_024.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.17.24_402.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.19.48_409.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.07.54_727.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.19.01_351.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.06.49_560.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.21.53_903.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.16.28_942.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.12.57_383.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.17.37_819.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.18.31_128.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.16.41_023.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.19.37_862.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.14.50_630.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.21.12_244.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.15.09_041.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.22.44_310.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.16.41_023.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.21.12_244.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.21.20_226.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.09.41_640.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.11.55_707.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.08.14_265.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.07.54_727.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.13.12_902.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_01.27.58_631.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_01.27.58_631.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.09.03_457.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.12.57_383.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.06.41_645.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.13.12_902.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.11.45_876.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.11.55_707.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.18.45_435.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.08.23_742.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.15.09_041.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.20.39_993.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.21.46_695.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.17.07_910.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.09.41_640.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.11.33_111.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.22.44_310.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_01.28.17_091.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.20.53_628.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.08.14_265.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.07.38_900.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.08.48_006.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.07.38_900.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.06.41_645.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.08.27_544.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.19.37_862.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.14.50_630.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.18.03_735.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.15.41_656.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.15.34_024.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.21.46_695.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.20.03_186.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.16.28_942.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.19.18_432.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.06.59_616.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.11.08_781.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.09.03_457.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.11.45_876.avi: Deleted
+2026/03/03 01:32:44 INFO  : 2026-03-03/motion_2026-03-03_00.20.53_628.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.17.17_461.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.35_932.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.18.41_525.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.10.46_545.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_01.28.17_091.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.20.24_891.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.08.48_006.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.11.16_251.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.08.19_985.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.11.08_781.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.17.37_819.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.41_518.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.11.16_251.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.11.39_826.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.15.24_493.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.20.24_891.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.11.39_826.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.21.20_226.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.44_718.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.06.36_100.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.11.59_863.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.21.30_870.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.18.10_999.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.17.13_488.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.19.48_409.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.17.13_488.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.09.45_883.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.18.10_999.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.21.53_903.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.08_833.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.18.31_128.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.07.59_084.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.20.03_186.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.10.17_868.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.11.59_863.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.18.03_735.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.10.41_771.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.19.01_351.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.09.45_883.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.08.19_985.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.06.36_100.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.18.41_525.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.21.30_870.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.10.41_771.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.12.41_518.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.15.41_656.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.10.46_545.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.23.22_743.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.18.45_435.avi: Deleted
+2026/03/03 01:32:45 INFO  : There was nothing to transfer
+2026/03/03 01:32:45 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                65 / 65, 100%, Listed 65
+Deleted:               65 (files), 0 (dirs), 57.026 MiB (freed)
+Elapsed time:         2.8s
+
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.17.07_910.avi: Deleted
+2026/03/03 01:32:45 INFO  : 2026-03-03/motion_2026-03-03_00.17.24_402.avi: Deleted
+2026/03/03 01:32:45 INFO  : There was nothing to transfer
+2026/03/03 01:32:45 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                65 / 65, 100%, Listed 65
+Deleted:               65 (files), 0 (dirs), 57.026 MiB (freed)
+Elapsed time:         3.0s
+
+2026/03/03 01:32:55 INFO  : There was nothing to transfer
+2026/03/03 01:32:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.9s
+
+2026/03/03 01:33:11 INFO  : There was nothing to transfer
+2026/03/03 01:33:12 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         1.0s
+
+2026/03/03 01:34:11 INFO  : There was nothing to transfer
+2026/03/03 01:34:11 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:35:03 INFO  : There was nothing to transfer
+2026/03/03 01:35:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:35:50 INFO  : There was nothing to transfer
+2026/03/03 01:35:50 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 01:36:39 INFO  : There was nothing to transfer
+2026/03/03 01:36:39 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:38:04 INFO  : There was nothing to transfer
+2026/03/03 01:38:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:38:36 INFO  : There was nothing to transfer
+2026/03/03 01:38:36 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 01:38:51 INFO  : There was nothing to transfer
+2026/03/03 01:38:51 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 01:38:59 INFO  : There was nothing to transfer
+2026/03/03 01:38:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:38:59 INFO  : There was nothing to transfer
+2026/03/03 01:38:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:39:01 INFO  : There was nothing to transfer
+2026/03/03 01:39:02 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:39:04 INFO  : There was nothing to transfer
+2026/03/03 01:39:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.7s
+
+2026/03/03 01:39:11 INFO  : There was nothing to transfer
+2026/03/03 01:39:11 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 01:39:13 INFO  : There was nothing to transfer
+2026/03/03 01:39:13 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:39:24 INFO  : There was nothing to transfer
+2026/03/03 01:39:25 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 01:39:38 INFO  : There was nothing to transfer
+2026/03/03 01:39:38 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:39:43 INFO  : There was nothing to transfer
+2026/03/03 01:39:43 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:39:46 INFO  : There was nothing to transfer
+2026/03/03 01:39:47 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:39:53 INFO  : There was nothing to transfer
+2026/03/03 01:39:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:39:57 INFO  : There was nothing to transfer
+2026/03/03 01:39:57 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:03 INFO  : There was nothing to transfer
+2026/03/03 01:40:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:05 INFO  : There was nothing to transfer
+2026/03/03 01:40:05 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 01:40:10 INFO  : There was nothing to transfer
+2026/03/03 01:40:10 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:10 INFO  : There was nothing to transfer
+2026/03/03 01:40:10 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.7s
+
+2026/03/03 01:40:13 INFO  : There was nothing to transfer
+2026/03/03 01:40:13 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 01:40:20 INFO  : There was nothing to transfer
+2026/03/03 01:40:20 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:23 INFO  : There was nothing to transfer
+2026/03/03 01:40:23 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:28 INFO  : There was nothing to transfer
+2026/03/03 01:40:28 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:31 INFO  : There was nothing to transfer
+2026/03/03 01:40:31 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:40 INFO  : There was nothing to transfer
+2026/03/03 01:40:40 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:40 INFO  : There was nothing to transfer
+2026/03/03 01:40:41 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:40:48 INFO  : There was nothing to transfer
+2026/03/03 01:40:48 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:41:16 INFO  : There was nothing to transfer
+2026/03/03 01:41:40 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:        30.1s
+
+2026/03/03 01:41:50 INFO  : There was nothing to transfer
+2026/03/03 01:41:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.0s
+
+2026/03/03 01:41:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:01 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:        10.0s
+
+2026/03/03 01:42:18 INFO  : There was nothing to transfer
+2026/03/03 01:42:31 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:        13.6s
+
+2026/03/03 01:42:33 INFO  : There was nothing to transfer
+2026/03/03 01:42:41 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.0s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:47 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.8s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:47 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.8s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:47 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:47 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:47 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.9s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:48 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:48 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:48 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.2s
+
+2026/03/03 01:42:40 INFO  : There was nothing to transfer
+2026/03/03 01:42:48 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.3s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.4s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.4s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.4s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.4s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.5s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.3s
+
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.5s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.3s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.5s
+
+2026/03/03 01:42:41 INFO  : There was nothing to transfer
+2026/03/03 01:42:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:43 INFO  : There was nothing to transfer
+2026/03/03 01:42:51 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.0s
+
+2026/03/03 01:42:43 INFO  : There was nothing to transfer
+2026/03/03 01:42:51 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.0s
+
+2026/03/03 01:42:43 INFO  : There was nothing to transfer
+2026/03/03 01:42:51 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.8s
+
+2026/03/03 01:42:43 INFO  : There was nothing to transfer
+2026/03/03 01:42:51 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:45 INFO  : There was nothing to transfer
+2026/03/03 01:42:52 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.0s
+
+2026/03/03 01:42:45 INFO  : There was nothing to transfer
+2026/03/03 01:42:52 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.0s
+
+2026/03/03 01:42:47 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.7s
+
+2026/03/03 01:42:47 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.8s
+
+2026/03/03 01:42:47 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.8s
+
+2026/03/03 01:42:47 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.7s
+
+2026/03/03 01:42:47 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.8s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.4s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.5s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.4s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.5s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:54 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.2s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:54 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.2s
+
+2026/03/03 01:42:54 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.1s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:54 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.1s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:54 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.1s
+
+2026/03/03 01:42:48 INFO  : There was nothing to transfer
+2026/03/03 01:42:54 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.1s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.6s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.6s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.6s
+
+2026/03/03 01:42:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.6s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.6s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.6s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:55 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.5s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.8s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.7s
+
+2026/03/03 01:42:50 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         5.8s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.2s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.2s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.1s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.1s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:56 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.2s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:57 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.0s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:57 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.0s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:57 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         6.6s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.2s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.3s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.3s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.4s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.4s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:51 INFO  : There was nothing to transfer
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:58 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.8s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.8s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.8s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.0s
+
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.0s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.9s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.0s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.9s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.0s
+
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         7.9s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.1s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.2s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.2s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.2s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.2s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:42:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.2s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.6s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.8s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.8s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         8.8s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.3s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.3s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.3s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.3s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.4s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.4s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:01 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:01 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         9.7s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:01 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:        10.2s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:01 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:        10.2s
+
+2026/03/03 01:42:52 INFO  : There was nothing to transfer
+2026/03/03 01:43:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:        13.0s
+
+2026/03/03 01:45:02 INFO  : There was nothing to transfer
+2026/03/03 01:45:02 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:50:02 INFO  : There was nothing to transfer
+2026/03/03 01:50:02 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 01:55:03 INFO  : There was nothing to transfer
+2026/03/03 01:55:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 02:00:03 INFO  : There was nothing to transfer
+2026/03/03 02:00:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 02:05:02 INFO  : There was nothing to transfer
+2026/03/03 02:05:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
+2026/03/03 02:10:02 INFO  : There was nothing to transfer
+2026/03/03 02:10:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.6s
+
+2026/03/03 02:15:03 INFO  : There was nothing to transfer
+2026/03/03 02:15:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Elapsed time:         0.5s
+
