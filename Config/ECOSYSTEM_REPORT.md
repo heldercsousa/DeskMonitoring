@@ -14,7 +14,7 @@
 C:\Users\helde\Repos\Bois        ← SOURCE (watched in real time)
         │
         ├─[RealTimeSync]─► run_mirror.bat on every change (5s idle buffer)
-        │                        └─► robocopy /MIR
+        │                        └─► robocopy /E /Z
         │                                 └─► C:\Sync\Mirror   (local mirror)
         │
         └─[Task Scheduler, every 5 min + boot]
@@ -147,9 +147,10 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 **Trigger:** RealTimeSync detects any change in Source → waits 5s idle → runs `run_mirror.bat`
 
 **robocopy flags used:**
-- `/MIR` — mirror mode: files deleted from Source are deleted from Mirror
-- `/R:2` — retry twice on error
-- `/W:5` — wait 5s between retries
+- `/E` - Copia subdiretórios, incluindo vazios (não deleta no destino)
+- `/Z` - Modo restartable (essencial para vídeos se a cópia for interrompida)
+- `/R:2` — Apenas 1 tentativa para evitar logs gigantes
+- `/W:5` — Espera curta entre tentativas
 - `/LOG+` — append to daily rotating log file (`mirror_YYYY-MM-DD.log`)
 - `/NP /NDL` — no progress output, no directory listing
 
@@ -163,7 +164,7 @@ Start-Process "C:\Program Files\FreeFileSync\RealTimeSync.exe" `
 
 **To force immediate mirror sync:**
 ```powershell
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /NP
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:5  /NP /NDL /NC /NS
 ```
 
 ---
@@ -284,7 +285,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
 | Problem | Fix |
 |---|---|
 | RealTimeSync not running | `Start-Process "C:\Program Files\FreeFileSync\RealTimeSync.exe" -ArgumentList '"C:\Sync\Config\realtime.ffs_real"' -WindowStyle Hidden` |
-| Mirror out of sync | `robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /NP` |
+| Mirror out of sync | `robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:5  /NP /NDL /NC /NS` |
 | Force cloud sync now | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1` |
 | Watchdog task wrong user | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\fix_watchdog_task.ps1` |
 | FolderSyncWatchdog service missing | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\install_service.ps1` |
@@ -311,7 +312,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
 | Watchdog task must run as user | SYSTEM cannot launch GUI apps. Always use `fix_watchdog_task.ps1`. |
 | robocopy exit code 1 | Normal — means files were copied successfully. Not an error. |
 | Rclone deletes from B2 | `rclone sync` mirrors deletions. B2 charges 1-day minimum per file. |
-| `/MIR` deletes from Mirror | Intentional — Mirror is an exact copy of Source. |
+| `/MIR` deletes from Mirror | Intentional — Mirror is an exact copy of Source. |/S
 | DPAPI credentials tied to user | `credentials.enc` only works for user `helde` on this machine. |
 | `rclone.conf` contains API key | Plaintext — never upload to any public repo or gist. |
 | B2 free tier | 10 GB free. Monitor at backblaze.com if syncing large video files. |
@@ -500,13 +501,14 @@ for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') d
 ```bat
 @echo off
 :: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
-:: /MIR = mirror (purges files deleted from source)
-:: /R:2  = retry twice on error
-:: /W:5  = wait 5 seconds between retries
+:: /E = Copia subdiretórios, incluind source)
+:: /Z  =  Modo restartable (essencial para vídeos se a cópia for interrompida)
+:: /R:1 = Apenas 1 tentativa para evita
+:: /W:5 = Espera curta entre tentativas
 :: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
 :: Last updated: 2026-03-02
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NP /NDL /NC /NS
 ```
 
 ---
@@ -814,12 +816,13 @@ $mirrorBat = "C:\Sync\Config\run_mirror.bat"
 Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
 @echo off
 :: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
-:: /MIR = mirror (purges files deleted from source)
-:: /R:2  = retry twice on error
-:: /W:5  = wait 5 seconds between retries
-:: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
+:: /E    = Copia subdiretórios, incluindo vazios (não deleta no destino)
+:: /Z    = Modo restartable (essencial para vídeos se a cópia for interrompida)
+:: /R:1  = Apenas 1 tentativa para evitar logs gigantes
+:: /W:2  = Espera curta entre tentativas
+:: /LOG+ = Append ao log diário rotativo
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS
 '@
 Write-OK "run_mirror.bat updated → mirror_YYYY-MM-DD.log"
 

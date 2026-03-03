@@ -43,19 +43,14 @@ Write-OK "Future firewall logs readable by $currentUser"
 # =============================================================================
 # STEP 2 - Update run_mirror.bat with daily log rotation
 # =============================================================================
-Write-Step "Step 2 - Update run_mirror.bat (daily log rotation)"
+Write-Step "Step 2 - Update run_mirror.bat (Safe Update Mode)"
 $mirrorBat = "C:\Sync\Config\run_mirror.bat"
 Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
 @echo off
-:: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
-:: /MIR = mirror (purges files deleted from source)
-:: /R:2  = retry twice on error
-:: /W:5  = wait 5 seconds between retries
-:: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS
 '@
-Write-OK "run_mirror.bat updated -> mirror_YYYY-MM-DD.log"
+Write-OK "run_mirror.bat updated (Removed /MIR to prevent log flooding)"
 
 # Archive old bloated mirror log if exists
 $oldMirror = "C:\Sync\Logs\mirror"

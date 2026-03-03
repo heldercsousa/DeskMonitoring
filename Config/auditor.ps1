@@ -256,15 +256,12 @@ Write-FileAudit "[AUDITOR] FileSystemWatcher active on $WatchedFolder"
 
 # Main polling loop
 try {
-    while ($true) {
-        Check-RemoteAccess
-        Check-Services
-        Check-SystemEvents
-
-        # Process queued FSW events
-        $null = [System.Threading.Thread]::Sleep(1000)
-        Start-Sleep -Milliseconds 100
-    }
+   while ($true) {
+    Check-RemoteAccess
+    Check-Services
+    Check-SystemEvents
+    Start-Sleep -Seconds 1
+}
 } finally {
     $fsw.EnableRaisingEvents = $false
     $fsw.Dispose()
