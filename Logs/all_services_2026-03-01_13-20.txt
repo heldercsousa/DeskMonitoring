@@ -1,0 +1,2193 @@
+=== ALL INSTALLED SERVICES (including stopped) ===
+
+Name        : ACCSvc
+DisplayName : ACC Service
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files (x86)\Acer\Care Center\ACCSvc.exe"
+StartName   : LocalSystem
+
+Name        : AdobeARMservice
+DisplayName : Adobe Acrobat Update Service
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\armsvc.exe"
+StartName   : LocalSystem
+
+Name        : Appinfo
+DisplayName : Informações sobre Aplicativos
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : AppXSvc
+DisplayName : Serviço de Implantação AppX (AppXSVC)
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k wsappx -p
+StartName   : LocalSystem
+
+Name        : AudioEndpointBuilder
+DisplayName : Construtor de Pontos de Extremidade de Áudio do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : Audiosrv
+DisplayName : Áudio do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : BDESVC
+DisplayName : Serviço de Criptografia de Unidade de Disco BitLocker
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : localSystem
+
+Name        : BFE
+DisplayName : Mecanismo de Filtragem Básica
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNoNetworkFirewall -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : BITS
+DisplayName : Serviço de Transferência Inteligente em Segundo Plano
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : BluetoothUserService_d32fd
+DisplayName : Serviço de Suporte a Usuários de Bluetooth_d32fd
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k BthAppGroup -p
+StartName   : 
+
+Name        : BrokerInfrastructure
+DisplayName : Serviço de Infraestrutura de Tarefas de Segundo Plano
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p
+StartName   : LocalSystem
+
+Name        : BTAGService
+DisplayName : Serviço de Gateway Bluetooth de Áudio
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted
+StartName   : NT AUTHORITY\LocalService
+
+Name        : BthAvctpSvc
+DisplayName : Serviço AVCTP
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : bthserv
+DisplayName : Serviço de Suporte a Bluetooth
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : camsvc
+DisplayName : Serviço do Gerenciador de Acesso de Recurso
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k osprivacy -p
+StartName   : LocalSystem
+
+Name        : cbdhsvc_d32fd
+DisplayName : Serviço de Usuário da Área de Transferência_d32fd
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k ClipboardSvcGroup -p
+StartName   : 
+
+Name        : CDPSvc
+DisplayName : Serviço de Plataforma de Dispositivos Conectados
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : CDPUserSvc_d32fd
+DisplayName : Serviço de Usuário da Plataforma de Dispositivos Conectados_d32fd
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : ClickToRunSvc
+DisplayName : Microsoft Office Click-to-Run Service
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeClickToRun.exe" /service
+StartName   : LocalSystem
+
+Name        : CoreMessagingRegistrar
+DisplayName : CoreMessaging
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNoNetwork -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : CoworkVMService
+DisplayName : Claude
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\WindowsApps\Claude_1.1.4498.0_x64__pzs8sxrjxfjjc\app\resources\cowork-svc.exe"
+StartName   : LocalSystem
+
+Name        : cphs
+DisplayName : Intel(R) Content Protection HECI Service
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_2b7bcff446ea567f\IntelCpHeciSvc.exe
+StartName   : LocalSystem
+
+Name        : cplspcon
+DisplayName : Intel(R) Content Protection HDCP Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_2b7bcff446ea567f\IntelCpHDCPSvc.exe
+StartName   : LocalSystem
+
+Name        : CryptSvc
+DisplayName : Serviços de criptografia
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k NetworkService -p
+StartName   : NT Authority\NetworkService
+
+Name        : DcomLaunch
+DisplayName : Inicializador do Processo de Servidor DCOM
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p
+StartName   : LocalSystem
+
+Name        : DeviceAssociationService
+DisplayName : Serviço de Associação de Dispositivo
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : DevicesFlowUserSvc_d32fd
+DisplayName : DevicesFlow_d32fd
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k DevicesFlow
+StartName   : 
+
+Name        : DevQueryBroker
+DisplayName : Agente de Descoberta em Segundo Plano de DevQuery
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : Dhcp
+DisplayName : Cliente DHCP
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT Authority\LocalService
+
+Name        : DiagTrack
+DisplayName : Experiências do Usuário Conectado e Telemetria
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k utcsvc -p
+StartName   : LocalSystem
+
+Name        : DispBrokerDesktopSvc
+DisplayName : Exibir Serviço de Política
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : DisplayEnhancementService
+DisplayName : Serviço de Aprimoramento de Exibição
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : Dnscache
+DisplayName : Cliente DNS
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k NetworkService -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : DPS
+DisplayName : Serviço de Política de Diagnóstico
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNoNetwork -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : DsSvc
+DisplayName : Serviço de Compartilhamento de Dados
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : DtsApo4Service
+DisplayName : DtsApo4Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DTS\PC\APO4x\DtsApo4Service.exe
+StartName   : LocalSystem
+
+Name        : DusmSvc
+DisplayName : Uso de Dados
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p -s DusmSvc
+StartName   : NT Authority\LocalService
+
+Name        : esifsvc
+DisplayName : Intel(R) Dynamic Tuning service
+State       : Running
+StartMode   : Auto
+PathName    : "C:\WINDOWS\System32\DriverStore\FileRepository\dptf_cpu.inf_amd64_82b77f8c4618e2d0\esif_uf.exe"
+StartName   : LocalSystem
+
+Name        : EventLog
+DisplayName : Log de Eventos do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : EventSystem
+DisplayName : COM+ evento do sistema
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceRedirectionGuard -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : FileSyncHelper
+DisplayName : FileSyncHelper
+State       : Running
+StartMode   : Manual
+PathName    : "C:\Program Files\Microsoft OneDrive\26.022.0203.0006\FileSyncHelper.exe"
+StartName   : LocalSystem
+
+Name        : Fing.Agent
+DisplayName : Fing.Agent
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\Fing\resources\extraResources\fingagent.exe" --servicemode Fing.Agent --agentroot "C:\Users\helde\AppData\Roaming"
+StartName   : LocalSystem
+
+Name        : FolderSyncAuditor
+DisplayName : Folder Sync Security Auditor
+State       : Running
+StartMode   : Auto
+PathName    : C:\Tools\NSSM\nssm.exe
+StartName   : LocalSystem
+
+Name        : FolderSyncWatchdog
+DisplayName : Folder Sync Watchdog Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\Tools\NSSM\nssm.exe
+StartName   : LocalSystem
+
+Name        : FontCache
+DisplayName : Serviço de Cache de Fontes do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : FontCache3.0.0.0
+DisplayName : Windows Presentation Foundation Font Cache 3.0.0.0
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\Microsoft.Net\Framework64\v3.0\WPF\PresentationFontCache.exe
+StartName   : NT Authority\LocalService
+
+Name        : gpsvc
+DisplayName : Cliente da Política de Grupo
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k GPSvcGroup
+StartName   : LocalSystem
+
+Name        : hidserv
+DisplayName : Serviço de Dispositivos de Interface Humana
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : hns
+DisplayName : Serviço de Rede Host
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k NetSvcs -p
+StartName   : LocalSystem
+
+Name        : HvHost
+DisplayName : Serviço de Host HV
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : igccservice
+DisplayName : Intel(R) Graphics Command Center Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\igcc_dch.inf_amd64_553b9a82ff9cf770\OneApp.IGCC.WinService.exe
+StartName   : LocalSystem
+
+Name        : igfxCUIService2.0.0.0
+DisplayName : Intel(R) HD Graphics Control Panel Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\cui_dch.inf_amd64_f9f92cc42e038a12\igfxCUIService.exe
+StartName   : LocalSystem
+
+Name        : IKEEXT
+DisplayName : Módulos de Criação de Chaves IKE e AuthIP do IPSec
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : InstallService
+DisplayName : Serviço de Instalação da Microsoft Store
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : InventorySvc
+DisplayName : Serviço de Avaliação de Inventário e Compatibilidade
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k InvSvcGroup -p
+StartName   : LocalSystem
+
+Name        : iphlpsvc
+DisplayName : Auxiliar de IP
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetSvcs -p
+StartName   : LocalSystem
+
+Name        : jhi_service
+DisplayName : Intel(R) Dynamic Application Loader Host Interface Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\dal.inf_amd64_af50fdb80983f7bc\jhi_service.exe
+StartName   : LocalSystem
+
+Name        : KeyIso
+DisplayName : Isolamento de Chave CNG
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\lsass.exe
+StartName   : LocalSystem
+
+Name        : Killer Analytics Service
+DisplayName : Killer Analytics Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\drivers\RivetNetworks\Killer\KillerAnalyticsService.exe
+StartName   : LocalSystem
+
+Name        : Killer Network Service
+DisplayName : Killer Network Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\drivers\RivetNetworks\Killer\KillerNetworkService.exe
+StartName   : LocalSystem
+
+Name        : Killer Wifi Optimization Service
+DisplayName : Killer Wifi Optimization Service
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\drivers\RivetNetworks\Killer\KAPSService.exe
+StartName   : LocalSystem
+
+Name        : LanmanServer
+DisplayName : Server
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : LanmanWorkstation
+DisplayName : Estação de trabalho
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetworkService -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : lfsvc
+DisplayName : Serviço de Geolocalização
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcsRedirectionGuard -p
+StartName   : LocalSystem
+
+Name        : LicenseManager
+DisplayName : Serviço de Gerenciador de Licença do Windows
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalService -p
+StartName   : NT Authority\LocalService
+
+Name        : lmhosts
+DisplayName : Auxiliar NetBIOS TCP/IP
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : LMS
+DisplayName : Intel(R) Management and Security Application Local Management Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\lms.inf_amd64_a55aa2cd52a3429d\LMS.exe
+StartName   : LocalSystem
+
+Name        : LSM
+DisplayName : Gerenciador de Sessão Local
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p
+StartName   : LocalSystem
+
+Name        : MBAMService
+DisplayName : Malwarebytes Service
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\Malwarebytes\Anti-Malware\MBAMService.exe"
+StartName   : LocalSystem
+
+Name        : midisrv
+DisplayName : Serviço MIDI do Windows
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\midisrv.exe
+StartName   : NT AUTHORITY\LocalService
+
+Name        : mpssvc
+DisplayName : Windows Defender Firewall
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNoNetworkFirewall -p
+StartName   : NT Authority\LocalService
+
+Name        : NaturalAuthentication
+DisplayName : Autenticação Natural
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : NcbService
+DisplayName : Agente de Conexão de Rede
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : Netman
+DisplayName : Conexões de Rede
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : netprofm
+DisplayName : Serviço da Lista de Redes
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netprofm -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : NgcCtnrSvc
+DisplayName : Contêiner do Microsoft Passport
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : NgcSvc
+DisplayName : Microsoft Passport
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : NPSMSvc_d32fd
+DisplayName : Serviço do Gerenciador de Sessão Sendo Reproduzida_d32fd
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : 
+
+Name        : nsi
+DisplayName : Serviço de Interface de Repositório de Rede
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT Authority\LocalService
+
+Name        : nvagent
+DisplayName : Serviço de Virtualização de Rede
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k NetSvcs
+StartName   : LocalSystem
+
+Name        : NVDisplay.ContainerLocalSystem
+DisplayName : NVIDIA Display Container LS
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\nvacegpu.inf_amd64_0845985e36e5a566\Display.NvContainer\NVDisplay.Container.exe -s NVDisplay.ContainerLocalSystem -f C:\ProgramData\NVIDIA\NVDisplay.ContainerLocalSystem.log -l 3 -d C:\WINDOWS\System32\DriverStore\FileRepository\nvacegpu.inf_amd64_0845985e36e5a566\Display.NvContainer\plugins\LocalSystem -r -p 30000 -cfg NVDisplay.ContainerLocalSystem\LocalSystem
+StartName   : LocalSystem
+
+Name        : OneSyncSvc_d32fd
+DisplayName : Host de Sincronização_d32fd
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : PcaSvc
+DisplayName : Serviço Auxiliar de Compatibilidade de Programas
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : PhoneSvc
+DisplayName : Serviço de Telefonia
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT Authority\LocalService
+
+Name        : PlugPlay
+DisplayName : Plug and Play
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p
+StartName   : LocalSystem
+
+Name        : Power
+DisplayName : Desligar
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p
+StartName   : LocalSystem
+
+Name        : ProfSvc
+DisplayName : Serviço de Perfil de Usuário
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k UserProfileService -p
+StartName   : LocalSystem
+
+Name        : PSSvc
+DisplayName : Predator Service
+State       : Running
+StartMode   : Manual
+PathName    : "C:\Program Files\Acer\NitroSense Service\PSSvc.exe"
+StartName   : LocalSystem
+
+Name        : QASvc
+DisplayName : Quick Access Service
+State       : Running
+StartMode   : Manual
+PathName    : "C:\Program Files\Acer\Quick Access Service\QASvc.exe"
+StartName   : LocalSystem
+
+Name        : RasMan
+DisplayName : Gerenciador de conexão de acesso remoto
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs
+StartName   : localSystem
+
+Name        : RmSvc
+DisplayName : Serviço de Gerenciamento de Rádio
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted
+StartName   : NT AUTHORITY\LocalService
+
+Name        : RpcEptMapper
+DisplayName : Mapeador de Ponto de Extremidade RPC
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k RPCSS -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : RpcSs
+DisplayName : RPC (Chamada de Procedimento Remoto)
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k rpcss -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : RstMwService
+DisplayName : Intel(R) Storage Middleware Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\iastorac.inf_amd64_42f9d9bfb72d84cf\RstMwService.exe
+StartName   : LocalSystem
+
+Name        : RtkAudioUniversalService
+DisplayName : Realtek Audio Universal Service
+State       : Running
+StartMode   : Auto
+PathName    : "C:\WINDOWS\System32\DriverStore\FileRepository\realtekservice.inf_amd64_9971779a1c712866\RtkAudUService64.exe"
+StartName   : LocalSystem
+
+Name        : SamSs
+DisplayName : Gerente de Contas de Segurança
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\lsass.exe
+StartName   : LocalSystem
+
+Name        : Schedule
+DisplayName : Agendador de Tarefas
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : SecurityHealthService
+DisplayName : Serviço de Segurança do Windows
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\SecurityHealthService.exe
+StartName   : LocalSystem
+
+Name        : SENS
+DisplayName : Serviço de Notificação de Eventos do Sistema
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcsRedirectionGuard -p
+StartName   : LocalSystem
+
+Name        : SharedAccess
+DisplayName : ICS (Compartilhamento de Conexão com a Internet)
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : ShellHWDetection
+DisplayName : Detecção do hardware do shell
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : Spooler
+DisplayName : Spooler de Impressão
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\spoolsv.exe
+StartName   : LocalSystem
+
+Name        : SQLWriter
+DisplayName : SQL Server VSS Writer
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\Microsoft SQL Server\90\Shared\sqlwriter.exe"
+StartName   : LocalSystem
+
+Name        : ss_conn_service
+DisplayName : SAMSUNG Mobile Connectivity Service
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\Samsung\USB Drivers\27_ssconn\conn\ss_conn_service.exe"
+StartName   : LocalSystem
+
+Name        : ss_conn_service2
+DisplayName : SAMSUNG Mobile Connectivity Service V2
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\Samsung\USB Drivers\28_ssconn2\conn\ss_conn_service2.exe"
+StartName   : LocalSystem
+
+Name        : SSDPSRV
+DisplayName : Descoberta SSDP
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : SstpSvc
+DisplayName : Serviço SSTP
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT Authority\LocalService
+
+Name        : StateRepository
+DisplayName : Serviço de Repositório de Estado
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k appmodel -p
+StartName   : LocalSystem
+
+Name        : StiSvc
+DisplayName : Assistente de aquisição de imagens do Windows (WIA)
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k imgsvc
+StartName   : NT Authority\LocalService
+
+Name        : StorSvc
+DisplayName : Serviço de Armazenamento
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : SysMain
+DisplayName : SysMain
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : SystemEventsBroker
+DisplayName : Agente de Eventos do Sistema
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p
+StartName   : LocalSystem
+
+Name        : TapiSrv
+DisplayName : Telefonia
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetworkService -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : TeamViewer
+DisplayName : TeamViewer
+State       : Running
+StartMode   : Auto
+PathName    : "C:\Program Files\TeamViewer\TeamViewer_Service.exe"
+StartName   : LocalSystem
+
+Name        : TextInputManagementService
+DisplayName : Serviço de Gerenciamento de Entrada de Texto
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : Themes
+DisplayName : Temas
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : TimeBrokerSvc
+DisplayName : Agente de Tempo
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : TokenBroker
+DisplayName : Gerenciador de Conta da Web
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : TrkWks
+DisplayName : Cliente de rastreamento de link distribuído
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : UdkUserSvc_d32fd
+DisplayName : Serviço de usuário UDK_d32fd
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k UdkSvcGroup
+StartName   : 
+
+Name        : UserManager
+DisplayName : Gerenciador de Usuários
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : UsoSvc
+DisplayName : Serviço orquestrador de atualizações
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : VaultSvc
+DisplayName : Gerenciador de Credenciais
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\lsass.exe
+StartName   : LocalSystem
+
+Name        : vmcompute
+DisplayName : Serviço de Computação de Host do Hyper-V
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\vmcompute.exe
+StartName   : LocalSystem
+
+Name        : VSStandardCollectorService150
+DisplayName : Visual Studio Standard Collector Service 150
+State       : Running
+StartMode   : Manual
+PathName    : "C:\Program Files (x86)\Microsoft Visual Studio\Shared\Common\DiagnosticsHub.Collection.Service\StandardCollector.Service.exe"
+StartName   : LocalSystem
+
+Name        : Wcmsvc
+DisplayName : Gerenciador de Conexões do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s Wcmsvc
+StartName   : NT Authority\LocalService
+
+Name        : wcncsvc
+DisplayName : Conexão Fácil do Windows - Registrador de Configuração
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WdiSystemHost
+DisplayName : Host do Sistema de Diagnósticos
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : webthreatdefsvc
+DisplayName : Serviço de Defesa Contra Ameaças da Web
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k WebThreatDefense -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : webthreatdefusersvc_d32fd
+DisplayName : Serviço de Defesa do Usuário Contra Ameaças da Web_d32fd
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : 
+
+Name        : WerSvc
+DisplayName : Serviço de Relatórios de Erro do Windows
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k WerSvcGroup
+StartName   : localSystem
+
+Name        : whesvc
+DisplayName : Integridade e Experiências Otimizadas do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k whesvc -p
+StartName   : LocalSystem
+
+Name        : WinHttpAutoProxySvc
+DisplayName : Serviço de Descoberta Automática de Proxy da Web do WinHTTP
+State       : Running
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceHttp -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : Winmgmt
+DisplayName : Testador de instrumentação de gerenciam. do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : localSystem
+
+Name        : WirelessKB850NotificationService
+DisplayName : Wireless Keyboard 850 Notification Service
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\WirelessKB850NotificationService.exe
+StartName   : LocalSystem
+
+Name        : WlanSvc
+DisplayName : Configuração Automática de WLAN
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : WpnService
+DisplayName : Serviço do Sistema de Notificações por Push do Windows
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : WpnUserService_d32fd
+DisplayName : Serviço de Usuário de Notificações por Push do Windows_d32fd
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : WSAIFabricSvc
+DisplayName : WSAIFabricSvc
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\svchost.exe -k WSAIFabricSvcGroup -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : wscsvc
+DisplayName : Central de Segurança
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WSearch
+DisplayName : Windows Search
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\SearchIndexer.exe /Embedding
+StartName   : LocalSystem
+
+Name        : xTendSoftAPService
+DisplayName : xTendSoftAPService
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\drivers\RivetNetworks\Killer\xTendSoftAPService.exe
+StartName   : LocalSystem
+
+Name        : xTendUtilityService
+DisplayName : xTendUtilityService
+State       : Running
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\drivers\RivetNetworks\Killer\xTendUtilityService.exe
+StartName   : LocalSystem
+
+Name        : AarSvc_d32fd
+DisplayName : Agent Activation Runtime_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k AarSvcGroup -p
+StartName   : 
+
+Name        : ADPSvc
+DisplayName : Serviço de Plataforma de Dados Agregados
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : ALG
+DisplayName : Serviço Gateway de Camada de Aplicativo
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\alg.exe
+StartName   : NT AUTHORITY\LocalService
+
+Name        : AppIDSvc
+DisplayName : Identidade do Aplicativo
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT Authority\LocalService
+
+Name        : AppReadiness
+DisplayName : Preparação de Aplicativos
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k AppReadiness -p
+StartName   : LocalSystem
+
+Name        : ApxSvc
+DisplayName : Serviço proxy de dispositivo de áudio virtual do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : autotimesvc
+DisplayName : Hora da Rede Celular
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k autoTimeSvc
+StartName   : NT AUTHORITY\LocalService
+
+Name        : AxInstSV
+DisplayName : Instalador do ActiveX (AxInstSV)
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k AxInstSVGroup
+StartName   : LocalSystem
+
+Name        : battlenet_helpersvc
+DisplayName : Battle.net Update Helper Svc
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\ProgramData\Battle.net_components\battlenet_helpersvc\AgentHelper.exe
+StartName   : LocalSystem
+
+Name        : BcastDVRUserService_d32fd
+DisplayName : Serviço de Usuário do GameDVR e Transmissão_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k BcastDVRUserService
+StartName   : 
+
+Name        : Browser
+DisplayName : Pesquisador de Computadores
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : CaptureService_d32fd
+DisplayName : CaptureService_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : 
+
+Name        : CertPropSvc
+DisplayName : Propagação de Certificado
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs
+StartName   : LocalSystem
+
+Name        : ClipSVC
+DisplayName : Serviço de Licenças de Cliente (ClipSVC)
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k wsappx -p
+StartName   : LocalSystem
+
+Name        : CloudBackupRestoreSvc_d32fd
+DisplayName : Serviço de Backup e Restauração na Nuvem_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : COMSysApp
+DisplayName : COM+ System Application
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\dllhost.exe /Processid:{02D4B3F1-FD88-11D1-960D-00805FC79235}
+StartName   : LocalSystem
+
+Name        : ConsentUxUserSvc_d32fd
+DisplayName : Serviço de Usuário do ConsentUX_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k DevicesFlow
+StartName   : 
+
+Name        : CopyFileTo.WS
+DisplayName : CopyFileTo.WS
+State       : Stopped
+StartMode   : Disabled
+PathName    : c:\CopyFilesToWS\CopyFileToWindowsService.exe
+StartName   : LocalSystem
+
+Name        : CredentialEnrollmentManagerUserSvc_d32fd
+DisplayName : CredentialEnrollmentManagerUserSvc_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\CredentialEnrollmentManager.exe
+StartName   : 
+
+Name        : dcsvc
+DisplayName : Serviço de Configuração Declarada (DC)
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : defragsvc
+DisplayName : Otimizador de unidade
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k defragsvc
+StartName   : localSystem
+
+Name        : DeviceAssociationBrokerSvc_d32fd
+DisplayName : DeviceAssociationBroker_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k DevicesFlow -p
+StartName   : 
+
+Name        : DeviceInstall
+DisplayName : Serviço de Instalação de Dispositivo
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k DcomLaunch -p
+StartName   : LocalSystem
+
+Name        : DevicePickerUserSvc_d32fd
+DisplayName : DevicePicker_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k DevicesFlow
+StartName   : 
+
+Name        : diagsvc
+DisplayName : Diagnostic Execution Service
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k diagnostics
+StartName   : LocalSystem
+
+Name        : DmEnrollmentSvc
+DisplayName : Serviço de Registro de Gerenciamento de Dispositivos
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : dmwappushservice
+DisplayName : Serviço de Roteamento de mensagens de envio por Push WAP do Gerenciamento de Dispositivos
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : DoSvc
+DisplayName : Otimização de Entrega
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetworkService -p
+StartName   : NT Authority\NetworkService
+
+Name        : dot3svc
+DisplayName : Configuração Automática com Fio
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : localSystem
+
+Name        : DsmSvc
+DisplayName : Gerenciador de Instalação de Dispositivo
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : EapHost
+DisplayName : Protocolo de Autenticação Extensível
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : localSystem
+
+Name        : edgeupdate
+DisplayName : Microsoft Edge Update Service (edgeupdate)
+State       : Stopped
+StartMode   : Auto
+PathName    : "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /svc
+StartName   : LocalSystem
+
+Name        : edgeupdatem
+DisplayName : Microsoft Edge Update Service (edgeupdatem)
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /medsvc
+StartName   : LocalSystem
+
+Name        : EFS
+DisplayName : EFS (Encrypting File System)
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\lsass.exe
+StartName   : LocalSystem
+
+Name        : embeddedmode
+DisplayName : Modo inserido
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : EntAppSvc
+DisplayName : Serviço de Gerenciamento de Aplicativos Empresariais
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k appmodelRedirectionGuard -p
+StartName   : LocalSystem
+
+Name        : Fax
+DisplayName : Fax
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\fxssvc.exe
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : fdPHost
+DisplayName : Host de Provedor da Descoberta de Função
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : FDResPub
+DisplayName : Publicação de Recursos de Descoberta de Função
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : fhsvc
+DisplayName : Serviço de Histórico de Arquivos
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : FrameServer
+DisplayName : Servidor de Quadros de Câmera do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k Camera
+StartName   : NT AUTHORITY\LocalService
+
+Name        : FrameServerMonitor
+DisplayName : Monitor do Servidor de Quadro da Câmera do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k CameraMonitor
+StartName   : LocalSystem
+
+Name        : GameInputSvc
+DisplayName : GameInput Service
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\GameInputSvc.exe
+StartName   : LocalSystem
+
+Name        : GoogleChromeElevationService
+DisplayName : Google Chrome Elevation Service (GoogleChromeElevationService)
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files\Google\Chrome\Application\145.0.7632.117\elevation_service.exe"
+StartName   : LocalSystem
+
+Name        : GoogleUpdaterInternalService147.0.7683.0
+DisplayName : Google Updater Internal Service (GoogleUpdaterInternalService147.0.7683.0)
+State       : Stopped
+StartMode   : Auto
+PathName    : "C:\Program Files (x86)\Google\GoogleUpdater\147.0.7683.0\updater.exe" --system --windows-service --service=update-internal
+StartName   : LocalSystem
+
+Name        : GoogleUpdaterService147.0.7683.0
+DisplayName : Google Updater Service (GoogleUpdaterService147.0.7683.0)
+State       : Stopped
+StartMode   : Auto
+PathName    : "C:\Program Files (x86)\Google\GoogleUpdater\147.0.7683.0\updater.exe" --system --windows-service --service=update
+StartName   : LocalSystem
+
+Name        : GraphicsPerfSvc
+DisplayName : GraphicsPerfSvc
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k GraphicsPerfSvcGroup
+StartName   : LocalSystem
+
+Name        : HfcDisableService
+DisplayName : Intel(R) RST HFC Disable Service
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\iastorac.inf_amd64_42f9d9bfb72d84cf\HfcDisableService.exe
+StartName   : LocalSystem
+
+Name        : hpatchmon
+DisplayName : Hotpatch Monitoring Service
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : iaStorAfsService
+DisplayName : Intel(R) Optane(TM) Memory Service
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\iaStorAfsService.exe
+StartName   : LocalSystem
+
+Name        : icssvc
+DisplayName : Serviço de Hotspot Móvel do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT Authority\LocalService
+
+Name        : Intel(R) TPM Provisioning Service
+DisplayName : Intel(R) TPM Provisioning Service
+State       : Stopped
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\DriverStore\FileRepository\iclsclient.inf_amd64_fc84dfa25a6a7727\lib\TPMProvisioningService.exe
+StartName   : LocalSystem
+
+Name        : IntelAudioService
+DisplayName : Intel(R) Audio Service
+State       : Stopped
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\cAVS\IAS\IntelAudioService.exe
+StartName   : LocalSystem
+
+Name        : IpxlatCfgSvc
+DisplayName : Serviço de Configuração de Conversão de IP
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : KNDBWM
+DisplayName : Killer Dynamic Bandwidth Management
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\drivers\RivetNetworks\Killer\KNDBWMService.exe
+StartName   : LocalSystem
+
+Name        : KtmRm
+DisplayName : KtmRm para Coordenador de Transações Distribuídas
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetworkServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : lltdsvc
+DisplayName : Mapeador da Descoberta de Topologia da Camada de Link
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : LocalKdc
+DisplayName : Centro de distribuição de chaves locais Kerberos
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\lsass.exe
+StartName   : LocalSystem
+
+Name        : LxpSvc
+DisplayName : Serviço de Experiência em Idiomas
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs
+StartName   : LocalSystem
+
+Name        : MapsBroker
+DisplayName : Gerenciador de Mapas Baixados
+State       : Stopped
+StartMode   : Auto
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetworkService -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : MBVpnTunnelService
+DisplayName : MBVpnTunnelService
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files\Malwarebytes\Anti-Malware\MBVpnTunnelService.exe"
+StartName   : LocalSystem
+
+Name        : McmSvc
+DisplayName : Serviço de Gerenciamento para Conectividade Móvel
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k McmSvc -p -s McmSvc
+StartName   : NT SERVICE\McmSvc
+
+Name        : McpManagementService
+DisplayName : McpManagementService
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k McpManagementServiceGroup
+StartName   : LocalSystem
+
+Name        : MDCoreSvc
+DisplayName : Serviço Microsoft Defender Core
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26010.5-0\MpDefenderCoreService.exe"
+StartName   : LocalSystem
+
+Name        : MessagingService_d32fd
+DisplayName : MessagingService_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : MicrosoftEdgeElevationService
+DisplayName : Microsoft Edge Elevation Service (MicrosoftEdgeElevationService)
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files (x86)\Microsoft\Edge\Application\145.0.3800.82\elevation_service.exe"
+StartName   : LocalSystem
+
+Name        : MozillaMaintenance
+DisplayName : Mozilla Maintenance Service
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files (x86)\Mozilla Maintenance Service\maintenanceservice.exe"
+StartName   : LocalSystem
+
+Name        : MSDTC
+DisplayName : Coordenador de transações distribuídas
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\msdtc.exe
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : MSiSCSI
+DisplayName : Serviço Iniciador Microsoft iSCSI
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : msiserver
+DisplayName : Windows Installer
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\msiexec.exe /V
+StartName   : LocalSystem
+
+Name        : NativePushService
+DisplayName : Wondershare Native Push Service
+State       : Stopped
+StartMode   : Auto
+PathName    : "C:\Users\helde\AppData\Local\Wondershare\Wondershare NativePush\WsNativePushService.exe"
+StartName   : LocalSystem
+
+Name        : NcaSvc
+DisplayName : Assistente de Conectividade de Rede
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetSvcs -p
+StartName   : LocalSystem
+
+Name        : NcdAutoSetup
+DisplayName : Instalação Automática de Dispositivos Conectados à Rede
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNoNetwork -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : Netlogon
+DisplayName : Logon de rede
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\lsass.exe
+StartName   : LocalSystem
+
+Name        : NetSetupSvc
+DisplayName : Serviço de Configuração de Rede
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : NetTcpPortSharing
+DisplayName : Serviço de Compartilhamento de Porta Net.Tcp
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe
+StartName   : NT AUTHORITY\LocalService
+
+Name        : NlaSvc
+DisplayName : Reconhecimento de locais de rede
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netprofm -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : NvContainerLocalSystem
+DisplayName : NVIDIA LocalSystem Container
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files\NVIDIA Corporation\NvContainer\nvcontainer.exe" -s NvContainerLocalSystem -a -f "C:\ProgramData\NVIDIA\NvContainerLocalSystem.log" -l 3 -d "C:\Program Files\NVIDIA Corporation\NvContainer\plugins\LocalSystem" -r -p 30000 -st "C:\Program Files\NVIDIA Corporation\NvContainer\NvContainerTelemetryApi.dll"
+StartName   : LocalSystem
+
+Name        : OneDrive Updater Service
+DisplayName : OneDrive Updater Service
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files\Microsoft OneDrive\26.022.0203.0006\OneDriveUpdaterService.exe"
+StartName   : LocalSystem
+
+Name        : P9RdrService_d32fd
+DisplayName : P9RdrService_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k P9RdrService -p
+StartName   : 
+
+Name        : PenService_d32fd
+DisplayName : PenService_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k PenService
+StartName   : 
+
+Name        : perceptionsimulation
+DisplayName : Serviço de Simulação de Percepção do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\PerceptionSimulation\PerceptionSimulationService.exe
+StartName   : LocalSystem
+
+Name        : PerfHost
+DisplayName : Host de DLL de Contador de Desempenho
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\SysWow64\perfhost.exe
+StartName   : NT AUTHORITY\LocalService
+
+Name        : PimIndexMaintenanceSvc_d32fd
+DisplayName : Dados de Contato_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : pla
+DisplayName : Logs e alertas de desempenho
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNoNetwork -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : PolicyAgent
+DisplayName : Agente de Política IPsec
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k NetworkServiceNetworkRestricted -p
+StartName   : NT Authority\NetworkService
+
+Name        : PrintDeviceConfigurationService
+DisplayName : Serviço de Configuração de Impressora
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : PrintNotify
+DisplayName : Extensões e Notificações da Impressora
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k print
+StartName   : LocalSystem
+
+Name        : PrintScanBrokerService
+DisplayName : PrintScanBrokerService
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k PrintScanBrokerService -p
+StartName   : LocalSystem
+
+Name        : PrintWorkflowUserSvc_d32fd
+DisplayName : PrintWorkflow_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k PrintWorkflow
+StartName   : 
+
+Name        : PushToInstall
+DisplayName : Serviço Windows PushToInstall
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : QALSvc
+DisplayName : Quick Access Local Service
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files\Acer\Quick Access Service\QALSvc.exe"
+StartName   : NT AUTHORITY\LocalService
+
+Name        : QWAVE
+DisplayName : Quality Windows Audio Video Experience
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : RasAuto
+DisplayName : Gerenciador de conexão de acesso remoto automático
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : localSystem
+
+Name        : refsdedupsvc
+DisplayName : Serviço de duplicação do ReFS
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\ReFsDedupSvc.exe
+StartName   : LocalSystem
+
+Name        : RemoteAccess
+DisplayName : Roteamento e Acesso Remoto
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs
+StartName   : localSystem
+
+Name        : RemoteRegistry
+DisplayName : Registro remoto
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\WINDOWS\system32\svchost.exe -k localService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : RetailDemo
+DisplayName : Serviço de Demonstração de Revenda
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k rdxgroup
+StartName   : LocalSystem
+
+Name        : RpcLocator
+DisplayName : Alocador Remote Procedure Call (RPC)
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\locator.exe
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : SCardSvr
+DisplayName : Cartão inteligente
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation
+StartName   : NT AUTHORITY\LocalService
+
+Name        : ScDeviceEnum
+DisplayName : Serviço de Enumeração de Dispositivo de Cartão Inteligente
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted
+StartName   : LocalSystem
+
+Name        : SCPolicySvc
+DisplayName : Política de Remoção de Cartão Inteligente
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs
+StartName   : LocalSystem
+
+Name        : SDRSVC
+DisplayName : Backup do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k SDRSVC
+StartName   : localSystem
+
+Name        : seclogon
+DisplayName : Logon secundário
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : SEMgrSvc
+DisplayName : Gerenciador de NFC/SE e Pagamentos
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : SensorDataService
+DisplayName : Serviço de Dados de Sensor
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\SensorDataService.exe
+StartName   : LocalSystem
+
+Name        : SensorService
+DisplayName : Serviço de Sensor
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : SensrSvc
+DisplayName : Serviço de Monitoramento de Sensor
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : SessionEnv
+DisplayName : Configuração da Área de Trabalho Remota
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : localSystem
+
+Name        : shpamsvc
+DisplayName : Shared PC Account Manager
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcsRedirectionGuard -p
+StartName   : LocalSystem
+
+Name        : smphost
+DisplayName : SMP de Espaços de Armazenamento da Microsoft
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k smphost
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : SmsRouter
+DisplayName : Serviço de Roteador SMS do Microsoft Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT Authority\LocalService
+
+Name        : SNMPTrap
+DisplayName : Interceptação SNMP
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\snmptrap.exe
+StartName   : NT AUTHORITY\LocalService
+
+Name        : sppsvc
+DisplayName : Proteção de Software
+State       : Stopped
+StartMode   : Auto
+PathName    : C:\WINDOWS\system32\sppsvc.exe
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : ssh-agent
+DisplayName : OpenSSH Authentication Agent
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\WINDOWS\System32\OpenSSH\ssh-agent.exe
+StartName   : LocalSystem
+
+Name        : svsvc
+DisplayName : Verificador de Ponto
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : swprv
+DisplayName : Provedor de Cópia de Sombra de Software da Microsoft
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k swprv
+StartName   : LocalSystem
+
+Name        : TermService
+DisplayName : Serviços de Área de Trabalho Remota
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetworkService
+StartName   : NT Authority\NetworkService
+
+Name        : TieringEngineService
+DisplayName : Gerenciamento de Camadas de Armazenamento
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\TieringEngineService.exe
+StartName   : localSystem
+
+Name        : TroubleshootingSvc
+DisplayName : Serviço de solução de problemas recomendado
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : TrustedInstaller
+DisplayName : Instalador de Módulos do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\servicing\TrustedInstaller.exe
+StartName   : localSystem
+
+Name        : tzautoupdate
+DisplayName : Atualizador de Fuso Horário Automático
+State       : Stopped
+StartMode   : Disabled
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : UEIPSvc
+DisplayName : User Experience Improvement Program
+State       : Stopped
+StartMode   : Disabled
+PathName    : "C:\Program Files\Acer\User Experience Improvement Program Service\Framework\UBTService.exe"
+StartName   : LocalSystem
+
+Name        : UmRdpService
+DisplayName : Redirecionador de Portas do Modo do Usuário dos Serviços de Área de Trabalho
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : localSystem
+
+Name        : UnistoreSvc_d32fd
+DisplayName : Armazenamento de Dados de Usuário_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : upnphost
+DisplayName : Host de dispositivo UPnP
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : UserDataSvc_d32fd
+DisplayName : Acesso a Dados de Usuário_d32fd
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k UnistackSvcGroup
+StartName   : 
+
+Name        : vds
+DisplayName : Disco Virtual
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\vds.exe
+StartName   : LocalSystem
+
+Name        : vmicguestinterface
+DisplayName : Interface de Serviço de Convidado do Hyper-V
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : vmicheartbeat
+DisplayName : Serviço de Pulsação do Hyper-V
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k ICService -p
+StartName   : LocalSystem
+
+Name        : vmickvpexchange
+DisplayName : Serviço de Troca de Dados do Hyper-V
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : vmicrdv
+DisplayName : Serviço de Virtualização de Área de Trabalho Remota do Hyper-V
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k ICService -p
+StartName   : LocalSystem
+
+Name        : vmicshutdown
+DisplayName : Serviço de Desligamento de Convidado do Hyper-V
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : vmictimesync
+DisplayName : Serviço de Sincronização de Data/Hora do Hyper-V
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : vmicvmsession
+DisplayName : Serviço Direto do Hyper-V PowerShell
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : vmicvss
+DisplayName : Solicitante de Cópia de Sombra de Volume do Hyper-V
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : VSInstallerElevationService
+DisplayName : Visual Studio Installer Elevation Service
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files (x86)\Microsoft Visual Studio\Installer\VSInstallerElevationService.exe"
+StartName   : LocalSystem
+
+Name        : VSS
+DisplayName : Cópia de Sombra de Volume
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\vssvc.exe
+StartName   : LocalSystem
+
+Name        : W32Time
+DisplayName : Horário do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WaaSMedicSvc
+DisplayName : WaaSMedicSvc
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k wusvcs -p
+StartName   : LocalSystem
+
+Name        : WalletService
+DisplayName : WalletService
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k appmodelRedirectionGuard -p
+StartName   : LocalSystem
+
+Name        : WarpJITSvc
+DisplayName : Warp JIT Service
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalServiceNetworkRestricted
+StartName   : NT Authority\LocalService
+
+Name        : wbengine
+DisplayName : Serviço de Mecanismo de Backup em Nível de Bloco
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\WINDOWS\system32\wbengine.exe"
+StartName   : localSystem
+
+Name        : WbioSrvc
+DisplayName : Serviço de Biometria do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k WbioSvcGroup
+StartName   : LocalSystem
+
+Name        : WdiServiceHost
+DisplayName : Host do Serviço de Diagnóstico
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WdNisSvc
+DisplayName : Serviço de Inspeção de Rede do Microsoft Defender Antivírus
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26010.5-0\NisSrv.exe"
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WebClient
+DisplayName : Cliente da Web
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : Wecsvc
+DisplayName : Coletor de Eventos do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k NetworkService -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : WEPHOSTSVC
+DisplayName : Serviço de Host do Provedor de Criptografia do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k WepHostSvcGroup
+StartName   : NT AUTHORITY\LocalService
+
+Name        : wercplsupport
+DisplayName : Suporte do Painel de Controle Relatórios de problemas
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k netsvcs -p
+StartName   : localSystem
+
+Name        : WFDSConMgrSvc
+DisplayName : Serviço do Gerenciador de Conexões de Serviços do Wi-Fi Direct
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WiaRpc
+DisplayName : Eventos de Aquisição de Imagens Estáticas
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : LocalSystem
+
+Name        : WinDefend
+DisplayName : Serviço Microsoft Defender Antivírus
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26010.5-0\MsMpEng.exe"
+StartName   : LocalSystem
+
+Name        : WinRM
+DisplayName : Windows Remote Management (WS-Management)
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k NetworkService -p
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : wisvc
+DisplayName : Serviço do Participante do Programa Windows Insider
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : wlidsvc
+DisplayName : Assistente de Conexão de Conta da Microsoft
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : wlpasvc
+DisplayName : Serviço Assistente de Perfil Local
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+StartName   : NT Authority\LocalService
+
+Name        : WManSvc
+DisplayName : Serviço de gerenciamento do Windows
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : wmiApSrv
+DisplayName : Adaptador de Desempenho WMI
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\wbem\WmiApSrv.exe
+StartName   : localSystem
+
+Name        : WMPNetworkSvc
+DisplayName : Serviço de Compartilhamento de Rede do Windows Media Player
+State       : Stopped
+StartMode   : Manual
+PathName    : "C:\Program Files\Windows Media Player\wmpnetwk.exe"
+StartName   : NT AUTHORITY\NetworkService
+
+Name        : workfolderssvc
+DisplayName : Pastas de Trabalho
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\System32\svchost.exe -k LocalService -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WpcMonSvc
+DisplayName : Controles dos Pais
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalService
+StartName   : LocalSystem
+
+Name        : WPDBusEnum
+DisplayName : Serviço Enumerador de Dispositivos Portáteis
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted
+StartName   : LocalSystem
+
+Name        : wuauserv
+DisplayName : Windows Update
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : wuqisvc
+DisplayName : Insights de Uso e Qualidade da Microsoft
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k WuqiSvcGroup -p
+StartName   : NT AUTHORITY\LocalService
+
+Name        : WwanSvc
+DisplayName : Configuração Automática de WWAN
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k LocalSystemNetworkRestricted -p
+StartName   : localSystem
+
+Name        : XblAuthManager
+DisplayName : Gerenciador de Autenticação Xbox Live
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcsRedirectionGuard -p
+StartName   : LocalSystem
+
+Name        : XblGameSave
+DisplayName : Salvar Jogos no Xbox Live
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : XboxGipSvc
+DisplayName : Xbox Accessory Management Service
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
+Name        : XboxNetApiSvc
+DisplayName : Serviço de Rede Xbox Live
+State       : Stopped
+StartMode   : Manual
+PathName    : C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+StartName   : LocalSystem
+
