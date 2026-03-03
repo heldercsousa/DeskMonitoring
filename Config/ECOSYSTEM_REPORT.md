@@ -1,6 +1,6 @@
 # Automated Folder Sync Ecosystem — Full Reference
 
-**Last updated:** 2026-02-25
+**Last updated:** 2026-03-02
 **Machine:** Windows 11 Home Single Language 24H2 — user: `helde` (`LAP\helde`)
 
 > This document is self-contained. Every config and script file's full content is
@@ -18,10 +18,22 @@ C:\Users\helde\Repos\Bois        ← SOURCE (watched in real time)
         │                                 └─► C:\Sync\Mirror   (local mirror)
         │
         └─[Task Scheduler, every 5 min + boot]
-                 └─► cloud_sync.bat
+                 └─► cloud_sync.ps1
                           └─► rclone sync
                                    └─► Backblaze B2
                                         bucket : helder-sync-mirror (root)
+                                        └─► /logs (log backup, copy-only)
+```
+
+**Security layers (applied 2026-03-01/02):**
+```
+Authentication    → Account lockout: 5 attempts, 30 min freeze
+Remote Access     → RDP / WinRM / RemoteRegistry / SMB2 all disabled
+File Permissions  → C:\Sync\Config locked to LAP\helde + SYSTEM + Admins only
+Network Logging   → Windows Firewall logs all connections → firewall.log
+Screen Lock       → Auto-lock after 5 min idle, password required on wake
+B2 Credentials    → Scoped app key (helder-sync-mirror only, Read+Write)
+Monitoring        → FolderSyncAuditor service + DailySecurityCheck task
 ```
 
 ---
@@ -46,9 +58,10 @@ C:\Users\helde\Repos\Bois        ← SOURCE (watched in real time)
 | `C:\Users\helde\Repos\Bois` | **Source** — folder being watched and synced |
 | `C:\Sync\Mirror` | Local mirror — robocopy exact copy of Source |
 | `C:\Sync\Logs` | All log files |
-| `C:\Sync\Config` | All scripts, configs, encrypted credentials |
+| `C:\Sync\Config` | All scripts, configs, encrypted credentials — **ACL locked** |
 | `C:\Tools\Rclone\` | Rclone binary |
 | `C:\Tools\NSSM\` | NSSM binary |
+| `%USERPROFILE%\Documents\SecurityScripts\` | DailySecurityCheck + AutoCleanup scripts |
 
 ---
 
@@ -61,9 +74,10 @@ C:\Users\helde\Repos\Bois        ← SOURCE (watched in real time)
 | Bucket | `helder-sync-mirror` |
 | Visibility | Private |
 | Encryption | SSE-B2 enabled (AES-256 at rest) |
-| Object Lock | Disabled (must stay disabled — sync requires deletes) |
+| Object Lock | Disabled (sync requires deletes — use B2 Lifecycle Rules instead) |
 | Rclone remote name | `cloudsync` |
 | Sync target | `cloudsync:helder-sync-mirror` (bucket root) |
+| Log backup | `cloudsync:helder-sync-mirror/logs` (copy-only, never deleted by sync) |
 | Free tier | 10 GB storage, 1 GB/day download |
 | Paid rate (overage) | $0.006/GB/month |
 
@@ -95,27 +109,36 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 
 | File | Used by | Purpose |
 |---|---|---|
-| `rclone.conf` | `cloud_sync.bat` | Rclone B2 remote definition + API key |
-| `cloud_sync.bat` | Task `FolderSync-CloudBackup` | Runs Rclone sync every 5 min |
-| `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change |
+| `rclone.conf` | `cloud_sync.ps1` | Rclone B2 remote definition + API key |
+| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup |
+| `cloud_sync.bat` | Manual trigger | Same as .ps1 but via cmd (manual use only) |
+| `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop |
+| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | Full health check |
+| `setup_all.ps1` | Fresh install / new device | Centralized setup: all security hardening + task registration |
+| `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `ECOSYSTEM_REPORT.md` | — | This document |
-| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Versão PowerShell do cloud sync (sem flash de janela cmd) |
-| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitora mudanças de arquivo, acesso remoto, e service tampering |
-| `install_auditor_service.ps1` | Serviço FolderSyncAuditor missing ou removed |
-| `enable_file_auditing.ps1` | One-time setup — ativa SACL no watched folder para atribuição de usuário nos logs |
 
 ### Recovery scripts (keep, run only if something breaks)
 
 | File | When to run |
 |---|---|
 | `fix_watchdog_task.ps1` | Watchdog task missing or running as wrong user |
-| `install_service.ps1` | NSSM service missing or removed |
-| `register_tasks.ps1` | Cloud backup task missing (registers only — use `fix_watchdog_task.ps1` for the watchdog) |
+| `install_service.ps1` | FolderSyncWatchdog NSSM service missing or removed |
+| `install_auditor_service.ps1` | FolderSyncAuditor NSSM service missing or removed |
+| `register_tasks.ps1` | Cloud backup task missing (follow with fix_watchdog_task.ps1) |
+| `protect_sync_folders.ps1` | Re-apply Deny Delete ACL to C:\Sync |
+
+### Security scripts (in %USERPROFILE%\Documents\SecurityScripts\)
+
+| File | Purpose |
+|---|---|
+| `DailySecurityCheck.ps1` | Daily security scan — processes, ports, remote tools, unknown devices |
+| `AutoCleanup.ps1` | Automated cleanup triggered by DailySecurityCheck |
 
 ---
 
@@ -127,10 +150,10 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 - `/MIR` — mirror mode: files deleted from Source are deleted from Mirror
 - `/R:2` — retry twice on error
 - `/W:5` — wait 5s between retries
-- `/LOG+` — append to log file
+- `/LOG+` — append to daily rotating log file (`mirror_YYYY-MM-DD.log`)
 - `/NP /NDL` — no progress output, no directory listing
 
-**Log:** `C:\Sync\Logs\mirror.log`
+**Log:** `C:\Sync\Logs\mirror_YYYY-MM-DD.log` (rotates daily, deleted after 30 days by cloud_sync.ps1)
 
 **To start RealTimeSync manually:**
 ```powershell
@@ -150,16 +173,16 @@ robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /NP
 **Trigger:** Every 5 minutes + on system boot
 
 **To trigger manually:**
-```bat
-C:\Sync\Config\cloud_sync.bat
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1
 ```
 
 **To verify B2 contents:**
 ```bat
-C:\Tools\Rclone\rclone.exe ls cloudsync:helder-sync-mirror/mirror --config C:\Sync\Config\rclone.conf
+C:\Tools\Rclone\rclone.exe lsd cloudsync:helder-sync-mirror --config C:\Sync\Config\rclone.conf
 ```
 
-**Log:** `C:\Sync\Logs\cloud_sync.log`
+**Log:** `C:\Sync\Logs\cloud_sync_YYYY-MM-DD.log` (rotates daily, deleted after 30 days)
 
 ---
 
@@ -167,19 +190,21 @@ C:\Tools\Rclone\rclone.exe ls cloudsync:helder-sync-mirror/mirror --config C:\Sy
 
 | Task | Runs As | Trigger | Action |
 |---|---|---|---|
-| `FolderSync-CloudBackup` | SYSTEM | Every 5 min + boot | `cloud_sync.bat` |
+| `FolderSync-CloudBackup` | SYSTEM | Every 5 min + boot | `cloud_sync.ps1` via PowerShell |
 | `FolderSync-Watchdog` | `LAP\helde` (interactive) | Every 3 min + logon | `wdog.ps1` via PowerShell |
+| `Verificacao Automatica de Seguranca` | `LAP\helde` | Daily 09:00 | `DailySecurityCheck.ps1` |
 
 > ⚠ **Critical:** `FolderSync-Watchdog` MUST run as `LAP\helde` (interactive user), NOT SYSTEM.
 > SYSTEM has no desktop session and cannot launch GUI apps like RealTimeSync.
 > Use `fix_watchdog_task.ps1` to restore it — never `register_tasks.ps1` for the watchdog.
 
-Both tasks: hidden, restart on failure (3 attempts, 1 min apart).
+Both sync tasks: hidden, restart on failure (3 attempts, 1 min apart).
 
 **Verify tasks:**
 ```powershell
 Get-ScheduledTask -TaskName "FolderSync-CloudBackup" | Select TaskName, State
 Get-ScheduledTask -TaskName "FolderSync-Watchdog"    | Select TaskName, State
+Get-ScheduledTask -TaskName "Verificacao Automatica de Seguranca" | Select TaskName, State
 ```
 
 ---
@@ -228,13 +253,21 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
 
 ## 10. Log Files
 
-| Log | Path | Written by |
-|---|---|---|
-| Cloud sync | `C:\Sync\Logs\cloud_sync.log` | Rclone (appended each run) |
-| Local mirror | `C:\Sync\Logs\mirror.log` | Robocopy (appended each run) |
-| Watchdog | `C:\Sync\Logs\watchdog.log` | `wdog.ps1` (timestamped) |
-| Service stdout | `C:\Sync\Logs\watchdog_svc.log` | NSSM |
-| Service stderr | `C:\Sync\Logs\watchdog_svc_err.log` | NSSM |
+| Log | Path | Written by | Rotation |
+|---|---|---|---|
+| Cloud sync | `C:\Sync\Logs\cloud_sync_YYYY-MM-DD.log` | Rclone | Daily file, deleted after 30 days |
+| Local mirror | `C:\Sync\Logs\mirror_YYYY-MM-DD.log` | Robocopy | Daily file, deleted after 30 days |
+| Watchdog | `C:\Sync\Logs\watchdog.log` | `wdog.ps1` | NSSM rotation at 1MB |
+| File audit | `C:\Sync\Logs\file_audit_YYYY-MM-DD.log` | `auditor.ps1` | Daily file |
+| Security audit | `C:\Sync\Logs\security_audit_YYYY-MM-DD.log` | `auditor.ps1` | Daily file |
+| Firewall | `C:\Sync\Logs\firewall.log` | Windows Firewall | Max 8MB, rotates to firewall.log.old |
+| Auditor service stdout | `C:\Sync\Logs\auditor_svc.log` | NSSM | Rotation at 2MB |
+| Auditor service stderr | `C:\Sync\Logs\auditor_svc_err.log` | NSSM | Rotation at 2MB |
+| Daily security check | `%USERPROFILE%\Documents\SecurityCheck_Log.txt` | DailySecurityCheck.ps1 | Appended |
+
+> ⚠ `firewall.log` is owned by SYSTEM. Read permission must be granted manually:
+> `icacls "C:\Sync\Logs\firewall.log" /grant:r "LAP\helde:(R)"`
+> This is done automatically by `setup_all.ps1`.
 
 ---
 
@@ -242,18 +275,6 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
-```
-
-Or manually:
-```powershell
-Get-ScheduledTask -TaskName "FolderSync-CloudBackup" | Select TaskName, State
-Get-ScheduledTask -TaskName "FolderSync-Watchdog"    | Select TaskName, State
-Get-Service FolderSyncWatchdog | Select Name, Status, StartType
-Get-Process RealTimeSync -ErrorAction SilentlyContinue | Select Name, Id
-(Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run").FolderSyncRealTime
-C:\Tools\Rclone\rclone.exe lsd cloudsync: --config C:\Sync\Config\rclone.conf
-Get-Content C:\Sync\Logs\cloud_sync.log | Select-Object -Last 8
-Get-Content C:\Sync\Logs\watchdog.log   | Select-Object -Last 5
 ```
 
 ---
@@ -264,28 +285,22 @@ Get-Content C:\Sync\Logs\watchdog.log   | Select-Object -Last 5
 |---|---|
 | RealTimeSync not running | `Start-Process "C:\Program Files\FreeFileSync\RealTimeSync.exe" -ArgumentList '"C:\Sync\Config\realtime.ffs_real"' -WindowStyle Hidden` |
 | Mirror out of sync | `robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /NP` |
-| Force cloud sync now | `C:\Sync\Config\cloud_sync.bat` |
+| Force cloud sync now | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1` |
 | Watchdog task wrong user | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\fix_watchdog_task.ps1` |
-| NSSM service missing | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\install_service.ps1` |
+| FolderSyncWatchdog service missing | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\install_service.ps1` |
+| FolderSyncAuditor service missing | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\install_auditor_service.ps1` |
 | Cloud backup task missing | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\register_tasks.ps1` |
 | Startup registry missing | See §9 Layer 3 restore command |
+| Cannot read firewall.log | `icacls "C:\Sync\Logs\firewall.log" /grant:r "LAP\helde:(R)"` |
+| Setting up new device | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\setup_all.ps1` |
 
 ### Rotate Backblaze API key
-1. Generate new key at backblaze.com → App Keys (scope to `helder-sync-mirror`, Read+Write)
-2. Edit `C:\Sync\Config\rclone.conf` — update `account` and `key` values
-3. Recreate `credentials.enc`:
-   - Create `C:\Sync\Config\credentials.txt` with this format:
-     ```
-     Backblaze B2 Credentials
-     ========================
-     Account Email : heldercsousa@yahoo.com.br
-     Key ID        : <your key ID>
-     App Key       : <your app key>
-     Bucket        : helder-sync-mirror
-     Rclone Remote : cloudsync
-     ```
-   - Run `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\encrypt_creds.ps1`
-   - (Re-create `encrypt_creds.ps1` from §14 if needed)
+1. Go to backblaze.com → App Keys → Add Application Key
+2. Name: `rclone-nitro5`, Bucket: `helder-sync-mirror`, Access: Read+Write
+3. Copy Key ID and Application Key immediately (shown only once)
+4. Edit `C:\Sync\Config\rclone.conf` — update `account` (Key ID) and `key` (App Key)
+5. Test: `C:\Tools\Rclone\rclone.exe lsd cloudsync: --config C:\Sync\Config\rclone.conf`
+6. Recreate `credentials.enc` (see §14 encrypt_creds.ps1)
 
 ---
 
@@ -300,65 +315,157 @@ Get-Content C:\Sync\Logs\watchdog.log   | Select-Object -Last 5
 | DPAPI credentials tied to user | `credentials.enc` only works for user `helde` on this machine. |
 | `rclone.conf` contains API key | Plaintext — never upload to any public repo or gist. |
 | B2 free tier | 10 GB free. Monitor at backblaze.com if syncing large video files. |
-| `local_mirror.ffs_batch` | Kept for reference but unused — local mirror runs via robocopy. |
-| `realtime.ffs_real` XmlFormat | Must stay as `XmlFormat="2"` — RealTimeSync 14.7 rewrites it to this on save. |
-| `rclone sync` deletes logs from B2 | O sync apaga `logs/` do B2 pois não existe na source. Fix: `--exclude "logs/**"` no comando sync de `cloud_sync.ps1` e `cloud_sync.bat` |
-| `realtime.ffs_real` XmlFormat | RealTimeSync 14.7 reescreve para `XmlFormat="23"` ao salvar — normal, não é erro |
+| `realtime.ffs_real` XmlFormat | RealTimeSync 14.7 rewrites to `XmlFormat="23"` on save — normal, not an error. |
+| Logs excluded from sync | `--exclude "logs/**"` prevents rclone sync from deleting logs in B2. Logs uploaded separately via `rclone copy`. |
+| firewall.log owned by SYSTEM | Run `icacls "C:\Sync\Logs\firewall.log" /grant:r "LAP\helde:(R)"` after reboot or log rotation. setup_all.ps1 automates this. |
+| mirror.log (old) | Old non-rotating mirror.log archived as `mirror_archive_YYYY-MM-DD.log`. Safe to delete. |
+| B2 versioning | B2 keeps multiple versions of files. Set Lifecycle Rules on bucket to "Keep only last version" to control storage costs. |
+| SMB2 disabled | Disabling SMB2 may affect local network file sharing if needed. Re-enable with: `Set-SmbServerConfiguration -EnableSMB2Protocol $true -Force` |
 
 ---
 
-## 14. Full File Contents (for restoration)
+## 14. Security Hardening (applied 2026-03-01/02)
+
+### Layer 1 — Account Lockout
+```powershell
+net accounts /lockoutthreshold:5 /lockoutduration:30 /lockoutwindow:30
+```
+> Takes effect after reboot.
+
+### Layer 2 — Remote Access Disabled
+```powershell
+# RDP
+Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" fDenyTSConnections 1
+# WinRM
+Disable-PSRemoting -Force
+Stop-Service WinRM -Force; Set-Service WinRM -StartupType Disabled
+# RemoteRegistry
+Set-Service RemoteRegistry -StartupType Disabled; Stop-Service RemoteRegistry -Force
+# SMB2
+Set-SmbServerConfiguration -EnableSMB2Protocol $false -Force
+```
+
+### Layer 3 — C:\Sync\Config ACL (locked to user + SYSTEM + Admins)
+```powershell
+icacls C:\Sync\Config /inheritance:r
+icacls C:\Sync\Config /remove:g "Everyone"
+icacls C:\Sync\Config /remove:g "BUILTIN\Users"
+icacls C:\Sync\Config /grant:r "LAP\helde:(OI)(CI)F"
+icacls C:\Sync\Config /grant:r "NT AUTHORITY\SYSTEM:(OI)(CI)F"
+icacls C:\Sync\Config /grant:r "BUILTIN\Administradores:(OI)(CI)F"
+```
+
+### Layer 4 — Windows Firewall Logging
+```powershell
+netsh advfirewall set allprofiles logging droppedconnections enable
+netsh advfirewall set allprofiles logging allowedconnections enable
+netsh advfirewall set allprofiles logging filename "C:\Sync\Logs\firewall.log"
+netsh advfirewall set allprofiles logging maxfilesize 8192
+# Fix read permission for user
+icacls "C:\Sync\Logs\firewall.log" /grant:r "LAP\helde:(R)"
+```
+
+### Layer 5 — Auto-lock (5 minutes)
+```powershell
+powercfg /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK 300
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK 300
+powercfg /setactive SCHEME_CURRENT
+powercfg /setacvalueindex SCHEME_CURRENT SUB_NONE CONSOLELOCK 1
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_NONE CONSOLELOCK 1
+```
+
+### Layer 6 — B2 Scoped Key
+- Key scoped to bucket `helder-sync-mirror` only
+- Read+Write, no expiry
+- Master key not stored anywhere — only scoped key in rclone.conf
+
+> **Pending:** B2 Object Lock / Lifecycle Rules (7-day retention via Backblaze web UI)
+> **Pending:** BIOS password on Acer Nitro 5
+> **Pending:** Windows Hello PIN (blocked by org policy — resolve via Microsoft account portal)
+
+---
+
+## 15. Full File Contents (for restoration)
 
 > Recreate any file by copying the content block below into a new file at the stated path.
 
 ---
 
 ### `C:\Sync\Config\rclone.conf`
-> ⚠ Replace `YOUR_KEY_HERE` with the actual app key from `read_credentials.ps1`
+> ⚠ Replace values with actual credentials from backblaze.com → App Keys
 
 ```ini
 [cloudsync]
 type = b2
-account = 005d1b2ea6fc5850000000001
-key = YOUR_KEY_HERE
+account = YOUR_KEY_ID_HERE
+key = YOUR_APP_KEY_HERE
 hard_delete = false
 ```
 
 ---
 
 ### `C:\Sync\Config\cloud_sync.ps1`
-> Versão PowerShell do cloud sync — usada pelo Task Scheduler para evitar flash de janela cmd.
+> Versão PowerShell do cloud sync — usada pelo Task Scheduler.
+> Inclui rotação de logs (30 dias) e limpeza do Mirror (7 dias).
+
 ```powershell
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
-# Gerencia também a limpeza automática da pasta Mirror local.
+# Manages Mirror cleanup and Log rotation automatically.
+# Last updated: 2026-03-02
 
-$$Rclone  = 'C:\Tools\Rclone\rclone.exe'
-$Config  = 'C:\Sync\Config\rclone.conf'
-$Source  = 'C:\Users\helde\Repos\Bois'
-$Remote  = 'cloudsync:helder-sync-mirror'
-$Mirror  = 'C:\Sync\Mirror'
-$Log     = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
-$DaysToKeep = 7 
+$Rclone     = 'C:\Tools\Rclone\rclone.exe'
+$Config     = 'C:\Sync\Config\rclone.conf'
+$Source     = 'C:\Users\helde\Repos\Bois'
+$Remote     = 'cloudsync:helder-sync-mirror'
+$Mirror     = 'C:\Sync\Mirror'
+$LogDir     = 'C:\Sync\Logs'
+$Log        = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$DaysToKeepMirror = 7
+$DaysToKeepLogs   = 30
 
-# 1. Sincronização para B2
-& $Rclone sync $Source $Remote --config $Config --log-file $Log --log-level INFO --transfers 4 --checkers 8 --fast-list --exclude "logs/**"    
+# 1. Sync to B2 (exclude logs folder to avoid re-upload loop)
+& $Rclone sync $Source $Remote `
+    --config $Config `
+    --log-file $Log `
+    --log-level INFO `
+    --transfers 4 `
+    --checkers 8 `
+    --fast-list `
+    --exclude "logs/**"
 
-# 2. Backup dos Logs
-& $Rclone copy 'C:\Sync\Logs' "$Remote/logs" --config $Config --log-file $Log --log-level INFO
+# 2. Upload logs to B2 (copy only - never deletes from B2)
+& $Rclone copy $LogDir "$Remote/logs" `
+    --config $Config `
+    --log-file $Log `
+    --log-level INFO `
+    --exclude "firewall.log" `
+    --exclude "firewall.log.old"
 
-# 3. Limpeza automática do Mirror local (Gestão de Espaço)
+# 3. Mirror cleanup - delete files older than DaysToKeepMirror
 if (Test-Path $Mirror) {
-    $thresholdDate = (Get-Date).AddDays(-$DaysToKeep)
-    Get-ChildItem -Path $Mirror -Recurse -File | 
-        Where-Object { $_.LastWriteTime -lt $thresholdDate } | 
+    $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+    Get-ChildItem -Path $Mirror -Recurse -File |
+        Where-Object { $_.LastWriteTime -lt $threshold } |
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
+
+# 4. Log rotation - delete cloud_sync logs older than DaysToKeepLogs
+Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 5. Mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
+Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
 ```
 
 ---
 
 ### `C:\Sync\Config\cloud_sync.bat`
+> Manual trigger only. Task Scheduler uses cloud_sync.ps1.
+
 ```bat
 @echo off
 set RCLONE=C:\Tools\Rclone\rclone.exe
@@ -380,20 +487,26 @@ for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') d
 "%RCLONE%" copy "C:\Sync\Logs" "%REMOTE%/logs" ^
     --config "%CONFIG%" ^
     --log-file "%LOG%" ^
-    --log-level INFO
+    --log-level INFO ^
+    --exclude "firewall.log" ^
+    --exclude "firewall.log.old"
 ```
 
 ---
 
 ### `C:\Sync\Config\run_mirror.bat`
+> Daily log rotation: creates mirror_YYYY-MM-DD.log instead of a single growing file.
+
 ```bat
 @echo off
 :: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
 :: /MIR = mirror (purges files deleted from source)
 :: /R:2  = retry twice on error
 :: /W:5  = wait 5 seconds between retries
-:: /LOG+ = append to log
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror.log" /NP /NDL
+:: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
+:: Last updated: 2026-03-02
+for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
 ```
 
 ---
@@ -487,7 +600,6 @@ $settings = New-ScheduledTaskSettingsSet `
     -RestartCount 3 `
     -RestartInterval (New-TimeSpan -Minutes 1)
 
-# Run as current user (interactive session — can launch GUI apps)
 $principal = New-ScheduledTaskPrincipal `
     -UserId $currentUser `
     -LogonType Interactive `
@@ -514,11 +626,9 @@ Write-Host "RealTimeSync can now be launched from watchdog."
 $nssm = 'C:\Tools\NSSM\nssm.exe'
 $svcName = 'FolderSyncWatchdog'
 
-# Remove existing service if present
 & $nssm stop $svcName 2>$null
 & $nssm remove $svcName confirm 2>$null
 
-# Install service
 & $nssm install $svcName powershell.exe
 & $nssm set $svcName AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
 & $nssm set $svcName DisplayName 'Folder Sync Watchdog Service'
@@ -535,15 +645,49 @@ Write-Host "Service '$svcName' installed and started"
 
 ---
 
+### `C:\Sync\Config\install_auditor_service.ps1`
+```powershell
+# install_auditor_service.ps1
+# Installs FolderSyncAuditor as an NSSM Windows service.
+# Run as Administrator.
+
+$nssm    = 'C:\Tools\NSSM\nssm.exe'
+$svcName = 'FolderSyncAuditor'
+
+if (-not (Test-Path $nssm)) { Write-Error "NSSM not found at $nssm"; exit 1 }
+
+& $nssm stop   $svcName 2>$null
+& $nssm remove $svcName confirm 2>$null
+Start-Sleep -Seconds 2
+
+& $nssm install $svcName powershell.exe
+& $nssm set $svcName AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auditor.ps1'
+& $nssm set $svcName DisplayName   'Folder Sync Security Auditor'
+& $nssm set $svcName Description   'Monitors file changes, remote access, and service tampering for the FolderSync ecosystem.'
+& $nssm set $svcName Start         SERVICE_AUTO_START
+& $nssm set $svcName AppStdout     'C:\Sync\Logs\auditor_svc.log'
+& $nssm set $svcName AppStderr     'C:\Sync\Logs\auditor_svc_err.log'
+& $nssm set $svcName AppRotateFiles  1
+& $nssm set $svcName AppRotateBytes  2097152
+& $nssm set $svcName AppRestartDelay 30000
+
+Start-Service $svcName
+$svc = Get-Service $svcName -ErrorAction SilentlyContinue
+Write-Host "Service '$svcName' installed - status: $($svc.Status)"
+Write-Host "Next step: run enable_file_auditing.ps1 (as Administrator)"
+```
+
+---
+
 ### `C:\Sync\Config\register_tasks.ps1`
 > ⚠ Only registers the cloud backup task correctly (as SYSTEM).
 > For the watchdog task use `fix_watchdog_task.ps1` instead.
 
 ```powershell
-# Register FolderSync scheduled tasks
-
 # Task 1: Cloud sync via Rclone every 5 minutes (runs as SYSTEM)
-$action1 = New-ScheduledTaskAction -Execute 'C:\Sync\Config\cloud_sync.bat'
+$action1 = New-ScheduledTaskAction `
+    -Execute 'powershell.exe' `
+    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
 $trigger1 = @(
     $(New-ScheduledTaskTrigger -AtStartup),
     $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 5) -Once -At (Get-Date))
@@ -551,19 +695,8 @@ $trigger1 = @(
 $settings1 = New-ScheduledTaskSettingsSet -Hidden -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1) -ExecutionTimeLimit (New-TimeSpan -Minutes 4)
 $principal1 = New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
 Register-ScheduledTask -TaskName "FolderSync-CloudBackup" -Action $action1 -Trigger $trigger1 -Settings $settings1 -Principal $principal1 -Force
-Write-Host "Task FolderSync-CloudBackup registered"
-
-# Task 2: Watchdog — NOTE: this registers as SYSTEM which cannot launch RealTimeSync.
-# Use fix_watchdog_task.ps1 after running this to fix the watchdog principal.
-$action2 = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
-$trigger2 = @(
-    $(New-ScheduledTaskTrigger -AtStartup),
-    $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 3) -Once -At (Get-Date))
-)
-$settings2 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 2)
-$principal2 = New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
-Register-ScheduledTask -TaskName "FolderSync-Watchdog" -Action $action2 -Trigger $trigger2 -Settings $settings2 -Principal $principal2 -Force
-Write-Host "Task FolderSync-Watchdog registered (run fix_watchdog_task.ps1 next!)"
+Write-Host "Task FolderSync-CloudBackup registered (runs cloud_sync.ps1)"
+Write-Host "Now run fix_watchdog_task.ps1 for the watchdog task."
 ```
 
 ---
@@ -573,17 +706,11 @@ Write-Host "Task FolderSync-Watchdog registered (run fix_watchdog_task.ps1 next!
 Write-Host "=== SCHEDULED TASKS ==="
 Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue | Select-Object TaskName, State
 Get-ScheduledTask -TaskName "FolderSync-Watchdog" -ErrorAction SilentlyContinue | Select-Object TaskName, State
+Get-ScheduledTask -TaskName "Verificacao Automatica de Seguranca" -ErrorAction SilentlyContinue | Select-Object TaskName, State
 
-Write-Host "`n=== TASK TRIGGERS & ACTIONS - CloudBackup ==="
-$t = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
-if ($t) { $t.Triggers | Format-List; $t.Actions | Format-List }
-
-Write-Host "=== TASK TRIGGERS & ACTIONS - Watchdog ==="
-$t2 = Get-ScheduledTask -TaskName "FolderSync-Watchdog" -ErrorAction SilentlyContinue
-if ($t2) { $t2.Triggers | Format-List; $t2.Actions | Format-List }
-
-Write-Host "`n=== SERVICE ==="
-Get-Service FolderSyncWatchdog -ErrorAction SilentlyContinue | Select-Object Name, DisplayName, Status, StartType
+Write-Host "`n=== SERVICES ==="
+Get-Service FolderSyncWatchdog  -ErrorAction SilentlyContinue | Select-Object Name, DisplayName, Status, StartType
+Get-Service FolderSyncAuditor   -ErrorAction SilentlyContinue | Select-Object Name, DisplayName, Status, StartType
 
 Write-Host "`n=== REGISTRY STARTUP ==="
 (Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -ErrorAction SilentlyContinue).FolderSyncRealTime
@@ -594,455 +721,450 @@ Get-Process RealTimeSync -ErrorAction SilentlyContinue | Select-Object Name, Id
 Write-Host "`n=== RCLONE VERSION ==="
 & "C:\Tools\Rclone\rclone.exe" version 2>&1 | Select-Object -First 1
 
+Write-Host "`n=== B2 CONNECTIVITY ==="
+& "C:\Tools\Rclone\rclone.exe" lsd cloudsync: --config C:\Sync\Config\rclone.conf 2>&1
+
+Write-Host "`n=== SECURITY HARDENING STATUS ==="
+$rdp = (Get-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" -ErrorAction SilentlyContinue).fDenyTSConnections
+Write-Host "RDP blocked: $(if($rdp -eq 1){'YES (good)'}else{'NO - WARNING'})"
+$wmr = (Get-Service WinRM -ErrorAction SilentlyContinue).StartType
+Write-Host "WinRM: $wmr"
+$smb = (Get-SmbServerConfiguration -ErrorAction SilentlyContinue).EnableSMB2Protocol
+Write-Host "SMB2 enabled: $(if($smb -eq $false){'NO (good)'}else{'YES - WARNING'})"
+
 Write-Host "`n=== SOURCE FOLDER SIZE ==="
 $sz = (Get-ChildItem "C:\Users\helde\Repos\Bois" -Recurse -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
 Write-Host ("{0:N1} MB  ({1} files)" -f ($sz/1MB), (Get-ChildItem "C:\Users\helde\Repos\Bois" -Recurse -File -ErrorAction SilentlyContinue).Count)
 
-Write-Host "`n=== MIRROR FOLDER SIZE ==="
-$sz2 = (Get-ChildItem "C:\Sync\Mirror" -Recurse -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
-Write-Host ("{0:N1} MB  ({1} files)" -f ($sz2/1MB), (Get-ChildItem "C:\Sync\Mirror" -Recurse -File -ErrorAction SilentlyContinue).Count)
-
-Write-Host "`n=== CONFIG FILES ==="
-Get-ChildItem "C:\Sync\Config" | Format-Table Name, @{N="Size(KB)";E={[math]::Round($_.Length/1KB,1)}}, LastWriteTime -AutoSize
-
 Write-Host "`n=== LOG FILES ==="
 Get-ChildItem "C:\Sync\Logs" -ErrorAction SilentlyContinue | Format-Table Name, @{N="Size(KB)";E={[math]::Round($_.Length/1KB,1)}}, LastWriteTime -AutoSize
-
-Write-Host "`n=== PATH INCLUDES RCLONE ==="
-[Environment]::GetEnvironmentVariable("PATH","Machine") -split ";" | Where-Object { $_ -like "*rclone*" -or $_ -like "*Rclone*" }
 
 Write-Host "`n=== RCLONE CONF (sanitized) ==="
 Get-Content "C:\Sync\Config\rclone.conf" | ForEach-Object {
     if ($_ -match "^key") { "  key = ***REDACTED***" } else { $_ }
 }
 
-Write-Host "`n=== LAST 5 LINES CLOUD SYNC LOG ==="
-Get-Content "C:\Sync\Logs\cloud_sync.log" -ErrorAction SilentlyContinue | Select-Object -Last 5
+Write-Host "`n=== LAST 5 LINES CLOUD SYNC LOG (today) ==="
+$todayLog = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+if (Test-Path $todayLog) { Get-Content $todayLog | Select-Object -Last 5 } else { Write-Host "(no log yet for today)" }
 
-Write-Host "`n=== LAST 5 LINES WATCHDOG LOG ==="
-Get-Content "C:\Sync\Logs\watchdog.log" -ErrorAction SilentlyContinue | Select-Object -Last 5
+Write-Host "`n=== LAST 5 LINES SECURITY AUDIT LOG (today) ==="
+$secLog = "C:\Sync\Logs\security_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
+if (Test-Path $secLog) { Get-Content $secLog | Select-Object -Last 5 } else { Write-Host "(no security audit log yet for today)" }
 ```
 
 ---
 
-### `C:\Sync\Config\local_mirror.ffs_batch`
-> Reference only — not actively used. Local mirror runs via robocopy (`run_mirror.bat`).
-> Kept in case you want to switch back to FreeFileSync for local mirroring.
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<FreeFileSync XmlType="BATCH" XmlFormat="23">
-    <Notes/>
-    <Compare>
-        <Variant>TimeAndSize</Variant>
-        <Symlinks>Follow</Symlinks>
-        <IgnoreTimeShift/>
-    </Compare>
-    <Synchronize>
-        <Changes>
-            <Left Create="ToRight" Update="ToRight" Delete="ToRight"/>
-            <Right Create="ToRight" Update="ToRight" Delete="ToRight"/>
-        </Changes>
-        <DeletionPolicy>RecycleBin</DeletionPolicy>
-        <VersioningFolder Style="Replace"/>
-    </Synchronize>
-    <Filter>
-        <Include>*</Include>
-        <Exclude/>
-        <SizeMin Unit="None"/>
-        <SizeMax Unit="None"/>
-        <TimeSpan Type="None"/>
-    </Filter>
-    <FolderPairs>
-        <Pair>
-            <Left>C:\Users\helde\Repos\Bois</Left>
-            <Right>C:\Sync\Mirror</Right>
-        </Pair>
-    </FolderPairs>
-    <Errors Ignore="false" Retry="1" Delay="5"/>
-    <PostSyncCommand Condition="Always"/>
-    <LogFolder>C:\Sync\Logs</LogFolder>
-    <EmailNotification Condition="Always"/>
-    <GridViewType>Sync</GridViewType>
-    <Batch>
-        <ProgressDialog Minimized="true" AutoClose="true"/>
-        <ErrorDialog>Cancel</ErrorDialog>
-        <PostSyncAction>None</PostSyncAction>
-    </Batch>
-</FreeFileSync>
-```
-
----
-
-### `C:\Sync\Config\encrypt_creds.ps1`
-> One-time use script. Run only when rotating credentials.
-> Requires `credentials.txt` to exist first (write it, run this, it deletes the plaintext).
+### `C:\Sync\Config\setup_all.ps1`
+> Centralized setup script — 15 steps. Run as Administrator on any Windows device.
+> Place alongside DailySecurityCheck.ps1 and AutoCleanup.ps1 before running.
+> Covers: log permissions, script updates, ACL hardening, DailySecurityCheck install,
+> remote access disable, lockout policy, auto-lock, firewall logging,
+> CloudBackup task, Watchdog task, FolderSyncWatchdog NSSM, FolderSyncAuditor NSSM,
+> RealTimeSync startup registry, and file system auditing.
 
 ```powershell
-Add-Type -AssemblyName System.Security
-$plain = [System.IO.File]::ReadAllBytes('C:\Sync\Config\credentials.txt')
-$encrypted = [System.Security.Cryptography.ProtectedData]::Protect(
-    $plain,
-    $null,
-    [System.Security.Cryptography.DataProtectionScope]::CurrentUser
-)
-[System.IO.File]::WriteAllBytes('C:\Sync\Config\credentials.enc', $encrypted)
-Remove-Item 'C:\Sync\Config\credentials.txt'
-Write-Host 'Credentials encrypted (DPAPI) and plaintext deleted'
-```
+#Requires -RunAsAdministrator
+# =============================================================================
+# setup_all.ps1 v2
+# Centralized setup for FolderSync Ecosystem + Security Hardening
+# Works on any Windows machine - detects current user automatically
+# Run as Administrator from C:\Sync\Config\
+# Place alongside: DailySecurityCheck.ps1, AutoCleanup.ps1
+# =============================================================================
 
----
+$ErrorActionPreference = 'SilentlyContinue'
+$currentUser     = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+$sidAdmins       = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')
+$sidAdminsAccount= $sidAdmins.Translate([System.Security.Principal.NTAccount]).Value
+$scriptDir       = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-### `C:\Sync\Config\auditor.ps1`
-> Monitora mudanças de arquivo via FileSystemWatcher, acesso remoto/RDP, service tampering e gera relatório forense em gaps de inicialização. Roda como NSSM service `FolderSyncAuditor`.
-```powershell
-# auditor.ps1
-# FolderSync Security Auditor
-# Monitors file system events, remote access, service tampering, and system events.
-# Runs as NSSM service "FolderSyncAuditor".
+function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
+function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
+function Write-Fail($msg) { Write-Host "  FAIL $msg" -ForegroundColor Red }
 
-$WatchedFolder  = 'C:\Users\helde\Repos\Bois'
-$LogDir         = 'C:\Sync\Logs'
-$StartupGapSecs = 120   # gap threshold to trigger forensic dump
-
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-function Get-FileAuditLog  { Join-Path $LogDir "file_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
-function Get-SecurityLog   { Join-Path $LogDir "security_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
-
-function Write-FileAudit($msg) {
-    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    "$ts  $msg" | Add-Content -LiteralPath (Get-FileAuditLog)
-}
-
-function Write-SecurityAudit($msg) {
-    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    "$ts  $msg" | Add-Content -LiteralPath (Get-SecurityLog)
-}
-
-function Write-BothLogs($msg) {
-    Write-FileAudit    $msg
-    Write-SecurityAudit $msg
-}
-
-# ---------------------------------------------------------------------------
-# Startup gap detection + forensic dump
-# ---------------------------------------------------------------------------
-function Invoke-StartupGapCheck {
-    # Find last timestamped line across all auditor logs
-    $allLogs = Get-ChildItem $LogDir -Filter "security_audit_*.log" -ErrorAction SilentlyContinue |
-               Sort-Object LastWriteTime -Descending | Select-Object -First 3
-    $lastTs = $null
-    foreach ($f in $allLogs) {
-        $lines = Get-Content $f.FullName -ErrorAction SilentlyContinue | Where-Object { $_ -match '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}' }
-        if ($lines) {
-            $lastLine = $lines | Select-Object -Last 1
-            if ($lastLine -match '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})') {
-                try { $lastTs = [datetime]::ParseExact($Matches[1], 'yyyy-MM-dd HH:mm:ss', $null); break } catch {}
-            }
-        }
-    }
-
-    if ($lastTs) {
-        $gapSecs = ([datetime]::Now - $lastTs).TotalSeconds
-        if ($gapSecs -gt $StartupGapSecs) {
-            Write-SecurityAudit "[WARN] Startup gap detected: $([math]::Round($gapSecs,0))s since last log entry ($lastTs) - writing forensic report"
-            Write-ForensicReport -GapSeconds $gapSecs -LastKnownTime $lastTs
-        }
-    }
-}
-
-function Write-ForensicReport([double]$GapSeconds, [datetime]$LastKnownTime) {
-    $ts   = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-    $path = Join-Path $LogDir "interruption_report_$ts.txt"
-
-    $lines = @()
-    $lines += "INTERRUPTION REPORT - generated $ts"
-    $lines += "Last known auditor activity : $LastKnownTime"
-    $lines += "Gap duration                : $([math]::Round($GapSeconds,0)) seconds"
-    $lines += ""
-    $lines += "=== RUNNING PROCESSES (snapshot) ==="
-    $lines += (Get-Process | Sort-Object CPU -Descending | Select-Object -First 60 |
-               Format-Table Name, Id, CPU, WorkingSet -AutoSize | Out-String).Trim()
-    $lines += ""
-    $lines += "=== LAST 50 SECURITY LOG EVENTS ==="
-    try {
-        $secEvents = Get-WinEvent -LogName Security -MaxEvents 50 -ErrorAction SilentlyContinue
-        $lines += ($secEvents | Format-Table TimeCreated, Id, Message -AutoSize -Wrap | Out-String -Width 200).Trim()
-    } catch { $lines += "(Security log unavailable: $_)" }
-    $lines += ""
-    $lines += "=== LAST 50 SYSTEM LOG EVENTS ==="
-    try {
-        $sysEvents = Get-WinEvent -LogName System -MaxEvents 50 -ErrorAction SilentlyContinue
-        $lines += ($sysEvents | Format-Table TimeCreated, Id, Message -AutoSize -Wrap | Out-String -Width 200).Trim()
-    } catch { $lines += "(System log unavailable: $_)" }
-
-    $lines | Set-Content -LiteralPath $path -Encoding UTF8
-    Write-SecurityAudit "[FORENSIC] Report written: $path"
-}
-
-# ---------------------------------------------------------------------------
-# A. FileSystemWatcher - event-driven file change detection
-# ---------------------------------------------------------------------------
-function Start-FileWatcher {
-    $fsw = New-Object System.IO.FileSystemWatcher
-    $fsw.Path                  = $WatchedFolder
-    $fsw.IncludeSubdirectories = $true
-    $fsw.NotifyFilter          = [System.IO.NotifyFilters]'FileName, DirectoryName'
-    $fsw.EnableRaisingEvents   = $true
-
-    $handler = {
-        param($src, $e)
-        
-        $now = Get-Date
-        # Forçamos a conversão para String AQUI, antes de entrar no Job
-        $changeTypeText = $e.ChangeType.ToString().ToUpper()
-        $filePath = $e.FullPath
-        $fileName = $e.Name
-        $oldName = if ($e -is [System.IO.RenamedEventArgs]) { $e.OldName } else { $null }
-
-        Start-Job -ArgumentList $filePath, $fileName, $changeTypeText, $now, $oldName -ScriptBlock {
-            param($path, $name, $type, $time, $old)
-            
-            Start-Sleep -Milliseconds 800 
-            $user = 'unknown'
-            
-            try {
-                $searchName = [System.IO.Path]::GetFileName($path)
-                $evt = Get-WinEvent -FilterHashtable @{
-                    LogName = 'Security'; Id = 4663, 4660; StartTime = $time.AddSeconds(-15)
-                } -ErrorAction SilentlyContinue | 
-                Where-Object { $_.Message -like "*$searchName*" } | Select-Object -First 1
-
-                if ($evt -and $evt.Message -match '(Nome da Conta|Account Name):\s+(\S+)') { $user = $Matches[2] }
-            } catch {}
-
-            $logFile = "C:\Sync\Logs\file_audit_$($time.ToString('yyyy-MM-dd')).log"
-            $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
-            
-            # Formatação garantida como texto
-            $detail = if ($old) { "RENAMED: $old -> $name" } else { $type }
-            $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
-            
-            $line | Add-Content -LiteralPath $logFile -Encoding UTF8
-            
-            if ($type -eq 'DELETED') { & 'C:\Sync\Config\cloud_sync.ps1' }
-        } | Out-Null
-    }
-
-    Register-ObjectEvent $fsw Created -Action $handler | Out-Null
-    Register-ObjectEvent $fsw Deleted -Action $handler | Out-Null
-    Register-ObjectEvent $fsw Renamed -Action $handler | Out-Null
-    
-    return $fsw
-}
-
-# ---------------------------------------------------------------------------
-# B. Remote access / logon detection (every 5 min)
-# ---------------------------------------------------------------------------
-$script:LastRemoteCheck = [datetime]::MinValue
-
-function Check-RemoteAccess {
-    if (([datetime]::Now - $script:LastRemoteCheck).TotalSeconds -lt 300) { return }
-    $script:LastRemoteCheck = [datetime]::Now
-    $since = (Get-Date).AddMinutes(-5)
-
-    # Network / RDP logons
-    try {
-        $logons = Get-WinEvent -FilterHashtable @{
-            LogName   = 'Security'
-            Id        = 4624
-            StartTime = $since
-        } -ErrorAction SilentlyContinue | Where-Object {
-            $_.Message -match 'Logon Type:\s+(3|10)\b'
-        }
-        foreach ($evt in $logons) {
-            $type = if ($evt.Message -match 'Logon Type:\s+(\d+)') { $Matches[1] } else { '?' }
-            $acct = if ($evt.Message -match 'Account Name:\s+(\S+)') { $Matches[1] } else { '?' }
-            $label = if ($type -eq '10') { 'RDP/RemoteInteractive' } else { 'Network' }
-            Write-SecurityAudit "[LOGON] Type=$type ($label) account=$acct at $($evt.TimeCreated)"
-        }
-    } catch {}
-
-    # Remote access tools
-    foreach ($proc in @('TeamViewer', 'AnyDesk', 'VNCViewer', 'vncserver', 'ScreenConnect')) {
-        $p = Get-Process $proc -ErrorAction SilentlyContinue
-        if ($p) { Write-SecurityAudit "[REMOTE-TOOL] $proc is running (PID $($p.Id -join ','))" }
-    }
-}
-
-# ---------------------------------------------------------------------------
-# C. Service tampering (every 60s)
-# ---------------------------------------------------------------------------
-$WatchedServices = @('FolderSyncWatchdog', 'FolderSyncAuditor', 'FolderSync-CloudBackup')
-$script:LastServiceCheck = [datetime]::MinValue
-
-function Check-Services {
-    if (([datetime]::Now - $script:LastServiceCheck).TotalSeconds -lt 60) { return }
-    $script:LastServiceCheck = [datetime]::Now
-    $since = (Get-Date).AddSeconds(-60)
-
-    foreach ($svcName in $WatchedServices) {
-        $svc = Get-Service $svcName -ErrorAction SilentlyContinue
-        if ($svc -and $svc.Status -ne 'Running') {
-            Write-SecurityAudit "[CRITICAL] Service $svcName is $($svc.Status) - expected Running"
-        }
-    }
-
-    # Event 7036 (service state change) and 7040 (start type change)
-    try {
-        $evts = Get-WinEvent -FilterHashtable @{
-            LogName   = 'System'
-            Id        = 7036, 7040
-            StartTime = $since
-        } -ErrorAction SilentlyContinue
-        foreach ($evt in $evts) {
-            foreach ($svc in $WatchedServices) {
-                if ($evt.Message -like "*$svc*") {
-                    Write-SecurityAudit "[SVC-EVENT] $($evt.Id): $($evt.Message.Trim() -replace '\s+', ' ')"
-                }
-            }
-        }
-    } catch {}
-}
-
-# ---------------------------------------------------------------------------
-# D. Physical/system events (every 60s)
-# ---------------------------------------------------------------------------
-$script:LastSystemCheck = [datetime]::MinValue
-
-function Check-SystemEvents {
-    if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
-    $script:LastSystemCheck = [datetime]::Now
-    $since = (Get-Date).AddSeconds(-60)
-
-    try {
-        $evts = Get-WinEvent -FilterHashtable @{
-            LogName   = 'System'
-            Id        = 42, 1074
-            StartTime = $since
-        } -ErrorAction SilentlyContinue
-        foreach ($evt in $evts) {
-            if ($evt.Id -eq 42) {
-                $reason = if ($evt.Message -match 'Reason.*?:\s+(.+)') { $Matches[1].Trim() } else { 'unknown' }
-                Write-SecurityAudit "[SLEEP] System entering sleep/hibernate - reason: $reason"
-            } elseif ($evt.Id -eq 1074) {
-                $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
-                $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
-                Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
-            }
-        }
-    } catch {}
-}
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-Write-SecurityAudit "[AUDITOR] Starting up (PID $PID)"
-Write-FileAudit     "[AUDITOR] Starting up (PID $PID)"
-
-# Check for startup gap and write forensic report if needed
-Invoke-StartupGapCheck
-
-# Start file system watcher
-$fsw = Start-FileWatcher
-Write-FileAudit "[AUDITOR] FileSystemWatcher active on $WatchedFolder"
-
-# Main polling loop
-try {
-    while ($true) {
-        Check-RemoteAccess
-        Check-Services
-        Check-SystemEvents
-
-        # Process queued FSW events
-        $null = [System.Threading.Thread]::Sleep(1000)
-        Start-Sleep -Milliseconds 100
-    }
-} finally {
-    $fsw.EnableRaisingEvents = $false
-    $fsw.Dispose()
-    Unregister-Event -SourceIdentifier 'FSW_Created'  -ErrorAction SilentlyContinue
-    Unregister-Event -SourceIdentifier 'FSW_Deleted'  -ErrorAction SilentlyContinue
-    Unregister-Event -SourceIdentifier 'FSW_Changed'  -ErrorAction SilentlyContinue
-    Unregister-Event -SourceIdentifier 'FSW_Renamed'  -ErrorAction SilentlyContinue
-    Write-SecurityAudit "[AUDITOR] Shutting down"
-    Write-FileAudit     "[AUDITOR] Shutting down"
-}
-
-```
-
----
-
-### `C:\Sync\Config\install_auditor_service.ps1`
-> Instala o serviço NSSM `FolderSyncAuditor`. Rodar como Administrador.
-```powershell
-# install_auditor_service.ps1
-# Installs FolderSyncAuditor as an NSSM Windows service.
-# Run as Administrator.
-
-$nssm    = 'C:\Tools\NSSM\nssm.exe'
-$svcName = 'FolderSyncAuditor'
-
-if (-not (Test-Path $nssm)) {
-    Write-Error "NSSM not found at $nssm"
-    exit 1
-}
-
-# Stop and remove existing service if present
-& $nssm stop   $svcName 2>$null
-& $nssm remove $svcName confirm 2>$null
-Start-Sleep -Seconds 2
-
-# Install
-& $nssm install $svcName powershell.exe
-& $nssm set $svcName AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auditor.ps1'
-& $nssm set $svcName DisplayName   'Folder Sync Security Auditor'
-& $nssm set $svcName Description   'Monitors file changes, remote access, and service tampering for the FolderSync ecosystem.'
-& $nssm set $svcName Start         SERVICE_AUTO_START
-& $nssm set $svcName AppStdout     'C:\Sync\Logs\auditor_svc.log'
-& $nssm set $svcName AppStderr     'C:\Sync\Logs\auditor_svc_err.log'
-& $nssm set $svcName AppRotateFiles  1
-& $nssm set $svcName AppRotateBytes  2097152   # 2 MB
-
-# Restart delay: 30s (matches NSSM default, avoids false startup-gap triggers)
-& $nssm set $svcName AppRestartDelay 30000
-
-Start-Service $svcName
-$svc = Get-Service $svcName -ErrorAction SilentlyContinue
-Write-Host "Service '$svcName' installed - status: $($svc.Status)"
 Write-Host ""
-Write-Host "Next step: run enable_file_auditing.ps1 (as Administrator) to activate Security Event Log attribution."
+Write-Host "============================================================" -ForegroundColor Cyan
+Write-Host "  FolderSync Ecosystem - Centralized Setup v2" -ForegroundColor Cyan
+Write-Host "  Running as: $currentUser" -ForegroundColor Cyan
+Write-Host "  Script dir: $scriptDir" -ForegroundColor Cyan
+Write-Host "============================================================" -ForegroundColor Cyan
 
+# =============================================================================
+# STEP 1 - Firewall log read permissions
+# =============================================================================
+Write-Step "Step 1 - Firewall log read permissions"
+foreach ($f in @("C:\Sync\Logs\firewall.log","C:\Sync\Logs\firewall.log.old")) {
+    if (Test-Path $f) {
+        icacls $f /grant:r "${currentUser}:(R)" | Out-Null
+        Write-OK "Read access granted: $f"
+    } else {
+        Write-Warn "Not found (will be fixed when created): $f"
+    }
+}
+icacls "C:\Sync\Logs" /grant:r "${currentUser}:(OI)(CI)(R)" | Out-Null
+Write-OK "Future firewall logs readable by $currentUser"
+
+# =============================================================================
+# STEP 2 - Update run_mirror.bat with daily log rotation
+# =============================================================================
+Write-Step "Step 2 - Update run_mirror.bat (daily log rotation)"
+$mirrorBat = "C:\Sync\Config\run_mirror.bat"
+Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
+@echo off
+:: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
+:: /MIR = mirror (purges files deleted from source)
+:: /R:2  = retry twice on error
+:: /W:5  = wait 5 seconds between retries
+:: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
+for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
+'@
+Write-OK "run_mirror.bat updated → mirror_YYYY-MM-DD.log"
+
+# Archive old bloated mirror log if exists
+$oldMirror = "C:\Sync\Logs\mirror"
+if (Test-Path $oldMirror) {
+    Rename-Item $oldMirror "C:\Sync\Logs\mirror_archive_$(Get-Date -Format 'yyyy-MM-dd').log" -ErrorAction SilentlyContinue
+    Write-OK "Old mirror log archived"
+}
+
+# =============================================================================
+# STEP 3 - Update cloud_sync.ps1 with log rotation
+# =============================================================================
+Write-Step "Step 3 - Update cloud_sync.ps1 (log rotation + firewall exclusion)"
+$cloudSyncPs1 = "C:\Sync\Config\cloud_sync.ps1"
+Set-Content -Path $cloudSyncPs1 -Encoding UTF8 -Value @'
+# cloud_sync.ps1
+# Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
+# Manages Mirror cleanup and Log rotation automatically.
+# Last updated: 2026-03-02
+
+$Rclone           = 'C:\Tools\Rclone\rclone.exe'
+$Config           = 'C:\Sync\Config\rclone.conf'
+$Source           = 'C:\Users\helde\Repos\Bois'
+$Remote           = 'cloudsync:helder-sync-mirror'
+$Mirror           = 'C:\Sync\Mirror'
+$LogDir           = 'C:\Sync\Logs'
+$Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$DaysToKeepMirror = 7
+$DaysToKeepLogs   = 30
+
+# 1. Sync source folder to B2
+# Config and Logs versioned via Git — not sent to B2
+& $Rclone sync $Source $Remote `
+    --config $Config `
+    --log-file $Log `
+    --log-level INFO `
+    --transfers 4 `
+    --checkers 8 `
+    --fast-list
+
+# 2. Mirror cleanup - delete files older than DaysToKeepMirror
+if (Test-Path $Mirror) {
+    $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+    Get-ChildItem -Path $Mirror -Recurse -File |
+        Where-Object { $_.LastWriteTime -lt $threshold } |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+}
+
+# 4. cloud_sync log rotation - delete logs older than DaysToKeepLogs
+Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 5. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
+Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+'@
+Write-OK "cloud_sync.ps1 updated (Mirror: 7 days | Logs: 30 days retention)"
+
+# =============================================================================
+# STEP 4 - C:\Sync\Config ACL
+# =============================================================================
+Write-Step "Step 4 - Lock C:\Sync\Config permissions"
+icacls C:\Sync\Config /inheritance:r | Out-Null
+icacls C:\Sync\Config /remove:g "Todos"         | Out-Null
+icacls C:\Sync\Config /remove:g "Everyone"      | Out-Null
+icacls C:\Sync\Config /remove:g "BUILTIN\Users" | Out-Null
+icacls C:\Sync\Config /grant:r "${currentUser}:(OI)(CI)F"        | Out-Null
+icacls C:\Sync\Config /grant:r "NT AUTHORITY\SYSTEM:(OI)(CI)F"   | Out-Null
+icacls C:\Sync\Config /grant:r "${sidAdminsAccount}:(OI)(CI)F"   | Out-Null
+Write-OK "C:\Sync\Config locked to: $currentUser + SYSTEM + Administrators"
+
+# =============================================================================
+# STEP 5 - DailySecurityCheck v7
+# =============================================================================
+Write-Step "Step 5 - Install DailySecurityCheck v7"
+$secScriptsDir = "$env:USERPROFILE\Documents\SecurityScripts"
+if (-not (Test-Path $secScriptsDir)) { New-Item -ItemType Directory -Path $secScriptsDir -Force | Out-Null }
+
+foreach ($scriptName in @("DailySecurityCheck.ps1","AutoCleanup.ps1")) {
+    $src = Join-Path $scriptDir $scriptName
+    if (Test-Path $src) {
+        Copy-Item $src "$secScriptsDir\$scriptName" -Force
+        Write-OK "Copied $scriptName → $secScriptsDir"
+    } else {
+        Write-Warn "$scriptName not found next to setup_all.ps1 — copy manually to $secScriptsDir"
+    }
+}
+
+$taskName  = "Verificacao Automatica de Seguranca"
+$action    = New-ScheduledTaskAction -Execute "powershell.exe" `
+    -Argument "-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$secScriptsDir\DailySecurityCheck.ps1`""
+$trigger   = New-ScheduledTaskTrigger -Daily -At "09:00"
+$settings  = New-ScheduledTaskSettingsSet -Hidden -RunOnlyIfNetworkAvailable:$false
+$principal = New-ScheduledTaskPrincipal -UserId $currentUser -LogonType S4U -RunLevel Highest
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
+Write-OK "Task registered: $taskName (daily 09:00)"
+
+$shell    = New-Object -ComObject WScript.Shell
+$shortcut = $shell.CreateShortcut("$([System.Environment]::GetFolderPath('Desktop'))\Verificar Seguranca.lnk")
+$shortcut.TargetPath = "powershell.exe"
+$shortcut.Arguments  = "-ExecutionPolicy Bypass -File `"$secScriptsDir\DailySecurityCheck.ps1`""
+$shortcut.Save()
+Write-OK "Desktop shortcut created: Verificar Seguranca.lnk"
+
+# =============================================================================
+# STEP 6 - Disable remote access services
+# =============================================================================
+Write-Step "Step 6 - Disable remote access services"
+Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" `
+    -Name "fDenyTSConnections" -Value 1 -ErrorAction SilentlyContinue
+Write-OK "RDP connections blocked"
+
+foreach ($svc in @("RemoteRegistry","WinRM","TermService")) {
+    $s = Get-Service $svc -ErrorAction SilentlyContinue
+    if ($s) {
+        if ($s.StartType -ne 'Disabled') {
+            Set-Service $svc -StartupType Disabled -ErrorAction SilentlyContinue
+            Stop-Service $svc -Force -ErrorAction SilentlyContinue
+            Write-OK "$svc disabled"
+        } else {
+            Write-OK "$svc already disabled"
+        }
+    }
+}
+
+try {
+    Set-SmbServerConfiguration -EnableSMB2Protocol $false -Force -ErrorAction SilentlyContinue
+    Write-OK "SMB2 disabled"
+} catch { Write-Warn "SMB2 disable failed: $_" }
+
+# =============================================================================
+# STEP 7 - Account lockout policy
+# =============================================================================
+Write-Step "Step 7 - Account lockout (5 attempts, 30 min)"
+net accounts /lockoutthreshold:5 /lockoutduration:30 /lockoutwindow:30 | Out-Null
+Write-OK "Lockout configured"
+
+# =============================================================================
+# STEP 8 - Screen auto-lock (5 minutes)
+# =============================================================================
+Write-Step "Step 8 - Screen auto-lock (5 minutes)"
+powercfg /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK 300 | Out-Null
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK 300 | Out-Null
+powercfg /setacvalueindex SCHEME_CURRENT SUB_NONE  CONSOLELOCK   1 | Out-Null
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_NONE  CONSOLELOCK   1 | Out-Null
+powercfg /setactive SCHEME_CURRENT | Out-Null
+Write-OK "Auto-lock: 5 minutes, password required on wake"
+
+# =============================================================================
+# STEP 9 - Windows Firewall logging
+# =============================================================================
+Write-Step "Step 9 - Windows Firewall logging"
+netsh advfirewall set allprofiles logging droppedconnections enable | Out-Null
+netsh advfirewall set allprofiles logging allowedconnections enable | Out-Null
+netsh advfirewall set allprofiles logging filename "C:\Sync\Logs\firewall.log" | Out-Null
+netsh advfirewall set allprofiles logging maxfilesize 8192 | Out-Null
+Start-Sleep -Seconds 1
+if (Test-Path "C:\Sync\Logs\firewall.log") {
+    icacls "C:\Sync\Logs\firewall.log" /grant:r "${currentUser}:(R)" | Out-Null
+    Write-OK "Firewall logging active + read permission set"
+} else {
+    Write-OK "Firewall logging active (log created on first connection)"
+}
+
+# =============================================================================
+# STEP 10 - Register FolderSync-CloudBackup task (SYSTEM)
+# NOTE: For new device only. Skip if task already exists and is correct.
+# =============================================================================
+Write-Step "Step 10 - FolderSync-CloudBackup task (SYSTEM, every 5 min)"
+$existingBackup = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
+if (-not $existingBackup) {
+    $action1   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+        -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
+    $trigger1  = @(
+        $(New-ScheduledTaskTrigger -AtStartup),
+        $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 5) -Once -At (Get-Date))
+    )
+    $settings1 = New-ScheduledTaskSettingsSet -Hidden -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1) -ExecutionTimeLimit (New-TimeSpan -Minutes 4)
+    $principal1= New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
+    Register-ScheduledTask -TaskName "FolderSync-CloudBackup" -Action $action1 -Trigger $trigger1 -Settings $settings1 -Principal $principal1 -Force | Out-Null
+    Write-OK "Task FolderSync-CloudBackup registered (SYSTEM)"
+} else {
+    Write-OK "Task FolderSync-CloudBackup already exists — skipped"
+}
+
+# =============================================================================
+# STEP 11 - Register FolderSync-Watchdog task (current user, interactive)
+# NOTE: MUST run as current user — SYSTEM cannot launch RealTimeSync GUI
+# =============================================================================
+Write-Step "Step 11 - FolderSync-Watchdog task (current user, every 3 min)"
+$action2   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
+$trigger2  = @(
+    $(New-ScheduledTaskTrigger -AtLogOn),
+    $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 3) -Once -At (Get-Date))
+)
+$settings2 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 2) -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
+$principal2= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+Unregister-ScheduledTask -TaskName "FolderSync-Watchdog" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-Watchdog" -Action $action2 -Trigger $trigger2 -Settings $settings2 -Principal $principal2 -Force | Out-Null
+Write-OK "Task FolderSync-Watchdog registered ($currentUser)"
+
+# =============================================================================
+# STEP 12 - Install FolderSyncWatchdog NSSM service
+# =============================================================================
+Write-Step "Step 12 - FolderSyncWatchdog NSSM service"
+$nssm = 'C:\Tools\NSSM\nssm.exe'
+if (Test-Path $nssm) {
+    & $nssm stop   FolderSyncWatchdog 2>$null
+    & $nssm remove FolderSyncWatchdog confirm 2>$null
+    Start-Sleep 2
+    & $nssm install FolderSyncWatchdog powershell.exe
+    & $nssm set FolderSyncWatchdog AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
+    & $nssm set FolderSyncWatchdog DisplayName   'Folder Sync Watchdog Service'
+    & $nssm set FolderSyncWatchdog Description   'Monitors and restarts folder sync processes (RealTimeSync + cloud backup task).'
+    & $nssm set FolderSyncWatchdog Start          SERVICE_AUTO_START
+    & $nssm set FolderSyncWatchdog AppStdout      'C:\Sync\Logs\watchdog_svc.log'
+    & $nssm set FolderSyncWatchdog AppStderr      'C:\Sync\Logs\watchdog_svc_err.log'
+    & $nssm set FolderSyncWatchdog AppRotateFiles  1
+    & $nssm set FolderSyncWatchdog AppRotateBytes  1048576
+    Start-Service FolderSyncWatchdog -ErrorAction SilentlyContinue
+    $s = Get-Service FolderSyncWatchdog -ErrorAction SilentlyContinue
+    Write-OK "FolderSyncWatchdog service: $($s.Status)"
+} else {
+    Write-Warn "NSSM not found at $nssm — install NSSM first, then rerun this step manually"
+}
+
+# =============================================================================
+# STEP 13 - Install FolderSyncAuditor NSSM service
+# =============================================================================
+Write-Step "Step 13 - FolderSyncAuditor NSSM service"
+if (Test-Path $nssm) {
+    & $nssm stop   FolderSyncAuditor 2>$null
+    & $nssm remove FolderSyncAuditor confirm 2>$null
+    Start-Sleep 2
+    & $nssm install FolderSyncAuditor powershell.exe
+    & $nssm set FolderSyncAuditor AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auditor.ps1'
+    & $nssm set FolderSyncAuditor DisplayName   'Folder Sync Security Auditor'
+    & $nssm set FolderSyncAuditor Description   'Monitors file changes, remote access, and service tampering.'
+    & $nssm set FolderSyncAuditor Start          SERVICE_AUTO_START
+    & $nssm set FolderSyncAuditor AppStdout      'C:\Sync\Logs\auditor_svc.log'
+    & $nssm set FolderSyncAuditor AppStderr      'C:\Sync\Logs\auditor_svc_err.log'
+    & $nssm set FolderSyncAuditor AppRotateFiles  1
+    & $nssm set FolderSyncAuditor AppRotateBytes  2097152
+    & $nssm set FolderSyncAuditor AppRestartDelay 30000
+    Start-Service FolderSyncAuditor -ErrorAction SilentlyContinue
+    $s = Get-Service FolderSyncAuditor -ErrorAction SilentlyContinue
+    Write-OK "FolderSyncAuditor service: $($s.Status)"
+} else {
+    Write-Warn "NSSM not found — skipped FolderSyncAuditor"
+}
+
+# =============================================================================
+# STEP 14 - RealTimeSync startup registry entry
+# =============================================================================
+Write-Step "Step 14 - RealTimeSync startup registry"
+$rtsPath = '"C:\Program Files\FreeFileSync\RealTimeSync.exe" "C:\Sync\Config\realtime.ffs_real"'
+Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
+    -Name "FolderSyncRealTime" -Value $rtsPath -ErrorAction SilentlyContinue
+Write-OK "Registry startup entry set for RealTimeSync"
+
+# Start RealTimeSync now if not running
+$rts = Get-Process RealTimeSync -ErrorAction SilentlyContinue
+if (-not $rts) {
+    Start-Process "C:\Program Files\FreeFileSync\RealTimeSync.exe" `
+        -ArgumentList '"C:\Sync\Config\realtime.ffs_real"' -WindowStyle Hidden -ErrorAction SilentlyContinue
+    Write-OK "RealTimeSync started"
+} else {
+    Write-OK "RealTimeSync already running (PID $($rts.Id))"
+}
+
+# =============================================================================
+# STEP 15 - Enable file auditing (SACL on watched folder)
+# =============================================================================
+Write-Step "Step 15 - File system auditing (SACL)"
+$auditScript = "C:\Sync\Config\enable_file_auditing.ps1"
+if (Test-Path $auditScript) {
+    & powershell.exe -ExecutionPolicy Bypass -File $auditScript
+    Write-OK "File auditing configured"
+} else {
+    Write-Warn "enable_file_auditing.ps1 not found — run manually when available"
+}
+
+# =============================================================================
+# SUMMARY
+# =============================================================================
+Write-Host ""
+Write-Host "============================================================" -ForegroundColor Green
+Write-Host "  Setup Complete — Full Ecosystem + Security Hardening" -ForegroundColor Green
+Write-Host "============================================================" -ForegroundColor Green
+Write-Host ""
+Write-Host "Applied:" -ForegroundColor White
+Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
+Write-Host "  Step  2 - run_mirror.bat daily rotation" -ForegroundColor Gray
+Write-Host "  Step  3 - cloud_sync.ps1 log rotation (Mirror:7d, Logs:30d)" -ForegroundColor Gray
+Write-Host "  Step  4 - C:\Sync\Config ACL locked" -ForegroundColor Gray
+Write-Host "  Step  5 - DailySecurityCheck v7 + scheduled task + shortcut" -ForegroundColor Gray
+Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
+Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor Gray
+Write-Host "  Step  8 - Screen auto-lock (5 min)" -ForegroundColor Gray
+Write-Host "  Step  9 - Firewall logging → C:\Sync\Logs\firewall.log" -ForegroundColor Gray
+Write-Host "  Step 10 - FolderSync-CloudBackup task (SYSTEM)" -ForegroundColor Gray
+Write-Host "  Step 11 - FolderSync-Watchdog task (current user)" -ForegroundColor Gray
+Write-Host "  Step 12 - FolderSyncWatchdog NSSM service" -ForegroundColor Gray
+Write-Host "  Step 13 - FolderSyncAuditor NSSM service" -ForegroundColor Gray
+Write-Host "  Step 14 - RealTimeSync startup registry + started" -ForegroundColor Gray
+Write-Host "  Step 15 - File system auditing (SACL)" -ForegroundColor Gray
+Write-Host ""
+Write-Host "Pending (manual — requires web UI or physical access):" -ForegroundColor Yellow
+Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
+Write-Host "  - BIOS password on Acer Nitro 5" -ForegroundColor Yellow
+Write-Host "  - Windows Hello PIN (resolve via Microsoft account portal)" -ForegroundColor Yellow
+Write-Host "  - C100 RTSP integration" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Validate with:" -ForegroundColor Cyan
+Write-Host "  powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1" -ForegroundColor Cyan
+Write-Host ""
+Read-Host "Press ENTER to close"
 ```
-
 ---
 
 ### `C:\Sync\Config\enable_file_auditing.ps1`
 > One-time setup. Ativa auditoria de file system e aplica SACL no watched folder. Rodar como Administrador uma única vez.
+
 ```powershell
 $WatchedFolder = 'C:\Users\helde\Repos\Bois'
 $RootPath      = 'C:\Sync'
-$LogPath       = "C:\Sync\Logs"
-$MirrorPath    = "C:\Sync\Mirror"
+$LogPath       = 'C:\Sync\Logs'
+$MirrorPath    = 'C:\Sync\Mirror'
 
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Error "Acesso negado. Execute como Administrador."
-    exit 1
+    Write-Error "Execute como Administrador."; exit 1
 }
 
-# Configuração do SO
 auditpol /set /subcategory:"Sistema de Arquivos" /success:enable /failure:enable
 
-# SACL na pasta Bois
-$AclData = Get-Acl -Path $WatchedFolder -Audit
+$AclData  = Get-Acl -Path $WatchedFolder -Audit
 $Everyone = [System.Security.Principal.SecurityIdentifier]'S-1-1-0'
 $AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule($Everyone, "Delete,DeleteSubdirectoriesAndFiles,WriteData", "ContainerInherit,ObjectInherit", "None", "Success,Failure")
 $AclData.SetAuditRule($AuditRule)
 Set-Acl -Path $WatchedFolder -AclObject $AclData
 
-# Blindagem da Raiz C:\Sync (Logs e Configs)
 if (-not (Test-Path $LogPath)) { New-Item -ItemType Directory -Path $LogPath -Force }
 $RootAcl = Get-Acl $RootPath
 $RootAcl.SetAccessRuleProtection($true, $true)
@@ -1050,34 +1172,32 @@ $DenyRule = New-Object System.Security.AccessControl.FileSystemAccessRule($Every
 $RootAcl.AddAccessRule($DenyRule)
 Set-Acl $RootPath $RootAcl
 
-# Exceção para Mirror (Permite deleção via SYSTEM)
 if (Test-Path $MirrorPath) {
-    $MirrorAcl = Get-Acl $MirrorPath
-    $SystemSid = [System.Security.Principal.SecurityIdentifier]'S-1-5-18'
+    $MirrorAcl  = Get-Acl $MirrorPath
+    $SystemSid  = [System.Security.Principal.SecurityIdentifier]'S-1-5-18'
     $SystemRule = New-Object System.Security.AccessControl.FileSystemAccessRule($SystemSid, "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
-    $UserSid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User
-    $UserRule = New-Object System.Security.AccessControl.FileSystemAccessRule($UserSid, "ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow")
-    
-    $MirrorAcl.SetAccessRuleProtection($true, $false) 
+    $UserSid    = [System.Security.Principal.WindowsIdentity]::GetCurrent().User
+    $UserRule   = New-Object System.Security.AccessControl.FileSystemAccessRule($UserSid, "ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow")
+    $MirrorAcl.SetAccessRuleProtection($true, $false)
     $MirrorAcl.AddAccessRule($SystemRule)
     $MirrorAcl.AddAccessRule($UserRule)
     Set-Acl $MirrorPath $MirrorAcl
 }
 
-Write-Host "Configuração de Auditoria e Blindagem aplicada com sucesso." -ForegroundColor Green
-```	
+Write-Host "Auditoria e blindagem aplicadas com sucesso." -ForegroundColor Green
+```
 
-## 15. Fresh Install / Disaster Recovery (from scratch)
+---
 
-Use this if the machine is wiped or you're setting up on a new PC.
+## 16. Fresh Install / Disaster Recovery (from scratch)
 
 ### Step 1 — Download tools
 
 | Tool | URL | Install to |
 |---|---|---|
 | Rclone (win-amd64 zip) | https://downloads.rclone.org/rclone-current-windows-amd64.zip | Extract `rclone.exe` → `C:\Tools\Rclone\` |
-| FreeFileSync (Windows) | https://freefilesync.org/download/FreeFileSync_14.7_Windows_Setup.exe | Run installer → `C:\Program Files\FreeFileSync\` |
-| NSSM (zip) | https://nssm.cc/release/nssm-2.24.zip | Extract `win64\nssm.exe` → `C:\Tools\NSSM\` |
+| FreeFileSync | https://freefilesync.org/download/FreeFileSync_14.7_Windows_Setup.exe | `C:\Program Files\FreeFileSync\` |
+| NSSM | https://nssm.cc/release/nssm-2.24.zip | Extract `win64\nssm.exe` → `C:\Tools\NSSM\` |
 
 ### Step 2 — Add Rclone to PATH
 ```powershell
@@ -1087,58 +1207,76 @@ $p = [Environment]::GetEnvironmentVariable('PATH','Machine')
 
 ### Step 3 — Create folders
 ```powershell
-mkdir C:\Sync\Source, C:\Sync\Mirror, C:\Sync\Logs, C:\Sync\Config
+mkdir C:\Sync\Mirror, C:\Sync\Logs, C:\Sync\Config
 mkdir C:\Tools\Rclone, C:\Tools\NSSM
 ```
 
 ### Step 4 — Restore all config files
-Recreate every file from §14 of this document.
+Recreate every file from §15 of this document into `C:\Sync\Config\`.
 
 ### Step 5 — Restore credentials
-- Get your Key ID and App Key from backblaze.com → App Keys
-- Fill in `credentials.txt` (format in §12)
+- Get Key ID and App Key from backblaze.com → App Keys (scope to `helder-sync-mirror`)
+- Edit `rclone.conf` with actual values
 - Run `encrypt_creds.ps1` to produce `credentials.enc`
-- Delete `credentials.txt`
 
-### Step 6 — Register tasks and service
+### Step 6 — Run centralized setup
+```powershell
+# Place setup_all.ps1 + DailySecurityCheck.ps1 + AutoCleanup.ps1 in C:\Sync\Config\
+powershell -ExecutionPolicy Bypass -File C:\Sync\Config\setup_all.ps1
+```
+
+### Step 7 — Register sync tasks and services
 ```powershell
 powershell -ExecutionPolicy Bypass -File C:\Sync\Config\register_tasks.ps1
 powershell -ExecutionPolicy Bypass -File C:\Sync\Config\fix_watchdog_task.ps1
 powershell -ExecutionPolicy Bypass -File C:\Sync\Config\install_service.ps1
+powershell -ExecutionPolicy Bypass -File C:\Sync\Config\install_auditor_service.ps1
+powershell -ExecutionPolicy Bypass -File C:\Sync\Config\enable_file_auditing.ps1
 ```
 
-### Step 7 — Add startup registry entry
+### Step 8 — Add startup registry entry
 ```powershell
 Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
     -Name "FolderSyncRealTime" `
     -Value '"C:\Program Files\FreeFileSync\RealTimeSync.exe" "C:\Sync\Config\realtime.ffs_real"'
 ```
 
-### Step 8 — Start RealTimeSync and validate
+### Step 9 — Start and validate
 ```powershell
 Start-Process "C:\Program Files\FreeFileSync\RealTimeSync.exe" `
     -ArgumentList '"C:\Sync\Config\realtime.ffs_real"' -WindowStyle Hidden
-C:\Sync\Config\cloud_sync.bat
 powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
 ```
 
 ---
 
-## 16. Validation Summary (2026-02-21)
+## 17. Validation Summary
 
-| Test | Result |
-|---|---|
-| `rclone lsd cloudsync:` | ✅ Bucket `helder-sync-mirror` listed |
-| Cloud upload test | ✅ 14 B transferred to B2 |
-| Local mirror (robocopy) | ✅ 233 files / 283 MB mirrored in 3 seconds |
-| `FolderSync-CloudBackup` task | ✅ Ready (SYSTEM) |
-| `FolderSync-Watchdog` task | ✅ Running (`LAP\helde`) |
-| `FolderSyncWatchdog` service | ✅ Running, Automatic start |
-| RealTimeSync process | ✅ Running |
-| Startup registry `FolderSyncRealTime` | ✅ Present |
-| `FolderSyncAuditor` service | ✅ Running, Automatic start |
+| Test | Date | Result |
+|---|---|---|
+| `rclone lsd cloudsync:` | 2026-02-21 | ✅ Bucket `helder-sync-mirror` listed |
+| Cloud upload test | 2026-02-21 | ✅ 14 B transferred to B2 |
+| Local mirror (robocopy) | 2026-02-21 | ✅ 233 files / 283 MB mirrored |
+| `FolderSync-CloudBackup` task | 2026-02-21 | ✅ Ready (SYSTEM) |
+| `FolderSync-Watchdog` task | 2026-02-21 | ✅ Running (`LAP\helde`) |
+| `FolderSyncWatchdog` service | 2026-02-21 | ✅ Running, Automatic |
+| `FolderSyncAuditor` service | 2026-02-21 | ✅ Running, Automatic |
+| RealTimeSync process | 2026-02-21 | ✅ Running |
+| B2 key rotation (scoped) | 2026-03-02 | ✅ Scoped key active |
+| RDP disabled | 2026-03-01 | ✅ fDenyTSConnections=1 |
+| WinRM disabled | 2026-03-01 | ✅ Stopped + Disabled |
+| RemoteRegistry disabled | 2026-03-01 | ✅ Stopped + Disabled |
+| SMB2 disabled | 2026-03-01 | ✅ Disabled |
+| C:\Sync\Config ACL locked | 2026-03-01 | ✅ User+SYSTEM+Admins only |
+| Firewall logging active | 2026-03-01 | ✅ → C:\Sync\Logs\firewall.log |
+| Auto-lock 5 minutes | 2026-03-01 | ✅ Configured |
+| Account lockout 5 attempts | 2026-03-01 | ✅ Configured |
+| DailySecurityCheck v7 | 2026-03-02 | ⏳ Pending install via setup_all.ps1 |
+| B2 Lifecycle Rules | — | ⏳ Pending (Backblaze web UI) |
+| BIOS password | — | ⏳ Pending |
+
 ---
 
-*Generated by Claude Code (claude-sonnet-4-6)*
+*Generated by Claude (claude-sonnet-4-6)*
 *Safe to upload to GitHub Gist — contains no secrets.*
 *Do NOT include `rclone.conf` in any gist.*
