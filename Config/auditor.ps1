@@ -129,10 +129,7 @@ function Start-FileWatcher {
             
             $line | Add-Content -LiteralPath $logFile -Encoding UTF8
             
-            if ($type -eq 'DELETED') { 
-                # Dispara o sync de forma totalmente oculta e independente
-                Start-Process powershell.exe -ArgumentList "-NoProfile -WindowStyle Hidden -File C:\Sync\Config\cloud_sync.ps1" -WindowStyle Hidden -CreateNoWindow
-            }
+            if ($type -eq 'DELETED') { & 'C:\Sync\Config\cloud_sync.ps1' }
         } | Out-Null
     }
 
@@ -256,12 +253,15 @@ Write-FileAudit "[AUDITOR] FileSystemWatcher active on $WatchedFolder"
 
 # Main polling loop
 try {
-   while ($true) {
-    Check-RemoteAccess
-    Check-Services
-    Check-SystemEvents
-    Start-Sleep -Seconds 1
-}
+    while ($true) {
+        Check-RemoteAccess
+        Check-Services
+        Check-SystemEvents
+
+        # Process queued FSW events
+        $null = [System.Threading.Thread]::Sleep(1000)
+        Start-Sleep -Milliseconds 100
+    }
 } finally {
     $fsw.EnableRaisingEvents = $false
     $fsw.Dispose()

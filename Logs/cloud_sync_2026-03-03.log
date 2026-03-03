@@ -2788,3 +2788,258 @@ Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
 Checks:                 6 / 6, 100%, Listed 13
 Elapsed time:         0.4s
 
+2026/03/03 03:44:31 INFO  : There was nothing to transfer
+2026/03/03 03:44:31 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                 6 / 6, 100%, Listed 13
+Elapsed time:         0.8s
+
+2026/03/03 03:45:03 INFO  : There was nothing to transfer
+2026/03/03 03:45:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                 6 / 6, 100%, Listed 13
+Elapsed time:         0.5s
+
+2026/03/03 03:46:35 INFO  : There was nothing to transfer
+2026/03/03 03:46:35 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                 6 / 6, 100%, Listed 13
+Elapsed time:         0.6s
+
+2026/03/03 03:50:07 INFO  : 2026-03-03/motion_2026-03-03_03.47.52_317.avi: Copied (new)
+2026/03/03 03:50:07 INFO  : 2026-03-03/motion_2026-03-03_03.47.45_016.avi: Copied (new)
+2026/03/03 03:50:07 INFO  : 2026-03-03/motion_2026-03-03_03.48.03_248.avi: Copied (new)
+2026/03/03 03:50:08 INFO  : 2026-03-03/motion_2026-03-03_03.48.38_439.avi: Copied (new)
+2026/03/03 03:50:08 INFO  : 2026-03-03/motion_2026-03-03_03.48.09_268.avi: Copied (new)
+2026/03/03 03:50:08 INFO  : 
+Transferred:   	    9.640 MiB / 9.640 MiB, 100%, 3.213 MiB/s, ETA 0s
+Checks:                 6 / 6, 100%, Listed 18
+Transferred:            5 / 5, 100%
+Elapsed time:         3.3s
+
+2026/03/03 03:55:04 INFO  : 2026-03-03/motion_2026-03-03_03.52.30_442.avi: Copied (new)
+2026/03/03 03:55:05 INFO  : 2026-03-03/motion_2026-03-03_03.53.17_644.avi: Copied (new)
+2026/03/03 03:55:05 INFO  : 2026-03-03/motion_2026-03-03_03.52.52_276.avi: Copied (new)
+2026/03/03 03:55:05 INFO  : 2026-03-03/motion_2026-03-03_03.52.41_256.avi: Copied (new)
+2026/03/03 03:55:05 INFO  : 2026-03-03/motion_2026-03-03_03.53.10_159.avi: Copied (new)
+2026/03/03 03:55:05 INFO  : 
+Transferred:   	    3.751 MiB / 3.751 MiB, 100%, 876.302 KiB/s, ETA 0s
+Checks:                11 / 11, 100%, Listed 28
+Transferred:            5 / 5, 100%
+Elapsed time:         2.7s
+
+2026/03/03 04:00:04 INFO  : 2026-03-03/motion_2026-03-03_03.57.27_539.avi: Copied (new)
+2026/03/03 04:00:05 INFO  : 2026-03-03/motion_2026-03-03_03.57.44_495.avi: Copied (new)
+2026/03/03 04:00:05 INFO  : 2026-03-03/motion_2026-03-03_03.58.23_791.avi: Copied (new)
+2026/03/03 04:00:05 INFO  : 2026-03-03/motion_2026-03-03_03.57.57_174.avi: Copied (new)
+2026/03/03 04:00:05 INFO  : 2026-03-03/motion_2026-03-03_03.58.03_230.avi: Copied (new)
+2026/03/03 04:00:05 INFO  : 2026-03-03/motion_2026-03-03_03.58.45_632.avi: Copied (new)
+2026/03/03 04:00:05 INFO  : 2026-03-03/motion_2026-03-03_03.59.05_558.avi: Copied (new)
+2026/03/03 04:00:05 INFO  : 2026-03-03/motion_2026-03-03_03.58.53_822.avi: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_2026-03-03_03.57.06_518.avi: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_2026-03-03_03.59.45_857.avi: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_2026-03-03_03.59.51_730.avi: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_2026-03-03_03.59.58_453.avi: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.06_450.jpg: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.07_972.jpg: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_2026-03-03_03.59.24_498.avi: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.12_494.jpg: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.27_454.jpg: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.10_982.jpg: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.28_963.jpg: Copied (new)
+2026/03/03 04:00:06 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.09_477.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.45_914.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.30_466.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.47_427.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.44_394.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.57_119.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.57.58_636.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.01_664.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.00_139.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.23_758.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.25_264.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.28_275.jpg: Copied (new)
+2026/03/03 04:00:07 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.45_603.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.26_769.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.48_621.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.47_116.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.05_462.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.06_975.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.08_484.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.58.29_778.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.11_502.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.24_424.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.25_939.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.09_990.jpg: Copied (new)
+2026/03/03 04:00:08 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.27_443.jpg: Copied (new)
+2026/03/03 04:00:09 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.28_947.jpg: Copied (new)
+2026/03/03 04:00:09 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.30_451.jpg: Copied (new)
+2026/03/03 04:00:09 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.47_868.jpg: Copied (new)
+2026/03/03 04:00:09 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.49_880.jpg: Copied (new)
+2026/03/03 04:00:09 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.45_853.jpg: Copied (new)
+2026/03/03 04:00:09 INFO  : 2026-03-03/motion_shot_2026-03-03_03.59.58_438.jpg: Copied (new)
+2026/03/03 04:00:10 INFO  : 2026-03-03/motion_shot_2026-03-03_04.00.00_452.jpg: Copied (new)
+2026/03/03 04:00:10 INFO  : 
+Transferred:   	   15.272 MiB / 15.272 MiB, 100%, 2.182 MiB/s, ETA 0s
+Checks:                16 / 16, 100%, Listed 84
+Transferred:           51 / 51, 100%
+Elapsed time:         7.3s
+
+2026/03/03 04:05:04 INFO  : 2026-03-03/motion_shot_2026-03-03_04.02.33_391.jpg: Copied (new)
+2026/03/03 04:05:04 ERROR : 2026-03-03/motion_2026-03-03_04.04.54_781.avi: Failed to copy: Post "https://pod-050-1042-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0052": can't copy - source file is being updated (size changed from 1309690 to 1391982)
+2026/03/03 04:05:04 INFO  : 2026-03-03/motion_shot_2026-03-03_04.02.35_408.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.02.37_412.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.02.39_417.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_2026-03-03_04.03.16_164.avi: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.03.16_117.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.02.41_420.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.03.18_126.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.04.54_775.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.04.56_784.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.04.58_789.jpg: Copied (new)
+2026/03/03 04:05:05 INFO  : 2026-03-03/motion_shot_2026-03-03_04.05.00_800.jpg: Copied (new)
+2026/03/03 04:05:06 INFO  : 2026-03-03/motion_shot_2026-03-03_04.05.02_805.jpg: Copied (new)
+2026/03/03 04:05:06 INFO  : 2026-03-03/motion_2026-03-03_04.02.33_417.avi: Copied (new)
+2026/03/03 04:05:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 04:05:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 04:05:06 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0052": can't copy - source file is being updated (size changed from 1309690 to 1391982)
+2026/03/03 04:05:07 ERROR : 2026-03-03/motion_2026-03-03_04.04.54_781.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "21c48dc33fea61dc54537c013f0d4f2119531655" vs dst(B2 bucket helder-sync-mirror) "7a10c9639e69921d42c2cf47928802839615ca90"
+2026/03/03 04:05:07 INFO  : 2026-03-03/motion_2026-03-03_04.04.54_781.avi: Removing failed copy
+2026/03/03 04:05:07 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/03 04:05:07 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/03 04:05:07 ERROR : Attempt 2/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "21c48dc33fea61dc54537c013f0d4f2119531655" vs dst(B2 bucket helder-sync-mirror) "7a10c9639e69921d42c2cf47928802839615ca90"
+2026/03/03 04:05:09 INFO  : 2026-03-03/motion_2026-03-03_04.04.54_781.avi: Copied (new)
+2026/03/03 04:05:09 ERROR : Attempt 3/3 succeeded
+2026/03/03 04:05:09 INFO  : 
+Transferred:   	    8.192 MiB / 8.192 MiB, 100%, 1.638 MiB/s, ETA 0s
+Checks:               229 / 229, 100%, Listed 478
+Transferred:           15 / 15, 100%
+Elapsed time:         6.6s
+
+2026/03/03 04:10:04 INFO  : There was nothing to transfer
+2026/03/03 04:10:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:15:03 INFO  : There was nothing to transfer
+2026/03/03 04:15:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:20:03 INFO  : There was nothing to transfer
+2026/03/03 04:20:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:25:03 INFO  : There was nothing to transfer
+2026/03/03 04:25:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:30:03 INFO  : There was nothing to transfer
+2026/03/03 04:30:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:35:03 INFO  : There was nothing to transfer
+2026/03/03 04:35:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.7s
+
+2026/03/03 04:40:03 INFO  : There was nothing to transfer
+2026/03/03 04:40:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:45:03 INFO  : There was nothing to transfer
+2026/03/03 04:45:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:50:03 INFO  : There was nothing to transfer
+2026/03/03 04:50:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 04:55:03 INFO  : There was nothing to transfer
+2026/03/03 04:55:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 05:00:03 INFO  : There was nothing to transfer
+2026/03/03 05:00:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.7s
+
+2026/03/03 05:05:03 INFO  : There was nothing to transfer
+2026/03/03 05:05:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 05:10:03 INFO  : There was nothing to transfer
+2026/03/03 05:10:03 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.8s
+
+2026/03/03 05:14:49 INFO  : There was nothing to transfer
+2026/03/03 05:14:49 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.7s
+
+2026/03/03 05:15:02 INFO  : There was nothing to transfer
+2026/03/03 05:15:02 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                82 / 82, 100%, Listed 165
+Elapsed time:         0.7s
+
+2026/03/03 05:20:06 INFO  : 2026-03-03/motion_2026-03-03_05.17.13_252.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.17.02_500.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.17.20_489.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.16.46_220.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.17.38_849.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.17.43_914.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.18.09_186.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.18.16_902.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.18.35_486.avi: Copied (new)
+2026/03/03 05:20:07 INFO  : 2026-03-03/motion_2026-03-03_05.17.51_506.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 2026-03-03/motion_2026-03-03_05.18.43_329.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 2026-03-03/motion_2026-03-03_05.19.14_298.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 2026-03-03/motion_2026-03-03_05.19.35_435.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 2026-03-03/motion_2026-03-03_05.19.23_053.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 2026-03-03/motion_2026-03-03_05.19.40_322.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 2026-03-03/motion_2026-03-03_05.19.48_041.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 2026-03-03/motion_2026-03-03_05.19.55_962.avi: Copied (new)
+2026/03/03 05:20:08 INFO  : 
+Transferred:   	   12.214 MiB / 12.214 MiB, 100%, 3.054 MiB/s, ETA 0s
+Checks:                82 / 82, 100%, Listed 182
+Transferred:           17 / 17, 100%
+Elapsed time:         4.1s
+
+2026/03/03 05:22:11 INFO  : 2026-03-03/motion_2026-03-03_05.20.07_635.avi: Copied (new)
+2026/03/03 05:22:11 INFO  : 2026-03-03/motion_2026-03-03_05.20.19_286.avi: Copied (new)
+2026/03/03 05:22:11 INFO  : 
+Transferred:   	    1.786 MiB / 1.786 MiB, 100%, 112 KiB/s, ETA 0s
+Checks:                99 / 99, 100%, Listed 201
+Transferred:            2 / 2, 100%
+Elapsed time:         2.8s
+
+2026/03/03 05:25:05 INFO  : There was nothing to transfer
+2026/03/03 05:25:05 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               101 / 101, 100%, Listed 203
+Elapsed time:         0.8s
+

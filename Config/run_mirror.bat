@@ -1,9 +1,8 @@
 @echo off
 :: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
-:: /E    = Copia subdiretórios, incluindo vazios (não deleta no destino)
-:: /Z    = Modo restartable (essencial para vídeos se a cópia for interrompida)
-:: /R:1  = Apenas 1 tentativa para evitar logs gigantes
-:: /W:2  = Espera curta entre tentativas
-:: /LOG+ = Append ao log diário rotativo
+:: /MIR = mirror (purges files deleted from source)
+:: /R:2  = retry twice on error
+:: /W:5  = wait 5 seconds between retries
+:: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL

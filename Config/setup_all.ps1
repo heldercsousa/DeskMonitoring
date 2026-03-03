@@ -43,14 +43,19 @@ Write-OK "Future firewall logs readable by $currentUser"
 # =============================================================================
 # STEP 2 - Update run_mirror.bat with daily log rotation
 # =============================================================================
-Write-Step "Step 2 - Update run_mirror.bat (Safe Update Mode)"
+Write-Step "Step 2 - Update run_mirror.bat (daily log rotation)"
 $mirrorBat = "C:\Sync\Config\run_mirror.bat"
 Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
 @echo off
+:: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
+:: /MIR = mirror (purges files deleted from source)
+:: /R:2  = retry twice on error
+:: /W:5  = wait 5 seconds between retries
+:: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
 '@
-Write-OK "run_mirror.bat updated (Removed /MIR to prevent log flooding)"
+Write-OK "run_mirror.bat updated -> mirror_YYYY-MM-DD.log"
 
 # Archive old bloated mirror log if exists
 $oldMirror = "C:\Sync\Logs\mirror"
@@ -223,7 +228,8 @@ if (Test-Path "C:\Sync\Logs\firewall.log") {
 Write-Step "Step 10 - FolderSync-CloudBackup task (SYSTEM, every 5 min)"
 $existingBackup = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
 if (-not $existingBackup) {
-    $action1 = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1"
+    $action1   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+        -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
     $trigger1  = @(
         $(New-ScheduledTaskTrigger -AtStartup),
         $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 5) -Once -At (Get-Date))
