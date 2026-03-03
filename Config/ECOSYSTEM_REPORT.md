@@ -1189,7 +1189,28 @@ if (Test-Path "C:\Sync\Logs\firewall.log") {
 # =============================================================================
 Write-Step "Step 10 - FolderSync-CloudBackup task (SYSTEM, every 5 min)"
 $existingBackup = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
-if (-not $existingBackup) {
+
+# Check if task exists and has CORRECT arguments (PowerShell with -NoWindow)
+$needsRecreate = $false
+if ($existingBackup) {
+    $currentArgs = $existingBackup.Actions[0].Arguments
+    $currentExec = $existingBackup.Actions[0].Execute
+    
+    # If running .bat or missing -NoWindow, force recreate
+    if ($currentExec -like "*.bat" -or $currentArgs -notlike "*-NoWindow*") {
+        Write-Warn "Task exists but uses .bat or missing -NoWindow — will recreate"
+        $needsRecreate = $true
+    }
+}
+
+if (-not $existingBackup -or $needsRecreate) {
+    # Remove old task if it exists
+    if ($existingBackup) {
+        Unregister-ScheduledTask -TaskName "FolderSync-CloudBackup" -Confirm:$false -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 1
+    }
+    
+    # Create with POWERSHELL (not .bat) and -NoWindow flag
     $action1   = New-ScheduledTaskAction -Execute 'powershell.exe' `
         -Argument '-NoWindow -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
     $trigger1  = @(
@@ -1199,9 +1220,9 @@ if (-not $existingBackup) {
     $settings1 = New-ScheduledTaskSettingsSet -Hidden -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1) -ExecutionTimeLimit (New-TimeSpan -Minutes 4)
     $principal1= New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
     Register-ScheduledTask -TaskName "FolderSync-CloudBackup" -Action $action1 -Trigger $trigger1 -Settings $settings1 -Principal $principal1 -Force | Out-Null
-    Write-OK "Task FolderSync-CloudBackup registered (SYSTEM)"
+    Write-OK "Task FolderSync-CloudBackup registered (PowerShell with -NoWindow)"
 } else {
-    Write-OK "Task FolderSync-CloudBackup already exists — skipped"
+    Write-OK "Task FolderSync-CloudBackup already exists with correct arguments"
 }
 
 # =============================================================================
