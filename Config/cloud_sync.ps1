@@ -1,7 +1,6 @@
-# cloud_sync.ps1
+﻿# cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Config and Logs are versioned via Git — not uploaded to B2.
 # Last updated: 2026-03-02
 
 $Rclone           = 'C:\Tools\Rclone\rclone.exe'
@@ -15,6 +14,7 @@ $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
 
 # 1. Sync source folder to B2
+# Config and Logs versioned via Git - not sent to B2
 & $Rclone sync $Source $Remote `
     --config $Config `
     --log-file $Log `
@@ -31,12 +31,12 @@ if (Test-Path $Mirror) {
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
-# 3. cloud_sync log rotation - delete logs older than DaysToKeepLogs
+# 4. cloud_sync log rotation - delete logs older than DaysToKeepLogs
 Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
-# 4. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
+# 5. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
 Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue

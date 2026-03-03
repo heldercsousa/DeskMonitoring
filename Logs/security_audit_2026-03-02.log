@@ -9,3 +9,6 @@
 2026-03-02 09:46:03  [AUDITOR] Shutting down
 2026-03-02 15:46:01  [AUDITOR] Starting up (PID 5232)
 2026-03-02 21:23:30  [AUDITOR] Starting up (PID 4664)
+2026-03-02 23:30:47  [AUDITOR] Shutting down
+2026-03-02 23:30:51  [AUDITOR] Starting up (PID 15484)
+2026-03-02 23:30:52  [CRITICAL] Service FolderSyncAuditor is StartPending - expected Running

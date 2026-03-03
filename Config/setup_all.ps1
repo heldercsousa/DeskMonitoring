@@ -55,7 +55,7 @@ Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
 robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
 '@
-Write-OK "run_mirror.bat updated → mirror_YYYY-MM-DD.log"
+Write-OK "run_mirror.bat updated -> mirror_YYYY-MM-DD.log"
 
 # Archive old bloated mirror log if exists
 $oldMirror = "C:\Sync\Logs\mirror"
@@ -86,7 +86,7 @@ $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
 
 # 1. Sync source folder to B2
-# Config and Logs versioned via Git — not sent to B2
+# Config and Logs versioned via Git - not sent to B2
 & $Rclone sync $Source $Remote `
     --config $Config `
     --log-file $Log `
@@ -139,9 +139,9 @@ foreach ($scriptName in @("DailySecurityCheck.ps1","AutoCleanup.ps1")) {
     $src = Join-Path $scriptDir $scriptName
     if (Test-Path $src) {
         Copy-Item $src "$secScriptsDir\$scriptName" -Force
-        Write-OK "Copied $scriptName → $secScriptsDir"
+        Write-OK "Copied $scriptName -> $secScriptsDir"
     } else {
-        Write-Warn "$scriptName not found next to setup_all.ps1 — copy manually to $secScriptsDir"
+        Write-Warn "$scriptName not found next to setup_all.ps1 - copy manually to $secScriptsDir"
     }
 }
 
@@ -239,12 +239,12 @@ if (-not $existingBackup) {
     Register-ScheduledTask -TaskName "FolderSync-CloudBackup" -Action $action1 -Trigger $trigger1 -Settings $settings1 -Principal $principal1 -Force | Out-Null
     Write-OK "Task FolderSync-CloudBackup registered (SYSTEM)"
 } else {
-    Write-OK "Task FolderSync-CloudBackup already exists — skipped"
+    Write-OK "Task FolderSync-CloudBackup already exists - skipped"
 }
 
 # =============================================================================
 # STEP 11 - Register FolderSync-Watchdog task (current user, interactive)
-# NOTE: MUST run as current user — SYSTEM cannot launch RealTimeSync GUI
+# NOTE: MUST run as current user - SYSTEM cannot launch RealTimeSync GUI
 # =============================================================================
 Write-Step "Step 11 - FolderSync-Watchdog task (current user, every 3 min)"
 $action2   = New-ScheduledTaskAction -Execute 'powershell.exe' `
@@ -281,7 +281,7 @@ if (Test-Path $nssm) {
     $s = Get-Service FolderSyncWatchdog -ErrorAction SilentlyContinue
     Write-OK "FolderSyncWatchdog service: $($s.Status)"
 } else {
-    Write-Warn "NSSM not found at $nssm — install NSSM first, then rerun this step manually"
+    Write-Warn "NSSM not found at $nssm - install NSSM first, then rerun this step manually"
 }
 
 # =============================================================================
@@ -306,7 +306,7 @@ if (Test-Path $nssm) {
     $s = Get-Service FolderSyncAuditor -ErrorAction SilentlyContinue
     Write-OK "FolderSyncAuditor service: $($s.Status)"
 } else {
-    Write-Warn "NSSM not found — skipped FolderSyncAuditor"
+    Write-Warn "NSSM not found - skipped FolderSyncAuditor"
 }
 
 # =============================================================================
@@ -337,7 +337,7 @@ if (Test-Path $auditScript) {
     & powershell.exe -ExecutionPolicy Bypass -File $auditScript
     Write-OK "File auditing configured"
 } else {
-    Write-Warn "enable_file_auditing.ps1 not found — run manually when available"
+    Write-Warn "enable_file_auditing.ps1 not found - run manually when available"
 }
 
 # =============================================================================
@@ -345,7 +345,7 @@ if (Test-Path $auditScript) {
 # =============================================================================
 Write-Host ""
 Write-Host "============================================================" -ForegroundColor Green
-Write-Host "  Setup Complete — Full Ecosystem + Security Hardening" -ForegroundColor Green
+Write-Host "  Setup Complete - Full Ecosystem + Security Hardening" -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "Applied:" -ForegroundColor White
@@ -357,7 +357,7 @@ Write-Host "  Step  5 - DailySecurityCheck v7 + scheduled task + shortcut" -Fore
 Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
 Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor Gray
 Write-Host "  Step  8 - Screen auto-lock (5 min)" -ForegroundColor Gray
-Write-Host "  Step  9 - Firewall logging → C:\Sync\Logs\firewall.log" -ForegroundColor Gray
+Write-Host "  Step  9 - Firewall logging -> C:\Sync\Logs\firewall.log" -ForegroundColor Gray
 Write-Host "  Step 10 - FolderSync-CloudBackup task (SYSTEM)" -ForegroundColor Gray
 Write-Host "  Step 11 - FolderSync-Watchdog task (current user)" -ForegroundColor Gray
 Write-Host "  Step 12 - FolderSyncWatchdog NSSM service" -ForegroundColor Gray
@@ -365,7 +365,7 @@ Write-Host "  Step 13 - FolderSyncAuditor NSSM service" -ForegroundColor Gray
 Write-Host "  Step 14 - RealTimeSync startup registry + started" -ForegroundColor Gray
 Write-Host "  Step 15 - File system auditing (SACL)" -ForegroundColor Gray
 Write-Host ""
-Write-Host "Pending (manual — requires web UI or physical access):" -ForegroundColor Yellow
+Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
 Write-Host "  - BIOS password on Acer Nitro 5" -ForegroundColor Yellow
 Write-Host "  - Windows Hello PIN (resolve via Microsoft account portal)" -ForegroundColor Yellow

@@ -307,3 +307,6 @@
 2026-03-02 21:42:24 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-03-02\motion_2026-03-02_21.42.23_909.avi
 2026-03-02 21:42:24 | DELETED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-03-02\motion_2026-03-02_21.42.23_909.avi
 2026-03-02 21:42:25 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-03-02\motion_2026-03-02_21.42.23_909.avi
+2026-03-02 23:30:47  [AUDITOR] Shutting down
+2026-03-02 23:30:51  [AUDITOR] Starting up (PID 15484)
+2026-03-02 23:30:51  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
