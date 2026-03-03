@@ -4245,3 +4245,21 @@ Checks:                38 / 38, 100%, Listed 76
 Transferred:            1 / 1, 100%
 Elapsed time:         2.2s
 
+2026/03/02 22:55:04 INFO  : There was nothing to transfer
+2026/03/02 22:55:04 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               110 / 110, 100%, Listed 260
+Elapsed time:         1.3s
+
+2026/03/02 22:55:07 INFO  : firewall.log: Copied (replaced existing)
+2026/03/02 22:55:08 ERROR : cloud_sync_2026-03-02.log: Failed to copy: Post "https://pod-050-1005-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501005_t0032": can't copy - source file is being updated (size changed from 327903 to 327972)
+2026/03/02 22:55:09 INFO  : firewall.log.old: Copied (replaced existing)
+2026/03/02 22:55:09 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1005-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501005_t0032": can't copy - source file is being updated (size changed from 327903 to 327972)
+2026/03/02 22:55:10 INFO  : cloud_sync_2026-03-02.log: Copied (replaced existing)
+2026/03/02 22:55:10 ERROR : Attempt 2/3 succeeded
+2026/03/02 22:55:10 INFO  : 
+Transferred:   	    8.611 MiB / 8.611 MiB, 100%, 1.963 MiB/s, ETA 0s
+Checks:                76 / 76, 100%, Listed 152
+Transferred:            3 / 3, 100%
+Elapsed time:         4.5s
+

@@ -85,26 +85,17 @@ $Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
 
-# 1. Sync to B2 (exclude logs folder to avoid re-upload loop)
+# 1. Sync source folder to B2
+# Config and Logs versioned via Git — not sent to B2
 & $Rclone sync $Source $Remote `
     --config $Config `
     --log-file $Log `
     --log-level INFO `
     --transfers 4 `
     --checkers 8 `
-    --fast-list `
-    --exclude "logs/**"
+    --fast-list
 
-# 2. Upload logs to B2 (copy only - never deletes from B2)
-# firewall.log excluded: owned by SYSTEM, large, rotated independently
-& $Rclone copy $LogDir "$Remote/logs" `
-    --config $Config `
-    --log-file $Log `
-    --log-level INFO `
-    --exclude "firewall.log" `
-    --exclude "firewall.log.old"
-
-# 3. Mirror cleanup - delete files older than DaysToKeepMirror
+# 2. Mirror cleanup - delete files older than DaysToKeepMirror
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
     Get-ChildItem -Path $Mirror -Recurse -File |
