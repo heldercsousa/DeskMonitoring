@@ -48,12 +48,13 @@ $mirrorBat = "C:\Sync\Config\run_mirror.bat"
 Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
 @echo off
 :: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
-:: /MIR = mirror (purges files deleted from source)
-:: /R:2  = retry twice on error
-:: /W:5  = wait 5 seconds between retries
-:: /LOG+ = append to DAILY rotating log (mirror_YYYY-MM-DD.log)
+:: /E    = Copy subdirectories (including empty ones), do NOT delete from dest
+:: /Z    = Restartable mode (essential for video files if copy is interrupted)
+:: /R:1  = Retry only once to avoid massive logs
+:: /W:2  = Short wait between retries
+:: /LOG+ = Append to DAILY rotating log (mirror_YYYY-MM-DD.log)
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /MIR /R:2 /W:5 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS
 '@
 Write-OK "run_mirror.bat updated -> mirror_YYYY-MM-DD.log"
 
@@ -65,15 +66,15 @@ if (Test-Path $oldMirror) {
 }
 
 # =============================================================================
-# STEP 3 - Update cloud_sync.ps1 with log rotation
+# STEP 3 - Update cloud_sync.ps1 with 3-phase ACL protection
 # =============================================================================
-Write-Step "Step 3 - Update cloud_sync.ps1 (log rotation + firewall exclusion)"
+Write-Step "Step 3 - Update cloud_sync.ps1 (3-phase ACL protection for 7-day retention)"
 $cloudSyncPs1 = "C:\Sync\Config\cloud_sync.ps1"
 Set-Content -Path $cloudSyncPs1 -Encoding UTF8 -Value @'
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-03-02
+# Last updated: 2026-03-03 - Added 3-phase ACL protection for 7-day file retention
 
 $Rclone           = 'C:\Tools\Rclone\rclone.exe'
 $Config           = 'C:\Sync\Config\rclone.conf'
@@ -95,11 +96,93 @@ $DaysToKeepLogs   = 30
     --checkers 8 `
     --fast-list
 
+# ============================================================
+# FASE 0 - Aplicar ACL Deny Delete em arquivos < 7 dias
+# Protege cada arquivo que ainda nao atingiu 7 dias de idade
+# ============================================================
+if (Test-Path $Mirror) {
+    $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+    
+    Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -gt $threshold } |
+        ForEach-Object {
+            try {
+                $acl = Get-Acl $_.FullName -ErrorAction Stop
+                
+                # Verificar se ja tem ACL Deny Delete (evitar duplicado)
+                $hasDeny = $acl.Access | Where-Object {
+                    $_.AccessControlType -eq 'Deny' -and
+                    $_.IdentityReference -like '*Everyone*' -and
+                    $_.FileSystemRights -like '*Delete*'
+                }
+                
+                if (-not $hasDeny) {
+                    # Aplicar ACL Deny Delete
+                    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+                        [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
+                        'Delete',
+                        'None',
+                        'None',
+                        'Deny'
+                    )
+                    $acl.AddAccessRule($rule)
+                    Set-Acl $_.FullName $acl -ErrorAction Stop
+                }
+            } catch {
+                # Silencioso - arquivo pode ter sido deletado/movido
+            }
+        }
+}
+
+# ============================================================
+# FASE 1 - Remover ACL Deny Delete de arquivos >= 7 dias
+# Remove protecao de arquivos que atingiram 7 dias
+# CRITICO: Fazer ANTES de tentar deletar (Fase 2)
+# ============================================================
+if (Test-Path $Mirror) {
+    $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+    
+    Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -lt $threshold } |
+        ForEach-Object {
+            try {
+                $acl = Get-Acl $_.FullName -ErrorAction Stop
+                
+                # Encontrar regras Deny Delete de "Everyone"
+                $denyRules = $acl.Access | Where-Object {
+                    $_.AccessControlType -eq 'Deny' -and
+                    $_.IdentityReference -like '*Everyone*' -and
+                    $_.FileSystemRights -like '*Delete*'
+                }
+                
+                if ($denyRules) {
+                    # Remover cada regra Deny Delete encontrada
+                    foreach ($rule in $denyRules) {
+                        $acl.RemoveAccessRule($rule) | Out-Null
+                    }
+                    Set-Acl $_.FullName $acl -ErrorAction Stop
+                }
+            } catch {
+                # Silencioso - arquivo pode ter sido deletado
+            }
+        }
+}
+
+# ============================================================
+# FASE 2 - Deletar arquivos >= 7 dias
+# Agora ACL foi removido em FASE 1, delete pode executar sem ERROR 5
+# ============================================================
 # 2. Mirror cleanup - delete files older than DaysToKeepMirror
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
-    Get-ChildItem -Path $Mirror -Recurse -File |
+    Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
         Where-Object { $_.LastWriteTime -lt $threshold } |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+    
+    # Cleanup de pastas vazias (apos deletar arquivos)
+    Get-ChildItem -Path $Mirror -Recurse -Directory -ErrorAction SilentlyContinue |
+        Sort-Object FullName -Descending |
+        Where-Object { @(Get-ChildItem -Path $_.FullName -ErrorAction SilentlyContinue).Count -eq 0 } |
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
@@ -113,20 +196,58 @@ Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 '@
-Write-OK "cloud_sync.ps1 updated (Mirror: 7 days | Logs: 30 days retention)"
+Write-OK "cloud_sync.ps1 updated (3-phase ACL protection: Mirror 7d retention + cleanup)"
 
 # =============================================================================
-# STEP 4 - C:\Sync\Config ACL
+# STEP 4 - Protect C:\Sync\Config + C:\Sync\Logs (RECURSIVE Deny Delete)
+#          Liberate C:\Sync\.git for git management
 # =============================================================================
-Write-Step "Step 4 - Lock C:\Sync\Config permissions"
-icacls C:\Sync\Config /inheritance:r | Out-Null
-icacls C:\Sync\Config /remove:g "Todos"         | Out-Null
-icacls C:\Sync\Config /remove:g "Everyone"      | Out-Null
-icacls C:\Sync\Config /remove:g "BUILTIN\Users" | Out-Null
-icacls C:\Sync\Config /grant:r "${currentUser}:(OI)(CI)F"        | Out-Null
-icacls C:\Sync\Config /grant:r "NT AUTHORITY\SYSTEM:(OI)(CI)F"   | Out-Null
-icacls C:\Sync\Config /grant:r "${sidAdminsAccount}:(OI)(CI)F"   | Out-Null
-Write-OK "C:\Sync\Config locked to: $currentUser + SYSTEM + Administrators"
+Write-Step "Step 4 - Apply ACL protection (Config+Logs blocked recursively, .git liberated)"
+
+# 4.1 - C:\Sync\Config - Block ALL deletions (folder + ALL files/subfolders RECURSIVE)
+Write-Host "  Protecting C:\Sync\Config..." -ForegroundColor Cyan
+$sidEveryone = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')
+$aclConfig = Get-Acl "C:\Sync\Config"
+$ruleConfig = New-Object System.Security.AccessControl.FileSystemAccessRule(
+    $sidEveryone,
+    [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles',
+    [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit',
+    [System.Security.AccessControl.PropagationFlags]::None,
+    [System.Security.AccessControl.AccessControlType]::Deny
+)
+$aclConfig.AddAccessRule($ruleConfig)
+Set-Acl -Path "C:\Sync\Config" -AclObject $aclConfig
+Write-OK "C:\Sync\Config locked (Deny Delete - RECURSIVE on all files/subfolders)"
+
+# 4.2 - C:\Sync\Logs - Block ALL deletions (folder + ALL files/subfolders RECURSIVE)
+Write-Host "  Protecting C:\Sync\Logs..." -ForegroundColor Cyan
+$aclLogs = Get-Acl "C:\Sync\Logs"
+$ruleLogs = New-Object System.Security.AccessControl.FileSystemAccessRule(
+    $sidEveryone,
+    [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles',
+    [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit',
+    [System.Security.AccessControl.PropagationFlags]::None,
+    [System.Security.AccessControl.AccessControlType]::Deny
+)
+$aclLogs.AddAccessRule($ruleLogs)
+Set-Acl -Path "C:\Sync\Logs" -AclObject $aclLogs
+Write-OK "C:\Sync\Logs locked (Deny Delete - RECURSIVE on all files/subfolders)"
+
+# 4.3 - C:\Sync\.git - LIBERATE for git management (remove any Deny Delete rules)
+Write-Host "  Liberating C:\Sync\.git..." -ForegroundColor Cyan
+if (Test-Path "C:\Sync\.git") {
+    $aclGit = Get-Acl "C:\Sync\.git"
+    $denyRules = $aclGit.Access | Where-Object { $_.AccessControlType -eq 'Deny' }
+    foreach ($rule in $denyRules) {
+        $aclGit.RemoveAccessRule($rule) | Out-Null
+    }
+    Set-Acl -Path "C:\Sync\.git" -AclObject $aclGit
+    Write-OK "C:\Sync\.git liberated (no Deny Delete - git can manage freely)"
+} else {
+    Write-Warn "C:\Sync\.git not found (will be created if git init is run)"
+}
+
+Write-OK "ACL protection complete: Config+Logs blocked RECURSIVELY, .git liberated"
 
 # =============================================================================
 # STEP 5 - DailySecurityCheck v7
@@ -350,9 +471,9 @@ Write-Host "============================================================" -Foreg
 Write-Host ""
 Write-Host "Applied:" -ForegroundColor White
 Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
-Write-Host "  Step  2 - run_mirror.bat daily rotation" -ForegroundColor Gray
-Write-Host "  Step  3 - cloud_sync.ps1 log rotation (Mirror:7d, Logs:30d)" -ForegroundColor Gray
-Write-Host "  Step  4 - C:\Sync\Config ACL locked" -ForegroundColor Gray
+Write-Host "  Step  2 - run_mirror.bat with /E flag (no delete mirroring)" -ForegroundColor Gray
+Write-Host "  Step  3 - cloud_sync.ps1 with 3-phase ACL protection (7d retention)" -ForegroundColor Gray
+Write-Host "  Step  4 - ACL: Config+Logs blocked RECURSIVELY, .git liberated" -ForegroundColor Gray
 Write-Host "  Step  5 - DailySecurityCheck v7 + scheduled task + shortcut" -ForegroundColor Gray
 Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
 Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor Gray
