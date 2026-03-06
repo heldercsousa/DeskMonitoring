@@ -1,0 +1,880 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 05:31:58
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_05.31.49_641.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         1         1         0         0         7
+ Arquivos:         1         1         0         0         0         0
+    Bytes:   633.2 k   633.2 k         0         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           216.136.666 Bytes/s.
+Velocidade:             12367,439 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 05:31:59
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 12:56:38
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.56.13_041.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.56.23_273.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.56.28_661.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:         4         3         1         0         0         0
+    Bytes:    2.44 m    1.82 m   633.2 k         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           29.013.090 Bytes/s.
+Velocidade:             1660,142 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 12:56:38
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 12:58:43
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.58.31_025.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.58.35_990.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:         6         2         4         0         0         0
+    Bytes:    3.18 m   754.2 k    2.44 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           96.548.500 Bytes/s.
+Velocidade:             5524,549 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 12:58:43
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 12:59:18
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.58.35_990.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.58.51_257.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.59.11_613.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:         8         3         5         0         0         0
+    Bytes:    6.63 m    3.45 m    3.18 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           258.936.285 Bytes/s.
+Velocidade:             14816,453 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 12:59:18
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 12:59:54
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_12.59.11_613.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:         8         1         7         0         0         0
+    Bytes:   10.47 m    3.83 m    6.63 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           1.341.160.000 Bytes/s.
+Velocidade:               76741,789 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 12:59:54
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:12:11
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:         8         0         8         0         0         0
+    Bytes:   10.47 m         0   10.47 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:12:11
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:12:38
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.12.33_008.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:         9         1         8         0         0         0
+    Bytes:   10.99 m   527.4 k   10.47 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           270.079.000 Bytes/s.
+Velocidade:             15454,044 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:12:38
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:13:09
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.12.51_530.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.13.03_092.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        11         2         9         0         0         0
+    Bytes:   12.35 m    1.36 m   10.99 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           287.196.800 Bytes/s.
+Velocidade:             16433,533 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:13:09
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:13:50
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.13.03_092.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.13.44_006.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        12         2        10         0         0         0
+    Bytes:   15.99 m    3.63 m   12.35 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           254.318.400 Bytes/s.
+Velocidade:             14552,216 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:13:50
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:14:15
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.13.44_006.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.14.09_936.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        13         2        11         0         0         0
+    Bytes:   18.14 m    2.14 m   15.99 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           281.175.000 Bytes/s.
+Velocidade:             16088,963 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:14:15
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:14:50
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.14.09_936.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.14.44_997.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        14         2        12         0         0         0
+    Bytes:   22.23 m    4.08 m   18.14 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           476.359.111 Bytes/s.
+Velocidade:             27257,486 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:14:50
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:15:20
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.14.51_329.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.15.04_683.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        16         2        14         0         0         0
+    Bytes:   24.53 m    2.30 m   22.23 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           402.163.333 Bytes/s.
+Velocidade:             23011,971 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:15:20
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:15:58
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.15.34_375.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        17         1        16         0         0         0
+    Bytes:   26.62 m    2.08 m   24.53 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           547.790.500 Bytes/s.
+Velocidade:             31344,824 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:15:58
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:17:05
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.16.09_707.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.16.58_930.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        19         2        17         0         0         0
+    Bytes:   27.26 m   656.9 k   26.62 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           96.108.285 Bytes/s.
+Velocidade:             5499,360 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:17:05
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:17:35
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.16.58_930.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.17.30_029.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        20         2        18         0         0         0
+    Bytes:   29.36 m    2.10 m   27.26 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           245.091.333 Bytes/s.
+Velocidade:             14024,238 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:17:36
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:18:03
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.17.30_029.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        20         1        19         0         0         0
+    Bytes:   32.27 m    2.91 m   29.36 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           508.602.333 Bytes/s.
+Velocidade:             29102,459 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:18:03
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:18:31
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.18.25_881.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        21         1        20         0         0         0
+    Bytes:   32.27 m         0   32.27 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:18:31
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:19:01
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.18.25_881.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.18.45_904.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        22         2        20         0         0         0
+    Bytes:   35.46 m    3.18 m   32.27 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           557.418.333 Bytes/s.
+Velocidade:             31895,732 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:19:01
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:19:23
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.19.11_612.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        23         1        22         0         0         0
+    Bytes:   36.36 m   914.3 k   35.46 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           468.140.000 Bytes/s.
+Velocidade:             26787,186 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:19:23
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:19:55
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.19.32_676.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.19.46_299.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        25         2        23         0         0         0
+    Bytes:   37.57 m    1.21 m   36.36 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           637.048.000 Bytes/s.
+Velocidade:             36452,180 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:19:55
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:20:20
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.20.14_144.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        26         1        25         0         0         0
+    Bytes:   37.57 m         0   37.57 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:20:20
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:21:18
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.20.14_144.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        26         1        25         0         0         0
+    Bytes:   43.65 m    6.07 m   37.57 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           637.241.600 Bytes/s.
+Velocidade:             36463,258 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:21:18
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:24:53
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.24.40_830.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.24.47_303.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        28         2        26         0         0         0
+    Bytes:   44.44 m   814.7 k   43.65 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           208.578.500 Bytes/s.
+Velocidade:             11934,957 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:24:53
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:25:29
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.24.47_303.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.25.04_446.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.25.08_284.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.25.23_950.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        31         4        27         0         0         0
+    Bytes:   48.03 m    3.58 m   44.44 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           289.539.076 Bytes/s.
+Velocidade:             16567,559 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:25:29
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:26:13
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.25.23_950.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.26.07_748.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        32         2        30         0         0         0
+    Bytes:   52.52 m    4.48 m   48.03 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           470.794.600 Bytes/s.
+Velocidade:             26939,084 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:26:13
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:27:14
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.26.07_748.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.27.07_870.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        33         2        31         0         0         0
+    Bytes:   58.51 m    5.99 m   52.52 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           418.754.000 Bytes/s.
+Velocidade:             23961,297 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:27:14
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:27:53
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.27.07_870.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.27.16_935.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.27.47_198.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        35         3        32         0         0         0
+    Bytes:   62.32 m    3.80 m   58.51 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           306.688.923 Bytes/s.
+Velocidade:             17548,881 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:27:53
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:28:22
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.27.47_198.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        35         1        34         0         0         0
+    Bytes:   65.29 m    2.97 m   62.32 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           519.928.333 Bytes/s.
+Velocidade:             29750,537 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:28:22
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: sexta-feira, 6 de mar‡o de 2026 13:28:50
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.28.33_796.avi
+	  			C:\Users\helde\Repos\Bois\2026-03-06\motion_2026-03-06_13.28.44_866.avi
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         2         0         2         0         0         6
+ Arquivos:        37         2        35         0         0         0
+    Bytes:   66.33 m    1.04 m   65.29 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           218.445.200 Bytes/s.
+Velocidade:             12499,534 MegaBytes/min.
+   Finalizado em: sexta-feira, 6 de mar‡o de 2026 13:28:50
+
