@@ -1,0 +1,71 @@
+# =============================================================================
+# .claudeignore — C:\Sync FolderSync + Camera Ecosystem
+# Keeps Claude focused on Config\ scripts. Excludes logs, mirror, credentials,
+# video recordings, and Yawcam Java binaries.
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Local mirror — large binary/media files, date-organized, gitignored already
+# ---------------------------------------------------------------------------
+Mirror/
+
+# ---------------------------------------------------------------------------
+# Log files — large, noisy, daily-rotating, not relevant for script editing
+# ---------------------------------------------------------------------------
+Logs/
+
+# ---------------------------------------------------------------------------
+# Credential and sensitive config files
+# ---------------------------------------------------------------------------
+# Plaintext Backblaze B2 credentials — never expose to context window
+Config/rclone.conf
+
+# DPAPI-encrypted binary blob — binary, meaningless without decryption
+Config/credentials.enc
+
+# ---------------------------------------------------------------------------
+# FreeFileSync binary config — not human-editable plain text
+# ---------------------------------------------------------------------------
+Config/realtime.ffs_real
+
+# ---------------------------------------------------------------------------
+# Source folder mapping (external path, outside repo)
+# ---------------------------------------------------------------------------
+Source/
+
+# ---------------------------------------------------------------------------
+# Git internals
+# ---------------------------------------------------------------------------
+.git/
+
+# ---------------------------------------------------------------------------
+# Camera video recordings — large AVI files (motion clips)
+# The Bois source dir and Mirror contain thousands of these
+# ---------------------------------------------------------------------------
+*.avi
+*.mp4
+*.mkv
+
+# ---------------------------------------------------------------------------
+# Config/motion/ — human-readable setup docs, KEPT VISIBLE
+# (these are the camera architecture reference, not ignored)
+# ---------------------------------------------------------------------------
+# Config/motion/ is intentionally NOT ignored
+
+# ---------------------------------------------------------------------------
+# Runtime forensic artifacts and registry dumps at repo root level
+# ---------------------------------------------------------------------------
+*.txt
+*.reg
+
+# =============================================================================
+# KEPT VISIBLE (not ignored):
+#   Config/*.ps1            — the actual codebase (sync + camera)
+#   Config/*.bat            — generated bat wrappers
+#   Config/motion/*.md      — camera setup documentation
+#   Config/motion/*.txt     — camera quick-start guides
+#   .claude/commands/*.md   — per-project slash commands
+#   .claude/settings.json   — project MCP and permission config
+#   .gitignore
+#   CLAUDE.md
+# =============================================================================

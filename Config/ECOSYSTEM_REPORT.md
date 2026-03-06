@@ -118,7 +118,9 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
-| `check_status.ps1` | User on demand | Full health check |
+| `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
+| `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup |
+| `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
 | `setup_all.ps1` | Fresh install / new device | Centralized setup: all security hardening + task registration |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `ECOSYSTEM_REPORT.md` | — | This document |
@@ -139,6 +141,30 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 |---|---|
 | `DailySecurityCheck.ps1` | Daily security scan — processes, ports, remote tools, unknown devices |
 | `AutoCleanup.ps1` | Automated cleanup triggered by DailySecurityCheck |
+
+### Camera scripts (in `C:\Program Files (x86)\Yawcam\`)
+
+These scripts are NOT inside `C:\Sync\Config\` but are part of the ecosystem. Restore from this section if lost.
+
+| File | Used by | Purpose |
+|---|---|---|
+| `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: checks for recent .avi recordings, restarts Yawcam + resets webcam PnP device if frozen. 60s interval, 600s restart cooldown. |
+| `start_monitor.ps1` | Registry Run `YawcamMonitor` | Boot launcher: waits 30s for system to stabilize, then starts `yawcam_monitor_v4.ps1` hidden |
+
+### Claude Code tooling (in `C:\Sync\.claude\`)
+
+These files configure the Claude Code AI assistant for this project. Restore from this section if the `.claude/` directory is lost.
+
+| File | Purpose |
+|---|---|
+| `.claude/settings.json` | Per-project permissions (allow/deny), env vars for key paths, MCP server config |
+| `.claude/commands/commit.md` | `/project:commit` slash command — minimal-token git commit workflow |
+| `.claude/commands/check.md` | `/project:check` slash command — FolderSync health check + auto-diagnosis |
+| `.claude/commands/camera-check.md` | `/project:camera-check` slash command — camera health check + auto-diagnosis |
+| `.claude/commands/camera-ecosystem.md` | `camera-ecosystem` skill — comprehensive camera/motion detection environment reference |
+| `.claude/commands/review.md` | `review` skill — self-healing post-task verification (RULE 3): 4-cycle fix loop, escalates to `known_issues.md` on failure |
+| `.claude/commands/health.md` | `health` skill — full ecosystem health check; routes failures to `/project:check` or `/project:camera-check` |
+| `check_health.bat` | Double-click launcher at `C:\Sync\check_health.bat` — runs `health_check_all.ps1` in a paused window |
 
 ---
 
@@ -1463,6 +1489,280 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
 Start-Process "C:\Program Files\FreeFileSync\RealTimeSync.exe" `
     -ArgumentList '"C:\Sync\Config\realtime.ffs_real"' -WindowStyle Hidden
 powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
+```
+
+---
+
+### `C:\Sync\Config\check_camera.ps1`
+> Camera and motion detection health check. Run interactively to verify Yawcam is running, webcam device is OK, and recordings are being produced. No admin required for most checks.
+
+```powershell
+# check_camera.ps1
+# Camera / Motion Detection Health Check
+# Modeled after check_status.ps1 — run interactively to diagnose camera state
+# No admin required for most checks; PnP device queries may return partial data without elevation
+
+$TodayDir  = "C:\Users\helde\Repos\Bois\$(Get-Date -Format 'yyyy-MM-dd')"
+$TempPath  = "C:\TEMP\motion_videos"
+$YawcamExe = "C:\Program Files (x86)\Yawcam\Yawcam.exe"
+$MonitorV4 = "C:\Program Files (x86)\Yawcam\yawcam_monitor_v4.ps1"
+
+Write-Host "=== YAWCAM PROCESS ===" -ForegroundColor Cyan
+$yawcamProc = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
+$javawProc  = Get-Process -Name "javaw"  -ErrorAction SilentlyContinue |
+              Where-Object { $_.MainWindowTitle -like "*Yawcam*" }
+if ($yawcamProc) {
+    $yawcamProc | Select-Object Name, Id, CPU, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
+} elseif ($javawProc) {
+    Write-Host "  (running as javaw)" -ForegroundColor Yellow
+    $javawProc | Select-Object Name, Id, CPU, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
+} else { Write-Host "  NOT RUNNING" -ForegroundColor Red }
+
+Write-Host "`n=== YAWCAM MONITOR PROCESS ===" -ForegroundColor Cyan
+$monitorProc = Get-Process -Name "powershell" -ErrorAction SilentlyContinue |
+               Where-Object { $_.CommandLine -like "*yawcam_monitor*" }
+if ($monitorProc) {
+    $monitorProc | Select-Object Name, Id, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
+} else {
+    $wmiProc = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue |
+               Where-Object { $_.CommandLine -like "*yawcam_monitor*" }
+    if ($wmiProc) { $wmiProc | Select-Object Name, ProcessId }
+    else { Write-Host "  NOT RUNNING" -ForegroundColor Red }
+}
+
+Write-Host "`n=== WEBCAM DEVICE (PnP) ===" -ForegroundColor Cyan
+Get-PnpDevice -ErrorAction SilentlyContinue |
+    Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or
+                   $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" } |
+    Select-Object FriendlyName, Status, Class, InstanceId
+
+Write-Host "`n=== REGISTRY STARTUP ENTRIES ===" -ForegroundColor Cyan
+$runKey = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -ErrorAction SilentlyContinue
+Write-Host "  Yawcam:             $($runKey.Yawcam)"
+Write-Host "  YawcamMonitor:      $($runKey.YawcamMonitor)"
+Write-Host "  FolderSyncRealTime: $($runKey.FolderSyncRealTime)"
+
+Write-Host "`n=== YAWCAM INSTALLATION ===" -ForegroundColor Cyan
+Write-Host "  Yawcam.exe     : $(if (Test-Path $YawcamExe) { 'FOUND - ' + (Get-Item $YawcamExe).LastWriteTime } else { 'NOT FOUND' })"
+Write-Host "  monitor_v4.ps1 : $(if (Test-Path $MonitorV4) { 'FOUND - ' + (Get-Item $MonitorV4).LastWriteTime } else { 'NOT FOUND' })"
+
+Write-Host "`n=== TODAY'S RECORDINGS ($TodayDir) ===" -ForegroundColor Cyan
+if (Test-Path $TodayDir) {
+    $files = Get-ChildItem $TodayDir -Filter "*.avi" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime
+    if ($files) {
+        $totalMB = [math]::Round(($files | Measure-Object -Property Length -Sum).Sum / 1MB, 1)
+        $latest  = $files | Select-Object -Last 1
+        $ageMin  = [math]::Round(((Get-Date) - $latest.LastWriteTime).TotalMinutes, 1)
+        Write-Host "  Count: $($files.Count) files   Size: $totalMB MB   Latest: $($latest.Name) ($ageMin min ago)"
+        if ($ageMin -le 5)  { Write-Host "  [ACTIVE]" -ForegroundColor Green }
+        elseif ($ageMin -le 15) { Write-Host "  [OK - normal gap]" -ForegroundColor Cyan }
+        else { Write-Host "  [GAP - no motion or camera frozen?]" -ForegroundColor Yellow }
+    } else { Write-Host "  No .avi files yet today" -ForegroundColor Yellow }
+} else { Write-Host "  Directory not yet created for today" -ForegroundColor Yellow }
+
+Write-Host "`n=== MONITOR RECORDING PATH ($TempPath) ===" -ForegroundColor Cyan
+if (Test-Path $TempPath) {
+    $tmpFiles = Get-ChildItem $TempPath -Recurse -Filter "*.avi" -ErrorAction SilentlyContinue |
+                Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if ($tmpFiles) { Write-Host "  Latest: $($tmpFiles.Name) ($([math]::Round(((Get-Date)-$tmpFiles.LastWriteTime).TotalMinutes,1)) min ago)" }
+    else { Write-Host "  Path exists but no .avi files" -ForegroundColor Yellow }
+} else {
+    Write-Host "  Path does not exist — monitor checks legacy path; actual recordings in Bois dir" -ForegroundColor Red
+}
+
+Write-Host "`n=== RECENT RECORDINGS (last 5 across cameras) ===" -ForegroundColor Cyan
+Get-ChildItem "C:\Users\helde\Repos\Bois" -Directory -ErrorAction SilentlyContinue |
+    Sort-Object Name -Descending | Select-Object -First 3 | ForEach-Object {
+        Get-ChildItem $_.FullName -Filter "*.avi" -ErrorAction SilentlyContinue |
+            Sort-Object LastWriteTime -Descending | Select-Object -First 2 | ForEach-Object {
+                $age = [math]::Round(((Get-Date)-$_.LastWriteTime).TotalMinutes,0)
+                Write-Host ("  [{0}]  {1}  ({2} min ago,  {3:N0} KB)" -f (Split-Path $_.DirectoryName -Leaf), $_.Name, $age, ($_.Length/1KB))
+            }
+    }
+
+Write-Host "`n=== CAMERA INPUT SUMMARY ===" -ForegroundColor Cyan
+Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2  [ACTIVE]"
+Write-Host "  [CAM-2]  TP-LINK C100  (LAN)                      ->  pending Yawcam 2nd input  [NOT YET CONFIGURED]"
+```
+
+---
+
+### `C:\Program Files (x86)\Yawcam\yawcam_monitor_v4.ps1`
+> Infinite-loop Yawcam recovery monitor. Checks for recent .avi files in `C:\TEMP\motion_videos` every 60s. If no recording for >15 min, kills Yawcam, resets webcam PnP device, and restarts. 600s cooldown between restarts. **Note:** monitoring path is `C:\TEMP\motion_videos` (legacy) but actual recordings go to `C:\Users\helde\Repos\Bois\YYYY-MM-DD\` — create a symlink to fix.
+
+```powershell
+# yawcam_monitor_v4.ps1
+$YawcamPath = "C:\Program Files (x86)\Yawcam\yawcam.exe"
+$VideoPath = "C:\TEMP\motion_videos"
+$CheckInterval = 60
+$MaxMinutesWithoutVideo = 15
+$LastRestartTime = $null
+$RestartCooldown = 600
+
+function Test-YawcamRunning {
+    $yawcam = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
+    if ($yawcam) { return $true }
+    $javaw = Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
+             Where-Object {$_.MainWindowTitle -like "*Yawcam*"}
+    if ($javaw) { return $true }
+    return $false
+}
+
+function Restart-YawcamSafely {
+    Get-Process -Name "yawcam" -ErrorAction SilentlyContinue | Stop-Process -Force
+    Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
+        Where-Object {$_.MainWindowTitle -like "*Yawcam*"} | Stop-Process -Force
+    Start-Sleep -Seconds 5
+    Get-PnpDevice | Where-Object {$_.FriendlyName -like "*HD User*"} | ForEach-Object {
+        Disable-PnpDevice -InstanceId $_.InstanceId -Confirm:$false -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 2
+        Enable-PnpDevice -InstanceId $_.InstanceId -Confirm:$false -ErrorAction SilentlyContinue
+    }
+    Start-Sleep -Seconds 8
+    Start-Process -FilePath $YawcamPath
+    $script:LastRestartTime = Get-Date
+}
+
+while ($true) {
+    $LatestVideo = Get-ChildItem -Path $VideoPath -Recurse -Filter "*.avi" -ErrorAction SilentlyContinue |
+                   Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if ($LatestVideo) {
+        $MinutesAgo = [math]::Round(((Get-Date) - $LatestVideo.LastWriteTime).TotalMinutes, 1)
+        if ($MinutesAgo -gt $MaxMinutesWithoutVideo) {
+            if ($LastRestartTime -eq $null -or ((Get-Date) - $LastRestartTime).TotalSeconds -gt $RestartCooldown) {
+                Restart-YawcamSafely
+            }
+        }
+    } else {
+        if (-not (Test-YawcamRunning)) {
+            if ($LastRestartTime -eq $null -or ((Get-Date) - $LastRestartTime).TotalSeconds -gt $RestartCooldown) {
+                Restart-YawcamSafely
+            }
+        }
+    }
+    Start-Sleep -Seconds $CheckInterval
+}
+```
+
+---
+
+### `C:\Program Files (x86)\Yawcam\start_monitor.ps1`
+> Boot launcher for yawcam_monitor_v4.ps1. Waits 30s after login for system to stabilize, then starts the monitor hidden. Registered in `HKCU:\...\Run\YawcamMonitor`.
+
+```powershell
+# start_monitor.ps1 — waits 30s after boot, then starts monitor hidden
+Start-Sleep -Seconds 30
+Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -WindowStyle Hidden -File `"C:\Program Files (x86)\Yawcam\yawcam_monitor_v4.ps1`"" -WindowStyle Hidden
+```
+
+---
+
+### `C:\Sync\Config\health_check_all.ps1`
+> Combined FolderSync + Camera health check. Evaluates 8 FolderSync checks and 5 Camera checks against the healthy baseline independently, prints a structured OVERALL summary, writes to `C:\Sync\Logs\health_check_YYYY-MM-DD.log`. Exit 0 = all pass, Exit 1 = any fail. Called by `check_health.bat` and `/project:health`.
+
+```powershell
+#Requires -Version 5.1
+$ErrorActionPreference = "SilentlyContinue"
+$LogFile     = "C:\Sync\Logs\health_check_$(Get-Date -Format yyyy-MM-dd).log"
+$CheckStatus = "C:\Sync\Config\check_status.ps1"
+$CheckCamera = "C:\Sync\Config\check_camera.ps1"
+
+function Write-Log($msg) { $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
+function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+function Write-Fail($msg) { Write-Host "  FAIL $msg" -ForegroundColor Red }
+
+function Invoke-ScriptCapture($ScriptPath) {
+    if (-not (Test-Path -LiteralPath $ScriptPath)) { return "[ERROR] Script not found: $ScriptPath" }
+    & powershell.exe -ExecutionPolicy Bypass -NonInteractive -File $ScriptPath 2>&1 | Out-String
+}
+
+Write-Step "Running FolderSync health sub-check..."
+Write-Log "--- BEGIN health_check_all.ps1 ---"
+$statusOut = Invoke-ScriptCapture $CheckStatus
+Write-Step "Running Camera health sub-check..."
+$cameraOut = Invoke-ScriptCapture $CheckCamera
+
+$fsIssues = @()
+$task = Get-ScheduledTask -TaskName FolderSync-CloudBackup -ErrorAction SilentlyContinue
+if (-not $task) { $fsIssues += "FolderSync-CloudBackup task: NOT FOUND" }
+elseif ($task.State -notin @("Ready","Running")) { $fsIssues += "FolderSync-CloudBackup task: State = $($task.State)" }
+
+$wdTask = Get-ScheduledTask -TaskName FolderSync-Watchdog -ErrorAction SilentlyContinue
+if (-not $wdTask) { $fsIssues += "FolderSync-Watchdog task: NOT FOUND" }
+elseif ($wdTask.State -notin @("Ready","Running")) { $fsIssues += "FolderSync-Watchdog task: State = $($wdTask.State)" }
+
+$wdSvc = Get-Service -Name FolderSyncWatchdog -ErrorAction SilentlyContinue
+if (-not $wdSvc) { $fsIssues += "FolderSyncWatchdog service: NOT FOUND" }
+else {
+    if ($wdSvc.Status -ne "Running")      { $fsIssues += "FolderSyncWatchdog service: Status = $($wdSvc.Status)" }
+    if ($wdSvc.StartType -ne "Automatic") { $fsIssues += "FolderSyncWatchdog service: StartType = $($wdSvc.StartType)" }
+}
+$audSvc = Get-Service -Name FolderSyncAuditor -ErrorAction SilentlyContinue
+if (-not $audSvc) { $fsIssues += "FolderSyncAuditor service: NOT FOUND" }
+else {
+    if ($audSvc.Status -ne "Running")      { $fsIssues += "FolderSyncAuditor service: Status = $($audSvc.Status)" }
+    if ($audSvc.StartType -ne "Automatic") { $fsIssues += "FolderSyncAuditor service: StartType = $($audSvc.StartType)" }
+}
+$rtReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name FolderSyncRealTime -ErrorAction SilentlyContinue
+if (-not $rtReg -or [string]::IsNullOrWhiteSpace($rtReg.FolderSyncRealTime)) { $fsIssues += "Registry FolderSyncRealTime: NOT FOUND or empty" }
+if (-not (Get-Process -Name RealTimeSync -ErrorAction SilentlyContinue)) { $fsIssues += "RealTimeSync process: NOT RUNNING" }
+$rclonePath = "C:\Tools\Rclone\rclone.exe"
+if (-not (Test-Path -LiteralPath $rclonePath)) { $fsIssues += "Rclone binary: NOT FOUND" }
+else { $rv = & $rclonePath version 2>&1 | Select-Object -First 1; if ($rv -notmatch "rclone") { $fsIssues += "Rclone: bad version response" } }
+$todayLog = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format yyyy-MM-dd).log"
+if (-not (Test-Path -LiteralPath $todayLog)) { $fsIssues += "Cloud sync log today: NOT FOUND" }
+
+$camIssues = @()
+$yawProc = Get-Process -Name yawcam -ErrorAction SilentlyContinue
+$javawProc = Get-Process -Name javaw -ErrorAction SilentlyContinue
+if (-not $yawProc -and -not $javawProc) { $camIssues += "Yawcam process (yawcam or javaw): NOT RUNNING" }
+$monProc = Get-WmiObject Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -match "yawcam_monitor" }
+if (-not $monProc) { $camIssues += "Yawcam monitor process: NOT RUNNING" }
+$webcam = Get-PnpDevice -ErrorAction SilentlyContinue | Where-Object { $_.FriendlyName -match "camera|webcam|HD User Facing" -and $_.Class -eq "Camera" } | Select-Object -First 1
+if (-not $webcam) { $camIssues += "Webcam PnP device: NOT FOUND" }
+elseif ($webcam.Status -ne "OK") { $camIssues += "Webcam PnP device: Status = $($webcam.Status)" }
+$yawReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name Yawcam -ErrorAction SilentlyContinue
+if (-not $yawReg -or [string]::IsNullOrWhiteSpace($yawReg.Yawcam)) { $camIssues += "Registry Yawcam: NOT FOUND or empty" }
+$monReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name YawcamMonitor -ErrorAction SilentlyContinue
+if (-not $monReg -or [string]::IsNullOrWhiteSpace($monReg.YawcamMonitor)) { $camIssues += "Registry YawcamMonitor: NOT FOUND or empty" }
+
+$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$fsPass = $fsIssues.Count -eq 0; $camPass = $camIssues.Count -eq 0; $overallPass = $fsPass -and $camPass
+$fsLabel    = if ($fsPass)      { "PASS" } else { "FAIL -- $($fsIssues.Count) issue(s)" }
+$camLabel   = if ($camPass)     { "PASS" } else { "FAIL -- $($camIssues.Count) issue(s)" }
+$overallLbl = if ($overallPass) { "ALL SYSTEMS OPERATIONAL" } else { "$($fsIssues.Count + $camIssues.Count) ISSUE(S) FOUND" }
+$summaryLines = @(
+    "============================================================",
+    "  ECOSYSTEM HEALTH SUMMARY -- $timestamp",
+    "============================================================",
+    "  FOLDERSYNC  : $fsLabel",
+    "  CAMERA      : $camLabel",
+    "------------------------------------------------------------",
+    "  OVERALL     : $overallLbl",
+    "============================================================"
+)
+Write-Host ""; foreach ($line in $summaryLines) { Write-Host $line }
+if (-not $fsPass)  { Write-Host "`n  FolderSync issues:" -ForegroundColor Red; foreach ($i in $fsIssues)  { Write-Fail "    $i" } }
+if (-not $camPass) { Write-Host "`n  Camera issues:" -ForegroundColor Red;     foreach ($i in $camIssues) { Write-Fail "    $i" } }
+Write-Host ""
+foreach ($line in $summaryLines) { Write-Log $line }
+if (-not $fsPass)  { foreach ($i in $fsIssues)  { Write-Log "  FOLDERSYNC ISSUE: $i" } }
+if (-not $camPass) { foreach ($i in $camIssues) { Write-Log "  CAMERA ISSUE: $i" } }
+Write-Log "--- END health_check_all.ps1 ---"
+if ($overallPass) { exit 0 } else { exit 1 }
+```
+
+---
+
+### `C:\Sync\check_health.bat`
+> Double-click launcher for Windows Explorer. Opens a PowerShell window, runs the full health check, pauses so results stay visible.
+
+```batch
+@echo off
+title FolderSync + Camera Health Check
+powershell.exe -ExecutionPolicy Bypass -NonInteractive -File "C:\Sync\Config\health_check_all.ps1"
+echo.
+pause
 ```
 
 ---

@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\check_status.ps1\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\check_camera.ps1\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-ScheduledTask*\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-Service*\")"
+    ],
+    "deny": [
+      "Bash(* rclone.conf *)",
+      "Bash(* credentials.enc *)"
+    ]
+  },
+  "env": {
+    "RCLONE_EXE": "C:\\Tools\\Rclone\\rclone.exe",
+    "NSSM_EXE": "C:\\Tools\\NSSM\\nssm.exe",
+    "YAWCAM_EXE": "C:\\Program Files (x86)\\Yawcam\\Yawcam.exe",
+    "YAWCAM_MONITOR": "C:\\Program Files (x86)\\Yawcam\\yawcam_monitor_v4.ps1",
+    "SYNC_SOURCE": "C:\\Users\\helde\\Repos\\Bois",
+    "SYNC_CONFIG": "C:\\Sync\\Config",
+    "SYNC_LOGS": "C:\\Sync\\Logs",
+    "SYNC_MIRROR": "C:\\Sync\\Mirror"
+  },
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Sync",
+        "C:\\Sync\\Config",
+        "C:\\Program Files (x86)\\Yawcam"
+      ],
+      "disabled": true,
+      "_note": "Enable after: npm install -g @modelcontextprotocol/server-filesystem"
+    },
+    "win-cli": {
+      "command": "npx",
+      "args": ["-y", "win-cli-mcp-server"],
+      "env": {
+        "ALLOWED_COMMANDS": "powershell,Get-ScheduledTask,Get-Service,Get-Process,Get-PnpDevice",
+        "SHELL": "powershell"
+      },
+      "disabled": true,
+      "_note": "Enable after: npm install -g win-cli-mcp-server — adds native PowerShell tool (Get-PSVersion, OS info, etc.)"
+    }
+  }
+}

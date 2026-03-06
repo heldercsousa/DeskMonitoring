@@ -1,0 +1,121 @@
+# check_camera.ps1
+# Camera / Motion Detection Health Check
+# Modeled after check_status.ps1 — run interactively to diagnose camera state
+# No admin required for most checks; PnP device queries may return partial data without elevation
+
+$TodayDir  = "C:\Users\helde\Repos\Bois\$(Get-Date -Format 'yyyy-MM-dd')"
+$TempPath  = "C:\TEMP\motion_videos"
+$YawcamExe = "C:\Program Files (x86)\Yawcam\Yawcam.exe"
+$MonitorV4 = "C:\Program Files (x86)\Yawcam\yawcam_monitor_v4.ps1"
+
+# =============================================================================
+Write-Host "=== YAWCAM PROCESS ===" -ForegroundColor Cyan
+$yawcamProc = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
+$javawProc  = Get-Process -Name "javaw"  -ErrorAction SilentlyContinue |
+              Where-Object { $_.MainWindowTitle -like "*Yawcam*" }
+
+if ($yawcamProc) {
+    $yawcamProc | Select-Object Name, Id, CPU, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
+} elseif ($javawProc) {
+    Write-Host "  (running as javaw)" -ForegroundColor Yellow
+    $javawProc | Select-Object Name, Id, CPU, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
+} else {
+    Write-Host "  NOT RUNNING" -ForegroundColor Red
+}
+
+# =============================================================================
+Write-Host "`n=== YAWCAM MONITOR PROCESS ===" -ForegroundColor Cyan
+$monitorProc = Get-Process -Name "powershell" -ErrorAction SilentlyContinue |
+               Where-Object { $_.CommandLine -like "*yawcam_monitor*" }
+if ($monitorProc) {
+    $monitorProc | Select-Object Name, Id, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
+} else {
+    # Try WMI for command line
+    $wmiProc = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue |
+               Where-Object { $_.CommandLine -like "*yawcam_monitor*" }
+    if ($wmiProc) {
+        $wmiProc | Select-Object Name, ProcessId, @{N="CommandLine(truncated)";E={$_.CommandLine.Substring(0,[math]::Min(80,$_.CommandLine.Length))}}
+    } else {
+        Write-Host "  NOT RUNNING" -ForegroundColor Red
+    }
+}
+
+# =============================================================================
+Write-Host "`n=== WEBCAM DEVICE (PnP) ===" -ForegroundColor Cyan
+Get-PnpDevice -ErrorAction SilentlyContinue |
+    Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" } |
+    Select-Object FriendlyName, Status, Class, InstanceId
+
+# =============================================================================
+Write-Host "`n=== REGISTRY STARTUP ENTRIES ===" -ForegroundColor Cyan
+$runKey = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -ErrorAction SilentlyContinue
+Write-Host "  Yawcam:        $($runKey.Yawcam)"
+Write-Host "  YawcamMonitor: $($runKey.YawcamMonitor)"
+Write-Host "  (other Sync entries for reference)"
+Write-Host "  FolderSyncRealTime: $($runKey.FolderSyncRealTime)"
+
+# =============================================================================
+Write-Host "`n=== YAWCAM INSTALLATION ===" -ForegroundColor Cyan
+Write-Host "  Yawcam.exe     : $(if (Test-Path $YawcamExe) { 'FOUND - ' + (Get-Item $YawcamExe).LastWriteTime } else { 'NOT FOUND' })"
+Write-Host "  monitor_v4.ps1 : $(if (Test-Path $MonitorV4) { 'FOUND - ' + (Get-Item $MonitorV4).LastWriteTime } else { 'NOT FOUND' })"
+
+# =============================================================================
+Write-Host "`n=== TODAY'S RECORDINGS ($TodayDir) ===" -ForegroundColor Cyan
+if (Test-Path $TodayDir) {
+    $files = Get-ChildItem $TodayDir -Filter "*.avi" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime
+    if ($files) {
+        $totalMB  = [math]::Round(($files | Measure-Object -Property Length -Sum).Sum / 1MB, 1)
+        $latest   = $files | Select-Object -Last 1
+        $oldest   = $files | Select-Object -First 1
+        $ageMin   = [math]::Round(((Get-Date) - $latest.LastWriteTime).TotalMinutes, 1)
+        Write-Host "  Count      : $($files.Count) files"
+        Write-Host "  Total size : $totalMB MB"
+        Write-Host "  First      : $($oldest.Name)  ($($oldest.LastWriteTime))"
+        Write-Host "  Latest     : $($latest.Name)  ($($latest.LastWriteTime))"
+        if ($ageMin -le 5) {
+            Write-Host "  Age        : $ageMin min ago  [ACTIVE - recording recently]" -ForegroundColor Green
+        } elseif ($ageMin -le 15) {
+            Write-Host "  Age        : $ageMin min ago  [OK - within normal gap]" -ForegroundColor Cyan
+        } else {
+            Write-Host "  Age        : $ageMin min ago  [GAP - no motion or camera frozen?]" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  No .avi files yet today" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  Directory not yet created for today" -ForegroundColor Yellow
+}
+
+# =============================================================================
+Write-Host "`n=== MONITOR RECORDING PATH ($TempPath) ===" -ForegroundColor Cyan
+if (Test-Path $TempPath) {
+    $tmpFiles = Get-ChildItem $TempPath -Recurse -Filter "*.avi" -ErrorAction SilentlyContinue |
+                Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if ($tmpFiles) {
+        $tmpAge = [math]::Round(((Get-Date) - $tmpFiles.LastWriteTime).TotalMinutes, 1)
+        Write-Host "  Latest : $($tmpFiles.Name)  ($tmpAge min ago)"
+    } else {
+        Write-Host "  Path exists but no .avi files" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  Path does not exist (monitor may fail to find recordings)" -ForegroundColor Red
+    Write-Host "  NOTE: Actual recordings go to Bois dir (see above). Monitor path is legacy." -ForegroundColor Gray
+}
+
+# =============================================================================
+Write-Host "`n=== RECENT RECORDINGS (last 5 across all cameras) ===" -ForegroundColor Cyan
+$allDirs = Get-ChildItem "C:\Users\helde\Repos\Bois" -Directory -ErrorAction SilentlyContinue |
+           Sort-Object Name -Descending | Select-Object -First 3
+foreach ($dir in $allDirs) {
+    $dirFiles = Get-ChildItem $dir.FullName -Filter "*.avi" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 2
+    foreach ($f in $dirFiles) {
+        $age = [math]::Round(((Get-Date) - $f.LastWriteTime).TotalMinutes, 0)
+        Write-Host ("  [{0}]  {1}  ({2} min ago,  {3:N0} KB)" -f $dir.Name, $f.Name, $age, ($f.Length/1KB))
+    }
+}
+
+# =============================================================================
+Write-Host "`n=== CAMERA INPUT SUMMARY ===" -ForegroundColor Cyan
+Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2"
+Write-Host "  [CAM-2]  TP-LINK C100  (not yet configured)       ->  pending Yawcam 2nd input"
+Write-Host ""
