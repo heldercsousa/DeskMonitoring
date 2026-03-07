@@ -1,11 +1,10 @@
-#Requires -RunAsAdministrator
 # AutoCleanup.ps1
 # Limpa processos suspeitos e entradas de registro de localizacao.
 # Chamado automaticamente pelo DailySecurityCheck.ps1 ou manualmente.
 
 Add-Type -AssemblyName System.Windows.Forms
 
-$logPath   = "$env:USERPROFILE\Documents\SecurityCheck_Log.txt"
+$logPath   = "C:\Sync\Logs\security_check_$(Get-Date -Format 'yyyy-MM-dd').log"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 Write-Host ""
@@ -48,7 +47,7 @@ try {
             try {
                 Stop-Process -Id $proc.Id -Force -ErrorAction Stop
                 Write-Host "  OK Encerrado: $($proc.ProcessName) (PID $($proc.Id))" -ForegroundColor Green
-                Add-Content -Path $logPath -Value "$timestamp - CLEANUP: Killed $($proc.ProcessName) PID $($proc.Id)"
+                Add-Content -LiteralPath $logPath -Value "$timestamp  CLEANUP: Killed $($proc.ProcessName) PID $($proc.Id)"
                 $cleanedItems++
             } catch {
                 Write-Host "  ERRO ao encerrar $($proc.ProcessName): $_" -ForegroundColor Red
@@ -75,7 +74,7 @@ try {
             try {
                 Remove-Item -Path $entry.PSPath -Recurse -Force -ErrorAction Stop
                 Write-Host "  OK Removido: $($entry.PSChildName)" -ForegroundColor Green
-                Add-Content -Path $logPath -Value "$timestamp - CLEANUP: Removed registry $($entry.PSChildName)"
+                Add-Content -LiteralPath $logPath -Value "$timestamp  CLEANUP: Removed registry $($entry.PSChildName)"
                 $cleanedItems++
             } catch {
                 Write-Host "  ERRO ao remover $($entry.PSChildName): $_" -ForegroundColor Red
@@ -94,7 +93,7 @@ try {
             try {
                 Start-Service $svcName -ErrorAction Stop
                 Write-Host "  OK Reiniciado: $svcName" -ForegroundColor Green
-                Add-Content -Path $logPath -Value "$timestamp - CLEANUP: Restarted service $svcName"
+                Add-Content -LiteralPath $logPath -Value "$timestamp  CLEANUP: Restarted service $svcName"
                 $cleanedItems++
             } catch {
                 Write-Host "  ERRO ao reiniciar $svcName: $_" -ForegroundColor Red
@@ -114,16 +113,18 @@ try {
     }
     Write-Host "===========================================" -ForegroundColor Cyan
 
-    Add-Content -Path $logPath -Value "$timestamp - CLEANUP DONE: $cleanedItems items cleaned"
+    Add-Content -LiteralPath $logPath -Value "$timestamp  CLEANUP DONE: $cleanedItems items cleaned"
 
-    [System.Windows.Forms.MessageBox]::Show(
-        "Limpeza concluida!`n$cleanedItems item(s) tratado(s).`nBackup do registro salvo em:`n$backupPath",
-        "Limpeza de Seguranca",
-        [System.Windows.Forms.MessageBoxButtons]::OK,
-        [System.Windows.Forms.MessageBoxIcon]::Information
-    ) | Out-Null
+    if ([Environment]::UserInteractive) {
+        [System.Windows.Forms.MessageBox]::Show(
+            "Limpeza concluida!`n$cleanedItems item(s) tratado(s).`nBackup do registro salvo em:`n$backupPath",
+            "Limpeza de Seguranca",
+            [System.Windows.Forms.MessageBoxButtons]::OK,
+            [System.Windows.Forms.MessageBoxIcon]::Information
+        ) | Out-Null
+    }
 
 } catch {
     Write-Host "ERRO GERAL: $_" -ForegroundColor Red
-    Add-Content -Path $logPath -Value "$timestamp - CLEANUP ERROR: $_"
+    Add-Content -LiteralPath $logPath -Value "$timestamp  CLEANUP ERROR: $_"
 }

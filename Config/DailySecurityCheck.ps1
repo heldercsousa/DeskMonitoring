@@ -1,8 +1,8 @@
-# DailySecurityCheck.ps1 - v7
+# DailySecurityCheck.ps1 - v8
 # Sistema de Deteccao de Seguranca com deteccao de acesso remoto e anomalias de rede
-# Scheduled task: "Verificacao Automatica de Seguranca" (daily at 09:00)
+# Scheduled task: "FolderSync-DailyCheck" (daily at 09:00, runs as helde)
 
-$logPath   = "$env:USERPROFILE\Documents\SecurityCheck_Log.txt"
+$logPath   = "C:\Sync\Logs\security_check_$(Get-Date -Format 'yyyy-MM-dd').log"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # Known devices on your network (update if router assigns different IPs)
@@ -156,17 +156,24 @@ try {
     # -----------------------------------------------------------------------
     # Log result
     # -----------------------------------------------------------------------
-    $logLine = "$timestamp - Issues: $issues"
+    $logLine = "$timestamp  Issues: $issues"
     if ($processDetails.Count  -gt 0) { $logLine += " | Processos: $($processDetails.Name -join ',')" }
+    if ($registryProblems.Count -gt 0) { $logLine += " | Registro: $($registryProblems.PSChildName -join ',')" }
     if ($foundRemote.Count     -gt 0) { $logLine += " | RemoteTools: $($foundRemote -join ',')" }
     if ($foundPorts.Count      -gt 0) { $logLine += " | Portas: $($foundPorts -join ',')" }
     if ($foundUnknown.Count    -gt 0) { $logLine += " | DispositivosNovos: $($foundUnknown -join ',')" }
     if ($stoppedSvcs.Count     -gt 0) { $logLine += " | ServicosParados: $($stoppedSvcs -join ',')" }
-    Add-Content -Path $logPath -Value $logLine
+    Add-Content -LiteralPath $logPath -Value $logLine
 
     # -----------------------------------------------------------------------
-    # Show result
+    # Show result (only when running interactively — skip if headless/service)
     # -----------------------------------------------------------------------
+    if (-not [Environment]::UserInteractive) {
+        # Running non-interactively (scheduled task with -NonInteractive flag)
+        # Dialog cannot be shown. Alert is already in the log above.
+        return
+    }
+
     Add-Type -AssemblyName System.Windows.Forms
 
     if ($issues -eq 0) {
@@ -190,7 +197,11 @@ try {
             }
         }
         if ($registryProblems.Count -gt 0) {
-            $msg += "REGISTRO: $($registryProblems.Count) entrada(s) suspeita(s) de localizacao`n`n"
+            $msg += "REGISTRO: $($registryProblems.Count) entrada(s) suspeita(s) de localizacao`n"
+            foreach ($r in $registryProblems) {
+                $msg += "  - $($r.PSChildName)`n"
+            }
+            $msg += "`n"
         }
         if ($foundRemote.Count -gt 0) {
             $msg += "FERRAMENTAS ACESSO REMOTO ATIVAS:`n"
@@ -223,7 +234,7 @@ try {
             [System.Windows.Forms.MessageBoxIcon]::Warning
         )
         if ($result -eq [System.Windows.Forms.DialogResult]::Yes) {
-            $cleanupScript = "$env:USERPROFILE\Documents\SecurityScripts\AutoCleanup.ps1"
+            $cleanupScript = "C:\Sync\Config\AutoCleanup.ps1"
             if (Test-Path $cleanupScript) {
                 Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -File `"$cleanupScript`"" -Verb RunAs
             }
@@ -231,5 +242,5 @@ try {
     }
 
 } catch {
-    Add-Content -Path $logPath -Value "$timestamp - ERRO: $_"
+    Add-Content -LiteralPath $logPath -Value "$timestamp  ERRO: $_"
 }
