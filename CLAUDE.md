@@ -1,14 +1,21 @@
-<!-- TASK GATE — READ THIS FIRST, EVERY SESSION -->
-## NON-NEGOTIABLE TASK RULES (summary — full rules below)
+<!-- TASK GATE — READ THIS FIRST, EVERY SESSION — APPLIES TO ALL MACHINES -->
+## NON-NEGOTIABLE TASK RULES
 
-| When | What |
-|---|---|
-| Before any multi-file task | `EnterPlanMode` — plan must list RULE 1 steps |
-| After changing any `.ps1` in `Config/` | Update `ECOSYSTEM_REPORT.md` S5 + S15 |
-| After any architectural/path/task change | Update `CLAUDE.md` relevant section |
-| After any fix that must survive reinstall | Update `setup_all.ps1` |
-| Before claiming done | Invoke `superpowers:verification-before-completion` |
-| Every commit | Use `/commit` skill — never raw git |
+### Pre-task gate
+For any task modifying `C:\Sync\Config\`, `ECOSYSTEM_REPORT.md`, `CLAUDE.md`, or `setup_all.ps1`:
+→ Invoke `EnterPlanMode` FIRST. Plan must explicitly list all RULE 1 follow-up steps.
+
+### Post-task gate — run ALL before claiming done or committing
+1. **RULE 1a** — Updated `ECOSYSTEM_REPORT.md` Section 5 (inventory row) for every changed `.ps1`?
+2. **RULE 1b** — Updated `ECOSYSTEM_REPORT.md` Section 15 (full file contents) for every changed `.ps1`?
+3. **RULE 1c** — Updated `CLAUDE.md` if architecture/paths/task names/log paths changed?
+4. **RULE 1d** — Updated `setup_all.ps1` so fix survives full reinstall?
+5. **RULE 3**  — Invoked `superpowers:verification-before-completion` skill before claiming done?
+6. **RULE 4**  — Invoked `/commit` skill (NEVER raw git commands)?
+
+### Hard stop
+If you are about to write "Done.", "Complete.", "All good." or similar — **STOP**.
+Run steps 1–6 above first. Only then proceed.
 
 See RULE 1, RULE 3, RULE 4 below for full detail.
 <!-- END TASK GATE -->
