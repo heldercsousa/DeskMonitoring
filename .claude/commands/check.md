@@ -22,6 +22,8 @@ Parse the output and verify EVERY item below. Mark each as PASS or FAIL:
 | RealTimeSync process | Listed with a PID (not absent) |
 | Rclone version | Returns a version string (not an error) |
 | Cloud sync log today | Exists and has content (not "(no log yet…)") |
+| Cloud sync errors today | No `SYNC-FAIL` or `FIREWALL-DETECT` lines in today's log |
+| Firewall B2 block rules | Section shows "No malicious B2 block rules found" (green OK) |
 | Watchdog log | Has recent entries |
 
 ## Step 3 — Decision
@@ -45,6 +47,10 @@ Each failing check maps to a specific step in setup_all.ps1:
 | RealTimeSync process not running | Step 14 — Start RealTimeSync | `Start-Process "C:\Program Files\FreeFileSync\RealTimeSync.exe" -ArgumentList "C:\Sync\Config\realtime.ffs_real"` |
 | Rclone not found / version error | External tool missing | Report: `C:\Tools\Rclone\rclone.exe` is missing — manual reinstall required |
 | Cloud sync log missing today | Task not running | Check task last run time: `(Get-ScheduledTask 'FolderSync-CloudBackup').LastRunTime` |
+| `SYNC-FAIL` in today's log | Non-firewall sync error | Read today's `cloud_sync_YYYY-MM-DD.log` for the exact error |
+| `FIREWALL-DETECT` in today's log | Active firewall blocking | Run `/project:diagnose-logs` — rules may have been re-added by attacker |
+| `FIREWALL-PREFLIGHT  WARNING` in log | Rules active at sync start | Attacker re-added block rules; consider running `setup_all.ps1` |
+| Firewall B2 block rules ALERT | Malicious rules present | Run `C:\Sync\fix_b2_firewall.bat` as Administrator |
 
 For fixes requiring Administrator (tasks, services, ACLs): note that and provide the exact command — do not attempt silently.
 

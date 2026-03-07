@@ -74,9 +74,33 @@ After successfully implementing any fix, new behavior, security hardening, or ec
 3. **Repeat** for up to **4 prior days maximum** (stepping back one day at a time), stopping as soon as the relevant error or event is found.
 4. **Only after exhausting all relevant logs** (or if the issue is not covered by logs) should you run live process/service checks or execute diagnostic commands.
 
+**Token-efficient approach — prefer Grep over Read:**
+Instead of reading full log files, use the `Grep` tool with an error pattern on the specific dated file. This returns only matching lines, costing a fraction of a full file read.
+
+```
+Grep pattern: SYNC-FAIL|FIREWALL|ERROR|Error|WARN|ALERT|connectex|socket access forbidden|failed|Failed|FAIL|exception|denied|blocked
+File: C:\Sync\Logs\cloud_sync_YYYY-MM-DD.log   (today's date)
+```
+
+For multi-component diagnosis, invoke `/project:diagnose-logs` — it greps all 5 log files in parallel for today (and yesterday if needed) and maps results to known causes, escalating to deep investigation only if logs are inconclusive.
+
+**Key log event prefixes written by `cloud_sync.ps1`:**
+
+| Prefix | Meaning |
+|---|---|
+| `SYNC-START` / `SYNC-END` | Normal run boundaries |
+| `SYNC-OK` | Rclone completed successfully |
+| `SYNC-FAIL` | Rclone failed for a non-firewall reason |
+| `FIREWALL-PREFLIGHT` | Known malicious rule found and removed *before* sync ran |
+| `FIREWALL-PREFLIGHT  WARNING` | Attack was active at sync start — high-severity indicator |
+| `FIREWALL-DETECT` | Rclone output contained `connectex`/`socket access forbidden` |
+| `FIREWALL-HEAL` | Rule removed and sync retried |
+| `FIREWALL-HEAL  Retry SUCCESS` | Self-healed — no manual action needed |
+| `FIREWALL-HEAL  Retry FAILED` | Manual investigation required |
+
 **Rationale:** The logs often contain the exact error message already. Reading them costs near-zero tokens compared to running PowerShell queries to test live processes.
 
-**Override:** `.claudeignore` excludes `Logs/` to avoid noise during normal development. This rule overrides that exclusion for diagnosis sessions only. When the issue is resolved, return to treating the Logs/ directory as context-noise.
+**Override:** `.claudeignore` excludes `Logs/` to avoid noise during normal development. This rule overrides that exclusion for diagnosis sessions only. The Grep and Read tools can always access ignored files directly — `.claudeignore` only blocks auto-loading into context. When the issue is resolved, return to treating the Logs/ directory as context-noise.
 
 ---
 

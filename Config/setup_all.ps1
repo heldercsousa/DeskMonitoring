@@ -66,15 +66,15 @@ if (Test-Path $oldMirror) {
 }
 
 # =============================================================================
-# STEP 3 - Update cloud_sync.ps1 with 3-phase ACL protection
+# STEP 3 - Update cloud_sync.ps1 with self-healing firewall + 3-phase ACL
 # =============================================================================
-Write-Step "Step 3 - Update cloud_sync.ps1 (3-phase ACL protection for 7-day retention)"
+Write-Step "Step 3 - Update cloud_sync.ps1 (firewall self-healing + 3-phase ACL protection)"
 $cloudSyncPs1 = "C:\Sync\Config\cloud_sync.ps1"
 Set-Content -Path $cloudSyncPs1 -Encoding UTF8 -Value @'
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-03-03 - Added 3-phase ACL protection for 7-day file retention
+# Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
 
 $Rclone           = 'C:\Tools\Rclone\rclone.exe'
 $Config           = 'C:\Sync\Config\rclone.conf'
@@ -86,15 +86,114 @@ $Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
 
-# 1. Sync source folder to B2
-# Config and Logs versioned via Git - not sent to B2
-& $Rclone sync $Source $Remote `
+# Known malicious firewall rules that block Backblaze B2 sync
+$MaliciousFirewallRules = @(
+    'Block 104.153.233.180',
+    'Block 149.137.142.15'
+)
+
+function Write-SyncLog($msg) {
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    "$ts  $msg" | Add-Content -LiteralPath $Log
+}
+
+function Remove-MaliciousFirewallRules {
+    $removed = @()
+    foreach ($ruleName in $MaliciousFirewallRules) {
+        $rule = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+        if ($rule) {
+            Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+            $removed += $ruleName
+            Write-SyncLog "FIREWALL-HEAL  Removed malicious block rule: $ruleName"
+        }
+    }
+    # Also scan for any unknown outbound BLOCK rules targeting B2 IP ranges
+    $allBlockRules = Get-NetFirewallRule -Direction Outbound -Action Block -ErrorAction SilentlyContinue |
+        Where-Object { $_.Enabled -eq 'True' } |
+        Where-Object { $_.DisplayName -notlike 'Block 0.0.0.0*' }
+    foreach ($r in $allBlockRules) {
+        $addr = ($r | Get-NetFirewallAddressFilter -ErrorAction SilentlyContinue).RemoteAddress
+        if ($addr -match '104\.153\.|149\.137\.|backblaze') {
+            Remove-NetFirewallRule -DisplayName $r.DisplayName -ErrorAction SilentlyContinue
+            $removed += $r.DisplayName
+            Write-SyncLog "FIREWALL-HEAL  Removed unknown B2 block rule: $($r.DisplayName) -> $addr"
+        }
+    }
+    return $removed
+}
+
+# ============================================================
+# STEP 1 - Pre-flight: check for known malicious firewall rules
+# Remove before sync attempt to avoid wasted run
+# ============================================================
+Write-SyncLog "SYNC-START  Beginning cloud sync run"
+
+$preRemoved = @()
+foreach ($ruleName in $MaliciousFirewallRules) {
+    $rule = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+    if ($rule) {
+        Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+        $preRemoved += $ruleName
+        Write-SyncLog "FIREWALL-PREFLIGHT  Removed malicious block rule before sync: $ruleName"
+    }
+}
+if ($preRemoved.Count -gt 0) {
+    Write-SyncLog "FIREWALL-PREFLIGHT  WARNING: $($preRemoved.Count) malicious rule(s) were active at sync start - possible active attack"
+}
+
+# ============================================================
+# STEP 2 - Run rclone sync, capture output for error detection
+# ============================================================
+$rcloneOutput = & $Rclone sync $Source $Remote `
     --config $Config `
     --log-file $Log `
     --log-level INFO `
     --transfers 4 `
     --checkers 8 `
-    --fast-list
+    --fast-list 2>&1
+
+$rcloneExitCode = $LASTEXITCODE
+
+# ============================================================
+# STEP 3 - Detect firewall blocking pattern in rclone output
+# If detected: remove rules, retry sync once
+# ============================================================
+$firewallBlocked = $false
+if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|connect: permission denied') {
+    $firewallBlocked = $true
+    Write-SyncLog "FIREWALL-DETECT  Rclone reported connection blocked - checking firewall rules"
+
+    $healed = Remove-MaliciousFirewallRules
+    if ($healed.Count -gt 0) {
+        Write-SyncLog "FIREWALL-HEAL  Removed $($healed.Count) malicious rule(s): $($healed -join ', ')"
+        Write-SyncLog "FIREWALL-HEAL  Retrying sync after firewall repair"
+
+        # Retry sync
+        $rcloneOutput2 = & $Rclone sync $Source $Remote `
+            --config $Config `
+            --log-file $Log `
+            --log-level INFO `
+            --transfers 4 `
+            --checkers 8 `
+            --fast-list 2>&1
+
+        $rcloneExitCode = $LASTEXITCODE
+
+        if ($LASTEXITCODE -eq 0) {
+            Write-SyncLog "FIREWALL-HEAL  Retry SUCCESS - sync completed after firewall repair"
+        } else {
+            Write-SyncLog "FIREWALL-HEAL  Retry FAILED (exit $LASTEXITCODE) - sync still failing after firewall repair"
+            Write-SyncLog "FIREWALL-HEAL  Manual investigation required"
+        }
+    } else {
+        Write-SyncLog "FIREWALL-DETECT  No known malicious rules found - unknown blocking cause"
+        Write-SyncLog "FIREWALL-DETECT  Run check_status.ps1 and review firewall rules manually"
+    }
+} elseif ($rcloneExitCode -eq 0) {
+    Write-SyncLog "SYNC-OK  Sync completed successfully (exit 0)"
+} else {
+    Write-SyncLog "SYNC-FAIL  Sync failed (exit $rcloneExitCode) - not a firewall error"
+}
 
 # ============================================================
 # FASE 0 - Aplicar ACL Deny Delete em arquivos < 7 dias
@@ -102,20 +201,20 @@ $DaysToKeepLogs   = 30
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
-    
+
     Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
         Where-Object { $_.LastWriteTime -gt $threshold } |
         ForEach-Object {
             try {
                 $acl = Get-Acl $_.FullName -ErrorAction Stop
-                
+
                 # Verificar se ja tem ACL Deny Delete (evitar duplicado)
                 $hasDeny = $acl.Access | Where-Object {
                     $_.AccessControlType -eq 'Deny' -and
                     $_.IdentityReference -like '*Everyone*' -and
                     $_.FileSystemRights -like '*Delete*'
                 }
-                
+
                 if (-not $hasDeny) {
                     # Aplicar ACL Deny Delete
                     $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
@@ -141,20 +240,20 @@ if (Test-Path $Mirror) {
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
-    
+
     Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
         Where-Object { $_.LastWriteTime -lt $threshold } |
         ForEach-Object {
             try {
                 $acl = Get-Acl $_.FullName -ErrorAction Stop
-                
+
                 # Encontrar regras Deny Delete de "Everyone"
                 $denyRules = $acl.Access | Where-Object {
                     $_.AccessControlType -eq 'Deny' -and
                     $_.IdentityReference -like '*Everyone*' -and
                     $_.FileSystemRights -like '*Delete*'
                 }
-                
+
                 if ($denyRules) {
                     # Remover cada regra Deny Delete encontrada
                     foreach ($rule in $denyRules) {
@@ -172,13 +271,12 @@ if (Test-Path $Mirror) {
 # FASE 2 - Deletar arquivos >= 7 dias
 # Agora ACL foi removido em FASE 1, delete pode executar sem ERROR 5
 # ============================================================
-# 2. Mirror cleanup - delete files older than DaysToKeepMirror
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
     Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
         Where-Object { $_.LastWriteTime -lt $threshold } |
         Remove-Item -Force -ErrorAction SilentlyContinue
-    
+
     # Cleanup de pastas vazias (apos deletar arquivos)
     Get-ChildItem -Path $Mirror -Recurse -Directory -ErrorAction SilentlyContinue |
         Sort-Object FullName -Descending |
@@ -195,8 +293,10 @@ Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
 Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
+
+Write-SyncLog "SYNC-END  Cloud sync run complete"
 '@
-Write-OK "cloud_sync.ps1 updated (3-phase ACL protection: Mirror 7d retention + cleanup)"
+Write-OK "cloud_sync.ps1 updated (self-healing firewall + 3-phase ACL protection)"
 
 # =============================================================================
 # STEP 4 - Protect C:\Sync\Config + C:\Sync\Logs (RECURSIVE Deny Delete)
@@ -486,9 +586,33 @@ if (-not $rts) {
 }
 
 # =============================================================================
-# STEP 15 - Enable file auditing (SACL on watched folder)
+# STEP 15 - Remove any known malicious firewall rules (attacker sabotage)
+# Add new B2 IPs here whenever the attacker changes their approach
 # =============================================================================
-Write-Step "Step 15 - File system auditing (SACL)"
+Write-Step "Step 15 - Remove malicious firewall rules (B2 block rules)"
+$maliciousRules = @(
+    "Block 104.153.233.180",   # Backblaze B2 API IP - blocked by attacker 2026-03-06
+    "Block 149.137.142.15"     # Backblaze B2 API IP - blocked by attacker 2026-03-06
+)
+$removedCount = 0
+foreach ($ruleName in $maliciousRules) {
+    $existing = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+    if ($existing) {
+        Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+        Write-Warn "Removed malicious rule: $ruleName"
+        $removedCount++
+    }
+}
+if ($removedCount -eq 0) {
+    Write-OK "No malicious B2 block rules found"
+} else {
+    Write-OK "$removedCount malicious rule(s) removed"
+}
+
+# =============================================================================
+# STEP 16 - Enable file auditing (SACL on watched folder)
+# =============================================================================
+Write-Step "Step 16 - File system auditing (SACL)"
 $auditScript = "C:\Sync\Config\enable_file_auditing.ps1"
 if (Test-Path $auditScript) {
     & powershell.exe -ExecutionPolicy Bypass -File $auditScript
@@ -508,7 +632,7 @@ Write-Host ""
 Write-Host "Applied:" -ForegroundColor White
 Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
 Write-Host "  Step  2 - run_mirror.bat with /E flag (no delete mirroring)" -ForegroundColor Gray
-Write-Host "  Step  3 - cloud_sync.ps1 with 3-phase ACL protection (7d retention)" -ForegroundColor Gray
+Write-Host "  Step  3 - cloud_sync.ps1 with firewall self-healing + 3-phase ACL (7d retention)" -ForegroundColor Gray
 Write-Host "  Step  4 - ACL: Config+Logs+Evidence blocked RECURSIVELY, .git liberated RECURSIVELY" -ForegroundColor Gray
 Write-Host "  Step  5 - DailySecurityCheck v7 + scheduled task + shortcut" -ForegroundColor Gray
 Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
@@ -520,7 +644,8 @@ Write-Host "  Step 11 - FolderSync-Watchdog task (current user)" -ForegroundColo
 Write-Host "  Step 12 - FolderSyncWatchdog NSSM service" -ForegroundColor Gray
 Write-Host "  Step 13 - FolderSyncAuditor NSSM service" -ForegroundColor Gray
 Write-Host "  Step 14 - RealTimeSync startup registry + started" -ForegroundColor Gray
-Write-Host "  Step 15 - File system auditing (SACL)" -ForegroundColor Gray
+Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
+Write-Host "  Step 16 - File system auditing (SACL)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow

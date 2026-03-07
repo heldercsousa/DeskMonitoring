@@ -55,6 +55,8 @@ Work through each failing subsystem:
 - RealTimeSync process missing → check registry autostart, launch manually
 - Rclone not found → verify `C:\Tools\Rclone\rclone.exe` exists
 - Cloud sync log missing today → check if `FolderSync-CloudBackup` task has run; check `cloud_sync_*.log` for errors
+- `SYNC-FAIL` or `FIREWALL-DETECT` in log → invoke `/project:diagnose-logs` for token-efficient error scan
+- `FIREWALL-PREFLIGHT WARNING` in log → attacker may have re-added firewall block rules; run `fix_b2_firewall.bat` as Administrator
 
 **For Camera issues** — invoke `/project:camera-check` and work through each failing item listed. Common items to diagnose:
 - Yawcam process not running → start `C:\Program Files (x86)\Yawcam\Yawcam.exe`

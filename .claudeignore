@@ -12,6 +12,11 @@ Mirror/
 # ---------------------------------------------------------------------------
 # Log files — large, noisy, daily-rotating, not relevant for script editing
 # ---------------------------------------------------------------------------
+# OVERRIDE PATTERN: .claudeignore blocks auto-loading into context, but does NOT
+# block the Grep and Read tools. To diagnose issues without loading all logs:
+#   → Use /project:diagnose-logs  (greps only today's dated files for errors)
+#   → Or use Grep tool directly on C:\Sync\Logs\<component>_YYYY-MM-DD.log
+# This keeps normal sessions token-efficient while allowing targeted log reads.
 Logs/
 
 # ---------------------------------------------------------------------------
