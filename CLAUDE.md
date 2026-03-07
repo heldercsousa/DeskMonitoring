@@ -1,3 +1,18 @@
+<!-- TASK GATE — READ THIS FIRST, EVERY SESSION -->
+## NON-NEGOTIABLE TASK RULES (summary — full rules below)
+
+| When | What |
+|---|---|
+| Before any multi-file task | `EnterPlanMode` — plan must list RULE 1 steps |
+| After changing any `.ps1` in `Config/` | Update `ECOSYSTEM_REPORT.md` S5 + S15 |
+| After any architectural/path/task change | Update `CLAUDE.md` relevant section |
+| After any fix that must survive reinstall | Update `setup_all.ps1` |
+| Before claiming done | Invoke `superpowers:verification-before-completion` |
+| Every commit | Use `/commit` skill — never raw git |
+
+See RULE 1, RULE 3, RULE 4 below for full detail.
+<!-- END TASK GATE -->
+
 # C:\Sync — FolderSync + Camera Ecosystem
 
 ## Project Overview
