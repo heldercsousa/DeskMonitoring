@@ -121,9 +121,26 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
 | `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
-| `setup_all.ps1` | Fresh install / new device | Centralized setup: all security hardening + task registration |
+| `setup_all.ps1` | Fresh install / new device | Centralized setup: all security hardening + task registration + .git ACL liberation |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
+| `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
 | `ECOSYSTEM_REPORT.md` | — | This document |
+
+### Remediation scripts (root of `C:\Sync\`)
+
+| File | Purpose |
+|---|---|
+| `fix_b2_firewall.bat` | Self-elevating UAC launcher — removes attacker firewall rules blocking B2 |
+| `fix_git_acl.bat` | Self-elevating UAC launcher — strips Deny ACL from `.git\` recursively (fixes git lock) |
+| `fix_git_lock.bat` | Self-elevating UAC launcher — force-deletes `.git\index.lock` when ACL prevents removal |
+| `check_health.bat` | Double-click launcher — runs `health_check_all.ps1` in a paused window |
+
+### Evidence folder (`C:\Sync\Evidence\`)
+
+| File | Purpose |
+|---|---|
+| `YYYY-MM-DD_description.md` | Forensic evidence records — **NEVER delete or overwrite** |
+| `2026-03-06_firewall_tampering.md` | Evidence of attacker-added B2 firewall block rules |
 
 ### Recovery scripts (keep, run only if something breaks)
 
@@ -320,6 +337,9 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
 | Startup registry missing | See §9 Layer 3 restore command |
 | Cannot read firewall.log | `icacls "C:\Sync\Logs\firewall.log" /grant:r "LAP\helde:(R)"` |
 | Setting up new device | `powershell -ExecutionPolicy Bypass -File C:\Sync\Config\setup_all.ps1` |
+| B2 sync blocked (connectex error) | Attacker firewall rule detected — double-click `C:\Sync\fix_b2_firewall.bat` (requires UAC) |
+| git index.lock can't be deleted | ACL trap on `.git\` — run `C:\Sync\fix_git_acl.bat` (UAC), then `Remove-Item -Force "C:\Sync\.git\index.lock"` in PS7 |
+| git operations all fail after setup_all | `setup_all.ps1` Step 4.3 auto-liberates `.git\` recursively — rerun if needed |
 
 ### Rotate Backblaze API key
 1. Go to backblaze.com → App Keys → Add Application Key
@@ -348,6 +368,11 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
 | mirror.log (old) | Old non-rotating mirror.log archived as `mirror_archive_YYYY-MM-DD.log`. Safe to delete. |
 | B2 versioning | B2 keeps multiple versions of files. Set Lifecycle Rules on bucket to "Keep only last version" to control storage costs. |
 | SMB2 disabled | Disabling SMB2 may affect local network file sharing if needed. Re-enable with: `Set-SmbServerConfiguration -EnableSMB2Protocol $true -Force` |
+| Firewall B2 blocking (attacker) | Symptom: `connectex: socket access forbidden` in cloud_sync log. Attacker adds outbound BLOCK rules for B2 IPs (104.153.233.180, 149.137.142.15). Fix: `fix_b2_firewall.bat`. Save evidence to `C:\Sync\Evidence\` FIRST. |
+| .git ACL trap (git lock fails) | `setup_all.ps1` Deny Delete ACL propagates into `.git\` if rerun. Step 4.3 uses `icacls /T` to fix recursively. `Set-Acl` alone is NOT sufficient — must use `icacls /T` for recursive removal. |
+| Evidence files are immutable | `C:\Sync\Evidence\` is ACL-protected (Deny Delete). Files can never be deleted or modified — by design. Add new files only. Restored by `setup_all.ps1` Step 4.4. |
+| PS7 vs PS5 command differences | Machine runs PowerShell 7. `del /F /Q` does NOT work — use `Remove-Item -Force`. `$_` in Where-Object via Bash causes extglob interference — always use temp .ps1 files. |
+| Claude Code admin barrier | Bash tool runs as regular user. Firewall/ACL/service ops need admin. Run Claude Code as Administrator to remove this barrier. Until then use self-elevating .bat files. |
 
 ---
 
@@ -406,6 +431,22 @@ powercfg /setdcvalueindex SCHEME_CURRENT SUB_NONE CONSOLELOCK 1
 - Read+Write, no expiry
 - Master key not stored anywhere — only scoped key in rclone.conf
 
+### Layer 7 — Evidence Folder (ACL-protected, tamper-proof)
+```
+C:\Sync\Evidence\ — Deny Delete (recursive, Everyone)
+```
+- Forensic evidence files cannot be deleted or overwritten
+- Restored automatically by `setup_all.ps1` Step 4.4
+- Naming: `YYYY-MM-DD_brief-description.md`
+- Always commit to git immediately after adding evidence
+
+### Layer 8 — .git Liberation (git operations must always work)
+```powershell
+# setup_all.ps1 Step 4.3 — MUST use icacls /T, not Set-Acl (not recursive)
+icacls "C:\Sync\.git" /remove:d "*S-1-1-0" /T /Q   # Everyone
+icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q  # Users
+```
+
 > **Pending:** B2 Object Lock / Lifecycle Rules (7-day retention via Backblaze web UI)
 > **Pending:** BIOS password on Acer Nitro 5
 > **Pending:** Windows Hello PIN (blocked by org policy — resolve via Microsoft account portal)
@@ -415,6 +456,55 @@ powercfg /setdcvalueindex SCHEME_CURRENT SUB_NONE CONSOLELOCK 1
 ## 15. Full File Contents (for restoration)
 
 > Recreate any file by copying the content block below into a new file at the stated path.
+
+---
+
+### `C:\Sync\Config\fix_firewall_b2.ps1`
+> Removes attacker-added outbound BLOCK firewall rules that block Backblaze B2 connectivity.
+> Run via `C:\Sync\fix_b2_firewall.bat` (self-elevating UAC). Requires Administrator.
+
+```powershell
+#Requires -RunAsAdministrator
+# fix_firewall_b2.ps1 — Removes malicious outbound BLOCK rules for B2 IPs.
+
+$LogFile = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+function Write-Log($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
+
+Write-Host ""
+Write-Host ">>> Removing malicious B2 firewall block rules" -ForegroundColor Cyan
+
+$rulesToRemove = @("Block 104.153.233.180", "Block 149.137.142.15")
+
+foreach ($rule in $rulesToRemove) {
+    $existing = Get-NetFirewallRule -DisplayName $rule -ErrorAction SilentlyContinue
+    if ($existing) {
+        Remove-NetFirewallRule -DisplayName $rule -ErrorAction Stop
+        Write-Host "  OK   Removed: $rule" -ForegroundColor Green
+        Write-Log "SECURITY  Removed malicious outbound BLOCK firewall rule: $rule"
+    } else {
+        Write-Host "  INFO Not found: $rule" -ForegroundColor Yellow
+        Write-Log "SECURITY  Firewall rule not found (skip): $rule"
+    }
+}
+
+$remaining = @()
+foreach ($rule in $rulesToRemove) {
+    $check = Get-NetFirewallRule -DisplayName $rule -ErrorAction SilentlyContinue
+    if ($check) { $remaining += $rule }
+}
+
+if ($remaining.Count -eq 0) {
+    Write-Host "  OK   All malicious rules removed. B2 connectivity restored." -ForegroundColor Green
+    Write-Log "SECURITY  B2 firewall remediation complete. All block rules removed."
+} else {
+    $list = $remaining -join ", "
+    Write-Host "  FAIL Rules still present: $list" -ForegroundColor Red
+    Write-Log "SECURITY  WARNING: Some block rules could not be removed: $list"
+}
+```
 
 ---
 
