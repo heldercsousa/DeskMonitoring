@@ -18,26 +18,9 @@ $AuditRule = New-Object System.Security.AccessControl.FileSystemAuditRule($Every
 $AclData.SetAuditRule($AuditRule)
 Set-Acl -Path $WatchedFolder -AclObject $AclData
 
-# Blindagem da Raiz C:\Sync (Logs e Configs)
 if (-not (Test-Path $LogPath)) { New-Item -ItemType Directory -Path $LogPath -Force }
-$RootAcl = Get-Acl $RootPath
-$RootAcl.SetAccessRuleProtection($true, $true)
-$DenyRule = New-Object System.Security.AccessControl.FileSystemAccessRule($Everyone, "Delete,DeleteSubdirectoriesAndFiles", "ContainerInherit,ObjectInherit", "None", "Deny")
-$RootAcl.AddAccessRule($DenyRule)
-Set-Acl $RootPath $RootAcl
 
-# Exceção para Mirror (Permite deleção via SYSTEM)
-if (Test-Path $MirrorPath) {
-    $MirrorAcl = Get-Acl $MirrorPath
-    $SystemSid = [System.Security.Principal.SecurityIdentifier]'S-1-5-18'
-    $SystemRule = New-Object System.Security.AccessControl.FileSystemAccessRule($SystemSid, "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
-    $UserSid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User
-    $UserRule = New-Object System.Security.AccessControl.FileSystemAccessRule($UserSid, "ReadAndExecute", "ContainerInherit,ObjectInherit", "None", "Allow")
-    
-    $MirrorAcl.SetAccessRuleProtection($true, $false) 
-    $MirrorAcl.AddAccessRule($SystemRule)
-    $MirrorAcl.AddAccessRule($UserRule)
-    Set-Acl $MirrorPath $MirrorAcl
-}
+# NOTE: ACL/Deny Delete rules are managed exclusively by setup_all.ps1 Step 4.
+# This script only handles SACL (audit) configuration. Do not add ACL rules here.
 
-Write-Host "Configuração de Auditoria e Blindagem aplicada com sucesso." -ForegroundColor Green
+Write-Host "Configuração de Auditoria aplicada com sucesso." -ForegroundColor Green

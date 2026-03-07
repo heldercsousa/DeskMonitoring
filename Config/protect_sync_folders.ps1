@@ -1,125 +1,78 @@
 # protect_sync_folders.ps1
-# Protects C:\Sync folder structure from deletion.
-# Uses SIDs instead of localized names (works on any Windows language).
+# Repair script: re-applies the canonical Deny Delete ACL rules for C:\Sync.
+# SINGLE SOURCE OF TRUTH is setup_all.ps1 Step 4.
+# This script mirrors those exact rules for manual repair without running full setup.
 # Run as Administrator.
+#
+# Canonical ACL table (matches setup_all.ps1 Step 4):
+#   C:\Sync (root)    Deny Delete folder-only (no inherit)  -- prevent root deletion
+#   C:\Sync\Config    Deny Delete + Children (full inherit)  -- scripts tamper-proof
+#   C:\Sync\Logs      Deny Delete + Children (full inherit)  -- logs tamper-proof
+#   C:\Sync\Evidence  Deny Delete + Children (full inherit)  -- forensic tamper-proof
+#   C:\Sync\.git      NONE (liberate)                        -- git needs full write
+#   C:\Sync\Mirror    NONE at folder level                   -- cloud_sync.ps1 manages per-file ACLs
 
-# ---------------------------------------------------------------------------
-# Identities via SID (language-independent)
-# ---------------------------------------------------------------------------
-$sidEveryone  = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')       # Everyone / Todos
-$sidAdmins    = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')  # BUILTIN\Administrators
-$sidSystem    = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-18')      # NT AUTHORITY\SYSTEM
-$sidCurrentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().User         # current user SID
+#Requires -RunAsAdministrator
 
-function Write-Step($msg) {
-    Write-Host "`n>>> $msg" -ForegroundColor Cyan
-}
+function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
+function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 
-# ---------------------------------------------------------------------------
-# Step 0 — Clean up any previous incorrect rules
-# ---------------------------------------------------------------------------
-Write-Step "Step 0 - Removing previous incorrect Deny rules"
+$sidEveryone = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')
 
-foreach ($path in @('C:\Sync', 'C:\Sync\Config', 'C:\Sync\Logs', 'C:\Sync\Mirror')) {
+function Set-DenyDeleteFull($path) {
     $acl = Get-Acl $path
-    $denyRules = $acl.Access | Where-Object { $_.AccessControlType -eq 'Deny' }
-    foreach ($rule in $denyRules) {
-        $acl.RemoveAccessRule($rule) | Out-Null
-        Write-Host "  Removed Deny rule [$($rule.IdentityReference)] from $path" -ForegroundColor DarkYellow
-    }
-    Set-Acl -Path $path -AclObject $acl
-}
-Write-Host "  Cleanup done." -ForegroundColor Green
-
-# ---------------------------------------------------------------------------
-# Helper: Deny Delete with full inheritance (files + subfolders)
-# ---------------------------------------------------------------------------
-function Deny-DeleteFull($path, $sid) {
-    $acl          = Get-Acl $path
-    $rights       = [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles'
-    $inherit      = [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit'
-    $propagate    = [System.Security.AccessControl.PropagationFlags]::None
-    $type         = [System.Security.AccessControl.AccessControlType]::Deny
     $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
-        $sid, $rights, $inherit, $propagate, $type
+        $sidEveryone,
+        [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles',
+        [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit',
+        [System.Security.AccessControl.PropagationFlags]::None,
+        [System.Security.AccessControl.AccessControlType]::Deny
     )
     $acl.AddAccessRule($rule)
     Set-Acl -Path $path -AclObject $acl
-    Write-Host "  [DENY Delete+Children] $($sid.Value) -> $path" -ForegroundColor Yellow
 }
 
-# ---------------------------------------------------------------------------
-# Helper: Deny Delete on folder itself ONLY (no inheritance)
-#         Protects the folder from being deleted but allows managing contents
-# ---------------------------------------------------------------------------
-function Deny-DeleteFolderOnly($path, $sid) {
-    $acl          = Get-Acl $path
-    $rights       = [System.Security.AccessControl.FileSystemRights]'Delete'
-    $inherit      = [System.Security.AccessControl.InheritanceFlags]::None
-    $propagate    = [System.Security.AccessControl.PropagationFlags]::None
-    $type         = [System.Security.AccessControl.AccessControlType]::Deny
+function Set-DenyDeleteFolderOnly($path) {
+    $acl = Get-Acl $path
     $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
-        $sid, $rights, $inherit, $propagate, $type
+        $sidEveryone,
+        [System.Security.AccessControl.FileSystemRights]'Delete',
+        [System.Security.AccessControl.InheritanceFlags]::None,
+        [System.Security.AccessControl.PropagationFlags]::None,
+        [System.Security.AccessControl.AccessControlType]::Deny
     )
     $acl.AddAccessRule($rule)
     Set-Acl -Path $path -AclObject $acl
-    Write-Host "  [DENY Delete folder only] $($sid.Value) -> $path" -ForegroundColor Yellow
 }
 
-# ---------------------------------------------------------------------------
-# Step 1 - C:\Sync root: protect folder itself from deletion
-# ---------------------------------------------------------------------------
-Write-Step "Step 1 - Protecting C:\Sync root folder"
-Deny-DeleteFolderOnly 'C:\Sync' $sidEveryone
+Write-Step "Applying canonical ACL rules"
 
-# ---------------------------------------------------------------------------
-# Step 2 - C:\Sync\Config: block all deletions (files + folder)
-# ---------------------------------------------------------------------------
-Write-Step "Step 2 - Protecting C:\Sync\Config (no deletions at all)"
-Deny-DeleteFull 'C:\Sync\Config' $sidEveryone
+Set-DenyDeleteFolderOnly 'C:\Sync'
+Write-OK "C:\Sync root locked (folder-only, no inherit)"
 
-# ---------------------------------------------------------------------------
-# Step 3 - C:\Sync\Logs: block all deletions (files + folder)
-# ---------------------------------------------------------------------------
-Write-Step "Step 3 - Protecting C:\Sync\Logs (no deletions at all)"
-Deny-DeleteFull 'C:\Sync\Logs' $sidEveryone
+Set-DenyDeleteFull 'C:\Sync\Config'
+Write-OK "C:\Sync\Config locked (Deny Delete recursive)"
 
-## Step 4 - C:\Sync\Mirror: block all deletions (folder + all files inside)
-#           Only a privileged age-check script can delete files older than 15 days
-Write-Step "Step 4 - Protecting C:\Sync\Mirror (no deletions at all)"
-Deny-DeleteFull 'C:\Sync\Mirror' $sidEveryone
+Set-DenyDeleteFull 'C:\Sync\Logs'
+Write-OK "C:\Sync\Logs locked (Deny Delete recursive)"
 
-# ---------------------------------------------------------------------------
-# Verify - show all Deny rules applied
-# ---------------------------------------------------------------------------
-Write-Step "Verification - Deny rules applied"
-foreach ($path in @('C:\Sync', 'C:\Sync\Config', 'C:\Sync\Logs', 'C:\Sync\Mirror')) {
-    Write-Host "`n  $path" -ForegroundColor White
-    $deny = (Get-Acl $path).Access | Where-Object { $_.AccessControlType -eq 'Deny' }
-    if ($deny) {
-        $deny | Format-Table IdentityReference, FileSystemRights, InheritanceFlags -AutoSize
-    } else {
-        Write-Host "  (no Deny rules)" -ForegroundColor Red
-    }
+if (-not (Test-Path 'C:\Sync\Evidence')) { New-Item -ItemType Directory -Path 'C:\Sync\Evidence' -Force | Out-Null }
+Set-DenyDeleteFull 'C:\Sync\Evidence'
+Write-OK "C:\Sync\Evidence locked (Deny Delete recursive)"
+
+Write-Step "Liberating C:\Sync\.git"
+if (Test-Path 'C:\Sync\.git') {
+    icacls "C:\Sync\.git" /remove:d "*S-1-1-0" /T /Q | Out-Null
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q | Out-Null
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-544" /T /Q | Out-Null
+    Write-OK "C:\Sync\.git liberated (git unrestricted)"
+} else {
+    Write-Warn "C:\Sync\.git not found"
 }
 
 Write-Host "`n=== Done ===" -ForegroundColor Green
-Write-Host "Config + Logs : all deletions blocked (folder + all files inside)"
-Write-Host "Sync + Mirror : folders protected from deletion, contents manageable"
-
-
-
-
----------------------------------------
-
-PS C:\> # Add sessions via alternative method and append to intrusion file
->> "`n=== CURRENT SESSIONS (alternative) ===" | Out-File "C:\Sync\Logs\intrusion_2026-03-01_12-45-53.txt" -Append
->> Get-WmiObject -Class Win32_LogonSession | Format-List | Out-File "C:\Sync\Logs\intrusion_2026-03-01_12-45-53.txt" -Append
->>
->> "`n=== WINDOWS EDITION ===" | Out-File "C:\Sync\Logs\intrusion_2026-03-01_12-45-53.txt" -Append
->> (Get-WmiObject Win32_OperatingSystem).Caption | Out-File "C:\Sync\Logs\intrusion_2026-03-01_12-45-53.txt" -Append
->>
->> Write-Host "Done - now upload the file"
-Done - now upload the file
-PS C:\>
-
+Write-Host "  C:\Sync root    : folder delete blocked (no inheritance)"
+Write-Host "  Config/Logs/Evidence : all deletions blocked recursively"
+Write-Host "  .git            : no Deny Delete (git unrestricted)"
+Write-Host "  Mirror          : no folder ACL (cloud_sync.ps1 manages per-file ACLs)"

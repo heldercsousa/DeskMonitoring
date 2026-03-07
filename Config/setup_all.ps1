@@ -299,70 +299,58 @@ Write-SyncLog "SYNC-END  Cloud sync run complete"
 Write-OK "cloud_sync.ps1 updated (self-healing firewall + 3-phase ACL protection)"
 
 # =============================================================================
-# STEP 4 - Protect C:\Sync\Config + C:\Sync\Logs (RECURSIVE Deny Delete)
-#          Liberate C:\Sync\.git for git management
+# STEP 4 - SINGLE AUTHORITY: all Deny Delete ACL rules for C:\Sync
 # =============================================================================
-Write-Step "Step 4 - Apply ACL protection (Config+Logs blocked recursively, .git liberated)"
+# This is the only place that sets ACL rules. No other script defines ACLs.
+# Canonical table:
+#   C:\Sync (root)    Deny Delete folder-only (no inherit)  -- prevent root deletion
+#   C:\Sync\Config    Deny Delete + Children (full inherit)  -- scripts tamper-proof
+#   C:\Sync\Logs      Deny Delete + Children (full inherit)  -- logs tamper-proof
+#   C:\Sync\Evidence  Deny Delete + Children (full inherit)  -- forensic tamper-proof
+#   C:\Sync\.git      NONE (liberated via icacls /T)         -- git needs full write
+#   C:\Sync\Mirror    NONE at folder level                   -- cloud_sync.ps1 manages per-file ACLs
+# =============================================================================
+Write-Step "Step 4 - Apply all Deny Delete ACL rules (single authority)"
 
-# 4.1 - C:\Sync\Config - Block ALL deletions (folder + ALL files/subfolders RECURSIVE)
-Write-Host "  Protecting C:\Sync\Config..." -ForegroundColor Cyan
 $sidEveryone = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')
-$aclConfig = Get-Acl "C:\Sync\Config"
-$ruleConfig = New-Object System.Security.AccessControl.FileSystemAccessRule(
-    $sidEveryone,
-    [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles',
-    [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit',
-    [System.Security.AccessControl.PropagationFlags]::None,
-    [System.Security.AccessControl.AccessControlType]::Deny
-)
-$aclConfig.AddAccessRule($ruleConfig)
-Set-Acl -Path "C:\Sync\Config" -AclObject $aclConfig
-Write-OK "C:\Sync\Config locked (Deny Delete - RECURSIVE on all files/subfolders)"
 
-# 4.2 - C:\Sync\Logs - Block ALL deletions (folder + ALL files/subfolders RECURSIVE)
-Write-Host "  Protecting C:\Sync\Logs..." -ForegroundColor Cyan
-$aclLogs = Get-Acl "C:\Sync\Logs"
-$ruleLogs = New-Object System.Security.AccessControl.FileSystemAccessRule(
-    $sidEveryone,
-    [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles',
-    [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit',
-    [System.Security.AccessControl.PropagationFlags]::None,
-    [System.Security.AccessControl.AccessControlType]::Deny
-)
-$aclLogs.AddAccessRule($ruleLogs)
-Set-Acl -Path "C:\Sync\Logs" -AclObject $aclLogs
-Write-OK "C:\Sync\Logs locked (Deny Delete - RECURSIVE on all files/subfolders)"
-
-# 4.3 - C:\Sync\.git - LIBERATE recursively for git management (remove any Deny rules on all files/subfolders)
-# CRITICAL: Must use icacls /T for recursive removal - Set-Acl only affects the folder itself.
-# Without this, git cannot create index.lock and all git operations fail.
-Write-Host "  Liberating C:\Sync\.git (recursive)..." -ForegroundColor Cyan
-if (Test-Path "C:\Sync\.git") {
-    # Remove deny rules using well-known SIDs (works on all Windows locales)
-    icacls "C:\Sync\.git" /remove:d "*S-1-1-0" /T /Q | Out-Null   # Everyone
-    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q | Out-Null  # Users
-    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-544" /T /Q | Out-Null  # Administrators (safety)
-    Write-OK "C:\Sync\.git liberated RECURSIVELY (all files/subfolders - git can manage freely)"
-} else {
-    Write-Warn "C:\Sync\.git not found (will be created if git init is run)"
+function Set-DenyDeleteFull($path) {
+    $acl = Get-Acl $path
+    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+        $sidEveryone, 'Delete,DeleteSubdirectoriesAndFiles',
+        'ContainerInherit,ObjectInherit', 'None', 'Deny')
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $path -AclObject $acl
 }
 
-# 4.4 - C:\Sync\Evidence - Block deletions (forensic evidence must be tamper-proof)
-Write-Host "  Protecting C:\Sync\Evidence..." -ForegroundColor Cyan
-if (-not (Test-Path "C:\Sync\Evidence")) { New-Item -ItemType Directory -Path "C:\Sync\Evidence" -Force | Out-Null }
-$aclEvidence = Get-Acl "C:\Sync\Evidence"
-$ruleEvidence = New-Object System.Security.AccessControl.FileSystemAccessRule(
-    $sidEveryone,
-    [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles',
-    [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit',
-    [System.Security.AccessControl.PropagationFlags]::None,
-    [System.Security.AccessControl.AccessControlType]::Deny
-)
-$aclEvidence.AddAccessRule($ruleEvidence)
-Set-Acl -Path "C:\Sync\Evidence" -AclObject $aclEvidence
-Write-OK "C:\Sync\Evidence locked (Deny Delete - forensic evidence protected)"
+function Set-DenyDeleteFolderOnly($path) {
+    $acl = Get-Acl $path
+    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+        $sidEveryone, 'Delete', 'None', 'None', 'Deny')
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $path -AclObject $acl
+}
 
-Write-OK "ACL protection complete: Config+Logs blocked RECURSIVELY, .git liberated"
+Set-DenyDeleteFolderOnly 'C:\Sync'
+Write-OK "C:\Sync root locked (folder-only, no inherit)"
+
+Set-DenyDeleteFull 'C:\Sync\Config'
+Write-OK "C:\Sync\Config locked (recursive)"
+
+Set-DenyDeleteFull 'C:\Sync\Logs'
+Write-OK "C:\Sync\Logs locked (recursive)"
+
+if (-not (Test-Path 'C:\Sync\Evidence')) { New-Item -ItemType Directory -Path 'C:\Sync\Evidence' -Force | Out-Null }
+Set-DenyDeleteFull 'C:\Sync\Evidence'
+Write-OK "C:\Sync\Evidence locked (recursive)"
+
+if (Test-Path 'C:\Sync\.git') {
+    icacls "C:\Sync\.git" /remove:d "*S-1-1-0" /T /Q | Out-Null
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q | Out-Null
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-544" /T /Q | Out-Null
+    Write-OK "C:\Sync\.git liberated (no Deny Delete)"
+}
+Write-OK "C:\Sync\Mirror - no folder ACL (cloud_sync.ps1 manages per-file ACLs)"
 
 # =============================================================================
 # STEP 5 - DailySecurityCheck v7
@@ -610,13 +598,15 @@ if ($removedCount -eq 0) {
 }
 
 # =============================================================================
-# STEP 16 - Enable file auditing (SACL on watched folder)
+# STEP 16 - File system auditing SACL on watched folder (Bois)
+# NOTE: ACL (Deny Delete) rules are handled exclusively in Step 4.
+# This step only configures SACL (Windows audit policy + audit rules).
 # =============================================================================
-Write-Step "Step 16 - File system auditing (SACL)"
+Write-Step "Step 16 - File system auditing (SACL on Bois folder)"
 $auditScript = "C:\Sync\Config\enable_file_auditing.ps1"
 if (Test-Path $auditScript) {
     & powershell.exe -ExecutionPolicy Bypass -File $auditScript
-    Write-OK "File auditing configured"
+    Write-OK "File auditing (SACL) configured"
 } else {
     Write-Warn "enable_file_auditing.ps1 not found - run manually when available"
 }
@@ -633,7 +623,7 @@ Write-Host "Applied:" -ForegroundColor White
 Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
 Write-Host "  Step  2 - run_mirror.bat with /E flag (no delete mirroring)" -ForegroundColor Gray
 Write-Host "  Step  3 - cloud_sync.ps1 with firewall self-healing + 3-phase ACL (7d retention)" -ForegroundColor Gray
-Write-Host "  Step  4 - ACL: Config+Logs+Evidence blocked RECURSIVELY, .git liberated RECURSIVELY" -ForegroundColor Gray
+Write-Host "  Step  4 - ACL: root(folder-only), Config+Logs+Evidence(recursive), .git liberated, Mirror unmanaged" -ForegroundColor Gray
 Write-Host "  Step  5 - DailySecurityCheck v7 + scheduled task + shortcut" -ForegroundColor Gray
 Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
 Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor Gray
@@ -645,7 +635,7 @@ Write-Host "  Step 12 - FolderSyncWatchdog NSSM service" -ForegroundColor Gray
 Write-Host "  Step 13 - FolderSyncAuditor NSSM service" -ForegroundColor Gray
 Write-Host "  Step 14 - RealTimeSync startup registry + started" -ForegroundColor Gray
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
-Write-Host "  Step 16 - File system auditing (SACL)" -ForegroundColor Gray
+Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow

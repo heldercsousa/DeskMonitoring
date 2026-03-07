@@ -1,4 +1,4 @@
-# cloud_sync.ps1
+﻿# cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
 # Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry

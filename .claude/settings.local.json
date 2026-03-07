@@ -1,22 +1,22 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git -C /c/Sync log --oneline -20)",
-      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\\\Sync\\\\Config\\\\check_status.ps1\")",
-      "Bash(find \"/c/Program Files \\(x86\\)/Yawcam\" -name \"*.xml\" -o -name \"*.conf\" -o -name \"*.ini\" -o -name \"*.config\")",
-      "Bash(find \"/c/Program Files \\(x86\\)/Yawcam\" -type d)",
-      "Bash(powershell -Command \"Remove-Item ''C:\\\\Sync\\\\.git\\\\index.lock'' -Force\")",
-      "Bash(powershell -Command \"Get-Process | Where-Object { $_.Name -like ''*git*'' }\")",
-      "Bash(/c/Sync/check_health.bat:*)",
-      "Bash(python3 -:*)",
-      "Bash(python3 -c \":*)",
-      "Bash(python -c \"print\\(''ok''\\)\")",
-      "Bash(node -e \"console.log\\(''ok''\\)\")",
-      "Bash(printf '%s\\\\n' '#Requires -Version 5.1')",
-      "Bash(printf '%s\\\\r\\\\n' '' '# ==========================================================================' '# FOLDERSYNC BASELINE EVALUATION' '# ==========================================================================' '$fsIssues = @\\(\\)' '' '# FolderSync-CloudBackup task: State = Ready' '$task = Get-ScheduledTask -TaskName FolderSync-CloudBackup -ErrorAction SilentlyContinue' 'if \\(-not $task\\) {' '    $fsIssues += \"\"FolderSync-CloudBackup task: NOT FOUND\"\"' '} elseif \\($task.State -notin @\\(\"\"Ready\"\",\"\"Running\"\"\\)\\) {' '    $fsIssues += \"\"FolderSync-CloudBackup task: State = $\\($task.State\\) \\(expected Ready\\)\"\"' '}' '' '# FolderSync-Watchdog task: State = Ready or Running' '$wdTask = Get-ScheduledTask -TaskName FolderSync-Watchdog -ErrorAction SilentlyContinue' 'if \\(-not $wdTask\\) {' '    $fsIssues += \"\"FolderSync-Watchdog task: NOT FOUND\"\"' '} elseif \\($wdTask.State -notin @\\(\"\"Ready\"\",\"\"Running\"\"\\)\\) {' '    $fsIssues += \"\"FolderSync-Watchdog task: State = $\\($wdTask.State\\) \\(expected Ready or Running\\)\"\"' '}' '' '# FolderSyncWatchdog service: Status = Running, StartType = Automatic' '$wdSvc = Get-Service -Name FolderSyncWatchdog -ErrorAction SilentlyContinue' 'if \\(-not $wdSvc\\) {' '    $fsIssues += \"\"FolderSyncWatchdog service: NOT FOUND\"\"' '} else {' '    if \\($wdSvc.Status -ne \"\"Running\"\"\\)      { $fsIssues += \"\"FolderSyncWatchdog service: Status = $\\($wdSvc.Status\\) \\(expected Running\\)\"\" }' '    if \\($wdSvc.StartType -ne \"\"Automatic\"\"\\) { $fsIssues += \"\"FolderSyncWatchdog service: StartType = $\\($wdSvc.StartType\\) \\(expected Automatic\\)\"\" }' '}' '' '# FolderSyncAuditor service: Status = Running, StartType = Automatic' '$audSvc = Get-Service -Name FolderSyncAuditor -ErrorAction SilentlyContinue' 'if \\(-not $audSvc\\) {' '    $fsIssues += \"\"FolderSyncAuditor service: NOT FOUND\"\"' '} else {' '    if \\($audSvc.Status -ne \"\"Running\"\"\\)      { $fsIssues += \"\"FolderSyncAuditor service: Status = $\\($audSvc.Status\\) \\(expected Running\\)\"\" }' '    if \\($audSvc.StartType -ne \"\"Automatic\"\"\\) { $fsIssues += \"\"FolderSyncAuditor service: StartType = $\\($audSvc.StartType\\) \\(expected Automatic\\)\"\" }' '}' '' '# Registry FolderSyncRealTime: non-empty' '$rtReg = Get-ItemProperty -Path HKCU:\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run -Name FolderSyncRealTime -ErrorAction SilentlyContinue' 'if \\(-not $rtReg -or [string]::IsNullOrWhiteSpace\\($rtReg.FolderSyncRealTime\\)\\) {' '    $fsIssues += \"\"Registry FolderSyncRealTime: NOT FOUND or empty\"\"' '}' '' '# RealTimeSync process: listed' '$rtProc = Get-Process -Name RealTimeSync -ErrorAction SilentlyContinue' 'if \\(-not $rtProc\\) {' '    $fsIssues += \"\"RealTimeSync process: NOT RUNNING\"\"' '}' '' '# Rclone: returns version string' '$rclonePath = \"\"C:\\\\Tools\\\\Rclone\\\\rclone.exe\"\"' 'if \\(-not \\(Test-Path -LiteralPath $rclonePath\\)\\) {' '    $fsIssues += \"\"Rclone binary: NOT FOUND at $rclonePath\"\"' '} else {' '    $rcloneVer = & $rclonePath version 2>&1 | Select-Object -First 1' '    if \\($rcloneVer -notmatch \"\"rclone\"\"\\) {' '        $fsIssues += \"\"Rclone: did not return version string \\(got: $rcloneVer\\)\"\"' '    }' '}' '' '# Cloud sync log today: exists' '$todayLog = \"\"C:\\\\Sync\\\\Logs\\\\cloud_sync_$\\(Get-Date -Format yyyy-MM-dd\\).log\"\"' 'if \\(-not \\(Test-Path -LiteralPath $todayLog\\)\\) {' '    $fsIssues += \"\"Cloud sync log today: NOT FOUND \\($todayLog\\)\"\"' '}')",
-      "Bash(printf '%s\\\\r\\\\n' '' '# ==========================================================================' '# CAMERA BASELINE EVALUATION' '# ==========================================================================' '$camIssues = @\\(\\)' '' '# Yawcam process \\(yawcam or javaw\\): running' '$yawProc   = Get-Process -Name yawcam -ErrorAction SilentlyContinue' '$javawProc = Get-Process -Name javaw  -ErrorAction SilentlyContinue' 'if \\(-not $yawProc -and -not $javawProc\\) {' '    $camIssues += \"\"Yawcam process \\(yawcam or javaw\\): NOT RUNNING\"\"' '}' '' '# Monitor process \\(powershell with yawcam_monitor\\): running' '$monProc = Get-WmiObject Win32_Process -Filter \"\"Name='\"''\"'powershell.exe'\"''\"'\"\" -ErrorAction SilentlyContinue |' '    Where-Object { $_.CommandLine -match \"\"yawcam_monitor\"\" }' 'if \\(-not $monProc\\) {' '    $camIssues += \"\"Yawcam monitor process \\(powershell yawcam_monitor\\): NOT RUNNING\"\"' '}' '' '# Webcam PnP device: Status = OK' '$webcam = Get-PnpDevice -ErrorAction SilentlyContinue |' '    Where-Object { $_.FriendlyName -match \"\"camera|webcam|HD User Facing\"\" -and $_.Class -eq \"\"Camera\"\" } |' '    Select-Object -First 1' 'if \\(-not $webcam\\) {' '    $camIssues += \"\"Webcam PnP device: NOT FOUND\"\"' '} elseif \\($webcam.Status -ne \"\"OK\"\"\\) {' '    $camIssues += \"\"Webcam PnP device: Status = $\\($webcam.Status\\) \\(expected OK\\)\"\"' '}' '' '# Registry Yawcam: non-empty' '$yawReg = Get-ItemProperty -Path HKCU:\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run -Name Yawcam -ErrorAction SilentlyContinue' 'if \\(-not $yawReg -or [string]::IsNullOrWhiteSpace\\($yawReg.Yawcam\\)\\) {' '    $camIssues += \"\"Registry Yawcam: NOT FOUND or empty\"\"' '}' '' '# Registry YawcamMonitor: non-empty' '$monReg = Get-ItemProperty -Path HKCU:\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run -Name YawcamMonitor -ErrorAction SilentlyContinue' 'if \\(-not $monReg -or [string]::IsNullOrWhiteSpace\\($monReg.YawcamMonitor\\)\\) {' '    $camIssues += \"\"Registry YawcamMonitor: NOT FOUND or empty\"\"' '}')",
-      "Bash(test -f /c/Sync/.git/index.lock)",
-      "Bash(powershell -Command \":*)"
+      "Bash(git -C \"C:\Sync\"*)",
+      "Bash(git -C /c/Sync*)",
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\Sync\Config\*\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File /tmp/*.ps1)",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"*\")",
+      "Bash(powershell -Command \"*\")",
+      "Bash(cat > /tmp/*.ps1 << *)",
+      "Bash(mkdir -p *)",
+      "Bash(del *)",
+      "Bash(test -f *)"
     ]
   }
 }

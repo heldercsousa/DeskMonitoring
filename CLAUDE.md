@@ -287,13 +287,41 @@ Scheduled tasks invoke PowerShell with `-ExecutionPolicy Bypass`. For interactiv
 
 ---
 
+## ACL Reference (Canonical — do not re-read scripts)
+
+`setup_all.ps1` **Step 4** is the **single authority** for all ACL (Deny Delete) rules.
+`setup_all.ps1` **Step 16** runs `enable_file_auditing.ps1` — **SACL only** (audit policy on Bois folder).
+`protect_sync_folders.ps1` mirrors Step 4's rules for manual repair.
+
+| Path | Rule | Notes |
+|---|---|---|
+| `C:\Sync` (root) | Deny Delete **folder-only** (no inherit) | Prevents root deletion; children unaffected |
+| `C:\Sync\Config` | Deny Delete + Children (full inherit) | Scripts tamper-proof |
+| `C:\Sync\Logs` | Deny Delete + Children (full inherit) | Logs tamper-proof |
+| `C:\Sync\Evidence` | Deny Delete + Children (full inherit) | Forensic data tamper-proof |
+| `C:\Sync\.git` | **None** — liberated via `icacls /remove:d /T` | git needs full write; liberation is Step 4.5 |
+| `C:\Sync\Mirror` | **None** at folder level | `cloud_sync.ps1` manages 7-day per-file Deny Delete internally |
+
+**Repair command** (Admin PS): `powershell -ExecutionPolicy Bypass -File "C:\Sync\Config\protect_sync_folders.ps1"`
+
+**`.git` index.lock trap**: If `index.lock` exists and can't be deleted, run in Admin PS:
+```powershell
+icacls "C:\Sync\.git" /remove:d "*S-1-1-0" /T /Q
+icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q
+icacls "C:\Sync\.git" /remove:d "*S-1-5-32-544" /T /Q
+Remove-Item -Force "C:\Sync\.git\index.lock"
+```
+Root cause: only occurs if `setup_all.ps1` was run with an older version that lacked centralized ACL (pre-2026-03-07). Should not recur after current `setup_all.ps1` is run.
+
+---
+
 ## What NOT to Modify
 
 | Item | Reason |
 |---|---|
 | `Config\rclone.conf` | Live Backblaze B2 credentials in plaintext. Never diff, log, or suggest changes to its contents. |
 | `Config\credentials.enc` | DPAPI binary blob. Any edit corrupts decryption irreversibly. |
-| ACL rules on `C:\Sync\` | Deny Delete ACLs on the folder structure and per-file Mirror ACLs are load-bearing tamper protection. Repair with `protect_sync_folders.ps1`, never freehand. |
+| ACL rules on `C:\Sync\` | See ACL Reference table above. Repair with `protect_sync_folders.ps1`, never freehand. |
 | `Config\realtime.ffs_real` | FreeFileSync binary config. Edit only through the FreeFileSync GUI. |
 | Scheduled task principals | Both tasks run as `SYSTEM` with `RunLevel Highest`. Changing to a user account breaks ACL and service operations. |
 | NSSM service recovery settings | Services are configured to auto-restart. Do not disable recovery or change service identity. |
