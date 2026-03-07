@@ -353,35 +353,34 @@ if (Test-Path 'C:\Sync\.git') {
 Write-OK "C:\Sync\Mirror - no folder ACL (cloud_sync.ps1 manages per-file ACLs)"
 
 # =============================================================================
-# STEP 5 - DailySecurityCheck v7
+# STEP 5 - DailySecurityCheck v8
+# Scripts live in C:\Sync\Config\ (no copy to Documents needed)
+# Task runs without -NonInteractive so the MessageBox dialog can appear
 # =============================================================================
-Write-Step "Step 5 - Install DailySecurityCheck v7"
-$secScriptsDir = "$env:USERPROFILE\Documents\SecurityScripts"
-if (-not (Test-Path $secScriptsDir)) { New-Item -ItemType Directory -Path $secScriptsDir -Force | Out-Null }
+Write-Step "Step 5 - Install DailySecurityCheck v8"
 
-foreach ($scriptName in @("DailySecurityCheck.ps1","AutoCleanup.ps1")) {
-    $src = Join-Path $scriptDir $scriptName
-    if (Test-Path $src) {
-        Copy-Item $src "$secScriptsDir\$scriptName" -Force
-        Write-OK "Copied $scriptName -> $secScriptsDir"
-    } else {
-        Write-Warn "$scriptName not found next to setup_all.ps1 - copy manually to $secScriptsDir"
+# Remove legacy tasks that used the old Documents path
+foreach ($oldName in @("Verificacao Automatica de Seguranca", "Verificação Automática de Segurança")) {
+    if (Get-ScheduledTask -TaskName $oldName -ErrorAction SilentlyContinue) {
+        Unregister-ScheduledTask -TaskName $oldName -Confirm:$false -ErrorAction SilentlyContinue
+        Write-OK "Removed legacy task: $oldName"
     }
 }
 
-$taskName  = "Verificacao Automatica de Seguranca"
+# Register canonical task pointing to C:\Sync\Config\ (no -NonInteractive so dialog works)
+$taskName  = "FolderSync-DailyCheck"
 $action    = New-ScheduledTaskAction -Execute "powershell.exe" `
-    -Argument "-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$secScriptsDir\DailySecurityCheck.ps1`""
+    -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"C:\Sync\Config\DailySecurityCheck.ps1`""
 $trigger   = New-ScheduledTaskTrigger -Daily -At "09:00"
 $settings  = New-ScheduledTaskSettingsSet -Hidden -RunOnlyIfNetworkAvailable:$false
-$principal = New-ScheduledTaskPrincipal -UserId $currentUser -LogonType S4U -RunLevel Highest
+$principal = New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
 Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
-Write-OK "Task registered: $taskName (daily 09:00)"
+Write-OK "Task registered: $taskName -> C:\Sync\Config\DailySecurityCheck.ps1 (daily 09:00)"
 
 $shell    = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut("$([System.Environment]::GetFolderPath('Desktop'))\Verificar Seguranca.lnk")
 $shortcut.TargetPath = "powershell.exe"
-$shortcut.Arguments  = "-ExecutionPolicy Bypass -File `"$secScriptsDir\DailySecurityCheck.ps1`""
+$shortcut.Arguments  = "-ExecutionPolicy Bypass -File `"C:\Sync\Config\DailySecurityCheck.ps1`""
 $shortcut.Save()
 Write-OK "Desktop shortcut created: Verificar Seguranca.lnk"
 
@@ -624,7 +623,7 @@ Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
 Write-Host "  Step  2 - run_mirror.bat with /E flag (no delete mirroring)" -ForegroundColor Gray
 Write-Host "  Step  3 - cloud_sync.ps1 with firewall self-healing + 3-phase ACL (7d retention)" -ForegroundColor Gray
 Write-Host "  Step  4 - ACL: root(folder-only), Config+Logs+Evidence(recursive), .git liberated, Mirror unmanaged" -ForegroundColor Gray
-Write-Host "  Step  5 - DailySecurityCheck v7 + scheduled task + shortcut" -ForegroundColor Gray
+Write-Host "  Step  5 - DailySecurityCheck v8 + FolderSync-DailyCheck task + shortcut (C:\Sync\Config\)" -ForegroundColor Gray
 Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
 Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor Gray
 Write-Host "  Step  8 - Screen auto-lock (5 min)" -ForegroundColor Gray
