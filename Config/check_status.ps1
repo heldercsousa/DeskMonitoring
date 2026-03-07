@@ -54,7 +54,12 @@ if (Test-Path $todayLog) {
     if ($lastEnd) { Write-Host "  Last event: $lastEnd" }
 
     # Show any FAIL or FIREWALL events today
-    $errorLines = $syncLines | Where-Object { $_ -match 'SYNC-FAIL|FIREWALL-DETECT|FIREWALL-HEAL|connectex|socket access forbidden|error|Error' }
+    # Exclude benign camera race condition: rclone can't upload a .avi Yawcam is still writing
+    $errorLines = $syncLines | Where-Object {
+        $_ -match 'SYNC-FAIL|FIREWALL-DETECT|FIREWALL-HEAL|connectex|socket access forbidden|error|Error'
+    } | Where-Object {
+        $_ -notmatch 'size changed|being updated|source file is being updated'
+    }
     if ($errorLines) {
         Write-Host "  SYNC ERRORS / FIREWALL EVENTS today:" -ForegroundColor Yellow
         $errorLines | Select-Object -Last 10 | ForEach-Object { Write-Host "    $_" -ForegroundColor Yellow }
