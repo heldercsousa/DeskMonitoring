@@ -10,7 +10,8 @@ function Write-Log($msg) {
     "$ts  $msg" | Add-Content -LiteralPath $LogFile
 }
 
-Write-Host "`n>>> Removing malicious B2 firewall block rules" -ForegroundColor Cyan
+Write-Host ""
+Write-Host ">>> Removing malicious B2 firewall block rules" -ForegroundColor Cyan
 
 $rulesToRemove = @(
     "Block 104.153.233.180",
@@ -29,8 +30,8 @@ foreach ($rule in $rulesToRemove) {
     }
 }
 
-# Verify removal
-Write-Host "`n>>> Verifying B2 IPs are no longer blocked" -ForegroundColor Cyan
+Write-Host ""
+Write-Host ">>> Verifying B2 IPs are no longer blocked" -ForegroundColor Cyan
 $remaining = @()
 foreach ($rule in $rulesToRemove) {
     $check = Get-NetFirewallRule -DisplayName $rule -ErrorAction SilentlyContinue
@@ -39,8 +40,9 @@ foreach ($rule in $rulesToRemove) {
 
 if ($remaining.Count -eq 0) {
     Write-Host "  OK   All malicious rules removed. B2 connectivity restored." -ForegroundColor Green
-    Write-Log "SECURITY  B2 firewall remediation complete — all block rules removed."
+    Write-Log "SECURITY  B2 firewall remediation complete. All block rules removed."
 } else {
-    Write-Host "  FAIL Rules still present: $($remaining -join ', ')" -ForegroundColor Red
-    Write-Log "SECURITY  WARNING: Some block rules could not be removed: $($remaining -join ', ')"
+    $list = $remaining -join ", "
+    Write-Host "  FAIL Rules still present: $list" -ForegroundColor Red
+    Write-Log "SECURITY  WARNING: Some block rules could not be removed: $list"
 }

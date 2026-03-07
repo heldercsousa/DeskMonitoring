@@ -43,7 +43,23 @@ Re-read the affected ECOSYSTEM_REPORT.md sections and CLAUDE.md to confirm — d
 
 **On failure:** Write the missing/incorrect section → increment cycle counter → re-read to confirm → continue.
 
-## Step 4 — Run health checks if scripts were modified
+## Step 4 — Verify setup_all.ps1 and ECOSYSTEM_REPORT.md reflect the fix (MANDATORY)
+
+This step is **non-negotiable** for any fix, new behavior, or security change.
+
+| Question | If yes → action required |
+|---|---|
+| Did the fix change how ACLs are applied? | Update `setup_all.ps1` Step 4 to match |
+| Did the fix add/change a script in `Config/`? | Update `setup_all.ps1` if it writes that script; update `ECOSYSTEM_REPORT.md` Section 15 |
+| Did the fix add a new folder? | Add ACL protection for it in `setup_all.ps1` Step 4 |
+| Did the fix change a service or scheduled task? | Update the relevant step in `setup_all.ps1` |
+| Did the fix add a new security hardening? | Add it permanently to `setup_all.ps1` |
+
+**Rationale:** `setup_all.ps1` is the reinstall blueprint. Any fix not reflected in it is lost after a fresh Windows install. A fix that doesn't survive reinstall is not a real fix.
+
+**On failure:** Update `setup_all.ps1` and/or `ECOSYSTEM_REPORT.md` → re-read to confirm → continue.
+
+## Step 5 — Run health checks if scripts were modified
 
 If any `.ps1` health check script was created or modified:
 

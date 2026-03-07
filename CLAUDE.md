@@ -32,8 +32,25 @@ These rules govern how Claude Code must behave in every session for this project
 | Any architectural change | `CLAUDE.md` relevant section + `ECOSYSTEM_REPORT.md` |
 | New camera added | `CLAUDE.md` Camera Inventory table + `check_camera.ps1` summary section + `camera-ecosystem` skill inventory |
 | New health check logic | Corresponding `/project:check` or `/project:camera-check` command baseline table |
+| Any fix, new behavior, or security hardening | `setup_all.ps1` — reflect the fix so it survives a full reinstall |
 
 **Do not mark a task complete until all guide updates are done.** ECOSYSTEM_REPORT.md is the disaster-recovery source of truth — if a file is not in Section 15, it cannot be restored after a reinstall.
+
+### RULE 1 — Mandatory Final Step After Any Fix or Behavior Change
+
+After successfully implementing any fix, new behavior, security hardening, or ecosystem change:
+
+1. **Review `setup_all.ps1`** — does the fix need to be reflected there so it survives a full reinstall? If yes, update it.
+2. **Review `ECOSYSTEM_REPORT.md`** — update Section 5 (inventory) and Section 15 (full file contents) for any changed scripts.
+3. **These two files are the reinstall blueprint** — any fix not reflected in them is lost after a fresh Windows install.
+
+| Scenario | Required update |
+|---|---|
+| Fixed a script behavior | Update the script content in `ECOSYSTEM_REPORT.md` Section 15 |
+| Changed ACL rules | Update `setup_all.ps1` Step 4 to match |
+| Added a new folder | Add ACL protection for it in `setup_all.ps1` Step 4 |
+| Changed a service/task | Update the relevant step in `setup_all.ps1` |
+| Fixed a firewall rule | Add rule removal/addition to `setup_all.ps1` if it should be permanent |
 
 ---
 

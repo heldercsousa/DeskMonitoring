@@ -233,19 +233,34 @@ $aclLogs.AddAccessRule($ruleLogs)
 Set-Acl -Path "C:\Sync\Logs" -AclObject $aclLogs
 Write-OK "C:\Sync\Logs locked (Deny Delete - RECURSIVE on all files/subfolders)"
 
-# 4.3 - C:\Sync\.git - LIBERATE for git management (remove any Deny Delete rules)
-Write-Host "  Liberating C:\Sync\.git..." -ForegroundColor Cyan
+# 4.3 - C:\Sync\.git - LIBERATE recursively for git management (remove any Deny rules on all files/subfolders)
+# CRITICAL: Must use icacls /T for recursive removal - Set-Acl only affects the folder itself.
+# Without this, git cannot create index.lock and all git operations fail.
+Write-Host "  Liberating C:\Sync\.git (recursive)..." -ForegroundColor Cyan
 if (Test-Path "C:\Sync\.git") {
-    $aclGit = Get-Acl "C:\Sync\.git"
-    $denyRules = $aclGit.Access | Where-Object { $_.AccessControlType -eq 'Deny' }
-    foreach ($rule in $denyRules) {
-        $aclGit.RemoveAccessRule($rule) | Out-Null
-    }
-    Set-Acl -Path "C:\Sync\.git" -AclObject $aclGit
-    Write-OK "C:\Sync\.git liberated (no Deny Delete - git can manage freely)"
+    # Remove deny rules using well-known SIDs (works on all Windows locales)
+    icacls "C:\Sync\.git" /remove:d "*S-1-1-0" /T /Q | Out-Null   # Everyone
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q | Out-Null  # Users
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-544" /T /Q | Out-Null  # Administrators (safety)
+    Write-OK "C:\Sync\.git liberated RECURSIVELY (all files/subfolders - git can manage freely)"
 } else {
     Write-Warn "C:\Sync\.git not found (will be created if git init is run)"
 }
+
+# 4.4 - C:\Sync\Evidence - Block deletions (forensic evidence must be tamper-proof)
+Write-Host "  Protecting C:\Sync\Evidence..." -ForegroundColor Cyan
+if (-not (Test-Path "C:\Sync\Evidence")) { New-Item -ItemType Directory -Path "C:\Sync\Evidence" -Force | Out-Null }
+$aclEvidence = Get-Acl "C:\Sync\Evidence"
+$ruleEvidence = New-Object System.Security.AccessControl.FileSystemAccessRule(
+    $sidEveryone,
+    [System.Security.AccessControl.FileSystemRights]'Delete,DeleteSubdirectoriesAndFiles',
+    [System.Security.AccessControl.InheritanceFlags]'ContainerInherit,ObjectInherit',
+    [System.Security.AccessControl.PropagationFlags]::None,
+    [System.Security.AccessControl.AccessControlType]::Deny
+)
+$aclEvidence.AddAccessRule($ruleEvidence)
+Set-Acl -Path "C:\Sync\Evidence" -AclObject $aclEvidence
+Write-OK "C:\Sync\Evidence locked (Deny Delete - forensic evidence protected)"
 
 Write-OK "ACL protection complete: Config+Logs blocked RECURSIVELY, .git liberated"
 
@@ -494,7 +509,7 @@ Write-Host "Applied:" -ForegroundColor White
 Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
 Write-Host "  Step  2 - run_mirror.bat with /E flag (no delete mirroring)" -ForegroundColor Gray
 Write-Host "  Step  3 - cloud_sync.ps1 with 3-phase ACL protection (7d retention)" -ForegroundColor Gray
-Write-Host "  Step  4 - ACL: Config+Logs blocked RECURSIVELY, .git liberated" -ForegroundColor Gray
+Write-Host "  Step  4 - ACL: Config+Logs+Evidence blocked RECURSIVELY, .git liberated RECURSIVELY" -ForegroundColor Gray
 Write-Host "  Step  5 - DailySecurityCheck v7 + scheduled task + shortcut" -ForegroundColor Gray
 Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
 Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor Gray
