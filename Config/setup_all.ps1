@@ -354,7 +354,7 @@ if (Test-Path 'C:\Sync\.git') {
     Write-OK "C:\Sync\.git liberated (no Deny Delete)"
     $gitDeny = (icacls "C:\Sync\.git" 2>&1) | Where-Object { $_ -match ':D\b' }
     if ($gitDeny) {
-        Write-Fail "C:\Sync\.git still has Deny rules — investigate: $gitDeny"
+        Write-Fail "C:\Sync\.git still has Deny rules - investigate: $gitDeny"
     } else {
         Write-OK "C:\Sync\.git verified clean (zero Deny rules)"
     }
