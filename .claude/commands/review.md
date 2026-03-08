@@ -3,7 +3,9 @@ name: review
 description: Invoke after completing any task, fix, or change that requires verification before claiming it is done — re-reads modified files, confirms guide sync, runs health checks, and auto-attempts fixes on failures up to 4 cycles before escalating to git stash and known_issues.md
 ---
 
-# Task Completion Review — Self-Healing Loop
+# Task Completion Review -- Self-Healing Loop
+
+**Phase 0 reminder:** Before ANY task touching `Config/` or `setup_update.ps1`, invoke relevant skills and load project commands. This review is Phase 3-4 of the 6-phase lifecycle.
 
 Evidence before claims. Run this after every task.
 
@@ -19,7 +21,22 @@ Start at Cycle 1. Each time a step fails and a fix is attempted, increment the c
 
 List every file created or modified this task. No file is assumed correct without being read.
 
-## Step 2 — Re-read every touched file
+## Step 1.5 — Syntax parse every modified .ps1
+
+For every `.ps1` file modified in this task, run:
+
+```powershell
+$tokens = $null; $errors = $null
+$null = [System.Management.Automation.Language.Parser]::ParseFile('C:\Sync\Config\SCRIPT.ps1', [ref]$tokens, [ref]$errors)
+if ($errors.Count -eq 0) { "PARSE OK" } else { $errors | ForEach-Object { "L$($_.Extent.StartLineNumber) $($_.Message)" } }
+```
+
+**IMPORTANT -- avoid em dash encoding bug:**
+Never use `--` (em dash U+2014) in double-quoted strings passed to Write-Host/Write-Step/Write-OK/Write-Fail/Write-Warn. The UTF-8 byte `0x94` (third byte of em dash) is read by ParseFile as U+201D (curly right quote), breaking string parsing. Use ` - ` (space-hyphen-space) instead.
+
+**On failure:** Fix the syntax error, save, re-parse. Do NOT mark any step done until parse returns 0 errors.
+
+## Step 2 -- Re-read every touched file
 
 Use the Read tool on each file. Confirm:
 - Content matches intent (no truncation, no missing sections)

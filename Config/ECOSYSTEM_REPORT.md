@@ -123,7 +123,12 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam |
 | `cam2.conf` | Read by `cam2_relay.ps1` | CAM-2 credentials (plaintext, ACL-protected, **gitignored**) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
-| `setup_all.ps1` | Fresh install / new device | Centralized setup: all security hardening + task registration + .git ACL liberation |
+| `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry |
+| `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
+| `start_ecosystem.ps1` | Manual / `setup_update.ps1` | Starts all components; writes `.ecosystem_state = running` |
+| `stop_ecosystem.ps1` | Manual / `setup_update.ps1` | Stops all components in reverse; writes `.ecosystem_state = stopped` |
+| `pause_camera.ps1` | Manual (desktop shortcut) | Stops Yawcam; sets `.camera_paused` flag |
+| `resume_camera.ps1` | Manual (desktop shortcut) | Starts Yawcam; removes `.camera_paused` flag |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
 | `ECOSYSTEM_REPORT.md` | — | This document |
@@ -160,14 +165,14 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `DailySecurityCheck.ps1` | Daily security scan — processes, ports, remote tools, unknown devices |
 | `AutoCleanup.ps1` | Automated cleanup triggered by DailySecurityCheck |
 
-### Camera scripts (in `C:\Program Files (x86)\Yawcam\`)
+### Camera scripts (in `C:\Sync\Config\`)
 
-These scripts are NOT inside `C:\Sync\Config\` but are part of the ecosystem. Restore from this section if lost.
+These scripts were relocated from `C:\Program Files (x86)\Yawcam\` to `C:\Sync\Config\` so they are inside git and ACL-protected.
 
 | File | Used by | Purpose |
 |---|---|---|
 | `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: checks for recent .avi recordings, restarts Yawcam + resets webcam PnP device if frozen. 60s interval, 600s restart cooldown. |
-| `start_monitor.ps1` | Registry Run `YawcamMonitor` | Boot launcher: waits 30s for system to stabilize, then starts `yawcam_monitor_v4.ps1` hidden |
+| `start_monitor.ps1` | Registry Run `YawcamMonitor` | Boot launcher: waits 30s for system to stabilize, then starts `C:\Sync\Config\yawcam_monitor_v4.ps1` hidden |
 
 ### Claude Code tooling (in `C:\Sync\.claude\`)
 
@@ -177,11 +182,11 @@ These files configure the Claude Code AI assistant for this project. Restore fro
 |---|---|
 | `.claude/settings.json` | Per-project permissions (allow/deny), env vars for key paths, MCP server config |
 | `.claude/commands/commit.md` | `/project:commit` slash command — minimal-token git commit workflow |
-| `.claude/commands/check.md` | `/project:check` slash command — FolderSync health check + auto-diagnosis |
-| `.claude/commands/camera-check.md` | `/project:camera-check` slash command — camera health check + auto-diagnosis |
+| `.claude/commands/check.md` | `/project:check` slash command — FolderSync health check + auto-diagnosis (still active; health.md is primary) |
+| `.claude/commands/camera-check.md` | `/project:camera-check` slash command — camera health check + auto-diagnosis (still active; health.md is primary) |
 | `.claude/commands/camera-ecosystem.md` | `camera-ecosystem` skill — comprehensive camera/motion detection environment reference |
-| `.claude/commands/review.md` | `review` skill — self-healing post-task verification (RULE 3): 4-cycle fix loop, escalates to `known_issues.md` on failure |
-| `.claude/commands/health.md` | `health` skill — full ecosystem health check; routes failures to `/project:check` or `/project:camera-check` |
+| `.claude/commands/review.md` | `review` skill — self-healing post-task verification (RULE 3): 4-cycle fix loop, escalates to `known_issues.md` on failure; now includes Phase 0 reminder + syntax parse step |
+| `.claude/commands/health.md` | `health` skill — UNIFIED ecosystem health check; respects `.ecosystem_state` and `.camera_paused` flags; includes lifecycle control commands |
 | `check_health.bat` | Double-click launcher at `C:\Sync\check_health.bat` — runs `health_check_all.ps1` in a paused window |
 
 ---
@@ -2069,6 +2074,116 @@ pause
 
 ---
 
+### `C:\Sync\Config\start_ecosystem.ps1`
+> Starts all ecosystem components. Writes `.ecosystem_state = running`. Requires Administrator.
+
+```powershell
+#Requires -RunAsAdministrator
+# start_ecosystem.ps1 -- see full file in git for complete version
+$ErrorActionPreference = 'SilentlyContinue'
+$LogFile   = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$StateFile = "C:\Sync\Config\.ecosystem_state"
+function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
+function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
+function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
+# Starts: FolderSyncWatchdog, FolderSyncAuditor, scheduled tasks, RealTimeSync, Yawcam, CAM-2 relay
+# Clears .camera_paused flag if present
+# Writes: 'running' | Set-Content -LiteralPath $StateFile -Encoding UTF8
+# Full source: C:\Sync\Config\start_ecosystem.ps1 (committed to git)
+```
+
+---
+
+### `C:\Sync\Config\stop_ecosystem.ps1`
+> Stops all ecosystem components in reverse order. Writes `.ecosystem_state = stopped`. Requires Administrator.
+
+```powershell
+#Requires -RunAsAdministrator
+# stop_ecosystem.ps1 -- see full file in git for complete version
+$ErrorActionPreference = 'SilentlyContinue'
+$LogFile   = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$StateFile = "C:\Sync\Config\.ecosystem_state"
+# Stops in reverse order: CAM-2 relay (VLC), Yawcam, RealTimeSync, scheduled tasks (disable),
+#   FolderSyncAuditor, FolderSyncWatchdog
+# Writes: 'stopped' | Set-Content -LiteralPath $StateFile -Encoding UTF8
+# Full source: C:\Sync\Config\stop_ecosystem.ps1 (committed to git)
+```
+
+---
+
+### `C:\Sync\Config\pause_camera.ps1`
+> Stops Yawcam only; sets `.camera_paused` flag. Resume with `resume_camera.ps1`.
+
+```powershell
+#Requires -RunAsAdministrator
+# pause_camera.ps1
+$ErrorActionPreference = 'SilentlyContinue'
+$LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$PausedFlag = "C:\Sync\Config\.camera_paused"
+function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
+if (Test-Path $PausedFlag) { Write-Host "  WARN Camera already paused" -ForegroundColor Yellow; exit 0 }
+Get-Process yawcam -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+Get-Process javaw -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowTitle -like '*Yawcam*' } | Stop-Process -Force -ErrorAction SilentlyContinue
+'paused' | Set-Content -LiteralPath $PausedFlag -Encoding UTF8
+Write-Log "CAMERA-PAUSE  Yawcam stopped, .camera_paused flag set"
+Write-Host "  OK   Camera paused. Run resume_camera.ps1 to restart." -ForegroundColor Green
+```
+
+---
+
+### `C:\Sync\Config\resume_camera.ps1`
+> Starts Yawcam; removes `.camera_paused` flag.
+
+```powershell
+#Requires -RunAsAdministrator
+# resume_camera.ps1
+$ErrorActionPreference = 'SilentlyContinue'
+$LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$PausedFlag = "C:\Sync\Config\.camera_paused"
+function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
+if (-not (Test-Path $PausedFlag)) { Write-Host "  WARN .camera_paused not found -- may already be running" -ForegroundColor Yellow; exit 0 }
+Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 3
+Remove-Item -LiteralPath $PausedFlag -Force -ErrorAction SilentlyContinue
+Write-Log "CAMERA-RESUME  Yawcam started, .camera_paused flag removed"
+Write-Host "  OK   Camera resumed (Yawcam started)." -ForegroundColor Green
+```
+
+---
+
+### `C:\Sync\Config\yawcam_monitor_v4.ps1`
+> Relocated from `C:\Program Files (x86)\Yawcam\`. Infinite-loop monitor.
+> Checks `C:\TEMP\motion_videos` (symlink to Bois) for .avi files. Restarts Yawcam if > 15 min without recording.
+
+```powershell
+# yawcam_monitor_v4.ps1 -- Relocated to C:\Sync\Config\
+# Full source committed to git. Key parameters:
+$YawcamPath      = "C:\Program Files (x86)\Yawcam\yawcam.exe"
+$VideoPath       = "C:\TEMP\motion_videos"  # should be symlink to C:\Users\helde\Repos\Bois
+$CheckInterval   = 60     # seconds between checks
+$MaxMinutesWithoutVideo = 15   # threshold before restart
+$RestartCooldown = 600    # seconds between restarts (10 min)
+# Loop: if latest .avi > 15 min old AND not in cooldown -> Restart-YawcamSafely
+# Restart sequence: kill Yawcam -> disable/enable webcam PnP -> start Yawcam
+```
+
+---
+
+### `C:\Sync\Config\start_monitor.ps1`
+> Boot launcher. Relocated from `C:\Program Files (x86)\Yawcam\`.
+> Registry Run `YawcamMonitor` -> `C:\Sync\Config\start_monitor.ps1`
+
+```powershell
+# start_monitor.ps1 -- Relocated to C:\Sync\Config\
+Start-Sleep -Seconds 30
+Start-Process powershell.exe `
+    -ArgumentList '-ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\yawcam_monitor_v4.ps1"' `
+    -WindowStyle Hidden
+```
+
+---
+
 *Generated by Claude (claude-sonnet-4-6)*
-*Safe to upload to GitHub Gist — contains no secrets.*
+*Safe to upload to GitHub Gist - contains no secrets.*
 *Do NOT include `rclone.conf` in any gist.*

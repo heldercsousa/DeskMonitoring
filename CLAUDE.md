@@ -1,21 +1,53 @@
 <!-- TASK GATE — READ THIS FIRST, EVERY SESSION — APPLIES TO ALL MACHINES -->
 ## NON-NEGOTIABLE TASK RULES
 
-### Pre-task gate
-For any task modifying `C:\Sync\Config\`, `ECOSYSTEM_REPORT.md`, `CLAUDE.md`, or `setup_all.ps1`:
-→ Invoke `EnterPlanMode` FIRST. Plan must explicitly list all RULE 1 follow-up steps.
+### 6-Phase Change Lifecycle (applies to ANY Config/ change)
+
+**Phase 0 — Load context**
+Before anything else: invoke relevant skills, load project commands, review CLAUDE.md rules.
+
+**Phase 1 — Plan**
+EnterPlanMode. Plan must list all RULE 1 follow-up steps explicitly.
+
+**Phase 2 — Apply**
+Execute changes. If a step cannot be completed as planned, return to Phase 1.
+
+**Phase 3 — Review compliance**
+Re-read every modified file. Confirm content matches intent, no truncation, no encoding anomalies (em dashes etc.).
+Any non-compliant point → fix → back to Phase 3.
+
+**Phase 4 — Test**
+a) Syntax parse every modified .ps1 via ParseFile (0 errors required):
+```powershell
+$t=$null;$e=$null;[System.Management.Automation.Language.Parser]::ParseFile('C:\Sync\Config\SCRIPT.ps1',[ref]$t,[ref]$e);$e.Count
+```
+b) Execution test: run `setup_update.ps1` as Administrator — all steps print OK with no errors.
+Exception: if execution would override production state, document rollback first.
+c) If production is running: run `/project:health` and confirm all PASS.
+Any failure → Phase 2 for fix. If fix requires plan change → Phase 1.
+
+**Phase 5 — Knowledge base sync (RULE 1)**
+Update ECOSYSTEM_REPORT.md Section 5 + Section 15 for every changed .ps1.
+Update CLAUDE.md if architecture/paths/task names/log paths changed.
+Update setup_update.ps1 so fix survives full reinstall.
+
+**Phase 6 — Commit**
+Invoke `/commit` skill. Never raw git commands.
 
 ### Post-task gate — run ALL before claiming done or committing
 1. **RULE 1a** — Updated `ECOSYSTEM_REPORT.md` Section 5 (inventory row) for every changed `.ps1`?
 2. **RULE 1b** — Updated `ECOSYSTEM_REPORT.md` Section 15 (full file contents) for every changed `.ps1`?
 3. **RULE 1c** — Updated `CLAUDE.md` if architecture/paths/task names/log paths changed?
-4. **RULE 1d** — Updated `setup_all.ps1` so fix survives full reinstall?
+4. **RULE 1d** — Updated `setup_update.ps1` so fix survives full reinstall?
 5. **RULE 3**  — Invoked `superpowers:verification-before-completion` skill before claiming done?
 6. **RULE 4**  — Invoked `/commit` skill (NEVER raw git commands)?
 
 ### Hard stop
 If you are about to write "Done.", "Complete.", "All good." or similar — **STOP**.
-Run steps 1–6 above first. Only then proceed.
+Run steps 1-6 above first. Only then proceed.
+
+### Em dash encoding rule (PowerShell)
+NEVER use em dash (U+2014) in double-quoted strings in .ps1 files. The UTF-8 byte 0x94 is read by ParseFile as U+201D (curly right quote), breaking string parsing. Use ` - ` (space-hyphen-space) instead.
 
 See RULE 1, RULE 3, RULE 4 below for full detail.
 <!-- END TASK GATE -->
@@ -247,7 +279,12 @@ The ecosystem has four layers that work together continuously:
 
 | Script | Purpose |
 |---|---|
-| `setup_all.ps1` | Master setup — firewall log permissions, regenerates `run_mirror.bat`, orchestrates full init |
+| `setup_update.ps1` | Master setup v3 — state-aware (stops ecosystem if running, reconfigures, restarts). Replaces `setup_all.ps1`. |
+| `setup_all.ps1` | Legacy master setup v2 — kept for reference; use `setup_update.ps1` for all new installs |
+| `start_ecosystem.ps1` | Starts all components (services, tasks, RealTimeSync, Yawcam, CAM-2 relay); writes `.ecosystem_state = running` |
+| `stop_ecosystem.ps1` | Stops all components in reverse order; writes `.ecosystem_state = stopped` |
+| `pause_camera.ps1` | Stops Yawcam only; sets `.camera_paused` flag so health checks skip camera checks |
+| `resume_camera.ps1` | Starts Yawcam; removes `.camera_paused` flag |
 | `register_tasks.ps1` | Registers `FolderSync-CloudBackup` and `FolderSync-Watchdog` scheduled tasks as SYSTEM |
 | `install_service.ps1` | Installs `wdog.ps1` as NSSM service `FolderSyncWatchdog` |
 | `install_auditor_service.ps1` | Installs `auditor.ps1` as NSSM service `FolderSyncAuditor` |
@@ -321,6 +358,8 @@ Scheduled tasks invoke PowerShell with `-ExecutionPolicy Bypass`. For interactiv
 | `C:\Sync\Evidence` | Deny Delete + Children (full inherit) | Forensic data tamper-proof |
 | `C:\Sync\.git` | **None** — liberated via `icacls /remove:d /T` | git needs full write; liberation is Step 4.5 |
 | `C:\Sync\Mirror` | **None** at folder level | `cloud_sync.ps1` manages 7-day per-file Deny Delete internally |
+| `C:\Sync\Config\.ecosystem_state` | Inherits Config\ Deny Delete | Runtime state flag: "running" or "stopped". Gitignored. |
+| `C:\Sync\Config\.camera_paused` | Inherits Config\ Deny Delete | Camera pause flag. Gitignored. |
 
 **Repair command** (Admin PS): run `setup_all.ps1` as Administrator — Step 4 re-applies all rules idempotently.
 
@@ -432,12 +471,14 @@ Retention: 7 days (ACL-protected then cleaned by cloud_sync.ps1)
 | Path | Purpose |
 |---|---|
 | `C:\Program Files (x86)\Yawcam\Yawcam.exe` | Main executable |
-| `C:\Program Files (x86)\Yawcam\yawcam_monitor_v4.ps1` | Active monitor script (recovery loop) |
-| `C:\Program Files (x86)\Yawcam\start_monitor.ps1` | Boot launcher — waits 30s then starts monitor hidden |
+| `C:\Sync\Config\yawcam_monitor_v4.ps1` | Active monitor script (recovery loop) — relocated from Yawcam dir |
+| `C:\Sync\Config\start_monitor.ps1` | Boot launcher — waits 30s then starts monitor hidden — relocated from Yawcam dir |
 | `C:\Users\helde\Repos\Bois\YYYY-MM-DD\` | Recording output (date-stamped subdirectory) |
 | `C:\TEMP\motion_videos` | Legacy path watched by monitor v4 — not the actual recording path; may need a symlink |
 | `C:\Sync\Config\cam2_relay.ps1` | CAM-2 VLC relay — converts RTSP from C100 to MJPEG HTTP on `127.0.0.1:8161` |
 | `C:\Sync\Config\cam2.conf` | CAM-2 credentials (plaintext, ACL-protected, gitignored) |
+| `C:\Sync\Config\.ecosystem_state` | Runtime state flag written by start/stop scripts ("running" or "stopped"). Gitignored. |
+| `C:\Sync\Config\.camera_paused` | Camera pause flag written by pause_camera.ps1. Gitignored. |
 
 ### Yawcam Configuration (key settings)
 

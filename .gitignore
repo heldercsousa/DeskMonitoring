@@ -1,3 +1,5 @@
 /Mirror
 *.tmp.*
 /Config/cam2.conf
+/Config/.ecosystem_state
+/Config/.camera_paused
