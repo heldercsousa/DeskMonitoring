@@ -1,7 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git -C \"C:\Sync\"*)",
+      "Bash(git -C \"C:\\Sync\"*)",
       "Bash(git -C /c/Sync*)",
       "Bash(git status*)",
       "Bash(git diff*)",
@@ -9,14 +9,32 @@
       "Bash(git add*)",
       "Bash(git commit*)",
       "Bash(git push*)",
-      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\Sync\Config\*\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\*\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File /c/Sync/Config/*)",
       "Bash(powershell -ExecutionPolicy Bypass -File /tmp/*.ps1)",
       "Bash(powershell -ExecutionPolicy Bypass -Command \"*\")",
       "Bash(powershell -Command \"*\")",
       "Bash(cat > /tmp/*.ps1 << *)",
       "Bash(mkdir -p *)",
-      "Bash(del *)",
-      "Bash(test -f *)"
+      "Bash(rm *)",
+      "Bash(test -f *)",
+      "Bash(node:*)",
+      "Bash(Remove-Item:*)",
+      "Bash(rm:*)",
+      "Bash(git:*)",
+      "Read(//c/Users/helde/AppData/Roaming/Microsoft/Internet Explorer/Quick Launch/User Pinned/TaskBar/**)",
+      "Read(//c/Users/helde/**)",
+      "Bash(powershell:*)",
+      "Bash(where.exe ffmpeg)",
+      "Bash(where.exe vlc)",
+      "Bash(dir \"C:\\\\Program Files\\\\VideoLAN\\\\VLC\\\\vlc.exe\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"Set-ItemProperty ''HKCU:\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run'' -Name ''YawcamCam2Relay'' -Value ''powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File \"\"C:\\\\Sync\\\\Config\\\\cam2_relay.ps1\"\"''; Write-Host ''OK''\")",
+      "Bash(powershell.exe -Command \"Remove-Item -Force ''C:\\\\Sync\\\\.git\\\\index.lock''\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \":*)",
+      "Bash(powershell.exe -Command \"Get-CimInstance Win32_Process | Where-Object { $_CommandLine -like ''*git*'' -or $_CommandLine -like ''*Sync*'' } | Select-Object ProcessId, Name, CommandLine\")",
+      "Bash(powershell.exe -Command \"Get-Process git -ErrorAction SilentlyContinue | Select-Object Id, Name, StartTime\")",
+      "Bash(powershell.exe -Command \"Move-Item ''C:\\\\Sync\\\\Config\\\\cam2_relay.ps1'' ''C:\\\\Sync\\\\Config\\\\motion\\\\cam2_relay.ps1''; Move-Item ''C:\\\\Sync\\\\Config\\\\cam2.conf'' ''C:\\\\Sync\\\\Config\\\\motion\\\\cam2.conf''; Write-Host ''Moved''\")",
+      "Bash(cmd:*)"
     ]
   }
 }

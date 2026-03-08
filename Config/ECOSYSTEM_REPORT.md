@@ -198,6 +198,7 @@ These files configure the Claude Code AI assistant for this project. Restore fro
 - `/W:5` — Espera curta entre tentativas
 - `/LOG+` — append to daily rotating log file (`mirror_YYYY-MM-DD.log`)
 - `/NP /NDL` — no progress output, no directory listing
+- `/NFL` — No File List: suppresses per-file output, keeps summary only (prevents log bloat)
 
 **Log:** `C:\Sync\Logs\mirror_YYYY-MM-DD.log` (rotates daily, deleted after 30 days by cloud_sync.ps1)
 
@@ -775,9 +776,10 @@ for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') d
 :: /Z    = Restartable mode (essential for video files if copy is interrupted)
 :: /R:1  = Retry only once to avoid massive logs
 :: /W:2  = Short wait between retries
+:: /NFL  = No File List - suppresses per-file output, keeps summary only (prevents log bloat)
 :: /LOG+ = Append to DAILY rotating log (mirror_YYYY-MM-DD.log)
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
 ```
 
 ---
@@ -1089,9 +1091,10 @@ Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
 :: /Z    = Modo restartable (essencial para vídeos se a cópia for interrompida)
 :: /R:1  = Apenas 1 tentativa para evitar logs gigantes
 :: /W:2  = Espera curta entre tentativas
+:: /NFL  = No File List - suppresses per-file output, keeps summary only (prevents log bloat)
 :: /LOG+ = Append ao log diário rotativo
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
 '@
 Write-OK "run_mirror.bat updated → mirror_YYYY-MM-DD.log"
 
