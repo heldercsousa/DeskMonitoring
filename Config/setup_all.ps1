@@ -320,6 +320,7 @@ function Set-DenyDeleteFull($path) {
     $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
         $sidEveryone, 'Delete,DeleteSubdirectoriesAndFiles',
         'ContainerInherit,ObjectInherit', 'None', 'Deny')
+    $acl.RemoveAccessRule($rule) | Out-Null   # no-op if absent; prevents duplicate stacking on reruns
     $acl.AddAccessRule($rule)
     Set-Acl -Path $path -AclObject $acl
 }
@@ -328,6 +329,7 @@ function Set-DenyDeleteFolderOnly($path) {
     $acl = Get-Acl $path
     $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
         $sidEveryone, 'Delete', 'None', 'None', 'Deny')
+    $acl.RemoveAccessRule($rule) | Out-Null   # no-op if absent; prevents duplicate stacking on reruns
     $acl.AddAccessRule($rule)
     Set-Acl -Path $path -AclObject $acl
 }
@@ -350,6 +352,12 @@ if (Test-Path 'C:\Sync\.git') {
     icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q | Out-Null
     icacls "C:\Sync\.git" /remove:d "*S-1-5-32-544" /T /Q | Out-Null
     Write-OK "C:\Sync\.git liberated (no Deny Delete)"
+    $gitDeny = (icacls "C:\Sync\.git" 2>&1) | Where-Object { $_ -match ':D\b' }
+    if ($gitDeny) {
+        Write-Fail "C:\Sync\.git still has Deny rules — investigate: $gitDeny"
+    } else {
+        Write-OK "C:\Sync\.git verified clean (zero Deny rules)"
+    }
 }
 Write-OK "C:\Sync\Mirror - no folder ACL (cloud_sync.ps1 manages per-file ACLs)"
 

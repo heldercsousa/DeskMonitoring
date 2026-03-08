@@ -152,7 +152,6 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `install_service.ps1` | FolderSyncWatchdog NSSM service missing or removed |
 | `install_auditor_service.ps1` | FolderSyncAuditor NSSM service missing or removed |
 | `register_tasks.ps1` | Cloud backup task missing (follow with fix_watchdog_task.ps1) |
-| `protect_sync_folders.ps1` | Re-apply Deny Delete ACL to C:\Sync |
 
 ### Security scripts (in %USERPROFILE%\Documents\SecurityScripts\)
 

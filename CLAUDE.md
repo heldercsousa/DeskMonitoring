@@ -252,7 +252,6 @@ The ecosystem has four layers that work together continuously:
 | `install_service.ps1` | Installs `wdog.ps1` as NSSM service `FolderSyncWatchdog` |
 | `install_auditor_service.ps1` | Installs `auditor.ps1` as NSSM service `FolderSyncAuditor` |
 | `enable_file_auditing.ps1` | Configures `auditpol`, sets SACL on source folder for deletion/write auditing, applies Deny Delete ACL to `C:\Sync` root |
-| `protect_sync_folders.ps1` | Applies/repairs Deny Delete ACLs on Config, Logs, Mirror folders using well-known SIDs |
 
 ### Continuous Operation (automated)
 
@@ -313,7 +312,6 @@ Scheduled tasks invoke PowerShell with `-ExecutionPolicy Bypass`. For interactiv
 
 `setup_all.ps1` **Step 4** is the **single authority** for all ACL (Deny Delete) rules.
 `setup_all.ps1` **Step 16** runs `enable_file_auditing.ps1` — **SACL only** (audit policy on Bois folder).
-`protect_sync_folders.ps1` mirrors Step 4's rules for manual repair.
 
 | Path | Rule | Notes |
 |---|---|---|
@@ -324,7 +322,7 @@ Scheduled tasks invoke PowerShell with `-ExecutionPolicy Bypass`. For interactiv
 | `C:\Sync\.git` | **None** — liberated via `icacls /remove:d /T` | git needs full write; liberation is Step 4.5 |
 | `C:\Sync\Mirror` | **None** at folder level | `cloud_sync.ps1` manages 7-day per-file Deny Delete internally |
 
-**Repair command** (Admin PS): `powershell -ExecutionPolicy Bypass -File "C:\Sync\Config\protect_sync_folders.ps1"`
+**Repair command** (Admin PS): run `setup_all.ps1` as Administrator — Step 4 re-applies all rules idempotently.
 
 **`.git` index.lock trap**: If `index.lock` exists and can't be deleted, run in Admin PS:
 ```powershell
@@ -343,7 +341,7 @@ Root cause: only occurs if `setup_all.ps1` was run with an older version that la
 |---|---|
 | `Config\rclone.conf` | Live Backblaze B2 credentials in plaintext. Never diff, log, or suggest changes to its contents. |
 | `Config\credentials.enc` | DPAPI binary blob. Any edit corrupts decryption irreversibly. |
-| ACL rules on `C:\Sync\` | See ACL Reference table above. Repair with `protect_sync_folders.ps1`, never freehand. |
+| ACL rules on `C:\Sync\` | See ACL Reference table above. Repair by re-running `setup_all.ps1` Step 4, never freehand. |
 | `Config\realtime.ffs_real` | FreeFileSync binary config. Edit only through the FreeFileSync GUI. |
 | Scheduled task principals | Both tasks run as `SYSTEM` with `RunLevel Highest`. Changing to a user account breaks ACL and service operations. |
 | NSSM service recovery settings | Services are configured to auto-restart. Do not disable recovery or change service identity. |
