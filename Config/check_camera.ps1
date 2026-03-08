@@ -50,7 +50,8 @@ Get-PnpDevice -ErrorAction SilentlyContinue |
 Write-Host "`n=== REGISTRY STARTUP ENTRIES ===" -ForegroundColor Cyan
 $runKey = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -ErrorAction SilentlyContinue
 Write-Host "  Yawcam:        $($runKey.Yawcam)"
-Write-Host "  YawcamMonitor: $($runKey.YawcamMonitor)"
+Write-Host "  YawcamMonitor:    $($runKey.YawcamMonitor)"
+Write-Host "  YawcamCam2Relay:  $($runKey.YawcamCam2Relay)"
 Write-Host "  (other Sync entries for reference)"
 Write-Host "  FolderSyncRealTime: $($runKey.FolderSyncRealTime)"
 
@@ -115,7 +116,32 @@ foreach ($dir in $allDirs) {
 }
 
 # =============================================================================
+Write-Host "`n=== CAM-2 RELAY (VLC: RTSP -> MJPEG http://127.0.0.1:8161/) ===" -ForegroundColor Cyan
+$relayProc = Get-CimInstance Win32_Process -Filter "Name = 'vlc.exe'" -ErrorAction SilentlyContinue |
+             Where-Object { $_.CommandLine -like "*cam2_relay*" -or $_.CommandLine -like "*8161*" }
+if ($relayProc) {
+    Write-Host "  VLC relay  : RUNNING (PID $($relayProc.ProcessId))" -ForegroundColor Green
+} else {
+    # Any VLC running (relay may have been started without cam2_relay in cmdline)
+    $vlcAny = Get-Process -Name "vlc" -ErrorAction SilentlyContinue
+    if ($vlcAny) {
+        Write-Host "  VLC relay  : VLC running (PID $($vlcAny.Id)) — verify it is the cam2 relay" -ForegroundColor Yellow
+    } else {
+        Write-Host "  VLC relay  : NOT RUNNING — run cam2_relay.ps1 or reboot to auto-start" -ForegroundColor Red
+    }
+}
+$cam2Reachable = Test-Connection -ComputerName "192.168.0.109" -Count 1 -Quiet -ErrorAction SilentlyContinue
+Write-Host "  C100 ping  : $(if ($cam2Reachable) { 'REACHABLE (192.168.0.109)' } else { 'UNREACHABLE — camera offline or IP changed?' })" -ForegroundColor $(if ($cam2Reachable) { 'Green' } else { 'Red' })
+$relayLog = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+if (Test-Path $relayLog) {
+    $lastLine = Get-Content $relayLog -Tail 1
+    Write-Host "  Last log   : $lastLine"
+} else {
+    Write-Host "  Relay log  : no log for today yet" -ForegroundColor Yellow
+}
+
+# =============================================================================
 Write-Host "`n=== CAMERA INPUT SUMMARY ===" -ForegroundColor Cyan
-Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2"
-Write-Host "  [CAM-2]  TP-LINK C100  (not yet configured)       ->  pending Yawcam 2nd input"
+Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2 (direct)"
+Write-Host "  [CAM-2]  TP-LINK Tapo C100 (192.168.0.109)        ->  VLC relay -> Yawcam (http://127.0.0.1:8161/)"
 Write-Host ""

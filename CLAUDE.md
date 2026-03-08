@@ -409,7 +409,7 @@ The Bois source folder is **also** the output target for a motion-detection came
 | ID | Device | Software | Status |
 |---|---|---|---|
 | CAM-1 | Built-in laptop webcam — HD User Facing (720p @ 30fps) | Yawcam 0.6.2 | **Active** |
-| CAM-2 | TP-LINK C100 IP camera (LAN) | Pending Yawcam 2nd input | **Not yet configured** |
+| CAM-2 | TP-LINK Tapo C100 IP camera (LAN, 192.168.0.109) | VLC RTSP→MJPEG relay (`cam2_relay.ps1`) → Yawcam (`http://127.0.0.1:8161/`) | **Active** |
 
 More cameras will be added over time. Each new camera should be integrated as an additional Yawcam input and documented in this table.
 
@@ -438,13 +438,15 @@ Retention: 7 days (ACL-protected then cleaned by cloud_sync.ps1)
 | `C:\Program Files (x86)\Yawcam\start_monitor.ps1` | Boot launcher — waits 30s then starts monitor hidden |
 | `C:\Users\helde\Repos\Bois\YYYY-MM-DD\` | Recording output (date-stamped subdirectory) |
 | `C:\TEMP\motion_videos` | Legacy path watched by monitor v4 — not the actual recording path; may need a symlink |
+| `C:\Sync\Config\cam2_relay.ps1` | CAM-2 VLC relay — converts RTSP from C100 to MJPEG HTTP on `127.0.0.1:8161` |
+| `C:\Sync\Config\cam2.conf` | CAM-2 credentials (plaintext, ACL-protected, gitignored) |
 
 ### Yawcam Configuration (key settings)
 
 | Setting | Value |
 |---|---|
-| Motion sensitivity | 60 |
-| Motion threshold | 25% |
+| Motion sensitivity | 91 (in XML: lower value = less sensitive — **was causing false triggers**) |
+| Motion threshold | 3% (in XML: `motionTol` — **was causing false triggers; raise to 15%**) |
 | Motion delay | 3 seconds |
 | Enable motion detection on startup | Yes |
 | Recording format | AVI (H.264) |
@@ -468,6 +470,7 @@ The monitor runs in an infinite loop (60s interval):
 Windows login
     → Registry Run: Yawcam.exe         (starts Yawcam with motion detection enabled)
     → Registry Run: YawcamMonitor      (start_monitor.ps1, 30s delay, then monitor v4 hidden)
+    → Registry Run: YawcamCam2Relay    (cam2_relay.ps1 hidden — VLC RTSP->MJPEG relay for CAM-2)
 ```
 
 ### Critical Power Settings

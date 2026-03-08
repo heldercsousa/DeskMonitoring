@@ -119,7 +119,9 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
-| `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup |
+| `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup, CAM-2 relay |
+| `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam |
+| `cam2.conf` | Read by `cam2_relay.ps1` | CAM-2 credentials (plaintext, ACL-protected, **gitignored**) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
 | `setup_all.ps1` | Fresh install / new device | Centralized setup: all security hardening + task registration + .git ACL liberation |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
@@ -1748,9 +1750,112 @@ Get-ChildItem "C:\Users\helde\Repos\Bois" -Directory -ErrorAction SilentlyContin
             }
     }
 
+Write-Host "`n=== CAM-2 RELAY (VLC: RTSP -> MJPEG http://127.0.0.1:8161/) ===" -ForegroundColor Cyan
+$relayProc = Get-CimInstance Win32_Process -Filter "Name = 'vlc.exe'" -ErrorAction SilentlyContinue |
+             Where-Object { $_.CommandLine -like "*cam2_relay*" -or $_.CommandLine -like "*8161*" }
+if ($relayProc) {
+    Write-Host "  VLC relay  : RUNNING (PID $($relayProc.ProcessId))" -ForegroundColor Green
+} else {
+    $vlcAny = Get-Process -Name "vlc" -ErrorAction SilentlyContinue
+    if ($vlcAny) {
+        Write-Host "  VLC relay  : VLC running (PID $($vlcAny.Id)) — verify it is the cam2 relay" -ForegroundColor Yellow
+    } else {
+        Write-Host "  VLC relay  : NOT RUNNING — run cam2_relay.ps1 or reboot to auto-start" -ForegroundColor Red
+    }
+}
+$cam2Reachable = Test-Connection -ComputerName "192.168.0.109" -Count 1 -Quiet -ErrorAction SilentlyContinue
+Write-Host "  C100 ping  : $(if ($cam2Reachable) { 'REACHABLE (192.168.0.109)' } else { 'UNREACHABLE — camera offline or IP changed?' })" -ForegroundColor $(if ($cam2Reachable) { 'Green' } else { 'Red' })
+$relayLog = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+if (Test-Path $relayLog) {
+    $lastLine = Get-Content $relayLog -Tail 1
+    Write-Host "  Last log   : $lastLine"
+} else {
+    Write-Host "  Relay log  : no log for today yet" -ForegroundColor Yellow
+}
+
 Write-Host "`n=== CAMERA INPUT SUMMARY ===" -ForegroundColor Cyan
-Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2  [ACTIVE]"
-Write-Host "  [CAM-2]  TP-LINK C100  (LAN)                      ->  pending Yawcam 2nd input  [NOT YET CONFIGURED]"
+Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2 (direct)  [ACTIVE]"
+Write-Host "  [CAM-2]  TP-LINK Tapo C100 (192.168.0.109)        ->  VLC relay -> Yawcam (http://127.0.0.1:8161/)  [ACTIVE]"
+```
+
+---
+
+### `C:\Sync\Config\cam2_relay.ps1`
+> CAM-2 VLC relay script. Reads credentials from `cam2.conf`, starts VLC as RTSP→MJPEG HTTP relay on `127.0.0.1:8161`. Monitors VLC process and restarts on death (30s interval). Logs to `C:\Sync\Logs\cam2_relay_YYYY-MM-DD.log`. Registered as `YawcamCam2Relay` registry Run entry (hidden, at login).
+
+```powershell
+# cam2_relay.ps1
+# CAM-2 RTSP -> MJPEG HTTP relay for Yawcam
+# Reads credentials from cam2.conf, starts VLC relay on http://127.0.0.1:8161/
+# Registered as startup entry: HKCU:\...\Run\YawcamCam2Relay
+# Logs to C:\Sync\Logs\cam2_relay_YYYY-MM-DD.log
+
+$ConfFile  = "C:\Sync\Config\cam2.conf"
+$VlcExe    = "C:\Program Files\VideoLAN\VLC\vlc.exe"
+$RelayPort = 8161
+$RelayHost = "127.0.0.1"
+$LogFile   = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+$CheckSecs = 30
+
+function Write-Log($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
+
+if (-not (Test-Path $ConfFile)) {
+    Write-Log "FAIL  cam2.conf not found at $ConfFile — relay cannot start"
+    exit 1
+}
+
+$conf = @{}
+Get-Content $ConfFile | Where-Object { $_ -match '^\s*[^#]' -and $_ -match '=' } | ForEach-Object {
+    $parts = $_ -split '=', 2
+    $conf[$parts[0].Trim()] = $parts[1].Trim()
+}
+
+$user   = $conf['CAM2_USER']
+$pass   = $conf['CAM2_PASS']
+$ip     = $conf['CAM2_IP']
+$port   = $conf['CAM2_PORT']
+$stream = $conf['CAM2_STREAM']
+
+if (-not $user -or -not $pass -or -not $ip) {
+    Write-Log "FAIL  cam2.conf missing required fields (CAM2_USER, CAM2_PASS, CAM2_IP)"
+    exit 1
+}
+
+$RtspUrl  = "rtsp://${user}:${pass}@${ip}:${port}/${stream}"
+$SoutDst  = "${RelayHost}:${RelayPort}/"
+$SoutArg  = "#transcode{vcodec=MJPG,fps=10,acodec=none}:std{access=http,mux=mpjpeg,dst=${SoutDst}}"
+
+Write-Log "START  CAM-2 relay starting  ->  http://${RelayHost}:${RelayPort}/"
+Write-Log "INFO   Source: rtsp://${user}:***@${ip}:${port}/${stream}"
+
+$vlcProc = $null
+
+function Start-VlcRelay {
+    Write-Log "INFO   Launching VLC relay"
+    $args = @(
+        "-I", "dummy",
+        "--no-one-instance",
+        "--loop",
+        "--sout-keep",
+        $RtspUrl,
+        "--sout=$SoutArg"
+    )
+    return Start-Process -FilePath $VlcExe -ArgumentList $args -PassThru -WindowStyle Hidden
+}
+
+$vlcProc = Start-VlcRelay
+
+while ($true) {
+    Start-Sleep -Seconds $CheckSecs
+    $LogFile = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+    if ($vlcProc -eq $null -or $vlcProc.HasExited) {
+        Write-Log "WARN   VLC relay process died — restarting"
+        $vlcProc = Start-VlcRelay
+    }
+}
 ```
 
 ---
