@@ -141,7 +141,7 @@ if (Test-Path $pausedFlag) {
 Write-Step "HKCU Run registry entries"
 $runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 $entries = @{
-    "Yawcam"          = '"C:\Program Files (x86)\Yawcam\Yawcam.exe"'
+    "Yawcam"          = '"C:\Sync\Config\start_yawcam.bat"'
     "YawcamMonitor"   = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\start_monitor.ps1"'
     "YawcamCam2Relay" = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"'
 }

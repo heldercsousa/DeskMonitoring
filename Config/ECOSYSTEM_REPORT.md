@@ -173,6 +173,7 @@ These scripts were relocated from `C:\Program Files (x86)\Yawcam\` to `C:\Sync\C
 |---|---|---|
 | `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: checks for recent .avi recordings, restarts Yawcam + resets webcam PnP device if frozen. 60s interval, 600s restart cooldown. |
 | `start_monitor.ps1` | Registry Run `YawcamMonitor` | Boot launcher: waits 30s for system to stabilize, then starts `C:\Sync\Config\yawcam_monitor_v4.ps1` hidden |
+| `start_yawcam.bat` | Registry Run `Yawcam` (replaces direct .exe entry) | `cd /d` to Yawcam dir then starts Yawcam.exe — fixes launcher.cfg not found error on boot |
 
 ### Claude Code tooling (in `C:\Sync\.claude\`)
 
@@ -2148,12 +2149,24 @@ $ErrorActionPreference = 'SilentlyContinue'
 $LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $PausedFlag = "C:\Sync\Config\.camera_paused"
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
-if (-not (Test-Path $PausedFlag)) { Write-Host "  WARN .camera_paused not found -- may already be running" -ForegroundColor Yellow; exit 0 }
-Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" -ErrorAction SilentlyContinue
+if (-not (Test-Path $PausedFlag)) { Write-Host "  WARN .camera_paused flag not found -- camera may already be running" -ForegroundColor Yellow; exit 0 }
+Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" `
+    -WorkingDirectory "C:\Program Files (x86)\Yawcam" -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 3
 Remove-Item -LiteralPath $PausedFlag -Force -ErrorAction SilentlyContinue
 Write-Log "CAMERA-RESUME  Yawcam started, .camera_paused flag removed"
 Write-Host "  OK   Camera resumed (Yawcam started)." -ForegroundColor Green
+```
+
+---
+
+### `C:\Sync\Config\start_yawcam.bat`
+> Boot launcher wrapper for Yawcam. Registered as `HKCU\Run\Yawcam`. Sets working directory to Yawcam install folder before starting `Yawcam.exe`, preventing the "launcher.cfg not found" error that occurs when the HKCU Run key launches the exe directly without a working directory.
+
+```bat
+@echo off
+cd /d "C:\Program Files (x86)\Yawcam"
+start "" "Yawcam.exe"
 ```
 
 ---

@@ -17,7 +17,8 @@ if (-not (Test-Path $PausedFlag)) {
     exit 0
 }
 
-Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" -ErrorAction SilentlyContinue
+Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" `
+    -WorkingDirectory "C:\Program Files (x86)\Yawcam" -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 3
 Remove-Item -LiteralPath $PausedFlag -Force -ErrorAction SilentlyContinue
 Write-Log "CAMERA-RESUME  Yawcam started, .camera_paused flag removed"
