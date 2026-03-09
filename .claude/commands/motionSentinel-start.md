@@ -1,9 +1,9 @@
 ---
-name: start
-description: Start all FolderSync + Camera ecosystem components (requires admin credentials)
+name: motionSentinel-start
+description: Start all FolderSync + Camera ecosystem components (requires Administrator)
 ---
 
-Run the ecosystem start script. A credential prompt will appear in the terminal — enter your local Windows administrator username and password to proceed.
+Run the ecosystem start script. Requires an elevated session (`#Requires -RunAsAdministrator`).
 
 ```bash
 powershell -ExecutionPolicy Bypass -File "C:\Sync\Config\start_ecosystem.ps1"

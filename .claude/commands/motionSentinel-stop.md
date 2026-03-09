@@ -1,12 +1,12 @@
 ---
-name: stop
-description: Stop all FolderSync + Camera ecosystem components (requires admin credentials)
+name: motionSentinel-stop
+description: Stop all FolderSync + Camera ecosystem components (requires Administrator)
 ---
 
-Run the ecosystem stop script. A credential prompt will appear in the terminal — enter your local Windows administrator username and password to proceed.
+Run the ecosystem stop script. Requires an elevated session (`#Requires -RunAsAdministrator`).
 
 ```bash
 powershell -ExecutionPolicy Bypass -File "C:\Sync\Config\stop_ecosystem.ps1"
 ```
 
-After stopping, the `.ecosystem_state` flag is set to `stopped`. Run `/project:start` to restart the ecosystem.
+After stopping, the `.ecosystem_state` flag is set to `stopped`. Run `/motionSentinel-start` to restart the ecosystem.
