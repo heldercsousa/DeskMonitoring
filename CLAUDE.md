@@ -32,7 +32,7 @@ Update CLAUDE.md if architecture/paths/task names/log paths changed.
 Update setup_update.ps1 so fix survives full reinstall.
 
 **Phase 6 — Commit**
-Invoke `/commit` skill. Never raw git commands.
+Run `/project:commit`. Never raw git commands, never `Skill("commit")`.
 
 ### Post-task gate — run ALL before claiming done or committing
 1. **RULE 1a** — Updated `ECOSYSTEM_REPORT.md` Section 5 (inventory row) for every changed `.ps1`?
@@ -40,7 +40,7 @@ Invoke `/commit` skill. Never raw git commands.
 3. **RULE 1c** — Updated `CLAUDE.md` if architecture/paths/task names/log paths changed?
 4. **RULE 1d** — Updated `setup_update.ps1` so fix survives full reinstall?
 5. **RULE 3**  — Invoked `superpowers:verification-before-completion` skill before claiming done?
-6. **RULE 4**  — Invoked `/commit` skill (NEVER raw git commands)?
+6. **RULE 4**  — Run `/project:commit` (NEVER raw git commands, NEVER `Skill("commit")`)?
 
 ### Hard stop
 If you are about to write "Done.", "Complete.", "All good." or similar — **STOP**.
@@ -192,23 +192,28 @@ Use `/project:review` for the full interactive verification checklist (includes 
 
 **Trigger:** After every task completion — immediately after RULE 3 review finishes, whether review passed or failed.
 
-**Required actions:**
+**How to commit — do this directly, no skill/command loading needed:**
 
-```powershell
-cd C:\Sync
-git add <all files changed in this task>
-git commit -m "<concise description of what changed>"
-git push
+```
+git status --short
+git diff --stat HEAD
+git add <only the files changed in this task — by name>
+git commit -m "$(cat <<'EOF'
+<imperative mood, ≤72 chars, describes actual change>
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+EOF
+)"
 ```
 
-**Constraints:**
+**Constraints (memorise these — never load a command to recall them):**
 - Never commit: `Logs/`, `Mirror/`, `Config/rclone.conf`, `Config/credentials.enc`, `Config/realtime.ffs_real`, `*.tmp.*`
-- Commit message must describe the actual change (not "update" or "fix" alone)
-- If nothing changed (e.g. review-only session): skip the commit step
-- If git push fails due to a stale lock at `.git/index.lock`: alert Helder — run as Administrator: `icacls "C:\Sync\.git" /remove:d "Everyone" /T /Q && del /F "C:\Sync\.git\index.lock"`
-- No PR creation — direct push to current branch
-
-**Note on git lock:** The Deny Delete ACL on `C:\Sync` propagates to `.git/`, which can trap lock files when git crashes. The fix above is a one-time admin operation per occurrence.
+- Never use `git add -A` or `git add .`
+- Never use `--no-verify`, `--amend`, or force flags (unless Helder explicitly asks)
+- Commit message must describe the actual change — not "update" or "fix" alone
+- If nothing changed: skip commit entirely
+- No PR creation — direct push to current branch only when Helder asks to push
+- If git push fails due to stale lock at `.git/index.lock`: alert Helder — Admin fix: `icacls "C:\Sync\.git" /remove:d "Everyone" /T /Q && del /F "C:\Sync\.git\index.lock"`
 
 ---
 
