@@ -94,10 +94,16 @@ if (-not $yawcam) {
 if (-not $yawcam) {
     Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 3
-    Write-OK "Yawcam started"
-    Write-Log "ECOSYSTEM-START  Yawcam started"
+    $yawcam = Get-Process yawcam -ErrorAction SilentlyContinue
+    if ($yawcam) {
+        Write-OK "Yawcam started (PID $($yawcam.Id))"
+        Write-Log "ECOSYSTEM-START  Yawcam started"
+    } else {
+        Write-Warn "Yawcam did not start - check C:\Program Files (x86)\Yawcam\Yawcam.exe"
+        Write-Log "ECOSYSTEM-START  WARN Yawcam did not start"
+    }
 } else {
-    Write-OK "Yawcam already running"
+    Write-OK "Yawcam already running (PID $($yawcam.Id))"
     Write-Log "ECOSYSTEM-START  Yawcam already running"
 }
 
@@ -109,10 +115,16 @@ if (-not $vlc) {
         -ArgumentList '-ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"' `
         -WindowStyle Hidden -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 2
-    Write-OK "CAM-2 relay started"
-    Write-Log "ECOSYSTEM-START  CAM-2 relay started"
+    $vlc = Get-Process vlc -ErrorAction SilentlyContinue
+    if ($vlc) {
+        Write-OK "CAM-2 relay started (VLC PID $($vlc.Id))"
+        Write-Log "ECOSYSTEM-START  CAM-2 relay started"
+    } else {
+        Write-Warn "CAM-2 relay (VLC) did not start - check cam2_relay.ps1"
+        Write-Log "ECOSYSTEM-START  WARN CAM-2 relay did not start"
+    }
 } else {
-    Write-OK "CAM-2 relay (VLC) already running"
+    Write-OK "CAM-2 relay (VLC) already running (PID $($vlc.Id))"
     Write-Log "ECOSYSTEM-START  CAM-2 relay already running"
 }
 
@@ -122,6 +134,25 @@ if (Test-Path $pausedFlag) {
     Remove-Item -LiteralPath $pausedFlag -Force -ErrorAction SilentlyContinue
     Write-OK ".camera_paused flag cleared"
     Write-Log "ECOSYSTEM-START  .camera_paused flag cleared"
+}
+
+# --- Ensure HKCU\Run autostart entries ---
+Write-Step "HKCU Run registry entries"
+$runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+$entries = @{
+    "Yawcam"          = '"C:\Program Files (x86)\Yawcam\Yawcam.exe"'
+    "YawcamMonitor"   = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\start_monitor.ps1"'
+    "YawcamCam2Relay" = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"'
+}
+foreach ($name in $entries.Keys) {
+    $current = (Get-ItemProperty $runKey -Name $name -ErrorAction SilentlyContinue).$name
+    if (-not $current) {
+        Set-ItemProperty $runKey -Name $name -Value $entries[$name] -ErrorAction SilentlyContinue
+        Write-OK "$name registry entry restored"
+        Write-Log "ECOSYSTEM-START  $name registry entry restored"
+    } else {
+        Write-OK "$name registry entry present"
+    }
 }
 
 # --- Write state flag ---

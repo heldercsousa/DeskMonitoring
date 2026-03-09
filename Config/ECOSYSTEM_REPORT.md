@@ -125,7 +125,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
-| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running` |
+| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs; restores HKCU\Run entries if missing |
 | `stop_ecosystem.ps1` | `/motionSentinel-stop` / Manual / `setup_update.ps1` | Stops all components in reverse; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = stopped` |
 | `pause_camera.ps1` | `/motionSentinel-pause` / Manual | Stops Yawcam; gate: `#Requires -RunAsAdministrator`; sets `.camera_paused` flag |
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
@@ -2080,6 +2080,7 @@ pause
 
 ### `C:\Sync\Config\start_ecosystem.ps1`
 > Starts all ecosystem components. Gate: `#Requires -RunAsAdministrator`. Writes `.ecosystem_state = running`.
+> Fixed 2026-03-08: Yawcam and CAM-2 relay now verified with Get-Process after Start-Process (no more false-positive OK). HKCU\Run registry entries auto-restored if missing.
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -2091,7 +2092,8 @@ function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $
 function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
 function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
 function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
-# Starts: FolderSyncWatchdog, FolderSyncAuditor, scheduled tasks, RealTimeSync, Yawcam, CAM-2 relay
+# Starts: FolderSyncWatchdog, FolderSyncAuditor, scheduled tasks, RealTimeSync, Yawcam (with PID confirm), CAM-2 relay (with VLC PID confirm)
+# Restores HKCU\Run entries (Yawcam, YawcamMonitor, YawcamCam2Relay) if missing
 # Clears .camera_paused flag if present
 # Writes: 'running' | Set-Content -LiteralPath $StateFile -Encoding UTF8
 # Full source: C:\Sync\Config\start_ecosystem.ps1 (committed to git)
