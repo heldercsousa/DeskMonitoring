@@ -92,7 +92,8 @@ if (-not $yawcam) {
               Where-Object { $_.MainWindowTitle -like '*Yawcam*' }
 }
 if (-not $yawcam) {
-    Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" -ErrorAction SilentlyContinue
+    Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" `
+        -WorkingDirectory "C:\Program Files (x86)\Yawcam" -ErrorAction SilentlyContinue
     Start-Sleep -Seconds 3
     $yawcam = Get-Process yawcam -ErrorAction SilentlyContinue
     if ($yawcam) {
