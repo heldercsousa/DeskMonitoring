@@ -125,10 +125,10 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
-| `start_ecosystem.ps1` | Manual / `setup_update.ps1` | Starts all components; writes `.ecosystem_state = running` |
-| `stop_ecosystem.ps1` | Manual / `setup_update.ps1` | Stops all components in reverse; writes `.ecosystem_state = stopped` |
-| `pause_camera.ps1` | Manual (desktop shortcut) | Stops Yawcam; sets `.camera_paused` flag |
-| `resume_camera.ps1` | Manual (desktop shortcut) | Starts Yawcam; removes `.camera_paused` flag |
+| `start_ecosystem.ps1` | `/project:start` / Manual / `setup_update.ps1` | Starts all components; credential guard (admin check); writes `.ecosystem_state = running` |
+| `stop_ecosystem.ps1` | `/project:stop` / Manual / `setup_update.ps1` | Stops all components in reverse; credential guard (admin check); writes `.ecosystem_state = stopped` |
+| `pause_camera.ps1` | `/project:pause` / Manual | Stops Yawcam; credential guard (admin check); sets `.camera_paused` flag |
+| `resume_camera.ps1` | `/project:resume` / Manual | Starts Yawcam; credential guard (admin check); removes `.camera_paused` flag |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
 | `ECOSYSTEM_REPORT.md` | — | This document |
@@ -187,6 +187,10 @@ These files configure the Claude Code AI assistant for this project. Restore fro
 | `.claude/commands/camera-ecosystem.md` | `camera-ecosystem` skill — comprehensive camera/motion detection environment reference |
 | `.claude/commands/review.md` | `review` skill — self-healing post-task verification (RULE 3): 4-cycle fix loop, escalates to `known_issues.md` on failure; now includes Phase 0 reminder + syntax parse step |
 | `.claude/commands/health.md` | `health` skill — UNIFIED ecosystem health check; respects `.ecosystem_state` and `.camera_paused` flags; includes lifecycle control commands |
+| `.claude/commands/start.md` | `/project:start` slash command — runs `start_ecosystem.ps1` (credential prompt in terminal) |
+| `.claude/commands/stop.md` | `/project:stop` slash command — runs `stop_ecosystem.ps1` (credential prompt in terminal) |
+| `.claude/commands/pause.md` | `/project:pause` slash command — runs `pause_camera.ps1` (credential prompt in terminal) |
+| `.claude/commands/resume.md` | `/project:resume` slash command — runs `resume_camera.ps1` (credential prompt in terminal) |
 | `check_health.bat` | Double-click launcher at `C:\Sync\check_health.bat` — runs `health_check_all.ps1` in a paused window |
 
 ---
@@ -2075,7 +2079,7 @@ pause
 ---
 
 ### `C:\Sync\Config\start_ecosystem.ps1`
-> Starts all ecosystem components. Writes `.ecosystem_state = running`. Requires Administrator.
+> Starts all ecosystem components. Credential guard (validates local admin credentials before proceeding). Writes `.ecosystem_state = running`. Requires Administrator.
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -2083,6 +2087,10 @@ pause
 $ErrorActionPreference = 'SilentlyContinue'
 $LogFile   = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $StateFile = "C:\Sync\Config\.ecosystem_state"
+# --- Credential guard ---
+# Read-Host username + password-as-securestring -> ValidateCredentials via PrincipalContext('Machine')
+# Checks user is in local Administrators group; exits 1 on failure
+# --- End credential guard ---
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
 function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
 function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
@@ -2096,7 +2104,7 @@ function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 ---
 
 ### `C:\Sync\Config\stop_ecosystem.ps1`
-> Stops all ecosystem components in reverse order. Writes `.ecosystem_state = stopped`. Requires Administrator.
+> Stops all ecosystem components in reverse order. Credential guard (validates local admin credentials before proceeding). Writes `.ecosystem_state = stopped`. Requires Administrator.
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -2104,6 +2112,10 @@ function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 $ErrorActionPreference = 'SilentlyContinue'
 $LogFile   = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $StateFile = "C:\Sync\Config\.ecosystem_state"
+# --- Credential guard ---
+# Read-Host username + password-as-securestring -> ValidateCredentials via PrincipalContext('Machine')
+# Checks user is in local Administrators group; exits 1 on failure
+# --- End credential guard ---
 # Stops in reverse order: CAM-2 relay (VLC), Yawcam, RealTimeSync, scheduled tasks (disable),
 #   FolderSyncAuditor, FolderSyncWatchdog
 # Writes: 'stopped' | Set-Content -LiteralPath $StateFile -Encoding UTF8
@@ -2113,7 +2125,7 @@ $StateFile = "C:\Sync\Config\.ecosystem_state"
 ---
 
 ### `C:\Sync\Config\pause_camera.ps1`
-> Stops Yawcam only; sets `.camera_paused` flag. Resume with `resume_camera.ps1`.
+> Stops Yawcam only; sets `.camera_paused` flag. Credential guard (validates local admin credentials before proceeding). Resume with `resume_camera.ps1`.
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -2121,6 +2133,10 @@ $StateFile = "C:\Sync\Config\.ecosystem_state"
 $ErrorActionPreference = 'SilentlyContinue'
 $LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $PausedFlag = "C:\Sync\Config\.camera_paused"
+# --- Credential guard ---
+# Read-Host username + password-as-securestring -> ValidateCredentials via PrincipalContext('Machine')
+# Checks user is in local Administrators group; exits 1 on failure
+# --- End credential guard ---
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
 if (Test-Path $PausedFlag) { Write-Host "  WARN Camera already paused" -ForegroundColor Yellow; exit 0 }
 Get-Process yawcam -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
@@ -2133,7 +2149,7 @@ Write-Host "  OK   Camera paused. Run resume_camera.ps1 to restart." -Foreground
 ---
 
 ### `C:\Sync\Config\resume_camera.ps1`
-> Starts Yawcam; removes `.camera_paused` flag.
+> Starts Yawcam; removes `.camera_paused` flag. Credential guard (validates local admin credentials before proceeding).
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -2141,6 +2157,10 @@ Write-Host "  OK   Camera paused. Run resume_camera.ps1 to restart." -Foreground
 $ErrorActionPreference = 'SilentlyContinue'
 $LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $PausedFlag = "C:\Sync\Config\.camera_paused"
+# --- Credential guard ---
+# Read-Host username + password-as-securestring -> ValidateCredentials via PrincipalContext('Machine')
+# Checks user is in local Administrators group; exits 1 on failure
+# --- End credential guard ---
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
 if (-not (Test-Path $PausedFlag)) { Write-Host "  WARN .camera_paused not found -- may already be running" -ForegroundColor Yellow; exit 0 }
 Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" -ErrorAction SilentlyContinue

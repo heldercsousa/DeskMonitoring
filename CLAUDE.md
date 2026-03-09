@@ -259,6 +259,31 @@ The ecosystem has four layers that work together continuously:
 | `FolderSyncWatchdog` | `wdog.ps1` | Restarts RealTimeSync + re-enables scheduled task if killed |
 | `FolderSyncAuditor` | `auditor.ps1` | FileSystemWatcher security monitor |
 
+### Boot Chain (startup order)
+
+| Trigger | Component | Runs as | Fires |
+|---|---|---|---|
+| NSSM auto-start | FolderSyncWatchdog | SYSTEM | Windows boot (before login) |
+| NSSM auto-start | FolderSyncAuditor | SYSTEM | Windows boot (before login) |
+| Task Scheduler (at startup) | FolderSync-CloudBackup | SYSTEM | System startup |
+| Task Scheduler (at logon) | FolderSync-Watchdog | SYSTEM | User logon |
+| HKCU\Run: FolderSyncRealTime | RealTimeSync.exe | Helder | User login |
+| HKCU\Run: Yawcam | Yawcam.exe | Helder | User login |
+| HKCU\Run: YawcamMonitor | start_monitor.ps1 | Helder | User login |
+| HKCU\Run: YawcamCam2Relay | cam2_relay.ps1 | Helder | User login |
+
+NSSM services + Task Scheduler at-startup provide system-level activation before login. Cloud sync, RealTimeSync, and camera components require a user session and are correctly login-triggered.
+
+### Lifecycle Control (/project: commands)
+
+| Command | Script | Credential check |
+|---|---|---|
+| `/project:start` | `start_ecosystem.ps1` | Yes - admin credentials |
+| `/project:stop` | `stop_ecosystem.ps1` | Yes - admin credentials |
+| `/project:pause` | `pause_camera.ps1` | Yes - admin credentials |
+| `/project:resume` | `resume_camera.ps1` | Yes - admin credentials |
+| `/project:health` | read-only checks | No |
+
 ### Key Data Paths
 
 | Path | Purpose |
