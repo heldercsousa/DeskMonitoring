@@ -278,10 +278,10 @@ NSSM services + Task Scheduler at-startup provide system-level activation before
 
 | Command | Script | Credential check |
 |---|---|---|
-| `/project:start` | `start_ecosystem.ps1` | Yes - admin credentials |
-| `/project:stop` | `stop_ecosystem.ps1` | Yes - admin credentials |
-| `/project:pause` | `pause_camera.ps1` | Yes - admin credentials |
-| `/project:resume` | `resume_camera.ps1` | Yes - admin credentials |
+| `/motionSentinel-start` | `start_ecosystem.ps1` | `#Requires -RunAsAdministrator` |
+| `/motionSentinel-stop` | `stop_ecosystem.ps1` | `#Requires -RunAsAdministrator` |
+| `/motionSentinel-pause` | `pause_camera.ps1` | `#Requires -RunAsAdministrator` |
+| `/motionSentinel-resume` | `resume_camera.ps1` | `#Requires -RunAsAdministrator` |
 | `/project:health` | read-only checks | No |
 
 ### Key Data Paths
