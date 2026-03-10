@@ -562,10 +562,10 @@ $rtsPath = '"C:\Program Files\FreeFileSync\RealTimeSync.exe" "C:\Sync\Config\rea
 Set-ItemProperty $runKey -Name "FolderSyncRealTime" -Value $rtsPath -ErrorAction SilentlyContinue
 Write-OK "Registry: FolderSyncRealTime -> RealTimeSync.exe"
 
-# Yawcam
+# Yawcam - use bat wrapper so working dir is set correctly (prevents launcher.cfg error)
 Set-ItemProperty $runKey -Name "Yawcam" `
-    -Value '"C:\Program Files (x86)\Yawcam\Yawcam.exe"' -ErrorAction SilentlyContinue
-Write-OK "Registry: Yawcam -> Yawcam.exe"
+    -Value '"C:\Sync\Config\start_yawcam.bat"' -ErrorAction SilentlyContinue
+Write-OK "Registry: Yawcam -> C:\Sync\Config\start_yawcam.bat"
 
 # YawcamMonitor (uses relocated start_monitor.ps1 in C:\Sync\Config\)
 $monitorCmd = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\start_monitor.ps1"'

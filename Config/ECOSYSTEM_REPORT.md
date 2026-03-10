@@ -123,9 +123,9 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam |
 | `cam2.conf` | Read by `cam2_relay.ps1` | CAM-2 credentials (plaintext, ACL-protected, **gitignored**) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
-| `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry |
+| `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry (Step 14 uses `start_yawcam.bat` wrapper to set correct working dir) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
-| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs; restores HKCU\Run entries if missing |
+| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs; enforces HKCU\Run entries (overwrites incorrect values, not just missing) |
 | `stop_ecosystem.ps1` | `/motionSentinel-stop` / Manual / `setup_update.ps1` | Stops all components in reverse; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = stopped` |
 | `pause_camera.ps1` | `/motionSentinel-pause` / Manual | Stops Yawcam; gate: `#Requires -RunAsAdministrator`; sets `.camera_paused` flag |
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
@@ -2082,6 +2082,7 @@ pause
 ### `C:\Sync\Config\start_ecosystem.ps1`
 > Starts all ecosystem components. Gate: `#Requires -RunAsAdministrator`. Writes `.ecosystem_state = running`.
 > Fixed 2026-03-08: Yawcam and CAM-2 relay now verified with Get-Process after Start-Process (no more false-positive OK). HKCU\Run registry entries auto-restored if missing.
+> Fixed 2026-03-10: HKCU\Run registry enforcement changed from "set if missing" to "set if missing or incorrect" — prevents Yawcam entry from silently staying as `Yawcam.exe` (no working dir) instead of `start_yawcam.bat` (correct working dir). Root cause of recurring launcher.cfg error at logon.
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -2094,7 +2095,7 @@ function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
 function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
 function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 # Starts: FolderSyncWatchdog, FolderSyncAuditor, scheduled tasks, RealTimeSync, Yawcam (with PID confirm), CAM-2 relay (with VLC PID confirm)
-# Restores HKCU\Run entries (Yawcam, YawcamMonitor, YawcamCam2Relay) if missing
+# Enforces HKCU\Run entries (Yawcam -> start_yawcam.bat, YawcamMonitor, YawcamCam2Relay) - overwrites if wrong
 # Clears .camera_paused flag if present
 # Writes: 'running' | Set-Content -LiteralPath $StateFile -Encoding UTF8
 # Full source: C:\Sync\Config\start_ecosystem.ps1 (committed to git)

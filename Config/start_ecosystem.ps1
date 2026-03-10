@@ -147,12 +147,17 @@ $entries = @{
 }
 foreach ($name in $entries.Keys) {
     $current = (Get-ItemProperty $runKey -Name $name -ErrorAction SilentlyContinue).$name
-    if (-not $current) {
+    if ($current -ne $entries[$name]) {
         Set-ItemProperty $runKey -Name $name -Value $entries[$name] -ErrorAction SilentlyContinue
-        Write-OK "$name registry entry restored"
-        Write-Log "ECOSYSTEM-START  $name registry entry restored"
+        if ($current) {
+            Write-OK "$name registry entry corrected (was: $current)"
+            Write-Log "ECOSYSTEM-START  $name registry entry corrected"
+        } else {
+            Write-OK "$name registry entry restored"
+            Write-Log "ECOSYSTEM-START  $name registry entry restored"
+        }
     } else {
-        Write-OK "$name registry entry present"
+        Write-OK "$name registry entry correct"
     }
 }
 
