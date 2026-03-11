@@ -24,3 +24,12 @@ $settings2 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeS
 $principal2 = New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
 Register-ScheduledTask -TaskName "FolderSync-Watchdog" -Action $action2 -Trigger $trigger2 -Settings $settings2 -Principal $principal2 -Force
 Write-Host "Task FolderSync-Watchdog registered"
+
+# Task 3: Daily log auto-commit at 23:30 (runs as current interactive user)
+$action3   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1'
+$trigger3  = New-ScheduledTaskTrigger -Daily -At "23:30"
+$settings3 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+$principal3= New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
+Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action3 -Trigger $trigger3 -Settings $settings3 -Principal $principal3 -Force
+Write-Host "Task FolderSync-GitCommitLogs registered"

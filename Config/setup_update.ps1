@@ -613,6 +613,19 @@ if (Test-Path $auditScript) {
 }
 
 # =============================================================================
+# STEP 17 - FolderSync-GitCommitLogs task (current user, daily 23:30)
+# =============================================================================
+Write-Step "Step 17 - FolderSync-GitCommitLogs task (daily 23:30)"
+$action17   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1'
+$trigger17  = New-ScheduledTaskTrigger -Daily -At "23:30"
+$settings17 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+$principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+Unregister-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -Trigger $trigger17 -Settings $settings17 -Principal $principal17 -Force | Out-Null
+Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, daily 23:30)"
+
+# =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
 # =============================================================================
 if ($wasRunning) {
@@ -649,6 +662,7 @@ Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)"
 Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
+Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
