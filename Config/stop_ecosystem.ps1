@@ -22,6 +22,17 @@ Write-Host "  FolderSync Ecosystem - Stop" -ForegroundColor Cyan
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Log "ECOSYSTEM-STOP  Stopping all ecosystem components"
 
+# --- Yawcam monitor (must stop BEFORE Yawcam, or it will restart it) ---
+Write-Step "Yawcam monitor"
+Get-CimInstance Win32_Process |
+    Where-Object CommandLine -like '*yawcam_monitor*' |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+Get-CimInstance Win32_Process |
+    Where-Object CommandLine -like '*start_monitor*' |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+Write-OK "Yawcam monitor stopped"
+Write-Log "ECOSYSTEM-STOP  Yawcam monitor stopped"
+
 # --- CAM-2 relay (VLC) ---
 Write-Step "CAM-2 relay (VLC)"
 Get-Process vlc -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue

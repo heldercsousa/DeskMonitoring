@@ -7,7 +7,7 @@
 #       so the monitor sees actual recordings. Create with:
 #       cmd /c mklink /D C:\TEMP\motion_videos C:\Users\helde\Repos\Bois
 
-$YawcamPath      = "C:\Program Files (x86)\Yawcam\yawcam.exe"
+$YawcamPath      = "C:\Sync\Config\start_yawcam.bat"
 $VideoPath       = "C:\TEMP\motion_videos"
 $CheckInterval   = 60
 $MaxMinutesWithoutVideo = 15
@@ -60,7 +60,7 @@ function Restart-YawcamSafely {
     Start-Sleep -Seconds 5
 
     Write-Host "   [4/5] Iniciando Yawcam..." -ForegroundColor Gray
-    Start-Process -FilePath $YawcamPath
+    Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$YawcamPath`""
     Start-Sleep -Seconds 10
 
     Write-Host "   [5/5] Verificando..." -ForegroundColor Gray
