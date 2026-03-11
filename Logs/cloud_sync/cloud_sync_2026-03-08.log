@@ -1,0 +1,1516 @@
+2026-03-08 13:20:26  SYNC-END  Cloud sync run complete
+2026/03/08 13:20:28 INFO  : There was nothing to transfer
+2026/03/08 13:20:28 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                11 / 11, 100%, Listed 23
+Elapsed time:         0.6s
+
+2026-03-08 13:20:28  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 13:20:35  SYNC-END  Cloud sync run complete
+2026-03-08 13:20:38  SYNC-START  Beginning cloud sync run
+2026/03/08 13:20:53 INFO  : 2026-03-08/motion_2026-03-08_13.20.35_224.avi: Copied (new)
+2026/03/08 13:20:53 INFO  : 
+Transferred:   	    2.598 MiB / 2.598 MiB, 100%, 734 KiB/s, ETA 0s
+Checks:                11 / 11, 100%, Listed 24
+Transferred:            1 / 1, 100%
+Elapsed time:         2.7s
+
+2026-03-08 13:20:53  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 13:21:01  SYNC-END  Cloud sync run complete
+2026-03-08 13:29:59  SYNC-START  Beginning cloud sync run
+2026/03/08 13:30:15 INFO  : 2026-03-08/motion_2026-03-08_13.29.56_569.avi: Copied (new)
+2026/03/08 13:30:15 INFO  : 
+Transferred:   	    1.312 MiB / 1.312 MiB, 100%, 462 KiB/s, ETA 0s
+Checks:                12 / 12, 100%, Listed 26
+Transferred:            1 / 1, 100%
+Elapsed time:         2.3s
+
+2026-03-08 13:30:15  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 13:30:22  SYNC-END  Cloud sync run complete
+2026-03-08 13:30:24  SYNC-START  Beginning cloud sync run
+2026-03-08 13:30:32  SYNC-START  Beginning cloud sync run
+2026-03-08 13:30:40  SYNC-START  Beginning cloud sync run
+2026/03/08 13:30:42 ERROR : 2026-03-08/motion_2026-03-08_13.30.36_633.avi: Failed to copy: Post "https://pod-050-1040-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 1649910 to 1760230)
+2026/03/08 13:30:44 INFO  : 2026-03-08/motion_2026-03-08_13.30.29_368.avi: Copied (new)
+2026/03/08 13:30:44 INFO  : 2026-03-08/motion_2026-03-08_13.30.21_427.avi: Copied (new)
+2026/03/08 13:30:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:30:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:30:44 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 1649910 to 1760230)
+2026/03/08 13:30:45 ERROR : 2026-03-08/motion_2026-03-08_13.30.43_964.avi: Failed to copy: Post "https://pod-050-1040-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 382642 to 491826)
+2026/03/08 13:30:45 INFO  : 2026-03-08/motion_2026-03-08_13.30.36_633.avi: Copied (new)
+2026/03/08 13:30:45 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:30:45 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:30:45 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 382642 to 491826)
+2026/03/08 13:30:46 ERROR : 2026-03-08/motion_2026-03-08_13.30.43_964.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "2f97c2bc03d5a283e6f3141796d0224a80d8d9fe" vs dst(B2 bucket helder-sync-mirror) "07f8d5d6f1ad773afa44bdde263856fd5604e3ce"
+2026/03/08 13:30:46 INFO  : 2026-03-08/motion_2026-03-08_13.30.43_964.avi: Removing failed copy
+2026/03/08 13:30:46 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:30:46 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:30:46 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "2f97c2bc03d5a283e6f3141796d0224a80d8d9fe" vs dst(B2 bucket helder-sync-mirror) "07f8d5d6f1ad773afa44bdde263856fd5604e3ce"
+2026/03/08 13:30:46 INFO  : 
+Transferred:   	    5.997 MiB / 5.997 MiB, 100%, 1.187 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:                44 / 44, 100%, Listed 97
+Transferred:            3 / 3, 100%
+Elapsed time:         4.5s
+
+2026/03/08 13:30:46 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "2f97c2bc03d5a283e6f3141796d0224a80d8d9fe" vs dst(B2 bucket helder-sync-mirror) "07f8d5d6f1ad773afa44bdde263856fd5604e3ce"
+2026-03-08 13:30:46  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 13:30:48  SYNC-START  Beginning cloud sync run
+2026/03/08 13:30:49 ERROR : 2026-03-08/motion_2026-03-08_13.30.43_964.avi: Failed to copy: Post "https://pod-050-1027-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0020": can't copy - source file is being updated (size changed from 1376548 to 1514868)
+2026/03/08 13:30:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:30:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:30:49 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1027-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0020": can't copy - source file is being updated (size changed from 1376548 to 1514868)
+2026/03/08 13:30:49 ERROR : 2026-03-08/motion_2026-03-08_13.30.43_964.avi: Failed to copy: Post "https://pod-050-1027-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0020": can't copy - source file is being updated (size changed from 1570180 to 1653032)
+2026/03/08 13:30:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:30:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:30:49 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1027-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0020": can't copy - source file is being updated (size changed from 1570180 to 1653032)
+2026/03/08 13:30:50 ERROR : 2026-03-08/motion_2026-03-08_13.30.43_964.avi: Failed to copy: Post "https://pod-050-1027-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0020": can't copy - source file is being updated (size changed from 1708358 to 1791356)
+2026/03/08 13:30:50 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:30:50 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:30:50 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1027-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0020": can't copy - source file is being updated (size changed from 1708358 to 1791356)
+2026/03/08 13:30:50 INFO  : 
+Transferred:   	        8 KiB / 8 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:                48 / 48, 100%, Listed 102
+Elapsed time:         2.1s
+
+2026/03/08 13:30:50 NOTICE: Failed to sync: Post "https://pod-050-1027-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0020": can't copy - source file is being updated (size changed from 1708358 to 1791356)
+2026-03-08 13:30:50  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 13:30:55  SYNC-END  Cloud sync run complete
+2026-03-08 13:30:55  SYNC-START  Beginning cloud sync run
+2026/03/08 13:30:58 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0049": can't copy - source file is being updated (size changed from 1842896 to 2008606)
+2026/03/08 13:31:00 INFO  : 2026-03-08/motion_2026-03-08_13.30.43_964.avi: Copied (new)
+2026/03/08 13:31:00 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:00 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:00 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0049": can't copy - source file is being updated (size changed from 1842896 to 2008606)
+2026/03/08 13:31:01 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0049": can't copy - source file is being updated (size changed from 2582496 to 2664452)
+2026/03/08 13:31:01 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:01 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:01 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-18.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0049": can't copy - source file is being updated (size changed from 2582496 to 2664452)
+2026-03-08 13:31:01  SYNC-END  Cloud sync run complete
+2026/03/08 13:31:02 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "c0b0a2b790ffe7fa05e0198d326cc3642b9b86b9" vs dst(B2 bucket helder-sync-mirror) "1bac845c4e2bd14994662a19d85a6979a37152fa"
+2026/03/08 13:31:02 INFO  : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Removing failed copy
+2026/03/08 13:31:02 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:02 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:02 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "c0b0a2b790ffe7fa05e0198d326cc3642b9b86b9" vs dst(B2 bucket helder-sync-mirror) "1bac845c4e2bd14994662a19d85a6979a37152fa"
+2026/03/08 13:31:02 INFO  : 
+Transferred:   	    4.333 MiB / 4.333 MiB, 100%, 592.459 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:                50 / 50, 100%, Listed 107
+Transferred:            1 / 1, 100%
+Elapsed time:         4.8s
+
+2026/03/08 13:31:02 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "c0b0a2b790ffe7fa05e0198d326cc3642b9b86b9" vs dst(B2 bucket helder-sync-mirror) "1bac845c4e2bd14994662a19d85a6979a37152fa"
+2026-03-08 13:31:02  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/08 13:31:05 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0017": can't copy - source file is being updated (size changed from 3515370 to 3653510)
+2026/03/08 13:31:05 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:05 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:05 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0017": can't copy - source file is being updated (size changed from 3515370 to 3653510)
+2026/03/08 13:31:05 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0017": can't copy - source file is being updated (size changed from 3736498 to 3819024)
+2026/03/08 13:31:05 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:05 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:05 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0017": can't copy - source file is being updated (size changed from 3736498 to 3819024)
+2026/03/08 13:31:06 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0017": can't copy - source file is being updated (size changed from 3874050 to 3955222)
+2026/03/08 13:31:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:06 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0017": can't copy - source file is being updated (size changed from 3874050 to 3955222)
+2026/03/08 13:31:06 INFO  : 
+Transferred:   	       68 KiB / 68 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:                51 / 51, 100%, Listed 108
+Elapsed time:         2.2s
+
+2026/03/08 13:31:06 NOTICE: Failed to sync: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0017": can't copy - source file is being updated (size changed from 3874050 to 3955222)
+2026-03-08 13:31:06  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/08 13:31:09 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0006": can't copy - source file is being updated (size changed from 4772204 to 4909114)
+2026/03/08 13:31:10 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:10 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:10 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0006": can't copy - source file is being updated (size changed from 4772204 to 4909114)
+2026-03-08 13:31:10  SYNC-END  Cloud sync run complete
+2026/03/08 13:31:10 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0006": can't copy - source file is being updated (size changed from 4963178 to 5045116)
+2026/03/08 13:31:10 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:10 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:10 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0006": can't copy - source file is being updated (size changed from 4963178 to 5045116)
+2026/03/08 13:31:11 ERROR : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Failed to copy: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0006": can't copy - source file is being updated (size changed from 5127730 to 5210148)
+2026/03/08 13:31:11 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:11 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:11 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0006": can't copy - source file is being updated (size changed from 5127730 to 5210148)
+2026/03/08 13:31:11 INFO  : 
+Transferred:   	      148 KiB / 148 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:                51 / 51, 100%, Listed 108
+Elapsed time:         2.2s
+
+2026/03/08 13:31:11 NOTICE: Failed to sync: Post "https://pod-050-1040-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0006": can't copy - source file is being updated (size changed from 5127730 to 5210148)
+2026-03-08 13:31:11  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 13:31:14  SYNC-END  Cloud sync run complete
+2026-03-08 13:31:18  SYNC-END  Cloud sync run complete
+2026-03-08 13:31:19  SYNC-START  Beginning cloud sync run
+2026-03-08 13:31:29  SYNC-START  Beginning cloud sync run
+2026/03/08 13:31:32 ERROR : 2026-03-08/motion_2026-03-08_13.31.26_174.avi: Failed to copy: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0013": can't copy - source file is being updated (size changed from 1727592 to 1865368)
+2026/03/08 13:31:34 INFO  : 2026-03-08/motion_2026-03-08_13.31.17_283.avi: Copied (new)
+2026/03/08 13:31:35 INFO  : 2026-03-08/motion_2026-03-08_13.30.52_212.avi: Copied (new)
+2026/03/08 13:31:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:35 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0013": can't copy - source file is being updated (size changed from 1727592 to 1865368)
+2026/03/08 13:31:35 ERROR : 2026-03-08/motion_2026-03-08_13.31.26_174.avi: Failed to copy: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0013": can't copy - source file is being updated (size changed from 2492464 to 2574940)
+2026/03/08 13:31:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:35 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0013": can't copy - source file is being updated (size changed from 2492464 to 2574940)
+2026/03/08 13:31:36 ERROR : 2026-03-08/motion_2026-03-08_13.31.26_174.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "86c76b5a54d7ae223beb665a0a6d99b2cddb48c3" vs dst(B2 bucket helder-sync-mirror) "a90460c9a460036789105cb978f15fe9ba652579"
+2026/03/08 13:31:36 INFO  : 2026-03-08/motion_2026-03-08_13.31.26_174.avi: Removing failed copy
+2026/03/08 13:31:36 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:36 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:36 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "86c76b5a54d7ae223beb665a0a6d99b2cddb48c3" vs dst(B2 bucket helder-sync-mirror) "a90460c9a460036789105cb978f15fe9ba652579"
+2026/03/08 13:31:36 INFO  : 
+Transferred:   	   11.045 MiB / 11.045 MiB, 100%, 2.845 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:                55 / 55, 100%, Listed 118
+Transferred:            2 / 2, 100%
+Elapsed time:         4.6s
+
+2026/03/08 13:31:36 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "86c76b5a54d7ae223beb665a0a6d99b2cddb48c3" vs dst(B2 bucket helder-sync-mirror) "a90460c9a460036789105cb978f15fe9ba652579"
+2026-03-08 13:31:36  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 13:31:41  SYNC-START  Beginning cloud sync run
+2026/03/08 13:31:44 ERROR : 2026-03-08/motion_2026-03-08_13.31.38_045.avi: Failed to copy: Post "https://pod-050-1015-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501015_t0006": can't copy - source file is being updated (size changed from 1803324 to 1905516)
+2026/03/08 13:31:46 INFO  : 2026-03-08/motion_2026-03-08_13.31.26_174.avi: Copied (new)
+2026/03/08 13:31:46 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:46 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:46 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1015-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501015_t0006": can't copy - source file is being updated (size changed from 1803324 to 1905516)
+2026/03/08 13:31:46 ERROR : 2026-03-08/motion_2026-03-08_13.31.38_045.avi: Failed to copy: Post "https://pod-050-1015-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501015_t0006": can't copy - source file is being updated (size changed from 2366692 to 2449066)
+2026/03/08 13:31:46 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:46 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:46 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1015-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501015_t0006": can't copy - source file is being updated (size changed from 2366692 to 2449066)
+2026-03-08 13:31:47  SYNC-END  Cloud sync run complete
+2026/03/08 13:31:47 ERROR : 2026-03-08/motion_2026-03-08_13.31.38_045.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "50d0c76c2964bfac0332bc333509aca2f96250b0" vs dst(B2 bucket helder-sync-mirror) "a90217c9bf75ecfda256f9ebc596f74b29bf36b1"
+2026/03/08 13:31:47 INFO  : 2026-03-08/motion_2026-03-08_13.31.38_045.avi: Removing failed copy
+2026/03/08 13:31:47 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 13:31:47 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 13:31:47 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "50d0c76c2964bfac0332bc333509aca2f96250b0" vs dst(B2 bucket helder-sync-mirror) "a90217c9bf75ecfda256f9ebc596f74b29bf36b1"
+2026/03/08 13:31:47 INFO  : 
+Transferred:   	    5.189 MiB / 5.189 MiB, 100%, 366 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:                59 / 59, 100%, Listed 125
+Transferred:            1 / 1, 100%
+Elapsed time:         4.1s
+
+2026/03/08 13:31:47 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "50d0c76c2964bfac0332bc333509aca2f96250b0" vs dst(B2 bucket helder-sync-mirror) "a90217c9bf75ecfda256f9ebc596f74b29bf36b1"
+2026-03-08 13:31:47  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 13:31:56  SYNC-END  Cloud sync run complete
+2026/03/08 13:31:59 INFO  : 2026-03-08/motion_2026-03-08_13.31.38_045.avi: Copied (new)
+2026/03/08 13:31:59 INFO  : 
+Transferred:   	    2.545 MiB / 2.545 MiB, 100%, 910 KiB/s, ETA 0s
+Checks:                20 / 20, 100%, Listed 42
+Transferred:            1 / 1, 100%
+Elapsed time:         2.4s
+
+2026-03-08 13:31:59  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 13:32:06  SYNC-END  Cloud sync run complete
+2026-03-08 21:53:00  SYNC-START  Beginning cloud sync run
+2026/03/08 21:53:19 INFO  : 2026-03-08/motion_2026-03-08_21.52.57_070.avi: Copied (new)
+2026/03/08 21:53:19 INFO  : 
+Transferred:   	    1.831 MiB / 1.831 MiB, 100%, 446 KiB/s, ETA 0s
+Checks:                21 / 21, 100%, Listed 44
+Transferred:            1 / 1, 100%
+Elapsed time:         2.6s
+
+2026-03-08 21:53:19  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 21:53:24  SYNC-START  Beginning cloud sync run
+2026-03-08 21:53:29  SYNC-START  Beginning cloud sync run
+2026-03-08 21:53:32  SYNC-END  Cloud sync run complete
+2026/03/08 21:53:44 INFO  : 2026-03-08/motion_2026-03-08_21.53.26_094.avi: Copied (new)
+2026/03/08 21:53:45 INFO  : 2026-03-08/motion_2026-03-08_21.53.19_155.avi: Copied (new)
+2026/03/08 21:53:45 INFO  : 
+Transferred:   	    3.494 MiB / 3.494 MiB, 100%, 1.165 MiB/s, ETA 0s
+Checks:                22 / 22, 100%, Listed 47
+Transferred:            2 / 2, 100%
+Elapsed time:         3.2s
+
+2026-03-08 21:53:45  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 21:53:46 INFO  : 2026-03-08/motion_2026-03-08_21.53.26_094.avi: Copied (new)
+2026/03/08 21:53:47 INFO  : 2026-03-08/motion_2026-03-08_21.53.19_155.avi: Copied (new)
+2026/03/08 21:53:47 INFO  : 
+Transferred:   	    3.494 MiB / 3.494 MiB, 100%, 1.165 MiB/s, ETA 0s
+Checks:                22 / 22, 100%, Listed 47
+Transferred:            2 / 2, 100%
+Elapsed time:         3.3s
+
+2026-03-08 21:53:47  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 21:53:55  SYNC-END  Cloud sync run complete
+2026-03-08 21:53:57  SYNC-END  Cloud sync run complete
+2026-03-08 21:53:57  SYNC-START  Beginning cloud sync run
+2026/03/08 21:54:14 INFO  : 2026-03-08/motion_2026-03-08_21.53.54_998.avi: Copied (new)
+2026/03/08 21:54:14 INFO  : 
+Transferred:   	    2.405 MiB / 2.405 MiB, 100%, 366 KiB/s, ETA 0s
+Checks:                24 / 24, 100%, Listed 50
+Transferred:            1 / 1, 100%
+Elapsed time:         2.7s
+
+2026-03-08 21:54:14  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 21:54:21  SYNC-END  Cloud sync run complete
+2026-03-08 22:21:59  SYNC-START  Beginning cloud sync run
+2026-03-08 22:22:07  SYNC-START  Beginning cloud sync run
+2026/03/08 22:22:17 ERROR : 2026-03-08/motion_2026-03-08_22.22.04_535.avi: Failed to copy: Post "https://pod-050-1040-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 3934432 to 4104332)
+2026/03/08 22:22:18 INFO  : 2026-03-08/motion_2026-03-08_22.21.54_957.avi: Copied (new)
+2026/03/08 22:22:18 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:22:18 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:22:18 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 3934432 to 4104332)
+2026/03/08 22:22:18 ERROR : 2026-03-08/motion_2026-03-08_22.22.04_535.avi: Failed to copy: Post "https://pod-050-1040-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 4465154 to 4542622)
+2026/03/08 22:22:18 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:22:18 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:22:18 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0033": can't copy - source file is being updated (size changed from 4465154 to 4542622)
+2026/03/08 22:22:19 ERROR : 2026-03-08/motion_2026-03-08_22.22.04_535.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "28d81f926068e1dabd75eb798f95123c0672b0cc" vs dst(B2 bucket helder-sync-mirror) "00a231cec2095d131da9d888a17fb98b6f428522"
+2026/03/08 22:22:19 INFO  : 2026-03-08/motion_2026-03-08_22.22.04_535.avi: Removing failed copy
+2026/03/08 22:22:20 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:22:20 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:22:20 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "28d81f926068e1dabd75eb798f95123c0672b0cc" vs dst(B2 bucket helder-sync-mirror) "00a231cec2095d131da9d888a17fb98b6f428522"
+2026/03/08 22:22:20 INFO  : 
+Transferred:   	    5.759 MiB / 5.759 MiB, 100%, 1.919 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:                77 / 77, 100%, Listed 161
+Transferred:            1 / 1, 100%
+Elapsed time:         4.3s
+
+2026/03/08 22:22:20 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "28d81f926068e1dabd75eb798f95123c0672b0cc" vs dst(B2 bucket helder-sync-mirror) "00a231cec2095d131da9d888a17fb98b6f428522"
+2026-03-08 22:22:20  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/08 22:22:21 ERROR : 2026-03-08/motion_2026-03-08_22.22.04_535.avi: Failed to copy: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0014": can't copy - source file is being updated (size changed from 5031682 to 5134250)
+2026/03/08 22:22:21 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:22:21 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:22:21 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0014": can't copy - source file is being updated (size changed from 5031682 to 5134250)
+2026/03/08 22:22:22 ERROR : 2026-03-08/motion_2026-03-08_22.22.04_535.avi: Failed to copy: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0014": can't copy - source file is being updated (size changed from 5211144 to 5291142)
+2026/03/08 22:22:22 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:22:22 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:22:22 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0014": can't copy - source file is being updated (size changed from 5211144 to 5291142)
+2026/03/08 22:22:24 INFO  : 2026-03-08/motion_2026-03-08_22.22.04_535.avi: Copied (new)
+2026/03/08 22:22:24 ERROR : Attempt 3/3 succeeded
+2026/03/08 22:22:24 INFO  : 
+Transferred:   	    5.163 MiB / 5.163 MiB, 100%, 298 KiB/s, ETA 0s
+Checks:                78 / 78, 100%, Listed 162
+Transferred:            1 / 1, 100%
+Elapsed time:         3.9s
+
+2026-03-08 22:22:24  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:22:30  SYNC-END  Cloud sync run complete
+2026-03-08 22:22:34  SYNC-END  Cloud sync run complete
+2026-03-08 22:22:50  SYNC-START  Beginning cloud sync run
+2026-03-08 22:23:01  SYNC-START  Beginning cloud sync run
+2026/03/08 22:23:05 ERROR : 2026-03-08/motion_2026-03-08_22.22.58_703.avi: Failed to copy: Post "https://pod-050-1029-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501029_t0010": can't copy - source file is being updated (size changed from 1617932 to 1720510)
+2026/03/08 22:23:07 INFO  : 2026-03-08/motion_2026-03-08_22.22.47_504.avi: Copied (new)
+2026/03/08 22:23:07 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:07 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:07 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1029-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501029_t0010": can't copy - source file is being updated (size changed from 1617932 to 1720510)
+2026/03/08 22:23:07 ERROR : 2026-03-08/motion_2026-03-08_22.22.58_703.avi: Failed to copy: Post "https://pod-050-1029-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501029_t0010": can't copy - source file is being updated (size changed from 2207556 to 2284110)
+2026/03/08 22:23:07 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:07 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:07 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1029-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501029_t0010": can't copy - source file is being updated (size changed from 2207556 to 2284110)
+2026/03/08 22:23:08 INFO  : 2026-03-08/motion_2026-03-08_22.22.58_703.avi: Copied (new)
+2026/03/08 22:23:08 ERROR : Attempt 3/3 succeeded
+2026/03/08 22:23:08 INFO  : 
+Transferred:   	    5.444 MiB / 5.444 MiB, 100%, 238 KiB/s, ETA 0s
+Checks:                83 / 83, 100%, Listed 173
+Transferred:            2 / 2, 100%
+Elapsed time:         4.6s
+
+2026-03-08 22:23:08  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:23:12  SYNC-START  Beginning cloud sync run
+2026/03/08 22:23:16 ERROR : 2026-03-08/motion_2026-03-08_22.23.16_307.avi: Failed to copy: Post "https://pod-050-1038-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0025": can't copy - source file is being updated (size changed from 824138 to 952680)
+2026/03/08 22:23:18 INFO  : 2026-03-08/motion_2026-03-08_22.23.08_688.avi: Copied (new)
+2026/03/08 22:23:18 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:18 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:18 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1038-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0025": can't copy - source file is being updated (size changed from 824138 to 952680)
+2026-03-08 22:23:18  SYNC-END  Cloud sync run complete
+2026/03/08 22:23:19 ERROR : 2026-03-08/motion_2026-03-08_22.23.16_307.avi: Failed to copy: Post "https://pod-050-1038-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0025": can't copy - source file is being updated (size changed from 1364444 to 1441812)
+2026/03/08 22:23:19 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:19 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:19 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1038-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0025": can't copy - source file is being updated (size changed from 1364444 to 1441812)
+2026-03-08 22:23:19  SYNC-START  Beginning cloud sync run
+2026/03/08 22:23:20 ERROR : 2026-03-08/motion_2026-03-08_22.23.16_307.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "29cd022ffdd557456f6b53f77f6954486c7d7f97" vs dst(B2 bucket helder-sync-mirror) "639fdea5a7e9c8d8573c5d83288654afb5f76a10"
+2026/03/08 22:23:20 INFO  : 2026-03-08/motion_2026-03-08_22.23.16_307.avi: Removing failed copy
+2026/03/08 22:23:20 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:20 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:20 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "29cd022ffdd557456f6b53f77f6954486c7d7f97" vs dst(B2 bucket helder-sync-mirror) "639fdea5a7e9c8d8573c5d83288654afb5f76a10"
+2026/03/08 22:23:20 INFO  : 
+Transferred:   	    2.504 MiB / 2.504 MiB, 100%, 854.295 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:                89 / 89, 100%, Listed 185
+Transferred:            1 / 1, 100%
+Elapsed time:         4.7s
+
+2026/03/08 22:23:20 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "29cd022ffdd557456f6b53f77f6954486c7d7f97" vs dst(B2 bucket helder-sync-mirror) "639fdea5a7e9c8d8573c5d83288654afb5f76a10"
+2026-03-08 22:23:20  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 22:23:25  SYNC-START  Beginning cloud sync run
+2026/03/08 22:23:31 INFO  : 2026-03-08/motion_2026-03-08_22.23.22_358.avi: Copied (new)
+2026-03-08 22:23:31  SYNC-END  Cloud sync run complete
+2026/03/08 22:23:31 INFO  : 2026-03-08/motion_2026-03-08_22.23.16_307.avi: Copied (new)
+2026/03/08 22:23:31 INFO  : 
+Transferred:   	    3.924 MiB / 3.924 MiB, 100%, 476 KiB/s, ETA 0s
+Checks:                30 / 30, 100%, Listed 63
+Transferred:            2 / 2, 100%
+Elapsed time:         2.9s
+
+2026-03-08 22:23:31  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:23:36 ERROR : 2026-03-08/motion_2026-03-08_22.23.33_705.avi: Failed to copy: Post "https://pod-050-1039-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1761146 to 1964190)
+2026/03/08 22:23:36 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:36 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:36 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1039-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1761146 to 1964190)
+2026-03-08 22:23:37  SYNC-START  Beginning cloud sync run
+2026/03/08 22:23:38 INFO  : 2026-03-08/motion_2026-03-08_22.23.33_705.avi: Copied (new)
+2026/03/08 22:23:38 ERROR : Attempt 2/3 succeeded
+2026/03/08 22:23:38 INFO  : 
+Transferred:   	    1.939 MiB / 1.939 MiB, 100%, 222 KiB/s, ETA 0s
+Checks:                64 / 64, 100%, Listed 132
+Transferred:            1 / 1, 100%
+Elapsed time:         3.5s
+
+2026-03-08 22:23:38  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:23:42 ERROR : 2026-03-08/motion_2026-03-08_22.23.41_475.avi: Failed to copy: Post "https://pod-050-1032-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0025": can't copy - source file is being updated (size changed from 1149920 to 1287864)
+2026/03/08 22:23:42 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:42 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:42 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1032-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0025": can't copy - source file is being updated (size changed from 1149920 to 1287864)
+2026/03/08 22:23:43 ERROR : 2026-03-08/motion_2026-03-08_22.23.41_475.avi: Failed to copy: Post "https://pod-050-1032-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0025": can't copy - source file is being updated (size changed from 1361314 to 1435166)
+2026/03/08 22:23:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:43 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1032-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0025": can't copy - source file is being updated (size changed from 1361314 to 1435166)
+2026-03-08 22:23:43  SYNC-END  Cloud sync run complete
+2026/03/08 22:23:43 ERROR : 2026-03-08/motion_2026-03-08_22.23.41_475.avi: Failed to copy: Post "https://pod-050-1032-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0025": can't copy - source file is being updated (size changed from 1484162 to 1558750)
+2026/03/08 22:23:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:23:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:23:43 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1032-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0025": can't copy - source file is being updated (size changed from 1484162 to 1558750)
+2026/03/08 22:23:43 INFO  : 
+Transferred:   	        8 KiB / 8 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:                99 / 99, 100%, Listed 204
+Elapsed time:         2.5s
+
+2026/03/08 22:23:43 NOTICE: Failed to sync: Post "https://pod-050-1032-10.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0025": can't copy - source file is being updated (size changed from 1484162 to 1558750)
+2026-03-08 22:23:43  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 22:23:44  SYNC-START  Beginning cloud sync run
+2026-03-08 22:23:50  SYNC-END  Cloud sync run complete
+2026-03-08 22:23:54  SYNC-END  Cloud sync run complete
+2026/03/08 22:23:58 INFO  : 2026-03-08/motion_2026-03-08_22.23.41_475.avi: Copied (new)
+2026/03/08 22:23:58 INFO  : 
+Transferred:   	    3.055 MiB / 3.055 MiB, 100%, 1.018 MiB/s, ETA 0s
+Checks:                33 / 33, 100%, Listed 68
+Transferred:            1 / 1, 100%
+Elapsed time:         3.4s
+
+2026-03-08 22:23:58  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:24:00  SYNC-START  Beginning cloud sync run
+2026/03/08 22:24:02 ERROR : 2026-03-08/motion_2026-03-08_22.23.56_445.avi: Failed to copy: Post "https://pod-050-1013-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0024": can't copy - source file is being updated (size changed from 2064864 to 2191904)
+2026/03/08 22:24:02 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:02 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:02 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1013-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0024": can't copy - source file is being updated (size changed from 2064864 to 2191904)
+2026/03/08 22:24:03 ERROR : 2026-03-08/motion_2026-03-08_22.23.56_445.avi: Failed to copy: Post "https://pod-050-1013-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0024": can't copy - source file is being updated (size changed from 2242784 to 2319054)
+2026/03/08 22:24:03 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:03 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:03 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1013-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0024": can't copy - source file is being updated (size changed from 2242784 to 2319054)
+2026/03/08 22:24:03 ERROR : 2026-03-08/motion_2026-03-08_22.23.56_445.avi: Failed to copy: Post "https://pod-050-1013-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0024": can't copy - source file is being updated (size changed from 2395512 to 2473240)
+2026/03/08 22:24:03 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:03 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:03 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1013-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0024": can't copy - source file is being updated (size changed from 2395512 to 2473240)
+2026/03/08 22:24:03 INFO  : 
+Transferred:   	       24 KiB / 24 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               102 / 102, 100%, Listed 210
+Elapsed time:         2.3s
+
+2026/03/08 22:24:03 NOTICE: Failed to sync: Post "https://pod-050-1013-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0024": can't copy - source file is being updated (size changed from 2395512 to 2473240)
+2026-03-08 22:24:03  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 22:24:08  SYNC-START  Beginning cloud sync run
+2026-03-08 22:24:10  SYNC-END  Cloud sync run complete
+2026-03-08 22:24:15  SYNC-END  Cloud sync run complete
+2026-03-08 22:24:18  SYNC-START  Beginning cloud sync run
+2026/03/08 22:24:21 ERROR : 2026-03-08/motion_2026-03-08_22.24.14_747.avi: Failed to copy: Post "https://pod-050-1019-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501019_t0006": can't copy - source file is being updated (size changed from 1772666 to 1903690)
+2026/03/08 22:24:24 INFO  : 2026-03-08/motion_2026-03-08_22.23.56_445.avi: Copied (new)
+2026/03/08 22:24:24 INFO  : 2026-03-08/motion_2026-03-08_22.24.04_368.avi: Copied (new)
+2026/03/08 22:24:24 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:24 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:24 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1019-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501019_t0006": can't copy - source file is being updated (size changed from 1772666 to 1903690)
+2026/03/08 22:24:24 ERROR : 2026-03-08/motion_2026-03-08_22.24.14_747.avi: Failed to copy: Post "https://pod-050-1019-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501019_t0006": can't copy - source file is being updated (size changed from 2561848 to 2640872)
+2026/03/08 22:24:24 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:24 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:24 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1019-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501019_t0006": can't copy - source file is being updated (size changed from 2561848 to 2640872)
+2026/03/08 22:24:25 ERROR : 2026-03-08/motion_2026-03-08_22.24.14_747.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "afffc961e3a84f724aa658387196f944b8075aea" vs dst(B2 bucket helder-sync-mirror) "4c78dacec015185d9e68bc5d7189d3428b20c703"
+2026/03/08 22:24:25 INFO  : 2026-03-08/motion_2026-03-08_22.24.14_747.avi: Removing failed copy
+2026/03/08 22:24:25 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:25 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:25 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "afffc961e3a84f724aa658387196f944b8075aea" vs dst(B2 bucket helder-sync-mirror) "4c78dacec015185d9e68bc5d7189d3428b20c703"
+2026/03/08 22:24:25 INFO  : 
+Transferred:   	    7.255 MiB / 7.255 MiB, 100%, 1.553 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               106 / 106, 100%, Listed 220
+Transferred:            2 / 2, 100%
+Elapsed time:         5.2s
+
+2026/03/08 22:24:25 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "afffc961e3a84f724aa658387196f944b8075aea" vs dst(B2 bucket helder-sync-mirror) "4c78dacec015185d9e68bc5d7189d3428b20c703"
+2026-03-08 22:24:25  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/08 22:24:28 INFO  : 2026-03-08/motion_2026-03-08_22.24.14_747.avi: Copied (new)
+2026/03/08 22:24:28 INFO  : 
+Transferred:   	    2.947 MiB / 2.947 MiB, 100%, 238 KiB/s, ETA 0s
+Checks:                36 / 36, 100%, Listed 74
+Transferred:            1 / 1, 100%
+Elapsed time:         2.7s
+
+2026-03-08 22:24:28  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:24:33 ERROR : 2026-03-08/motion_2026-03-08_22.24.32_367.avi: Failed to copy: Post "https://pod-050-1039-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1052764 to 1184624)
+2026/03/08 22:24:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:34 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1039-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1052764 to 1184624)
+2026/03/08 22:24:34 ERROR : 2026-03-08/motion_2026-03-08_22.24.32_367.avi: Failed to copy: Post "https://pod-050-1039-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1237328 to 1316492)
+2026/03/08 22:24:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:34 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1039-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1237328 to 1316492)
+2026/03/08 22:24:35 ERROR : 2026-03-08/motion_2026-03-08_22.24.32_367.avi: Failed to copy: Post "https://pod-050-1039-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1395468 to 1474512)
+2026/03/08 22:24:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:24:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:24:35 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1039-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1395468 to 1474512)
+2026/03/08 22:24:35 INFO  : 
+Transferred:   	        8 KiB / 8 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               111 / 111, 100%, Listed 228
+Elapsed time:         2.3s
+
+2026/03/08 22:24:35 NOTICE: Failed to sync: Post "https://pod-050-1039-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0027": can't copy - source file is being updated (size changed from 1395468 to 1474512)
+2026-03-08 22:24:35  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 22:24:35  SYNC-END  Cloud sync run complete
+2026-03-08 22:24:35  SYNC-START  Beginning cloud sync run
+2026-03-08 22:24:39  SYNC-END  Cloud sync run complete
+2026-03-08 22:24:44  SYNC-END  Cloud sync run complete
+2026-03-08 22:24:45  SYNC-START  Beginning cloud sync run
+2026/03/08 22:24:54 INFO  : 2026-03-08/motion_2026-03-08_22.24.42_793.avi: Copied (new)
+2026/03/08 22:24:54 INFO  : 2026-03-08/motion_2026-03-08_22.24.32_367.avi: Copied (new)
+2026/03/08 22:24:54 INFO  : 
+Transferred:   	    3.593 MiB / 3.593 MiB, 100%, 492 KiB/s, ETA 0s
+Checks:                37 / 37, 100%, Listed 77
+Transferred:            2 / 2, 100%
+Elapsed time:         2.7s
+
+2026-03-08 22:24:54  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:24:59 INFO  : There was nothing to transfer
+2026/03/08 22:24:59 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                39 / 39, 100%, Listed 79
+Elapsed time:         0.7s
+
+2026-03-08 22:24:59  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:25:03  SYNC-END  Cloud sync run complete
+2026-03-08 22:25:08  SYNC-END  Cloud sync run complete
+2026-03-08 22:25:14  SYNC-START  Beginning cloud sync run
+2026-03-08 22:25:23  SYNC-START  Beginning cloud sync run
+2026-03-08 22:25:29  SYNC-START  Beginning cloud sync run
+2026/03/08 22:25:32 ERROR : 2026-03-08/motion_2026-03-08_22.25.26_548.avi: Failed to copy: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0015": can't copy - source file is being updated (size changed from 2031414 to 2156762)
+2026/03/08 22:25:33 INFO  : 2026-03-08/motion_2026-03-08_22.25.20_040.avi: Copied (new)
+2026/03/08 22:25:34 INFO  : 2026-03-08/motion_2026-03-08_22.25.10_851.avi: Copied (new)
+2026/03/08 22:25:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:25:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:25:34 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0015": can't copy - source file is being updated (size changed from 2031414 to 2156762)
+2026/03/08 22:25:34 ERROR : 2026-03-08/motion_2026-03-08_22.25.26_548.avi: Failed to copy: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0015": can't copy - source file is being updated (size changed from 2633424 to 2707988)
+2026/03/08 22:25:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:25:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:25:34 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0015": can't copy - source file is being updated (size changed from 2633424 to 2707988)
+2026/03/08 22:25:34 ERROR : 2026-03-08/motion_2026-03-08_22.25.26_548.avi: Failed to copy: Post "https://pod-050-1022-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0006": can't copy - source file is being updated (size changed from 2757416 to 2781933)
+2026/03/08 22:25:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:25:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:25:34 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1022-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0006": can't copy - source file is being updated (size changed from 2757416 to 2781933)
+2026/03/08 22:25:34 INFO  : 
+Transferred:   	    3.174 MiB / 3.174 MiB, 100%, 1.053 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               121 / 121, 100%, Listed 250
+Transferred:            2 / 2, 100%
+Elapsed time:         3.9s
+
+2026/03/08 22:25:34 NOTICE: Failed to sync: Post "https://pod-050-1022-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0006": can't copy - source file is being updated (size changed from 2757416 to 2781933)
+2026-03-08 22:25:34  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/08 22:25:40 ERROR : 2026-03-08/motion_2026-03-08_22.25.26_548.avi: Failed to copy: Post "https://pod-050-1032-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0055": can't copy - source file is being updated (size changed from 3854162 to 3982486)
+2026/03/08 22:25:40 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:25:40 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:25:40 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1032-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0055": can't copy - source file is being updated (size changed from 3854162 to 3982486)
+2026/03/08 22:25:40 ERROR : 2026-03-08/motion_2026-03-08_22.25.26_548.avi: Failed to copy: Post "https://pod-050-1032-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0055": can't copy - source file is being updated (size changed from 4033682 to 4110596)
+2026/03/08 22:25:40 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:25:40 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:25:40 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1032-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0055": can't copy - source file is being updated (size changed from 4033682 to 4110596)
+2026/03/08 22:25:42 INFO  : 2026-03-08/motion_2026-03-08_22.25.26_548.avi: Copied (new)
+2026/03/08 22:25:42 ERROR : Attempt 3/3 succeeded
+2026/03/08 22:25:42 INFO  : 
+Transferred:   	    3.986 MiB / 3.986 MiB, 100%, 1.329 MiB/s, ETA 0s
+Checks:               123 / 123, 100%, Listed 252
+Transferred:            1 / 1, 100%
+Elapsed time:         4.1s
+
+2026-03-08 22:25:43  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:25:43  SYNC-END  Cloud sync run complete
+2026/03/08 22:25:44 INFO  : There was nothing to transfer
+2026/03/08 22:25:44 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                42 / 42, 100%, Listed 85
+Elapsed time:         0.7s
+
+2026-03-08 22:25:44  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:25:47  SYNC-START  Beginning cloud sync run
+2026-03-08 22:25:53  SYNC-END  Cloud sync run complete
+2026-03-08 22:25:53  SYNC-END  Cloud sync run complete
+2026/03/08 22:26:04 INFO  : 2026-03-08/motion_2026-03-08_22.25.44_655.avi: Copied (new)
+2026/03/08 22:26:04 INFO  : 
+Transferred:   	    4.128 MiB / 4.128 MiB, 100%, 1.376 MiB/s, ETA 0s
+Checks:                42 / 42, 100%, Listed 86
+Transferred:            1 / 1, 100%
+Elapsed time:         3.1s
+
+2026-03-08 22:26:04  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:26:11  SYNC-START  Beginning cloud sync run
+2026-03-08 22:26:13  SYNC-END  Cloud sync run complete
+2026/03/08 22:26:27 INFO  : 2026-03-08/motion_2026-03-08_22.26.08_760.avi: Copied (new)
+2026/03/08 22:26:27 INFO  : 
+Transferred:   	    1.679 MiB / 1.679 MiB, 100%, 572.933 KiB/s, ETA 0s
+Checks:                43 / 43, 100%, Listed 88
+Transferred:            1 / 1, 100%
+Elapsed time:         3.0s
+
+2026-03-08 22:26:27  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:26:36  SYNC-END  Cloud sync run complete
+2026-03-08 22:26:39  SYNC-START  Beginning cloud sync run
+2026-03-08 22:26:47  SYNC-START  Beginning cloud sync run
+2026/03/08 22:26:58 INFO  : 2026-03-08/motion_2026-03-08_22.26.32_893.avi: Copied (new)
+2026/03/08 22:26:59 INFO  : 2026-03-08/motion_2026-03-08_22.26.44_124.avi: Copied (new)
+2026/03/08 22:26:59 INFO  : 
+Transferred:   	    4.354 MiB / 4.354 MiB, 100%, 1.451 MiB/s, ETA 0s
+Checks:                44 / 44, 100%, Listed 91
+Transferred:            2 / 2, 100%
+Elapsed time:         3.6s
+
+2026-03-08 22:26:59  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:27:00 INFO  : There was nothing to transfer
+2026/03/08 22:27:00 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                46 / 46, 100%, Listed 93
+Elapsed time:         0.7s
+
+2026-03-08 22:27:00  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:27:08  SYNC-START  Beginning cloud sync run
+2026-03-08 22:27:09  SYNC-END  Cloud sync run complete
+2026-03-08 22:27:11  SYNC-END  Cloud sync run complete
+2026/03/08 22:27:25 INFO  : 2026-03-08/motion_2026-03-08_22.27.05_033.avi: Copied (new)
+2026/03/08 22:27:25 INFO  : 
+Transferred:   	    3.181 MiB / 3.181 MiB, 100%, 222 KiB/s, ETA 0s
+Checks:                46 / 46, 100%, Listed 94
+Transferred:            1 / 1, 100%
+Elapsed time:         2.8s
+
+2026-03-08 22:27:25  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:27:26  SYNC-START  Beginning cloud sync run
+2026-03-08 22:27:34  SYNC-END  Cloud sync run complete
+2026-03-08 22:27:39  SYNC-START  Beginning cloud sync run
+2026/03/08 22:27:42 ERROR : 2026-03-08/motion_2026-03-08_22.27.37_057.avi: Failed to copy: Post "https://pod-050-1005-04.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501005_t0054": can't copy - source file is being updated (size changed from 2078428 to 2223308)
+2026/03/08 22:27:44 INFO  : 2026-03-08/motion_2026-03-08_22.27.23_236.avi: Copied (new)
+2026/03/08 22:27:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:27:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:27:44 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1005-04.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501005_t0054": can't copy - source file is being updated (size changed from 2078428 to 2223308)
+2026/03/08 22:27:46 INFO  : 2026-03-08/motion_2026-03-08_22.27.37_057.avi: Copied (new)
+2026/03/08 22:27:46 ERROR : Attempt 2/3 succeeded
+2026/03/08 22:27:46 INFO  : 
+Transferred:   	    5.105 MiB / 5.105 MiB, 100%, 1.103 MiB/s, ETA 0s
+Checks:                95 / 95, 100%, Listed 195
+Transferred:            2 / 2, 100%
+Elapsed time:         5.1s
+
+2026-03-08 22:27:46  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:27:53 INFO  : There was nothing to transfer
+2026/03/08 22:27:53 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                49 / 49, 100%, Listed 99
+Elapsed time:         0.7s
+
+2026-03-08 22:27:53  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:27:55  SYNC-END  Cloud sync run complete
+2026-03-08 22:28:00  SYNC-START  Beginning cloud sync run
+2026-03-08 22:28:03  SYNC-END  Cloud sync run complete
+2026/03/08 22:28:18 INFO  : 2026-03-08/motion_2026-03-08_22.27.57_383.avi: Copied (new)
+2026/03/08 22:28:18 INFO  : 
+Transferred:   	    3.164 MiB / 3.164 MiB, 100%, 1.055 MiB/s, ETA 0s
+Checks:                49 / 49, 100%, Listed 100
+Transferred:            1 / 1, 100%
+Elapsed time:         3.5s
+
+2026-03-08 22:28:18  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:28:27  SYNC-END  Cloud sync run complete
+2026-03-08 22:28:37  SYNC-START  Beginning cloud sync run
+2026-03-08 22:28:46  SYNC-START  Beginning cloud sync run
+2026/03/08 22:28:57 INFO  : 2026-03-08/motion_2026-03-08_22.28.34_526.avi: Copied (new)
+2026/03/08 22:28:58 INFO  : 2026-03-08/motion_2026-03-08_22.28.40_118.avi: Copied (new)
+2026/03/08 22:28:58 INFO  : 
+Transferred:   	    3.454 MiB / 3.454 MiB, 100%, 1.151 MiB/s, ETA 0s
+Checks:                50 / 50, 100%, Listed 103
+Transferred:            2 / 2, 100%
+Elapsed time:         3.3s
+
+2026-03-08 22:28:58  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:29:01 ERROR : 2026-03-08/motion_2026-03-08_22.28.57_982.avi: Failed to copy: Post "https://pod-050-1031-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501031_t0037": can't copy - source file is being updated (size changed from 1564574 to 1592960)
+2026/03/08 22:29:01 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:29:01 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:29:01 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1031-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501031_t0037": can't copy - source file is being updated (size changed from 1564574 to 1592960)
+2026-03-08 22:29:01  SYNC-START  Beginning cloud sync run
+2026/03/08 22:29:03 INFO  : 2026-03-08/motion_2026-03-08_22.28.57_982.avi: Copied (new)
+2026/03/08 22:29:03 ERROR : Attempt 2/3 succeeded
+2026/03/08 22:29:03 INFO  : 
+Transferred:   	    1.519 MiB / 1.519 MiB, 100%, 222 KiB/s, ETA 0s
+Checks:               104 / 104, 100%, Listed 212
+Transferred:            1 / 1, 100%
+Elapsed time:         3.1s
+
+2026-03-08 22:29:03  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:29:08  SYNC-END  Cloud sync run complete
+2026-03-08 22:29:13  SYNC-END  Cloud sync run complete
+2026/03/08 22:29:18 INFO  : There was nothing to transfer
+2026/03/08 22:29:18 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                53 / 53, 100%, Listed 107
+Elapsed time:         0.8s
+
+2026-03-08 22:29:18  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:29:27  SYNC-END  Cloud sync run complete
+2026-03-08 22:29:54  SYNC-START  Beginning cloud sync run
+2026-03-08 22:29:58  SYNC-START  Beginning cloud sync run
+2026/03/08 22:30:13 ERROR : 2026-03-08/motion_2026-03-08_22.30.11_385.avi: Failed to copy: Post "https://pod-050-1042-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 1211160 to 1355668)
+2026/03/08 22:30:13 INFO  : 2026-03-08/motion_2026-03-08_22.29.55_587.avi: Copied (new)
+2026/03/08 22:30:13 INFO  : 2026-03-08/motion_2026-03-08_22.29.50_906.avi: Copied (new)
+2026/03/08 22:30:13 INFO  : 
+Transferred:   	    4.706 MiB / 4.706 MiB, 100%, 1.569 MiB/s, ETA 0s
+Checks:                53 / 53, 100%, Listed 109
+Transferred:            2 / 2, 100%
+Elapsed time:         3.4s
+
+2026-03-08 22:30:13  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:30:14  SYNC-START  Beginning cloud sync run
+2026/03/08 22:30:14 INFO  : 2026-03-08/motion_2026-03-08_22.29.50_906.avi: Copied (new)
+2026/03/08 22:30:15 INFO  : 2026-03-08/motion_2026-03-08_22.29.55_587.avi: Copied (new)
+2026/03/08 22:30:15 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:15 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:15 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 1211160 to 1355668)
+2026/03/08 22:30:15 ERROR : 2026-03-08/motion_2026-03-08_22.30.11_385.avi: Failed to copy: Post "https://pod-050-1042-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 1904334 to 1961786)
+2026/03/08 22:30:15 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:15 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:15 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 1904334 to 1961786)
+2026/03/08 22:30:16 ERROR : 2026-03-08/motion_2026-03-08_22.30.11_385.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "e17dbbe285c7c35098080d39d87c10396faae4ce" vs dst(B2 bucket helder-sync-mirror) "9e0fee3310ba883c3d82fa4b1c83dda5dea982b6"
+2026/03/08 22:30:16 INFO  : 2026-03-08/motion_2026-03-08_22.30.11_385.avi: Removing failed copy
+2026/03/08 22:30:16 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:16 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:16 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "e17dbbe285c7c35098080d39d87c10396faae4ce" vs dst(B2 bucket helder-sync-mirror) "9e0fee3310ba883c3d82fa4b1c83dda5dea982b6"
+2026/03/08 22:30:16 INFO  : 
+Transferred:   	    6.663 MiB / 6.663 MiB, 100%, 1.569 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               163 / 163, 100%, Listed 334
+Transferred:            2 / 2, 100%
+Elapsed time:         5.0s
+
+2026/03/08 22:30:16 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "e17dbbe285c7c35098080d39d87c10396faae4ce" vs dst(B2 bucket helder-sync-mirror) "9e0fee3310ba883c3d82fa4b1c83dda5dea982b6"
+2026-03-08 22:30:16  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 22:30:24  SYNC-END  Cloud sync run complete
+2026-03-08 22:30:26  SYNC-END  Cloud sync run complete
+2026-03-08 22:30:28  SYNC-START  Beginning cloud sync run
+2026/03/08 22:30:31 ERROR : 2026-03-08/motion_2026-03-08_22.30.28_507.avi: Failed to copy: Post "https://pod-050-1038-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0019": can't copy - source file is being updated (size changed from 1409988 to 1554470)
+2026-03-08 22:30:31  SYNC-START  Beginning cloud sync run
+2026/03/08 22:30:32 INFO  : 2026-03-08/motion_2026-03-08_22.30.21_271.avi: Copied (new)
+2026/03/08 22:30:33 INFO  : 2026-03-08/motion_2026-03-08_22.30.11_385.avi: Copied (new)
+2026/03/08 22:30:33 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:33 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:33 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1038-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501038_t0019": can't copy - source file is being updated (size changed from 1409988 to 1554470)
+2026/03/08 22:30:36 INFO  : 2026-03-08/motion_2026-03-08_22.30.28_507.avi: Copied (new)
+2026/03/08 22:30:36 ERROR : Attempt 2/3 succeeded
+2026/03/08 22:30:36 INFO  : 
+Transferred:   	    6.020 MiB / 6.020 MiB, 100%, 1.204 MiB/s, ETA 0s
+Checks:               112 / 112, 100%, Listed 230
+Transferred:            3 / 3, 100%
+Elapsed time:         6.4s
+
+2026-03-08 22:30:36  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:30:43  SYNC-START  Beginning cloud sync run
+2026-03-08 22:30:46  SYNC-END  Cloud sync run complete
+2026/03/08 22:30:46 ERROR : 2026-03-08/motion_2026-03-08_22.30.39_892.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0039": can't copy - source file is being updated (size changed from 2574756 to 2705602)
+2026/03/08 22:30:46 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:46 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:46 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0039": can't copy - source file is being updated (size changed from 2574756 to 2705602)
+2026/03/08 22:30:47 ERROR : 2026-03-08/motion_2026-03-08_22.30.39_892.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0039": can't copy - source file is being updated (size changed from 2836484 to 2934770)
+2026/03/08 22:30:47 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:47 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:47 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0039": can't copy - source file is being updated (size changed from 2836484 to 2934770)
+2026/03/08 22:30:47 ERROR : 2026-03-08/motion_2026-03-08_22.30.39_892.avi: Failed to copy: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0039": can't copy - source file is being updated (size changed from 3033204 to 3131336)
+2026/03/08 22:30:47 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:47 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:47 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0039": can't copy - source file is being updated (size changed from 3033204 to 3131336)
+2026/03/08 22:30:47 INFO  : 
+Transferred:   	       24 KiB / 24 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               174 / 174, 100%, Listed 354
+Elapsed time:         2.5s
+
+2026/03/08 22:30:47 NOTICE: Failed to sync: Post "https://pod-050-1042-06.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0039": can't copy - source file is being updated (size changed from 3033204 to 3131336)
+2026-03-08 22:30:47  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/08 22:30:48 ERROR : 2026-03-08/motion_2026-03-08_22.30.39_892.avi: Failed to copy: Post "https://pod-050-1027-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0015": can't copy - source file is being updated (size changed from 3033204 to 3164034)
+2026/03/08 22:30:48 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:48 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:48 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1027-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0015": can't copy - source file is being updated (size changed from 3033204 to 3164034)
+2026/03/08 22:30:48 ERROR : 2026-03-08/motion_2026-03-08_22.30.39_892.avi: Failed to copy: Post "https://pod-050-1027-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0015": can't copy - source file is being updated (size changed from 3262480 to 3360678)
+2026/03/08 22:30:48 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:48 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:48 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1027-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0015": can't copy - source file is being updated (size changed from 3262480 to 3360678)
+2026/03/08 22:30:49 ERROR : 2026-03-08/motion_2026-03-08_22.30.39_892.avi: Failed to copy: Post "https://pod-050-1027-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0015": can't copy - source file is being updated (size changed from 3458992 to 3557414)
+2026/03/08 22:30:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:30:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:30:49 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1027-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0015": can't copy - source file is being updated (size changed from 3458992 to 3557414)
+2026/03/08 22:30:49 INFO  : 
+Transferred:   	       68 KiB / 68 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               174 / 174, 100%, Listed 354
+Elapsed time:         2.4s
+
+2026/03/08 22:30:49 NOTICE: Failed to sync: Post "https://pod-050-1027-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0015": can't copy - source file is being updated (size changed from 3458992 to 3557414)
+2026-03-08 22:30:49  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 22:30:58  SYNC-END  Cloud sync run complete
+2026/03/08 22:30:58 ERROR : 2026-03-08/motion_2026-03-08_22.30.56_550.avi: Failed to copy: Post "https://pod-050-1024-04.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0007": can't copy - source file is being updated (size changed from 1531976 to 1682746)
+2026-03-08 22:30:59  SYNC-END  Cloud sync run complete
+2026/03/08 22:31:00 INFO  : 2026-03-08/motion_2026-03-08_22.30.39_892.avi: Copied (new)
+2026/03/08 22:31:00 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:31:00 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:31:00 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1024-04.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0007": can't copy - source file is being updated (size changed from 1531976 to 1682746)
+2026/03/08 22:31:02 INFO  : 2026-03-08/motion_2026-03-08_22.30.56_550.avi: Copied (new)
+2026/03/08 22:31:02 ERROR : Attempt 2/3 succeeded
+2026/03/08 22:31:02 INFO  : 
+Transferred:   	    5.711 MiB / 5.711 MiB, 100%, 1.297 MiB/s, ETA 0s
+Checks:               117 / 117, 100%, Listed 239
+Transferred:            2 / 2, 100%
+Elapsed time:         5.2s
+
+2026-03-08 22:31:02  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:31:04  SYNC-START  Beginning cloud sync run
+2026-03-08 22:31:08  SYNC-START  Beginning cloud sync run
+2026-03-08 22:31:13  SYNC-END  Cloud sync run complete
+2026/03/08 22:31:23 INFO  : 2026-03-08/motion_2026-03-08_22.31.04_577.avi: Copied (new)
+2026/03/08 22:31:23 INFO  : 
+Transferred:   	    5.300 MiB / 5.300 MiB, 100%, 1.767 MiB/s, ETA 0s
+Checks:                60 / 60, 100%, Listed 122
+Transferred:            1 / 1, 100%
+Elapsed time:         3.4s
+
+2026-03-08 22:31:23  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:31:24 INFO  : 2026-03-08/motion_2026-03-08_22.31.04_577.avi: Copied (new)
+2026/03/08 22:31:24 INFO  : 
+Transferred:   	    5.300 MiB / 5.300 MiB, 100%, 1.426 MiB/s, ETA 0s
+Checks:                60 / 60, 100%, Listed 122
+Transferred:            1 / 1, 100%
+Elapsed time:         3.8s
+
+2026-03-08 22:31:24  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:31:25  SYNC-START  Beginning cloud sync run
+2026-03-08 22:31:33  SYNC-END  Cloud sync run complete
+2026-03-08 22:31:33  SYNC-END  Cloud sync run complete
+2026/03/08 22:31:42 INFO  : 2026-03-08/motion_2026-03-08_22.31.21_903.avi: Copied (new)
+2026/03/08 22:31:42 INFO  : 
+Transferred:   	    4.736 MiB / 4.736 MiB, 100%, 1.579 MiB/s, ETA 0s
+Checks:                61 / 61, 100%, Listed 124
+Transferred:            1 / 1, 100%
+Elapsed time:         3.4s
+
+2026-03-08 22:31:42  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:31:50  SYNC-END  Cloud sync run complete
+2026-03-08 22:32:08  SYNC-START  Beginning cloud sync run
+2026/03/08 22:32:24 INFO  : 2026-03-08/motion_2026-03-08_22.32.05_273.avi: Copied (new)
+2026/03/08 22:32:24 INFO  : 
+Transferred:   	    2.203 MiB / 2.203 MiB, 100%, 751.854 KiB/s, ETA 0s
+Checks:                62 / 62, 100%, Listed 126
+Transferred:            1 / 1, 100%
+Elapsed time:         3.0s
+
+2026-03-08 22:32:24  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:32:25  SYNC-START  Beginning cloud sync run
+2026-03-08 22:32:36  SYNC-START  Beginning cloud sync run
+2026-03-08 22:32:36  SYNC-END  Cloud sync run complete
+2026/03/08 22:32:47 INFO  : 2026-03-08/motion_2026-03-08_22.32.22_291.avi: Copied (new)
+2026/03/08 22:32:48 INFO  : 2026-03-08/motion_2026-03-08_22.32.27_479.avi: Copied (new)
+2026/03/08 22:32:48 INFO  : 
+Transferred:   	    6.584 MiB / 6.584 MiB, 100%, 2.195 MiB/s, ETA 0s
+Checks:                63 / 63, 100%, Listed 129
+Transferred:            2 / 2, 100%
+Elapsed time:         3.3s
+
+2026-03-08 22:32:48  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 22:32:50 INFO  : There was nothing to transfer
+2026/03/08 22:32:50 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                65 / 65, 100%, Listed 131
+Elapsed time:         0.8s
+
+2026-03-08 22:32:50  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:32:55  SYNC-START  Beginning cloud sync run
+2026-03-08 22:32:58  SYNC-END  Cloud sync run complete
+2026-03-08 22:33:03  SYNC-END  Cloud sync run complete
+2026-03-08 22:33:03  SYNC-START  Beginning cloud sync run
+2026-03-08 22:33:15  SYNC-START  Beginning cloud sync run
+2026/03/08 22:33:16 INFO  : 2026-03-08/motion_2026-03-08_22.32.59_692.avi: Copied (new)
+2026/03/08 22:33:16 INFO  : 2026-03-08/motion_2026-03-08_22.33.06_706.avi: Copied (new)
+2026/03/08 22:33:16 INFO  : 2026-03-08/motion_2026-03-08_22.32.51_217.avi: Copied (new)
+2026/03/08 22:33:16 INFO  : 
+Transferred:   	    4.972 MiB / 4.972 MiB, 100%, 1.657 MiB/s, ETA 0s
+Checks:                65 / 65, 100%, Listed 134
+Transferred:            3 / 3, 100%
+Elapsed time:         3.2s
+
+2026-03-08 22:33:16  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 22:33:18  SYNC-START  Beginning cloud sync run
+2026/03/08 22:33:20 ERROR : 2026-03-08/motion_2026-03-08_22.33.15_780.avi: Failed to copy: Post "https://pod-050-1042-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0037": can't copy - source file is being updated (size changed from 2032506 to 2063044)
+2026/03/08 22:33:20 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:20 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:20 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0037": can't copy - source file is being updated (size changed from 2032506 to 2063044)
+2026/03/08 22:33:20 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1042-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0037": can't copy - source file is being updated (size changed from 238128 to 327704)
+2026/03/08 22:33:22 INFO  : 2026-03-08/motion_2026-03-08_22.33.15_780.avi: Copied (new)
+2026/03/08 22:33:22 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:22 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:22 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0037": can't copy - source file is being updated (size changed from 238128 to 327704)
+2026-03-08 22:33:22  SYNC-START  Beginning cloud sync run
+2026/03/08 22:33:23 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1042-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0037": can't copy - source file is being updated (size changed from 834208 to 923690)
+2026/03/08 22:33:23 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:23 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:23 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0037": can't copy - source file is being updated (size changed from 834208 to 923690)
+2026/03/08 22:33:23 INFO  : 
+Transferred:   	    1.967 MiB / 1.967 MiB, 100%, 126 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               205 / 205, 100%, Listed 417
+Transferred:            1 / 1, 100%
+Elapsed time:         4.1s
+
+2026/03/08 22:33:23 NOTICE: Failed to sync: Post "https://pod-050-1042-13.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0037": can't copy - source file is being updated (size changed from 834208 to 923690)
+2026-03-08 22:33:23  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 22:33:30  SYNC-END  Cloud sync run complete
+2026-03-08 22:33:36  SYNC-END  Cloud sync run complete
+2026/03/08 22:33:37 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1035-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0021": can't copy - source file is being updated (size changed from 4689036 to 4808588)
+2026/03/08 22:33:37 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:37 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:37 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1035-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0021": can't copy - source file is being updated (size changed from 4689036 to 4808588)
+2026/03/08 22:33:38 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1035-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0021": can't copy - source file is being updated (size changed from 4928140 to 5017812)
+2026/03/08 22:33:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:38 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1035-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0021": can't copy - source file is being updated (size changed from 4928140 to 5017812)
+2026/03/08 22:33:38 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1035-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0021": can't copy - source file is being updated (size changed from 5107488 to 5197164)
+2026/03/08 22:33:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:38 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1035-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0021": can't copy - source file is being updated (size changed from 5107488 to 5197164)
+2026/03/08 22:33:38 INFO  : 
+Transferred:   	      132 KiB / 132 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               207 / 207, 100%, Listed 420
+Elapsed time:         2.6s
+
+2026/03/08 22:33:38 NOTICE: Failed to sync: Post "https://pod-050-1035-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0021": can't copy - source file is being updated (size changed from 5107488 to 5197164)
+2026-03-08 22:33:38  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/08 22:33:39 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1032-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0016": can't copy - source file is being updated (size changed from 5346608 to 5466160)
+2026/03/08 22:33:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:39 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1032-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0016": can't copy - source file is being updated (size changed from 5346608 to 5466160)
+2026/03/08 22:33:41 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1032-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0016": can't copy - source file is being updated (size changed from 5585724 to 5675400)
+2026/03/08 22:33:41 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:41 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:41 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1032-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0016": can't copy - source file is being updated (size changed from 5585724 to 5675400)
+2026/03/08 22:33:41 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1013-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0035": can't copy - source file is being updated (size changed from 5675400 to 5824852)
+2026/03/08 22:33:41 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:41 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:41 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1013-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0035": can't copy - source file is being updated (size changed from 5675400 to 5824852)
+2026/03/08 22:33:42 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1032-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0016": can't copy - source file is being updated (size changed from 5884628 to 5974292)
+2026/03/08 22:33:42 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:42 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:42 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1032-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0016": can't copy - source file is being updated (size changed from 5884628 to 5974292)
+2026/03/08 22:33:42 INFO  : 
+Transferred:   	      308 KiB / 308 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               207 / 207, 100%, Listed 420
+Elapsed time:         3.6s
+
+2026/03/08 22:33:42 NOTICE: Failed to sync: Post "https://pod-050-1032-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0016": can't copy - source file is being updated (size changed from 5884628 to 5974292)
+2026-03-08 22:33:42  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/08 22:33:42 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1013-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0035": can't copy - source file is being updated (size changed from 6063958 to 6153628)
+2026/03/08 22:33:42 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:42 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:42 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1013-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0035": can't copy - source file is being updated (size changed from 6063958 to 6153628)
+2026/03/08 22:33:43 ERROR : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Failed to copy: Post "https://pod-050-1013-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0035": can't copy - source file is being updated (size changed from 6362858 to 6452528)
+2026/03/08 22:33:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 22:33:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 22:33:43 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1013-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0035": can't copy - source file is being updated (size changed from 6362858 to 6452528)
+2026/03/08 22:33:43 INFO  : 
+Transferred:   	      372 KiB / 372 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               207 / 207, 100%, Listed 420
+Elapsed time:         3.9s
+
+2026/03/08 22:33:43 NOTICE: Failed to sync: Post "https://pod-050-1013-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501013_t0035": can't copy - source file is being updated (size changed from 6362858 to 6452528)
+2026-03-08 22:33:43  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 22:33:50  SYNC-END  Cloud sync run complete
+2026-03-08 22:33:53  SYNC-END  Cloud sync run complete
+2026-03-08 22:33:54  SYNC-END  Cloud sync run complete
+2026-03-08 23:12:27  SYNC-START  Beginning cloud sync run
+2026-03-08 23:12:32  SYNC-START  Beginning cloud sync run
+2026/03/08 23:12:47 ERROR : 2026-03-08/motion_2026-03-08_23.12.45_564.avi: Failed to copy: Post "https://pod-050-1012-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501012_t0014": can't copy - source file is being updated (size changed from 1194484 to 1419216)
+2026/03/08 23:12:47 INFO  : 2026-03-08/motion_2026-03-08_23.12.23_913.avi: Copied (new)
+2026/03/08 23:12:47 INFO  : 2026-03-08/motion_2026-03-08_23.12.27_728.avi: Copied (new)
+2026-03-08 23:12:49  SYNC-START  Beginning cloud sync run
+2026/03/08 23:12:49 INFO  : 2026-03-08/motion_2026-03-08_23.12.23_913.avi: Copied (new)
+2026/03/08 23:12:49 INFO  : 2026-03-08/motion_2026-03-08_23.12.27_728.avi: Copied (new)
+2026/03/08 23:12:50 INFO  : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Copied (new)
+2026/03/08 23:12:50 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:12:50 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:12:50 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1012-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501012_t0014": can't copy - source file is being updated (size changed from 1194484 to 1419216)
+2026/03/08 23:12:51 ERROR : 2026-03-08/motion_2026-03-08_23.12.45_564.avi: Failed to copy: Post "https://pod-050-1012-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501012_t0014": can't copy - source file is being updated (size changed from 2485978 to 2583066)
+2026/03/08 23:12:51 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:12:51 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:12:51 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1012-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501012_t0014": can't copy - source file is being updated (size changed from 2485978 to 2583066)
+2026/03/08 23:12:51 INFO  : 2026-03-08/motion_2026-03-08_22.33.19_939.avi: Copied (new)
+2026/03/08 23:12:51 INFO  : 
+Transferred:   	   14.748 MiB / 14.748 MiB, 100%, 2.107 MiB/s, ETA 0s
+Checks:                69 / 69, 100%, Listed 142
+Transferred:            3 / 3, 100%
+Elapsed time:         7.2s
+
+2026-03-08 23:12:51  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 23:12:52 ERROR : 2026-03-08/motion_2026-03-08_23.12.45_564.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "7008c226a3562a5b25c4c7af10c12b18eebeb0d5" vs dst(B2 bucket helder-sync-mirror) "a2d21ba9092a0f15bca494a2648ee6d7b3bea4b9"
+2026/03/08 23:12:52 INFO  : 2026-03-08/motion_2026-03-08_23.12.45_564.avi: Removing failed copy
+2026/03/08 23:12:52 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:12:52 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:12:52 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "7008c226a3562a5b25c4c7af10c12b18eebeb0d5" vs dst(B2 bucket helder-sync-mirror) "a2d21ba9092a0f15bca494a2648ee6d7b3bea4b9"
+2026/03/08 23:12:52 INFO  : 
+Transferred:   	   17.307 MiB / 17.307 MiB, 100%, 3.383 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               213 / 213, 100%, Listed 435
+Transferred:            3 / 3, 100%
+Elapsed time:         6.5s
+
+2026/03/08 23:12:52 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "7008c226a3562a5b25c4c7af10c12b18eebeb0d5" vs dst(B2 bucket helder-sync-mirror) "a2d21ba9092a0f15bca494a2648ee6d7b3bea4b9"
+2026-03-08 23:12:52  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 23:13:01  SYNC-END  Cloud sync run complete
+2026-03-08 23:13:01  SYNC-END  Cloud sync run complete
+2026/03/08 23:13:06 INFO  : 2026-03-08/motion_2026-03-08_23.12.45_564.avi: Copied (new)
+2026/03/08 23:13:06 INFO  : 
+Transferred:   	    4.188 MiB / 4.188 MiB, 100%, 1.396 MiB/s, ETA 0s
+Checks:                72 / 72, 100%, Listed 146
+Transferred:            1 / 1, 100%
+Elapsed time:         3.0s
+
+2026-03-08 23:13:06  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:13:13  SYNC-START  Beginning cloud sync run
+2026-03-08 23:13:14  SYNC-END  Cloud sync run complete
+2026/03/08 23:13:28 ERROR : 2026-03-08/motion_2026-03-08_23.13.09_862.avi: Failed to copy: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 5225006 to 5351490)
+2026/03/08 23:13:28 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:13:28 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:13:28 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 5225006 to 5351490)
+2026/03/08 23:13:29 ERROR : 2026-03-08/motion_2026-03-08_23.13.09_862.avi: Failed to copy: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 5425968 to 5502696)
+2026/03/08 23:13:29 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:13:29 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:13:29 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 5425968 to 5502696)
+2026/03/08 23:13:30 ERROR : 2026-03-08/motion_2026-03-08_23.13.09_862.avi: Failed to copy: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 5679910 to 5756330)
+2026/03/08 23:13:30 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:13:30 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:13:30 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 5679910 to 5756330)
+2026/03/08 23:13:30 INFO  : 
+Transferred:   	      248 KiB / 248 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               219 / 219, 100%, Listed 444
+Elapsed time:         3.5s
+
+2026/03/08 23:13:30 NOTICE: Failed to sync: Post "https://pod-050-1040-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0009": can't copy - source file is being updated (size changed from 5679910 to 5756330)
+2026-03-08 23:13:30  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:13:38  SYNC-END  Cloud sync run complete
+2026-03-08 23:14:09  SYNC-START  Beginning cloud sync run
+2026/03/08 23:14:24 INFO  : 2026-03-08/motion_2026-03-08_23.14.06_491.avi: Copied (new)
+2026/03/08 23:14:25 INFO  : 2026-03-08/motion_2026-03-08_23.13.09_862.avi: Copied (new)
+2026/03/08 23:14:25 INFO  : 
+Transferred:   	   14.938 MiB / 14.938 MiB, 100%, 3.499 MiB/s, ETA 0s
+Checks:                73 / 73, 100%, Listed 149
+Transferred:            2 / 2, 100%
+Elapsed time:         3.8s
+
+2026-03-08 23:14:25  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:14:33  SYNC-END  Cloud sync run complete
+2026-03-08 23:14:47  SYNC-START  Beginning cloud sync run
+2026/03/08 23:15:03 ERROR : 2026-03-08/motion_2026-03-08_23.14.44_643.avi: Failed to copy: Post "https://pod-050-1039-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0036": can't copy - source file is being updated (size changed from 5491044 to 5639548)
+2026/03/08 23:15:03 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:15:03 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:15:03 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1039-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0036": can't copy - source file is being updated (size changed from 5491044 to 5639548)
+2026/03/08 23:15:04 ERROR : 2026-03-08/motion_2026-03-08_23.14.44_643.avi: Failed to copy: Post "https://pod-050-1039-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0036": can't copy - source file is being updated (size changed from 5727564 to 5839282)
+2026/03/08 23:15:04 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:15:04 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:15:04 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1039-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0036": can't copy - source file is being updated (size changed from 5727564 to 5839282)
+2026/03/08 23:15:05 ERROR : 2026-03-08/motion_2026-03-08_23.14.44_643.avi: Failed to copy: Post "https://pod-050-1039-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0036": can't copy - source file is being updated (size changed from 6049236 to 6139240)
+2026/03/08 23:15:05 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:15:05 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:15:05 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1039-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0036": can't copy - source file is being updated (size changed from 6049236 to 6139240)
+2026/03/08 23:15:05 INFO  : 
+Transferred:   	      260 KiB / 260 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               225 / 225, 100%, Listed 456
+Elapsed time:         3.6s
+
+2026/03/08 23:15:05 NOTICE: Failed to sync: Post "https://pod-050-1039-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0036": can't copy - source file is being updated (size changed from 6049236 to 6139240)
+2026-03-08 23:15:05  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:15:13  SYNC-END  Cloud sync run complete
+2026-03-08 23:15:17  SYNC-START  Beginning cloud sync run
+2026/03/08 23:15:33 ERROR : 2026-03-08/motion_2026-03-08_23.15.15_055.avi: Failed to copy: Post "https://pod-050-1040-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0008": can't copy - source file is being updated (size changed from 5038554 to 5184872)
+2026/03/08 23:15:36 INFO  : 2026-03-08/motion_2026-03-08_23.14.44_643.avi: Copied (new)
+2026/03/08 23:15:36 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:15:36 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:15:36 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0008": can't copy - source file is being updated (size changed from 5038554 to 5184872)
+2026/03/08 23:15:37 ERROR : 2026-03-08/motion_2026-03-08_23.15.15_055.avi: Failed to copy: Post "https://pod-050-1040-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0008": can't copy - source file is being updated (size changed from 5922036 to 5996992)
+2026/03/08 23:15:37 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:15:37 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:15:37 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0008": can't copy - source file is being updated (size changed from 5922036 to 5996992)
+2026/03/08 23:15:39 ERROR : 2026-03-08/motion_2026-03-08_23.15.15_055.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "95d077722fa428ba5968f88c15e2d537d32ed641" vs dst(B2 bucket helder-sync-mirror) "aac8c0e4c0768db53a24fa7017ebf439b6253ad6"
+2026/03/08 23:15:39 INFO  : 2026-03-08/motion_2026-03-08_23.15.15_055.avi: Removing failed copy
+2026/03/08 23:15:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:15:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:15:39 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "95d077722fa428ba5968f88c15e2d537d32ed641" vs dst(B2 bucket helder-sync-mirror) "aac8c0e4c0768db53a24fa7017ebf439b6253ad6"
+2026/03/08 23:15:39 INFO  : 
+Transferred:   	   14.234 MiB / 14.234 MiB, 100%, 2.847 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               227 / 227, 100%, Listed 461
+Transferred:            1 / 1, 100%
+Elapsed time:         7.1s
+
+2026/03/08 23:15:39 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "95d077722fa428ba5968f88c15e2d537d32ed641" vs dst(B2 bucket helder-sync-mirror) "aac8c0e4c0768db53a24fa7017ebf439b6253ad6"
+2026-03-08 23:15:39  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 23:15:46  SYNC-END  Cloud sync run complete
+2026-03-08 23:16:23  SYNC-START  Beginning cloud sync run
+2026-03-08 23:16:35  SYNC-START  Beginning cloud sync run
+2026-03-08 23:16:41  SYNC-START  Beginning cloud sync run
+2026/03/08 23:16:44 INFO  : 2026-03-08/motion_2026-03-08_23.16.31_778.avi: Copied (new)
+2026/03/08 23:16:44 INFO  : 2026-03-08/motion_2026-03-08_23.16.37_870.avi: Copied (new)
+2026/03/08 23:16:44 INFO  : 2026-03-08/motion_2026-03-08_23.16.21_214.avi: Copied (new)
+2026/03/08 23:16:47 INFO  : 2026-03-08/motion_2026-03-08_23.15.15_055.avi: Copied (new)
+2026/03/08 23:16:47 INFO  : 
+Transferred:   	   12.190 MiB / 12.190 MiB, 100%, 2.032 MiB/s, ETA 0s
+Checks:                76 / 76, 100%, Listed 157
+Transferred:            4 / 4, 100%
+Elapsed time:         6.3s
+
+2026-03-08 23:16:47  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 23:16:51 INFO  : There was nothing to transfer
+2026/03/08 23:16:51 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:                80 / 80, 100%, Listed 161
+Elapsed time:         0.8s
+
+2026-03-08 23:16:51  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:16:56  SYNC-END  Cloud sync run complete
+2026/03/08 23:16:56 ERROR : 2026-03-08/motion_2026-03-08_23.16.55_103.avi: Failed to copy: Post "https://pod-050-1001-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0037": can't copy - source file is being updated (size changed from 1038204 to 1174526)
+2026/03/08 23:16:56 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:16:56 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:16:56 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1001-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0037": can't copy - source file is being updated (size changed from 1038204 to 1174526)
+2026/03/08 23:16:57 ERROR : 2026-03-08/motion_2026-03-08_23.16.55_103.avi: Failed to copy: Post "https://pod-050-1001-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0037": can't copy - source file is being updated (size changed from 1256124 to 1337954)
+2026/03/08 23:16:57 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:16:57 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:16:57 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1001-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0037": can't copy - source file is being updated (size changed from 1256124 to 1337954)
+2026/03/08 23:16:57 ERROR : 2026-03-08/motion_2026-03-08_23.16.55_103.avi: Failed to copy: Post "https://pod-050-1001-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0037": can't copy - source file is being updated (size changed from 1419854 to 1501882)
+2026/03/08 23:16:57 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:16:57 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:16:57 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1001-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0037": can't copy - source file is being updated (size changed from 1419854 to 1501882)
+2026/03/08 23:16:57 INFO  : 
+Transferred:   	        8 KiB / 8 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               240 / 240, 100%, Listed 486
+Elapsed time:         2.5s
+
+2026/03/08 23:16:57 NOTICE: Failed to sync: Post "https://pod-050-1001-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501001_t0037": can't copy - source file is being updated (size changed from 1419854 to 1501882)
+2026-03-08 23:16:57  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:17:00  SYNC-END  Cloud sync run complete
+2026-03-08 23:17:04  SYNC-START  Beginning cloud sync run
+2026-03-08 23:17:07  SYNC-END  Cloud sync run complete
+2026/03/08 23:17:19 INFO  : 2026-03-08/motion_2026-03-08_23.16.55_103.avi: Copied (new)
+2026/03/08 23:17:19 INFO  : 
+Transferred:   	    1.694 MiB / 1.694 MiB, 100%, 238 KiB/s, ETA 0s
+Checks:                80 / 80, 100%, Listed 162
+Transferred:            1 / 1, 100%
+Elapsed time:         2.7s
+
+2026-03-08 23:17:19  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:17:26  SYNC-END  Cloud sync run complete
+2026-03-08 23:17:59  SYNC-START  Beginning cloud sync run
+2026-03-08 23:18:06  SYNC-START  Beginning cloud sync run
+2026/03/08 23:18:15 ERROR : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: Failed to copy: Post "https://pod-050-1042-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 3618478 to 3763726)
+2026/03/08 23:18:17 INFO  : 2026-03-08/motion_2026-03-08_23.17.56_955.avi: Copied (new)
+2026/03/08 23:18:17 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:18:17 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:18:17 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 3618478 to 3763726)
+2026/03/08 23:18:17 ERROR : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: Failed to copy: Post "https://pod-050-1042-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 4101732 to 4173862)
+2026/03/08 23:18:17 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:18:17 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:18:17 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0055": can't copy - source file is being updated (size changed from 4101732 to 4173862)
+2026/03/08 23:18:19 ERROR : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "44b27a526a2194899ed517223bacbf44207379ef" vs dst(B2 bucket helder-sync-mirror) "2f8e2ed5ac2023c5804a4db3e1c7da39a6cd924a"
+2026/03/08 23:18:19 INFO  : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: Removing failed copy
+2026/03/08 23:18:19 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:18:19 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:18:19 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "44b27a526a2194899ed517223bacbf44207379ef" vs dst(B2 bucket helder-sync-mirror) "2f8e2ed5ac2023c5804a4db3e1c7da39a6cd924a"
+2026/03/08 23:18:19 INFO  : 
+Transferred:   	    5.678 MiB / 5.678 MiB, 100%, 1.893 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               245 / 245, 100%, Listed 497
+Transferred:            1 / 1, 100%
+Elapsed time:         4.9s
+
+2026/03/08 23:18:19 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "44b27a526a2194899ed517223bacbf44207379ef" vs dst(B2 bucket helder-sync-mirror) "2f8e2ed5ac2023c5804a4db3e1c7da39a6cd924a"
+2026-03-08 23:18:19  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/08 23:18:20 ERROR : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: Failed to copy: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0045": can't copy - source file is being updated (size changed from 4680786 to 4780426)
+2026/03/08 23:18:20 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:18:20 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:18:20 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0045": can't copy - source file is being updated (size changed from 4680786 to 4780426)
+2026/03/08 23:18:21 ERROR : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: Failed to copy: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0045": can't copy - source file is being updated (size changed from 4887174 to 4967630)
+2026/03/08 23:18:21 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:18:21 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:18:21 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0045": can't copy - source file is being updated (size changed from 4887174 to 4967630)
+2026/03/08 23:18:21 ERROR : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: Failed to copy: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0045": can't copy - source file is being updated (size changed from 5048414 to 5128432)
+2026/03/08 23:18:21 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:18:21 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:18:21 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0045": can't copy - source file is being updated (size changed from 5048414 to 5128432)
+2026/03/08 23:18:21 INFO  : 
+Transferred:   	      180 KiB / 180 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               246 / 246, 100%, Listed 498
+Elapsed time:         2.7s
+
+2026/03/08 23:18:21 NOTICE: Failed to sync: Post "https://pod-050-1042-07.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0045": can't copy - source file is being updated (size changed from 5048414 to 5128432)
+2026-03-08 23:18:21  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:18:28  SYNC-END  Cloud sync run complete
+2026-03-08 23:18:30  SYNC-END  Cloud sync run complete
+2026-03-08 23:19:00  SYNC-START  Beginning cloud sync run
+2026/03/08 23:19:14 ERROR : 2026-03-08/motion_2026-03-08_23.18.57_555.avi: Failed to copy: Post "https://pod-050-1040-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0040": can't copy - source file is being updated (size changed from 4695686 to 4804766)
+2026/03/08 23:19:16 INFO  : 2026-03-08/motion_2026-03-08_23.18.03_314.avi: Copied (new)
+2026/03/08 23:19:16 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:19:16 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:19:16 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0040": can't copy - source file is being updated (size changed from 4695686 to 4804766)
+2026/03/08 23:19:17 ERROR : 2026-03-08/motion_2026-03-08_23.18.57_555.avi: Failed to copy: Post "https://pod-050-1040-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0040": can't copy - source file is being updated (size changed from 5513718 to 5586598)
+2026/03/08 23:19:17 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:19:17 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:19:17 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1040-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0040": can't copy - source file is being updated (size changed from 5513718 to 5586598)
+2026/03/08 23:19:18 ERROR : 2026-03-08/motion_2026-03-08_23.18.57_555.avi: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "706162a9879ecb56bdfab1f2d29e429f0d841db1" vs dst(B2 bucket helder-sync-mirror) "ff4471724ea927372dc9289f07241a1744d407df"
+2026/03/08 23:19:18 INFO  : 2026-03-08/motion_2026-03-08_23.18.57_555.avi: Removing failed copy
+2026/03/08 23:19:18 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:19:18 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:19:18 ERROR : Attempt 3/3 failed with 1 errors and: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "706162a9879ecb56bdfab1f2d29e429f0d841db1" vs dst(B2 bucket helder-sync-mirror) "ff4471724ea927372dc9289f07241a1744d407df"
+2026/03/08 23:19:18 INFO  : 
+Transferred:   	   17.234 MiB / 17.234 MiB, 100%, 2.561 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               248 / 248, 100%, Listed 503
+Transferred:            1 / 1, 100%
+Elapsed time:         5.7s
+
+2026/03/08 23:19:18 NOTICE: Failed to sync: corrupted on transfer: sha1 hashes differ src(Local file system at //?/C:/Users/helde/Repos/Bois) "706162a9879ecb56bdfab1f2d29e429f0d841db1" vs dst(B2 bucket helder-sync-mirror) "ff4471724ea927372dc9289f07241a1744d407df"
+2026-03-08 23:19:18  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-08 23:19:26  SYNC-END  Cloud sync run complete
+2026-03-08 23:19:27  SYNC-START  Beginning cloud sync run
+2026/03/08 23:19:40 ERROR : 2026-03-08/motion_2026-03-08_23.19.24_162.avi: Failed to copy: Post "https://pod-050-1003-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501003_t0010": can't copy - source file is being updated (size changed from 4115240 to 4243198)
+2026/03/08 23:19:43 INFO  : 2026-03-08/motion_2026-03-08_23.18.57_555.avi: Copied (new)
+2026/03/08 23:19:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:19:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:19:43 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1003-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501003_t0010": can't copy - source file is being updated (size changed from 4115240 to 4243198)
+2026/03/08 23:19:44 ERROR : 2026-03-08/motion_2026-03-08_23.19.24_162.avi: Failed to copy: Post "https://pod-050-1003-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501003_t0010": can't copy - source file is being updated (size changed from 4983722 to 5058178)
+2026/03/08 23:19:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:19:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:19:44 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1003-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501003_t0010": can't copy - source file is being updated (size changed from 4983722 to 5058178)
+2026/03/08 23:19:44 ERROR : 2026-03-08/motion_2026-03-08_23.19.24_162.avi: Failed to copy: Post "https://pod-050-1008-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501008_t0053": can't copy - source file is being updated (size changed from 5107074 to 5131416)
+2026/03/08 23:19:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:19:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:19:44 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1008-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501008_t0053": can't copy - source file is being updated (size changed from 5107074 to 5131416)
+2026/03/08 23:19:44 INFO  : 
+Transferred:   	    9.760 MiB / 9.760 MiB, 100%, 1.676 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               251 / 251, 100%, Listed 509
+Transferred:            1 / 1, 100%
+Elapsed time:         5.2s
+
+2026/03/08 23:19:44 NOTICE: Failed to sync: Post "https://pod-050-1008-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501008_t0053": can't copy - source file is being updated (size changed from 5107074 to 5131416)
+2026-03-08 23:19:44  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:19:52  SYNC-END  Cloud sync run complete
+2026-03-08 23:27:36  SYNC-START  Beginning cloud sync run
+2026/03/08 23:27:51 INFO  : 2026-03-08/motion_2026-03-08_23.27.33_138.avi: Copied (new)
+2026/03/08 23:27:52 INFO  : 2026-03-08/motion_2026-03-08_23.19.24_162.avi: Copied (new)
+2026/03/08 23:27:52 INFO  : 
+Transferred:   	    8.618 MiB / 8.618 MiB, 100%, 2.155 MiB/s, ETA 0s
+Checks:                84 / 84, 100%, Listed 171
+Transferred:            2 / 2, 100%
+Elapsed time:         4.0s
+
+2026-03-08 23:27:52  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:27:54  SYNC-START  Beginning cloud sync run
+2026-03-08 23:28:00  SYNC-END  Cloud sync run complete
+2026/03/08 23:28:07 ERROR : 2026-03-08/motion_2026-03-08_23.27.51_052.avi: Failed to copy: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0032": can't copy - source file is being updated (size changed from 4649504 to 4778398)
+2026/03/08 23:28:07 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:28:07 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:28:07 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0032": can't copy - source file is being updated (size changed from 4649504 to 4778398)
+2026/03/08 23:28:08 ERROR : 2026-03-08/motion_2026-03-08_23.27.51_052.avi: Failed to copy: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0032": can't copy - source file is being updated (size changed from 4855868 to 4933264)
+2026/03/08 23:28:08 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:28:08 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:28:08 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0032": can't copy - source file is being updated (size changed from 4855868 to 4933264)
+2026/03/08 23:28:09 ERROR : 2026-03-08/motion_2026-03-08_23.27.51_052.avi: Failed to copy: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0032": can't copy - source file is being updated (size changed from 5010458 to 5088006)
+2026/03/08 23:28:09 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:28:09 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:28:09 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0032": can't copy - source file is being updated (size changed from 5010458 to 5088006)
+2026/03/08 23:28:09 INFO  : 
+Transferred:   	      120 KiB / 120 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               258 / 258, 100%, Listed 522
+Elapsed time:         2.7s
+
+2026/03/08 23:28:09 NOTICE: Failed to sync: Post "https://pod-050-1032-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501032_t0032": can't copy - source file is being updated (size changed from 5010458 to 5088006)
+2026-03-08 23:28:09  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:28:16  SYNC-END  Cloud sync run complete
+2026-03-08 23:28:19  SYNC-START  Beginning cloud sync run
+2026/03/08 23:28:35 INFO  : 2026-03-08/motion_2026-03-08_23.28.17_038.avi: Copied (new)
+2026/03/08 23:28:35 INFO  : 2026-03-08/motion_2026-03-08_23.27.51_052.avi: Copied (new)
+2026/03/08 23:28:35 INFO  : 
+Transferred:   	    9.034 MiB / 9.034 MiB, 100%, 2.956 MiB/s, ETA 0s
+Checks:                86 / 86, 100%, Listed 175
+Transferred:            2 / 2, 100%
+Elapsed time:         3.6s
+
+2026-03-08 23:28:35  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:28:36  SYNC-START  Beginning cloud sync run
+2026-03-08 23:28:43  SYNC-END  Cloud sync run complete
+2026/03/08 23:28:52 INFO  : 2026-03-08/motion_2026-03-08_23.28.33_087.avi: Copied (new)
+2026/03/08 23:28:52 INFO  : 
+Transferred:   	    2.065 MiB / 2.065 MiB, 100%, 704.956 KiB/s, ETA 0s
+Checks:                88 / 88, 100%, Listed 178
+Transferred:            1 / 1, 100%
+Elapsed time:         3.7s
+
+2026-03-08 23:28:52  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:28:58  SYNC-START  Beginning cloud sync run
+2026-03-08 23:29:00  SYNC-END  Cloud sync run complete
+2026/03/08 23:29:14 INFO  : 2026-03-08/motion_2026-03-08_23.28.55_695.avi: Copied (new)
+2026/03/08 23:29:14 INFO  : 
+Transferred:   	    4.323 MiB / 4.323 MiB, 100%, 532 KiB/s, ETA 0s
+Checks:                89 / 89, 100%, Listed 180
+Transferred:            1 / 1, 100%
+Elapsed time:         3.8s
+
+2026-03-08 23:29:14  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:29:21  SYNC-END  Cloud sync run complete
+2026-03-08 23:29:37  SYNC-START  Beginning cloud sync run
+2026/03/08 23:29:52 INFO  : 2026-03-08/motion_2026-03-08_23.29.34_507.avi: Copied (new)
+2026/03/08 23:29:52 INFO  : 
+Transferred:   	    1.398 MiB / 1.398 MiB, 100%, 222 KiB/s, ETA 0s
+Checks:                90 / 90, 100%, Listed 182
+Transferred:            1 / 1, 100%
+Elapsed time:         2.7s
+
+2026-03-08 23:29:52  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:29:59  SYNC-END  Cloud sync run complete
+2026-03-08 23:46:02  SYNC-START  Beginning cloud sync run
+2026/03/08 23:46:17 INFO  : 2026-03-08/motion_2026-03-08_23.45.59_224.avi: Copied (new)
+2026/03/08 23:46:18 INFO  : 
+Transferred:   	    2.677 MiB / 2.677 MiB, 100%, 913.771 KiB/s, ETA 0s
+Checks:                91 / 91, 100%, Listed 184
+Transferred:            1 / 1, 100%
+Elapsed time:         3.4s
+
+2026-03-08 23:46:18  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:46:25  SYNC-END  Cloud sync run complete
+2026-03-08 23:46:44  SYNC-START  Beginning cloud sync run
+2026/03/08 23:46:57 ERROR : 2026-03-08/motion_2026-03-08_23.46.41_572.avi: Failed to copy: Post "https://pod-050-1035-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0019": can't copy - source file is being updated (size changed from 5340780 to 5508978)
+2026/03/08 23:46:57 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:46:57 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:46:57 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1035-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0019": can't copy - source file is being updated (size changed from 5340780 to 5508978)
+2026/03/08 23:46:58 ERROR : 2026-03-08/motion_2026-03-08_23.46.41_572.avi: Failed to copy: Post "https://pod-050-1035-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0019": can't copy - source file is being updated (size changed from 5609516 to 5710252)
+2026/03/08 23:46:58 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:46:58 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:46:58 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1035-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0019": can't copy - source file is being updated (size changed from 5609516 to 5710252)
+2026/03/08 23:46:59 ERROR : 2026-03-08/motion_2026-03-08_23.46.41_572.avi: Failed to copy: Post "https://pod-050-1035-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0019": can't copy - source file is being updated (size changed from 5945020 to 6045710)
+2026/03/08 23:46:59 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:46:59 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:46:59 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1035-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0019": can't copy - source file is being updated (size changed from 5945020 to 6045710)
+2026/03/08 23:46:59 INFO  : 
+Transferred:   	      260 KiB / 260 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               276 / 276, 100%, Listed 558
+Elapsed time:         3.5s
+
+2026/03/08 23:46:59 NOTICE: Failed to sync: Post "https://pod-050-1035-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501035_t0019": can't copy - source file is being updated (size changed from 5945020 to 6045710)
+2026-03-08 23:46:59  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:47:06  SYNC-END  Cloud sync run complete
+2026-03-08 23:47:52  SYNC-START  Beginning cloud sync run
+2026-03-08 23:47:58  SYNC-START  Beginning cloud sync run
+2026/03/08 23:48:07 ERROR : 2026-03-08/motion_2026-03-08_23.47.56_234.avi: Failed to copy: Post "https://pod-050-1010-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0023": can't copy - source file is being updated (size changed from 3457338 to 3622534)
+2026/03/08 23:48:11 INFO  : 2026-03-08/motion_2026-03-08_23.47.49_266.avi: Copied (new)
+2026/03/08 23:48:11 ERROR : 2026-03-08/motion_2026-03-08_23.47.56_234.avi: Failed to copy: Post "https://pod-050-1040-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0025": can't copy - source file is being updated (size changed from 4422098 to 4586738)
+2026/03/08 23:48:16 INFO  : 2026-03-08/motion_2026-03-08_23.47.49_266.avi: Copied (new)
+2026-03-08 23:48:38  SYNC-START  Beginning cloud sync run
+2026/03/08 23:48:44 INFO  : 2026-03-08/motion_2026-03-08_23.46.41_572.avi: Copied (new)
+2026/03/08 23:48:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:48:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:48:44 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1010-12.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501010_t0023": can't copy - source file is being updated (size changed from 3457338 to 3622534)
+2026-03-08 23:48:46  SYNC-START  Beginning cloud sync run
+2026/03/08 23:48:48 INFO  : 2026-03-08/motion_2026-03-08_23.46.41_572.avi: Copied (new)
+2026/03/08 23:48:48 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:48:48 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:48:48 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1040-02.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501040_t0025": can't copy - source file is being updated (size changed from 4422098 to 4586738)
+2026/03/08 23:48:48 INFO  : 2026-03-08/motion_2026-03-08_23.48.40_006.avi: Copied (new)
+2026/03/08 23:48:49 INFO  : 2026-03-08/motion_2026-03-08_23.48.31_964.avi: Copied (new)
+2026/03/08 23:48:53 INFO  : 2026-03-08/motion_2026-03-08_23.48.40_006.avi: Copied (new)
+2026/03/08 23:48:54 INFO  : 2026-03-08/motion_2026-03-08_23.48.31_964.avi: Copied (new)
+2026/03/08 23:49:01 INFO  : 2026-03-08/motion_2026-03-08_23.47.56_234.avi: Copied (new)
+2026/03/08 23:49:01 ERROR : Attempt 2/3 succeeded
+2026/03/08 23:49:01 INFO  : 
+Transferred:   	   31.039 MiB / 31.039 MiB, 100%, 617.435 KiB/s, ETA 0s
+Checks:               186 / 186, 100%, Listed 380
+Transferred:            5 / 5, 100%
+Elapsed time:        55.3s
+
+2026-03-08 23:49:01  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 23:49:05 INFO  : 2026-03-08/motion_2026-03-08_23.47.56_234.avi: Copied (new)
+2026/03/08 23:49:05 ERROR : Attempt 2/3 succeeded
+2026/03/08 23:49:05 INFO  : 
+Transferred:   	   31.066 MiB / 31.066 MiB, 100%, 595.143 KiB/s, ETA 0s
+Checks:               186 / 186, 100%, Listed 380
+Transferred:            5 / 5, 100%
+Elapsed time:        55.5s
+
+2026-03-08 23:49:05  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:49:09  SYNC-END  Cloud sync run complete
+2026/03/08 23:49:12 INFO  : 2026-03-08/motion_2026-03-08_23.47.56_234.avi: Copied (new)
+2026/03/08 23:49:12 INFO  : 
+Transferred:   	    8.437 MiB / 8.437 MiB, 100%, 463.960 KiB/s, ETA 0s
+Checks:                96 / 96, 100%, Listed 194
+Transferred:            1 / 1, 100%
+Elapsed time:        18.7s
+
+2026-03-08 23:49:12  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:49:14  SYNC-END  Cloud sync run complete
+2026/03/08 23:49:17 INFO  : 2026-03-08/motion_2026-03-08_23.47.56_234.avi: Copied (new)
+2026/03/08 23:49:17 INFO  : 
+Transferred:   	    8.437 MiB / 8.437 MiB, 100%, 452.108 KiB/s, ETA 0s
+Checks:                96 / 96, 100%, Listed 194
+Transferred:            1 / 1, 100%
+Elapsed time:        19.5s
+
+2026-03-08 23:49:18  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:49:20  SYNC-END  Cloud sync run complete
+2026-03-08 23:49:25  SYNC-END  Cloud sync run complete
+2026-03-08 23:51:30  SYNC-START  Beginning cloud sync run
+2026/03/08 23:51:44 ERROR : 2026-03-08/motion_2026-03-08_23.51.27_848.avi: Failed to copy: Post "https://pod-050-1024-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0015": can't copy - source file is being updated (size changed from 4706950 to 4845750)
+2026/03/08 23:51:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:51:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:51:44 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1024-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0015": can't copy - source file is being updated (size changed from 4706950 to 4845750)
+2026/03/08 23:51:44 ERROR : 2026-03-08/motion_2026-03-08_23.51.27_848.avi: Failed to copy: Post "https://pod-050-1024-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0015": can't copy - source file is being updated (size changed from 4929008 to 5012590)
+2026/03/08 23:51:44 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:51:44 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:51:44 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1024-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0015": can't copy - source file is being updated (size changed from 4929008 to 5012590)
+2026/03/08 23:51:45 ERROR : 2026-03-08/motion_2026-03-08_23.51.27_848.avi: Failed to copy: Post "https://pod-050-1024-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0015": can't copy - source file is being updated (size changed from 5096048 to 5179622)
+2026/03/08 23:51:45 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:51:45 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:51:45 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1024-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0015": can't copy - source file is being updated (size changed from 5096048 to 5179622)
+2026/03/08 23:51:45 INFO  : 
+Transferred:   	      132 KiB / 132 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:               291 / 291, 100%, Listed 588
+Elapsed time:         2.6s
+
+2026/03/08 23:51:45 NOTICE: Failed to sync: Post "https://pod-050-1024-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0015": can't copy - source file is being updated (size changed from 5096048 to 5179622)
+2026-03-08 23:51:45  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:51:52  SYNC-END  Cloud sync run complete
+2026-03-08 23:52:17  SYNC-START  Beginning cloud sync run
+2026-03-08 23:52:23  SYNC-START  Beginning cloud sync run
+2026/03/08 23:52:33 ERROR : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Failed to copy: Post "https://pod-050-1039-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0026": can't copy - source file is being updated (size changed from 3504928 to 3670826)
+2026/03/08 23:52:38 INFO  : 2026-03-08/motion_2026-03-08_23.52.14_118.avi: Copied (new)
+2026/03/08 23:52:38 ERROR : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Failed to copy: Post "https://pod-050-1000-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501000_t0022": can't copy - source file is being updated (size changed from 4687242 to 4716490)
+2026/03/08 23:52:42 INFO  : 2026-03-08/motion_2026-03-08_23.52.14_118.avi: Copied (new)
+2026/03/08 23:52:56 INFO  : 2026-03-08/motion_2026-03-08_23.51.27_848.avi: Copied (new)
+2026/03/08 23:52:56 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:52:56 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:52:56 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1039-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0026": can't copy - source file is being updated (size changed from 3504928 to 3670826)
+2026/03/08 23:52:58 ERROR : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Failed to copy: Post "https://pod-050-1039-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0026": can't copy - source file is being updated (size changed from 10100230 to 10190888)
+2026/03/08 23:52:58 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:52:58 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:52:58 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1039-05.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0026": can't copy - source file is being updated (size changed from 10100230 to 10190888)
+2026/03/08 23:53:00 INFO  : 2026-03-08/motion_2026-03-08_23.51.27_848.avi: Copied (new)
+2026/03/08 23:53:00 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:53:00 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:53:00 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1000-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501000_t0022": can't copy - source file is being updated (size changed from 4687242 to 4716490)
+2026/03/08 23:53:04 ERROR : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Failed to copy: Post "https://pod-050-1042-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0042": can't copy - source file is being updated (size changed from 10497072 to 10588562)
+2026/03/08 23:53:04 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:53:04 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:53:04 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0042": can't copy - source file is being updated (size changed from 10497072 to 10588562)
+2026/03/08 23:53:04 INFO  : 
+Transferred:   	   15.567 MiB / 15.567 MiB, 100%, 521.481 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               295 / 295, 100%, Listed 598
+Transferred:            2 / 2, 100%
+Elapsed time:        32.0s
+
+2026/03/08 23:53:04 NOTICE: Failed to sync: Post "https://pod-050-1042-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0042": can't copy - source file is being updated (size changed from 10497072 to 10588562)
+2026-03-08 23:53:04  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/08 23:53:08 ERROR : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Failed to copy: Post "https://pod-050-1000-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501000_t0022": can't copy - source file is being updated (size changed from 11068524 to 11146144)
+2026/03/08 23:53:08 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:53:08 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:53:08 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1000-15.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501000_t0022": can't copy - source file is being updated (size changed from 11068524 to 11146144)
+2026-03-08 23:53:14  SYNC-END  Cloud sync run complete
+2026/03/08 23:53:19 ERROR : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Failed to copy: Post "https://pod-050-1022-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0022": can't copy - source file is being updated (size changed from 12921304 to 13027574)
+2026/03/08 23:53:19 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:53:19 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:53:19 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1022-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0022": can't copy - source file is being updated (size changed from 12921304 to 13027574)
+2026/03/08 23:53:19 INFO  : 
+Transferred:   	   21.317 MiB / 21.317 MiB, 100%, 540.054 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:               295 / 295, 100%, Listed 598
+Transferred:            2 / 2, 100%
+Elapsed time:        43.0s
+
+2026/03/08 23:53:19 NOTICE: Failed to sync: Post "https://pod-050-1022-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501022_t0022": can't copy - source file is being updated (size changed from 12921304 to 13027574)
+2026-03-08 23:53:19  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-08 23:53:27  SYNC-END  Cloud sync run complete
+2026-03-08 23:55:27  SYNC-START  Beginning cloud sync run
+2026-03-08 23:55:32  SYNC-START  Beginning cloud sync run
+2026/03/08 23:55:44 ERROR : 2026-03-08/motion_2026-03-08_23.55.43_055.avi: Failed to copy: Post "https://pod-050-1039-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0013": can't copy - source file is being updated (size changed from 950340 to 1066408)
+2026/03/08 23:55:46 ERROR : 2026-03-08/motion_2026-03-08_23.55.43_055.avi: Failed to copy: Post "https://pod-050-1037-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501037_t0013": can't copy - source file is being updated (size changed from 1458072 to 1652576)
+2026/03/08 23:55:47 INFO  : 2026-03-08/motion_2026-03-08_23.55.29_639.avi: Copied (new)
+2026/03/08 23:55:48 INFO  : 2026-03-08/motion_2026-03-08_23.55.24_525.avi: Copied (new)
+2026/03/08 23:55:49 INFO  : 2026-03-08/motion_2026-03-08_23.55.29_639.avi: Copied (new)
+2026-03-08 23:55:49  SYNC-START  Beginning cloud sync run
+2026/03/08 23:55:50 INFO  : 2026-03-08/motion_2026-03-08_23.55.24_525.avi: Copied (new)
+2026/03/08 23:56:08 INFO  : 2026-03-08/motion_2026-03-08_23.55.43_055.avi: Copied (new)
+2026/03/08 23:56:11 INFO  : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Copied (new)
+2026/03/08 23:56:11 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:56:11 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:56:11 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1039-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501039_t0013": can't copy - source file is being updated (size changed from 950340 to 1066408)
+2026/03/08 23:56:12 ERROR : Attempt 2/3 succeeded
+2026/03/08 23:56:12 INFO  : 
+Transferred:   	   15.137 MiB / 15.137 MiB, 100%, 529.208 KiB/s, ETA 0s
+Checks:               202 / 202, 100%, Listed 410
+Transferred:            3 / 3, 100%
+Elapsed time:        29.8s
+
+2026-03-08 23:56:12  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/08 23:56:14 INFO  : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Copied (new)
+2026/03/08 23:56:14 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/08 23:56:14 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/08 23:56:14 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1037-00.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501037_t0013": can't copy - source file is being updated (size changed from 1458072 to 1652576)
+2026/03/08 23:56:14 ERROR : Attempt 2/3 succeeded
+2026/03/08 23:56:14 INFO  : 
+Transferred:   	   15.141 MiB / 15.141 MiB, 100%, 530.098 KiB/s, ETA 0s
+Checks:               202 / 202, 100%, Listed 410
+Transferred:            3 / 3, 100%
+Elapsed time:        29.7s
+
+2026-03-08 23:56:14  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:56:21  SYNC-END  Cloud sync run complete
+2026-03-08 23:56:23  SYNC-END  Cloud sync run complete
+2026/03/08 23:56:28 INFO  : 2026-03-08/motion_2026-03-08_23.52.19_970.avi: Copied (new)
+2026/03/08 23:56:28 INFO  : 
+Transferred:   	   14.605 MiB / 14.605 MiB, 100%, 600.741 KiB/s, ETA 0s
+Checks:               101 / 101, 100%, Listed 205
+Transferred:            2 / 2, 100%
+Elapsed time:        26.1s
+
+2026-03-08 23:56:28  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:56:35  SYNC-END  Cloud sync run complete
+2026-03-08 23:56:45  SYNC-START  Beginning cloud sync run
+2026/03/08 23:57:00 INFO  : 2026-03-08/motion_2026-03-08_23.56.41_895.avi: Copied (new)
+2026/03/08 23:57:00 INFO  : 
+Transferred:   	    2.475 MiB / 2.475 MiB, 100%, 844.860 KiB/s, ETA 0s
+Checks:               103 / 103, 100%, Listed 208
+Transferred:            1 / 1, 100%
+Elapsed time:         3.0s
+
+2026-03-08 23:57:00  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-08 23:57:07  SYNC-END  Cloud sync run complete

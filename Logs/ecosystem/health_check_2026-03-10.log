@@ -1,0 +1,18 @@
+2026-03-10 18:35:04  --- BEGIN health_check_all.ps1 ---
+2026-03-10 18:35:34  check_status.ps1 output captured (16424 chars)
+2026-03-10 23:00:27  --- BEGIN health_check_all.ps1 ---
+2026-03-10 23:00:50  check_status.ps1 output captured (16424 chars)
+2026-03-10 23:00:54  check_camera.ps1 output captured (2400 chars)
+2026-03-10 23:01:04  ============================================================
+2026-03-10 23:01:04    ECOSYSTEM HEALTH SUMMARY -- 2026-03-10 23:01:04
+2026-03-10 23:01:04  ============================================================
+2026-03-10 23:01:04    FOLDERSYNC  : FAIL -- 3 issue(s)
+2026-03-10 23:01:04    CAMERA      : FAIL -- 1 issue(s)
+2026-03-10 23:01:04  ------------------------------------------------------------
+2026-03-10 23:01:04    OVERALL     : 4 ISSUE(S) FOUND
+2026-03-10 23:01:04  ============================================================
+2026-03-10 23:01:04    FOLDERSYNC ISSUE: FolderSyncWatchdog service: Status = Stopped (expected Running)
+2026-03-10 23:01:04    FOLDERSYNC ISSUE: FolderSyncAuditor service: Status = Stopped (expected Running)
+2026-03-10 23:01:04    FOLDERSYNC ISSUE: RealTimeSync process: NOT RUNNING
+2026-03-10 23:01:04    CAMERA ISSUE: Yawcam process (yawcam or javaw): NOT RUNNING
+2026-03-10 23:01:04  --- END health_check_all.ps1 ---
