@@ -9,7 +9,7 @@ $Source           = 'C:\Users\helde\Repos\Bois'
 $Remote           = 'cloudsync:helder-sync-mirror'
 $Mirror           = 'C:\Sync\Mirror'
 $LogDir           = 'C:\Sync\Logs'
-$Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$Log              = "$LogDir\cloud_sync\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
 
@@ -211,14 +211,47 @@ if (Test-Path $Mirror) {
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
-# 4. cloud_sync log rotation - delete logs older than DaysToKeepLogs
-Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
+# 4. cloud_sync log rotation
+Get-ChildItem -Path "$LogDir\cloud_sync" -Filter "cloud_sync_*.log" -ErrorAction SilentlyContinue |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
-# 5. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
-Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
+# 5. mirror log rotation
+Get-ChildItem -Path "$LogDir\mirror" -Filter "mirror_*.log" -ErrorAction SilentlyContinue |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 6. security log rotation
+foreach ($filter in @('security_audit_*.log','security_check_*.log','firewall_*.log')) {
+    Get-ChildItem -Path "$LogDir\security" -Filter $filter -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+}
+
+# 7. file audit log rotation
+Get-ChildItem -Path "$LogDir\audit" -Filter "file_audit_*.log" -ErrorAction SilentlyContinue |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 8. ecosystem log rotation
+foreach ($filter in @('ecosystem_*.log','health_check_*.log')) {
+    Get-ChildItem -Path "$LogDir\ecosystem" -Filter $filter -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+}
+
+# 9. camera log rotation
+Get-ChildItem -Path "$LogDir\camera" -Filter "cam2_relay_*.log" -ErrorAction SilentlyContinue |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 10. firewall.log daily rotation - copy today's slice to dated file, truncate live log
+$FwLog   = "$LogDir\security\firewall.log"
+$FwDated = "$LogDir\security\firewall_$(Get-Date -Format 'yyyy-MM-dd').log"
+if ((Test-Path $FwLog) -and -not (Test-Path $FwDated)) {
+    Copy-Item $FwLog $FwDated -ErrorAction SilentlyContinue
+    Clear-Content $FwLog -ErrorAction SilentlyContinue
+    Write-SyncLog "FIREWALL-ROTATE  Archived to $FwDated"
+}
 
 Write-SyncLog "SYNC-END  Cloud sync run complete"
