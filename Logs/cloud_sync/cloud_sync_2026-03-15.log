@@ -2757,3 +2757,243 @@ Elapsed time:       3m2.5s
 
 2026-03-15 14:24:11  SYNC-OK  Sync completed successfully (exit 0)
 2026-03-15 14:24:14  SYNC-END  Cloud sync run complete
+2026-03-15 14:52:56  SYNC-START  Beginning cloud sync run
+2026-03-15 14:53:25  SYNC-START  Beginning cloud sync run
+2026/03/15 14:53:33 ERROR : 2026-03-15/motion_2026-03-15_14.53.26_036.avi: Failed to copy: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0010": can't copy - source file is being updated (size changed from 2186684 to 2445410)
+2026-03-15 14:53:33  SYNC-START  Beginning cloud sync run
+2026-03-15 14:53:36  SYNC-START  Beginning cloud sync run
+2026/03/15 14:53:37 INFO  : 2026-03-15/motion_2026-03-15_14.53.15_003.avi: Copied (new)
+2026/03/15 14:53:37 INFO  : 2026-03-15/motion_2026-03-15_14.52.52_827.avi: Copied (new)
+2026/03/15 14:53:39 INFO  : 2026-03-15/motion_2026-03-15_14.53.07_045.avi: Copied (new)
+2026/03/15 14:53:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:53:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:53:39 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0010": can't copy - source file is being updated (size changed from 2186684 to 2445410)
+2026/03/15 14:53:40 ERROR : 2026-03-15/motion_2026-03-15_14.53.35_289.avi: Failed to copy: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0010": can't copy - source file is being updated (size changed from 1196834 to 1275904)
+2026-03-15 14:53:44  SYNC-START  Beginning cloud sync run
+2026/03/15 14:53:47 INFO  : 2026-03-15/motion_2026-03-15_14.53.26_036.avi: Copied (new)
+2026/03/15 14:53:47 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:53:47 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:53:47 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0010": can't copy - source file is being updated (size changed from 1196834 to 1275904)
+2026/03/15 14:53:49 ERROR : 2026-03-15/motion_2026-03-15_14.53.35_289.avi: Failed to copy: Post "https://pod-052-1006-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0037": can't copy - source file is being updated (size changed from 3096254 to 3201074)
+2026/03/15 14:53:49 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:53:49 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:53:49 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-052-1006-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0037": can't copy - source file is being updated (size changed from 3096254 to 3201074)
+2026/03/15 14:53:49 INFO  : 
+Transferred:   	    8.301 MiB / 8.301 MiB, 100%, 566.371 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:              2761 / 2761, 100%, Listed 5550
+Transferred:            4 / 4, 100%
+Elapsed time:        18.6s
+
+2026/03/15 14:53:49 NOTICE: Failed to sync: Post "https://pod-052-1006-03.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0521006_t0037": can't copy - source file is being updated (size changed from 3096254 to 3201074)
+2026-03-15 14:53:49  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/15 14:53:58 ERROR : 2026-03-15/motion_2026-03-15_14.53.56_506.avi: Failed to copy: Post "https://pod-050-1041-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0017": can't copy - source file is being updated (size changed from 1045704 to 1179384)
+2026-03-15 14:53:59  SYNC-END  Cloud sync run complete
+2026-03-15 14:54:00  SYNC-START  Beginning cloud sync run
+2026/03/15 14:54:06 INFO  : 2026-03-15/motion_2026-03-15_14.53.35_289.avi: Copied (new)
+2026/03/15 14:54:06 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:06 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:06 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1041-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0017": can't copy - source file is being updated (size changed from 1045704 to 1179384)
+2026/03/15 14:54:07 ERROR : 2026-03-15/motion_2026-03-15_14.54.03_611.avi: Failed to copy: Post "https://pod-050-1041-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0037": can't copy - source file is being updated (size changed from 1420000 to 1578008)
+2026/03/15 14:54:08 ERROR : 2026-03-15/motion_2026-03-15_14.54.03_611.avi: Failed to copy: Post "https://pod-050-1041-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0017": can't copy - source file is being updated (size changed from 1735704 to 1814516)
+2026-03-15 14:54:09  SYNC-START  Beginning cloud sync run
+2026/03/15 14:54:11 INFO  : 2026-03-15/motion_2026-03-15_14.53.56_506.avi: Copied (new)
+2026/03/15 14:54:12 INFO  : 2026-03-15/motion_2026-03-15_14.53.56_506.avi: Copied (new)
+2026/03/15 14:54:12 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:12 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:12 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1041-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0017": can't copy - source file is being updated (size changed from 1735704 to 1814516)
+2026/03/15 14:54:14 INFO  : 2026-03-15/motion_2026-03-15_14.53.35_289.avi: Copied (new)
+2026/03/15 14:54:14 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:14 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:14 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1041-11.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0037": can't copy - source file is being updated (size changed from 1420000 to 1578008)
+2026/03/15 14:54:17 INFO  : 2026-03-15/motion_2026-03-15_14.54.03_611.avi: Copied (new)
+2026/03/15 14:54:17 ERROR : Attempt 3/3 succeeded
+2026/03/15 14:54:17 INFO  : 
+Transferred:   	    6.548 MiB / 6.548 MiB, 100%, 361.906 KiB/s, ETA 0s
+Checks:              2769 / 2769, 100%, Listed 5564
+Transferred:            3 / 3, 100%
+Elapsed time:        21.5s
+
+2026-03-15 14:54:17  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/15 14:54:20 INFO  : 2026-03-15/motion_2026-03-15_14.54.03_611.avi: Copied (new)
+2026/03/15 14:54:20 ERROR : Attempt 2/3 succeeded
+2026/03/15 14:54:20 INFO  : 
+Transferred:   	    6.544 MiB / 6.544 MiB, 100%, 499.359 KiB/s, ETA 0s
+Checks:              1846 / 1846, 100%, Listed 3710
+Transferred:            3 / 3, 100%
+Elapsed time:        15.2s
+
+2026-03-15 14:54:20  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/15 14:54:21 INFO  : 2026-03-15/motion_2026-03-15_14.54.03_611.avi: Copied (new)
+2026/03/15 14:54:21 INFO  : 
+Transferred:   	    1.857 MiB / 1.857 MiB, 100%, 316.940 KiB/s, ETA 0s
+Checks:               924 / 924, 100%, Listed 1856
+Transferred:            1 / 1, 100%
+Elapsed time:         6.5s
+
+2026-03-15 14:54:21  SYNC-OK  Sync completed successfully (exit 0)
+2026/03/15 14:54:22 INFO  : There was nothing to transfer
+2026/03/15 14:54:22 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:               925 / 925, 100%, Listed 1857
+Elapsed time:         1.6s
+
+2026-03-15 14:54:22  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-15 14:54:28  SYNC-END  Cloud sync run complete
+2026-03-15 14:54:30  SYNC-END  Cloud sync run complete
+2026-03-15 14:54:30  SYNC-END  Cloud sync run complete
+2026-03-15 14:54:33  SYNC-END  Cloud sync run complete
+2026-03-15 14:54:34  SYNC-START  Beginning cloud sync run
+2026/03/15 14:54:34 ERROR : 2026-03-15/motion_2026-03-15_14.54.30_631.avi: Failed to copy: Post "https://pod-050-1041-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0005": can't copy - source file is being updated (size changed from 1474812 to 1635164)
+2026/03/15 14:54:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:34 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1041-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0005": can't copy - source file is being updated (size changed from 1474812 to 1635164)
+2026/03/15 14:54:35 ERROR : 2026-03-15/motion_2026-03-15_14.54.30_631.avi: Failed to copy: Post "https://pod-050-1041-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0005": can't copy - source file is being updated (size changed from 1742490 to 1820992)
+2026/03/15 14:54:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:35 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1041-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0005": can't copy - source file is being updated (size changed from 1742490 to 1820992)
+2026/03/15 14:54:36 ERROR : 2026-03-15/motion_2026-03-15_14.54.30_631.avi: Failed to copy: Post "https://pod-050-1041-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0005": can't copy - source file is being updated (size changed from 1898940 to 1977128)
+2026/03/15 14:54:36 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:36 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:36 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1041-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0005": can't copy - source file is being updated (size changed from 1898940 to 1977128)
+2026/03/15 14:54:36 INFO  : 
+Transferred:   	        8 KiB / 8 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:              2775 / 2775, 100%, Listed 5574
+Elapsed time:         3.6s
+
+2026/03/15 14:54:36 NOTICE: Failed to sync: Post "https://pod-050-1041-16.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501041_t0005": can't copy - source file is being updated (size changed from 1898940 to 1977128)
+2026-03-15 14:54:36  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026/03/15 14:54:37 ERROR : 2026-03-15/motion_2026-03-15_14.54.30_631.avi: Failed to copy: Post "https://pod-050-1020-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0003": can't copy - source file is being updated (size changed from 2028978 to 2184554)
+2026/03/15 14:54:37 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:37 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:37 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1020-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0003": can't copy - source file is being updated (size changed from 2028978 to 2184554)
+2026/03/15 14:54:38 ERROR : 2026-03-15/motion_2026-03-15_14.54.30_631.avi: Failed to copy: Post "https://pod-050-1020-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0003": can't copy - source file is being updated (size changed from 2287984 to 2365142)
+2026/03/15 14:54:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:38 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1020-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0003": can't copy - source file is being updated (size changed from 2287984 to 2365142)
+2026/03/15 14:54:39 ERROR : 2026-03-15/motion_2026-03-15_14.54.30_631.avi: Failed to copy: Post "https://pod-050-1020-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0003": can't copy - source file is being updated (size changed from 2467966 to 2545362)
+2026/03/15 14:54:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:39 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1020-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0003": can't copy - source file is being updated (size changed from 2467966 to 2545362)
+2026/03/15 14:54:39 INFO  : 
+Transferred:   	       28 KiB / 28 KiB, 100%, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:              2775 / 2775, 100%, Listed 5574
+Elapsed time:         3.7s
+
+2026/03/15 14:54:39 NOTICE: Failed to sync: Post "https://pod-050-1020-19.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501020_t0003": can't copy - source file is being updated (size changed from 2467966 to 2545362)
+2026-03-15 14:54:39  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-15 14:54:44  SYNC-END  Cloud sync run complete
+2026-03-15 14:54:46  SYNC-END  Cloud sync run complete
+2026/03/15 14:54:56 ERROR : 2026-03-15/motion_2026-03-15_14.54.55_916.avi: Failed to copy: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0003": can't copy - source file is being updated (size changed from 824696 to 979422)
+2026/03/15 14:54:58 INFO  : 2026-03-15/motion_2026-03-15_14.54.30_631.avi: Copied (new)
+2026/03/15 14:54:58 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:58 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:58 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0003": can't copy - source file is being updated (size changed from 824696 to 979422)
+2026-03-15 14:54:59  SYNC-START  Beginning cloud sync run
+2026/03/15 14:54:59 ERROR : 2026-03-15/motion_2026-03-15_14.54.55_916.avi: Failed to copy: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0003": can't copy - source file is being updated (size changed from 1614940 to 1703546)
+2026/03/15 14:54:59 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:59 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:59 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1024-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501024_t0003": can't copy - source file is being updated (size changed from 1614940 to 1703546)
+2026/03/15 14:54:59 ERROR : 2026-03-15/motion_2026-03-15_14.54.55_916.avi: Failed to copy: Post "https://pod-050-1027-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0018": can't copy - source file is being updated (size changed from 1794190 to 1824264)
+2026/03/15 14:54:59 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:54:59 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:54:59 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1027-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0018": can't copy - source file is being updated (size changed from 1794190 to 1824264)
+2026/03/15 14:54:59 INFO  : 
+Transferred:   	    5.220 MiB / 5.220 MiB, 100%, 759 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:              2777 / 2777, 100%, Listed 5579
+Transferred:            1 / 1, 100%
+Elapsed time:         5.6s
+
+2026/03/15 14:54:59 NOTICE: Failed to sync: Post "https://pod-050-1027-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501027_t0018": can't copy - source file is being updated (size changed from 1794190 to 1824264)
+2026-03-15 14:54:59  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-15 14:55:08  SYNC-END  Cloud sync run complete
+2026/03/15 14:55:22 ERROR : 2026-03-15/motion_2026-03-15_14.54.55_916.avi: Failed to copy: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 7390900 to 7555208)
+2026/03/15 14:55:22 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:55:22 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:55:22 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 7390900 to 7555208)
+2026/03/15 14:55:23 ERROR : 2026-03-15/motion_2026-03-15_14.54.55_916.avi: Failed to copy: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 7654068 to 7785998)
+2026/03/15 14:55:23 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:55:23 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:55:23 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 7654068 to 7785998)
+2026/03/15 14:55:25 ERROR : 2026-03-15/motion_2026-03-15_14.54.55_916.avi: Failed to copy: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 8189976 to 8340822)
+2026/03/15 14:55:25 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/15 14:55:25 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/15 14:55:25 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 8189976 to 8340822)
+2026/03/15 14:55:25 INFO  : 
+Transferred:   	     1020 KiB / 1020 KiB, 100%, 166.892 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:              2778 / 2778, 100%, Listed 5580
+Elapsed time:         5.6s
+
+2026/03/15 14:55:25 NOTICE: Failed to sync: Post "https://pod-050-1042-14.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501042_t0011": can't copy - source file is being updated (size changed from 8189976 to 8340822)
+2026-03-15 14:55:25  SYNC-FAIL  Sync failed (exit 6) - not a firewall error
+2026-03-15 14:55:30  SYNC-END  Cloud sync run complete
+2026-03-15 14:55:36  SYNC-START  Beginning cloud sync run
+2026-03-15 14:55:48  SYNC-START  Beginning cloud sync run
+2026/03/15 14:55:53 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 14:55:53  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 14:55:58  SYNC-END  Cloud sync run complete
+2026/03/15 14:56:02 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 14:56:02  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 14:56:08  SYNC-END  Cloud sync run complete
+2026-03-15 14:58:42  SYNC-START  Beginning cloud sync run
+2026/03/15 14:58:58 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 14:58:58  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 14:59:02  SYNC-START  Beginning cloud sync run
+2026-03-15 14:59:06  SYNC-END  Cloud sync run complete
+2026-03-15 14:59:13  SYNC-START  Beginning cloud sync run
+2026-03-15 14:59:17  SYNC-START  Beginning cloud sync run
+2026/03/15 14:59:22 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 14:59:22  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 14:59:28  SYNC-END  Cloud sync run complete
+2026/03/15 14:59:32 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 14:59:32  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/15 14:59:33 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 14:59:33  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 14:59:38  SYNC-END  Cloud sync run complete
+2026-03-15 14:59:38  SYNC-END  Cloud sync run complete
+2026-03-15 14:59:53  SYNC-START  Beginning cloud sync run
+2026/03/15 15:00:09 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:00:09  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:00:14  SYNC-END  Cloud sync run complete
+2026-03-15 15:00:31  SYNC-START  Beginning cloud sync run
+2026/03/15 15:00:45 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:00:45  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:00:49  SYNC-END  Cloud sync run complete
+2026-03-15 15:01:22  SYNC-START  Beginning cloud sync run
+2026/03/15 15:01:35 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:01:35  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:01:40  SYNC-END  Cloud sync run complete
+2026-03-15 15:02:27  SYNC-START  Beginning cloud sync run
+2026-03-15 15:02:34  SYNC-START  Beginning cloud sync run
+2026/03/15 15:02:44 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:02:44  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:02:47  SYNC-START  Beginning cloud sync run
+2026/03/15 15:02:49 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:02:49  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:02:50  SYNC-END  Cloud sync run complete
+2026-03-15 15:02:54  SYNC-END  Cloud sync run complete
+2026/03/15 15:03:02 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:03:02  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:03:06  SYNC-END  Cloud sync run complete
+2026-03-15 15:03:19  SYNC-START  Beginning cloud sync run
+2026-03-15 15:03:31  SYNC-START  Beginning cloud sync run
+2026/03/15 15:03:33 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:03:33  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:03:38  SYNC-END  Cloud sync run complete
+2026-03-15 15:03:42  SYNC-START  Beginning cloud sync run
+2026/03/15 15:03:45 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:03:45  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:03:50  SYNC-END  Cloud sync run complete
+2026/03/15 15:03:56 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:03:56  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:04:02  SYNC-END  Cloud sync run complete
+2026-03-15 15:04:49  SYNC-START  Beginning cloud sync run
+2026/03/15 15:05:02 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-15 15:05:02  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-15 15:05:06  SYNC-END  Cloud sync run complete
+2026-03-15 16:23:18  SYNC-START  Beginning cloud sync run
+2026-03-15 16:23:20  SYNC-START  Beginning cloud sync run
