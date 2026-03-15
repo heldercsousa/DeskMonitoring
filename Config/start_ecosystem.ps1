@@ -94,8 +94,13 @@ if (-not $yawcam) {
 if (-not $yawcam) {
     Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" `
         -WorkingDirectory "C:\Program Files (x86)\Yawcam" -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 3
+    # Yawcam runs as javaw - JVM startup needs up to 8s; check both process names
+    Start-Sleep -Seconds 8
     $yawcam = Get-Process yawcam -ErrorAction SilentlyContinue
+    if (-not $yawcam) {
+        $yawcam = Get-Process javaw -ErrorAction SilentlyContinue |
+                  Where-Object { $_.MainWindowTitle -like '*Yawcam*' }
+    }
     if ($yawcam) {
         Write-OK "Yawcam started (PID $($yawcam.Id))"
         Write-Log "ECOSYSTEM-START  Yawcam started"
@@ -115,7 +120,8 @@ if (-not $vlc) {
     Start-Process powershell.exe `
         -ArgumentList '-ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"' `
         -WindowStyle Hidden -ErrorAction SilentlyContinue
-    Start-Sleep -Seconds 2
+    # cam2_relay.ps1 spawns VLC which needs a few seconds to connect to RTSP stream
+    Start-Sleep -Seconds 5
     $vlc = Get-Process vlc -ErrorAction SilentlyContinue
     if ($vlc) {
         Write-OK "CAM-2 relay started (VLC PID $($vlc.Id))"
