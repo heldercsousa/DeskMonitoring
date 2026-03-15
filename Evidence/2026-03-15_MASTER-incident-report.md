@@ -84,3 +84,22 @@ Camera recording was disrupted. Root cause unknown. Must investigate.
 ## Security Log Status
 - No suspicious processes, anomalous connections, or registry tampering found in security logs on 03-11, 03-13, 03-15.
 - Audit log DELETED entries are all `user=helde`, all `motion_*.avi` — consistent with normal Yawcam recording cycle.
+
+---
+
+## FINAL STATUS (2026-03-15 session close)
+
+| Priority | Issue | Status |
+|---|---|---|
+| P1 | DNS-level B2 sabotage via DHCP poisoning on Ethernet | REMEDIATED - Static DNS 1.1.1.1/8.8.8.8 set on Ethernet adapter |
+| P2 | cloud_sync.ps1 blind to DNS attack pattern | REMEDIATED - DNS-ATTACK-DETECT branch added |
+| P3 | Yawcam/CAM-2 false WARN on startup | REMEDIATED - javaw fallback check + timing fixes |
+| P4 | Scheduled tasks disabled/missing | NO ACTION - All tasks in Ready state |
+
+## Open items requiring MANUAL intervention
+1. **Router/DHCP investigation**: The Ethernet DHCP server served 127.0.0.1 as DNS.
+   Check your router admin panel -> DHCP settings -> DNS field.
+   Change router admin password. Consider whether the Ethernet LAN is trusted.
+2. **Verify fixes on next Ethernet connection**: Confirm sync succeeds when Ethernet is plugged in.
+3. **Verify camera fix**: On next ecosystem start, confirm no WARN for Yawcam or CAM-2.
+
