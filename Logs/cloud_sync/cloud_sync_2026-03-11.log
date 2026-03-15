@@ -1,0 +1,81 @@
+2026-03-11 12:25:10  SYNC-START  Beginning cloud sync run
+2026-03-11 12:25:16  SYNC-START  Beginning cloud sync run
+2026/03/11 12:25:29 ERROR : 2026-03-11/motion_2026-03-11_12.25.05_745.avi: Failed to copy: Post "https://pod-050-1009-09.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501009_t0032": can't copy - source file is being updated (size changed from 5969552 to 6096220)
+2026/03/11 12:25:30 INFO  : 2026-03-11/motion_2026-03-11_12.24.55_968.avi: Copied (new)
+2026/03/11 12:25:30 INFO  : 2026-03-10/motion_2026-03-10_17.13.27_616.avi: Copied (new)
+2026/03/11 12:25:30 INFO  : 2026-03-10/motion_2026-03-10_17.14.07_003.avi: Copied (new)
+2026/03/11 12:25:31 INFO  : 2026-03-10/motion_2026-03-10_17.14.00_257.avi: Copied (new)
+2026/03/11 12:25:31 INFO  : 2026-03-10/motion_2026-03-10_17.13.46_943.avi: Copied (new)
+2026/03/11 12:25:31 INFO  : 2026-03-10/motion_2026-03-10_17.14.23_662.avi: Copied (new)
+2026/03/11 12:25:32 INFO  : 2026-03-10/motion_2026-03-10_17.15.35_981.avi: Copied (new)
+2026/03/11 12:25:32 INFO  : 2026-03-10/motion_2026-03-10_17.14.36_293.avi: Copied (new)
+2026/03/11 12:25:32 INFO  : 2026-03-10/motion_2026-03-10_17.16.00_074.avi: Copied (new)
+2026/03/11 12:25:32 INFO  : 2026-03-10/motion_2026-03-10_17.15.04_091.avi: Copied (new)
+2026/03/11 12:25:32 INFO  : 2026-03-10/motion_2026-03-10_17.16.09_526.avi: Copied (new)
+2026/03/11 12:25:32 INFO  : 2026-03-10/motion_2026-03-10_17.16.31_493.avi: Copied (new)
+2026/03/11 12:25:32 INFO  : 2026-03-10/motion_2026-03-10_17.16.44_737.avi: Copied (new)
+2026/03/11 12:25:33 INFO  : 2026-03-10/motion_2026-03-10_17.16.20_998.avi: Copied (new)
+2026/03/11 12:25:33 INFO  : 2026-03-10/motion_2026-03-10_17.16.49_900.avi: Copied (new)
+2026/03/11 12:25:33 INFO  : 2026-03-10/motion_2026-03-10_17.17.00_064.avi: Copied (new)
+2026/03/11 12:25:33 INFO  : 2026-03-10/motion_2026-03-10_17.17.34_567.avi: Copied (new)
+2026/03/11 12:25:33 INFO  : 2026-03-10/motion_2026-03-10_17.18.07_480.avi: Copied (new)
+2026/03/11 12:25:34 INFO  : 2026-03-10/motion_2026-03-10_17.17.16_164.avi: Copied (new)
+2026/03/11 12:25:34 INFO  : 2026-03-10/motion_2026-03-10_17.18.02_483.avi: Copied (new)
+2026/03/11 12:25:34 INFO  : 2026-03-10/motion_2026-03-10_17.18.24_699.avi: Copied (new)
+2026/03/11 12:25:35 INFO  : 2026-03-10/motion_2026-03-10_17.19.20_992.avi: Copied (new)
+2026/03/11 12:25:35 ERROR : 2026-03-11/motion_2026-03-11_12.25.30_428.avi: Failed to copy: Post "https://pod-050-1026-17.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501026_t0045": can't copy - source file is being updated (size changed from 732984 to 1011312)
+2026/03/11 12:25:35 INFO  : 2026-03-10/motion_2026-03-10_17.18.39_406.avi: Copied (new)
+2026/03/11 12:25:35 INFO  : 2026-03-10/motion_2026-03-10_17.19.14_979.avi: Copied (new)
+2026/03/11 12:25:35 INFO  : 2026-03-10/motion_2026-03-10_17.19.04_620.avi: Copied (new)
+2026/03/11 12:25:37 INFO  : 2026-03-10/motion_2026-03-10_17.22.40_488.avi: Copied (new)
+2026/03/11 12:25:38 INFO  : 2026-03-10/motion_2026-03-10_17.20.59_867.avi: Copied (new)
+2026/03/11 12:25:38 INFO  : 2026-03-10/motion_2026-03-10_17.22.56_604.avi: Copied (new)
+2026/03/11 12:25:38 INFO  : 2026-03-10/motion_2026-03-10_17.35.47_582.avi: Copied (new)
+2026-03-11 12:25:38  SYNC-START  Beginning cloud sync run
+2026/03/11 12:25:38 INFO  : 2026-03-10/motion_2026-03-10_17.19.59_292.avi: Copied (new)
+2026/03/11 12:25:40 INFO  : 2026-03-10/motion_2026-03-10_17.39.10_167.avi: Copied (new)
+2026/03/11 12:25:41 INFO  : 2026-03-10/motion_2026-03-10_17.35.59_828.avi: Copied (new)
+2026/03/11 12:25:42 INFO  : 2026-03-10/motion_2026-03-10_17.21.35_253.avi: Copied (new)
+2026/03/11 12:25:42 INFO  : 2026-03-10/motion_2026-03-10_17.41.10_466.avi: Copied (new)
+2026/03/11 12:25:43 INFO  : 2026-03-10/motion_2026-03-10_17.41.20_523.avi: Copied (new)
+2026/03/11 12:25:43 INFO  : 2026-03-10/motion_2026-03-10_17.41.31_024.avi: Copied (new)
+2026/03/11 12:25:44 INFO  : 2026-03-10/motion_2026-03-10_17.41.41_132.avi: Copied (new)
+2026/03/11 12:25:44 INFO  : 2026-03-10/motion_2026-03-10_17.43.09_706.avi: Copied (new)
+2026-03-11 12:25:45  SYNC-START  Beginning cloud sync run
+2026/03/11 12:25:46 INFO  : 2026-03-10/motion_2026-03-10_17.14.36_293.avi: Copied (new)
+2026/03/11 12:25:46 INFO  : 2026-03-10/motion_2026-03-10_17.45.01_861.avi: Copied (new)
+2026/03/11 12:25:46 INFO  : 2026-03-10/motion_2026-03-10_17.16.00_074.avi: Copied (new)
+2026/03/11 12:25:46 INFO  : 2026-03-10/motion_2026-03-10_17.44.26_772.avi: Copied (new)
+2026/03/11 12:25:46 INFO  : 2026-03-10/motion_2026-03-10_17.39.35_629.avi: Copied (new)
+2026/03/11 12:25:46 INFO  : 2026-03-10/motion_2026-03-10_17.45.27_900.avi: Copied (new)
+2026/03/11 12:25:46 INFO  : 2026-03-10/motion_2026-03-10_17.15.04_091.avi: Copied (new)
+2026/03/11 12:25:47 INFO  : 2026-03-10/motion_2026-03-10_17.46.25_507.avi: Copied (new)
+2026/03/11 12:25:47 INFO  : 2026-03-10/motion_2026-03-10_17.45.46_902.avi: Copied (new)
+2026/03/11 12:25:47 INFO  : 2026-03-10/motion_2026-03-10_17.36.47_638.avi: Copied (new)
+2026/03/11 12:25:48 INFO  : 2026-03-10/motion_2026-03-10_17.45.54_751.avi: Copied (new)
+2026/03/11 12:25:48 INFO  : 2026-03-10/motion_2026-03-10_17.46.45_647.avi: Copied (new)
+2026/03/11 12:25:48 INFO  : 2026-03-10/motion_2026-03-10_17.16.20_998.avi: Copied (new)
+2026/03/11 12:25:48 INFO  : 2026-03-10/motion_2026-03-10_17.46.56_472.avi: Copied (new)
+2026/03/11 12:25:49 INFO  : 2026-03-10/motion_2026-03-10_17.47.01_170.avi: Copied (new)
+2026/03/11 12:25:49 INFO  : 2026-03-10/motion_2026-03-10_17.16.31_493.avi: Copied (new)
+2026/03/11 12:25:49 INFO  : 2026-03-10/motion_2026-03-10_17.16.44_737.avi: Copied (new)
+2026/03/11 12:25:49 INFO  : 2026-03-10/motion_2026-03-10_17.16.49_900.avi: Copied (new)
+2026/03/11 12:25:50 INFO  : 2026-03-10/motion_2026-03-10_17.16.09_526.avi: Copied (new)
+2026/03/11 12:25:50 INFO  : 2026-03-11/motion_2026-03-11_12.25.05_745.avi: Copied (new)
+2026/03/11 12:25:50 INFO  : 2026-03-10/motion_2026-03-10_17.17.00_064.avi: Copied (new)
+2026-03-11 19:26:20  SYNC-START  Beginning cloud sync run
+2026/03/11 19:26:32 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-11 19:26:32  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-11 19:26:34  SYNC-START  Beginning cloud sync run
+2026-03-11 19:26:39  SYNC-END  Cloud sync run complete
+2026/03/11 19:26:45 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-11 19:26:45  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-11 19:26:48  SYNC-START  Beginning cloud sync run
+2026-03-11 19:26:53  SYNC-END  Cloud sync run complete
+2026-03-11 19:27:01  SYNC-START  Beginning cloud sync run
+2026/03/11 19:27:02 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-11 19:27:02  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-11 19:27:10  SYNC-END  Cloud sync run complete
+2026/03/11 19:27:13 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-11 19:27:13  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-11 19:27:20  SYNC-END  Cloud sync run complete

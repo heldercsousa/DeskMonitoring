@@ -6,7 +6,7 @@
 # Resume with: resume_camera.ps1
 
 $ErrorActionPreference = 'SilentlyContinue'
-$LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile    = "C:\Sync\Logs\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $PausedFlag = "C:\Sync\Config\.camera_paused"
 
 function Write-Log($msg) {

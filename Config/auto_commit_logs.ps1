@@ -5,7 +5,7 @@
 
 $RepoRoot = 'C:\Sync'
 $LogDir   = 'C:\Sync\Logs'
-$EcoLog   = "$LogDir\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$EcoLog   = "$LogDir\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 
 function Write-EcoLog($msg) {
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'

@@ -3,7 +3,7 @@
 # Removes malicious outbound BLOCK rules for Backblaze B2 IPs added by attacker.
 # Run once as Administrator.
 
-$LogFile = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 
 function Write-Log($msg) {
     $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"

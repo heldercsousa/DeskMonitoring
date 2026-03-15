@@ -2,13 +2,13 @@
 # CAM-2 RTSP -> MJPEG HTTP relay for Yawcam
 # Reads credentials from cam2.conf, starts VLC relay on http://127.0.0.1:8161/
 # Registered as startup entry: HKCU:\...\Run\YawcamCam2Relay
-# Logs to C:\Sync\Logs\cam2_relay_YYYY-MM-DD.log
+# Logs to C:\Sync\Logs\camera\cam2_relay_YYYY-MM-DD.log
 
 $ConfFile  = "C:\Sync\Config\cam2.conf"
 $VlcExe    = "C:\Program Files\VideoLAN\VLC\vlc.exe"
 $RelayPort = 8161
 $RelayHost = "127.0.0.1"
-$LogFile   = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile   = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
 $CheckSecs = 30   # health check interval
 
 function Write-Log($msg) {

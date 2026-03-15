@@ -4,7 +4,7 @@
 
 Add-Type -AssemblyName System.Windows.Forms
 
-$logPath   = "C:\Sync\Logs\security_check_$(Get-Date -Format 'yyyy-MM-dd').log"
+$logPath   = "C:\Sync\Logs\security\security_check_$(Get-Date -Format 'yyyy-MM-dd').log"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 Write-Host ""

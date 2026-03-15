@@ -5,7 +5,7 @@
 # Run as Administrator.
 
 $ErrorActionPreference = 'SilentlyContinue'
-$LogFile   = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile   = "C:\Sync\Logs\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $StateFile = "C:\Sync\Config\.ecosystem_state"
 
 function Write-Log($msg) {

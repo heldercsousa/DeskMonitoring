@@ -2,7 +2,7 @@
 # Ensures RealTimeSync and cloud sync scheduled task are alive.
 # Runs as "FolderSync Watchdog Service" via NSSM.
 
-$LogFile = "C:\Sync\Logs\watchdog.log"
+$LogFile = "C:\Sync\Logs\services\watchdog.log"
 $RealTimeSync = "C:\Program Files\FreeFileSync\RealTimeSync.exe"
 $RealTimeSyncConfig = "C:\Sync\Config\realtime.ffs_real"
 $TaskName = "FolderSync-CloudBackup"

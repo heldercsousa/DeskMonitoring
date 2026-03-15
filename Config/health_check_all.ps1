@@ -2,7 +2,7 @@
 $ErrorActionPreference = "SilentlyContinue"
 
 # -- Paths -----------------------------------------------------------------
-$LogFile     = "C:\Sync\Logs\health_check_$(Get-Date -Format yyyy-MM-dd).log"
+$LogFile     = "C:\Sync\Logs\ecosystem\health_check_$(Get-Date -Format yyyy-MM-dd).log"
 $CheckStatus = "C:\Sync\Config\check_status.ps1"
 $CheckCamera = "C:\Sync\Config\check_camera.ps1"
 

@@ -2,7 +2,7 @@
 # Sistema de Deteccao de Seguranca com deteccao de acesso remoto e anomalias de rede
 # Scheduled task: "FolderSync-DailyCheck" (daily at 09:00, runs as helde)
 
-$logPath   = "C:\Sync\Logs\security_check_$(Get-Date -Format 'yyyy-MM-dd').log"
+$logPath   = "C:\Sync\Logs\security\security_check_$(Get-Date -Format 'yyyy-MM-dd').log"
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # Known devices on your network (update if router assigns different IPs)

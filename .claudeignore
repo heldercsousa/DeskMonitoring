@@ -17,21 +17,21 @@ Mirror/
 #   → Use /project:diagnose-logs  (greps only today's dated files for errors)
 #   → Or use Grep tool directly on C:\Sync\Logs\<component>_YYYY-MM-DD.log
 # This keeps normal sessions token-efficient while allowing targeted log reads.
-Logs/
+# Logs/
 
 # ---------------------------------------------------------------------------
 # Credential and sensitive config files
 # ---------------------------------------------------------------------------
 # Plaintext Backblaze B2 credentials — never expose to context window
-Config/rclone.conf
+# Config/rclone.conf
 
 # DPAPI-encrypted binary blob — binary, meaningless without decryption
-Config/credentials.enc
+# Config/credentials.enc
 
 # ---------------------------------------------------------------------------
 # FreeFileSync binary config — not human-editable plain text
 # ---------------------------------------------------------------------------
-Config/realtime.ffs_real
+# Config/realtime.ffs_real
 
 # ---------------------------------------------------------------------------
 # Source folder mapping (external path, outside repo)

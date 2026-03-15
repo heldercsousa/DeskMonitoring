@@ -5,13 +5,15 @@
 
 $WatchedFolder  = 'C:\Users\helde\Repos\Bois'
 $LogDir         = 'C:\Sync\Logs'
+$AuditDir       = "$LogDir\audit"
+$SecurityDir    = "$LogDir\security"
 $StartupGapSecs = 120   # gap threshold to trigger forensic dump
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-function Get-FileAuditLog  { Join-Path $LogDir "file_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
-function Get-SecurityLog   { Join-Path $LogDir "security_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
+function Get-FileAuditLog  { Join-Path $AuditDir    "file_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
+function Get-SecurityLog   { Join-Path $SecurityDir "security_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
 
 function Write-FileAudit($msg) {
     $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -33,7 +35,7 @@ function Write-BothLogs($msg) {
 # ---------------------------------------------------------------------------
 function Invoke-StartupGapCheck {
     # Find last timestamped line across all auditor logs
-    $allLogs = Get-ChildItem $LogDir -Filter "security_audit_*.log" -ErrorAction SilentlyContinue |
+    $allLogs = Get-ChildItem $SecurityDir -Filter "security_audit_*.log" -ErrorAction SilentlyContinue |
                Sort-Object LastWriteTime -Descending | Select-Object -First 3
     $lastTs = $null
     foreach ($f in $allLogs) {
@@ -57,7 +59,7 @@ function Invoke-StartupGapCheck {
 
 function Write-ForensicReport([double]$GapSeconds, [datetime]$LastKnownTime) {
     $ts   = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-    $path = Join-Path $LogDir "interruption_report_$ts.txt"
+    $path = Join-Path $AuditDir "interruption_report_$ts.txt"
 
     $lines = @()
     $lines += "INTERRUPTION REPORT - generated $ts"
@@ -120,7 +122,7 @@ function Start-FileWatcher {
                 if ($evt -and $evt.Message -match '(Nome da Conta|Account Name):\s+(\S+)') { $user = $Matches[2] }
             } catch {}
 
-            $logFile = "C:\Sync\Logs\file_audit_$($time.ToString('yyyy-MM-dd')).log"
+            $logFile = "C:\Sync\Logs\audit\file_audit_$($time.ToString('yyyy-MM-dd')).log"
             $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
             
             # Formatação garantida como texto
