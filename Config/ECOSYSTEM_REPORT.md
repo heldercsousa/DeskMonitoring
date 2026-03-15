@@ -110,7 +110,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | File | Used by | Purpose |
 |---|---|---|
 | `rclone.conf` | `cloud_sync.ps1` | Rclone B2 remote definition + API key |
-| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup |
+| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup + self-healing firewall+DNS attack detection (2026-03-15) |
 | `cloud_sync.bat` | Manual trigger | Same as .ps1 but via cmd (manual use only) |
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
@@ -536,14 +536,14 @@ hard_delete = false
 
 ### `C:\Sync\Config\cloud_sync.ps1`
 > Versão PowerShell do cloud sync — usada pelo Task Scheduler.
-> Inclui self-healing firewall detection+removal+retry, 3-phase ACL protection (7 dias), rotação de logs (30 dias) e limpeza do Mirror.
-> Last updated: 2026-03-07
+> Inclui self-healing firewall detection+removal+retry, DNS-attack detection+retry (2026-03-15), 3-phase ACL protection (7 dias), rotação de logs (30 dias) e limpeza do Mirror.
+> Last updated: 2026-03-15
 
 ```powershell
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
+# Last updated: 2026-03-15 - Added DNS-attack detection+retry (DHCP poisoning vector)
 
 $Rclone           = 'C:\Tools\Rclone\rclone.exe'
 $Config           = 'C:\Sync\Config\rclone.conf'
@@ -657,6 +657,42 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
     } else {
         Write-SyncLog "FIREWALL-DETECT  No known malicious rules found - unknown blocking cause"
         Write-SyncLog "FIREWALL-DETECT  Run check_status.ps1 and review firewall rules manually"
+    }
+} elseif ($rcloneOutput -match 'no such host|i/o timeout|dial tcp.*lookup') {
+    # DNS-level attack: rogue DHCP server serving 127.0.0.1 as DNS (confirmed 2026-03-15)
+    $dnsBlocked = $true
+    Write-SyncLog "DNS-ATTACK-DETECT  Rclone reported DNS failure - possible rogue DNS/DHCP attack"
+
+    # Check if Ethernet adapter has DHCP-assigned DNS (127.0.0.1 = rogue)
+    $ethDns = (Get-DnsClientServerAddress -InterfaceAlias 'Ethernet' -AddressFamily IPv4 -ErrorAction SilentlyContinue).ServerAddresses
+    Write-SyncLog "DNS-ATTACK-DETECT  Ethernet DNS: $($ethDns -join ', ')"
+
+    # Test live resolution
+    try {
+        $resolved = [System.Net.Dns]::GetHostAddresses('api.backblazeb2.com')
+        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com resolves NOW: $($resolved -join ', ') - transient DNS issue"
+    } catch {
+        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com still FAILS to resolve - DNS attack may be active"
+        Write-SyncLog "DNS-ATTACK-DETECT  Check: hosts file, Ethernet DNS settings, router DHCP config"
+    }
+
+    # Retry sync (DNS may have recovered if interface switched)
+    Write-SyncLog "DNS-ATTACK-DETECT  Retrying sync after DNS diagnosis"
+    $rcloneOutput2 = & $Rclone sync $Source $Remote `
+        --config $Config `
+        --log-file $Log `
+        --log-level INFO `
+        --transfers 4 `
+        --checkers 8 `
+        --fast-list 2>&1
+
+    $rcloneExitCode = $LASTEXITCODE
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-SyncLog "DNS-ATTACK-HEAL  Retry SUCCESS - sync completed after DNS recovery"
+    } else {
+        Write-SyncLog "DNS-ATTACK-FAIL  Retry FAILED (exit $LASTEXITCODE) - DNS still broken"
+        Write-SyncLog "DNS-ATTACK-FAIL  Run: Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 1.1.1.1,8.8.8.8"
     }
 } elseif ($rcloneExitCode -eq 0) {
     Write-SyncLog "SYNC-OK  Sync completed successfully (exit 0)"

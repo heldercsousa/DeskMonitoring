@@ -82,10 +82,13 @@ $rcloneOutput = & $Rclone sync $Source $Remote `
 $rcloneExitCode = $LASTEXITCODE
 
 # ============================================================
-# STEP 3 - Detect firewall blocking pattern in rclone output
-# If detected: remove rules, retry sync once
+# STEP 3 - Detect blocking patterns in rclone output
+# Handles: IP firewall blocks AND DNS-level sabotage
+# If detected: attempt repair, retry sync once
 # ============================================================
 $firewallBlocked = $false
+$dnsBlocked = $false
+
 if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|connect: permission denied') {
     $firewallBlocked = $true
     Write-SyncLog "FIREWALL-DETECT  Rclone reported connection blocked - checking firewall rules"
@@ -115,6 +118,42 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
     } else {
         Write-SyncLog "FIREWALL-DETECT  No known malicious rules found - unknown blocking cause"
         Write-SyncLog "FIREWALL-DETECT  Run check_status.ps1 and review firewall rules manually"
+    }
+} elseif ($rcloneOutput -match 'no such host|i/o timeout|dial tcp.*lookup') {
+    # DNS-level attack: rogue DHCP server serving 127.0.0.1 as DNS (confirmed 2026-03-15)
+    $dnsBlocked = $true
+    Write-SyncLog "DNS-ATTACK-DETECT  Rclone reported DNS failure - possible rogue DNS/DHCP attack"
+
+    # Check if Ethernet adapter has DHCP-assigned DNS (127.0.0.1 = rogue)
+    $ethDns = (Get-DnsClientServerAddress -InterfaceAlias 'Ethernet' -AddressFamily IPv4 -ErrorAction SilentlyContinue).ServerAddresses
+    Write-SyncLog "DNS-ATTACK-DETECT  Ethernet DNS: $($ethDns -join ', ')"
+
+    # Test live resolution
+    try {
+        $resolved = [System.Net.Dns]::GetHostAddresses('api.backblazeb2.com')
+        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com resolves NOW: $($resolved -join ', ') - transient DNS issue"
+    } catch {
+        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com still FAILS to resolve - DNS attack may be active"
+        Write-SyncLog "DNS-ATTACK-DETECT  Check: hosts file, Ethernet DNS settings, router DHCP config"
+    }
+
+    # Retry sync (DNS may have recovered if interface switched)
+    Write-SyncLog "DNS-ATTACK-DETECT  Retrying sync after DNS diagnosis"
+    $rcloneOutput2 = & $Rclone sync $Source $Remote `
+        --config $Config `
+        --log-file $Log `
+        --log-level INFO `
+        --transfers 4 `
+        --checkers 8 `
+        --fast-list 2>&1
+
+    $rcloneExitCode = $LASTEXITCODE
+
+    if ($LASTEXITCODE -eq 0) {
+        Write-SyncLog "DNS-ATTACK-HEAL  Retry SUCCESS - sync completed after DNS recovery"
+    } else {
+        Write-SyncLog "DNS-ATTACK-FAIL  Retry FAILED (exit $LASTEXITCODE) - DNS still broken"
+        Write-SyncLog "DNS-ATTACK-FAIL  Run: Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 1.1.1.1,8.8.8.8"
     }
 } elseif ($rcloneExitCode -eq 0) {
     Write-SyncLog "SYNC-OK  Sync completed successfully (exit 0)"
