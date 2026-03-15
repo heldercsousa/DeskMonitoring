@@ -108,3 +108,50 @@ The glued reset button is physical evidence — preserve it (photograph, do not 
 - `Config/cloud_sync.ps1` — DNS-ATTACK-DETECT branch added
 - `Config/start_ecosystem.ps1` — Yawcam/CAM-2 startup fixes
 - Ethernet adapter: static DNS 1.1.1.1/8.8.8.8 set (persists reboots)
+
+---
+
+## LAN Device Audit (2026-03-15 session)
+
+### Hosts file — CLEAN
+No tampering detected in `C:\Windows\System32\drivers\etc\hosts`.
+
+### DNS resolution — RESTORED
+`api.backblazeb2.com` now resolves to `104.153.233.180, 149.137.142.15` (correct Backblaze IPs).
+Static DNS fix confirmed working.
+
+### Unknown device: 192.168.0.106
+- **MAC**: c8:12:0b:ff:bd:0a
+- **OUI**: Micro-Star INTL CO. (MSI) — gaming laptop/desktop manufacturer
+- **Status**: Reachable (ping success)
+- **Open port**: 8080 (HTTP) — returns HTTP 403
+- **No hostname** via reverse DNS or NetBIOS
+- **Active connection observed**: During audit, this machine had an `ESTABLISHED` TCP connection
+  to `192.168.0.106:8080` (local port 57745). Connection closed before process could be identified.
+  The originating process is **unknown** — this is a suspicious finding.
+- **Verdict**: Identity unconfirmed. Could be another device on the LAN belonging to attacker
+  or a legitimate device (neighbour's laptop, etc.). HTTP service on :8080 with no hostname is atypical.
+
+### Unknown device: 192.168.0.206
+- **MAC**: 90:b6:22:51:a2:cd
+- **Status**: UNREACHABLE at time of scan
+- **OUI**: Not identified (Huawei range — common in consumer routers and IoT)
+- **Verdict**: Device may be offline or powered down; no further data.
+
+### Suspicious external connection: 18.97.36.5 (AWS EC2)
+- Reverse DNS: `ec2-18-97-36-5.compute-1.amazonaws.com`
+- Connection: ESTABLISHED on port 443 from this machine
+- This could be legitimate (many cloud services use AWS) or indicate C2 exfiltration channel
+- **Note**: Earlier in session, a transient `SYN_SENT` to `169.254.169.254:80` (AWS EC2 instance
+  metadata IP — only meaningful inside an EC2 instance) was observed but did not persist.
+  Possible explanation: AWS SDK or background service probing metadata endpoint incorrectly.
+
+### Summary of LAN audit risk
+| Finding | Risk |
+|---|---|
+| .106 unknown MSI device with HTTP:8080 | MEDIUM — unidentified; monitor |
+| ESTABLISHED connection from this machine to .106:8080 | HIGH — process unknown; could be attacker pivot |
+| .206 unreachable Huawei device | LOW — offline; revisit if it appears |
+| AWS EC2 connection (18.97.36.5) | LOW-MEDIUM — likely legitimate but unverified |
+| Hosts file | CLEAN |
+| DNS resolution | RESTORED (static DNS working) |
