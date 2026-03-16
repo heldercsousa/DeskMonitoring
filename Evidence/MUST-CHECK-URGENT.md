@@ -72,6 +72,69 @@
 
 ---
 
+---
+
+## !! ONEDRIVE DATA BREACH — DO THIS BEFORE SLEEPING (added 2026-03-16 03:15) !!
+
+- [ ] **LOG INTO Microsoft account (account.microsoft.com) FROM A DIFFERENT DEVICE NOW**
+  - Change Microsoft account password
+  - Check Recent Activity for attacker logins
+  - Revoke all OneDrive sessions
+  - **WHY:** `passes.txt` (C100 camera password + "void" account passwords) was in OneDrive and syncing since 08/03. Investigation screenshots from this session (03:01-03:11 tonight) were also syncing in real time.
+  - Full details: `Evidence/2026-03-16_CRITICAL-onedrive-data-exposure.md`
+
+- [ ] **Change C100 camera admin password** (it was in passes.txt, assume the attacker has it)
+
+- [ ] **Change all "void" account passwords** (also in passes.txt)
+
+OneDrive processes killed and tasks disabled at 03:15 on 2026-03-16. Sync is stopped locally but cloud data is already there.
+
+---
+
+## MALWARE / PERSISTENCE — FAKE ONEDRIVE NOTIFICATION (CRITICAL - added 2026-03-16)
+
+- [ ] **Fake OneDrive popup** appearing for ~5 days (since ~2026-03-11, coincides with attack window)
+  - Helder never clicked it — instinct was correct, treat as phishing/credential-harvest attempt
+  - Persists AFTER OneDrive was uninstalled — confirms it is NOT the real OneDrive process
+  - **This is malware mimicking OneDrive UI** — likely designed to capture Microsoft credentials
+  - Action: identify the process/executable showing this notification (see investigation steps below)
+
+- [ ] **OneDrive reinstalled 07/03/2026** (one day after confirmed attack began 06/03)
+  - Version: 26.026.0209.0004, 472 MB, publisher: Microsoft Corporation
+  - Windows Settings still shows it installed even after Helder uninstalled it — suggests:
+    a) A persistence mechanism reinstalls it automatically (scheduled task, attacker script), OR
+    b) The "uninstall" removed the user copy but a system/attacker copy remains at a different path
+  - Install date 07/03 is a RED FLAG — attacker may have deployed a trojanized OneDrive
+  - **Do NOT use or log into OneDrive until this is resolved**
+
+  **Investigation steps (run in PS as admin):**
+  ```powershell
+  # Find what process shows the notification
+  Get-Process | Where-Object { $_.MainWindowTitle -like "*OneDrive*" -or $_.Name -like "*OneDrive*" } | Select Name, Id, Path, MainWindowTitle
+
+  # Find ALL OneDrive executables on disk
+  Get-ChildItem -Path C:\, "C:\Users\helde\" -Recurse -Filter "OneDrive.exe" -ErrorAction SilentlyContinue | Select FullName, LastWriteTime, Length
+
+  # Check registry startup entries
+  Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" | Select *Drive*
+  Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run" | Select *Drive*
+
+  # Check scheduled tasks with OneDrive
+  Get-ScheduledTask | Where-Object { $_.TaskName -like "*OneDrive*" -or $_.Actions.Execute -like "*OneDrive*" } | Select TaskName, TaskPath
+
+  # Check toast notification source
+  Get-AppxPackage -Name "*OneDrive*" | Select Name, PackageFullName, InstallLocation
+  ```
+
+- [ ] **Yawcam "new instance" startup dialog** blocks automated startup
+  - Yawcam has "start at Windows startup" enabled internally AND an "ask for new instance" prompt
+  - On boot, the dialog blocks the automated startup chain — camera may not start unattended
+  - Fix: `setup_update.ps1` should write Yawcam settings XML to disable the "ask new instance" flag
+  - Yawcam settings XML path: `C:\Users\helde\AppData\Roaming\Yawcam\settings.xml` (verify)
+  - The registry `HKCU:\...\Run\Yawcam` entry handles startup — Yawcam's internal startup setting should be DISABLED to avoid conflict/double-launch
+
+---
+
 ## CONTEXT for next session
 - All 2026-03-15 log analysis + P1-P4 fixes are committed to git
 - Evidence files in `C:\Sync\Evidence\2026-03-15_*.md`

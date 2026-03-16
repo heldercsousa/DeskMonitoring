@@ -34,6 +34,35 @@ Update setup_update.ps1 so fix survives full reinstall.
 **Phase 6 — Commit**
 Run `/project:commit`. Never raw git commands, never `Skill("commit")`.
 
+### RULE 5 — Autonomous Mode (within C:\Sync)
+
+**Helder has granted full autonomy for all operations scoped to `C:\Sync\`.**
+
+- **Within `C:\Sync\`**: Proceed without asking for confirmation on any read, write, edit, bash, or git operation. Do not pause to ask "should I proceed?" — just do it.
+- **Outside `C:\Sync\`**: Read operations on the wider filesystem are permitted for investigation. Any **write, delete, registry change, or system state change** outside `C:\Sync\` requires explicit confirmation first.
+- **Destructive system-wide ops** (format, registry delete, uninstall, firewall rule delete outside B2 context): always confirm, regardless of path.
+
+---
+
+### RULE 6 — Pre-commit Integrity Check (anti-injection)
+
+**Trigger:** Before EVERY `git add` / `git commit`, no exceptions.
+
+**Purpose:** An attacker with filesystem access could modify files on disk between when Claude writes them and when they are committed. This check catches injected code.
+
+**Protocol — mandatory before staging any file:**
+
+1. Re-read each file being staged using the `Read` tool — get live disk content.
+2. Compare against what was written in this session (from memory of the write operation).
+3. If content matches intent → proceed with `git add`.
+4. If content differs from what was written (unexpected lines, modified logic, encoding anomalies):
+   - **STOP** — do not commit.
+   - Document the discrepancy immediately in `C:\Sync\Evidence\YYYY-MM-DD_code-injection-detected.md`.
+   - Alert Helder with the exact diff.
+   - Do not overwrite the tampered file — preserve it as evidence.
+
+---
+
 ### Post-task gate — run ALL before claiming done or committing
 1. **RULE 1a** — Updated `ECOSYSTEM_REPORT.md` Section 5 (inventory row) for every changed `.ps1`?
 2. **RULE 1b** — Updated `ECOSYSTEM_REPORT.md` Section 15 (full file contents) for every changed `.ps1`?
