@@ -76,16 +76,15 @@
 
 ## !! ONEDRIVE DATA BREACH — DO THIS BEFORE SLEEPING (added 2026-03-16 03:15) !!
 
-- [ ] **LOG INTO Microsoft account (account.microsoft.com) FROM A DIFFERENT DEVICE NOW**
-  - Change Microsoft account password
-  - Check Recent Activity for attacker logins
-  - Revoke all OneDrive sessions
-  - **WHY:** `passes.txt` (C100 camera password + "void" account passwords) was in OneDrive and syncing since 08/03. Investigation screenshots from this session (03:01-03:11 tonight) were also syncing in real time.
-  - Full details: `Evidence/2026-03-16_CRITICAL-onedrive-data-exposure.md`
+- [x] **Microsoft account password changed** — CLOSED 2026-03-15
+  - Done via new factory-reset phone, Samsung Knox, different mobile carrier (never touched by attacker)
+  - OneDrive cloud access revoked
 
-- [ ] **Change C100 camera admin password** (it was in passes.txt, assume the attacker has it)
+- [x] **passes.txt passwords** — NOT a new exposure (CLOSED)
+  - Attacker already had these from Google Drive before passes.txt was written on 08/03
+  - passes.txt was Helder's own recovery note after attacker deleted them from Google Drive
 
-- [ ] **Change all "void" account passwords** (also in passes.txt)
+- [ ] **C100 camera password** — change AFTER router replacement (over clean network only)
 
 OneDrive processes killed and tasks disabled at 03:15 on 2026-03-16. Sync is stopped locally but cloud data is already there.
 
