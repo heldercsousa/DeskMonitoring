@@ -2890,3 +2890,154 @@ Velocidade:           274.836.636 Bytes/s.
 Velocidade:             15726,278 MegaBytes/min.
    Finalizado em: ter‡a-feira, 17 de mar‡o de 2026 17:12:56
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 17 de mar‡o de 2026 17:13:21
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 17 de mar‡o de 2026 17:13:21
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/17 17:13:21 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_00.08.50_253.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        10         1         9         0         0         0
+ Arquivos:      1158       578       580         0         0       115
+    Bytes:   3.025 g   1.393 g   1.632 g         0         0  265.16 m
+N.§ de Vezes:   0:00:05   0:00:05                       0:00:00   0:00:00
+
+
+Velocidade:           256.324.394 Bytes/s.
+Velocidade:             14666,999 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 17 de mar‡o de 2026 17:13:27
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        10         0        10         0         0         0
+ Arquivos:      1158       459       699         0         0       115
+    Bytes:   3.026 g   1.138 g   1.888 g         0         0  265.16 m
+N.§ de Vezes:   0:00:07   0:00:05                       0:00:02   0:00:00
+
+
+Velocidade:           211.810.956 Bytes/s.
+Velocidade:             12119,920 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 17 de mar‡o de 2026 17:13:29
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 17 de mar‡o de 2026 17:14:00
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 17 de mar‡o de 2026 17:14:01
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/17 17:14:01 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_10.41.09_833.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        10         1         9         0         0         0
+ Arquivos:      1161       580       581         0         0       115
+    Bytes:   3.029 g   1.394 g   1.635 g         0         0  265.16 m
+N.§ de Vezes:   0:00:05   0:00:05                       0:00:00   0:00:00
+
+
+Velocidade:           259.496.536 Bytes/s.
+Velocidade:             14848,511 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 17 de mar‡o de 2026 17:14:06
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        10         0        10         0         0         0
+ Arquivos:      1161       414       747         0         0       115
+    Bytes:   3.030 g   1.007 g   2.022 g         0         0  265.16 m
+N.§ de Vezes:   0:00:07   0:00:05                       0:00:02   0:00:00
+
+
+Velocidade:           214.811.986 Bytes/s.
+Velocidade:             12291,641 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 17 de mar‡o de 2026 17:14:09
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 17 de mar‡o de 2026 17:14:29
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        10         1         9         0         0         0
+ Arquivos:      1163       583       580         0         0       115
+    Bytes:   3.033 g   1.400 g   1.633 g         0         0  265.16 m
+N.§ de Vezes:   0:00:05   0:00:05                       0:00:00   0:00:00
+
+
+Velocidade:           277.224.957 Bytes/s.
+Velocidade:             15862,939 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 17 de mar‡o de 2026 17:14:35
+
