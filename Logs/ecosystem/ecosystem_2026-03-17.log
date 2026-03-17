@@ -20,3 +20,14 @@
 2026-03-17 17:12:46  GIT-COMMIT-LOGS  OK  committed 8 Logs/ file(s): logs: auto-commit 2026-03-17 17:12
 2026-03-17 17:13:05  GIT-COMMIT-LOGS  OK  committed 5 Logs/ file(s): logs: auto-commit 2026-03-17 17:13
 2026-03-17 17:14:13  CAMERA-PAUSE  Yawcam stopped, .camera_paused flag set
+2026-03-17 17:16:11  ECOSYSTEM-STOP  Stopping all ecosystem components
+2026-03-17 17:16:11  ECOSYSTEM-STOP  Yawcam monitor stopped
+2026-03-17 17:16:11  ECOSYSTEM-STOP  CAM-2 relay stopped
+2026-03-17 17:16:11  ECOSYSTEM-STOP  Yawcam stopped
+2026-03-17 17:16:11  ECOSYSTEM-STOP  RealTimeSync stopped
+2026-03-17 17:16:18  ECOSYSTEM-STOP  Task FolderSync-CloudBackup disabled
+2026-03-17 17:16:19  ECOSYSTEM-STOP  Task FolderSync-Watchdog disabled
+2026-03-17 17:16:20  ECOSYSTEM-STOP  Task FolderSync-DailyCheck disabled
+2026-03-17 17:16:21  ECOSYSTEM-STOP  FolderSyncAuditor stopped
+2026-03-17 17:16:21  ECOSYSTEM-STOP  FolderSyncWatchdog stopped
+2026-03-17 17:16:21  ECOSYSTEM-STOP  State set to stopped
