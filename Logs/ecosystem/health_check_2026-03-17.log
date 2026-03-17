@@ -1,0 +1,28 @@
+2026-03-17 17:04:16  --- BEGIN health_check_all.ps1 ---
+2026-03-17 17:04:39  check_status.ps1 output captured (13159 chars)
+2026-03-17 17:04:45  check_camera.ps1 output captured (2377 chars)
+2026-03-17 17:04:51  ============================================================
+2026-03-17 17:04:51    ECOSYSTEM HEALTH SUMMARY -- 2026-03-17 17:04:51
+2026-03-17 17:04:51  ============================================================
+2026-03-17 17:04:51    FOLDERSYNC  : PASS
+2026-03-17 17:04:51    CAMERA      : FAIL -- 1 issue(s)
+2026-03-17 17:04:51  ------------------------------------------------------------
+2026-03-17 17:04:51    OVERALL     : 1 ISSUE(S) FOUND
+2026-03-17 17:04:51  ============================================================
+2026-03-17 17:04:51    CAMERA ISSUE: Yawcam monitor process (powershell yawcam_monitor): NOT RUNNING
+2026-03-17 17:04:51  --- END health_check_all.ps1 ---
+2026-03-17 17:09:21  --- BEGIN health_check_all.ps1 ---
+2026-03-17 17:10:02  check_status.ps1 output captured (13160 chars)
+2026-03-17 17:10:30  --- BEGIN health_check_all.ps1 ---
+2026-03-17 17:10:59  check_status.ps1 output captured (13160 chars)
+2026-03-17 17:11:04  check_camera.ps1 output captured (2377 chars)
+2026-03-17 17:11:07  ============================================================
+2026-03-17 17:11:07    ECOSYSTEM HEALTH SUMMARY -- 2026-03-17 17:11:07
+2026-03-17 17:11:07  ============================================================
+2026-03-17 17:11:07    FOLDERSYNC  : PASS
+2026-03-17 17:11:07    CAMERA      : FAIL -- 1 issue(s)
+2026-03-17 17:11:07  ------------------------------------------------------------
+2026-03-17 17:11:07    OVERALL     : 1 ISSUE(S) FOUND
+2026-03-17 17:11:07  ============================================================
+2026-03-17 17:11:07    CAMERA ISSUE: Yawcam monitor process (powershell yawcam_monitor): NOT RUNNING
+2026-03-17 17:11:07  --- END health_check_all.ps1 ---
