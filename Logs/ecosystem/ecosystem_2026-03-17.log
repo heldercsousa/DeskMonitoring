@@ -32,3 +32,15 @@
 2026-03-17 17:16:21  ECOSYSTEM-STOP  FolderSyncWatchdog stopped
 2026-03-17 17:16:21  ECOSYSTEM-STOP  State set to stopped
 2026-03-17 17:16:56  GIT-COMMIT-LOGS  OK  committed 6 Logs/ file(s): logs: auto-commit 2026-03-17 17:16
+2026-03-17 17:17:17  GIT-COMMIT-LOGS  OK  committed 2 Logs/ file(s): logs: auto-commit 2026-03-17 17:17
+2026-03-17 17:18:24  ECOSYSTEM-START  Starting all ecosystem components
+2026-03-17 17:18:26  ECOSYSTEM-START  FolderSyncWatchdog running
+2026-03-17 17:18:28  ECOSYSTEM-START  FolderSyncAuditor running
+2026-03-17 17:18:29  ECOSYSTEM-START  Task FolderSync-CloudBackup state: Ready
+2026-03-17 17:18:30  ECOSYSTEM-START  Task FolderSync-Watchdog state: Disabled
+2026-03-17 17:18:31  ECOSYSTEM-START  Task FolderSync-DailyCheck state: Disabled
+2026-03-17 17:18:33  ECOSYSTEM-START  RealTimeSync started
+2026-03-17 17:18:41  ECOSYSTEM-START  WARN Yawcam did not start
+2026-03-17 17:18:46  ECOSYSTEM-START  WARN CAM-2 relay did not start
+2026-03-17 17:18:46  ECOSYSTEM-START  .camera_paused flag cleared
+2026-03-17 17:18:46  ECOSYSTEM-START  State set to running
