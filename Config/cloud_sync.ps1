@@ -1,4 +1,4 @@
-﻿# cloud_sync.ps1
+# cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
 # Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
@@ -9,7 +9,7 @@ $Source           = 'C:\Users\helde\Repos\Bois'
 $Remote           = 'cloudsync:helder-sync-mirror'
 $Mirror           = 'C:\Sync\Mirror'
 $LogDir           = 'C:\Sync\Logs'
-$Log              = "$LogDir\cloud_sync\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
 
@@ -82,13 +82,10 @@ $rcloneOutput = & $Rclone sync $Source $Remote `
 $rcloneExitCode = $LASTEXITCODE
 
 # ============================================================
-# STEP 3 - Detect blocking patterns in rclone output
-# Handles: IP firewall blocks AND DNS-level sabotage
-# If detected: attempt repair, retry sync once
+# STEP 3 - Detect firewall blocking pattern in rclone output
+# If detected: remove rules, retry sync once
 # ============================================================
 $firewallBlocked = $false
-$dnsBlocked = $false
-
 if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|connect: permission denied') {
     $firewallBlocked = $true
     Write-SyncLog "FIREWALL-DETECT  Rclone reported connection blocked - checking firewall rules"
@@ -118,42 +115,6 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
     } else {
         Write-SyncLog "FIREWALL-DETECT  No known malicious rules found - unknown blocking cause"
         Write-SyncLog "FIREWALL-DETECT  Run check_status.ps1 and review firewall rules manually"
-    }
-} elseif ($rcloneOutput -match 'no such host|i/o timeout|dial tcp.*lookup') {
-    # DNS-level attack: rogue DHCP server serving 127.0.0.1 as DNS (confirmed 2026-03-15)
-    $dnsBlocked = $true
-    Write-SyncLog "DNS-ATTACK-DETECT  Rclone reported DNS failure - possible rogue DNS/DHCP attack"
-
-    # Check if Ethernet adapter has DHCP-assigned DNS (127.0.0.1 = rogue)
-    $ethDns = (Get-DnsClientServerAddress -InterfaceAlias 'Ethernet' -AddressFamily IPv4 -ErrorAction SilentlyContinue).ServerAddresses
-    Write-SyncLog "DNS-ATTACK-DETECT  Ethernet DNS: $($ethDns -join ', ')"
-
-    # Test live resolution
-    try {
-        $resolved = [System.Net.Dns]::GetHostAddresses('api.backblazeb2.com')
-        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com resolves NOW: $($resolved -join ', ') - transient DNS issue"
-    } catch {
-        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com still FAILS to resolve - DNS attack may be active"
-        Write-SyncLog "DNS-ATTACK-DETECT  Check: hosts file, Ethernet DNS settings, router DHCP config"
-    }
-
-    # Retry sync (DNS may have recovered if interface switched)
-    Write-SyncLog "DNS-ATTACK-DETECT  Retrying sync after DNS diagnosis"
-    $rcloneOutput2 = & $Rclone sync $Source $Remote `
-        --config $Config `
-        --log-file $Log `
-        --log-level INFO `
-        --transfers 4 `
-        --checkers 8 `
-        --fast-list 2>&1
-
-    $rcloneExitCode = $LASTEXITCODE
-
-    if ($LASTEXITCODE -eq 0) {
-        Write-SyncLog "DNS-ATTACK-HEAL  Retry SUCCESS - sync completed after DNS recovery"
-    } else {
-        Write-SyncLog "DNS-ATTACK-FAIL  Retry FAILED (exit $LASTEXITCODE) - DNS still broken"
-        Write-SyncLog "DNS-ATTACK-FAIL  Run: Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 1.1.1.1,8.8.8.8"
     }
 } elseif ($rcloneExitCode -eq 0) {
     Write-SyncLog "SYNC-OK  Sync completed successfully (exit 0)"
@@ -250,47 +211,14 @@ if (Test-Path $Mirror) {
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
-# 4. cloud_sync log rotation
-Get-ChildItem -Path "$LogDir\cloud_sync" -Filter "cloud_sync_*.log" -ErrorAction SilentlyContinue |
+# 4. cloud_sync log rotation - delete logs older than DaysToKeepLogs
+Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
-# 5. mirror log rotation
-Get-ChildItem -Path "$LogDir\mirror" -Filter "mirror_*.log" -ErrorAction SilentlyContinue |
+# 5. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
+Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
-
-# 6. security log rotation
-foreach ($filter in @('security_audit_*.log','security_check_*.log','firewall_*.log')) {
-    Get-ChildItem -Path "$LogDir\security" -Filter $filter -ErrorAction SilentlyContinue |
-        Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
-        Remove-Item -Force -ErrorAction SilentlyContinue
-}
-
-# 7. file audit log rotation
-Get-ChildItem -Path "$LogDir\audit" -Filter "file_audit_*.log" -ErrorAction SilentlyContinue |
-    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
-    Remove-Item -Force -ErrorAction SilentlyContinue
-
-# 8. ecosystem log rotation
-foreach ($filter in @('ecosystem_*.log','health_check_*.log')) {
-    Get-ChildItem -Path "$LogDir\ecosystem" -Filter $filter -ErrorAction SilentlyContinue |
-        Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
-        Remove-Item -Force -ErrorAction SilentlyContinue
-}
-
-# 9. camera log rotation
-Get-ChildItem -Path "$LogDir\camera" -Filter "cam2_relay_*.log" -ErrorAction SilentlyContinue |
-    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
-    Remove-Item -Force -ErrorAction SilentlyContinue
-
-# 10. firewall.log daily rotation - copy today's slice to dated file, truncate live log
-$FwLog   = "$LogDir\security\firewall.log"
-$FwDated = "$LogDir\security\firewall_$(Get-Date -Format 'yyyy-MM-dd').log"
-if ((Test-Path $FwLog) -and -not (Test-Path $FwDated)) {
-    Copy-Item $FwLog $FwDated -ErrorAction SilentlyContinue
-    Clear-Content $FwLog -ErrorAction SilentlyContinue
-    Write-SyncLog "FIREWALL-ROTATE  Archived to $FwDated"
-}
 
 Write-SyncLog "SYNC-END  Cloud sync run complete"

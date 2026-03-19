@@ -1,0 +1,824 @@
+2026-03-18 19:40:48  SYNC-START  Beginning cloud sync run
+2026-03-18 19:40:56  SYNC-START  Beginning cloud sync run
+2026/03/18 19:41:10 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:41:10  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:41:14 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:41:14  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:41:16  SYNC-START  Beginning cloud sync run
+2026-03-18 19:41:19  SYNC-END  Cloud sync run complete
+2026-03-18 19:41:21  SYNC-END  Cloud sync run complete
+2026/03/18 19:41:30 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:41:30  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:41:38  SYNC-END  Cloud sync run complete
+2026-03-18 19:42:26  SYNC-START  Beginning cloud sync run
+2026-03-18 19:42:41  SYNC-START  Beginning cloud sync run
+2026/03/18 19:42:43 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:42:43  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:42:47  SYNC-END  Cloud sync run complete
+2026/03/18 19:42:53 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:42:53  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:42:55  SYNC-END  Cloud sync run complete
+2026-03-18 19:43:37  SYNC-START  Beginning cloud sync run
+2026/03/18 19:43:50 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:43:50  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:43:55  SYNC-END  Cloud sync run complete
+2026-03-18 19:43:57  SYNC-START  Beginning cloud sync run
+2026-03-18 19:44:08  SYNC-START  Beginning cloud sync run
+2026/03/18 19:44:37 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:44:37  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:44:45  SYNC-START  Beginning cloud sync run
+2026/03/18 19:44:46 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:44:46  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:44:47  SYNC-END  Cloud sync run complete
+2026-03-18 19:44:47  SYNC-START  Beginning cloud sync run
+2026-03-18 19:44:52  SYNC-END  Cloud sync run complete
+2026/03/18 19:45:03 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:45:04  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:45:04 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:45:04  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:45:10  SYNC-END  Cloud sync run complete
+2026-03-18 19:45:10  SYNC-END  Cloud sync run complete
+2026-03-18 19:48:53  SYNC-START  Beginning cloud sync run
+2026-03-18 19:49:06  SYNC-START  Beginning cloud sync run
+2026-03-18 19:49:16  SYNC-START  Beginning cloud sync run
+2026/03/18 19:49:18 INFO  : 2026-03-18/motion_2026-03-18_19.40.51_325.avi: Copied (new)
+2026/03/18 19:49:18 INFO  : 2026-03-18/motion_2026-03-18_19.40.41_731.avi: Copied (new)
+2026/03/18 19:49:18 INFO  : 2026-03-18/motion_2026-03-18_19.42.23_268.avi: Copied (new)
+2026/03/18 19:49:19 INFO  : 2026-03-18/motion_2026-03-18_19.41.09_576.avi: Copied (new)
+2026/03/18 19:49:19 INFO  : 2026-03-18/motion_2026-03-18_19.43.54_257.avi: Copied (new)
+2026/03/18 19:49:19 INFO  : 2026-03-18/motion_2026-03-18_19.43.34_120.avi: Copied (new)
+2026/03/18 19:49:20 INFO  : 2026-03-18/motion_2026-03-18_19.44.17_538.avi: Copied (new)
+2026/03/18 19:49:20 INFO  : 2026-03-18/motion_2026-03-18_19.44.05_500.avi: Copied (new)
+2026/03/18 19:49:20 INFO  : 2026-03-18/motion_2026-03-18_19.44.42_278.avi: Copied (new)
+2026/03/18 19:49:20 INFO  : 2026-03-18/motion_2026-03-18_19.48.49_492.avi: Copied (new)
+2026/03/18 19:49:20 INFO  : 2026-03-18/motion_2026-03-18_19.49.02_620.avi: Copied (new)
+2026/03/18 19:49:21 INFO  : 2026-03-18/motion_2026-03-18_19.49.13_617.avi: Copied (new)
+2026/03/18 19:49:21 INFO  : 2026-03-16/motion_2026-03-16_03.20.33_850.avi: Copied (new)
+2026/03/18 19:49:21 INFO  : 2026-03-16/motion_2026-03-16_03.21.30_915.avi: Copied (new)
+2026/03/18 19:49:22 INFO  : 2026-03-18/motion_2026-03-18_19.42.37_594.avi: Copied (new)
+2026/03/18 19:49:22 INFO  : 2026-03-16/motion_2026-03-16_03.21.04_751.avi: Copied (new)
+2026/03/18 19:49:22 INFO  : 2026-03-16/motion_2026-03-16_03.21.42_249.avi: Copied (new)
+2026/03/18 19:49:22 INFO  : 2026-03-16/motion_2026-03-16_03.22.04_934.avi: Copied (new)
+2026/03/18 19:49:23 INFO  : 2026-03-16/motion_2026-03-16_03.22.23_241.avi: Copied (new)
+2026/03/18 19:49:23 INFO  : 2026-03-16/motion_2026-03-16_03.23.08_273.avi: Copied (new)
+2026/03/18 19:49:23 INFO  : 2026-03-16/motion_2026-03-16_03.23.19_810.avi: Copied (new)
+2026/03/18 19:49:23 INFO  : 2026-03-16/motion_2026-03-16_03.22.31_636.avi: Copied (new)
+2026/03/18 19:49:23 INFO  : 2026-03-16/motion_2026-03-16_05.03.26_485.avi: Copied (new)
+2026/03/18 19:49:24 INFO  : 2026-03-16/motion_2026-03-16_03.23.46_919.avi: Copied (new)
+2026/03/18 19:49:24 INFO  : 2026-03-16/motion_2026-03-16_03.23.37_365.avi: Copied (new)
+2026/03/18 19:49:24 INFO  : 2026-03-16/motion_2026-03-16_05.06.47_965.avi: Copied (new)
+2026/03/18 19:49:24 INFO  : 2026-03-16/motion_2026-03-16_05.07.49_312.avi: Copied (new)
+2026/03/18 19:49:25 INFO  : 2026-03-16/motion_2026-03-16_05.08.08_862.avi: Copied (new)
+2026/03/18 19:49:25 INFO  : 2026-03-16/motion_2026-03-16_05.09.00_000.avi: Copied (new)
+2026/03/18 19:49:25 INFO  : 2026-03-16/motion_2026-03-16_05.09.17_442.avi: Copied (new)
+2026/03/18 19:49:25 INFO  : 2026-03-16/motion_2026-03-16_05.08.46_952.avi: Copied (new)
+2026/03/18 19:49:26 INFO  : 2026-03-16/motion_2026-03-16_05.10.07_728.avi: Copied (new)
+2026/03/18 19:49:26 INFO  : 2026-03-16/motion_2026-03-16_05.10.24_149.avi: Copied (new)
+2026/03/18 19:49:27 INFO  : 2026-03-16/motion_2026-03-16_05.09.49_336.avi: Copied (new)
+2026/03/18 19:49:27 INFO  : 2026-03-17/motion_2026-03-17_17.03.57_680.avi: Copied (new)
+2026/03/18 19:49:27 INFO  : 2026-03-16/motion_2026-03-16_05.19.45_267.avi: Copied (new)
+2026/03/18 19:49:28 INFO  : 2026-03-16/motion_2026-03-16_05.14.03_443.avi: Copied (new)
+2026/03/18 19:49:28 INFO  : 2026-03-17/motion_2026-03-17_17.04.09_743.avi: Copied (new)
+2026/03/18 19:49:28 INFO  : 2026-03-17/motion_2026-03-17_17.04.35_410.avi: Copied (new)
+2026/03/18 19:49:28 ERROR : 2026-03-18/motion_2026-03-18_19.49.24_887.avi: Failed to copy: Post "https://pod-050-1000-01.backblaze.com/b2api/v1/b2_upload_file/fd817b22ceea76df9cc50815/c005_v0501000_t0031": can't copy - source file is being updated (size changed from 1573260 to 1802370)
+2026/03/18 19:49:28 INFO  : 2026-03-17/motion_2026-03-17_17.05.01_856.avi: Copied (new)
+2026/03/18 19:49:28 INFO  : 2026-03-17/motion_2026-03-17_17.05.18_517.avi: Copied (new)
+2026/03/18 19:49:28 INFO  : 2026-03-17/motion_2026-03-17_17.05.11_356.avi: Copied (new)
+2026/03/18 19:49:29 INFO  : 2026-03-17/motion_2026-03-17_17.06.37_309.avi: Copied (new)
+2026/03/18 19:49:29 INFO  : 2026-03-17/motion_2026-03-17_17.06.02_154.avi: Copied (new)
+2026/03/18 19:49:29 INFO  : 2026-03-17/motion_2026-03-17_17.05.39_357.avi: Copied (new)
+2026/03/18 19:49:29 INFO  : 2026-03-16/motion_2026-03-16_05.10.36_646.avi: Copied (new)
+2026/03/18 19:49:29 INFO  : 2026-03-17/motion_2026-03-17_17.06.58_023.avi: Copied (new)
+2026/03/18 19:49:29 INFO  : 2026-03-17/motion_2026-03-17_17.07.13_293.avi: Copied (new)
+2026/03/18 19:49:30 INFO  : 2026-03-16/motion_2026-03-16_05.19.45_267.avi: Copied (new)
+2026/03/18 19:49:30 INFO  : 2026-03-17/motion_2026-03-17_17.07.31_457.avi: Copied (new)
+2026/03/18 19:49:30 INFO  : 2026-03-17/motion_2026-03-17_17.08.32_605.avi: Copied (new)
+2026/03/18 19:49:30 INFO  : 2026-03-17/motion_2026-03-17_17.03.57_680.avi: Copied (new)
+2026/03/18 19:49:30 INFO  : 2026-03-17/motion_2026-03-17_17.08.26_207.avi: Copied (new)
+2026/03/18 19:49:31 INFO  : 2026-03-17/motion_2026-03-17_17.08.47_269.avi: Copied (new)
+2026/03/18 19:49:31 INFO  : 2026-03-16/motion_2026-03-16_05.10.36_646.avi: Copied (new)
+2026/03/18 19:49:32 INFO  : 2026-03-17/motion_2026-03-17_17.08.59_584.avi: Copied (new)
+2026/03/18 19:49:32 INFO  : 2026-03-17/motion_2026-03-17_17.09.09_919.avi: Copied (new)
+2026/03/18 19:49:32 INFO  : 2026-03-17/motion_2026-03-17_17.04.09_743.avi: Copied (new)
+2026/03/18 19:49:32 INFO  : 2026-03-17/motion_2026-03-17_17.09.15_142.avi: Copied (new)
+2026/03/18 19:49:32 INFO  : 2026-03-17/motion_2026-03-17_17.04.35_410.avi: Copied (new)
+2026/03/18 19:49:32 INFO  : 2026-03-17/motion_2026-03-17_17.09.24_560.avi: Copied (new)
+2026/03/18 19:49:33 INFO  : 2026-03-17/motion_2026-03-17_17.05.18_517.avi: Copied (new)
+2026/03/18 19:49:33 INFO  : 2026-03-17/motion_2026-03-17_17.10.02_486.avi: Copied (new)
+2026-03-18 19:49:33  SYNC-START  Beginning cloud sync run
+2026/03/18 19:49:34 INFO  : 2026-03-17/motion_2026-03-17_17.05.11_356.avi: Copied (new)
+2026/03/18 19:49:34 INFO  : 2026-03-17/motion_2026-03-17_17.10.08_092.avi: Copied (new)
+2026/03/18 19:49:36 INFO  : 2026-03-17/motion_2026-03-17_17.09.36_453.avi: Copied (new)
+2026/03/18 19:49:36 INFO  : 2026-03-17/motion_2026-03-17_17.05.39_357.avi: Copied (new)
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.10.45_121.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-16/motion_2026-03-16_05.14.03_443.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.08.07_831.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.06.58_023.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.06.37_309.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.11.33_304.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.07.13_293.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.10.29_806.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.06.02_154.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.21_233.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.08.07_831.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.03_249.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:38 ERROR : Attempt 1/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:38 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.29_509.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.05.01_856.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.35_444.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:38 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:38 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Errors:                 1 (retrying may help)
+Checks:                 0 / 0, -, Listed 30
+Elapsed time:         5.1s
+
+2026/03/18 19:49:38 NOTICE: Failed to sync: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.07.31_457.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.43_282.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.08.26_207.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.13.26_159.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.59_985.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.08.32_605.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.08.47_269.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.13.53_967.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026-03-18 19:49:38  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.09.09_919.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.03_792.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.08.59_584.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.17_819.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.13.39_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.09.15_142.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.33_324.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.09.24_560.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.55_793.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.10.02_486.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.37_887.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.02_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.09.36_453.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.48_580.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.10.29_806.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.22_612.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.10.08_092.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.28_781.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.11.33_304.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.35_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.29_509.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.10.45_121.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.44_183.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.18.38_204.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.03_249.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.16.05_584.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.19_399.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.18.47_346.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.35_444.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.20.20_828.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.43_282.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.59_985.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.19.50_500.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.12.21_233.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.20.46_289.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.13.39_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.20.55_562.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.13.53_967.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.19.57_931.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.03_792.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.21.00_861.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.13.26_159.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.21.15_856.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.17_819.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.21.10_241.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.33_324.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.21.21_189.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.21.27_527.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.37_887.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.48_580.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.21.41_122.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.14.55_793.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.22.43_798.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.02_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.23.03_498.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.19_399.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.23.11_530.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:38 ERROR : 2026-03-17/motion_2026-03-17_17.15.22_612.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.16.05_584.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.23_628.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.41_538.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.15.28_781.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.05_085.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.15.35_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.15.44_183.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.50_219.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.18.38_204.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.21_035.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.18.47_346.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.28_522.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.19.50_500.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.40_678.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.19.57_931.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.42.29_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.20.20_828.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.14.13_539.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.20.46_289.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.14.23_341.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.20.55_562.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.21.00_861.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.27.31_910.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.21.10_241.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.27.12_146.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.21.15_856.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.51.01_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.21.21_189.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.26.42_285.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.21.27_527.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.51.55_772.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.22.43_798.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.51.19_586.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.03_498.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.08_075.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.16_780.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.21.41_122.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.11_530.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.26_342.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.23_628.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.57_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.41_538.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.34_809.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.46.13_198.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.23.50_219.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.05_085.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.46.35_650.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.21_035.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.47.17_822.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.28_522.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.47.02_960.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.24.40_678.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.33.03_157.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_17.42.29_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.57.34_943.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.14.13_539.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.56.01_795.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.14.23_341.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_21.08.43_149.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.26.42_285.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.57.44_696.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.27.12_146.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_21.04.33_676.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.27.31_910.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_21.08.53_060.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:39 ERROR : Attempt 1/3 failed with 74 errors and: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.51.01_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:39 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.51.19_586.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:39 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 INFO  : 
+Transferred:   	  155.677 MiB / 155.677 MiB, 100%, 5.986 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:              1101 / 1101, 100%, Listed 2365
+Transferred:           59 / 59, 100%
+Elapsed time:        24.6s
+
+2026/03/18 19:49:39 NOTICE: Failed to sync: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.51.55_772.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.08_075.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026-03-18 19:49:39  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.16_780.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.26_342.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.34_809.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_18.52.57_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.46.13_198.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.46.35_650.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.47.02_960.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_19.47.17_822.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.33.03_157.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.56.01_795.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.57.34_943.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_20.57.44_696.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_21.04.33_676.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_21.08.43_149.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : 2026-03-17/motion_2026-03-17_21.08.53_060.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:39 ERROR : Attempt 1/3 failed with 92 errors and: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:39 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:49:39 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:49:39 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:49:39 INFO  : 
+Transferred:   	   23.772 MiB / 23.772 MiB, 100%, 1.486 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:              1135 / 1135, 100%, Listed 2400
+Transferred:            8 / 8, 100%
+Elapsed time:        16.4s
+
+2026/03/18 19:49:39 NOTICE: Failed to sync: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026-03-18 19:49:39  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:49:47  SYNC-START  Beginning cloud sync run
+2026-03-18 19:49:47  SYNC-END  Cloud sync run complete
+2026-03-18 19:49:47  SYNC-END  Cloud sync run complete
+2026-03-18 19:49:48  SYNC-END  Cloud sync run complete
+2026-03-18 19:49:53  SYNC-START  Beginning cloud sync run
+2026/03/18 19:49:56 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:49:56  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:49:59  SYNC-END  Cloud sync run complete
+2026-03-18 19:50:02  SYNC-START  Beginning cloud sync run
+2026/03/18 19:50:05 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:50:05  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:50:05  SYNC-START  Beginning cloud sync run
+2026-03-18 19:50:11  SYNC-END  Cloud sync run complete
+2026/03/18 19:50:13 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:50:13  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:50:20  SYNC-START  Beginning cloud sync run
+2026/03/18 19:50:21 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:50:21  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:50:26 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:50:26  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:50:26  SYNC-END  Cloud sync run complete
+2026-03-18 19:50:28  SYNC-START  Beginning cloud sync run
+2026-03-18 19:50:31  SYNC-END  Cloud sync run complete
+2026-03-18 19:50:35  SYNC-END  Cloud sync run complete
+2026-03-18 19:50:37  SYNC-START  Beginning cloud sync run
+2026/03/18 19:50:46 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:50:46  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:50:47 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:50:47  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:50:49  SYNC-END  Cloud sync run complete
+2026-03-18 19:50:50  SYNC-END  Cloud sync run complete
+2026/03/18 19:50:52 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:50:52  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:50:55  SYNC-END  Cloud sync run complete
+2026-03-18 19:50:55  SYNC-START  Beginning cloud sync run
+2026-03-18 19:51:11  SYNC-START  Beginning cloud sync run
+2026/03/18 19:51:14 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:51:15  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:51:21  SYNC-END  Cloud sync run complete
+2026-03-18 19:51:21  SYNC-START  Beginning cloud sync run
+2026-03-18 19:51:32  SYNC-START  Beginning cloud sync run
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.49.39_854.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.49.24_887.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.49.49_730.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.49.58_706.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.50.23_572.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.50.02_076.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.50.15_284.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.50.33_920.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.51.06_969.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.51.19_091.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.50.52_322.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.51.38_415.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-18/motion_2026-03-18_19.51.26_210.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-17/motion_2026-03-17_17.10.29_806.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-17/motion_2026-03-17_17.08.07_831.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-17/motion_2026-03-17_17.12.03_249.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-17/motion_2026-03-17_17.12.29_509.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-17/motion_2026-03-17_17.12.21_233.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:41 ERROR : 2026-03-17/motion_2026-03-17_17.10.45_121.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.12.35_444.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.12.59_985.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.11.33_304.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.13.39_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.13.53_967.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.14.03_792.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.14.17_819.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.14.33_324.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.13.26_159.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.14.37_887.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.14.48_580.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.14.55_793.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.15.02_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.15.19_399.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.12.43_282.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.15.22_612.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.15.28_781.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.15.35_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.15.44_183.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.18.38_204.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.18.47_346.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.16.05_584.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.19.50_500.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.19.57_931.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.20.20_828.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.20.46_289.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.20.55_562.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.21.00_861.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.21.10_241.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.21.15_856.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.21.21_189.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.21.27_527.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.23.03_498.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.23.11_530.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.23.23_628.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.23.41_538.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.21.41_122.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.22.43_798.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.23.50_219.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.24.05_085.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.24.40_678.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.24.21_035.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.42.29_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.14.13_539.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_17.24.28_522.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.27.12_146.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.14.23_341.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.26.42_285.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.27.31_910.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.51.55_772.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.52.08_075.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.51.01_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.51.19_586.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.52.16_780.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.52.26_342.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.52.34_809.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_18.52.57_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_19.46.13_198.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_19.46.35_650.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_19.47.17_822.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:42 ERROR : 2026-03-17/motion_2026-03-17_19.47.02_960.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : 2026-03-17/motion_2026-03-17_20.33.03_157.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : 2026-03-17/motion_2026-03-17_20.57.34_943.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : 2026-03-17/motion_2026-03-17_20.56.01_795.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : 2026-03-17/motion_2026-03-17_20.57.44_696.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : 2026-03-17/motion_2026-03-17_21.04.33_676.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : 2026-03-17/motion_2026-03-17_21.08.43_149.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : 2026-03-17/motion_2026-03-17_21.08.53_060.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:51:43 ERROR : Attempt 1/3 failed with 87 errors and: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:51:43 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:51:43 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:51:43 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:51:43 INFO  : 
+Transferred:   	    1.641 MiB / 1.641 MiB, 100%, 280 KiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:              1160 / 1160, 100%, Listed 2437
+Elapsed time:         6.2s
+
+2026/03/18 19:51:43 NOTICE: Failed to sync: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026-03-18 19:51:43  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:51:51  SYNC-START  Beginning cloud sync run
+2026/03/18 19:51:52 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:51:52  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:51:54  SYNC-START  Beginning cloud sync run
+2026-03-18 19:51:56  SYNC-END  Cloud sync run complete
+2026-03-18 19:52:00  SYNC-END  Cloud sync run complete
+2026/03/18 19:52:02 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:52:02  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:52:04  SYNC-START  Beginning cloud sync run
+2026-03-18 19:52:11  SYNC-END  Cloud sync run complete
+2026/03/18 19:52:11 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:52:11  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:52:15 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:52:15  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:52:18  SYNC-END  Cloud sync run complete
+2026-03-18 19:52:18  SYNC-START  Beginning cloud sync run
+2026-03-18 19:52:19  SYNC-END  Cloud sync run complete
+2026/03/18 19:52:31 INFO  : 2026-03-17/motion_2026-03-17_17.10.29_806.avi: Copied (new)
+2026/03/18 19:52:32 INFO  : 2026-03-17/motion_2026-03-17_17.08.07_831.avi: Copied (new)
+2026/03/18 19:52:32 INFO  : 2026-03-17/motion_2026-03-17_17.12.03_249.avi: Copied (new)
+2026/03/18 19:52:32 INFO  : 2026-03-17/motion_2026-03-17_17.11.33_304.avi: Copied (new)
+2026-03-18 19:52:32  SYNC-START  Beginning cloud sync run
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.12.35_444.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.12.21_233.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.12.29_509.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.10.45_121.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.12.43_282.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.13.26_159.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.13.39_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.13.53_967.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.14.33_324.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.14.17_819.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:33 ERROR : 2026-03-17/motion_2026-03-17_17.14.37_887.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.14.55_793.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.14.03_792.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.14.48_580.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.15.02_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.12.59_985.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.15.19_399.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.15.22_612.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.15.28_781.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.15.35_940.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.15.44_183.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.18.38_204.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.16.05_584.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.18.47_346.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.19.57_931.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.19.50_500.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.20.46_289.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.20.20_828.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.20.55_562.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.21.00_861.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.21.10_241.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.21.15_856.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.21.21_189.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.21.27_527.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.22.43_798.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.21.41_122.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.23.03_498.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.23.23_628.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.23.11_530.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.23.41_538.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.24.21_035.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.23.50_219.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.24.05_085.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.24.28_522.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.24.40_678.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_17.42.29_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.14.13_539.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.14.23_341.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.26.42_285.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.27.12_146.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.51.01_102.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.27.31_910.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.51.19_586.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.51.55_772.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.52.08_075.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.52.16_780.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.52.26_342.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.52.34_809.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_18.52.57_162.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_19.46.13_198.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_19.47.02_960.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_19.46.35_650.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_19.47.17_822.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_20.33.03_157.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_20.56.01_795.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_20.57.34_943.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_20.57.44_696.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_21.04.33_676.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_21.08.43_149.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-17/motion_2026-03-17_21.08.53_060.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.49.24_887.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.49.39_854.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.49.49_730.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.49.58_706.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.50.02_076.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.50.15_284.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.50.23_572.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.50.52_322.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.50.33_920.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.51.06_969.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.51.19_091.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.51.48_626.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.51.38_415.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.52.00_830.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.52.14_259.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:34 ERROR : 2026-03-18/motion_2026-03-18_19.52.25_212.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:35 ERROR : 2026-03-18/motion_2026-03-18_19.51.26_210.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:52:35 ERROR : Attempt 1/3 failed with 87 errors and: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:52:35 ERROR : Attempt 2/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: error reading destination root directory: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/03/18 19:52:35 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/03/18 19:52:35 ERROR : Attempt 3/3 failed with 1 errors and: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026/03/18 19:52:35 INFO  : 
+Transferred:   	   18.303 MiB / 18.303 MiB, 100%, 2.615 MiB/s, ETA 0s
+Errors:                 1 (retrying may help)
+Checks:              1160 / 1160, 100%, Listed 2441
+Transferred:            4 / 4, 100%
+Elapsed time:         7.2s
+
+2026/03/18 19:52:35 NOTICE: Failed to sync: Post "https://api005.backblazeb2.com/b2api/v1/b2_list_file_names": dial tcp: lookup api005.backblazeb2.com: no such host
+2026-03-18 19:52:35  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:52:46  SYNC-START  Beginning cloud sync run
+2026-03-18 19:52:48  SYNC-END  Cloud sync run complete
+2026/03/18 19:52:53 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:52:53  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:52:54  SYNC-START  Beginning cloud sync run
+2026/03/18 19:53:00 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:53:00  SYNC-END  Cloud sync run complete
+2026-03-18 19:53:00  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:53:04  SYNC-START  Beginning cloud sync run
+2026-03-18 19:53:04  SYNC-END  Cloud sync run complete
+2026/03/18 19:53:05 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:53:05  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:53:10  SYNC-END  Cloud sync run complete
+2026/03/18 19:53:11 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:53:11  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:53:13  SYNC-START  Beginning cloud sync run
+2026-03-18 19:53:20  SYNC-START  Beginning cloud sync run
+2026-03-18 19:53:23  SYNC-END  Cloud sync run complete
+2026/03/18 19:53:27 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:53:27  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:53:32  SYNC-START  Beginning cloud sync run
+2026/03/18 19:53:35 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:53:35  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:53:36  SYNC-END  Cloud sync run complete
+2026-03-18 19:53:39  SYNC-END  Cloud sync run complete
+2026/03/18 19:53:40 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:53:40  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:53:44  SYNC-END  Cloud sync run complete
+2026-03-18 19:53:45  SYNC-START  Beginning cloud sync run
+2026/03/18 19:53:47 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:53:47  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:53:50  SYNC-START  Beginning cloud sync run
+2026-03-18 19:53:50  SYNC-END  Cloud sync run complete
+2026-03-18 19:53:57  SYNC-START  Beginning cloud sync run
+2026/03/18 19:54:08 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:54:08  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:54:09 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:54:09  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:54:14  SYNC-START  Beginning cloud sync run
+2026-03-18 19:54:19  SYNC-END  Cloud sync run complete
+2026-03-18 19:54:22  SYNC-END  Cloud sync run complete
+2026/03/18 19:54:23 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:54:23  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:54:27  SYNC-END  Cloud sync run complete
+2026/03/18 19:54:31 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:54:31  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:54:34  SYNC-START  Beginning cloud sync run
+2026-03-18 19:54:35  SYNC-END  Cloud sync run complete
+2026-03-18 19:54:46  SYNC-START  Beginning cloud sync run
+2026-03-18 19:54:50  SYNC-START  Beginning cloud sync run
+2026/03/18 19:54:53 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:54:53  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:55:03  SYNC-END  Cloud sync run complete
+2026/03/18 19:55:06 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:55:06  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/03/18 19:55:09 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-03-18 19:55:09  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-03-18 19:55:09  SYNC-END  Cloud sync run complete
+2026-03-18 19:55:11  SYNC-END  Cloud sync run complete
+2026-03-18 22:28:29  SYNC-START  Beginning cloud sync run
+2026/03/18 22:28:47 INFO  : 2026-03-18/motion_2026-03-18_19.49.24_887.avi: Copied (new)
+2026/03/18 22:28:47 INFO  : 2026-03-18/motion_2026-03-18_19.49.49_730.avi: Copied (new)
+2026/03/18 22:28:48 INFO  : 2026-03-18/motion_2026-03-18_19.50.02_076.avi: Copied (new)
+2026/03/18 22:28:48 INFO  : 2026-03-18/motion_2026-03-18_19.50.15_284.avi: Copied (new)
+2026/03/18 22:28:48 INFO  : 2026-03-18/motion_2026-03-18_19.50.23_572.avi: Copied (new)
+2026/03/18 22:28:48 INFO  : 2026-03-18/motion_2026-03-18_19.49.39_854.avi: Copied (new)
+2026/03/18 22:28:48 INFO  : 2026-03-18/motion_2026-03-18_19.49.58_706.avi: Copied (new)
+2026/03/18 22:28:49 INFO  : 2026-03-18/motion_2026-03-18_19.50.33_920.avi: Copied (new)
+2026/03/18 22:28:49 INFO  : 2026-03-18/motion_2026-03-18_19.50.52_322.avi: Copied (new)
+2026/03/18 22:28:50 INFO  : 2026-03-18/motion_2026-03-18_19.51.06_969.avi: Copied (new)
+2026/03/18 22:28:50 INFO  : 2026-03-18/motion_2026-03-18_19.51.38_415.avi: Copied (new)
+2026/03/18 22:28:50 INFO  : 2026-03-18/motion_2026-03-18_19.51.19_091.avi: Copied (new)
+2026/03/18 22:28:50 INFO  : 2026-03-18/motion_2026-03-18_19.51.26_210.avi: Copied (new)
+2026/03/18 22:28:51 INFO  : 2026-03-18/motion_2026-03-18_19.51.48_626.avi: Copied (new)
+2026/03/18 22:28:51 INFO  : 2026-03-18/motion_2026-03-18_19.52.00_830.avi: Copied (new)
+2026/03/18 22:28:51 INFO  : 2026-03-18/motion_2026-03-18_19.52.14_259.avi: Copied (new)
+2026/03/18 22:28:51 INFO  : 2026-03-18/motion_2026-03-18_19.52.41_737.avi: Copied (new)
+2026/03/18 22:28:52 INFO  : 2026-03-18/motion_2026-03-18_19.52.51_223.avi: Copied (new)
+2026/03/18 22:28:52 INFO  : 2026-03-18/motion_2026-03-18_19.53.00_434.avi: Copied (new)
+2026/03/18 22:28:52 INFO  : 2026-03-18/motion_2026-03-18_19.53.10_456.avi: Copied (new)
+2026/03/18 22:28:52 INFO  : 2026-03-18/motion_2026-03-18_19.53.15_518.avi: Copied (new)
+2026/03/18 22:28:52 INFO  : 2026-03-18/motion_2026-03-18_19.52.25_212.avi: Copied (new)
+2026/03/18 22:28:52 INFO  : 2026-03-18/motion_2026-03-18_19.53.29_130.avi: Copied (new)
+2026/03/18 22:28:53 INFO  : 2026-03-18/motion_2026-03-18_19.53.47_232.avi: Copied (new)
+2026/03/18 22:28:53 INFO  : 2026-03-18/motion_2026-03-18_19.53.42_355.avi: Copied (new)
+2026/03/18 22:28:53 INFO  : 2026-03-18/motion_2026-03-18_19.53.54_560.avi: Copied (new)
+2026/03/18 22:28:53 INFO  : 2026-03-18/motion_2026-03-18_19.54.09_535.avi: Copied (new)
+2026/03/18 22:28:53 INFO  : 2026-03-18/motion_2026-03-18_19.54.31_199.avi: Copied (new)
+2026/03/18 22:28:54 INFO  : 2026-03-18/motion_2026-03-18_19.54.41_842.avi: Copied (new)
+2026/03/18 22:28:54 INFO  : 2026-03-18/motion_2026-03-18_19.54.47_195.avi: Copied (new)
+2026/03/18 22:28:54 INFO  : 2026-03-18/motion_2026-03-18_22.28.24_532.avi: Copied (new)
+2026/03/18 22:28:54 INFO  : 2026-03-17/motion_2026-03-17_17.12.21_233.avi: Copied (new)
+2026/03/18 22:28:55 INFO  : 2026-03-17/motion_2026-03-17_17.12.35_444.avi: Copied (new)
+2026/03/18 22:28:55 INFO  : 2026-03-17/motion_2026-03-17_17.10.45_121.avi: Copied (new)
+2026/03/18 22:28:55 INFO  : 2026-03-17/motion_2026-03-17_17.12.43_282.avi: Copied (new)
+2026/03/18 22:28:55 INFO  : 2026-03-17/motion_2026-03-17_17.12.59_985.avi: Copied (new)
+2026/03/18 22:28:56 INFO  : 2026-03-17/motion_2026-03-17_17.13.39_102.avi: Copied (new)
+2026/03/18 22:28:56 INFO  : 2026-03-17/motion_2026-03-17_17.13.26_159.avi: Copied (new)
+2026/03/18 22:28:56 INFO  : 2026-03-17/motion_2026-03-17_17.13.53_967.avi: Copied (new)
+2026/03/18 22:28:56 INFO  : 2026-03-17/motion_2026-03-17_17.14.03_792.avi: Copied (new)
+2026/03/18 22:28:56 INFO  : 2026-03-17/motion_2026-03-17_17.14.17_819.avi: Copied (new)
+2026/03/18 22:28:56 INFO  : 2026-03-17/motion_2026-03-17_17.14.33_324.avi: Copied (new)
+2026/03/18 22:28:56 INFO  : 2026-03-17/motion_2026-03-17_17.14.37_887.avi: Copied (new)
+2026/03/18 22:28:57 INFO  : 2026-03-17/motion_2026-03-17_17.14.55_793.avi: Copied (new)
+2026/03/18 22:28:57 INFO  : 2026-03-17/motion_2026-03-17_17.15.02_940.avi: Copied (new)
+2026/03/18 22:28:57 INFO  : 2026-03-17/motion_2026-03-17_17.15.22_612.avi: Copied (new)
+2026/03/18 22:28:57 INFO  : 2026-03-17/motion_2026-03-17_17.14.48_580.avi: Copied (new)
+2026/03/18 22:28:57 INFO  : 2026-03-17/motion_2026-03-17_17.15.19_399.avi: Copied (new)
+2026/03/18 22:28:57 INFO  : 2026-03-17/motion_2026-03-17_17.15.28_781.avi: Copied (new)
+2026/03/18 22:28:57 INFO  : 2026-03-17/motion_2026-03-17_17.15.35_940.avi: Copied (new)
+2026/03/18 22:28:58 INFO  : 2026-03-17/motion_2026-03-17_17.15.44_183.avi: Copied (new)
+2026/03/18 22:28:58 INFO  : 2026-03-17/motion_2026-03-17_17.16.05_584.avi: Copied (new)
+2026/03/18 22:28:58 INFO  : 2026-03-17/motion_2026-03-17_17.18.38_204.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.18.47_346.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.19.50_500.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.19.57_931.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.20.20_828.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.20.55_562.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.20.46_289.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.21.00_861.avi: Copied (new)
+2026/03/18 22:28:59 INFO  : 2026-03-17/motion_2026-03-17_17.21.10_241.avi: Copied (new)
+2026/03/18 22:29:00 INFO  : 2026-03-17/motion_2026-03-17_17.21.15_856.avi: Copied (new)
+2026/03/18 22:29:00 INFO  : 2026-03-17/motion_2026-03-17_17.21.27_527.avi: Copied (new)
+2026/03/18 22:29:00 INFO  : 2026-03-17/motion_2026-03-17_17.21.21_189.avi: Copied (new)
+2026/03/18 22:29:01 INFO  : 2026-03-17/motion_2026-03-17_17.23.03_498.avi: Copied (new)
+2026/03/18 22:29:01 INFO  : 2026-03-17/motion_2026-03-17_17.23.11_530.avi: Copied (new)
+2026/03/18 22:29:01 INFO  : 2026-03-17/motion_2026-03-17_17.22.43_798.avi: Copied (new)
+2026/03/18 22:29:01 INFO  : 2026-03-17/motion_2026-03-17_17.23.23_628.avi: Copied (new)
+2026/03/18 22:29:01 INFO  : 2026-03-17/motion_2026-03-17_17.23.41_538.avi: Copied (new)
+2026/03/18 22:29:01 INFO  : 2026-03-17/motion_2026-03-17_17.21.41_122.avi: Copied (new)
+2026/03/18 22:29:02 INFO  : 2026-03-17/motion_2026-03-17_17.23.50_219.avi: Copied (new)
+2026/03/18 22:29:02 INFO  : 2026-03-17/motion_2026-03-17_17.24.05_085.avi: Copied (new)
+2026/03/18 22:29:02 INFO  : 2026-03-17/motion_2026-03-17_17.24.21_035.avi: Copied (new)
+2026/03/18 22:29:02 INFO  : 2026-03-17/motion_2026-03-17_17.24.28_522.avi: Copied (new)
+2026/03/18 22:29:02 INFO  : 2026-03-17/motion_2026-03-17_17.24.40_678.avi: Copied (new)
+2026/03/18 22:29:02 INFO  : 2026-03-17/motion_2026-03-17_17.42.29_162.avi: Copied (new)
+2026/03/18 22:29:02 INFO  : 2026-03-17/motion_2026-03-17_18.14.13_539.avi: Copied (new)
+2026/03/18 22:29:03 INFO  : 2026-03-17/motion_2026-03-17_18.14.23_341.avi: Copied (new)
+2026/03/18 22:29:03 INFO  : 2026-03-17/motion_2026-03-17_18.27.12_146.avi: Copied (new)
+2026/03/18 22:29:03 INFO  : 2026-03-17/motion_2026-03-17_18.27.31_910.avi: Copied (new)
+2026/03/18 22:29:04 INFO  : 2026-03-17/motion_2026-03-17_18.26.42_285.avi: Copied (new)
+2026/03/18 22:29:04 INFO  : 2026-03-17/motion_2026-03-17_18.51.19_586.avi: Copied (new)
+2026/03/18 22:29:04 INFO  : 2026-03-17/motion_2026-03-17_18.51.55_772.avi: Copied (new)
+2026/03/18 22:29:04 INFO  : 2026-03-17/motion_2026-03-17_18.51.01_102.avi: Copied (new)
+2026/03/18 22:29:04 INFO  : 2026-03-17/motion_2026-03-17_18.52.08_075.avi: Copied (new)
+2026/03/18 22:29:05 INFO  : 2026-03-17/motion_2026-03-17_18.52.16_780.avi: Copied (new)
+2026/03/18 22:29:05 INFO  : 2026-03-17/motion_2026-03-17_18.52.26_342.avi: Copied (new)
+2026-03-18 22:29:05  SYNC-START  Beginning cloud sync run
+2026/03/18 22:29:05 INFO  : 2026-03-17/motion_2026-03-17_18.52.34_809.avi: Copied (new)
+2026/03/18 22:29:05 INFO  : 2026-03-17/motion_2026-03-17_18.52.57_162.avi: Copied (new)
+2026/03/18 22:29:06 INFO  : 2026-03-17/motion_2026-03-17_19.46.35_650.avi: Copied (new)
+2026/03/18 22:29:06 INFO  : 2026-03-17/motion_2026-03-17_19.46.13_198.avi: Copied (new)
+2026/03/18 22:29:06 INFO  : 2026-03-17/motion_2026-03-17_19.47.17_822.avi: Copied (new)
+2026/03/18 22:29:06 INFO  : 2026-03-17/motion_2026-03-17_19.47.02_960.avi: Copied (new)
+2026/03/18 22:29:07 INFO  : 2026-03-17/motion_2026-03-17_20.33.03_157.avi: Copied (new)
+2026/03/18 22:29:07 INFO  : 2026-03-17/motion_2026-03-17_20.57.44_696.avi: Copied (new)
+2026/03/18 22:29:07 INFO  : 2026-03-17/motion_2026-03-17_20.56.01_795.avi: Copied (new)
+2026/03/18 22:29:07 INFO  : 2026-03-17/motion_2026-03-17_21.04.33_676.avi: Copied (new)
+2026/03/18 22:29:08 INFO  : 2026-03-17/motion_2026-03-17_20.57.34_943.avi: Copied (new)
+2026/03/18 22:29:08 INFO  : 2026-03-17/motion_2026-03-17_21.08.43_149.avi: Copied (new)
+2026/03/18 22:29:08 INFO  : 2026-03-17/motion_2026-03-17_21.08.53_060.avi: Copied (new)
+2026/03/18 22:29:08 INFO  : 
+Transferred:   	  200.758 MiB / 200.758 MiB, 100%, 8.356 MiB/s, ETA 0s
+Checks:              1165 / 1165, 100%, Listed 2440
+Transferred:          100 / 100, 100%
+Elapsed time:        24.6s
+
+2026-03-18 22:29:08  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-18 22:29:15  SYNC-END  Cloud sync run complete
+2026/03/18 22:29:23 INFO  : 2026-03-18/motion_2026-03-18_22.28.59_118.avi: Copied (new)
+2026/03/18 22:29:23 INFO  : 
+Transferred:   	    1.552 MiB / 1.552 MiB, 100%, 148 KiB/s, ETA 0s
+Checks:              1265 / 1265, 100%, Listed 2541
+Transferred:            1 / 1, 100%
+Elapsed time:         3.7s
+
+2026-03-18 22:29:23  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-18 22:29:26  SYNC-END  Cloud sync run complete
+2026-03-18 22:29:27  SYNC-START  Beginning cloud sync run
+2026/03/18 22:29:49 INFO  : 2026-03-18/motion_2026-03-18_22.29.23_902.avi: Copied (new)
+2026/03/18 22:29:49 INFO  : 
+Transferred:   	    2.624 MiB / 2.624 MiB, 100%, 671.796 KiB/s, ETA 0s
+Checks:              1266 / 1266, 100%, Listed 2543
+Transferred:            1 / 1, 100%
+Elapsed time:         4.1s
+
+2026-03-18 22:29:49  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-18 22:29:57  SYNC-END  Cloud sync run complete
+2026-03-18 22:30:04  SYNC-START  Beginning cloud sync run
+2026-03-18 22:30:18  SYNC-START  Beginning cloud sync run
+2026/03/18 22:30:20 INFO  : 2026-03-18/motion_2026-03-18_22.30.15_041.avi: Copied (new)
+2026/03/18 22:30:20 INFO  : 2026-03-18/motion_2026-03-18_22.30.01_340.avi: Copied (new)
+2026/03/18 22:30:20 INFO  : 
+Transferred:   	    4.396 MiB / 4.396 MiB, 100%, 1.099 MiB/s, ETA 0s
+Checks:              1267 / 1267, 100%, Listed 2546
+Transferred:            2 / 2, 100%
+Elapsed time:         4.0s
+
+2026-03-18 22:30:20  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-18 22:30:26  SYNC-END  Cloud sync run complete
+2026/03/18 22:30:36 INFO  : There was nothing to transfer
+2026/03/18 22:30:36 INFO  : 
+Transferred:   	          0 B / 0 B, -, 0 B/s, ETA -
+Checks:              1269 / 1269, 100%, Listed 2548
+Elapsed time:         2.1s
+
+2026-03-18 22:30:36  SYNC-OK  Sync completed successfully (exit 0)
+2026-03-18 22:30:38  SYNC-END  Cloud sync run complete
+2026-03-18 22:33:24  SECURITY  Firewall rule not found (skip): Block 104.153.233.180
+2026-03-18 22:33:24  SECURITY  Firewall rule not found (skip): Block 149.137.142.15
+2026-03-18 22:33:25  SECURITY  B2 firewall remediation complete. All block rules removed.

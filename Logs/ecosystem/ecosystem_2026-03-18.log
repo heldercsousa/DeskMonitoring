@@ -1,0 +1,66 @@
+2026-03-18 19:55:15  ECOSYSTEM-STOP  Stopping all ecosystem components
+2026-03-18 19:55:16  ECOSYSTEM-STOP  Yawcam monitor stopped
+2026-03-18 19:55:16  ECOSYSTEM-STOP  CAM-2 relay stopped
+2026-03-18 19:55:16  ECOSYSTEM-STOP  Yawcam stopped
+2026-03-18 19:55:16  ECOSYSTEM-STOP  RealTimeSync stopped
+2026-03-18 19:55:20  ECOSYSTEM-STOP  Task FolderSync-CloudBackup disabled
+2026-03-18 19:55:21  ECOSYSTEM-STOP  Task FolderSync-Watchdog disabled
+2026-03-18 19:55:22  ECOSYSTEM-STOP  Task FolderSync-DailyCheck disabled
+2026-03-18 19:55:23  ECOSYSTEM-STOP  FolderSyncAuditor stopped
+2026-03-18 19:55:24  ECOSYSTEM-STOP  FolderSyncWatchdog stopped
+2026-03-18 19:55:24  ECOSYSTEM-STOP  State set to stopped
+2026-03-18 22:28:06  ECOSYSTEM-START  Starting all ecosystem components
+2026-03-18 22:28:08  ECOSYSTEM-START  FolderSyncWatchdog running
+2026-03-18 22:28:09  ECOSYSTEM-START  FolderSyncAuditor running
+2026-03-18 22:28:11  ECOSYSTEM-START  Task FolderSync-CloudBackup state: Disabled
+2026-03-18 22:28:12  ECOSYSTEM-START  Task FolderSync-Watchdog state: Disabled
+2026-03-18 22:28:13  ECOSYSTEM-START  Task FolderSync-DailyCheck state: Disabled
+2026-03-18 22:28:15  ECOSYSTEM-START  RealTimeSync started
+2026-03-18 22:28:23  ECOSYSTEM-START  WARN Yawcam did not start
+2026-03-18 22:28:29  ECOSYSTEM-START  WARN CAM-2 relay did not start
+2026-03-18 22:28:29  ECOSYSTEM-START  State set to running
+2026-03-18 22:34:27  ECOSYSTEM-STOP  Stopping all ecosystem components
+2026-03-18 22:34:27  ECOSYSTEM-STOP  Yawcam monitor stopped
+2026-03-18 22:34:27  ECOSYSTEM-STOP  CAM-2 relay stopped
+2026-03-18 22:34:27  ECOSYSTEM-STOP  Yawcam stopped
+2026-03-18 22:34:27  ECOSYSTEM-STOP  RealTimeSync stopped
+2026-03-18 22:34:28  ECOSYSTEM-STOP  Task FolderSync-CloudBackup disabled
+2026-03-18 22:34:29  ECOSYSTEM-STOP  Task FolderSync-Watchdog disabled
+2026-03-18 22:34:30  ECOSYSTEM-STOP  Task FolderSync-DailyCheck disabled
+2026-03-18 22:34:31  ECOSYSTEM-STOP  FolderSyncAuditor stopped
+2026-03-18 22:34:31  ECOSYSTEM-STOP  FolderSyncWatchdog stopped
+2026-03-18 22:34:31  ECOSYSTEM-STOP  State set to stopped
+2026-03-18 22:35:27  ECOSYSTEM-START  Starting all ecosystem components
+2026-03-18 22:35:27  ECOSYSTEM-START  FolderSyncWatchdog running
+2026-03-18 22:35:27  ECOSYSTEM-START  FolderSyncAuditor running
+2026-03-18 22:35:29  ECOSYSTEM-START  Task FolderSync-CloudBackup state: Ready
+2026-03-18 22:35:30  ECOSYSTEM-START  Task FolderSync-Watchdog state: Ready
+2026-03-18 22:35:31  ECOSYSTEM-START  Task FolderSync-DailyCheck state: Ready
+2026-03-18 22:35:31  ECOSYSTEM-START  RealTimeSync already running
+2026-03-18 22:35:39  ECOSYSTEM-START  WARN Yawcam did not start
+2026-03-18 22:35:44  ECOSYSTEM-START  WARN CAM-2 relay did not start
+2026-03-18 22:35:44  ECOSYSTEM-START  .camera_paused flag cleared
+2026-03-18 22:35:44  ECOSYSTEM-START  State set to running
+2026-03-18 22:39:00  ECOSYSTEM-STOP  Stopping all ecosystem components
+2026-03-18 22:39:00  ECOSYSTEM-STOP  Yawcam monitor stopped
+2026-03-18 22:39:00  ECOSYSTEM-STOP  CAM-2 relay stopped
+2026-03-18 22:39:00  ECOSYSTEM-STOP  Yawcam stopped
+2026-03-18 22:39:00  ECOSYSTEM-STOP  RealTimeSync stopped
+2026-03-18 22:39:01  ECOSYSTEM-STOP  Task FolderSync-CloudBackup disabled
+2026-03-18 22:39:02  ECOSYSTEM-STOP  Task FolderSync-Watchdog disabled
+2026-03-18 22:39:03  ECOSYSTEM-STOP  Task FolderSync-DailyCheck disabled
+2026-03-18 22:39:04  ECOSYSTEM-STOP  FolderSyncAuditor stopped
+2026-03-18 22:39:05  ECOSYSTEM-STOP  FolderSyncWatchdog stopped
+2026-03-18 22:39:05  ECOSYSTEM-STOP  State set to stopped
+2026-03-18 22:39:10  ECOSYSTEM-START  Starting all ecosystem components
+2026-03-18 22:39:12  ECOSYSTEM-START  FolderSyncWatchdog running
+2026-03-18 22:39:14  ECOSYSTEM-START  FolderSyncAuditor running
+2026-03-18 22:39:15  ECOSYSTEM-START  Task FolderSync-CloudBackup state: Ready
+2026-03-18 22:39:16  ECOSYSTEM-START  Task FolderSync-Watchdog state: Running
+2026-03-18 22:39:17  ECOSYSTEM-START  Task FolderSync-DailyCheck state: Disabled
+2026-03-18 22:39:19  ECOSYSTEM-START  RealTimeSync started
+2026-03-18 22:39:27  ECOSYSTEM-START  WARN Yawcam did not start
+2026-03-18 22:39:32  ECOSYSTEM-START  WARN CAM-2 relay did not start
+2026-03-18 22:39:32  ECOSYSTEM-START  State set to running
+2026-03-18 22:44:10  GIT-COMMIT-LOGS  SKIP  git index.lock exists - skipping this run
+2026-03-18 22:44:59  GIT-COMMIT-LOGS  SKIP  git index.lock exists - skipping this run
