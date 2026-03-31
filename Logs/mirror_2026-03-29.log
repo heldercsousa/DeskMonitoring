@@ -1710,3 +1710,1390 @@ Velocidade:           216.031.305 Bytes/s.
 Velocidade:             12361,410 MegaBytes/min.
    Finalizado em: domingo, 29 de maráo de 2026 22:47:32
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:39:09
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:39:11
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:39:11 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_15.50.32_356.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1748      1353       395         0         0         0
+    Bytes:   4.515 g   3.503 g   1.011 g         0         0         0
+N.ß de Vezes:   0:00:13   0:00:13                       0:00:00   0:00:00
+
+
+Velocidade:           277.206.929 Bytes/s.
+Velocidade:             15861,908 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:39:22
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1748       996       752         0         0         0
+    Bytes:   4.515 g   2.663 g   1.852 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:12                       0:00:02   0:00:00
+
+
+Velocidade:           231.903.639 Bytes/s.
+Velocidade:             13269,633 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:39:26
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:40:03
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:40:03
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:40:03 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_00.07.58_405.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1749      1352       397         0         0         0
+    Bytes:   4.517 g   3.501 g   1.016 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:14                       0:00:00   0:00:00
+
+
+Velocidade:           256.181.589 Bytes/s.
+Velocidade:             14658,828 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:40:17
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1749      1350       399         0         0         0
+    Bytes:   4.517 g   3.498 g   1.019 g         0         0         0
+N.ß de Vezes:   0:00:20   0:00:18                       0:00:02   0:00:00
+
+
+Velocidade:           203.811.348 Bytes/s.
+Velocidade:             11662,179 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:40:23
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:46:12
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:46:14
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:46:14 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_11.10.21_364.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18         6        12         0         0         0
+ Arquivos:      1750       941       809         0         0         0
+    Bytes:   4.520 g   2.494 g   2.025 g         0         0         0
+N.ß de Vezes:   0:00:09   0:00:09                       0:00:00   0:00:00
+
+
+Velocidade:           291.977.522 Bytes/s.
+Velocidade:             16707,088 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:46:21
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18         5        13         0         0         0
+ Arquivos:      1750       665      1085         0         0         0
+    Bytes:   4.520 g   1.882 g   2.637 g         0         0         0
+N.ß de Vezes:   0:00:10   0:00:08                       0:00:02   0:00:00
+
+
+Velocidade:           237.497.657 Bytes/s.
+Velocidade:             13589,725 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:46:24
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:46:59
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:46:59
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:46:59 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_00.07.58_405.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1753      1354       399         0         0         0
+    Bytes:   4.526 g   3.505 g   1.020 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:14                       0:00:00   0:00:00
+
+
+Velocidade:           262.299.509 Bytes/s.
+Velocidade:             15008,898 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:47:13
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1753      1349       404         0         0         0
+    Bytes:   4.526 g   3.496 g   1.029 g         0         0         0
+N.ß de Vezes:   0:00:19   0:00:17                       0:00:02   0:00:00
+
+
+Velocidade:           218.454.169 Bytes/s.
+Velocidade:             12500,048 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:47:18
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:47:36
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:47:46
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:47:46 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-18\motion_2026-03-18_22.50.58_849.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1755      1353       402         0         0         0
+    Bytes:   4.529 g   3.502 g   1.026 g         0         0         0
+N.ß de Vezes:   0:00:11   0:00:11                       0:00:00   0:00:00
+
+
+Velocidade:           318.093.048 Bytes/s.
+Velocidade:             18201,430 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:47:47
+
+ Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18         3        15         0         0         0
+ Arquivos:      1755        97      1658         0         0         0
+    Bytes:   4.529 g  285.60 m   4.250 g         0         0         0
+N.ß de Vezes:   0:00:03   0:00:01                       0:00:02   0:00:00
+
+
+Velocidade:           268.348.073 Bytes/s.
+Velocidade:             15355,000 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:47:50
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:48:24
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:48:27
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:48:27 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_12.34.31_259.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1756      1352       404         0         0         0
+    Bytes:   4.529 g   3.499 g   1.030 g         0         0         0
+N.ß de Vezes:   0:00:13   0:00:13                       0:00:00   0:00:00
+
+
+Velocidade:           279.204.423 Bytes/s.
+Velocidade:             15976,205 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:48:38
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1756      1004       752         0         0         0
+    Bytes:   4.535 g   2.700 g   1.835 g         0         0         0
+N.ß de Vezes:   0:00:15   0:00:13                       0:00:02   0:00:00
+
+
+Velocidade:           221.056.523 Bytes/s.
+Velocidade:             12648,956 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:48:42
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:49:16
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:49:18
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:49:18 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_11.16.28_293.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1757      1353       404         0         0         0
+    Bytes:   4.542 g   3.512 g   1.030 g         0         0         0
+N.ß de Vezes:   0:00:13   0:00:13                       0:00:00   0:00:00
+
+
+Velocidade:           276.820.099 Bytes/s.
+Velocidade:             15839,773 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:49:30
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1757      1104       653         0         0         0
+    Bytes:   4.542 g   2.969 g   1.573 g         0         0         0
+N.ß de Vezes:   0:00:16   0:00:14                       0:00:02   0:00:00
+
+
+Velocidade:           223.573.536 Bytes/s.
+Velocidade:             12792,980 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:49:34
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:51:00
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:51:00
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:51:00 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_10.23.36_178.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1758      1352       406         0         0         0
+    Bytes:   4.543 g   3.501 g   1.042 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:13                       0:00:00   0:00:00
+
+
+Velocidade:           269.458.805 Bytes/s.
+Velocidade:             15418,557 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:51:14
+
+
+2026/03/29 23:51:18 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.27.45_508.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:20 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.27.45_508.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:20 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.08_178.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:22 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.08_178.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:22 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.32_946.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:24 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.32_946.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:24 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.17_496.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:26 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.17_496.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:26 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.31_556.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:28 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.31_556.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:28 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.43_801.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:30 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.43_801.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:30 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.57_865.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:32 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.57_865.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:32 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.30.10_831.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:34 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.30.10_831.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:34 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.10_986.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:36 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.10_986.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:36 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.25_739.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:38 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.25_739.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:38 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.32_939.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:40 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.32_939.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:40 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.37_740.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:42 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.37_740.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:42 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.53_130.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:44 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.53_130.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:44 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.32.08_100.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos...
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:51:45
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+ Repetindo...
+2026/03/29 23:51:46 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.32.08_100.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:51:46 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_07.51.37_278.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:51:48 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_07.51.37_278.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1761      1214       532         0        15         0
+    Bytes:   4.550 g   3.182 g   1.333 g         0   35.50 m         0
+N.ß de Vezes:   0:00:47   0:00:15                       0:00:32   0:00:00
+
+
+Velocidade:           218.342.928 Bytes/s.
+Velocidade:             12493,683 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:51:48
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1761      1352       409         0         0         0
+    Bytes:   4.553 g   3.502 g   1.050 g         0         0         0
+N.ß de Vezes:   0:00:11   0:00:11                       0:00:00   0:00:00
+
+
+Velocidade:           323.844.219 Bytes/s.
+Velocidade:             18530,516 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:51:56
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:52:22
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:52:22
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:52:22 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_00.26.58_357.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1763      1353       410         0         0         0
+    Bytes:   4.559 g   3.506 g   1.053 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:14                       0:00:00   0:00:00
+
+
+Velocidade:           260.743.508 Bytes/s.
+Velocidade:             14919,863 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:52:36
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1763      1336       427         0         0         0
+    Bytes:   4.559 g   3.466 g   1.093 g         0         0         0
+N.ß de Vezes:   0:00:18   0:00:16                       0:00:02   0:00:00
+
+
+Velocidade:           223.878.699 Bytes/s.
+Velocidade:             12810,442 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:52:41
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:53:01
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:53:08
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:53:08 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.32.23_967.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18         9         9         0         0         0
+ Arquivos:      1765      1230       535         0         0         0
+    Bytes:   4.564 g   3.165 g   1.399 g         0         0         0
+N.ß de Vezes:   0:00:10   0:00:10                       0:00:00   0:00:00
+
+
+Velocidade:           320.573.182 Bytes/s.
+Velocidade:             18343,344 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:53:11
+
+
+2026/03/29 23:53:14 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.27.45_508.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:16 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.27.45_508.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:16 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.08_178.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:18 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.08_178.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:18 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.32_946.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:20 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.28.32_946.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:20 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.17_496.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:22 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.17_496.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:22 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.31_556.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:24 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.31_556.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:24 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.43_801.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:26 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.43_801.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:26 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.57_865.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:28 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.29.57_865.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:28 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.30.10_831.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.30.10_831.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.10_986.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.10_986.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.25_739.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.25_739.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.32_939.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.32_939.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.37_740.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.37_740.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.53_130.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.31.53_130.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.32.08_100.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_01.32.08_100.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_07.51.37_278.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-21\motion_2026-03-21_07.51.37_278.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_17.58.18_452.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_17.58.18_452.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.00.39_328.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.00.39_328.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.01.54_229.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:51 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.01.54_229.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:51 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.02.11_576.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:53 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.02.11_576.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:53 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.02.36_135.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:55 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.02.36_135.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:55 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.04_796.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:57 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.04_796.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:57 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.20_827.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:53:59 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.20_827.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:53:59 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.38_868.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:01 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.38_868.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:01 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.46_589.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:03 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.46_589.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:03 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.56_873.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:05 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.04.56_873.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:05 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.02_348.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:07 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.02_348.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:07 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.10_640.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:09 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.10_640.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:09 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.21_297.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:11 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.21_297.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:11 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.28_051.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:13 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.28_051.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:13 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.41_312.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:15 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.05.41_312.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:15 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.08.11_699.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:17 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.08.11_699.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:17 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.08.33_109.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:19 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_18.08.33_109.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:19 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.22.37_006.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:21 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.22.37_006.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:21 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.22.45_784.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:23 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.22.45_784.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:23 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.22.55_707.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:25 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.22.55_707.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:25 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.23.13_223.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:27 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.23.13_223.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:27 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.23.23_687.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:29 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.23.23_687.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:29 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.23.33_157.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.23.33_157.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.27.11_319.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.27.11_319.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.27.53_261.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.27.53_261.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.27.59_284.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.27.59_284.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.06_186.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.06_186.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.39_479.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.39_479.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.47_704.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.47_704.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.56_596.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.29.56_596.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.30.05_843.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.30.05_843.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.30.39_748.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.30.39_748.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/29 23:54:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.30.51_901.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/29 23:54:51 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-22\motion_2026-03-22_19.30.51_901.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18         4        12         0         2         0
+ Arquivos:      1765       401      1316         0        48         0
+    Bytes:   4.564 g 1008.53 m   3.418 g         0  165.18 m         0
+N.ß de Vezes:   0:01:42   0:00:04                       0:01:38   0:00:00
+
+
+Velocidade:           232.422.793 Bytes/s.
+Velocidade:             13299,339 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:54:51
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:55:14
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:55:16
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:55:16 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_12.36.12_589.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1766      1352       414         0         0         0
+    Bytes:   4.567 g   3.502 g   1.065 g         0         0         0
+N.ß de Vezes:   0:00:13   0:00:13                       0:00:00   0:00:00
+
+
+Velocidade:           286.221.583 Bytes/s.
+Velocidade:             16377,730 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:55:27
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1766      1001       765         0         0         0
+    Bytes:   4.567 g   2.690 g   1.877 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:12                       0:00:02   0:00:00
+
+
+Velocidade:           229.506.873 Bytes/s.
+Velocidade:             13132,488 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:55:31
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:56:23
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:56:23
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:56:23 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_00.29.52_074.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1768      1353       415         0         0         0
+    Bytes:   4.570 g   3.502 g   1.068 g         0         0         0
+N.ß de Vezes:   0:00:18   0:00:18                       0:00:00   0:00:00
+
+
+Velocidade:           200.759.797 Bytes/s.
+Velocidade:             11487,567 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:56:42
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1768      1330       438         0         0         0
+    Bytes:   4.571 g   3.458 g   1.112 g         0         0         0
+N.ß de Vezes:   0:00:23   0:00:21                       0:00:02   0:00:00
+
+
+Velocidade:           176.136.049 Bytes/s.
+Velocidade:             10078,586 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:56:46
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:58:07
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:58:09
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:58:09 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_21.04.20_881.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1771      1355       416         0         0         0
+    Bytes:   4.578 g   3.508 g   1.070 g         0         0         0
+N.ß de Vezes:   0:00:13   0:00:13                       0:00:00   0:00:00
+
+
+Velocidade:           280.273.706 Bytes/s.
+Velocidade:             16037,391 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:58:20
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1771       990       781         0         0         0
+    Bytes:   4.578 g   2.640 g   1.938 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:12                       0:00:02   0:00:00
+
+
+Velocidade:           227.039.604 Bytes/s.
+Velocidade:             12991,311 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:58:24
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:59:38
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 29 de maráo de 2026 23:59:38
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/29 23:59:38 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-09\motion_2026-03-09_00.09.48_616.avi
+O arquivo j† est† sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        13         5         0         0         0
+ Arquivos:      1773      1353       420         0         0         0
+    Bytes:   4.582 g   3.502 g   1.079 g         0         0         0
+N.ß de Vezes:   0:00:14   0:00:14                       0:00:00   0:00:00
+
+
+Velocidade:           262.564.763 Bytes/s.
+Velocidade:             15024,076 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:59:52
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        18        12         6         0         0         0
+ Arquivos:      1774      1349       425         0         0         0
+    Bytes:   4.584 g   3.494 g   1.090 g         0         0         0
+N.ß de Vezes:   0:00:18   0:00:16                       0:00:02   0:00:00
+
+
+Velocidade:           226.240.672 Bytes/s.
+Velocidade:             12945,595 MegaBytes/min.
+   Finalizado em: domingo, 29 de maráo de 2026 23:59:56
+
