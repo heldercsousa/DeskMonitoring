@@ -1,0 +1,30 @@
+2026-05-12 09:37:13  ECOSYSTEM-STOP  Stopping all ecosystem components
+2026-05-12 09:37:14  ECOSYSTEM-STOP  Yawcam monitor stopped
+2026-05-12 09:37:14  ECOSYSTEM-STOP  CAM-2 relay stopped
+2026-05-12 09:37:14  ECOSYSTEM-STOP  Yawcam stopped
+2026-05-12 09:37:14  ECOSYSTEM-STOP  RealTimeSync stopped
+2026-05-12 09:37:19  ECOSYSTEM-STOP  Task FolderSync-CloudBackup disabled
+2026-05-12 09:37:27  ECOSYSTEM-STOP  FolderSyncAuditor stopped
+2026-05-12 09:37:27  ECOSYSTEM-STOP  FolderSyncWatchdog stopped
+2026-05-12 09:37:27  ECOSYSTEM-STOP  State set to stopped
+2026-05-12 13:51:50  ECOSYSTEM-START  Starting all ecosystem components
+2026-05-12 13:51:52  ECOSYSTEM-START  FolderSyncWatchdog running
+2026-05-12 13:51:54  ECOSYSTEM-START  FolderSyncAuditor running
+2026-05-12 13:51:58  ECOSYSTEM-START  Task FolderSync-CloudBackup state: Ready
+2026-05-12 13:52:00  ECOSYSTEM-START  Task FolderSync-Watchdog state: Disabled
+2026-05-12 13:52:01  ECOSYSTEM-START  Task FolderSync-DailyCheck state: Disabled
+2026-05-12 13:52:03  ECOSYSTEM-START  RealTimeSync started
+2026-05-12 13:52:11  ECOSYSTEM-START  WARN Yawcam did not start
+2026-05-12 13:52:16  ECOSYSTEM-START  WARN CAM-2 relay did not start
+2026-05-12 13:52:16  ECOSYSTEM-START  State set to running
+2026-05-12 14:41:58  ECOSYSTEM-STOP  Stopping all ecosystem components
+2026-05-12 14:41:59  ECOSYSTEM-STOP  Yawcam monitor stopped
+2026-05-12 14:41:59  ECOSYSTEM-STOP  CAM-2 relay stopped
+2026-05-12 14:41:59  ECOSYSTEM-STOP  Yawcam stopped
+2026-05-12 14:41:59  ECOSYSTEM-STOP  RealTimeSync stopped
+2026-05-12 14:42:04  ECOSYSTEM-STOP  Task FolderSync-CloudBackup disabled
+2026-05-12 14:42:05  ECOSYSTEM-STOP  Task FolderSync-Watchdog disabled
+2026-05-12 14:42:06  ECOSYSTEM-STOP  Task FolderSync-DailyCheck disabled
+2026-05-12 14:42:11  ECOSYSTEM-STOP  FolderSyncAuditor stopped
+2026-05-12 14:42:11  ECOSYSTEM-STOP  FolderSyncWatchdog stopped
+2026-05-12 14:42:11  ECOSYSTEM-STOP  State set to stopped
