@@ -3,7 +3,8 @@
 **Generated:** 2026-05-17 19:39:47 BRT (UTC-03:00)
 **Host:** `LAP\helde` (Windows 11, hostname per `C:\Sync`)
 **Session type:** Defensive — recovering control of compromised home network
-**Plan file:** `C:\Users\helde\.claude\plans\calm-giggling-liskov.md`
+**Plan file (origin):** `C:\Users\helde\.claude\plans\calm-giggling-liskov.md`
+**Plan file (repository copy):** `Evidence/2026-05-17_router-hardening-plan.md` — committed alongside this evidence so the plan is preserved inside the ACL-protected, version-controlled repository (the origin lives outside `C:\Sync\` and would otherwise be lost on reinstall or tampering)
 
 ---
 
