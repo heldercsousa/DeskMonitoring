@@ -97,14 +97,39 @@ The agreed safe operator is the **clean cellphone**, which:
 
 ## Outstanding manual actions (Helder)
 
-1. Air-gap the compromised laptop and Android (Wi-Fi off, Ethernet unplugged).
-2. From the clean cellphone, execute Phase 2 (steps 1-18) of the plan file.
-3. Format the Windows laptop (USB-installer Windows reinstall, full system-drive wipe).
-4. Factory-reset the Android phone; rotate the Google account password and 2FA
-   from the clean phone first.
-5. Reconnect devices to the new Wi-Fi only after each is freshly formatted.
-6. Review `Logs/firewall.log` truncation — if forensic recovery is desired,
-   image the system drive before formatting.
+### Step 0 — Clean the clean phone first (NEW — must be done before anything else)
+The clean phone was signed into the same Google account as the compromised Android.
+Before using it to touch the router:
+- Sign out of the compromised Google account on the clean phone.
+- Clear app data for Chrome, Drive, Photos, and any Google app that synced.
+- Do not open any file from the shared Drive before signing out.
+- During Phase 2, operate with no Google account active on the device.
+- After Phase 2, sign into the new Google account only (never the compromised one
+  until the dirty Android is reset and the account password rotated).
+
+### Step 1 — Power off dirty devices completely
+Shut down this laptop and the dirty Android fully (not sleep, not Wi-Fi-off).
+"Wi-Fi off" is software-controlled and can be silently reversed by malware.
+
+### Step 2 — Execute Phase 2 on the clean phone (or clean laptop via Ethernet)
+Follow the 18-step hardening checklist in the plan file.
+If a clean laptop is available, use it with Wi-Fi disabled and Ethernet cable to
+the router — that is strictly safer than phone-only (no WPA2 handshake over air).
+
+### Step 3 — Verify Phase 2 completed
+Old admin password fails, new SSID joins, `1.1.1.1/help` confirms Cloudflare Families DNS.
+
+### Step 4 — Format this Windows laptop
+USB-installer Windows reinstall, full system-drive wipe.
+Image the drive first if forensic recovery of `Logs/firewall.log` truncation is desired.
+
+### Step 5 — Factory-reset the dirty Android
+From the clean phone: rotate the compromised Google account password and 2FA first.
+Then factory-reset the Android. Do not restore from any Google backup made before
+the compromise was detected.
+
+### Step 6 — Reconnect devices only after formatting
+No device connects to the new Wi-Fi until it has been freshly formatted.
 
 ---
 

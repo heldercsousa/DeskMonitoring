@@ -63,6 +63,35 @@ exists in this machine's memory.
 
 ---
 
+## Phase 0 — Clean the clean phone BEFORE it touches the router
+
+The clean phone was used with the **same Google account as the compromised Android**.
+This creates a sync bridge the attacker can exploit. These steps must be done before
+Phase 2 — otherwise the clean phone is not fully trustworthy as an operator.
+
+1. **Sign out of the compromised Google account** on the clean phone.
+   Settings → Accounts → select the shared account → Remove account.
+   This severs Drive/Photos/Chrome sync from the attacker's reach.
+2. **Clear app data** for Chrome, Drive, Photos, and any Google app that was active
+   while the shared account was signed in.
+   Settings → Apps → [app] → Storage → Clear Data.
+3. **Do not sign into any Google account during Phase 2.** Operate the router session
+   with no Google account active on the device.
+4. **Do not open any file received via Drive or shared from the compromised account**
+   before signing out — Drive is a viable delivery channel for malicious documents.
+5. After Phase 2 is complete, you may sign into the **new Google account** (the one
+   created on the clean phone and never touched by compromised devices). Do not
+   sign back into the compromised account until the dirty Android is factory-reset
+   and the Google account password has been rotated.
+
+**Why this matters:** The attacker can place malicious files in the shared Drive,
+read everything you store there (including any new passwords), and silently sync
+settings/autofill/Chrome passwords to any device signed into the same account.
+Signing out removes all of these vectors before the clean phone is used for the
+router operation.
+
+---
+
 ## Phase 1 — Pre-flight (still safe to do from this laptop)
 
 These steps don't reveal any future secret, so the compromised laptop can do them:
