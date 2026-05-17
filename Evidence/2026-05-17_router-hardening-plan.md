@@ -18,6 +18,38 @@ is presumed clean.
 
 ---
 
+## Scenario B — Clean laptop available (in addition to clean cellphone)
+
+If you acquire a second laptop that has **never been connected to this home network**
+and has no shared accounts/sync with the compromised devices, it can replace the clean
+phone as the operator. It offers a full browser and easier copy-paste for long passwords.
+
+**Trust requirements for the clean laptop to qualify:**
+- Never connected to this home Wi-Fi (not even once in the past).
+- Not signed into the same Google/Microsoft account as the dirty Android or this laptop
+  (those accounts may be compromised and sync credentials silently).
+- No Vivo/ISP software, no remote-access tools, no shared cloud storage with dirty devices.
+- Ideally: freshly installed OS from a USB image, or a device belonging to someone else.
+
+**How to use it instead of the clean phone:**
+
+1. Generate the new admin password and new Wi-Fi password on the clean laptop — type
+   them into a local plain-text file or password manager **on that machine only**.
+   Do NOT sync, email, or cloud-save them.
+2. Connect the clean laptop to `VIVOFIBRA-WIFI6-3961` via Wi-Fi (key `B8ABxvLvtKwuYUN`).
+   Alternatively, connect via **Ethernet cable directly to the router** — this bypasses
+   Wi-Fi entirely and is the most secure option (no PSK sniffable from the air).
+3. Open browser → `http://192.168.15.1` → proceed with Phase 2 steps 4-18 below.
+4. After finishing, the new credentials exist only on the clean laptop. Store them in
+   a password manager on that machine and do not transfer to the dirty laptop until
+   it has been freshly formatted.
+
+**Ethernet cable is strongly preferred over Wi-Fi for this step** — it removes the risk
+of a dirty device sniffing the WPA2 4-way handshake when the clean laptop joins the
+network, which would give the attacker the new PSK.
+
+---
+
 ## CRITICAL REVISION — Do NOT use this laptop
 
 **Threat reality:** A compromised endpoint cannot safely change the router password.
