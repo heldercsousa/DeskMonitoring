@@ -36,9 +36,10 @@ phone as the operator. It offers a full browser and easier copy-paste for long p
 1. Generate the new admin password and new Wi-Fi password on the clean laptop — type
    them into a local plain-text file or password manager **on that machine only**.
    Do NOT sync, email, or cloud-save them.
-2. Connect the clean laptop to `VIVOFIBRA-WIFI6-3961` via Wi-Fi (key `B8ABxvLvtKwuYUN`).
-   Alternatively, connect via **Ethernet cable directly to the router** — this bypasses
-   Wi-Fi entirely and is the most secure option (no PSK sniffable from the air).
+2. **Disable Wi-Fi on the clean laptop before connecting** (in Windows: airplane mode, or
+   Device Manager → disable the Wi-Fi adapter). Then connect via **Ethernet cable directly
+   to the router**. This is mandatory — if Wi-Fi is enabled, the laptop may auto-associate
+   wirelessly and the new password would transit over the air, defeating the isolation.
 3. Open browser → `http://192.168.15.1` → proceed with Phase 2 steps 4-18 below.
 4. After finishing, the new credentials exist only on the clean laptop. Store them in
    a password manager on that machine and do not transfer to the dirty laptop until
@@ -66,9 +67,12 @@ exists in this machine's memory.
 
 These steps don't reveal any future secret, so the compromised laptop can do them:
 
-1. **Air-gap the dirty devices first.** Turn off Wi-Fi on this laptop and the dirty
-   Android. Unplug any Ethernet cable from this laptop. They must NOT be on the
-   network while the clean phone operates on the new router.
+1. **Physically power off the dirty devices** — do not merely disable Wi-Fi.
+   "Wi-Fi off" is a software command; malware can silently re-enable the radio and
+   sniff WPA2 4-way handshakes from nearby joins. Full power-off removes that risk.
+   - This laptop: shut down completely (not sleep/hibernate).
+   - Dirty Android: power off completely.
+   - Any other device that has ever connected to this Wi-Fi: power off or unplug.
 2. **Power-cycle the router** if you haven't already after the factory reset
    (ensures clean state in RAM).
 3. **Generate the new admin password and new Wi-Fi password offline** — write them
@@ -79,6 +83,12 @@ These steps don't reveal any future secret, so the compromised laptop can do the
 ---
 
 ## Phase 2 — Clean cellphone operates the router (you do this manually)
+
+**⚠️ Residual weakness of phone-only approach:** The clean phone must connect via Wi-Fi —
+there is no Ethernet option. This means the WPA2 4-way handshake is transmitted over the
+air. If dirty devices are powered off (not just Wi-Fi-off), this risk is eliminated.
+If a clean laptop with an Ethernet cable is available, use Scenario B instead — it is
+strictly safer.
 
 **On the clean phone:**
 
