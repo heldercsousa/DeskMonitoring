@@ -147,11 +147,11 @@ After successfully implementing any fix, new behavior, security hardening, or ec
 
    | Component failing | Log file pattern |
    |---|---|
-   | Cloud sync / rclone | `C:\Sync\Logs\cloud_sync_YYYY-MM-DD.log` |
-   | FolderSyncAuditor | `C:\Sync\Logs\file_audit_YYYY-MM-DD.log` |
-   | Security scan | `C:\Sync\Logs\security_audit_YYYY-MM-DD.log` |
-   | Local mirror | `C:\Sync\Logs\mirror_YYYY-MM-DD.log` |
-   | Watchdog | `C:\Sync\Logs\watchdog.log` (no date suffix — single file) |
+   | Cloud sync / rclone | `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log` |
+   | FolderSyncAuditor | `C:\Sync\Logs\audit\file_audit_YYYY-MM-DD.log` |
+   | Security scan | `C:\Sync\Logs\security\security_audit_YYYY-MM-DD.log` |
+   | Local mirror | `C:\Sync\Logs\mirror\mirror_YYYY-MM-DD.log` |
+   | Watchdog | `C:\Sync\Logs\services\watchdog.log` (no date suffix — single file) |
 
 2. **If today's log has no relevant entry:** read the prior day's log (`YYYY-MM-(DD-1)`).
 3. **Repeat** for up to **4 prior days maximum** (stepping back one day at a time), stopping as soon as the relevant error or event is found.
@@ -162,7 +162,7 @@ Instead of reading full log files, use the `Grep` tool with an error pattern on 
 
 ```
 Grep pattern: SYNC-FAIL|FIREWALL|ERROR|Error|WARN|ALERT|connectex|socket access forbidden|failed|Failed|FAIL|exception|denied|blocked
-File: C:\Sync\Logs\cloud_sync_YYYY-MM-DD.log   (today's date)
+File: C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log   (today's date)
 ```
 
 For multi-component diagnosis, invoke `/project:diagnose-logs` — it greps all 5 log files in parallel for today (and yesterday if needed) and maps results to known causes, escalating to deep investigation only if logs are inconclusive.

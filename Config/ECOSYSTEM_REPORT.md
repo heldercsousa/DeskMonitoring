@@ -122,7 +122,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup, CAM-2 relay |
 | `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam |
 | `cam2.conf` | Read by `cam2_relay.ps1` | CAM-2 credentials (plaintext, ACL-protected, **gitignored**) |
-| `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `health_check_YYYY-MM-DD.log` |
+| `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry (Step 14 uses `start_yawcam.bat` wrapper to set correct working dir) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
 | `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs; enforces HKCU\Run entries. Yawcam wait 8s + checks both yawcam/javaw process names; CAM-2 wait 5s (2026-03-15). |
@@ -210,7 +210,7 @@ These files configure the Claude Code AI assistant for this project. Restore fro
 - `/NP /NDL` — no progress output, no directory listing
 - `/NFL` — No File List: suppresses per-file output, keeps summary only (prevents log bloat)
 
-**Log:** `C:\Sync\Logs\mirror_YYYY-MM-DD.log` (rotates daily, deleted after 30 days by cloud_sync.ps1)
+**Log:** `C:\Sync\Logs\mirror\mirror_YYYY-MM-DD.log` (rotates daily, deleted after 30 days by cloud_sync.ps1)
 
 **To start RealTimeSync manually:**
 ```powershell
@@ -239,7 +239,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1
 C:\Tools\Rclone\rclone.exe lsd cloudsync:helder-sync-mirror --config C:\Sync\Config\rclone.conf
 ```
 
-**Log:** `C:\Sync\Logs\cloud_sync_YYYY-MM-DD.log` (rotates daily, deleted after 30 days)
+**Log:** `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log` (rotates daily, deleted after 30 days)
 
 ---
 
@@ -312,14 +312,14 @@ Set-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" `
 
 | Log | Path | Written by | Rotation |
 |---|---|---|---|
-| Cloud sync | `C:\Sync\Logs\cloud_sync_YYYY-MM-DD.log` | Rclone | Daily file, deleted after 30 days |
-| Local mirror | `C:\Sync\Logs\mirror_YYYY-MM-DD.log` | Robocopy | Daily file, deleted after 30 days |
-| Watchdog | `C:\Sync\Logs\watchdog.log` | `wdog.ps1` | NSSM rotation at 1MB |
-| File audit | `C:\Sync\Logs\file_audit_YYYY-MM-DD.log` | `auditor.ps1` | Daily file |
-| Security audit | `C:\Sync\Logs\security_audit_YYYY-MM-DD.log` | `auditor.ps1` | Daily file |
-| Firewall | `C:\Sync\Logs\firewall.log` | Windows Firewall | Max 8MB, rotates to firewall.log.old |
-| Auditor service stdout | `C:\Sync\Logs\auditor_svc.log` | NSSM | Rotation at 2MB |
-| Auditor service stderr | `C:\Sync\Logs\auditor_svc_err.log` | NSSM | Rotation at 2MB |
+| Cloud sync | `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log` | Rclone | Daily file, deleted after 30 days |
+| Local mirror | `C:\Sync\Logs\mirror\mirror_YYYY-MM-DD.log` | Robocopy | Daily file, deleted after 30 days |
+| Watchdog | `C:\Sync\Logs\services\watchdog.log` | `wdog.ps1` | NSSM rotation at 1MB |
+| File audit | `C:\Sync\Logs\audit\file_audit_YYYY-MM-DD.log` | `auditor.ps1` | Daily file |
+| Security audit | `C:\Sync\Logs\security\security_audit_YYYY-MM-DD.log` | `auditor.ps1` | Daily file |
+| Firewall | `C:\Sync\Logs\security\firewall.log` | Windows Firewall | Max 8MB, rotates to firewall.log.old |
+| Auditor service stdout | `C:\Sync\Logs\services\auditor_svc.log` | NSSM | Rotation at 2MB |
+| Auditor service stderr | `C:\Sync\Logs\services\auditor_svc_err.log` | NSSM | Rotation at 2MB |
 | Daily security check | `%USERPROFILE%\Documents\SecurityCheck_Log.txt` | DailySecurityCheck.ps1 | Appended |
 
 > ⚠ `firewall.log` is owned by SYSTEM. Read permission must be granted manually:
@@ -480,7 +480,7 @@ icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q  # Users
 #Requires -RunAsAdministrator
 # fix_firewall_b2.ps1 — Removes malicious outbound BLOCK rules for B2 IPs.
 
-$LogFile = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 function Write-Log($msg) {
     $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     "$ts  $msg" | Add-Content -LiteralPath $LogFile
@@ -535,22 +535,21 @@ hard_delete = false
 ---
 
 ### `C:\Sync\Config\cloud_sync.ps1`
-> Versão PowerShell do cloud sync — usada pelo Task Scheduler.
-> Inclui self-healing firewall detection+removal+retry, DNS-attack detection+retry (2026-03-15), 3-phase ACL protection (7 dias), rotação de logs (30 dias) e limpeza do Mirror.
-> Last updated: 2026-03-15
+> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, 3-phase ACL protection (7 days), log rotation (30 days), mirror cleanup. Logs to `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log`.
+> Last updated: 2026-03-07
 
 ```powershell
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-03-15 - Added DNS-attack detection+retry (DHCP poisoning vector)
+# Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
 
 $Rclone           = 'C:\Tools\Rclone\rclone.exe'
 $Config           = 'C:\Sync\Config\rclone.conf'
 $Source           = 'C:\Users\helde\Repos\Bois'
 $Remote           = 'cloudsync:helder-sync-mirror'
 $Mirror           = 'C:\Sync\Mirror'
-$LogDir           = 'C:\Sync\Logs'
+$LogDir           = 'C:\Sync\Logs\cloud_sync'
 $Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
@@ -767,12 +766,13 @@ if (Test-Path $Mirror) {
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
-# Log rotation
+# 4. cloud_sync log rotation
 Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
-Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
+# 5. mirror log rotation
+Get-ChildItem -Path 'C:\Sync\Logs\mirror' -Filter "mirror_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
@@ -813,7 +813,7 @@ for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') d
 ---
 
 ### `C:\Sync\Config\run_mirror.bat`
-> Daily log rotation: creates mirror_YYYY-MM-DD.log instead of a single growing file.
+> Daily log rotation: creates `C:\Sync\Logs\mirror\mirror_YYYY-MM-DD.log`.
 
 ```bat
 @echo off
@@ -825,7 +825,7 @@ for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') d
 :: /NFL  = No File List - suppresses per-file output, keeps summary only (prevents log bloat)
 :: /LOG+ = Append to DAILY rotating log (mirror_YYYY-MM-DD.log)
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
 ```
 
 ---
@@ -850,7 +850,7 @@ robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\
 # Ensures RealTimeSync and cloud sync scheduled task are alive.
 # Runs as "FolderSync Watchdog Service" via NSSM.
 
-$LogFile = "C:\Sync\Logs\watchdog.log"
+$LogFile = "C:\Sync\Logs\services\watchdog.log"
 $RealTimeSync = "C:\Program Files\FreeFileSync\RealTimeSync.exe"
 $RealTimeSyncConfig = "C:\Sync\Config\realtime.ffs_real"
 $TaskName = "FolderSync-CloudBackup"
@@ -945,16 +945,18 @@ Write-Host "RealTimeSync can now be launched from watchdog."
 $nssm = 'C:\Tools\NSSM\nssm.exe'
 $svcName = 'FolderSyncWatchdog'
 
+# Remove existing service if present
 & $nssm stop $svcName 2>$null
 & $nssm remove $svcName confirm 2>$null
 
+# Install service
 & $nssm install $svcName powershell.exe
 & $nssm set $svcName AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
 & $nssm set $svcName DisplayName 'Folder Sync Watchdog Service'
 & $nssm set $svcName Description 'Monitors and restarts folder sync processes (RealTimeSync + cloud backup task).'
 & $nssm set $svcName Start SERVICE_AUTO_START
-& $nssm set $svcName AppStdout 'C:\Sync\Logs\watchdog_svc.log'
-& $nssm set $svcName AppStderr 'C:\Sync\Logs\watchdog_svc_err.log'
+& $nssm set $svcName AppStdout 'C:\Sync\Logs\services\watchdog_svc.log'
+& $nssm set $svcName AppStderr 'C:\Sync\Logs\services\watchdog_svc_err.log'
 & $nssm set $svcName AppRotateFiles 1
 & $nssm set $svcName AppRotateBytes 1048576
 
@@ -973,27 +975,35 @@ Write-Host "Service '$svcName' installed and started"
 $nssm    = 'C:\Tools\NSSM\nssm.exe'
 $svcName = 'FolderSyncAuditor'
 
-if (-not (Test-Path $nssm)) { Write-Error "NSSM not found at $nssm"; exit 1 }
+if (-not (Test-Path $nssm)) {
+    Write-Error "NSSM not found at $nssm"
+    exit 1
+}
 
+# Stop and remove existing service if present
 & $nssm stop   $svcName 2>$null
 & $nssm remove $svcName confirm 2>$null
 Start-Sleep -Seconds 2
 
+# Install
 & $nssm install $svcName powershell.exe
 & $nssm set $svcName AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auditor.ps1'
 & $nssm set $svcName DisplayName   'Folder Sync Security Auditor'
 & $nssm set $svcName Description   'Monitors file changes, remote access, and service tampering for the FolderSync ecosystem.'
 & $nssm set $svcName Start         SERVICE_AUTO_START
-& $nssm set $svcName AppStdout     'C:\Sync\Logs\auditor_svc.log'
-& $nssm set $svcName AppStderr     'C:\Sync\Logs\auditor_svc_err.log'
+& $nssm set $svcName AppStdout     'C:\Sync\Logs\services\auditor_svc.log'
+& $nssm set $svcName AppStderr     'C:\Sync\Logs\services\auditor_svc_err.log'
 & $nssm set $svcName AppRotateFiles  1
-& $nssm set $svcName AppRotateBytes  2097152
+& $nssm set $svcName AppRotateBytes  2097152   # 2 MB
+
+# Restart delay: 30s (matches NSSM default, avoids false startup-gap triggers)
 & $nssm set $svcName AppRestartDelay 30000
 
 Start-Service $svcName
 $svc = Get-Service $svcName -ErrorAction SilentlyContinue
 Write-Host "Service '$svcName' installed - status: $($svc.Status)"
-Write-Host "Next step: run enable_file_auditing.ps1 (as Administrator)"
+Write-Host ""
+Write-Host "Next step: run enable_file_auditing.ps1 (as Administrator) to activate Security Event Log attribution."
 ```
 
 ---
@@ -1025,7 +1035,14 @@ Write-Host "Now run fix_watchdog_task.ps1 for the watchdog task."
 Write-Host "=== SCHEDULED TASKS ==="
 Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue | Select-Object TaskName, State
 Get-ScheduledTask -TaskName "FolderSync-Watchdog" -ErrorAction SilentlyContinue | Select-Object TaskName, State
-Get-ScheduledTask -TaskName "Verificacao Automatica de Seguranca" -ErrorAction SilentlyContinue | Select-Object TaskName, State
+
+Write-Host "`n=== TASK TRIGGERS & ACTIONS - CloudBackup ==="
+$t = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
+if ($t) { $t.Triggers | Format-List; $t.Actions | Format-List }
+
+Write-Host "=== TASK TRIGGERS & ACTIONS - Watchdog ==="
+$t2 = Get-ScheduledTask -TaskName "FolderSync-Watchdog" -ErrorAction SilentlyContinue
+if ($t2) { $t2.Triggers | Format-List; $t2.Actions | Format-List }
 
 Write-Host "`n=== SERVICES ==="
 Get-Service FolderSyncWatchdog  -ErrorAction SilentlyContinue | Select-Object Name, DisplayName, Status, StartType
@@ -1040,36 +1057,94 @@ Get-Process RealTimeSync -ErrorAction SilentlyContinue | Select-Object Name, Id
 Write-Host "`n=== RCLONE VERSION ==="
 & "C:\Tools\Rclone\rclone.exe" version 2>&1 | Select-Object -First 1
 
-Write-Host "`n=== B2 CONNECTIVITY ==="
-& "C:\Tools\Rclone\rclone.exe" lsd cloudsync: --config C:\Sync\Config\rclone.conf 2>&1
-
-Write-Host "`n=== SECURITY HARDENING STATUS ==="
-$rdp = (Get-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" -ErrorAction SilentlyContinue).fDenyTSConnections
-Write-Host "RDP blocked: $(if($rdp -eq 1){'YES (good)'}else{'NO - WARNING'})"
-$wmr = (Get-Service WinRM -ErrorAction SilentlyContinue).StartType
-Write-Host "WinRM: $wmr"
-$smb = (Get-SmbServerConfiguration -ErrorAction SilentlyContinue).EnableSMB2Protocol
-Write-Host "SMB2 enabled: $(if($smb -eq $false){'NO (good)'}else{'YES - WARNING'})"
-
 Write-Host "`n=== SOURCE FOLDER SIZE ==="
 $sz = (Get-ChildItem "C:\Users\helde\Repos\Bois" -Recurse -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
 Write-Host ("{0:N1} MB  ({1} files)" -f ($sz/1MB), (Get-ChildItem "C:\Users\helde\Repos\Bois" -Recurse -File -ErrorAction SilentlyContinue).Count)
 
+Write-Host "`n=== MIRROR FOLDER SIZE ==="
+$sz2 = (Get-ChildItem "C:\Sync\Mirror" -Recurse -File -ErrorAction SilentlyContinue | Measure-Object -Property Length -Sum).Sum
+Write-Host ("{0:N1} MB  ({1} files)" -f ($sz2/1MB), (Get-ChildItem "C:\Sync\Mirror" -Recurse -File -ErrorAction SilentlyContinue).Count)
+
+Write-Host "`n=== CONFIG FILES ==="
+Get-ChildItem "C:\Sync\Config" | Format-Table Name, @{N="Size(KB)";E={[math]::Round($_.Length/1KB,1)}}, LastWriteTime -AutoSize
+
 Write-Host "`n=== LOG FILES ==="
 Get-ChildItem "C:\Sync\Logs" -ErrorAction SilentlyContinue | Format-Table Name, @{N="Size(KB)";E={[math]::Round($_.Length/1KB,1)}}, LastWriteTime -AutoSize
+
+Write-Host "`n=== PATH INCLUDES RCLONE ==="
+[Environment]::GetEnvironmentVariable("PATH","Machine") -split ";" | Where-Object { $_ -like "*rclone*" -or $_ -like "*Rclone*" }
 
 Write-Host "`n=== RCLONE CONF (sanitized) ==="
 Get-Content "C:\Sync\Config\rclone.conf" | ForEach-Object {
     if ($_ -match "^key") { "  key = ***REDACTED***" } else { $_ }
 }
 
-Write-Host "`n=== LAST 5 LINES CLOUD SYNC LOG (today) ==="
-$todayLog = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
-if (Test-Path $todayLog) { Get-Content $todayLog | Select-Object -Last 5 } else { Write-Host "(no log yet for today)" }
+Write-Host "`n=== CLOUD SYNC STATUS (today) ==="
+$todayLog = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+if (Test-Path $todayLog) {
+    $syncLines = Get-Content $todayLog
+    # Show last sync result
+    $lastEnd   = $syncLines | Where-Object { $_ -match 'SYNC-(OK|FAIL|END)|FIREWALL' } | Select-Object -Last 1
+    if ($lastEnd) { Write-Host "  Last event: $lastEnd" }
+
+    # Show any FAIL or FIREWALL events today
+    # Exclude benign camera race condition: rclone can't upload a .avi Yawcam is still writing
+    $errorLines = $syncLines | Where-Object {
+        $_ -match 'SYNC-FAIL|FIREWALL-DETECT|FIREWALL-HEAL|connectex|socket access forbidden|error|Error'
+    } | Where-Object {
+        $_ -notmatch 'size changed|being updated|source file is being updated'
+    }
+    if ($errorLines) {
+        Write-Host "  SYNC ERRORS / FIREWALL EVENTS today:" -ForegroundColor Yellow
+        $errorLines | Select-Object -Last 10 | ForEach-Object { Write-Host "    $_" -ForegroundColor Yellow }
+    } else {
+        Write-Host "  No errors or firewall events today" -ForegroundColor Green
+    }
+
+    # Show last 5 lines for context
+    Write-Host "  --- Last 5 lines ---"
+    $syncLines | Select-Object -Last 5
+} else {
+    Write-Host "(no log yet for today: $todayLog)"
+}
+
+Write-Host "`n=== LAST 5 LINES WATCHDOG LOG ==="
+Get-Content "C:\Sync\Logs\services\watchdog.log" -ErrorAction SilentlyContinue | Select-Object -Last 5
+
+Write-Host "`n=== LAST 5 LINES FILE AUDIT LOG (today) ==="
+$fileLog = "C:\Sync\Logs\audit\file_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
+if (Test-Path $fileLog) {
+    Get-Content $fileLog | Select-Object -Last 5
+} else {
+    Write-Host "(no file audit log yet for today: $fileLog)"
+}
 
 Write-Host "`n=== LAST 5 LINES SECURITY AUDIT LOG (today) ==="
-$secLog = "C:\Sync\Logs\security_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
-if (Test-Path $secLog) { Get-Content $secLog | Select-Object -Last 5 } else { Write-Host "(no security audit log yet for today)" }
+$secLog = "C:\Sync\Logs\security\security_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
+if (Test-Path $secLog) {
+    Get-Content $secLog | Select-Object -Last 5
+} else {
+    Write-Host "(no security audit log yet for today: $secLog)"
+}
+
+Write-Host "`n=== FIREWALL TAMPERING CHECK (B2 block rules) ==="
+$b2Rules = @("Block 104.153.233.180", "Block 149.137.142.15")
+$found = @()
+foreach ($r in $b2Rules) {
+    $rule = Get-NetFirewallRule -DisplayName $r -ErrorAction SilentlyContinue
+    if ($rule) { $found += $r }
+}
+if ($found.Count -gt 0) {
+    Write-Host "  ALERT  Malicious B2 block rules ACTIVE: $($found -join ', ')" -ForegroundColor Red
+    Write-Host "  ACTION Run C:\Sync\fix_b2_firewall.bat as Administrator to remove them" -ForegroundColor Yellow
+} else {
+    Write-Host "  OK     No malicious B2 block rules found" -ForegroundColor Green
+}
+
+Write-Host "`n=== EVIDENCE FOLDER ==="
+$evCount = (Get-ChildItem "C:\Sync\Evidence" -ErrorAction SilentlyContinue).Count
+Write-Host "  $evCount evidence file(s) in C:\Sync\Evidence"
+Get-ChildItem "C:\Sync\Evidence" -ErrorAction SilentlyContinue | Format-Table Name, LastWriteTime -AutoSize
 ```
 
 ---
@@ -1140,9 +1215,9 @@ Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
 :: /NFL  = No File List - suppresses per-file output, keeps summary only (prevents log bloat)
 :: /LOG+ = Append ao log diário rotativo
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
-robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
 '@
-Write-OK "run_mirror.bat updated → mirror_YYYY-MM-DD.log"
+Write-OK "run_mirror.bat updated -> mirror_YYYY-MM-DD.log"
 
 # Archive old bloated mirror log if exists
 $oldMirror = "C:\Sync\Logs\mirror"
@@ -1418,11 +1493,11 @@ Write-OK "Auto-lock: 5 minutes, password required on wake"
 Write-Step "Step 9 - Windows Firewall logging"
 netsh advfirewall set allprofiles logging droppedconnections enable | Out-Null
 netsh advfirewall set allprofiles logging allowedconnections enable | Out-Null
-netsh advfirewall set allprofiles logging filename "C:\Sync\Logs\firewall.log" | Out-Null
+netsh advfirewall set allprofiles logging filename "C:\Sync\Logs\security\firewall.log" | Out-Null
 netsh advfirewall set allprofiles logging maxfilesize 8192 | Out-Null
 Start-Sleep -Seconds 1
-if (Test-Path "C:\Sync\Logs\firewall.log") {
-    icacls "C:\Sync\Logs\firewall.log" /grant:r "${currentUser}:(R)" | Out-Null
+if (Test-Path "C:\Sync\Logs\security\firewall.log") {
+    icacls "C:\Sync\Logs\security\firewall.log" /grant:r "${currentUser}:(R)" | Out-Null
     Write-OK "Firewall logging active + read permission set"
 } else {
     Write-OK "Firewall logging active (log created on first connection)"
@@ -1501,15 +1576,15 @@ if (Test-Path $nssm) {
     & $nssm set FolderSyncWatchdog DisplayName   'Folder Sync Watchdog Service'
     & $nssm set FolderSyncWatchdog Description   'Monitors and restarts folder sync processes (RealTimeSync + cloud backup task).'
     & $nssm set FolderSyncWatchdog Start          SERVICE_AUTO_START
-    & $nssm set FolderSyncWatchdog AppStdout      'C:\Sync\Logs\watchdog_svc.log'
-    & $nssm set FolderSyncWatchdog AppStderr      'C:\Sync\Logs\watchdog_svc_err.log'
+    & $nssm set FolderSyncWatchdog AppStdout      'C:\Sync\Logs\services\watchdog_svc.log'
+    & $nssm set FolderSyncWatchdog AppStderr      'C:\Sync\Logs\services\watchdog_svc_err.log'
     & $nssm set FolderSyncWatchdog AppRotateFiles  1
     & $nssm set FolderSyncWatchdog AppRotateBytes  1048576
     Start-Service FolderSyncWatchdog -ErrorAction SilentlyContinue
     $s = Get-Service FolderSyncWatchdog -ErrorAction SilentlyContinue
     Write-OK "FolderSyncWatchdog service: $($s.Status)"
 } else {
-    Write-Warn "NSSM not found at $nssm — install NSSM first, then rerun this step manually"
+    Write-Warn "NSSM not found at $nssm - install NSSM first, then rerun this step manually"
 }
 
 # =============================================================================
@@ -1525,8 +1600,8 @@ if (Test-Path $nssm) {
     & $nssm set FolderSyncAuditor DisplayName   'Folder Sync Security Auditor'
     & $nssm set FolderSyncAuditor Description   'Monitors file changes, remote access, and service tampering.'
     & $nssm set FolderSyncAuditor Start          SERVICE_AUTO_START
-    & $nssm set FolderSyncAuditor AppStdout      'C:\Sync\Logs\auditor_svc.log'
-    & $nssm set FolderSyncAuditor AppStderr      'C:\Sync\Logs\auditor_svc_err.log'
+    & $nssm set FolderSyncAuditor AppStdout      'C:\Sync\Logs\services\auditor_svc.log'
+    & $nssm set FolderSyncAuditor AppStderr      'C:\Sync\Logs\services\auditor_svc_err.log'
     & $nssm set FolderSyncAuditor AppRotateFiles  1
     & $nssm set FolderSyncAuditor AppRotateBytes  2097152
     & $nssm set FolderSyncAuditor AppRestartDelay 30000
@@ -1601,6 +1676,647 @@ Write-Host "  - C100 RTSP integration" -ForegroundColor Yellow
 Write-Host ""
 Write-Host "Validate with:" -ForegroundColor Cyan
 Write-Host "  powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1" -ForegroundColor Cyan
+Write-Host ""
+Read-Host "Press ENTER to close"
+```
+---
+
+### `C:\Sync\Config\setup_update.ps1`
+> Centralized setup v3 (primary). State-aware: stops ecosystem before reconfigure, restarts after. Covers all 17 steps including subdir log routing, Yawcam registry, CAM-2 relay, and ecosystem lifecycle management.
+
+```powershell
+#Requires -RunAsAdministrator
+# =============================================================================
+# setup_update.ps1 v3
+# Centralized setup for FolderSync Ecosystem + Security Hardening
+# Replaces setup_all.ps1. Adds .ecosystem_state awareness:
+#   - Stops ecosystem before reconfiguring if currently running
+#   - Restarts after config if it was running before
+# Run as Administrator from C:\Sync\Config\
+# =============================================================================
+
+$ErrorActionPreference = 'SilentlyContinue'
+$currentUser     = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+$sidAdmins       = New-Object System.Security.Principal.SecurityIdentifier('S-1-5-32-544')
+$sidAdminsAccount= $sidAdmins.Translate([System.Security.Principal.NTAccount]).Value
+$scriptDir       = Split-Path -Parent $MyInvocation.MyCommand.Path
+$StateFile       = "C:\Sync\Config\.ecosystem_state"
+
+function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
+function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
+function Write-Fail($msg) { Write-Host "  FAIL $msg" -ForegroundColor Red }
+
+Write-Host ""
+Write-Host "============================================================" -ForegroundColor Cyan
+Write-Host "  FolderSync Ecosystem - Centralized Setup v3" -ForegroundColor Cyan
+Write-Host "  Running as: $currentUser" -ForegroundColor Cyan
+Write-Host "  Script dir: $scriptDir" -ForegroundColor Cyan
+Write-Host "============================================================" -ForegroundColor Cyan
+
+# =============================================================================
+# STATE MANAGEMENT - read .ecosystem_state, stop if running
+# =============================================================================
+$wasRunning = $false
+if (Test-Path $StateFile) {
+    $state = (Get-Content -LiteralPath $StateFile -Raw).Trim()
+    if ($state -eq 'running') {
+        $wasRunning = $true
+        Write-Warn "Ecosystem is running - stopping before reconfigure"
+        & powershell.exe -ExecutionPolicy Bypass -File "$scriptDir\stop_ecosystem.ps1"
+        Start-Sleep -Seconds 3
+    } else {
+        Write-OK "Ecosystem state: stopped - proceeding with config"
+    }
+} else {
+    Write-OK "No .ecosystem_state file - assuming first run (will start after setup)"
+    $wasRunning = $true  # default: start after fresh install
+}
+
+# =============================================================================
+# STEP 1 - Firewall log read permissions
+# =============================================================================
+Write-Step "Step 1 - Firewall log read permissions"
+foreach ($f in @("C:\Sync\Logs\firewall.log","C:\Sync\Logs\firewall.log.old")) {
+    if (Test-Path $f) {
+        icacls $f /grant:r "${currentUser}:(R)" | Out-Null
+        Write-OK "Read access granted: $f"
+    } else {
+        Write-Warn "Not found (will be fixed when created): $f"
+    }
+}
+icacls "C:\Sync\Logs" /grant:r "${currentUser}:(OI)(CI)(R)" | Out-Null
+Write-OK "Future firewall logs readable by $currentUser"
+
+# =============================================================================
+# STEP 2 - Update run_mirror.bat with daily log rotation
+# =============================================================================
+Write-Step "Step 2 - Update run_mirror.bat (daily log rotation)"
+$mirrorBat = "C:\Sync\Config\run_mirror.bat"
+Set-Content -Path $mirrorBat -Encoding ASCII -Value @'
+@echo off
+:: Local mirror: C:\Users\helde\Repos\Bois -> C:\Sync\Mirror
+:: /E    = Copy subdirectories (including empty ones), do NOT delete from dest
+:: /Z    = Restartable mode (essential for video files if copy is interrupted)
+:: /R:1  = Retry only once to avoid massive logs
+:: /W:2  = Short wait between retries
+:: /NFL  = No File List - suppresses per-file output, keeps summary only (prevents log bloat)
+:: /LOG+ = Append to DAILY rotating log (mirror_YYYY-MM-DD.log)
+for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
+robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
+'@
+Write-OK "run_mirror.bat updated -> mirror_YYYY-MM-DD.log"
+
+# Archive old bloated mirror log if exists
+$oldMirror = "C:\Sync\Logs\mirror"
+if (Test-Path $oldMirror) {
+    Rename-Item $oldMirror "C:\Sync\Logs\mirror_archive_$(Get-Date -Format 'yyyy-MM-dd').log" -ErrorAction SilentlyContinue
+    Write-OK "Old mirror log archived"
+}
+
+# =============================================================================
+# STEP 3 - Update cloud_sync.ps1 with self-healing firewall + 3-phase ACL
+# =============================================================================
+Write-Step "Step 3 - Update cloud_sync.ps1 (firewall self-healing + 3-phase ACL protection)"
+$cloudSyncPs1 = "C:\Sync\Config\cloud_sync.ps1"
+Set-Content -Path $cloudSyncPs1 -Encoding UTF8 -Value @'
+# cloud_sync.ps1
+# Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
+# Manages Mirror cleanup and Log rotation automatically.
+# Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
+
+$Rclone           = 'C:\Tools\Rclone\rclone.exe'
+$Config           = 'C:\Sync\Config\rclone.conf'
+$Source           = 'C:\Users\helde\Repos\Bois'
+$Remote           = 'cloudsync:helder-sync-mirror'
+$Mirror           = 'C:\Sync\Mirror'
+$LogDir           = 'C:\Sync\Logs\cloud_sync'
+$Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$DaysToKeepMirror = 7
+$DaysToKeepLogs   = 30
+
+# Known malicious firewall rules that block Backblaze B2 sync
+$MaliciousFirewallRules = @(
+    'Block 104.153.233.180',
+    'Block 149.137.142.15'
+)
+
+function Write-SyncLog($msg) {
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    "$ts  $msg" | Add-Content -LiteralPath $Log
+}
+
+function Remove-MaliciousFirewallRules {
+    $removed = @()
+    foreach ($ruleName in $MaliciousFirewallRules) {
+        $rule = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+        if ($rule) {
+            Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+            $removed += $ruleName
+            Write-SyncLog "FIREWALL-HEAL  Removed malicious block rule: $ruleName"
+        }
+    }
+    $allBlockRules = Get-NetFirewallRule -Direction Outbound -Action Block -ErrorAction SilentlyContinue |
+        Where-Object { $_.Enabled -eq 'True' } |
+        Where-Object { $_.DisplayName -notlike 'Block 0.0.0.0*' }
+    foreach ($r in $allBlockRules) {
+        $addr = ($r | Get-NetFirewallAddressFilter -ErrorAction SilentlyContinue).RemoteAddress
+        if ($addr -match '104\.153\.|149\.137\.|backblaze') {
+            Remove-NetFirewallRule -DisplayName $r.DisplayName -ErrorAction SilentlyContinue
+            $removed += $r.DisplayName
+            Write-SyncLog "FIREWALL-HEAL  Removed unknown B2 block rule: $($r.DisplayName) -> $addr"
+        }
+    }
+    return $removed
+}
+
+Write-SyncLog "SYNC-START  Beginning cloud sync run"
+
+$preRemoved = @()
+foreach ($ruleName in $MaliciousFirewallRules) {
+    $rule = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+    if ($rule) {
+        Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+        $preRemoved += $ruleName
+        Write-SyncLog "FIREWALL-PREFLIGHT  Removed malicious block rule before sync: $ruleName"
+    }
+}
+if ($preRemoved.Count -gt 0) {
+    Write-SyncLog "FIREWALL-PREFLIGHT  WARNING: $($preRemoved.Count) malicious rule(s) were active at sync start - possible active attack"
+}
+
+$rcloneOutput = & $Rclone sync $Source $Remote `
+    --config $Config `
+    --log-file $Log `
+    --log-level INFO `
+    --transfers 4 `
+    --checkers 8 `
+    --fast-list 2>&1
+
+$rcloneExitCode = $LASTEXITCODE
+
+$firewallBlocked = $false
+if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|connect: permission denied') {
+    $firewallBlocked = $true
+    Write-SyncLog "FIREWALL-DETECT  Rclone reported connection blocked - checking firewall rules"
+    $healed = Remove-MaliciousFirewallRules
+    if ($healed.Count -gt 0) {
+        Write-SyncLog "FIREWALL-HEAL  Removed $($healed.Count) malicious rule(s): $($healed -join ', ')"
+        Write-SyncLog "FIREWALL-HEAL  Retrying sync after firewall repair"
+        $rcloneOutput2 = & $Rclone sync $Source $Remote `
+            --config $Config `
+            --log-file $Log `
+            --log-level INFO `
+            --transfers 4 `
+            --checkers 8 `
+            --fast-list 2>&1
+        $rcloneExitCode = $LASTEXITCODE
+        if ($LASTEXITCODE -eq 0) {
+            Write-SyncLog "FIREWALL-HEAL  Retry SUCCESS - sync completed after firewall repair"
+        } else {
+            Write-SyncLog "FIREWALL-HEAL  Retry FAILED (exit $LASTEXITCODE) - sync still failing after firewall repair"
+            Write-SyncLog "FIREWALL-HEAL  Manual investigation required"
+        }
+    } else {
+        Write-SyncLog "FIREWALL-DETECT  No known malicious rules found - unknown blocking cause"
+        Write-SyncLog "FIREWALL-DETECT  Run check_status.ps1 and review firewall rules manually"
+    }
+} elseif ($rcloneExitCode -eq 0) {
+    Write-SyncLog "SYNC-OK  Sync completed successfully (exit 0)"
+} else {
+    Write-SyncLog "SYNC-FAIL  Sync failed (exit $rcloneExitCode) - not a firewall error"
+}
+
+if (Test-Path $Mirror) {
+    $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+    Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -gt $threshold } |
+        ForEach-Object {
+            try {
+                $acl = Get-Acl $_.FullName -ErrorAction Stop
+                $hasDeny = $acl.Access | Where-Object {
+                    $_.AccessControlType -eq 'Deny' -and
+                    $_.IdentityReference -like '*Everyone*' -and
+                    $_.FileSystemRights -like '*Delete*'
+                }
+                if (-not $hasDeny) {
+                    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+                        [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
+                        'Delete', 'None', 'None', 'Deny')
+                    $acl.AddAccessRule($rule)
+                    Set-Acl $_.FullName $acl -ErrorAction Stop
+                }
+            } catch { }
+        }
+}
+
+if (Test-Path $Mirror) {
+    $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+    Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -lt $threshold } |
+        ForEach-Object {
+            try {
+                $acl = Get-Acl $_.FullName -ErrorAction Stop
+                $denyRules = $acl.Access | Where-Object {
+                    $_.AccessControlType -eq 'Deny' -and
+                    $_.IdentityReference -like '*Everyone*' -and
+                    $_.FileSystemRights -like '*Delete*'
+                }
+                if ($denyRules) {
+                    foreach ($rule in $denyRules) { $acl.RemoveAccessRule($rule) | Out-Null }
+                    Set-Acl $_.FullName $acl -ErrorAction Stop
+                }
+            } catch { }
+        }
+}
+
+if (Test-Path $Mirror) {
+    $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+    Get-ChildItem -Path $Mirror -Recurse -File -ErrorAction SilentlyContinue |
+        Where-Object { $_.LastWriteTime -lt $threshold } |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+    Get-ChildItem -Path $Mirror -Recurse -Directory -ErrorAction SilentlyContinue |
+        Sort-Object FullName -Descending |
+        Where-Object { @(Get-ChildItem -Path $_.FullName -ErrorAction SilentlyContinue).Count -eq 0 } |
+        Remove-Item -Force -ErrorAction SilentlyContinue
+}
+
+# 4. cloud_sync log rotation
+Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 5. mirror log rotation
+Get-ChildItem -Path 'C:\Sync\Logs\mirror' -Filter "mirror_*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+Write-SyncLog "SYNC-END  Cloud sync run complete"
+'@
+Write-OK "cloud_sync.ps1 updated (self-healing firewall + 3-phase ACL protection)"
+
+# =============================================================================
+# STEP 4 - SINGLE AUTHORITY: all Deny Delete ACL rules for C:\Sync
+# =============================================================================
+Write-Step "Step 4 - Apply all Deny Delete ACL rules (single authority)"
+
+$sidEveryone = New-Object System.Security.Principal.SecurityIdentifier('S-1-1-0')
+
+function Set-DenyDeleteFull($path) {
+    $acl = Get-Acl $path
+    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+        $sidEveryone, 'Delete,DeleteSubdirectoriesAndFiles',
+        'ContainerInherit,ObjectInherit', 'None', 'Deny')
+    $acl.RemoveAccessRule($rule) | Out-Null
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $path -AclObject $acl
+}
+
+function Set-DenyDeleteFolderOnly($path) {
+    $acl = Get-Acl $path
+    $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+        $sidEveryone, 'Delete', 'None', 'None', 'Deny')
+    $acl.RemoveAccessRule($rule) | Out-Null
+    $acl.AddAccessRule($rule)
+    Set-Acl -Path $path -AclObject $acl
+}
+
+Set-DenyDeleteFolderOnly 'C:\Sync'
+Write-OK "C:\Sync root locked (folder-only, no inherit)"
+
+Set-DenyDeleteFull 'C:\Sync\Config'
+Write-OK "C:\Sync\Config locked (recursive)"
+
+Set-DenyDeleteFull 'C:\Sync\Logs'
+Write-OK "C:\Sync\Logs locked (recursive)"
+
+if (-not (Test-Path 'C:\Sync\Evidence')) { New-Item -ItemType Directory -Path 'C:\Sync\Evidence' -Force | Out-Null }
+Set-DenyDeleteFull 'C:\Sync\Evidence'
+Write-OK "C:\Sync\Evidence locked (recursive)"
+
+if (Test-Path 'C:\Sync\.git') {
+    icacls "C:\Sync\.git" /remove:d "*S-1-1-0" /T /Q | Out-Null
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q | Out-Null
+    icacls "C:\Sync\.git" /remove:d "*S-1-5-32-544" /T /Q | Out-Null
+    Write-OK "C:\Sync\.git liberated (no Deny Delete)"
+    $gitDeny = (icacls "C:\Sync\.git" 2>&1) | Where-Object { $_ -match ':D\b' }
+    if ($gitDeny) {
+        Write-Fail "C:\Sync\.git still has Deny rules - investigate: $gitDeny"
+    } else {
+        Write-OK "C:\Sync\.git verified clean (zero Deny rules)"
+    }
+}
+Write-OK "C:\Sync\Mirror - no folder ACL (cloud_sync.ps1 manages per-file ACLs)"
+
+# =============================================================================
+# STEP 5 - DailySecurityCheck v8
+# =============================================================================
+Write-Step "Step 5 - Install DailySecurityCheck v8"
+
+foreach ($oldName in @("Verificacao Automatica de Seguranca", "Verificacao Automatica de Seguranca")) {
+    if (Get-ScheduledTask -TaskName $oldName -ErrorAction SilentlyContinue) {
+        Unregister-ScheduledTask -TaskName $oldName -Confirm:$false -ErrorAction SilentlyContinue
+        Write-OK "Removed legacy task: $oldName"
+    }
+}
+
+$taskName  = "FolderSync-DailyCheck"
+$action    = New-ScheduledTaskAction -Execute "powershell.exe" `
+    -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"C:\Sync\Config\DailySecurityCheck.ps1`""
+$trigger   = New-ScheduledTaskTrigger -Daily -At "09:00"
+$settings  = New-ScheduledTaskSettingsSet -Hidden -RunOnlyIfNetworkAvailable:$false
+$principal = New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
+Write-OK "Task registered: $taskName -> C:\Sync\Config\DailySecurityCheck.ps1 (daily 09:00)"
+
+$shell    = New-Object -ComObject WScript.Shell
+$shortcut = $shell.CreateShortcut("$([System.Environment]::GetFolderPath('Desktop'))\Verificar Seguranca.lnk")
+$shortcut.TargetPath = "powershell.exe"
+$shortcut.Arguments  = "-ExecutionPolicy Bypass -File `"C:\Sync\Config\DailySecurityCheck.ps1`""
+$shortcut.Save()
+Write-OK "Desktop shortcut created: Verificar Seguranca.lnk"
+
+# =============================================================================
+# STEP 6 - Disable remote access services
+# =============================================================================
+Write-Step "Step 6 - Disable remote access services"
+Set-ItemProperty "HKLM:\System\CurrentControlSet\Control\Terminal Server" `
+    -Name "fDenyTSConnections" -Value 1 -ErrorAction SilentlyContinue
+Write-OK "RDP connections blocked"
+
+foreach ($svc in @("RemoteRegistry","WinRM","TermService")) {
+    $s = Get-Service $svc -ErrorAction SilentlyContinue
+    if ($s) {
+        if ($s.StartType -ne 'Disabled') {
+            Set-Service $svc -StartupType Disabled -ErrorAction SilentlyContinue
+            Stop-Service $svc -Force -ErrorAction SilentlyContinue
+            Write-OK "$svc disabled"
+        } else {
+            Write-OK "$svc already disabled"
+        }
+    }
+}
+
+try {
+    Set-SmbServerConfiguration -EnableSMB2Protocol $false -Force -ErrorAction SilentlyContinue
+    Write-OK "SMB2 disabled"
+} catch { Write-Warn "SMB2 disable failed: $_" }
+
+# =============================================================================
+# STEP 7 - Account lockout policy
+# =============================================================================
+Write-Step "Step 7 - Account lockout (5 attempts, 30 min)"
+net accounts /lockoutthreshold:5 /lockoutduration:30 /lockoutwindow:30 | Out-Null
+Write-OK "Lockout configured"
+
+# =============================================================================
+# STEP 8 - Screen auto-lock (5 minutes)
+# =============================================================================
+Write-Step "Step 8 - Screen auto-lock (5 minutes)"
+powercfg /setacvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK 300 | Out-Null
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_VIDEO VIDEOCONLOCK 300 | Out-Null
+powercfg /setacvalueindex SCHEME_CURRENT SUB_NONE  CONSOLELOCK   1 | Out-Null
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_NONE  CONSOLELOCK   1 | Out-Null
+powercfg /setactive SCHEME_CURRENT | Out-Null
+Write-OK "Auto-lock: 5 minutes, password required on wake"
+
+# =============================================================================
+# STEP 9 - Windows Firewall logging
+# =============================================================================
+Write-Step "Step 9 - Windows Firewall logging"
+netsh advfirewall set allprofiles logging droppedconnections enable | Out-Null
+netsh advfirewall set allprofiles logging allowedconnections enable | Out-Null
+netsh advfirewall set allprofiles logging filename "C:\Sync\Logs\security\firewall.log" | Out-Null
+netsh advfirewall set allprofiles logging maxfilesize 8192 | Out-Null
+Start-Sleep -Seconds 1
+if (Test-Path "C:\Sync\Logs\security\firewall.log") {
+    icacls "C:\Sync\Logs\security\firewall.log" /grant:r "${currentUser}:(R)" | Out-Null
+    Write-OK "Firewall logging active + read permission set"
+} else {
+    Write-OK "Firewall logging active (log created on first connection)"
+}
+
+# =============================================================================
+# STEP 10 - Register FolderSync-CloudBackup task (SYSTEM)
+# =============================================================================
+Write-Step "Step 10 - FolderSync-CloudBackup task (SYSTEM, every 5 min)"
+$existingBackup = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
+
+$needsRecreate = $false
+if ($existingBackup) {
+    $currentArgs = $existingBackup.Actions[0].Arguments
+    $currentExec = $existingBackup.Actions[0].Execute
+
+    if ($currentExec -like "*.bat" -or $currentArgs -notlike "*-NoWindow*") {
+        Write-Warn "Task exists but uses .bat or missing -NoWindow - will recreate"
+        $needsRecreate = $true
+    }
+}
+
+if (-not $existingBackup -or $needsRecreate) {
+    if ($existingBackup) {
+        Unregister-ScheduledTask -TaskName "FolderSync-CloudBackup" -Confirm:$false -ErrorAction SilentlyContinue
+        Start-Sleep -Seconds 1
+    }
+
+    $action1   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+        -Argument '-NoWindow -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
+    $trigger1  = @(
+        $(New-ScheduledTaskTrigger -AtStartup),
+        $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 5) -Once -At (Get-Date))
+    )
+    $settings1 = New-ScheduledTaskSettingsSet -Hidden -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1) -ExecutionTimeLimit (New-TimeSpan -Minutes 4)
+    $principal1= New-ScheduledTaskPrincipal -UserId "SYSTEM" -RunLevel Highest
+    Register-ScheduledTask -TaskName "FolderSync-CloudBackup" -Action $action1 -Trigger $trigger1 -Settings $settings1 -Principal $principal1 -Force | Out-Null
+    Write-OK "Task FolderSync-CloudBackup registered (PowerShell with -NoWindow)"
+} else {
+    Write-OK "Task FolderSync-CloudBackup already exists with correct arguments"
+}
+
+# =============================================================================
+# STEP 11 - Register FolderSync-Watchdog task (current user, interactive)
+# =============================================================================
+Write-Step "Step 11 - FolderSync-Watchdog task (current user, every 3 min)"
+$action2   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
+$trigger2  = @(
+    $(New-ScheduledTaskTrigger -AtLogOn),
+    $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 3) -Once -At (Get-Date))
+)
+$settings2 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 2) -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
+$principal2= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+Unregister-ScheduledTask -TaskName "FolderSync-Watchdog" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-Watchdog" -Action $action2 -Trigger $trigger2 -Settings $settings2 -Principal $principal2 -Force | Out-Null
+Write-OK "Task FolderSync-Watchdog registered ($currentUser)"
+
+# =============================================================================
+# STEP 12 - Install FolderSyncWatchdog NSSM service
+# =============================================================================
+Write-Step "Step 12 - FolderSyncWatchdog NSSM service"
+$nssm = 'C:\Tools\NSSM\nssm.exe'
+if (Test-Path $nssm) {
+    & $nssm stop   FolderSyncWatchdog 2>$null
+    & $nssm remove FolderSyncWatchdog confirm 2>$null
+    Start-Sleep 2
+    & $nssm install FolderSyncWatchdog powershell.exe
+    & $nssm set FolderSyncWatchdog AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
+    & $nssm set FolderSyncWatchdog DisplayName   'Folder Sync Watchdog Service'
+    & $nssm set FolderSyncWatchdog Description   'Monitors and restarts folder sync processes (RealTimeSync + cloud backup task).'
+    & $nssm set FolderSyncWatchdog Start          SERVICE_AUTO_START
+    & $nssm set FolderSyncWatchdog AppStdout      'C:\Sync\Logs\services\watchdog_svc.log'
+    & $nssm set FolderSyncWatchdog AppStderr      'C:\Sync\Logs\services\watchdog_svc_err.log'
+    & $nssm set FolderSyncWatchdog AppRotateFiles  1
+    & $nssm set FolderSyncWatchdog AppRotateBytes  1048576
+    Write-OK "FolderSyncWatchdog service installed (start via start_ecosystem.ps1)"
+} else {
+    Write-Warn "NSSM not found at $nssm - install NSSM first, then rerun this step manually"
+}
+
+# =============================================================================
+# STEP 13 - Install FolderSyncAuditor NSSM service
+# =============================================================================
+Write-Step "Step 13 - FolderSyncAuditor NSSM service"
+if (Test-Path $nssm) {
+    & $nssm stop   FolderSyncAuditor 2>$null
+    & $nssm remove FolderSyncAuditor confirm 2>$null
+    Start-Sleep 2
+    & $nssm install FolderSyncAuditor powershell.exe
+    & $nssm set FolderSyncAuditor AppParameters '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auditor.ps1'
+    & $nssm set FolderSyncAuditor DisplayName   'Folder Sync Security Auditor'
+    & $nssm set FolderSyncAuditor Description   'Monitors file changes, remote access, and service tampering.'
+    & $nssm set FolderSyncAuditor Start          SERVICE_AUTO_START
+    & $nssm set FolderSyncAuditor AppStdout      'C:\Sync\Logs\services\auditor_svc.log'
+    & $nssm set FolderSyncAuditor AppStderr      'C:\Sync\Logs\services\auditor_svc_err.log'
+    & $nssm set FolderSyncAuditor AppRotateFiles  1
+    & $nssm set FolderSyncAuditor AppRotateBytes  2097152
+    & $nssm set FolderSyncAuditor AppRestartDelay 30000
+    Write-OK "FolderSyncAuditor service installed (start via start_ecosystem.ps1)"
+} else {
+    Write-Warn "NSSM not found - skipped FolderSyncAuditor"
+}
+
+# =============================================================================
+# STEP 14 - Startup registry entries (RealTimeSync + Yawcam + Monitor + CAM-2)
+# =============================================================================
+Write-Step "Step 14 - Startup registry entries"
+$runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
+
+# RealTimeSync
+$rtsPath = '"C:\Program Files\FreeFileSync\RealTimeSync.exe" "C:\Sync\Config\realtime.ffs_real"'
+Set-ItemProperty $runKey -Name "FolderSyncRealTime" -Value $rtsPath -ErrorAction SilentlyContinue
+Write-OK "Registry: FolderSyncRealTime -> RealTimeSync.exe"
+
+# Yawcam - use bat wrapper so working dir is set correctly (prevents launcher.cfg error)
+Set-ItemProperty $runKey -Name "Yawcam" `
+    -Value '"C:\Sync\Config\start_yawcam.bat"' -ErrorAction SilentlyContinue
+Write-OK "Registry: Yawcam -> C:\Sync\Config\start_yawcam.bat"
+
+# YawcamMonitor (uses relocated start_monitor.ps1 in C:\Sync\Config\)
+$monitorCmd = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\start_monitor.ps1"'
+Set-ItemProperty $runKey -Name "YawcamMonitor" -Value $monitorCmd -ErrorAction SilentlyContinue
+Write-OK "Registry: YawcamMonitor -> C:\Sync\Config\start_monitor.ps1"
+
+# YawcamCam2Relay
+$cam2Cmd = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"'
+Set-ItemProperty $runKey -Name "YawcamCam2Relay" -Value $cam2Cmd -ErrorAction SilentlyContinue
+Write-OK "Registry: YawcamCam2Relay -> C:\Sync\Config\cam2_relay.ps1"
+
+# =============================================================================
+# STEP 15 - Remove any known malicious firewall rules
+# =============================================================================
+Write-Step "Step 15 - Remove malicious firewall rules (B2 block rules)"
+$maliciousRules = @(
+    "Block 104.153.233.180",
+    "Block 149.137.142.15"
+)
+$removedCount = 0
+foreach ($ruleName in $maliciousRules) {
+    $existing = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+    if ($existing) {
+        Remove-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
+        Write-Warn "Removed malicious rule: $ruleName"
+        $removedCount++
+    }
+}
+if ($removedCount -eq 0) {
+    Write-OK "No malicious B2 block rules found"
+} else {
+    Write-OK "$removedCount malicious rule(s) removed"
+}
+
+# =============================================================================
+# STEP 16 - File system auditing SACL on watched folder (Bois)
+# =============================================================================
+Write-Step "Step 16 - File system auditing (SACL on Bois folder)"
+$auditScript = "C:\Sync\Config\enable_file_auditing.ps1"
+if (Test-Path $auditScript) {
+    & powershell.exe -ExecutionPolicy Bypass -File $auditScript
+    Write-OK "File auditing (SACL) configured"
+} else {
+    Write-Warn "enable_file_auditing.ps1 not found - run manually when available"
+}
+
+# =============================================================================
+# STEP 17 - FolderSync-GitCommitLogs task (current user, daily 23:30)
+# =============================================================================
+Write-Step "Step 17 - FolderSync-GitCommitLogs task (daily 23:30)"
+$action17   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1'
+$trigger17  = New-ScheduledTaskTrigger -Daily -At "23:30"
+$settings17 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+$principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+Unregister-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -Trigger $trigger17 -Settings $settings17 -Principal $principal17 -Force | Out-Null
+Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, daily 23:30)"
+
+# =============================================================================
+# STATE MANAGEMENT - start ecosystem if it was running before config
+# =============================================================================
+if ($wasRunning) {
+    Write-Step "Restarting ecosystem (was running before config)"
+    & powershell.exe -ExecutionPolicy Bypass -File "$scriptDir\start_ecosystem.ps1"
+} else {
+    # Write stopped state explicitly
+    'stopped' | Set-Content -LiteralPath $StateFile -Encoding UTF8
+    Write-OK "Ecosystem left in stopped state (was stopped before config)"
+}
+
+# =============================================================================
+# SUMMARY
+# =============================================================================
+Write-Host ""
+Write-Host "============================================================" -ForegroundColor Green
+Write-Host "  Setup Complete - Full Ecosystem + Security Hardening" -ForegroundColor Green
+Write-Host "============================================================" -ForegroundColor Green
+Write-Host ""
+Write-Host "Applied:" -ForegroundColor White
+Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
+Write-Host "  Step  2 - run_mirror.bat with /E flag (no delete mirroring)" -ForegroundColor Gray
+Write-Host "  Step  3 - cloud_sync.ps1 with firewall self-healing + 3-phase ACL (7d retention)" -ForegroundColor Gray
+Write-Host "  Step  4 - ACL: root(folder-only), Config+Logs+Evidence(recursive), .git liberated, Mirror unmanaged" -ForegroundColor Gray
+Write-Host "  Step  5 - DailySecurityCheck v8 + FolderSync-DailyCheck task + shortcut" -ForegroundColor Gray
+Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray
+Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor Gray
+Write-Host "  Step  8 - Screen auto-lock (5 min)" -ForegroundColor Gray
+Write-Host "  Step  9 - Firewall logging -> C:\Sync\Logs\firewall.log" -ForegroundColor Gray
+Write-Host "  Step 10 - FolderSync-CloudBackup task (SYSTEM)" -ForegroundColor Gray
+Write-Host "  Step 11 - FolderSync-Watchdog task (current user)" -ForegroundColor Gray
+Write-Host "  Step 12 - FolderSyncWatchdog NSSM service (installed, not started)" -ForegroundColor Gray
+Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)" -ForegroundColor Gray
+Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
+Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
+Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
+Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
+Write-Host ""
+Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
+Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
+Write-Host "  - BIOS password on Acer Nitro 5" -ForegroundColor Yellow
+Write-Host "  - Windows Hello PIN (resolve via Microsoft account portal)" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Ecosystem control:" -ForegroundColor Cyan
+Write-Host "  Start : powershell -ExecutionPolicy Bypass -File C:\Sync\Config\start_ecosystem.ps1" -ForegroundColor Cyan
+Write-Host "  Stop  : powershell -ExecutionPolicy Bypass -File C:\Sync\Config\stop_ecosystem.ps1" -ForegroundColor Cyan
+Write-Host "  Health: /project:health" -ForegroundColor Cyan
 Write-Host ""
 Read-Host "Press ENTER to close"
 ```
@@ -1814,7 +2530,7 @@ if ($relayProc) {
 }
 $cam2Reachable = Test-Connection -ComputerName "192.168.0.109" -Count 1 -Quiet -ErrorAction SilentlyContinue
 Write-Host "  C100 ping  : $(if ($cam2Reachable) { 'REACHABLE (192.168.0.109)' } else { 'UNREACHABLE — camera offline or IP changed?' })" -ForegroundColor $(if ($cam2Reachable) { 'Green' } else { 'Red' })
-$relayLog = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+$relayLog = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
 if (Test-Path $relayLog) {
     $lastLine = Get-Content $relayLog -Tail 1
     Write-Host "  Last log   : $lastLine"
@@ -1822,28 +2538,30 @@ if (Test-Path $relayLog) {
     Write-Host "  Relay log  : no log for today yet" -ForegroundColor Yellow
 }
 
+# =============================================================================
 Write-Host "`n=== CAMERA INPUT SUMMARY ===" -ForegroundColor Cyan
-Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2 (direct)  [ACTIVE]"
-Write-Host "  [CAM-2]  TP-LINK Tapo C100 (192.168.0.109)        ->  VLC relay -> Yawcam (http://127.0.0.1:8161/)  [ACTIVE]"
+Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2 (direct)"
+Write-Host "  [CAM-2]  TP-LINK Tapo C100 (192.168.0.109)        ->  VLC relay -> Yawcam (http://127.0.0.1:8161/)"
+Write-Host ""
 ```
 
 ---
 
 ### `C:\Sync\Config\cam2_relay.ps1`
-> CAM-2 VLC relay script. Reads credentials from `cam2.conf`, starts VLC as RTSP→MJPEG HTTP relay on `127.0.0.1:8161`. Monitors VLC process and restarts on death (30s interval). Logs to `C:\Sync\Logs\cam2_relay_YYYY-MM-DD.log`. Registered as `YawcamCam2Relay` registry Run entry (hidden, at login).
+> CAM-2 VLC relay script. Reads credentials from `cam2.conf`, starts VLC as RTSP->MJPEG HTTP relay on `127.0.0.1:8161`. Monitors VLC process and restarts on death (30s interval). Logs to `C:\Sync\Logs\camera\cam2_relay_YYYY-MM-DD.log`. Registered as `YawcamCam2Relay` registry Run entry (hidden, at login).
 
 ```powershell
 # cam2_relay.ps1
 # CAM-2 RTSP -> MJPEG HTTP relay for Yawcam
 # Reads credentials from cam2.conf, starts VLC relay on http://127.0.0.1:8161/
 # Registered as startup entry: HKCU:\...\Run\YawcamCam2Relay
-# Logs to C:\Sync\Logs\cam2_relay_YYYY-MM-DD.log
+# Logs to C:\Sync\Logs\camera\cam2_relay_YYYY-MM-DD.log
 
 $ConfFile  = "C:\Sync\Config\cam2.conf"
 $VlcExe    = "C:\Program Files\VideoLAN\VLC\vlc.exe"
 $RelayPort = 8161
 $RelayHost = "127.0.0.1"
-$LogFile   = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile   = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
 $CheckSecs = 30
 
 function Write-Log($msg) {
@@ -1899,9 +2617,9 @@ $vlcProc = Start-VlcRelay
 
 while ($true) {
     Start-Sleep -Seconds $CheckSecs
-    $LogFile = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+    $LogFile = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
     if ($vlcProc -eq $null -or $vlcProc.HasExited) {
-        Write-Log "WARN   VLC relay process died — restarting"
+        Write-Log "WARN   VLC relay process died  - restarting"
         $vlcProc = Start-VlcRelay
     }
 }
@@ -1980,24 +2698,37 @@ Start-Process powershell.exe -ArgumentList "-ExecutionPolicy Bypass -WindowStyle
 ---
 
 ### `C:\Sync\Config\health_check_all.ps1`
-> Combined FolderSync + Camera health check. Evaluates 8 FolderSync checks and 5 Camera checks against the healthy baseline independently, prints a structured OVERALL summary, writes to `C:\Sync\Logs\health_check_YYYY-MM-DD.log`. Exit 0 = all pass, Exit 1 = any fail. Called by `check_health.bat` and `/project:health`.
+> Combined FolderSync + Camera health check. Evaluates FolderSync and Camera checks against the healthy baseline independently, prints a structured OVERALL summary, writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log`. Exit 0 = all pass, Exit 1 = any fail. Called by `check_health.bat` and `/project:health`.
 
 ```powershell
 #Requires -Version 5.1
 $ErrorActionPreference = "SilentlyContinue"
-$LogFile     = "C:\Sync\Logs\health_check_$(Get-Date -Format yyyy-MM-dd).log"
+
+# -- Paths -----------------------------------------------------------------
+$LogFile     = "C:\Sync\Logs\ecosystem\health_check_$(Get-Date -Format yyyy-MM-dd).log"
 $CheckStatus = "C:\Sync\Config\check_status.ps1"
 $CheckCamera = "C:\Sync\Config\check_camera.ps1"
 
-function Write-Log($msg) { $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
+# -- Logging helpers -------------------------------------------------------
+function Write-Log($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
 function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
+function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 function Write-Fail($msg) { Write-Host "  FAIL $msg" -ForegroundColor Red }
 
+# -- Capture subscript output ----------------------------------------------
 function Invoke-ScriptCapture($ScriptPath) {
-    if (-not (Test-Path -LiteralPath $ScriptPath)) { return "[ERROR] Script not found: $ScriptPath" }
-    & powershell.exe -ExecutionPolicy Bypass -NonInteractive -File $ScriptPath 2>&1 | Out-String
+    if (-not (Test-Path -LiteralPath $ScriptPath)) {
+        return "[ERROR] Script not found: $ScriptPath"
+    }
+    $out = & powershell.exe -ExecutionPolicy Bypass -NonInteractive -File $ScriptPath 2>&1 | Out-String
+    return $out
 }
 
+# --------------------------------------------------------------------------
 Write-Step "Running FolderSync health sub-check..."
 Write-Log "--- BEGIN health_check_all.ps1 ---"
 $statusOut = Invoke-ScriptCapture $CheckStatus
@@ -2031,28 +2762,65 @@ if (-not (Get-Process -Name RealTimeSync -ErrorAction SilentlyContinue)) { $fsIs
 $rclonePath = "C:\Tools\Rclone\rclone.exe"
 if (-not (Test-Path -LiteralPath $rclonePath)) { $fsIssues += "Rclone binary: NOT FOUND" }
 else { $rv = & $rclonePath version 2>&1 | Select-Object -First 1; if ($rv -notmatch "rclone") { $fsIssues += "Rclone: bad version response" } }
-$todayLog = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format yyyy-MM-dd).log"
-if (-not (Test-Path -LiteralPath $todayLog)) { $fsIssues += "Cloud sync log today: NOT FOUND" }
+# Cloud sync log today: exists
+$todayLog = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Format yyyy-MM-dd).log"
+if (-not (Test-Path -LiteralPath $todayLog)) {
+    $fsIssues += "Cloud sync log today: NOT FOUND ($todayLog)"
+}
 
+# ==========================================================================
+# CAMERA BASELINE EVALUATION
+# ==========================================================================
 $camIssues = @()
-$yawProc = Get-Process -Name yawcam -ErrorAction SilentlyContinue
-$javawProc = Get-Process -Name javaw -ErrorAction SilentlyContinue
-if (-not $yawProc -and -not $javawProc) { $camIssues += "Yawcam process (yawcam or javaw): NOT RUNNING" }
-$monProc = Get-WmiObject Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -match "yawcam_monitor" }
-if (-not $monProc) { $camIssues += "Yawcam monitor process: NOT RUNNING" }
-$webcam = Get-PnpDevice -ErrorAction SilentlyContinue | Where-Object { $_.FriendlyName -match "camera|webcam|HD User Facing" -and $_.Class -eq "Camera" } | Select-Object -First 1
-if (-not $webcam) { $camIssues += "Webcam PnP device: NOT FOUND" }
-elseif ($webcam.Status -ne "OK") { $camIssues += "Webcam PnP device: Status = $($webcam.Status)" }
-$yawReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name Yawcam -ErrorAction SilentlyContinue
-if (-not $yawReg -or [string]::IsNullOrWhiteSpace($yawReg.Yawcam)) { $camIssues += "Registry Yawcam: NOT FOUND or empty" }
-$monReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name YawcamMonitor -ErrorAction SilentlyContinue
-if (-not $monReg -or [string]::IsNullOrWhiteSpace($monReg.YawcamMonitor)) { $camIssues += "Registry YawcamMonitor: NOT FOUND or empty" }
 
-$timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$fsPass = $fsIssues.Count -eq 0; $camPass = $camIssues.Count -eq 0; $overallPass = $fsPass -and $camPass
+# Yawcam process (yawcam or javaw): running
+$yawProc   = Get-Process -Name yawcam -ErrorAction SilentlyContinue
+$javawProc = Get-Process -Name javaw  -ErrorAction SilentlyContinue
+if (-not $yawProc -and -not $javawProc) {
+    $camIssues += "Yawcam process (yawcam or javaw): NOT RUNNING"
+}
+
+# Monitor process (powershell with yawcam_monitor): running
+$monProc = Get-WmiObject Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -match "yawcam_monitor" }
+if (-not $monProc) {
+    $camIssues += "Yawcam monitor process (powershell yawcam_monitor): NOT RUNNING"
+}
+
+# Webcam PnP device: Status = OK
+$webcam = Get-PnpDevice -ErrorAction SilentlyContinue |
+    Where-Object { $_.FriendlyName -match "camera|webcam|HD User Facing" -and $_.Class -eq "Camera" } |
+    Select-Object -First 1
+if (-not $webcam) {
+    $camIssues += "Webcam PnP device: NOT FOUND"
+} elseif ($webcam.Status -ne "OK") {
+    $camIssues += "Webcam PnP device: Status = $($webcam.Status) (expected OK)"
+}
+
+# Registry Yawcam: non-empty
+$yawReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name Yawcam -ErrorAction SilentlyContinue
+if (-not $yawReg -or [string]::IsNullOrWhiteSpace($yawReg.Yawcam)) {
+    $camIssues += "Registry Yawcam: NOT FOUND or empty"
+}
+
+# Registry YawcamMonitor: non-empty
+$monReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name YawcamMonitor -ErrorAction SilentlyContinue
+if (-not $monReg -or [string]::IsNullOrWhiteSpace($monReg.YawcamMonitor)) {
+    $camIssues += "Registry YawcamMonitor: NOT FOUND or empty"
+}
+
+# ==========================================================================
+# SUMMARY
+# ==========================================================================
+$timestamp   = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+$fsPass      = $fsIssues.Count -eq 0
+$camPass     = $camIssues.Count -eq 0
+$overallPass = $fsPass -and $camPass
+
 $fsLabel    = if ($fsPass)      { "PASS" } else { "FAIL -- $($fsIssues.Count) issue(s)" }
 $camLabel   = if ($camPass)     { "PASS" } else { "FAIL -- $($camIssues.Count) issue(s)" }
 $overallLbl = if ($overallPass) { "ALL SYSTEMS OPERATIONAL" } else { "$($fsIssues.Count + $camIssues.Count) ISSUE(S) FOUND" }
+
 $summaryLines = @(
     "============================================================",
     "  ECOSYSTEM HEALTH SUMMARY -- $timestamp",
@@ -2063,14 +2831,25 @@ $summaryLines = @(
     "  OVERALL     : $overallLbl",
     "============================================================"
 )
-Write-Host ""; foreach ($line in $summaryLines) { Write-Host $line }
-if (-not $fsPass)  { Write-Host "`n  FolderSync issues:" -ForegroundColor Red; foreach ($i in $fsIssues)  { Write-Fail "    $i" } }
-if (-not $camPass) { Write-Host "`n  Camera issues:" -ForegroundColor Red;     foreach ($i in $camIssues) { Write-Fail "    $i" } }
+
 Write-Host ""
+foreach ($line in $summaryLines) { Write-Host $line }
+
+if (-not $fsPass) {
+    Write-Host "`n  FolderSync issues:" -ForegroundColor Red
+    foreach ($issue in $fsIssues) { Write-Fail "    $issue" }
+}
+if (-not $camPass) {
+    Write-Host "`n  Camera issues:" -ForegroundColor Red
+    foreach ($issue in $camIssues) { Write-Fail "    $issue" }
+}
+Write-Host ""
+
 foreach ($line in $summaryLines) { Write-Log $line }
 if (-not $fsPass)  { foreach ($i in $fsIssues)  { Write-Log "  FOLDERSYNC ISSUE: $i" } }
 if (-not $camPass) { foreach ($i in $camIssues) { Write-Log "  CAMERA ISSUE: $i" } }
 Write-Log "--- END health_check_all.ps1 ---"
+
 if ($overallPass) { exit 0 } else { exit 1 }
 ```
 
@@ -2125,7 +2904,7 @@ pause
 #Requires -RunAsAdministrator
 # start_ecosystem.ps1 -- see full file in git for complete version
 $ErrorActionPreference = 'SilentlyContinue'
-$LogFile   = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile   = "C:\Sync\Logs\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $StateFile = "C:\Sync\Config\.ecosystem_state"
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
 function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
@@ -2147,7 +2926,7 @@ function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 #Requires -RunAsAdministrator
 # stop_ecosystem.ps1 -- see full file in git for complete version
 $ErrorActionPreference = 'SilentlyContinue'
-$LogFile   = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile   = "C:\Sync\Logs\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $StateFile = "C:\Sync\Config\.ecosystem_state"
 # Stops in reverse order: CAM-2 relay (VLC), Yawcam, RealTimeSync, scheduled tasks (disable),
 #   FolderSyncAuditor, FolderSyncWatchdog
@@ -2164,7 +2943,7 @@ $StateFile = "C:\Sync\Config\.ecosystem_state"
 #Requires -RunAsAdministrator
 # pause_camera.ps1
 $ErrorActionPreference = 'SilentlyContinue'
-$LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile    = "C:\Sync\Logs\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $PausedFlag = "C:\Sync\Config\.camera_paused"
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
 if (Test-Path $PausedFlag) { Write-Host "  WARN Camera already paused" -ForegroundColor Yellow; exit 0 }
@@ -2184,7 +2963,7 @@ Write-Host "  OK   Camera paused. Run resume_camera.ps1 to restart." -Foreground
 #Requires -RunAsAdministrator
 # resume_camera.ps1
 $ErrorActionPreference = 'SilentlyContinue'
-$LogFile    = "C:\Sync\Logs\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$LogFile    = "C:\Sync\Logs\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 $PausedFlag = "C:\Sync\Config\.camera_paused"
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
 if (-not (Test-Path $PausedFlag)) { Write-Host "  WARN .camera_paused flag not found -- camera may already be running" -ForegroundColor Yellow; exit 0 }
@@ -2252,7 +3031,7 @@ Start-Process powershell.exe `
 
 $RepoRoot = 'C:\Sync'
 $LogDir   = 'C:\Sync\Logs'
-$EcoLog   = "$LogDir\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
+$EcoLog   = "$LogDir\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').log"
 
 function Write-EcoLog($msg) {
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
