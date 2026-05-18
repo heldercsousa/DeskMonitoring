@@ -21,8 +21,8 @@ Start-Sleep -Seconds 2
 & $nssm set $svcName DisplayName   'Folder Sync Security Auditor'
 & $nssm set $svcName Description   'Monitors file changes, remote access, and service tampering for the FolderSync ecosystem.'
 & $nssm set $svcName Start         SERVICE_AUTO_START
-& $nssm set $svcName AppStdout     'C:\Sync\Logs\auditor_svc.log'
-& $nssm set $svcName AppStderr     'C:\Sync\Logs\auditor_svc_err.log'
+& $nssm set $svcName AppStdout     'C:\Sync\Logs\services\auditor_svc.log'
+& $nssm set $svcName AppStderr     'C:\Sync\Logs\services\auditor_svc_err.log'
 & $nssm set $svcName AppRotateFiles  1
 & $nssm set $svcName AppRotateBytes  2097152   # 2 MB
 

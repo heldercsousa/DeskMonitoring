@@ -519,8 +519,8 @@ if (Test-Path $nssm) {
     & $nssm set FolderSyncWatchdog DisplayName   'Folder Sync Watchdog Service'
     & $nssm set FolderSyncWatchdog Description   'Monitors and restarts folder sync processes (RealTimeSync + cloud backup task).'
     & $nssm set FolderSyncWatchdog Start          SERVICE_AUTO_START
-    & $nssm set FolderSyncWatchdog AppStdout      'C:\Sync\Logs\watchdog_svc.log'
-    & $nssm set FolderSyncWatchdog AppStderr      'C:\Sync\Logs\watchdog_svc_err.log'
+    & $nssm set FolderSyncWatchdog AppStdout      'C:\Sync\Logs\services\watchdog_svc.log'
+    & $nssm set FolderSyncWatchdog AppStderr      'C:\Sync\Logs\services\watchdog_svc_err.log'
     & $nssm set FolderSyncWatchdog AppRotateFiles  1
     & $nssm set FolderSyncWatchdog AppRotateBytes  1048576
     Write-OK "FolderSyncWatchdog service installed (start via start_ecosystem.ps1)"
@@ -541,8 +541,8 @@ if (Test-Path $nssm) {
     & $nssm set FolderSyncAuditor DisplayName   'Folder Sync Security Auditor'
     & $nssm set FolderSyncAuditor Description   'Monitors file changes, remote access, and service tampering.'
     & $nssm set FolderSyncAuditor Start          SERVICE_AUTO_START
-    & $nssm set FolderSyncAuditor AppStdout      'C:\Sync\Logs\auditor_svc.log'
-    & $nssm set FolderSyncAuditor AppStderr      'C:\Sync\Logs\auditor_svc_err.log'
+    & $nssm set FolderSyncAuditor AppStdout      'C:\Sync\Logs\services\auditor_svc.log'
+    & $nssm set FolderSyncAuditor AppStderr      'C:\Sync\Logs\services\auditor_svc_err.log'
     & $nssm set FolderSyncAuditor AppRotateFiles  1
     & $nssm set FolderSyncAuditor AppRotateBytes  2097152
     & $nssm set FolderSyncAuditor AppRestartDelay 30000

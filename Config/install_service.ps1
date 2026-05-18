@@ -11,8 +11,8 @@ $svcName = 'FolderSyncWatchdog'
 & $nssm set $svcName DisplayName 'Folder Sync Watchdog Service'
 & $nssm set $svcName Description 'Monitors and restarts folder sync processes (RealTimeSync + cloud backup task).'
 & $nssm set $svcName Start SERVICE_AUTO_START
-& $nssm set $svcName AppStdout 'C:\Sync\Logs\watchdog_svc.log'
-& $nssm set $svcName AppStderr 'C:\Sync\Logs\watchdog_svc_err.log'
+& $nssm set $svcName AppStdout 'C:\Sync\Logs\services\watchdog_svc.log'
+& $nssm set $svcName AppStderr 'C:\Sync\Logs\services\watchdog_svc_err.log'
 & $nssm set $svcName AppRotateFiles 1
 & $nssm set $svcName AppRotateBytes 1048576
 
