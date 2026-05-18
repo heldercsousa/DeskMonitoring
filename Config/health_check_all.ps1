@@ -98,7 +98,7 @@ if (-not (Test-Path -LiteralPath $rclonePath)) {
 }
 
 # Cloud sync log today: exists
-$todayLog = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format yyyy-MM-dd).log"
+$todayLog = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Format yyyy-MM-dd).log"
 if (-not (Test-Path -LiteralPath $todayLog)) {
     $fsIssues += "Cloud sync log today: NOT FOUND ($todayLog)"
 }

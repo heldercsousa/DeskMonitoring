@@ -46,7 +46,7 @@ Get-Content "C:\Sync\Config\rclone.conf" | ForEach-Object {
 }
 
 Write-Host "`n=== CLOUD SYNC STATUS (today) ==="
-$todayLog = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$todayLog = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 if (Test-Path $todayLog) {
     $syncLines = Get-Content $todayLog
     # Show last sync result
@@ -75,10 +75,10 @@ if (Test-Path $todayLog) {
 }
 
 Write-Host "`n=== LAST 5 LINES WATCHDOG LOG ==="
-Get-Content "C:\Sync\Logs\watchdog.log" -ErrorAction SilentlyContinue | Select-Object -Last 5
+Get-Content "C:\Sync\Logs\services\watchdog.log" -ErrorAction SilentlyContinue | Select-Object -Last 5
 
 Write-Host "`n=== LAST 5 LINES FILE AUDIT LOG (today) ==="
-$fileLog = "C:\Sync\Logs\file_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
+$fileLog = "C:\Sync\Logs\audit\file_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
 if (Test-Path $fileLog) {
     Get-Content $fileLog | Select-Object -Last 5
 } else {
@@ -86,7 +86,7 @@ if (Test-Path $fileLog) {
 }
 
 Write-Host "`n=== LAST 5 LINES SECURITY AUDIT LOG (today) ==="
-$secLog = "C:\Sync\Logs\security_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
+$secLog = "C:\Sync\Logs\security\security_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
 if (Test-Path $secLog) {
     Get-Content $secLog | Select-Object -Last 5
 } else {
