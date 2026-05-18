@@ -110,7 +110,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | File | Used by | Purpose |
 |---|---|---|
 | `rclone.conf` | `cloud_sync.ps1` | Rclone B2 remote definition + API key |
-| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup + self-healing firewall+DNS attack detection (2026-03-15) |
+| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup (7-day) + source folder retention (7-day, date-name based) + self-healing firewall+DNS attack detection (2026-03-15) |
 | `cloud_sync.bat` | Manual trigger | Same as .ps1 but via cmd (manual use only) |
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
@@ -535,14 +535,14 @@ hard_delete = false
 ---
 
 ### `C:\Sync\Config\cloud_sync.ps1`
-> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, 3-phase ACL protection (7 days), log rotation (30 days), mirror cleanup. Logs to `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log`.
-> Last updated: 2026-03-07
+> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, 3-phase ACL protection (7 days), source folder retention (7 days, date-name based), log rotation (30 days), mirror cleanup. Logs to `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log`.
+> Last updated: 2026-05-17
 
 ```powershell
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
-# Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
+# Manages Mirror cleanup, Source folder retention, and Log rotation automatically.
+# Last updated: 2026-05-17 - Added FASE 3 source folder 7-day retention
 
 $Rclone           = 'C:\Tools\Rclone\rclone.exe'
 $Config           = 'C:\Sync\Config\rclone.conf'
@@ -766,12 +766,34 @@ if (Test-Path $Mirror) {
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
-# 4. cloud_sync log rotation
+# ============================================================
+# FASE 3 - Source folder retention
+# Delete date-named subdirs in $Source older than $DaysToKeepMirror calendar days.
+# Uses folder NAME as date (yyyy-MM-dd), ignoring file timestamps entirely,
+# so whole-day folders are removed in one sync cycle with no B2 churn.
+# ============================================================
+$sourceThreshold = (Get-Date).Date.AddDays(-$DaysToKeepMirror)
+Get-ChildItem -LiteralPath $Source -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+    $folderDate = $null
+    $parsed = [datetime]::TryParseExact(
+        $_.Name,
+        'yyyy-MM-dd',
+        [System.Globalization.CultureInfo]::InvariantCulture,
+        [System.Globalization.DateTimeStyles]::None,
+        [ref]$folderDate
+    )
+    if ($parsed -and $folderDate -lt $sourceThreshold) {
+        Remove-Item -LiteralPath $_.FullName -Recurse -Force -ErrorAction SilentlyContinue
+        Write-SyncLog "SOURCE-CLEANUP  Deleted $($_.Name)"
+    }
+}
+
+# 4. cloud_sync log rotation - delete logs older than DaysToKeepLogs
 Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
-# 5. mirror log rotation
+# 5. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
 Get-ChildItem -Path 'C:\Sync\Logs\mirror' -Filter "mirror_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
