@@ -8,7 +8,7 @@ $Config           = 'C:\Sync\Config\rclone.conf'
 $Source           = 'C:\Users\helde\Repos\Bois'
 $Remote           = 'cloudsync:helder-sync-mirror'
 $Mirror           = 'C:\Sync\Mirror'
-$LogDir           = 'C:\Sync\Logs'
+$LogDir           = 'C:\Sync\Logs\cloud_sync'
 $Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
 $DaysToKeepMirror = 7
 $DaysToKeepLogs   = 30
@@ -217,7 +217,7 @@ Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
 # 5. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
-Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
+Get-ChildItem -Path 'C:\Sync\Logs\mirror' -Filter "mirror_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
