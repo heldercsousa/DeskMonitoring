@@ -442,11 +442,11 @@ Write-OK "Auto-lock: 5 minutes, password required on wake"
 Write-Step "Step 9 - Windows Firewall logging"
 netsh advfirewall set allprofiles logging droppedconnections enable | Out-Null
 netsh advfirewall set allprofiles logging allowedconnections enable | Out-Null
-netsh advfirewall set allprofiles logging filename "C:\Sync\Logs\firewall.log" | Out-Null
+netsh advfirewall set allprofiles logging filename "C:\Sync\Logs\security\firewall.log" | Out-Null
 netsh advfirewall set allprofiles logging maxfilesize 8192 | Out-Null
 Start-Sleep -Seconds 1
-if (Test-Path "C:\Sync\Logs\firewall.log") {
-    icacls "C:\Sync\Logs\firewall.log" /grant:r "${currentUser}:(R)" | Out-Null
+if (Test-Path "C:\Sync\Logs\security\firewall.log") {
+    icacls "C:\Sync\Logs\security\firewall.log" /grant:r "${currentUser}:(R)" | Out-Null
     Write-OK "Firewall logging active + read permission set"
 } else {
     Write-OK "Firewall logging active (log created on first connection)"
