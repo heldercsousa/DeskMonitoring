@@ -20,7 +20,7 @@ function Write-Log($msg) {
 # Read credentials from cam2.conf
 # ---------------------------------------------------------------------------
 if (-not (Test-Path $ConfFile)) {
-    Write-Log "FAIL  cam2.conf not found at $ConfFile — relay cannot start"
+    Write-Log "FAIL  cam2.conf not found at $ConfFile  - relay cannot start"
     exit 1
 }
 
@@ -49,7 +49,7 @@ Write-Log "START  CAM-2 relay starting  ->  http://${RelayHost}:${RelayPort}/"
 Write-Log "INFO   Source: rtsp://${user}:***@${ip}:${port}/${stream}"
 
 # ---------------------------------------------------------------------------
-# Relay loop — start VLC, monitor, restart on death
+# Relay loop  - start VLC, monitor, restart on death
 # ---------------------------------------------------------------------------
 $vlcProc = $null
 
@@ -72,10 +72,10 @@ while ($true) {
     Start-Sleep -Seconds $CheckSecs
 
     # Roll log file at midnight
-    $LogFile = "C:\Sync\Logs\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+    $LogFile = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
 
     if ($vlcProc -eq $null -or $vlcProc.HasExited) {
-        Write-Log "WARN   VLC relay process died — restarting"
+        Write-Log "WARN   VLC relay process died  - restarting"
         $vlcProc = Start-VlcRelay
     }
 }
