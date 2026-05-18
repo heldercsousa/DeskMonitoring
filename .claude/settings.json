@@ -6,10 +6,13 @@
       "Bash(git log*)",
       "Bash(git add*)",
       "Bash(git commit*)",
-      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\check_status.ps1\")",
-      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\check_camera.ps1\")",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\check_*\")",
       "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-ScheduledTask*\")",
-      "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-Service*\")"
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-Service*\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-Process*\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-NetFirewallRule*\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Get-PnpDevice*\")",
+      "Bash(git push *)"
     ],
     "deny": [
       "Bash(* rclone.conf *)",

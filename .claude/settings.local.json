@@ -76,7 +76,14 @@
       "Bash(cat > /tmp/parse3.ps1 << 'EOF'\n$e = $null; $t = $null\n[System.Management.Automation.Language.Parser]::ParseFile\\('C:\\\\Sync\\\\Config\\\\start_ecosystem.ps1',[ref]$t,[ref]$e\\) | Out-Null\n\"Errors: $\\($e.Count\\)\"\nEOF\npowershell -ExecutionPolicy Bypass -File /tmp/parse3.ps1)",
       "Bash(git -C \"C:\\\\Sync\" add \"Config/start_ecosystem.ps1\" \"Config/ECOSYSTEM_REPORT.md\" \"Evidence/2026-03-15_P3-camera-failure.md\" && git -C \"C:\\\\Sync\" commit -m \"$\\(cat <<'EOF'\nfix\\(start_ecosystem\\): correct Yawcam/CAM-2 startup detection\n\nYawcam runs as javaw not 'yawcam' process - added javaw fallback\ncheck after startup and increased wait 3s->8s for JVM startup.\nCAM-2 relay wait increased 2s->5s for VLC RTSP connection chain.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git -C \"C:\\\\Sync\" push)",
       "Bash(git -C \"C:\\\\Sync\" add \"Evidence/2026-03-15_MASTER-incident-report.md\" \"Evidence/2026-03-15_P4-tasks-registration.md\" && git -C \"C:\\\\Sync\" commit -m \"$\\(cat <<'EOF'\nevidence: close P4 \\(tasks OK\\) + finalize master incident report 2026-03-15\n\nAll 4 priorities resolved. P1 DNS fix, P2 detection patch, P3 startup\ntiming fix, P4 tasks already in Ready state. Manual action needed:\nrouter DHCP investigation.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git -C \"C:\\\\Sync\" push)",
-      "Bash(git -C \"C:\\\\Sync\" add \"Evidence/2026-03-15_PHYSICAL-TAMPERING-router.md\" && git -C \"C:\\\\Sync\" commit -m \"$\\(cat <<'EOF'\nevidence\\(CRITICAL\\): physical router tampering - reset button glued\n\nAttacker physically accessed router and disabled reset button with glue\nto prevent factory reset remediation. Confirms premeditated targeted\nattack. Ethernet LAN fully compromised. See evidence file for full\nimpact assessment and required manual actions.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git -C \"C:\\\\Sync\" push)"
+      "Bash(git -C \"C:\\\\Sync\" add \"Evidence/2026-03-15_PHYSICAL-TAMPERING-router.md\" && git -C \"C:\\\\Sync\" commit -m \"$\\(cat <<'EOF'\nevidence\\(CRITICAL\\): physical router tampering - reset button glued\n\nAttacker physically accessed router and disabled reset button with glue\nto prevent factory reset remediation. Confirms premeditated targeted\nattack. Ethernet LAN fully compromised. See evidence file for full\nimpact assessment and required manual actions.\n\nCo-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git -C \"C:\\\\Sync\" push)",
+      "mcp__claude_ai_Malwarebytes__reputation-check_link",
+      "Skill(superpowers:using-superpowers)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:executing-plans)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:verification-before-completion)"
     ]
   }
 }
