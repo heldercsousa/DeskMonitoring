@@ -211,6 +211,28 @@ if (Test-Path $Mirror) {
         Remove-Item -Force -ErrorAction SilentlyContinue
 }
 
+# ============================================================
+# FASE 3 - Source folder retention
+# Delete date-named subdirs in $Source older than $DaysToKeepMirror calendar days.
+# Uses folder NAME as date (yyyy-MM-dd), ignoring file timestamps entirely,
+# so whole-day folders are removed in one sync cycle with no B2 churn.
+# ============================================================
+$sourceThreshold = (Get-Date).Date.AddDays(-$DaysToKeepMirror)
+Get-ChildItem -LiteralPath $Source -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+    $folderDate = $null
+    $parsed = [datetime]::TryParseExact(
+        $_.Name,
+        'yyyy-MM-dd',
+        [System.Globalization.CultureInfo]::InvariantCulture,
+        [System.Globalization.DateTimeStyles]::None,
+        [ref]$folderDate
+    )
+    if ($parsed -and $folderDate -lt $sourceThreshold) {
+        Remove-Item -LiteralPath $_.FullName -Recurse -Force -ErrorAction SilentlyContinue
+        Write-SyncLog "SOURCE-CLEANUP  Deleted $($_.Name)"
+    }
+}
+
 # 4. cloud_sync log rotation - delete logs older than DaysToKeepLogs
 Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
