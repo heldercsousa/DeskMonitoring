@@ -1,0 +1,10 @@
+2026-05-18 22:52:39  ECOSYSTEM-START  Starting all ecosystem components
+2026-05-18 22:52:39  ECOSYSTEM-START  FolderSyncWatchdog running
+2026-05-18 22:52:39  ECOSYSTEM-START  FolderSyncAuditor running
+2026-05-18 22:52:44  ECOSYSTEM-START  Task FolderSync-CloudBackup state: Ready
+2026-05-18 22:52:45  ECOSYSTEM-START  Task FolderSync-Watchdog state: Disabled
+2026-05-18 22:52:46  ECOSYSTEM-START  Task FolderSync-DailyCheck state: Disabled
+2026-05-18 22:52:48  ECOSYSTEM-START  RealTimeSync started
+2026-05-18 22:52:56  ECOSYSTEM-START  WARN Yawcam did not start
+2026-05-18 22:53:01  ECOSYSTEM-START  CAM-2 relay started
+2026-05-18 22:53:01  ECOSYSTEM-START  State set to running
