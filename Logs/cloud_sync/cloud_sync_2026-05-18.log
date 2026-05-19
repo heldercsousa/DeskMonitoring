@@ -126,3 +126,39 @@
 2026/05/18 23:23:57 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
 2026-05-18 23:23:57  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
 2026-05-18 23:23:59  SYNC-END  Cloud sync run complete
+2026-05-18 23:50:57  SYNC-START  Beginning cloud sync run
+2026-05-18 23:51:11  SYNC-START  Beginning cloud sync run
+2026/05/18 23:51:14 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:51:14  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:51:19  SYNC-END  Cloud sync run complete
+2026/05/18 23:51:26 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:51:26  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:51:27  SYNC-END  Cloud sync run complete
+2026-05-18 23:54:16  SYNC-START  Beginning cloud sync run
+2026/05/18 23:54:31 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:54:31  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:54:33  SYNC-END  Cloud sync run complete
+2026-05-18 23:55:09  SYNC-START  Beginning cloud sync run
+2026/05/18 23:55:24 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:55:24  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:55:26  SYNC-END  Cloud sync run complete
+2026-05-18 23:55:48  SYNC-START  Beginning cloud sync run
+2026/05/18 23:56:05 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:56:05  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:56:07  SYNC-END  Cloud sync run complete
+2026-05-18 23:56:20  SYNC-START  Beginning cloud sync run
+2026/05/18 23:56:37 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:56:37  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:56:39  SYNC-END  Cloud sync run complete
+2026-05-18 23:56:41  SYNC-START  Beginning cloud sync run
+2026/05/18 23:56:56 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:56:56  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:56:57  SYNC-END  Cloud sync run complete
+2026-05-18 23:57:02  SYNC-START  Beginning cloud sync run
+2026-05-18 23:57:16  SYNC-START  Beginning cloud sync run
+2026/05/18 23:57:25 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:57:25  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:57:29  SYNC-END  Cloud sync run complete
+2026/05/18 23:57:33 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-05-18 23:57:33  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-05-18 23:57:34  SYNC-END  Cloud sync run complete
