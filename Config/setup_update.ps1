@@ -626,6 +626,60 @@ Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -T
 Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, daily 23:30)"
 
 # =============================================================================
+# STEP 18 - FolderSync-PowerCheck task (SYSTEM, every 1h + AtLogon + AtBoot)
+# Registers check_power_motion.ps1 to audit and auto-heal power settings
+# =============================================================================
+Write-Step "Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)"
+
+$taskXml18 = @'
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <TimeTrigger>
+      <Repetition><Interval>PT1H</Interval><Duration>P1D</Duration><StopAtDurationEnd>false</StopAtDurationEnd></Repetition>
+      <StartBoundary>2026-01-01T00:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+    <LogonTrigger><Enabled>true</Enabled></LogonTrigger>
+    <BootTrigger><Enabled>true</Enabled></BootTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <Hidden>true</Hidden>
+    <ExecutionTimeLimit>PT5M</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions>
+    <Exec>
+      <Command>powershell.exe</Command>
+      <Arguments>-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\check_power_motion.ps1</Arguments>
+    </Exec>
+  </Actions>
+</Task>
+'@
+
+Unregister-ScheduledTask -TaskName "FolderSync-PowerCheck" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-PowerCheck" -Xml $taskXml18 -Force | Out-Null
+Write-OK "Task FolderSync-PowerCheck registered (SYSTEM, hourly + AtLogon + AtBoot)"
+
+# Apply power settings immediately on reinstall
+Write-Step "Step 18b - Apply motion-detection power settings (fix_power_motion.ps1)"
+try {
+    & powershell.exe -ExecutionPolicy Bypass -File "$scriptDir\fix_power_motion.ps1"
+    Write-OK "Power settings applied (Balanced plan, USB Suspend disabled, sleep/hibernate Never)"
+} catch {
+    Write-Warn "fix_power_motion.ps1 failed: $_ - run manually after setup"
+}
+
+# =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
 # =============================================================================
 if ($wasRunning) {
@@ -663,6 +717,8 @@ Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor 
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
 Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
+Write-Host "  Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)" -ForegroundColor Gray
+Write-Host "  Step 18b- Power settings applied (Balanced plan, USB Suspend disabled)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
