@@ -1,11 +1,21 @@
 #Requires -RunAsAdministrator
 # =============================================================================
-# setup_all.ps1 v2
-# Centralized setup for FolderSync Ecosystem + Security Hardening
-# Works on any Windows machine - detects current user automatically
-# Run as Administrator from C:\Sync\Config\
-# Place alongside: DailySecurityCheck.ps1, AutoCleanup.ps1
+# setup_all.ps1 v2  **DEPRECATED — DO NOT RUN**
+#
+# Use setup_update.ps1 (v3) instead. It is state-aware and includes all
+# steps added after 2026-03-07 (FolderSync-PowerCheck, fix_power_motion,
+# GitCommitLogs, CAM-2 relay, auto_commit_logs, etc.).
+#
+# This file is kept for historical reference only.
+# Running it on a live system WILL overwrite or miss recent configurations.
 # =============================================================================
+Write-Host ""
+Write-Host "  *** DEPRECATED SCRIPT ***" -ForegroundColor Red
+Write-Host "  setup_all.ps1 v2 is obsolete. Use setup_update.ps1 (v3) instead." -ForegroundColor Red
+Write-Host "  Run: powershell -ExecutionPolicy Bypass -File C:\Sync\Config\setup_update.ps1" -ForegroundColor Yellow
+Write-Host ""
+Read-Host "Press ENTER to abort (or Ctrl+C to force-exit)"
+exit 1
 
 $ErrorActionPreference = 'SilentlyContinue'
 $currentUser     = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
