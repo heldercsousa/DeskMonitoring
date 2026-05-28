@@ -132,6 +132,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
 | `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: switches to Balanced plan, disables USB Selective Suspend (AC+DC), sleep/hibernate=Never, display=600s AC |
+| `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s; logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
 | `auto_commit_logs.ps1` | Task `FolderSync-GitCommitLogs` (daily 23:30) | Commits dirty Logs/ files to git; skips if nothing changed or git is locked; logs to `ecosystem_YYYY-MM-DD.log` |
 | `ECOSYSTEM_REPORT.md` | — | This document |
 
@@ -473,6 +474,102 @@ icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q  # Users
 
 ---
 
+### `C:\Sync\Config\check_power_motion.ps1`
+> Hourly audit + auto-heal of power settings required for motion detection.
+> Run by Task Scheduler (`FolderSync-PowerCheck`) as SYSTEM, every 1h + AtLogon + AtStartup. `#Requires -RunAsAdministrator`.
+> Checks: active plan (not SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display AC>=600s.
+> Logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`.
+> Log prefixes: `POWER-CHECK-START`, `POWER-OK`, `POWER-ANOMALY`, `POWER-CORRECTED`, `POWER-CHECK-END`.
+
+```powershell
+#Requires -RunAsAdministrator
+# check_power_motion.ps1 - hourly audit + auto-heal of power settings required for motion detection
+# Idempotent: safe to run multiple times
+# Scheduled Task: FolderSync-PowerCheck (every 1h, SYSTEM, RunLevel Highest)
+
+$ErrorActionPreference = 'SilentlyContinue'
+
+$LogDir  = "C:\Sync\Logs\power_check"
+$LogFile = "$LogDir\power_check_$(Get-Date -Format 'yyyy-MM-dd').log"
+
+if (-not (Test-Path $LogDir)) {
+    New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
+}
+
+function Write-Log($msg) {
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
+
+# GUIDs
+$USB_SG    = '2a737441-1930-4402-8d77-b2bebba308a3'
+$USB_SET   = '48e6b7a6-50f5-4782-a5d4-53bb8f07e226'
+$SLEEP_SG  = '238c9fa8-0aad-41ed-83f4-97be242c8f20'
+$SLEEP_SET = '29f6c1db-86da-48c5-9fdb-f2b67b1f44da'
+$HIB_SET   = '9d7815a6-7ee4-497e-8888-515a05f02364'
+$DISP_SG   = '7516b95f-f776-4464-8c53-06167f40cc99'
+$DISP_SET  = '3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e'
+$SCHEME_MAX = 'a1841308-3541-4fab-bc81-f71556f20b4a'
+
+Write-Log "POWER-CHECK-START"
+
+$anyAnomaly = $false
+
+function Get-PowerSetting {
+    param($SubGroup, $Setting, $AcOrDc)
+    $output = powercfg /query SCHEME_CURRENT $SubGroup $Setting 2>$null
+    if (-not $output) { return $null }
+    $label = if ($AcOrDc -eq 'AC') { 'Current AC Power Setting Index' } else { 'Current DC Power Setting Index' }
+    $line = $output | Where-Object { $_ -match $label }
+    if (-not $line) { return $null }
+    if ($line -match '0x([0-9a-fA-F]+)') { return [Convert]::ToInt64($Matches[1], 16) }
+    return $null
+}
+
+$activeLine = powercfg /getactivescheme 2>$null
+if ($activeLine -match $SCHEME_MAX) {
+    Write-Log "POWER-ANOMALY  Active plan is Power Saver (SCHEME_MAX) - switching to Balanced"
+    $anyAnomaly = $true
+    powercfg /setactive SCHEME_BALANCED 2>$null
+    Write-Log "POWER-CORRECTED  Active plan set to SCHEME_BALANCED"
+} else { Write-Log "POWER-OK  Active plan is not Power Saver" }
+
+foreach ($cfg in @(
+    @{SG=$USB_SG;  SET=$USB_SET;  AC='AC'; label='USB Selective Suspend AC'; cmd='setacvalueindex'},
+    @{SG=$USB_SG;  SET=$USB_SET;  AC='DC'; label='USB Selective Suspend DC'; cmd='setdcvalueindex'},
+    @{SG=$SLEEP_SG;SET=$SLEEP_SET;AC='AC'; label='Sleep AC';                 cmd='setacvalueindex'},
+    @{SG=$SLEEP_SG;SET=$SLEEP_SET;AC='DC'; label='Sleep DC';                 cmd='setdcvalueindex'},
+    @{SG=$SLEEP_SG;SET=$HIB_SET;  AC='AC'; label='Hibernate AC';             cmd='setacvalueindex'},
+    @{SG=$SLEEP_SG;SET=$HIB_SET;  AC='DC'; label='Hibernate DC';             cmd='setdcvalueindex'}
+)) {
+    $val = Get-PowerSetting -SubGroup $cfg.SG -Setting $cfg.SET -AcOrDc $cfg.AC
+    if ($val -ne $null -and $val -ne 0) {
+        Write-Log "POWER-ANOMALY  $($cfg.label) = $val (expected 0)"
+        $anyAnomaly = $true
+        powercfg /$($cfg.cmd) SCHEME_CURRENT $cfg.SG $cfg.SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  $($cfg.label) set to 0"
+    } else { Write-Log "POWER-OK  $($cfg.label) = 0" }
+}
+
+$dispAC = Get-PowerSetting -SubGroup $DISP_SG -Setting $DISP_SET -AcOrDc 'AC'
+if ($dispAC -ne $null -and $dispAC -lt 600) {
+    Write-Log "POWER-ANOMALY  Display timeout AC = $dispAC seconds (expected >= 600)"
+    $anyAnomaly = $true
+    powercfg /setacvalueindex SCHEME_CURRENT $DISP_SG $DISP_SET 600 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  Display timeout AC set to 600"
+} else { Write-Log "POWER-OK  Display timeout AC = $dispAC (>= 600)" }
+
+if (-not $anyAnomaly) {
+    Write-Log "POWER-CHECK-END  ALL_OK - no anomalies detected"
+} else {
+    Write-Log "POWER-CHECK-END  anomalies detected and corrected"
+}
+```
+
+---
+
 ### `C:\Sync\Config\fix_power_motion.ps1`
 > Restores Windows power settings required for continuous motion detection.
 > Run as Administrator. Idempotent. Switches plan to Balanced, disables USB Selective Suspend (AC+DC), sets sleep/hibernate to Never, display timeout to 600s AC / 120s DC.
@@ -553,6 +650,164 @@ powercfg /setactive SCHEME_CURRENT
 
 Write-Host ""
 Write-Host "=== Repair complete ===" -ForegroundColor Green
+```
+
+---
+
+### `C:\Sync\Config\check_power_motion.ps1`
+> Hourly audit + auto-heal of power settings required for continuous motion detection (Yawcam webcam).
+> Run by Task `FolderSync-PowerCheck` as SYSTEM (every 1h + AtLogon + AtBoot). Requires Administrator.
+> Checks: active plan not SCHEME_MAX, USB Selective Suspend=0 AC+DC, Sleep/Hibernate=0 AC+DC, Display AC>=600s.
+> Logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`. Created 2026-05-28 after power settings manipulation detected.
+
+```powershell
+#Requires -RunAsAdministrator
+# check_power_motion.ps1 - hourly audit + auto-heal of power settings required for motion detection
+# Idempotent: safe to run multiple times
+# Scheduled Task: FolderSync-PowerCheck (every 1h, SYSTEM, RunLevel Highest)
+
+$ErrorActionPreference = 'SilentlyContinue'
+
+$LogDir  = "C:\Sync\Logs\power_check"
+$LogFile = "$LogDir\power_check_$(Get-Date -Format 'yyyy-MM-dd').log"
+
+if (-not (Test-Path $LogDir)) {
+    New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
+}
+
+function Write-Log($msg) {
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
+
+# GUIDs
+$USB_SG   = '2a737441-1930-4402-8d77-b2bebba308a3'
+$USB_SET  = '48e6b7a6-50f5-4782-a5d4-53bb8f07e226'
+$SLEEP_SG = '238c9fa8-0aad-41ed-83f4-97be242c8f20'
+$SLEEP_SET = '29f6c1db-86da-48c5-9fdb-f2b67b1f44da'
+$HIB_SET  = '9d7815a6-7ee4-497e-8888-515a05f02364'
+$DISP_SG  = '7516b95f-f776-4464-8c53-06167f40cc99'
+$DISP_SET = '3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e'
+$SCHEME_MAX     = 'a1841308-3541-4fab-bc81-f71556f20b4a'
+
+Write-Log "POWER-CHECK-START"
+
+$anyAnomaly = $false
+
+# --- Helper: read a powercfg setting index value ---
+function Get-PowerSetting {
+    param($SubGroup, $Setting, $AcOrDc)
+    # AcOrDc: 'AC' or 'DC'
+    $output = powercfg /query SCHEME_CURRENT $SubGroup $Setting 2>$null
+    if (-not $output) { return $null }
+    $label = if ($AcOrDc -eq 'AC') { 'Current AC Power Setting Index' } else { 'Current DC Power Setting Index' }
+    $line = $output | Where-Object { $_ -match $label }
+    if (-not $line) { return $null }
+    if ($line -match '0x([0-9a-fA-F]+)') { return [Convert]::ToInt64($Matches[1], 16) }
+    return $null
+}
+
+# --- 1. Active power plan ---
+$activeLine = powercfg /getactivescheme 2>$null
+$isSchemeMax = $activeLine -match $SCHEME_MAX
+if ($isSchemeMax) {
+    Write-Log "POWER-ANOMALY  Active plan is Power Saver (SCHEME_MAX) - switching to Balanced"
+    $anyAnomaly = $true
+    powercfg /setactive SCHEME_BALANCED 2>$null
+    Write-Log "POWER-CORRECTED  Active plan set to SCHEME_BALANCED"
+} else {
+    Write-Log "POWER-OK  Active plan is not Power Saver"
+}
+
+# --- 2. USB Selective Suspend AC ---
+$usbAC = Get-PowerSetting -SubGroup $USB_SG -Setting $USB_SET -AcOrDc 'AC'
+if ($usbAC -ne $null -and $usbAC -ne 0) {
+    Write-Log "POWER-ANOMALY  USB Selective Suspend AC = $usbAC (expected 0)"
+    $anyAnomaly = $true
+    powercfg /setacvalueindex SCHEME_CURRENT $USB_SG $USB_SET 0 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  USB Selective Suspend AC set to 0"
+} else {
+    Write-Log "POWER-OK  USB Selective Suspend AC = 0"
+}
+
+# --- 3. USB Selective Suspend DC ---
+$usbDC = Get-PowerSetting -SubGroup $USB_SG -Setting $USB_SET -AcOrDc 'DC'
+if ($usbDC -ne $null -and $usbDC -ne 0) {
+    Write-Log "POWER-ANOMALY  USB Selective Suspend DC = $usbDC (expected 0)"
+    $anyAnomaly = $true
+    powercfg /setdcvalueindex SCHEME_CURRENT $USB_SG $USB_SET 0 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  USB Selective Suspend DC set to 0"
+} else {
+    Write-Log "POWER-OK  USB Selective Suspend DC = 0"
+}
+
+# --- 4. Sleep after AC ---
+$sleepAC = Get-PowerSetting -SubGroup $SLEEP_SG -Setting $SLEEP_SET -AcOrDc 'AC'
+if ($sleepAC -ne $null -and $sleepAC -ne 0) {
+    Write-Log "POWER-ANOMALY  Sleep AC = $sleepAC seconds (expected 0)"
+    $anyAnomaly = $true
+    powercfg /setacvalueindex SCHEME_CURRENT $SLEEP_SG $SLEEP_SET 0 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  Sleep AC set to 0"
+} else {
+    Write-Log "POWER-OK  Sleep AC = 0"
+}
+
+# --- 5. Sleep after DC ---
+$sleepDC = Get-PowerSetting -SubGroup $SLEEP_SG -Setting $SLEEP_SET -AcOrDc 'DC'
+if ($sleepDC -ne $null -and $sleepDC -ne 0) {
+    Write-Log "POWER-ANOMALY  Sleep DC = $sleepDC seconds (expected 0)"
+    $anyAnomaly = $true
+    powercfg /setdcvalueindex SCHEME_CURRENT $SLEEP_SG $SLEEP_SET 0 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  Sleep DC set to 0"
+} else {
+    Write-Log "POWER-OK  Sleep DC = 0"
+}
+
+# --- 6. Hibernate after AC ---
+$hibAC = Get-PowerSetting -SubGroup $SLEEP_SG -Setting $HIB_SET -AcOrDc 'AC'
+if ($hibAC -ne $null -and $hibAC -ne 0) {
+    Write-Log "POWER-ANOMALY  Hibernate AC = $hibAC seconds (expected 0)"
+    $anyAnomaly = $true
+    powercfg /setacvalueindex SCHEME_CURRENT $SLEEP_SG $HIB_SET 0 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  Hibernate AC set to 0"
+} else {
+    Write-Log "POWER-OK  Hibernate AC = 0"
+}
+
+# --- 7. Hibernate after DC ---
+$hibDC = Get-PowerSetting -SubGroup $SLEEP_SG -Setting $HIB_SET -AcOrDc 'DC'
+if ($hibDC -ne $null -and $hibDC -ne 0) {
+    Write-Log "POWER-ANOMALY  Hibernate DC = $hibDC seconds (expected 0)"
+    $anyAnomaly = $true
+    powercfg /setdcvalueindex SCHEME_CURRENT $SLEEP_SG $HIB_SET 0 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  Hibernate DC set to 0"
+} else {
+    Write-Log "POWER-OK  Hibernate DC = 0"
+}
+
+# --- 8. Display timeout AC (must be >= 600s = 0x258) ---
+$dispAC = Get-PowerSetting -SubGroup $DISP_SG -Setting $DISP_SET -AcOrDc 'AC'
+if ($dispAC -ne $null -and $dispAC -lt 600) {
+    Write-Log "POWER-ANOMALY  Display timeout AC = $dispAC seconds (expected >= 600)"
+    $anyAnomaly = $true
+    powercfg /setacvalueindex SCHEME_CURRENT $DISP_SG $DISP_SET 600 2>$null
+    powercfg /setactive SCHEME_CURRENT 2>$null
+    Write-Log "POWER-CORRECTED  Display timeout AC set to 600"
+} else {
+    Write-Log "POWER-OK  Display timeout AC = $dispAC (>= 600)"
+}
+
+if (-not $anyAnomaly) {
+    Write-Log "POWER-CHECK-END  ALL_OK - no anomalies detected"
+} else {
+    Write-Log "POWER-CHECK-END  anomalies detected and corrected"
+}
 ```
 
 ---
