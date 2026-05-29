@@ -1,0 +1,123 @@
+Config/cloud_sync.ps1 | 45 +++++++--------------------------------------
+ Config/run_mirror.bat |  2 +-
+ 2 files changed, 8 insertions(+), 39 deletions(-)
+
+--- Changes ---
+
+Config/cloud_sync.ps1
+  @@ -1,4 +1,4 @@
+  -# cloud_sync.ps1
+  +﻿# cloud_sync.ps1
+   # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
+   # Manages Mirror cleanup and Log rotation automatically.
+   # Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
+  @@ -8,7 +8,7 @@ $Config           = 'C:\Sync\Config\rclone.conf'
+  -$LogDir           = 'C:\Sync\Logs\cloud_sync'
+  +$LogDir           = 'C:\Sync\Logs'
+   $Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+   $DaysToKeepMirror = 7
+   $DaysToKeepLogs   = 30
+  @@ -124,7 +124,6 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
+  -# Protege cada arquivo que ainda nao atingiu 7 dias de idade
+   # ============================================================
+   if (Test-Path $Mirror) {
+       $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+  @@ -135,7 +134,6 @@ if (Test-Path $Mirror) {
+  -                # Verificar se ja tem ACL Deny Delete (evitar duplicado)
+                   $hasDeny = $acl.Access | Where-Object {
+                       $_.AccessControlType -eq 'Deny' -and
+                       $_.IdentityReference -like '*Everyone*' -and
+  @@ -143,7 +141,6 @@ if (Test-Path $Mirror) {
+  -                    # Aplicar ACL Deny Delete
+                       $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+                           [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
+                           'Delete',
+  @@ -155,15 +152,13 @@ if (Test-Path $Mirror) {
+  -                # Silencioso - arquivo pode ter sido deletado/movido
+  +                # Silencioso
+               }
+           }
+   }
+   
+   # ============================================================
+   # FASE 1 - Remover ACL Deny Delete de arquivos >= 7 dias
+  -# Remove protecao de arquivos que atingiram 7 dias
+  -# CRITICO: Fazer ANTES de tentar deletar (Fase 2)
+   # ============================================================
+   if (Test-Path $Mirror) {
+       $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+  @@ -174,7 +169,6 @@ if (Test-Path $Mirror) {
+  -                # Encontrar regras Deny Delete de "Everyone"
+                   $denyRules = $acl.Access | Where-Object {
+                       $_.AccessControlType -eq 'Deny' -and
+                       $_.IdentityReference -like '*Everyone*' -and
+  @@ -182,21 +176,19 @@ if (Test-Path $Mirror) {
+  -                    # Remover cada regra Deny Delete encontrada
+                       foreach ($rule in $denyRules) {
+                           $acl.RemoveAccessRule($rule) | Out-Null
+                       }
+                       Set-Acl $_.FullName $acl -ErrorAction Stop
+                   }
+               } catch {
+  -                # Silencioso - arquivo pode ter sido deletado
+  +                # Silencioso
+               }
+           }
+   }
+   
+   # ============================================================
+   # FASE 2 - Deletar arquivos >= 7 dias
+  -# Agora ACL foi removido em FASE 1, delete pode executar sem ERROR 5
+   # ============================================================
+   if (Test-Path $Mirror) {
+       $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
+  @@ -204,42 +196,19 @@ if (Test-Path $Mirror) {
+  -    # Cleanup de pastas vazias (apos deletar arquivos)
+       Get-ChildItem -Path $Mirror -Recurse -Directory -ErrorAction SilentlyContinue |
+           Sort-Object FullName -Descending |
+           Where-Object { @(Get-ChildItem -Path $_.FullName -ErrorAction SilentlyContinue).Count -eq 0 } |
+           Remove-Item -Force -ErrorAction SilentlyContinue
+   }
+   
+  -# ============================================================
+  -# FASE 3 - Source folder retention
+  -# Delete date-named subdirs in $Source older than $DaysToKeepMirror calendar days.
+  -# Uses folder NAME as date (yyyy-MM-dd), ignoring file timestamps entirely,
+  -# so whole-day folders are removed in one sync cycle with no B2 churn.
+  -# ============================================================
+  -$sourceThreshold = (Get-Date).Date.AddDays(-$DaysToKeepMirror)
+  -Get-ChildItem -LiteralPath $Source -Directory -ErrorAction SilentlyContinue | ForEach-Object {
+  -    $folderDate = $null
+  -    $parsed = [datetime]::TryParseExact(
+  -        $_.Name,
+  -        'yyyy-MM-dd',
+  -        [System.Globalization.CultureInfo]::InvariantCulture,
+  -        [System.Globalization.DateTimeStyles]::None,
+  -        [ref]$folderDate
+  -    )
+  -    if ($parsed -and $folderDate -lt $sourceThreshold) {
+  -        Remove-Item -LiteralPath $_.FullName -Recurse -Force -ErrorAction SilentlyContinue
+  -        Write-SyncLog "SOURCE-CLEANUP  Deleted $($_.Name)"
+  -    }
+  -}
+  -
+  -# 4. cloud_sync log rotation - delete logs older than DaysToKeepLogs
+  +# 4. cloud_sync log rotation
+   Get-ChildItem -Path $LogDir -Filter "cloud_sync_*.log" |
+       Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+       Remove-Item -Force -ErrorAction SilentlyContinue
+   
+  -# 5. mirror log rotation - delete mirror_*.log older than DaysToKeepLogs
+  -Get-ChildItem -Path 'C:\Sync\Logs\mirror' -Filter "mirror_*.log" |
+  +# 5. mirror log rotation
+  +Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
+       Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-$DaysToKeepLogs) } |
+       Remove-Item -Force -ErrorAction SilentlyContinue
+   
+  +7 -38
+
+Config/run_mirror.bat
+  @@ -7,4 +7,4 @@
+  -robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
+  +robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL
+  +1 -1
