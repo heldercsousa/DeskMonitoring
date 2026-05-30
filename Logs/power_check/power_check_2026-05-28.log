@@ -1,0 +1,40 @@
+2026-05-28 15:59:10  POWER-CHECK-START
+2026-05-28 15:59:10  POWER-OK  Active plan is not Power Saver
+2026-05-28 15:59:10  POWER-OK  USB Selective Suspend AC = 0
+2026-05-28 15:59:10  POWER-OK  USB Selective Suspend DC = 0
+2026-05-28 15:59:10  POWER-OK  Sleep AC = 0
+2026-05-28 15:59:10  POWER-OK  Sleep DC = 0
+2026-05-28 15:59:10  POWER-OK  Hibernate AC = 0
+2026-05-28 15:59:10  POWER-OK  Hibernate DC = 0
+2026-05-28 15:59:10  POWER-OK  Display timeout AC =  (>= 600)
+2026-05-28 15:59:10  POWER-CHECK-END  ALL_OK - no anomalies detected
+2026-05-28 15:59:52  POWER-CHECK-START
+2026-05-28 15:59:52  POWER-OK  Active plan is not Power Saver
+2026-05-28 15:59:52  POWER-OK  USB Selective Suspend AC = 0
+2026-05-28 15:59:52  POWER-OK  USB Selective Suspend DC = 0
+2026-05-28 15:59:52  POWER-OK  Sleep AC = 0
+2026-05-28 15:59:52  POWER-OK  Sleep DC = 0
+2026-05-28 15:59:52  POWER-OK  Hibernate AC = 0
+2026-05-28 15:59:52  POWER-OK  Hibernate DC = 0
+2026-05-28 15:59:52  POWER-OK  Display timeout AC =  (>= 600)
+2026-05-28 15:59:52  POWER-CHECK-END  ALL_OK - no anomalies detected
+2026-05-28 17:35:41  POWER-CHECK-START
+2026-05-28 17:35:44  POWER-OK  Active plan is not Power Saver
+2026-05-28 17:35:44  POWER-OK  USB Selective Suspend AC = 0
+2026-05-28 17:35:45  POWER-OK  USB Selective Suspend DC = 0
+2026-05-28 17:35:45  POWER-OK  Sleep AC = 0
+2026-05-28 17:35:45  POWER-OK  Sleep DC = 0
+2026-05-28 17:35:46  POWER-OK  Hibernate AC = 0
+2026-05-28 17:35:47  POWER-OK  Hibernate DC = 0
+2026-05-28 17:35:48  POWER-OK  Display timeout AC =  (>= 600)
+2026-05-28 17:35:48  POWER-CHECK-END  ALL_OK - no anomalies detected
+2026-05-28 17:37:18  POWER-CHECK-START
+2026-05-28 17:37:19  POWER-OK  Active plan is not Power Saver
+2026-05-28 17:37:19  POWER-OK  USB Selective Suspend AC = 0
+2026-05-28 17:37:19  POWER-OK  USB Selective Suspend DC = 0
+2026-05-28 17:37:19  POWER-OK  Sleep AC = 0
+2026-05-28 17:37:19  POWER-OK  Sleep DC = 0
+2026-05-28 17:37:19  POWER-OK  Hibernate AC = 0
+2026-05-28 17:37:20  POWER-OK  Hibernate DC = 0
+2026-05-28 17:37:20  POWER-OK  Display timeout AC =  (>= 600)
+2026-05-28 17:37:20  POWER-CHECK-END  ALL_OK - no anomalies detected

@@ -225,3 +225,7 @@ No C:\Sync\Config\auditor.ps1:265 caractere:9
     + CategoryInfo          : InvalidOperation: (System.Windows.Forms.Application:TypeName) [], RuntimeException
     + FullyQualifiedErrorId : TypeNotFound
  
+
+Process is terminated due to StackOverflowException.
+
+Process is terminated due to StackOverflowException.
