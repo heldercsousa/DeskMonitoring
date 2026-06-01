@@ -1,0 +1,30 @@
+2026-05-31 08:44:08  POWER-CHECK-START
+2026-05-31 08:44:10  POWER-OK  Active plan is not Power Saver
+2026-05-31 08:44:11  POWER-OK  USB Selective Suspend AC = 0
+2026-05-31 08:44:11  POWER-OK  USB Selective Suspend DC = 0
+2026-05-31 08:44:11  POWER-OK  Sleep AC = 0
+2026-05-31 08:44:11  POWER-OK  Sleep DC = 0
+2026-05-31 08:44:11  POWER-OK  Hibernate AC = 0
+2026-05-31 08:44:11  POWER-OK  Hibernate DC = 0
+2026-05-31 08:44:11  POWER-OK  Display timeout AC =  (>= 600)
+2026-05-31 08:44:11  POWER-CHECK-END  ALL_OK - no anomalies detected
+2026-05-31 08:50:54  POWER-CHECK-START
+2026-05-31 08:50:54  POWER-OK  Active plan is not Power Saver
+2026-05-31 08:50:54  POWER-OK  USB Selective Suspend AC = 0
+2026-05-31 08:50:54  POWER-OK  USB Selective Suspend DC = 0
+2026-05-31 08:50:54  POWER-OK  Sleep AC = 0
+2026-05-31 08:50:54  POWER-OK  Sleep DC = 0
+2026-05-31 08:50:54  POWER-OK  Hibernate AC = 0
+2026-05-31 08:50:54  POWER-OK  Hibernate DC = 0
+2026-05-31 08:50:54  POWER-OK  Display timeout AC =  (>= 600)
+2026-05-31 08:50:54  POWER-CHECK-END  ALL_OK - no anomalies detected
+2026-05-31 11:29:22  POWER-CHECK-START
+2026-05-31 11:29:22  POWER-OK  Active plan is not Power Saver
+2026-05-31 11:29:23  POWER-OK  USB Selective Suspend AC = 0
+2026-05-31 11:29:23  POWER-OK  USB Selective Suspend DC = 0
+2026-05-31 11:29:23  POWER-OK  Sleep AC = 0
+2026-05-31 11:29:23  POWER-OK  Sleep DC = 0
+2026-05-31 11:29:23  POWER-OK  Hibernate AC = 0
+2026-05-31 11:29:23  POWER-OK  Hibernate DC = 0
+2026-05-31 11:29:23  POWER-OK  Display timeout AC =  (>= 600)
+2026-05-31 11:29:23  POWER-CHECK-END  ALL_OK - no anomalies detected
