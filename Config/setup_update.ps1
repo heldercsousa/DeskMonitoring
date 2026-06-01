@@ -613,6 +613,18 @@ if (Test-Path $auditScript) {
 }
 
 # =============================================================================
+# STEP 16b - SACL write auditing on C:\Sync\Config\ (catches tampering process via event 4663)
+# =============================================================================
+Write-Step "Step 16b - SACL write auditing on C:\Sync\Config\"
+$configAuditScript = "C:\Sync\Config\enable_config_auditing.ps1"
+if (Test-Path $configAuditScript) {
+    & pwsh.exe -ExecutionPolicy Bypass -File $configAuditScript
+    Write-OK "Config write auditing (SACL) configured - tampering will appear as event 4663"
+} else {
+    Write-Warn "enable_config_auditing.ps1 not found - run manually when available"
+}
+
+# =============================================================================
 # STEP 17 - FolderSync-GitCommitLogs task (current user, daily 23:30)
 # =============================================================================
 Write-Step "Step 17 - FolderSync-GitCommitLogs task (daily 23:30)"
@@ -716,6 +728,7 @@ Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)"
 Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
+Write-Host "  Step 16b- Config write auditing (SACL on Config\ - event 4663 on tampering)" -ForegroundColor Gray
 Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
 Write-Host "  Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)" -ForegroundColor Gray
 Write-Host "  Step 18b- Power settings applied (Balanced plan, USB Suspend disabled)" -ForegroundColor Gray
