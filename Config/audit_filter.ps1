@@ -127,9 +127,10 @@ if ($suspicious.Count -eq 0) { exit 0 }
 # ============================================================
 # Append to Evidence file (tamper-protected by ACL)
 # ============================================================
+$timestamp = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
 $header = @"
 
-## $((Get-Date).ToString('yyyy-MM-dd HH:mm:ss')) - $($suspicious.Count) suspicious write(s) detected
+## $timestamp - $($suspicious.Count) suspicious write(s) detected
 
 | Time | Process | Account | Access | Object |
 |------|---------|---------|--------|--------|
@@ -138,8 +139,29 @@ $header = @"
 $block = $header + "`n" + ($suspicious -join "`n")
 $block | Add-Content -LiteralPath $OutFile -Encoding UTF8
 
-# Also append a one-liner to the security audit log for cross-reference
+# Cross-reference in security audit log
 $secLog = "C:\Sync\Logs\security\security_audit_$(Get-Date -Format 'yyyy-MM-dd').log"
-$ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
-"$ts  AUDIT-FILTER  SUSPICIOUS-WRITES  $($suspicious.Count) event(s) - see $OutFile" |
+"$timestamp  AUDIT-FILTER  SUSPICIOUS-WRITES  $($suspicious.Count) event(s) - see $OutFile" |
     Add-Content -LiteralPath $secLog -Encoding UTF8
+
+# ============================================================
+# Email + B2 upload — off-machine, admin-proof
+# ============================================================
+$emailBody = @"
+SUSPICIOUS FILE WRITES DETECTED ON C:\Sync
+Time: $timestamp
+Count: $($suspicious.Count) event(s)
+
+$($suspicious -join "`n")
+
+Evidence file: $OutFile
+Machine: $env:COMPUTERNAME
+"@
+
+$b2Key = "suspicious_writes_$(Get-Date -Format 'yyyy-MM-dd_HH-mm-ss').md"
+
+& pwsh.exe -NonInteractive -ExecutionPolicy Bypass -File 'C:\Sync\Config\send_alert.ps1' `
+    -Subject "SUSPICIOUS WRITES on $env:COMPUTERNAME - $($suspicious.Count) event(s)" `
+    -Body $emailBody `
+    -AttachFile $OutFile `
+    -B2Key $b2Key
