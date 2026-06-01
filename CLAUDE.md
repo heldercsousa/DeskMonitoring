@@ -5,8 +5,12 @@
 **Purpose:** Business-level overview of project status. Non-technical. Survives context resets.
 
 **Claude must:**
-- Check `Backlog.md` at the start of every session for Pending/In Progress tasks
-- Set a task to `In Progress` before starting it; set to `Done` (with completion date) when finished
+- Check `Backlog.md` at the start of every session for Pending/In Progress/Planned tasks
+- Update status at **every transition**, not only at completion:
+  - `Pending` → `Planned` when a plan folder (`Tasks/T###/`) is created
+  - `Planned` → `In Progress` when coding begins
+  - `In Progress` → `Done` (set completion date) when finished
+  - Any state → `Blocked` if waiting on something external
 - Add newly discovered tasks as new rows with today's date and `Pending` status
 - For complex tasks requiring multiple sessions: enter plan mode, create `Tasks/T###-brief-name/`, write the technical plan there, and maintain `Tasks/T###-brief-name/steps-status.md` to track implementation progress across sessions
 - Consider subagents for tasks with independent parallel workstreams

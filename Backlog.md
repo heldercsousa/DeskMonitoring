@@ -9,6 +9,7 @@
 | Status | Meaning |
 |--------|---------|
 | `Pending` | Identified, not yet started |
+| `Planned` | Plan written in `Tasks/T###/`; ready to code |
 | `In Progress` | Actively being worked on |
 | `Blocked` | Waiting on something external |
 | `Done` | Completed |
@@ -22,7 +23,7 @@ When a task requires significant planning or multiple sessions to complete:
 1. Enter plan mode and create a folder: `Tasks/T###-brief-name/`
 2. Write the technical plan inside that folder
 3. Create `Tasks/T###-brief-name/steps-status.md` to track progress and allow resuming in fresh sessions
-4. Update this Backlog when the task is `Done`
+4. Update this Backlog at every status transition — not only at completion
 
 Subagents may be used for tasks with independent parallel workstreams.
 
