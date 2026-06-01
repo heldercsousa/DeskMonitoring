@@ -1,15 +1,15 @@
 <!-- TASK GATE — READ THIS FIRST, EVERY SESSION — APPLIES TO ALL MACHINES -->
-## TASKS.md — Persistent Task Tracker
+## Backlog.md — Persistent Task Tracker
 
-**File:** `C:\Sync\TASKS.md`
-**Purpose:** Cross-session task backlog. Survives context resets and interrupted sessions.
+**File:** `C:\Sync\Backlog.md`
+**Purpose:** Business-level overview of project status. Non-technical. Survives context resets.
 
 **Claude must:**
-- Check `TASKS.md` at the start of every session for pending/in-progress work
-- Mark a task `In Progress` (change `[ ]` → `[~]`) before starting it
-- Mark a task `Done` (change `[~]` → `[x]`, move to Done section with date) when complete
-- Add newly discovered tasks as new `[ ]` entries with today's date
-- Never leave a task stuck in `In Progress` across sessions without a note
+- Check `Backlog.md` at the start of every session for Pending/In Progress tasks
+- Set a task to `In Progress` before starting it; set to `Done` (with completion date) when finished
+- Add newly discovered tasks as new rows with today's date and `Pending` status
+- For complex tasks requiring multiple sessions: enter plan mode, create `Tasks/T###-brief-name/`, write the technical plan there, and maintain `Tasks/T###-brief-name/steps-status.md` to track implementation progress across sessions
+- Consider subagents for tasks with independent parallel workstreams
 
 ---
 
