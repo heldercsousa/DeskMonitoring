@@ -693,10 +693,12 @@ try {
 
 # =============================================================================
 # STEP 19 - FolderSync-AuditFilter task (every 5 min — suspicious-only 4663 filter)
+# Runs as current user (InteractiveToken) so DPAPI credential decryption works
 # =============================================================================
-Write-Step "Step 19 - FolderSync-AuditFilter task (every 5 min, SYSTEM)"
+Write-Step "Step 19 - FolderSync-AuditFilter task (every 5 min, current user)"
 
-$taskXml19 = @'
+$userSid  = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+$taskXml19 = @"
 <?xml version="1.0" encoding="UTF-16"?>
 <Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
   <Triggers>
@@ -705,11 +707,15 @@ $taskXml19 = @'
       <StartBoundary>2026-01-01T00:00:00</StartBoundary>
       <Enabled>true</Enabled>
     </TimeTrigger>
-    <BootTrigger><Enabled>true</Enabled></BootTrigger>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+      <UserId>$currentUser</UserId>
+    </LogonTrigger>
   </Triggers>
   <Principals>
     <Principal id="Author">
-      <UserId>S-1-5-18</UserId>
+      <UserId>$userSid</UserId>
+      <LogonType>InteractiveToken</LogonType>
       <RunLevel>HighestAvailable</RunLevel>
     </Principal>
   </Principals>
@@ -728,11 +734,11 @@ $taskXml19 = @'
     </Exec>
   </Actions>
 </Task>
-'@
+"@
 
 Unregister-ScheduledTask -TaskName "FolderSync-AuditFilter" -Confirm:$false -ErrorAction SilentlyContinue
 Register-ScheduledTask -TaskName "FolderSync-AuditFilter" -Xml $taskXml19 -Force | Out-Null
-Write-OK "Task FolderSync-AuditFilter registered (SYSTEM, every 5 min)"
+Write-OK "Task FolderSync-AuditFilter registered ($currentUser / InteractiveToken, every 5 min)"
 
 # =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
