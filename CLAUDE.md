@@ -1,4 +1,18 @@
 <!-- TASK GATE — READ THIS FIRST, EVERY SESSION — APPLIES TO ALL MACHINES -->
+## TASKS.md — Persistent Task Tracker
+
+**File:** `C:\Sync\TASKS.md`
+**Purpose:** Cross-session task backlog. Survives context resets and interrupted sessions.
+
+**Claude must:**
+- Check `TASKS.md` at the start of every session for pending/in-progress work
+- Mark a task `In Progress` (change `[ ]` → `[~]`) before starting it
+- Mark a task `Done` (change `[~]` → `[x]`, move to Done section with date) when complete
+- Add newly discovered tasks as new `[ ]` entries with today's date
+- Never leave a task stuck in `In Progress` across sessions without a note
+
+---
+
 ## NON-NEGOTIABLE TASK RULES
 
 ### 6-Phase Change Lifecycle (applies to ANY Config/ change)
