@@ -25,3 +25,10 @@
 | 2026-06-01 12:32:51 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\post_commit_push.ps1.tmp.18904.b54611849e39` |
 | 2026-06-01 12:32:40 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\.git\hooks` |
 | 2026-06-01 12:32:40 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\.git\hooks\post-commit.tmp.18904.38288d75c319` |
+
+## 2026-06-01 18:50:07 - 2 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-01 18:45:37 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 18:45:37 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\stop_commit_check.ps1.tmp.18904.25722003d023` |
