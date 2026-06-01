@@ -40,8 +40,9 @@ $action = {
         "$ts  CONFIG-GUARD  INFO  removed stale index.lock before restore" | Add-Content -LiteralPath "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
     }
 
-    # Restore the file
-    $out = & git -C 'C:\Sync' restore $name 2>&1
+    # Restore the file — use full path relative to repo root (Config/<name>)
+    $repoRelPath = "Config/$name"
+    $out = & git -C 'C:\Sync' restore $repoRelPath 2>&1
     $result = if ($LASTEXITCODE -eq 0) { "RESTORED" } else { "RESTORE-FAILED: $out" }
     "$ts  CONFIG-GUARD  $result  $name" | Add-Content -LiteralPath "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
 }
