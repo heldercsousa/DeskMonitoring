@@ -29,6 +29,23 @@
     "SYNC_LOGS": "C:\\Sync\\Logs",
     "SYNC_MIRROR": "C:\\Sync\\Mirror"
   },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\stop_commit_check.ps1\"",
+            "shell": "powershell",
+            "asyncRewake": true,
+            "rewakeMessage": "Stop hook detected uncommitted changes:",
+            "rewakeSummary": "Uncommitted changes need committing",
+            "statusMessage": "Checking for uncommitted changes..."
+          }
+        ]
+      }
+    ]
+  },
   "mcpServers": {
     "filesystem": {
       "command": "npx",
