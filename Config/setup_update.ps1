@@ -615,11 +615,11 @@ if (Test-Path $auditScript) {
 # =============================================================================
 # STEP 16b - SACL write auditing on C:\Sync\Config\ (catches tampering process via event 4663)
 # =============================================================================
-Write-Step "Step 16b - SACL write auditing on C:\Sync\Config\"
+Write-Step "Step 16b - SACL write auditing on Config\, Evidence\, .git\ + 512 MB Security log"
 $configAuditScript = "C:\Sync\Config\enable_config_auditing.ps1"
 if (Test-Path $configAuditScript) {
     & pwsh.exe -ExecutionPolicy Bypass -File $configAuditScript
-    Write-OK "Config write auditing (SACL) configured - tampering will appear as event 4663"
+    Write-OK "SACL configured on Config\+Evidence\+.git\ - tampering appears as event 4663"
 } else {
     Write-Warn "enable_config_auditing.ps1 not found - run manually when available"
 }
@@ -692,6 +692,49 @@ try {
 }
 
 # =============================================================================
+# STEP 19 - FolderSync-AuditFilter task (every 5 min — suspicious-only 4663 filter)
+# =============================================================================
+Write-Step "Step 19 - FolderSync-AuditFilter task (every 5 min, SYSTEM)"
+
+$taskXml19 = @'
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <TimeTrigger>
+      <Repetition><Interval>PT5M</Interval><StopAtDurationEnd>false</StopAtDurationEnd></Repetition>
+      <StartBoundary>2026-01-01T00:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+    <BootTrigger><Enabled>true</Enabled></BootTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <Hidden>true</Hidden>
+    <ExecutionTimeLimit>PT3M</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions>
+    <Exec>
+      <Command>pwsh.exe</Command>
+      <Arguments>-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\audit_filter.ps1</Arguments>
+    </Exec>
+  </Actions>
+</Task>
+'@
+
+Unregister-ScheduledTask -TaskName "FolderSync-AuditFilter" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-AuditFilter" -Xml $taskXml19 -Force | Out-Null
+Write-OK "Task FolderSync-AuditFilter registered (SYSTEM, every 5 min)"
+
+# =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
 # =============================================================================
 if ($wasRunning) {
@@ -728,10 +771,11 @@ Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)"
 Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
-Write-Host "  Step 16b- Config write auditing (SACL on Config\ - event 4663 on tampering)" -ForegroundColor Gray
+Write-Host "  Step 16b- SACL on Config\+Evidence\+.git\ + 512 MB Security log" -ForegroundColor Gray
 Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
 Write-Host "  Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)" -ForegroundColor Gray
 Write-Host "  Step 18b- Power settings applied (Balanced plan, USB Suspend disabled)" -ForegroundColor Gray
+Write-Host "  Step 19 - FolderSync-AuditFilter task (SYSTEM, every 5 min - suspicious writes to Evidence\)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
