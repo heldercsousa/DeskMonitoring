@@ -35,7 +35,7 @@ Subagents may be used for tasks with independent parallel workstreams.
 |----|--------|-------------|---------|-----------|--------|
 | T001 | - | Set up a rule so Claude always uses this Backlog to track activities and can resume interrupted work across sessions | 2026-06-01 | - | Done |
 | T002 | - | Find opportunities to turn repetitive Claude steps into commands or hooks, reducing token usage and improving efficiency | 2026-06-01 | - | Pending |
-| T003 | - | Find and install an official Anthropic tool for maintaining the Claude configuration file for this project | 2026-06-01 | - | Pending |
+| T003 | - | Find and install an official Anthropic tool for maintaining the Claude configuration file for this project | 2026-06-01 | 2026-06-02 | Done |
 | T004 | - | Review and improve the ignore file so Claude does not load unnecessary files, saving tokens | 2026-06-01 | - | Pending |
 | T005 | - | Research and install skills that strengthen our ability to detect and counter hacking attacks (Fing, Malwarebytes, VPN, dynamic IP, and others) | 2026-06-01 | - | Pending |
 | T006 | - | Research and install MCP servers that enhance the security and automation capabilities of the ecosystem | 2026-06-01 | - | Pending |
