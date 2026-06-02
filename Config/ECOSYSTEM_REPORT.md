@@ -1,4 +1,329 @@
-# Automated Folder Sync Ecosystem — Full Reference
+﻿```powershell
+# auditor.ps1
+# FolderSync Security Auditor
+# Monitors file system events, remote access, service tampering, and system events.
+# Runs as NSSM service "FolderSyncAuditor".
+
+$WatchedFolder  = 'C:\Users\helde\Repos\Bois'
+$LogDir         = 'C:\Sync\Logs'
+$AuditDir       = "$LogDir\audit"
+$SecurityDir    = "$LogDir\security"
+$StartupGapSecs = 120   # gap threshold to trigger forensic dump
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+function Get-FileAuditLog  { Join-Path $AuditDir    "file_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
+function Get-SecurityLog   { Join-Path $SecurityDir "security_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
+
+function Write-FileAudit($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath (Get-FileAuditLog)
+}
+
+function Write-SecurityAudit($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath (Get-SecurityLog)
+}
+
+function Write-BothLogs($msg) {
+    Write-FileAudit    $msg
+    Write-SecurityAudit $msg
+}
+
+# ---------------------------------------------------------------------------
+# Startup gap detection + forensic dump
+# ---------------------------------------------------------------------------
+function Invoke-StartupGapCheck {
+    # Find last timestamped line across all auditor logs
+    $allLogs = Get-ChildItem $SecurityDir -Filter "security_audit_*.log" -ErrorAction SilentlyContinue |
+               Sort-Object LastWriteTime -Descending | Select-Object -First 3
+    $lastTs = $null
+    foreach ($f in $allLogs) {
+        $lines = Get-Content $f.FullName -ErrorAction SilentlyContinue | Where-Object { $_ -match '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}' }
+        if ($lines) {
+            $lastLine = $lines | Select-Object -Last 1
+            if ($lastLine -match '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})') {
+                try { $lastTs = [datetime]::ParseExact($Matches[1], 'yyyy-MM-dd HH:mm:ss', $null); break } catch {}
+            }
+        }
+    }
+
+    if ($lastTs) {
+        $gapSecs = ([datetime]::Now - $lastTs).TotalSeconds
+        if ($gapSecs -gt $StartupGapSecs) {
+            Write-SecurityAudit "[WARN] Startup gap detected: $([math]::Round($gapSecs,0))s since last log entry ($lastTs) - writing forensic report"
+            Write-ForensicReport -GapSeconds $gapSecs -LastKnownTime $lastTs
+        }
+    }
+}
+
+function Write-ForensicReport([double]$GapSeconds, [datetime]$LastKnownTime) {
+    $ts   = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+    $path = Join-Path $AuditDir "interruption_report_$ts.txt"
+
+    $lines = @()
+    $lines += "INTERRUPTION REPORT - generated $ts"
+    $lines += "Last known auditor activity : $LastKnownTime"
+    $lines += "Gap duration                : $([math]::Round($GapSeconds,0)) seconds"
+    $lines += ""
+    $lines += "=== RUNNING PROCESSES (snapshot) ==="
+    $lines += (Get-Process | Sort-Object CPU -Descending | Select-Object -First 60 |
+               Format-Table Name, Id, CPU, WorkingSet -AutoSize | Out-String).Trim()
+    $lines += ""
+    $lines += "=== LAST 50 SECURITY LOG EVENTS ==="
+    try {
+        $secEvents = Get-WinEvent -LogName Security -MaxEvents 50 -ErrorAction SilentlyContinue
+        $lines += ($secEvents | Format-Table TimeCreated, Id, Message -AutoSize -Wrap | Out-String -Width 200).Trim()
+    } catch { $lines += "(Security log unavailable: $_)" }
+    $lines += ""
+    $lines += "=== LAST 50 SYSTEM LOG EVENTS ==="
+    try {
+        $sysEvents = Get-WinEvent -LogName System -MaxEvents 50 -ErrorAction SilentlyContinue
+        $lines += ($sysEvents | Format-Table TimeCreated, Id, Message -AutoSize -Wrap | Out-String -Width 200).Trim()
+    } catch { $lines += "(System log unavailable: $_)" }
+
+    $lines | Set-Content -LiteralPath $path -Encoding UTF8
+    Write-SecurityAudit "[FORENSIC] Report written: $path"
+}
+
+# ---------------------------------------------------------------------------
+# Log rotation (T033): delete audit logs older than 30 days
+# ---------------------------------------------------------------------------
+$script:LastLogRotation = [datetime]::MinValue
+
+function Invoke-AuditLogRotation {
+    if (([datetime]::Now - $script:LastLogRotation).TotalHours -lt 24) { return }
+    $script:LastLogRotation = [datetime]::Now
+    $cutoff = (Get-Date).AddDays(-30)
+
+    foreach ($pattern in @("$SecurityDir\security_audit_*.log", "$AuditDir\file_audit_*.log")) {
+        Get-ChildItem -LiteralPath (Split-Path $pattern) -Filter (Split-Path $pattern -Leaf) `
+            -ErrorAction SilentlyContinue |
+            Where-Object { $_.LastWriteTime -lt $cutoff } |
+            ForEach-Object {
+                Remove-Item -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue
+                Write-SecurityAudit "[LOG-ROTATE] Deleted old log: $($_.Name)"
+            }
+    }
+}
+
+# ---------------------------------------------------------------------------
+# A. FileSystemWatcher - event-driven file change detection
+# ---------------------------------------------------------------------------
+function Start-FileWatcher {
+    $fsw = New-Object System.IO.FileSystemWatcher
+    $fsw.Path                  = $WatchedFolder
+    $fsw.IncludeSubdirectories = $true
+    $fsw.NotifyFilter          = [System.IO.NotifyFilters]'FileName, DirectoryName'
+    $fsw.EnableRaisingEvents   = $true
+
+    $handler = {
+        param($src, $e)
+
+        $now = Get-Date
+        # ForÃ§amos a conversÃ£o para String AQUI, antes de entrar no Job
+        $changeTypeText = $e.ChangeType.ToString().ToUpper()
+        $filePath = $e.FullPath
+        $fileName = $e.Name
+        $oldName = if ($e -is [System.IO.RenamedEventArgs]) { $e.OldName } else { $null }
+
+        Start-Job -ArgumentList $filePath, $fileName, $changeTypeText, $now, $oldName -ScriptBlock {
+            param($path, $name, $type, $time, $old)
+
+            Start-Sleep -Milliseconds 800
+            $user = 'unknown'
+
+            try {
+                $searchName = [System.IO.Path]::GetFileName($path)
+                $evt = Get-WinEvent -FilterHashtable @{
+                    LogName = 'Security'; Id = 4663, 4660; StartTime = $time.AddSeconds(-15)
+                } -ErrorAction SilentlyContinue |
+                Where-Object { $_.Message -like "*$searchName*" } | Select-Object -First 1
+
+                if ($evt -and $evt.Message -match '(Nome da Conta|Account Name):\s+(\S+)') { $user = $Matches[2] }
+            } catch {}
+
+            $logFile = "C:\Sync\Logs\audit\file_audit_$($time.ToString('yyyy-MM-dd')).log"
+            $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
+
+            # T029: distinguish routine AVI aging from suspicious deletions
+            if ($type -eq 'DELETED') {
+                if ($name -like 'motion_*.avi') {
+                    $detail = 'DELETED-ROUTINE'
+                    $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
+                    $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+                } else {
+                    $detail = 'DELETED-SUSPICIOUS'
+                    $line = "$ts | ALERT  $($detail.PadRight(18)) | user=$user | path=$path"
+                    $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+                    $secLog = "C:\Sync\Logs\security\security_audit_$($time.ToString('yyyy-MM-dd')).log"
+                    $line | Add-Content -LiteralPath $secLog -Encoding UTF8
+                    & 'C:\Sync\Config\cloud_sync.ps1'
+                }
+            } else {
+                # FormataÃ§Ã£o garantida como texto
+                $detail = if ($old) { "RENAMED: $old -> $name" } else { $type }
+                $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
+                $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+            }
+        } | Out-Null
+    }
+
+    Register-ObjectEvent $fsw Created -Action $handler | Out-Null
+    Register-ObjectEvent $fsw Deleted -Action $handler | Out-Null
+    Register-ObjectEvent $fsw Renamed -Action $handler | Out-Null
+    
+    return $fsw
+}
+
+# ---------------------------------------------------------------------------
+# B. Remote access / logon detection (every 5 min)
+# ---------------------------------------------------------------------------
+$script:LastRemoteCheck = [datetime]::MinValue
+
+function Check-RemoteAccess {
+    if (([datetime]::Now - $script:LastRemoteCheck).TotalSeconds -lt 300) { return }
+    $script:LastRemoteCheck = [datetime]::Now
+    $since = (Get-Date).AddMinutes(-5)
+
+    # Network / RDP logons
+    try {
+        $logons = Get-WinEvent -FilterHashtable @{
+            LogName   = 'Security'
+            Id        = 4624
+            StartTime = $since
+        } -ErrorAction SilentlyContinue | Where-Object {
+            $_.Message -match 'Logon Type:\s+(3|10)\b'
+        }
+        foreach ($evt in $logons) {
+            $type = if ($evt.Message -match 'Logon Type:\s+(\d+)') { $Matches[1] } else { '?' }
+            $acct = if ($evt.Message -match 'Account Name:\s+(\S+)') { $Matches[1] } else { '?' }
+            $label = if ($type -eq '10') { 'RDP/RemoteInteractive' } else { 'Network' }
+            Write-SecurityAudit "[LOGON] Type=$type ($label) account=$acct at $($evt.TimeCreated)"
+        }
+    } catch {}
+
+    # Remote access tools
+    foreach ($proc in @('TeamViewer', 'AnyDesk', 'VNCViewer', 'vncserver', 'ScreenConnect')) {
+        $p = Get-Process $proc -ErrorAction SilentlyContinue
+        if ($p) { Write-SecurityAudit "[REMOTE-TOOL] $proc is running (PID $($p.Id -join ','))" }
+    }
+}
+
+# ---------------------------------------------------------------------------
+# C. Service tampering (every 60s)
+# ---------------------------------------------------------------------------
+$WatchedServices = @('FolderSyncWatchdog', 'FolderSyncAuditor', 'FolderSync-CloudBackup')
+$script:LastServiceCheck = [datetime]::MinValue
+
+function Check-Services {
+    if (([datetime]::Now - $script:LastServiceCheck).TotalSeconds -lt 60) { return }
+    $script:LastServiceCheck = [datetime]::Now
+    $since = (Get-Date).AddSeconds(-60)
+
+    foreach ($svcName in $WatchedServices) {
+        $svc = Get-Service $svcName -ErrorAction SilentlyContinue
+        if ($svc -and $svc.Status -ne 'Running') {
+            Write-SecurityAudit "[CRITICAL] Service $svcName is $($svc.Status) - expected Running"
+        }
+    }
+
+    # Event 7036 (service state change) and 7040 (start type change)
+    try {
+        $evts = Get-WinEvent -FilterHashtable @{
+            LogName   = 'System'
+            Id        = 7036, 7040
+            StartTime = $since
+        } -ErrorAction SilentlyContinue
+        foreach ($evt in $evts) {
+            foreach ($svc in $WatchedServices) {
+                if ($evt.Message -like "*$svc*") {
+                    Write-SecurityAudit "[SVC-EVENT] $($evt.Id): $($evt.Message.Trim() -replace '\s+', ' ')"
+                }
+            }
+        }
+    } catch {}
+}
+
+# ---------------------------------------------------------------------------
+# D. Physical/system events (every 60s)
+# ---------------------------------------------------------------------------
+$script:LastSystemCheck = [datetime]::MinValue
+
+function Check-SystemEvents {
+    if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
+    $script:LastSystemCheck = [datetime]::Now
+    $since = (Get-Date).AddSeconds(-60)
+
+    try {
+        $evts = Get-WinEvent -FilterHashtable @{
+            LogName   = 'System'
+            Id        = 42, 1074
+            StartTime = $since
+        } -ErrorAction SilentlyContinue
+        foreach ($evt in $evts) {
+            if ($evt.Id -eq 42) {
+                $reason = if ($evt.Message -match 'Reason.*?:\s+(.+)') { $Matches[1].Trim() } else { 'unknown' }
+                Write-SecurityAudit "[SLEEP] System entering sleep/hibernate - reason: $reason"
+            } elseif ($evt.Id -eq 1074) {
+                $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
+                $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
+                Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
+            }
+        }
+    } catch {}
+}
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+Write-SecurityAudit "[AUDITOR] Starting up (PID $PID)"
+Write-FileAudit     "[AUDITOR] Starting up (PID $PID)"
+
+# Check for startup gap and write forensic report if needed
+Invoke-StartupGapCheck
+
+# T033: rotate old audit logs at startup
+Invoke-AuditLogRotation
+
+# Start file system watcher
+$fsw = Start-FileWatcher
+Write-FileAudit "[AUDITOR] FileSystemWatcher active on $WatchedFolder"
+
+# Main polling loop
+$script:LoopIteration = 0
+try {
+    while ($true) {
+        Check-RemoteAccess
+        Check-Services
+        Check-SystemEvents
+
+        # T028: clean up completed/failed background jobs every 60 iterations (~60s)
+        $script:LoopIteration++
+        if ($script:LoopIteration % 60 -eq 0) {
+            Get-Job | Where-Object { $_.State -in 'Completed', 'Failed' } | Remove-Job -Force -ErrorAction SilentlyContinue
+        }
+
+        # T033: daily log rotation check
+        Invoke-AuditLogRotation
+
+        # Process queued FSW events
+        $null = [System.Threading.Thread]::Sleep(1000)
+        Start-Sleep -Milliseconds 100
+    }
+} finally {
+    $fsw.EnableRaisingEvents = $false
+    $fsw.Dispose()
+    Unregister-Event -SourceIdentifier 'FSW_Created'  -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier 'FSW_Deleted'  -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier 'FSW_Changed'  -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier 'FSW_Renamed'  -ErrorAction SilentlyContinue
+    Write-SecurityAudit "[AUDITOR] Shutting down"
+    Write-FileAudit     "[AUDITOR] Shutting down"
+}
+```
+> Security monitor: startup gap forensics, FileSystemWatcher on source folder, remote logon/service/system event polling. Background job cleanup every ~60s (T028); motion AVI vs suspicious delete distinction (T029); 30-day log rotation for audit logs (T033, 2026-06-02). Writes to security_audit_YYYY-MM-DD.log and file_audit_YYYY-MM-DD.log.
 
 **Last updated:** 2026-03-02
 **Machine:** Windows 11 Home Single Language 24H2 — user: `helde` (`LAP\helde`)
@@ -110,17 +435,17 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | File | Used by | Purpose |
 |---|---|---|
 | `rclone.conf` | `cloud_sync.ps1` | Rclone B2 remote definition + API key |
-| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup (7-day) + source folder retention (7-day, date-name based) + self-healing firewall+DNS attack detection (2026-03-15) |
+| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup (7-day) + source folder retention (7-day, date-name based) + self-healing firewall+DNS attack detection + failure sentinel (`.sync_failed`) + B2 lag alert (`.last_sync_ok`) + English comments + ACL failure logging (T026/T030/T031/T032, 2026-06-02) |
 | `cloud_sync.bat` | Manual trigger | Same as .ps1 but via cmd (manual use only) |
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
-| `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop |
-| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering |
+| `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
+| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029); 30-day audit log rotation (T033, 2026-06-02) |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
-| `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup, CAM-2 relay |
-| `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam |
+| `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup, CAM-2 relay; VLC process + port 8161 + restart sentinel checks added (T025, 2026-06-02) |
+| `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam; max 5 restarts/hour circuit breaker; 7-day log rotation; port-listening verification after restart (T024, 2026-06-02) |
 | `cam2.conf` | Read by `cam2_relay.ps1` | CAM-2 credentials (plaintext, ACL-protected, **gitignored**) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry (Step 14 uses `start_yawcam.bat` wrapper to set correct working dir) |
@@ -165,8 +490,10 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 
 | File | Purpose |
 |---|---|
-| `DailySecurityCheck.ps1` | Daily security scan v9 — processes, ports, remote tools, unknown devices, firewall tamper, hosts file, scheduled task integrity, B2 connectivity, Event Log audit, Run key persistence |
+| `DailySecurityCheck.ps1` | Daily security scan v9 — processes, ports, remote tools, unknown devices, firewall tamper, hosts file, scheduled task integrity (CloudBackup only), B2 connectivity, Event Log audit, Run key persistence; whitelist expanded (Fing/OneDrive/Docker/Copilot); SYSTEM/SISTEMA principal match; FolderSync-Watchdog removed from task check (post-T022-T034 false-positive fixes, 2026-06-02) |
 | `AutoCleanup.ps1` | Automated cleanup triggered by DailySecurityCheck |
+| `run_tests.ps1` | Tier 1-4 automated test orchestrator for T010-T034 changes; runs parse checks, safe live executions, sentinel file verification, and behavioral log checks; logs to `C:\Sync\Logs\security\test_results_YYYY-MM-DD.log` (T035, 2026-06-02) |
+| `run_parse_check.ps1` | Quick parse-only check for 6 key scripts (DailySecurityCheck, yawcam_monitor_v4, cam2_relay, wdog, auditor, cloud_sync); exits 0 = all pass (T035, 2026-06-02) |
 
 ### Camera scripts (in `C:\Sync\Config\`)
 
@@ -174,7 +501,7 @@ These scripts were relocated from `C:\Program Files (x86)\Yawcam\` to `C:\Sync\C
 
 | File | Used by | Purpose |
 |---|---|---|
-| `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: checks for recent .avi recordings, restarts Yawcam + resets webcam PnP device if frozen. 60s interval, 600s restart cooldown. |
+| `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: scans Bois dir recursively for latest .avi (T022), timestamped log to `C:\Sync\Logs\services\yawcam_monitor.log` (T023), restart failure sentinel `.camera_restart_failed` (T034). 60s interval, 600s cooldown. |
 | `start_monitor.ps1` | Registry Run `YawcamMonitor` | Boot launcher: waits 30s for system to stabilize, then starts `C:\Sync\Config\yawcam_monitor_v4.ps1` hidden |
 | `start_yawcam.bat` | Registry Run `Yawcam` (replaces direct .exe entry) | `cd /d` to Yawcam dir then starts Yawcam.exe — fixes launcher.cfg not found error on boot |
 
@@ -475,9 +802,9 @@ icacls "C:\Sync\.git" /remove:d "*S-1-5-32-545" /T /Q  # Users
 ---
 
 ### `C:\Sync\Config\DailySecurityCheck.ps1`
-> Daily security scan v9. Checks: suspicious processes, registry location entries, remote access tools, suspicious ports, unknown ARP devices, FolderSync service health, firewall tamper (B2 outbound BLOCK rules), hosts file poisoning, scheduled task integrity (FolderSync-CloudBackup + Watchdog), B2 connectivity probe, Windows Event Log audit (EventIds 4698/4720/4732 last 24h), HKCU Run key persistence against whitelist.
-> Scheduled Task: `FolderSync-DailyCheck` (daily 09:00, runs as helde, RunLevel Highest).
-> Logs to `C:\Sync\Logs\security\security_check_YYYY-MM-DD.log`. Prefixes: `SCAN-START`, `SCAN-END`, `ALERT`, `INFO`.
+> Daily security scan v9. Checks: suspicious processes, registry location entries, remote access tools, suspicious ports, unknown ARP devices, FolderSync service health, firewall tamper (B2 outbound BLOCK rules), hosts file poisoning, scheduled task integrity (FolderSync-CloudBackup only), B2 connectivity probe, Windows Event Log audit (EventIds 4698/4720/4732 last 24h), HKCU Run key persistence against whitelist (expanded: Fing/OneDrive/Docker/Copilot). SYSTEM/SISTEMA principal match; FolderSync-Watchdog removed from task checks (post-T022-T034 false-positive fixes, 2026-06-02).
+> Daily security scan v9. Checks: suspicious processes, registry location entries, remote access tools, suspicious ports, unknown ARP devices, FolderSync service health, firewall tamper (B2 outbound BLOCK rules), hosts file poisoning, scheduled task integrity (FolderSync-CloudBackup only), B2 connectivity probe, Windows Event Log audit (EventIds 4698/4720/4732 last 24h), HKCU Run key persistence against whitelist (expanded: Fing/OneDrive/Docker/Copilot). SYSTEM/SISTEMA principal match; FolderSync-Watchdog removed from task checks (post-T022-T034 false-positive fixes, 2026-06-02).
+> Daily security scan v9. Checks: suspicious processes, registry location entries, remote access tools, suspicious ports, unknown ARP devices, FolderSync service health, firewall tamper (B2 outbound BLOCK rules), hosts file poisoning, scheduled task integrity (FolderSync-CloudBackup only), B2 connectivity probe, Windows Event Log audit (EventIds 4698/4720/4732 last 24h), HKCU Run key persistence against whitelist (expanded: Fing/OneDrive/Docker/Copilot). SYSTEM/SISTEMA principal match; FolderSync-Watchdog removed from task checks (post-T022-T034 false-positive fixes, 2026-06-02).
 
 ```powershell
 # DailySecurityCheck.ps1 - v9
@@ -512,7 +839,11 @@ $knownRunKeys = @(
     'Yawcam',
     'YawcamMonitor',
     'YawcamCam2Relay',
-    'FolderSyncRealTime'
+    'FolderSyncRealTime',
+    'electron.app.Fing',
+    'OneDrive',
+    'Docker Desktop'
+    # MicrosoftCopilotAutoLaunch_* matched below via wildcard
 )
 
 try {
@@ -534,7 +865,9 @@ try {
 
     Write-Log "SCAN-START  DailySecurityCheck v9"
 
+    # -----------------------------------------------------------------------
     # [1] Suspicious processes
+    # -----------------------------------------------------------------------
     Write-Step "[1] Suspicious processes"
     $procs = Get-Process -ErrorAction SilentlyContinue | Where-Object {
         $name         = $_.ProcessName
@@ -578,7 +911,9 @@ try {
         Write-OK "No suspicious processes"
     }
 
+    # -----------------------------------------------------------------------
     # [2] Registry location entries
+    # -----------------------------------------------------------------------
     Write-Step "[2] Registry location access entries"
     $subApps = Get-ChildItem -Path $locationPath -ErrorAction SilentlyContinue | Where-Object {
         $name = $_.PSChildName
@@ -596,7 +931,9 @@ try {
         Write-OK "No suspicious registry location entries"
     }
 
+    # -----------------------------------------------------------------------
     # [3] Remote access tools running
+    # -----------------------------------------------------------------------
     Write-Step "[3] Remote access tools"
     $remoteTools = @('AnyDesk', 'VNCViewer', 'vncserver', 'ScreenConnect', 'Ammyy', 'RemoteUtilities', 'Rustdesk')
     foreach ($tool in $remoteTools) {
@@ -608,7 +945,9 @@ try {
         }
     }
 
+    # -----------------------------------------------------------------------
     # [4] Suspicious listening ports
+    # -----------------------------------------------------------------------
     Write-Step "[4] Suspicious listening ports"
     $suspiciousPorts = @(4444, 5900, 5901, 1080, 8443, 31337, 12345, 54321, 9999, 6666)
     $listening = Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue
@@ -622,8 +961,11 @@ try {
             Write-Fail "Suspicious port $($conn.LocalPort) listening - $procName ($procPath)"
         }
     }
+    if ($issues -eq 0) { Write-OK "No suspicious ports open" }
 
+    # -----------------------------------------------------------------------
     # [5] Unknown devices on network (ARP table)
+    # -----------------------------------------------------------------------
     Write-Step "[5] Unknown network devices (ARP)"
     try {
         $arpOutput = arp -a 2>$null
@@ -643,7 +985,9 @@ try {
         }
     } catch {}
 
+    # -----------------------------------------------------------------------
     # [6] FolderSync services status
+    # -----------------------------------------------------------------------
     Write-Step "[6] FolderSync services"
     $watchedSvcs = @('FolderSyncAuditor', 'FolderSyncWatchdog')
     foreach ($svc in $watchedSvcs) {
@@ -661,7 +1005,9 @@ try {
         }
     }
 
+    # -----------------------------------------------------------------------
     # [10] Firewall tamper detection (B2 outbound BLOCK rules)
+    # -----------------------------------------------------------------------
     Write-Step "[10] Firewall tamper detection"
     $fwRules = Get-NetFirewallRule -Direction Outbound -Action Block -ErrorAction SilentlyContinue |
         Where-Object { $_.Enabled -eq 'True' }
@@ -688,7 +1034,9 @@ try {
         Write-OK "No outbound BLOCK rules targeting B2 IPs"
     }
 
+    # -----------------------------------------------------------------------
     # [11] Hosts file poisoning check
+    # -----------------------------------------------------------------------
     Write-Step "[11] Hosts file check"
     $hostsPath = "C:\Windows\System32\drivers\etc\hosts"
     $hostsLines = Get-Content -LiteralPath $hostsPath -ErrorAction SilentlyContinue
@@ -706,12 +1054,14 @@ try {
             }
         }
     }
+    if ($issues -eq 0) { Write-OK "Hosts file clean" }
 
+    # -----------------------------------------------------------------------
     # [12] Scheduled task integrity check
+    # -----------------------------------------------------------------------
     Write-Step "[12] Scheduled task integrity"
     $taskChecks = @(
         @{ Name = 'FolderSync-CloudBackup'; ExpectedPath = 'C:\Sync\Config\cloud_sync.ps1' }
-        @{ Name = 'FolderSync-Watchdog';    ExpectedPath = 'C:\Sync\Config\wdog.ps1' }
     )
     foreach ($tc in $taskChecks) {
         $task = Get-ScheduledTask -TaskName $tc.Name -ErrorAction SilentlyContinue
@@ -724,7 +1074,7 @@ try {
         $deviations = @()
         if ($task.State -ne 'Ready') { $deviations += "State=$($task.State) (expected Ready)" }
         $principal = $task.Principal
-        if ($principal.UserId -notmatch 'S-1-5-18|SYSTEM') { $deviations += "Principal=$($principal.UserId) (expected SYSTEM)" }
+        if ($principal.UserId -notmatch 'S-1-5-18|SYSTEM|SISTEMA') { $deviations += "Principal=$($principal.UserId) (expected SYSTEM)" }
         if ($principal.RunLevel -ne 'Highest') { $deviations += "RunLevel=$($principal.RunLevel) (expected Highest)" }
         $action = $task.Actions | Select-Object -First 1
         if ($action -and $action.Arguments -notmatch [regex]::Escape($tc.ExpectedPath)) {
@@ -741,7 +1091,9 @@ try {
         }
     }
 
+    # -----------------------------------------------------------------------
     # [13] Active B2 connectivity probe
+    # -----------------------------------------------------------------------
     Write-Step "[13] B2 connectivity probe"
     $conn443 = Test-NetConnection -ComputerName $b2Host -Port 443 -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
     if ($conn443 -and $conn443.TcpTestSucceeded) {
@@ -753,7 +1105,9 @@ try {
         Write-Fail "B2 connectivity FAILED: $b2Host:443 unreachable"
     }
 
+    # -----------------------------------------------------------------------
     # [14] Windows Event Log audit (last 24h)
+    # -----------------------------------------------------------------------
     Write-Step "[14] Windows Event Log audit (last 24h)"
     $since = (Get-Date).AddHours(-24)
     $auditEventIds = @(
@@ -780,7 +1134,9 @@ try {
         } catch {}
     }
 
+    # -----------------------------------------------------------------------
     # [17] HKCU Run key persistence check
+    # -----------------------------------------------------------------------
     Write-Step "[17] HKCU Run key persistence check"
     $runKeyPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
     $runEntries = Get-ItemProperty -Path $runKeyPath -ErrorAction SilentlyContinue
@@ -789,7 +1145,7 @@ try {
             Where-Object { $_.Name -notmatch '^PS' } |
             ForEach-Object {
                 $entryName = $_.Name
-                if ($entryName -notin $knownRunKeys) {
+                if ($entryName -notin $knownRunKeys -and $entryName -notmatch '^MicrosoftCopilotAutoLaunch_') {
                     $issues++
                     Write-Log "ALERT  [RunKeyUnknown] Name=`"$entryName`" Value=`"$($_.Value)`""
                     Write-Fail "Unknown HKCU Run key: `"$entryName`" = `"$($_.Value)`""
@@ -799,8 +1155,14 @@ try {
             }
     }
 
+    # -----------------------------------------------------------------------
+    # Summary log line
+    # -----------------------------------------------------------------------
     Write-Log "SCAN-END  Issues=$issues"
 
+    # -----------------------------------------------------------------------
+    # Interactive dialog (skip when running as scheduled task)
+    # -----------------------------------------------------------------------
     if (-not [Environment]::UserInteractive) { return }
 
     Add-Type -AssemblyName System.Windows.Forms
@@ -838,6 +1200,7 @@ try {
     $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     "$ts  ERROR: $_" | Add-Content -LiteralPath $logPath
 }
+
 ```
 
 ---
@@ -1243,24 +1606,26 @@ hard_delete = false
 ---
 
 ### `C:\Sync\Config\cloud_sync.ps1`
-> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, 3-phase ACL protection (7 days), source folder retention (7 days, date-name based), log rotation (30 days), mirror cleanup. Logs to `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log`.
-> Last updated: 2026-05-17
+> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, failure sentinel (.sync_failed), B2 lag alert (.last_sync_ok), 3-phase ACL protection (7 days), source folder retention (7 days, date-name based), log rotation (30 days), mirror cleanup. ACL failures logged with ACL-WARN prefix. All comments in English. (T026/T030/T031/T032, 2026-06-02)
+> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, failure sentinel (.sync_failed), B2 lag alert (.last_sync_ok), 3-phase ACL protection (7 days), source folder retention (7 days, date-name based), log rotation (30 days), mirror cleanup. ACL failures logged with ACL-WARN prefix. All comments in English. (T026/T030/T031/T032, 2026-06-02)
 
 ```powershell
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
-# Manages Mirror cleanup, Source folder retention, and Log rotation automatically.
-# Last updated: 2026-05-17 - Added FASE 3 source folder 7-day retention
+# Manages Mirror cleanup and Log rotation automatically.
+# Last updated: 2026-06-02 - T026/T030/T031/T032: failure sentinel, lag alert, English comments, ACL logging
 
-$Rclone           = 'C:\Tools\Rclone\rclone.exe'
-$Config           = 'C:\Sync\Config\rclone.conf'
-$Source           = 'C:\Users\helde\Repos\Bois'
-$Remote           = 'cloudsync:helder-sync-mirror'
-$Mirror           = 'C:\Sync\Mirror'
-$LogDir           = 'C:\Sync\Logs\cloud_sync'
-$Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
-$DaysToKeepMirror = 7
-$DaysToKeepLogs   = 30
+$Rclone             = 'C:\Tools\Rclone\rclone.exe'
+$Config             = 'C:\Sync\Config\rclone.conf'
+$Source             = 'C:\Users\helde\Repos\Bois'
+$Remote             = 'cloudsync:helder-sync-mirror'
+$Mirror             = 'C:\Sync\Mirror'
+$LogDir             = 'C:\Sync\Logs\cloud_sync'
+$Log                = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$DaysToKeepMirror   = 7
+$DaysToKeepLogs     = 30
+$SyncFailedSentinel = 'C:\Sync\Config\.sync_failed'
+$LastSyncOkFile     = 'C:\Sync\Config\.last_sync_ok'
 
 # Known malicious firewall rules that block Backblaze B2 sync
 $MaliciousFirewallRules = @(
@@ -1296,6 +1661,17 @@ function Remove-MaliciousFirewallRules {
         }
     }
     return $removed
+}
+
+# ============================================================
+# T030 - B2 lag alert: warn if last successful sync is stale
+# ============================================================
+if (Test-Path $LastSyncOkFile) {
+    $lastOk = [datetime](Get-Content -LiteralPath $LastSyncOkFile -Raw).Trim()
+    $lagMinutes = [math]::Round(((Get-Date) - $lastOk).TotalMinutes, 1)
+    if ($lagMinutes -gt 15) {
+        Write-SyncLog "B2-LAG-ALERT  Last successful sync was $lagMinutes minutes ago (threshold: 15)"
+    }
 }
 
 # ============================================================
@@ -1357,58 +1733,37 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
 
         if ($LASTEXITCODE -eq 0) {
             Write-SyncLog "FIREWALL-HEAL  Retry SUCCESS - sync completed after firewall repair"
+            # T026: clear failure sentinel on successful retry
+            if (Test-Path $SyncFailedSentinel) { Remove-Item -LiteralPath $SyncFailedSentinel -Force -ErrorAction SilentlyContinue }
+            # T030: record successful sync timestamp
+            (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') | Set-Content -LiteralPath $LastSyncOkFile -NoNewline
         } else {
             Write-SyncLog "FIREWALL-HEAL  Retry FAILED (exit $LASTEXITCODE) - sync still failing after firewall repair"
             Write-SyncLog "FIREWALL-HEAL  Manual investigation required"
+            # T026: write failure sentinel
+            "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  FIREWALL-HEAL Retry FAILED (exit $LASTEXITCODE)" |
+                Set-Content -LiteralPath $SyncFailedSentinel -NoNewline
         }
     } else {
         Write-SyncLog "FIREWALL-DETECT  No known malicious rules found - unknown blocking cause"
         Write-SyncLog "FIREWALL-DETECT  Run check_status.ps1 and review firewall rules manually"
     }
-} elseif ($rcloneOutput -match 'no such host|i/o timeout|dial tcp.*lookup') {
-    # DNS-level attack: rogue DHCP server serving 127.0.0.1 as DNS (confirmed 2026-03-15)
-    $dnsBlocked = $true
-    Write-SyncLog "DNS-ATTACK-DETECT  Rclone reported DNS failure - possible rogue DNS/DHCP attack"
-
-    # Check if Ethernet adapter has DHCP-assigned DNS (127.0.0.1 = rogue)
-    $ethDns = (Get-DnsClientServerAddress -InterfaceAlias 'Ethernet' -AddressFamily IPv4 -ErrorAction SilentlyContinue).ServerAddresses
-    Write-SyncLog "DNS-ATTACK-DETECT  Ethernet DNS: $($ethDns -join ', ')"
-
-    # Test live resolution
-    try {
-        $resolved = [System.Net.Dns]::GetHostAddresses('api.backblazeb2.com')
-        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com resolves NOW: $($resolved -join ', ') - transient DNS issue"
-    } catch {
-        Write-SyncLog "DNS-ATTACK-DETECT  api.backblazeb2.com still FAILS to resolve - DNS attack may be active"
-        Write-SyncLog "DNS-ATTACK-DETECT  Check: hosts file, Ethernet DNS settings, router DHCP config"
-    }
-
-    # Retry sync (DNS may have recovered if interface switched)
-    Write-SyncLog "DNS-ATTACK-DETECT  Retrying sync after DNS diagnosis"
-    $rcloneOutput2 = & $Rclone sync $Source $Remote `
-        --config $Config `
-        --log-file $Log `
-        --log-level INFO `
-        --transfers 4 `
-        --checkers 8 `
-        --fast-list 2>&1
-
-    $rcloneExitCode = $LASTEXITCODE
-
-    if ($LASTEXITCODE -eq 0) {
-        Write-SyncLog "DNS-ATTACK-HEAL  Retry SUCCESS - sync completed after DNS recovery"
-    } else {
-        Write-SyncLog "DNS-ATTACK-FAIL  Retry FAILED (exit $LASTEXITCODE) - DNS still broken"
-        Write-SyncLog "DNS-ATTACK-FAIL  Run: Set-DnsClientServerAddress -InterfaceAlias Ethernet -ServerAddresses 1.1.1.1,8.8.8.8"
-    }
 } elseif ($rcloneExitCode -eq 0) {
     Write-SyncLog "SYNC-OK  Sync completed successfully (exit 0)"
+    # T026: clear failure sentinel on success
+    if (Test-Path $SyncFailedSentinel) { Remove-Item -LiteralPath $SyncFailedSentinel -Force -ErrorAction SilentlyContinue }
+    # T030: record successful sync timestamp
+    (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') | Set-Content -LiteralPath $LastSyncOkFile -NoNewline
 } else {
     Write-SyncLog "SYNC-FAIL  Sync failed (exit $rcloneExitCode) - not a firewall error"
+    # T026: write failure sentinel
+    "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  SYNC-FAIL (exit $rcloneExitCode)" |
+        Set-Content -LiteralPath $SyncFailedSentinel -NoNewline
 }
 
 # ============================================================
-# FASE 0 - Aplicar ACL Deny Delete em arquivos < 7 dias
+# PHASE 0 - Apply Deny Delete ACL to files younger than 7 days
+# Protects each file that has not yet reached 7 days of age
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -1418,25 +1773,37 @@ if (Test-Path $Mirror) {
         ForEach-Object {
             try {
                 $acl = Get-Acl $_.FullName -ErrorAction Stop
+
+                # Check if file already has Deny Delete ACL (avoid duplicate)
                 $hasDeny = $acl.Access | Where-Object {
                     $_.AccessControlType -eq 'Deny' -and
                     $_.IdentityReference -like '*Everyone*' -and
                     $_.FileSystemRights -like '*Delete*'
                 }
+
                 if (-not $hasDeny) {
+                    # Apply Deny Delete ACL
                     $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
                         [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
-                        'Delete', 'None', 'None', 'Deny'
+                        'Delete',
+                        'None',
+                        'None',
+                        'Deny'
                     )
                     $acl.AddAccessRule($rule)
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
-            } catch { }
+            } catch {
+                # T032: surface ACL set failures
+                Write-SyncLog "ACL-WARN  Failed to set ACL on $($_.FullName): $($_.Exception.Message)"
+            }
         }
 }
 
 # ============================================================
-# FASE 1 - Remover ACL Deny Delete de arquivos >= 7 dias
+# PHASE 1 - Remove Deny Delete ACL from files >= 7 days old
+# Strips protection from files that have reached 7 days
+# CRITICAL: Must run BEFORE attempting deletion (Phase 2)
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -1446,21 +1813,31 @@ if (Test-Path $Mirror) {
         ForEach-Object {
             try {
                 $acl = Get-Acl $_.FullName -ErrorAction Stop
+
+                # Find Deny Delete rules belonging to Everyone
                 $denyRules = $acl.Access | Where-Object {
                     $_.AccessControlType -eq 'Deny' -and
                     $_.IdentityReference -like '*Everyone*' -and
                     $_.FileSystemRights -like '*Delete*'
                 }
+
                 if ($denyRules) {
-                    foreach ($rule in $denyRules) { $acl.RemoveAccessRule($rule) | Out-Null }
+                    # Remove each Deny Delete rule found
+                    foreach ($rule in $denyRules) {
+                        $acl.RemoveAccessRule($rule) | Out-Null
+                    }
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
-            } catch { }
+            } catch {
+                # T032: surface ACL removal failures
+                Write-SyncLog "ACL-WARN  Failed to remove ACL on $($_.FullName): $($_.Exception.Message)"
+            }
         }
 }
 
 # ============================================================
-# FASE 2 - Deletar arquivos >= 7 dias
+# PHASE 2 - Delete files >= 7 days old
+# ACL was already stripped in PHASE 1, so delete runs without ERROR 5
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -1468,6 +1845,7 @@ if (Test-Path $Mirror) {
         Where-Object { $_.LastWriteTime -lt $threshold } |
         Remove-Item -Force -ErrorAction SilentlyContinue
 
+    # Clean up empty folders (after deleting files)
     Get-ChildItem -Path $Mirror -Recurse -Directory -ErrorAction SilentlyContinue |
         Sort-Object FullName -Descending |
         Where-Object { @(Get-ChildItem -Path $_.FullName -ErrorAction SilentlyContinue).Count -eq 0 } |
@@ -1475,7 +1853,7 @@ if (Test-Path $Mirror) {
 }
 
 # ============================================================
-# FASE 3 - Source folder retention
+# PHASE 3 - Source folder retention
 # Delete date-named subdirs in $Source older than $DaysToKeepMirror calendar days.
 # Uses folder NAME as date (yyyy-MM-dd), ignoring file timestamps entirely,
 # so whole-day folders are removed in one sync cycle with no B2 churn.
@@ -1507,6 +1885,7 @@ Get-ChildItem -Path 'C:\Sync\Logs\mirror' -Filter "mirror_*.log" |
     Remove-Item -Force -ErrorAction SilentlyContinue
 
 Write-SyncLog "SYNC-END  Cloud sync run complete"
+
 ```
 
 ---
@@ -1575,6 +1954,7 @@ robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\
 ---
 
 ### `C:\Sync\Config\wdog.ps1`
+> Watchdog loop (180s interval). Monitors RealTimeSync process and FolderSync-CloudBackup task. Logs WATCHDOG-HEARTBEAT every cycle. Restarts RealTimeSync if not running; re-enables task if Disabled. Logs to C:\Sync\Logs\services\watchdog.log. (T027, 2026-06-02)
 ```powershell
 # FolderSync Watchdog
 # Ensures RealTimeSync and cloud sync scheduled task are alive.
@@ -1593,22 +1973,25 @@ function Write-Log($msg) {
 Write-Log "Watchdog started."
 
 while ($true) {
+    Write-Log "WATCHDOG-HEARTBEAT"
+
     # --- Check RealTimeSync ---
     $rts = Get-Process -Name "RealTimeSync" -ErrorAction SilentlyContinue
     if (-not $rts) {
-        Write-Log "RealTimeSync not running — starting."
+        Write-Log "RealTimeSync not running â€” starting."
         Start-Process -FilePath $RealTimeSync -ArgumentList "`"$RealTimeSyncConfig`"" -WindowStyle Hidden
     }
 
     # --- Check scheduled task is enabled ---
     $task = Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue
     if ($task -and $task.State -eq 'Disabled') {
-        Write-Log "Task $TaskName was disabled — re-enabling."
+        Write-Log "Task $TaskName was disabled â€” re-enabling."
         Enable-ScheduledTask -TaskName $TaskName | Out-Null
     }
 
     Start-Sleep -Seconds 180
 }
+
 ```
 
 ---
@@ -1693,6 +2076,336 @@ $svcName = 'FolderSyncWatchdog'
 Start-Service $svcName
 Write-Host "Service '$svcName' installed and started"
 ```
+
+### `C:\Sync\Config\auditor.ps1`
+> Security monitor: startup gap forensics, FileSystemWatcher on source folder, remote logon/service/system event polling. Background job cleanup every ~60s (T028); motion AVI vs suspicious delete distinction (T029); 30-day log rotation for audit logs (T033, 2026-06-02). Writes to security_audit_YYYY-MM-DD.log and file_audit_YYYY-MM-DD.log.
+```powershell
+# auditor.ps1
+# FolderSync Security Auditor
+# Monitors file system events, remote access, service tampering, and system events.
+# Runs as NSSM service "FolderSyncAuditor".
+
+$WatchedFolder  = 'C:\Users\helde\Repos\Bois'
+$LogDir         = 'C:\Sync\Logs'
+$AuditDir       = "$LogDir\audit"
+$SecurityDir    = "$LogDir\security"
+$StartupGapSecs = 120   # gap threshold to trigger forensic dump
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+function Get-FileAuditLog  { Join-Path $AuditDir    "file_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
+function Get-SecurityLog   { Join-Path $SecurityDir "security_audit_$(Get-Date -Format 'yyyy-MM-dd').log" }
+
+function Write-FileAudit($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath (Get-FileAuditLog)
+}
+
+function Write-SecurityAudit($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath (Get-SecurityLog)
+}
+
+function Write-BothLogs($msg) {
+    Write-FileAudit    $msg
+    Write-SecurityAudit $msg
+}
+
+# ---------------------------------------------------------------------------
+# Startup gap detection + forensic dump
+# ---------------------------------------------------------------------------
+function Invoke-StartupGapCheck {
+    # Find last timestamped line across all auditor logs
+    $allLogs = Get-ChildItem $SecurityDir -Filter "security_audit_*.log" -ErrorAction SilentlyContinue |
+               Sort-Object LastWriteTime -Descending | Select-Object -First 3
+    $lastTs = $null
+    foreach ($f in $allLogs) {
+        $lines = Get-Content $f.FullName -ErrorAction SilentlyContinue | Where-Object { $_ -match '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}' }
+        if ($lines) {
+            $lastLine = $lines | Select-Object -Last 1
+            if ($lastLine -match '^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})') {
+                try { $lastTs = [datetime]::ParseExact($Matches[1], 'yyyy-MM-dd HH:mm:ss', $null); break } catch {}
+            }
+        }
+    }
+
+    if ($lastTs) {
+        $gapSecs = ([datetime]::Now - $lastTs).TotalSeconds
+        if ($gapSecs -gt $StartupGapSecs) {
+            Write-SecurityAudit "[WARN] Startup gap detected: $([math]::Round($gapSecs,0))s since last log entry ($lastTs) - writing forensic report"
+            Write-ForensicReport -GapSeconds $gapSecs -LastKnownTime $lastTs
+        }
+    }
+}
+
+function Write-ForensicReport([double]$GapSeconds, [datetime]$LastKnownTime) {
+    $ts   = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+    $path = Join-Path $AuditDir "interruption_report_$ts.txt"
+
+    $lines = @()
+    $lines += "INTERRUPTION REPORT - generated $ts"
+    $lines += "Last known auditor activity : $LastKnownTime"
+    $lines += "Gap duration                : $([math]::Round($GapSeconds,0)) seconds"
+    $lines += ""
+    $lines += "=== RUNNING PROCESSES (snapshot) ==="
+    $lines += (Get-Process | Sort-Object CPU -Descending | Select-Object -First 60 |
+               Format-Table Name, Id, CPU, WorkingSet -AutoSize | Out-String).Trim()
+    $lines += ""
+    $lines += "=== LAST 50 SECURITY LOG EVENTS ==="
+    try {
+        $secEvents = Get-WinEvent -LogName Security -MaxEvents 50 -ErrorAction SilentlyContinue
+        $lines += ($secEvents | Format-Table TimeCreated, Id, Message -AutoSize -Wrap | Out-String -Width 200).Trim()
+    } catch { $lines += "(Security log unavailable: $_)" }
+    $lines += ""
+    $lines += "=== LAST 50 SYSTEM LOG EVENTS ==="
+    try {
+        $sysEvents = Get-WinEvent -LogName System -MaxEvents 50 -ErrorAction SilentlyContinue
+        $lines += ($sysEvents | Format-Table TimeCreated, Id, Message -AutoSize -Wrap | Out-String -Width 200).Trim()
+    } catch { $lines += "(System log unavailable: $_)" }
+
+    $lines | Set-Content -LiteralPath $path -Encoding UTF8
+    Write-SecurityAudit "[FORENSIC] Report written: $path"
+}
+
+# ---------------------------------------------------------------------------
+# Log rotation (T033): delete audit logs older than 30 days
+# ---------------------------------------------------------------------------
+$script:LastLogRotation = [datetime]::MinValue
+
+function Invoke-AuditLogRotation {
+    if (([datetime]::Now - $script:LastLogRotation).TotalHours -lt 24) { return }
+    $script:LastLogRotation = [datetime]::Now
+    $cutoff = (Get-Date).AddDays(-30)
+
+    foreach ($pattern in @("$SecurityDir\security_audit_*.log", "$AuditDir\file_audit_*.log")) {
+        Get-ChildItem -LiteralPath (Split-Path $pattern) -Filter (Split-Path $pattern -Leaf) `
+            -ErrorAction SilentlyContinue |
+            Where-Object { $_.LastWriteTime -lt $cutoff } |
+            ForEach-Object {
+                Remove-Item -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue
+                Write-SecurityAudit "[LOG-ROTATE] Deleted old log: $($_.Name)"
+            }
+    }
+}
+
+# ---------------------------------------------------------------------------
+# A. FileSystemWatcher - event-driven file change detection
+# ---------------------------------------------------------------------------
+function Start-FileWatcher {
+    $fsw = New-Object System.IO.FileSystemWatcher
+    $fsw.Path                  = $WatchedFolder
+    $fsw.IncludeSubdirectories = $true
+    $fsw.NotifyFilter          = [System.IO.NotifyFilters]'FileName, DirectoryName'
+    $fsw.EnableRaisingEvents   = $true
+
+    $handler = {
+        param($src, $e)
+
+        $now = Get-Date
+        # ForÃ§amos a conversÃ£o para String AQUI, antes de entrar no Job
+        $changeTypeText = $e.ChangeType.ToString().ToUpper()
+        $filePath = $e.FullPath
+        $fileName = $e.Name
+        $oldName = if ($e -is [System.IO.RenamedEventArgs]) { $e.OldName } else { $null }
+
+        Start-Job -ArgumentList $filePath, $fileName, $changeTypeText, $now, $oldName -ScriptBlock {
+            param($path, $name, $type, $time, $old)
+
+            Start-Sleep -Milliseconds 800
+            $user = 'unknown'
+
+            try {
+                $searchName = [System.IO.Path]::GetFileName($path)
+                $evt = Get-WinEvent -FilterHashtable @{
+                    LogName = 'Security'; Id = 4663, 4660; StartTime = $time.AddSeconds(-15)
+                } -ErrorAction SilentlyContinue |
+                Where-Object { $_.Message -like "*$searchName*" } | Select-Object -First 1
+
+                if ($evt -and $evt.Message -match '(Nome da Conta|Account Name):\s+(\S+)') { $user = $Matches[2] }
+            } catch {}
+
+            $logFile = "C:\Sync\Logs\audit\file_audit_$($time.ToString('yyyy-MM-dd')).log"
+            $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
+
+            # T029: distinguish routine AVI aging from suspicious deletions
+            if ($type -eq 'DELETED') {
+                if ($name -like 'motion_*.avi') {
+                    $detail = 'DELETED-ROUTINE'
+                    $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
+                    $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+                } else {
+                    $detail = 'DELETED-SUSPICIOUS'
+                    $line = "$ts | ALERT  $($detail.PadRight(18)) | user=$user | path=$path"
+                    $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+                    $secLog = "C:\Sync\Logs\security\security_audit_$($time.ToString('yyyy-MM-dd')).log"
+                    $line | Add-Content -LiteralPath $secLog -Encoding UTF8
+                    & 'C:\Sync\Config\cloud_sync.ps1'
+                }
+            } else {
+                # FormataÃ§Ã£o garantida como texto
+                $detail = if ($old) { "RENAMED: $old -> $name" } else { $type }
+                $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
+                $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+            }
+        } | Out-Null
+    }
+
+    Register-ObjectEvent $fsw Created -Action $handler | Out-Null
+    Register-ObjectEvent $fsw Deleted -Action $handler | Out-Null
+    Register-ObjectEvent $fsw Renamed -Action $handler | Out-Null
+    
+    return $fsw
+}
+
+# ---------------------------------------------------------------------------
+# B. Remote access / logon detection (every 5 min)
+# ---------------------------------------------------------------------------
+$script:LastRemoteCheck = [datetime]::MinValue
+
+function Check-RemoteAccess {
+    if (([datetime]::Now - $script:LastRemoteCheck).TotalSeconds -lt 300) { return }
+    $script:LastRemoteCheck = [datetime]::Now
+    $since = (Get-Date).AddMinutes(-5)
+
+    # Network / RDP logons
+    try {
+        $logons = Get-WinEvent -FilterHashtable @{
+            LogName   = 'Security'
+            Id        = 4624
+            StartTime = $since
+        } -ErrorAction SilentlyContinue | Where-Object {
+            $_.Message -match 'Logon Type:\s+(3|10)\b'
+        }
+        foreach ($evt in $logons) {
+            $type = if ($evt.Message -match 'Logon Type:\s+(\d+)') { $Matches[1] } else { '?' }
+            $acct = if ($evt.Message -match 'Account Name:\s+(\S+)') { $Matches[1] } else { '?' }
+            $label = if ($type -eq '10') { 'RDP/RemoteInteractive' } else { 'Network' }
+            Write-SecurityAudit "[LOGON] Type=$type ($label) account=$acct at $($evt.TimeCreated)"
+        }
+    } catch {}
+
+    # Remote access tools
+    foreach ($proc in @('TeamViewer', 'AnyDesk', 'VNCViewer', 'vncserver', 'ScreenConnect')) {
+        $p = Get-Process $proc -ErrorAction SilentlyContinue
+        if ($p) { Write-SecurityAudit "[REMOTE-TOOL] $proc is running (PID $($p.Id -join ','))" }
+    }
+}
+
+# ---------------------------------------------------------------------------
+# C. Service tampering (every 60s)
+# ---------------------------------------------------------------------------
+$WatchedServices = @('FolderSyncWatchdog', 'FolderSyncAuditor', 'FolderSync-CloudBackup')
+$script:LastServiceCheck = [datetime]::MinValue
+
+function Check-Services {
+    if (([datetime]::Now - $script:LastServiceCheck).TotalSeconds -lt 60) { return }
+    $script:LastServiceCheck = [datetime]::Now
+    $since = (Get-Date).AddSeconds(-60)
+
+    foreach ($svcName in $WatchedServices) {
+        $svc = Get-Service $svcName -ErrorAction SilentlyContinue
+        if ($svc -and $svc.Status -ne 'Running') {
+            Write-SecurityAudit "[CRITICAL] Service $svcName is $($svc.Status) - expected Running"
+        }
+    }
+
+    # Event 7036 (service state change) and 7040 (start type change)
+    try {
+        $evts = Get-WinEvent -FilterHashtable @{
+            LogName   = 'System'
+            Id        = 7036, 7040
+            StartTime = $since
+        } -ErrorAction SilentlyContinue
+        foreach ($evt in $evts) {
+            foreach ($svc in $WatchedServices) {
+                if ($evt.Message -like "*$svc*") {
+                    Write-SecurityAudit "[SVC-EVENT] $($evt.Id): $($evt.Message.Trim() -replace '\s+', ' ')"
+                }
+            }
+        }
+    } catch {}
+}
+
+# ---------------------------------------------------------------------------
+# D. Physical/system events (every 60s)
+# ---------------------------------------------------------------------------
+$script:LastSystemCheck = [datetime]::MinValue
+
+function Check-SystemEvents {
+    if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
+    $script:LastSystemCheck = [datetime]::Now
+    $since = (Get-Date).AddSeconds(-60)
+
+    try {
+        $evts = Get-WinEvent -FilterHashtable @{
+            LogName   = 'System'
+            Id        = 42, 1074
+            StartTime = $since
+        } -ErrorAction SilentlyContinue
+        foreach ($evt in $evts) {
+            if ($evt.Id -eq 42) {
+                $reason = if ($evt.Message -match 'Reason.*?:\s+(.+)') { $Matches[1].Trim() } else { 'unknown' }
+                Write-SecurityAudit "[SLEEP] System entering sleep/hibernate - reason: $reason"
+            } elseif ($evt.Id -eq 1074) {
+                $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
+                $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
+                Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
+            }
+        }
+    } catch {}
+}
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+Write-SecurityAudit "[AUDITOR] Starting up (PID $PID)"
+Write-FileAudit     "[AUDITOR] Starting up (PID $PID)"
+
+# Check for startup gap and write forensic report if needed
+Invoke-StartupGapCheck
+
+# T033: rotate old audit logs at startup
+Invoke-AuditLogRotation
+
+# Start file system watcher
+$fsw = Start-FileWatcher
+Write-FileAudit "[AUDITOR] FileSystemWatcher active on $WatchedFolder"
+
+# Main polling loop
+$script:LoopIteration = 0
+try {
+    while ($true) {
+        Check-RemoteAccess
+        Check-Services
+        Check-SystemEvents
+
+        # T028: clean up completed/failed background jobs every 60 iterations (~60s)
+        $script:LoopIteration++
+        if ($script:LoopIteration % 60 -eq 0) {
+            Get-Job | Where-Object { $_.State -in 'Completed', 'Failed' } | Remove-Job -Force -ErrorAction SilentlyContinue
+        }
+
+        # T033: daily log rotation check
+        Invoke-AuditLogRotation
+
+        # Process queued FSW events
+        $null = [System.Threading.Thread]::Sleep(1000)
+        Start-Sleep -Milliseconds 100
+    }
+} finally {
+    $fsw.EnableRaisingEvents = $false
+    $fsw.Dispose()
+    Unregister-Event -SourceIdentifier 'FSW_Created'  -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier 'FSW_Deleted'  -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier 'FSW_Changed'  -ErrorAction SilentlyContinue
+    Unregister-Event -SourceIdentifier 'FSW_Renamed'  -ErrorAction SilentlyContinue
+    Write-SecurityAudit "[AUDITOR] Shutting down"
+    Write-FileAudit     "[AUDITOR] Shutting down"
+}
+```
+
+---
 
 ---
 
@@ -3159,12 +3872,12 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\check_status.ps1
 ---
 
 ### `C:\Sync\Config\check_camera.ps1`
-> Camera and motion detection health check. Run interactively to verify Yawcam is running, webcam device is OK, and recordings are being produced. No admin required for most checks.
+> Camera and motion detection health check. Run interactively to verify Yawcam process, webcam PnP device, recordings, startup entries, CAM-2 VLC relay (process + port 8161 + restart sentinel), and recent recordings across all cameras. No admin required for most checks. (T025, 2026-06-02)
 
 ```powershell
 # check_camera.ps1
 # Camera / Motion Detection Health Check
-# Modeled after check_status.ps1 — run interactively to diagnose camera state
+# Modeled after check_status.ps1 â€” run interactively to diagnose camera state
 # No admin required for most checks; PnP device queries may return partial data without elevation
 
 $TodayDir  = "C:\Users\helde\Repos\Bois\$(Get-Date -Format 'yyyy-MM-dd')"
@@ -3172,100 +3885,157 @@ $TempPath  = "C:\TEMP\motion_videos"
 $YawcamExe = "C:\Program Files (x86)\Yawcam\Yawcam.exe"
 $MonitorV4 = "C:\Program Files (x86)\Yawcam\yawcam_monitor_v4.ps1"
 
+# =============================================================================
 Write-Host "=== YAWCAM PROCESS ===" -ForegroundColor Cyan
 $yawcamProc = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
 $javawProc  = Get-Process -Name "javaw"  -ErrorAction SilentlyContinue |
               Where-Object { $_.MainWindowTitle -like "*Yawcam*" }
+
 if ($yawcamProc) {
     $yawcamProc | Select-Object Name, Id, CPU, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
 } elseif ($javawProc) {
     Write-Host "  (running as javaw)" -ForegroundColor Yellow
     $javawProc | Select-Object Name, Id, CPU, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
-} else { Write-Host "  NOT RUNNING" -ForegroundColor Red }
+} else {
+    Write-Host "  NOT RUNNING" -ForegroundColor Red
+}
 
+# =============================================================================
 Write-Host "`n=== YAWCAM MONITOR PROCESS ===" -ForegroundColor Cyan
 $monitorProc = Get-Process -Name "powershell" -ErrorAction SilentlyContinue |
                Where-Object { $_.CommandLine -like "*yawcam_monitor*" }
 if ($monitorProc) {
     $monitorProc | Select-Object Name, Id, @{N="Mem(MB)";E={[math]::Round($_.WorkingSet64/1MB,1)}}
 } else {
+    # Try WMI for command line
     $wmiProc = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue |
                Where-Object { $_.CommandLine -like "*yawcam_monitor*" }
-    if ($wmiProc) { $wmiProc | Select-Object Name, ProcessId }
-    else { Write-Host "  NOT RUNNING" -ForegroundColor Red }
+    if ($wmiProc) {
+        $wmiProc | Select-Object Name, ProcessId, @{N="CommandLine(truncated)";E={$_.CommandLine.Substring(0,[math]::Min(80,$_.CommandLine.Length))}}
+    } else {
+        Write-Host "  NOT RUNNING" -ForegroundColor Red
+    }
 }
 
+# =============================================================================
 Write-Host "`n=== WEBCAM DEVICE (PnP) ===" -ForegroundColor Cyan
 Get-PnpDevice -ErrorAction SilentlyContinue |
-    Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or
-                   $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" } |
+    Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" } |
     Select-Object FriendlyName, Status, Class, InstanceId
 
+# =============================================================================
 Write-Host "`n=== REGISTRY STARTUP ENTRIES ===" -ForegroundColor Cyan
 $runKey = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -ErrorAction SilentlyContinue
-Write-Host "  Yawcam:             $($runKey.Yawcam)"
-Write-Host "  YawcamMonitor:      $($runKey.YawcamMonitor)"
+Write-Host "  Yawcam:        $($runKey.Yawcam)"
+Write-Host "  YawcamMonitor:    $($runKey.YawcamMonitor)"
+Write-Host "  YawcamCam2Relay:  $($runKey.YawcamCam2Relay)"
+Write-Host "  (other Sync entries for reference)"
 Write-Host "  FolderSyncRealTime: $($runKey.FolderSyncRealTime)"
 
+# =============================================================================
 Write-Host "`n=== YAWCAM INSTALLATION ===" -ForegroundColor Cyan
 Write-Host "  Yawcam.exe     : $(if (Test-Path $YawcamExe) { 'FOUND - ' + (Get-Item $YawcamExe).LastWriteTime } else { 'NOT FOUND' })"
 Write-Host "  monitor_v4.ps1 : $(if (Test-Path $MonitorV4) { 'FOUND - ' + (Get-Item $MonitorV4).LastWriteTime } else { 'NOT FOUND' })"
 
+# =============================================================================
 Write-Host "`n=== TODAY'S RECORDINGS ($TodayDir) ===" -ForegroundColor Cyan
 if (Test-Path $TodayDir) {
     $files = Get-ChildItem $TodayDir -Filter "*.avi" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime
     if ($files) {
-        $totalMB = [math]::Round(($files | Measure-Object -Property Length -Sum).Sum / 1MB, 1)
-        $latest  = $files | Select-Object -Last 1
-        $ageMin  = [math]::Round(((Get-Date) - $latest.LastWriteTime).TotalMinutes, 1)
-        Write-Host "  Count: $($files.Count) files   Size: $totalMB MB   Latest: $($latest.Name) ($ageMin min ago)"
-        if ($ageMin -le 5)  { Write-Host "  [ACTIVE]" -ForegroundColor Green }
-        elseif ($ageMin -le 15) { Write-Host "  [OK - normal gap]" -ForegroundColor Cyan }
-        else { Write-Host "  [GAP - no motion or camera frozen?]" -ForegroundColor Yellow }
-    } else { Write-Host "  No .avi files yet today" -ForegroundColor Yellow }
-} else { Write-Host "  Directory not yet created for today" -ForegroundColor Yellow }
+        $totalMB  = [math]::Round(($files | Measure-Object -Property Length -Sum).Sum / 1MB, 1)
+        $latest   = $files | Select-Object -Last 1
+        $oldest   = $files | Select-Object -First 1
+        $ageMin   = [math]::Round(((Get-Date) - $latest.LastWriteTime).TotalMinutes, 1)
+        Write-Host "  Count      : $($files.Count) files"
+        Write-Host "  Total size : $totalMB MB"
+        Write-Host "  First      : $($oldest.Name)  ($($oldest.LastWriteTime))"
+        Write-Host "  Latest     : $($latest.Name)  ($($latest.LastWriteTime))"
+        if ($ageMin -le 5) {
+            Write-Host "  Age        : $ageMin min ago  [ACTIVE - recording recently]" -ForegroundColor Green
+        } elseif ($ageMin -le 15) {
+            Write-Host "  Age        : $ageMin min ago  [OK - within normal gap]" -ForegroundColor Cyan
+        } else {
+            Write-Host "  Age        : $ageMin min ago  [GAP - no motion or camera frozen?]" -ForegroundColor Yellow
+        }
+    } else {
+        Write-Host "  No .avi files yet today" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "  Directory not yet created for today" -ForegroundColor Yellow
+}
 
+# =============================================================================
 Write-Host "`n=== MONITOR RECORDING PATH ($TempPath) ===" -ForegroundColor Cyan
 if (Test-Path $TempPath) {
     $tmpFiles = Get-ChildItem $TempPath -Recurse -Filter "*.avi" -ErrorAction SilentlyContinue |
                 Sort-Object LastWriteTime -Descending | Select-Object -First 1
-    if ($tmpFiles) { Write-Host "  Latest: $($tmpFiles.Name) ($([math]::Round(((Get-Date)-$tmpFiles.LastWriteTime).TotalMinutes,1)) min ago)" }
-    else { Write-Host "  Path exists but no .avi files" -ForegroundColor Yellow }
+    if ($tmpFiles) {
+        $tmpAge = [math]::Round(((Get-Date) - $tmpFiles.LastWriteTime).TotalMinutes, 1)
+        Write-Host "  Latest : $($tmpFiles.Name)  ($tmpAge min ago)"
+    } else {
+        Write-Host "  Path exists but no .avi files" -ForegroundColor Yellow
+    }
 } else {
-    Write-Host "  Path does not exist — monitor checks legacy path; actual recordings in Bois dir" -ForegroundColor Red
+    Write-Host "  Path does not exist (monitor may fail to find recordings)" -ForegroundColor Red
+    Write-Host "  NOTE: Actual recordings go to Bois dir (see above). Monitor path is legacy." -ForegroundColor Gray
 }
 
-Write-Host "`n=== RECENT RECORDINGS (last 5 across cameras) ===" -ForegroundColor Cyan
-Get-ChildItem "C:\Users\helde\Repos\Bois" -Directory -ErrorAction SilentlyContinue |
-    Sort-Object Name -Descending | Select-Object -First 3 | ForEach-Object {
-        Get-ChildItem $_.FullName -Filter "*.avi" -ErrorAction SilentlyContinue |
-            Sort-Object LastWriteTime -Descending | Select-Object -First 2 | ForEach-Object {
-                $age = [math]::Round(((Get-Date)-$_.LastWriteTime).TotalMinutes,0)
-                Write-Host ("  [{0}]  {1}  ({2} min ago,  {3:N0} KB)" -f (Split-Path $_.DirectoryName -Leaf), $_.Name, $age, ($_.Length/1KB))
-            }
+# =============================================================================
+Write-Host "`n=== RECENT RECORDINGS (last 5 across all cameras) ===" -ForegroundColor Cyan
+$allDirs = Get-ChildItem "C:\Users\helde\Repos\Bois" -Directory -ErrorAction SilentlyContinue |
+           Sort-Object Name -Descending | Select-Object -First 3
+foreach ($dir in $allDirs) {
+    $dirFiles = Get-ChildItem $dir.FullName -Filter "*.avi" -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 2
+    foreach ($f in $dirFiles) {
+        $age = [math]::Round(((Get-Date) - $f.LastWriteTime).TotalMinutes, 0)
+        Write-Host ("  [{0}]  {1}  ({2} min ago,  {3:N0} KB)" -f $dir.Name, $f.Name, $age, ($f.Length/1KB))
     }
+}
 
+# =============================================================================
 Write-Host "`n=== CAM-2 RELAY (VLC: RTSP -> MJPEG http://127.0.0.1:8161/) ===" -ForegroundColor Cyan
+
+# VLC process check
 $relayProc = Get-CimInstance Win32_Process -Filter "Name = 'vlc.exe'" -ErrorAction SilentlyContinue |
              Where-Object { $_.CommandLine -like "*cam2_relay*" -or $_.CommandLine -like "*8161*" }
 if ($relayProc) {
-    Write-Host "  VLC relay  : RUNNING (PID $($relayProc.ProcessId))" -ForegroundColor Green
+    Write-Host "  VLC process : PASS  (PID $($relayProc.ProcessId))" -ForegroundColor Green
 } else {
     $vlcAny = Get-Process -Name "vlc" -ErrorAction SilentlyContinue
     if ($vlcAny) {
-        Write-Host "  VLC relay  : VLC running (PID $($vlcAny.Id)) — verify it is the cam2 relay" -ForegroundColor Yellow
+        Write-Host "  VLC process : PASS  VLC running (PID $($vlcAny.Id)) - verify it is the cam2 relay" -ForegroundColor Yellow
     } else {
-        Write-Host "  VLC relay  : NOT RUNNING — run cam2_relay.ps1 or reboot to auto-start" -ForegroundColor Red
+        Write-Host "  VLC process : FAIL  NOT RUNNING - run cam2_relay.ps1 or reboot to auto-start" -ForegroundColor Red
     }
 }
+
+# Port 8161 check
+$port8161 = Test-NetConnection -ComputerName "127.0.0.1" -Port 8161 -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+if ($port8161.TcpTestSucceeded) {
+    Write-Host "  Port 8161   : PASS  listening" -ForegroundColor Green
+} else {
+    Write-Host "  Port 8161   : FAIL  nothing listening on 127.0.0.1:8161" -ForegroundColor Red
+}
+
+# Sentinel: restart failure flag
+$sentinelFail = "C:\Sync\Config\.camera_restart_failed"
+if (Test-Path $sentinelFail) {
+    $sentinelTs = Get-Content -LiteralPath $sentinelFail -ErrorAction SilentlyContinue
+    Write-Host "  Restart sentinel : FAIL  .camera_restart_failed exists (timestamp: $sentinelTs)" -ForegroundColor Red
+    Write-Host "                     Yawcam failed to recover after last restart attempt." -ForegroundColor Red
+    Write-Host "                     Remove C:\Sync\Config\.camera_restart_failed after manual fix." -ForegroundColor Gray
+} else {
+    Write-Host "  Restart sentinel : PASS  no failure flag" -ForegroundColor Green
+}
+
 $cam2Reachable = Test-Connection -ComputerName "192.168.0.109" -Count 1 -Quiet -ErrorAction SilentlyContinue
-Write-Host "  C100 ping  : $(if ($cam2Reachable) { 'REACHABLE (192.168.0.109)' } else { 'UNREACHABLE — camera offline or IP changed?' })" -ForegroundColor $(if ($cam2Reachable) { 'Green' } else { 'Red' })
-$relayLog = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+Write-Host "  C100 ping   : $(if ($cam2Reachable) { 'REACHABLE (192.168.0.109)' } else { 'UNREACHABLE - camera offline or IP changed?' })" -ForegroundColor $(if ($cam2Reachable) { 'Green' } else { 'Red' })
+$relayLog = "C:\Sync\Logs\services\cam2_relay.log"
 if (Test-Path $relayLog) {
     $lastLine = Get-Content $relayLog -Tail 1
-    Write-Host "  Last log   : $lastLine"
+    Write-Host "  Last log    : $lastLine"
 } else {
-    Write-Host "  Relay log  : no log for today yet" -ForegroundColor Yellow
+    Write-Host "  Relay log   : no log yet at $relayLog" -ForegroundColor Yellow
 }
 
 # =============================================================================
@@ -3273,34 +4043,60 @@ Write-Host "`n=== CAMERA INPUT SUMMARY ===" -ForegroundColor Cyan
 Write-Host "  [CAM-1]  Built-in laptop webcam (HD User Facing)  ->  Yawcam 0.6.2 (direct)"
 Write-Host "  [CAM-2]  TP-LINK Tapo C100 (192.168.0.109)        ->  VLC relay -> Yawcam (http://127.0.0.1:8161/)"
 Write-Host ""
+
 ```
 
 ---
 
 ### `C:\Sync\Config\cam2_relay.ps1`
-> CAM-2 VLC relay script. Reads credentials from `cam2.conf`, starts VLC as RTSP->MJPEG HTTP relay on `127.0.0.1:8161`. Monitors VLC process and restarts on death (30s interval). Logs to `C:\Sync\Logs\camera\cam2_relay_YYYY-MM-DD.log`. Registered as `YawcamCam2Relay` registry Run entry (hidden, at login).
+> CAM-2 VLC RTSP->MJPEG relay. Reads credentials from cam2.conf, starts VLC on http://127.0.0.1:8161/. Circuit breaker: max 5 restarts/hour. Port-listening verification after each restart. 7-day log rotation. Logs to C:\Sync\Logs\services\cam2_relay.log. (T024, 2026-06-02)
 
 ```powershell
 # cam2_relay.ps1
 # CAM-2 RTSP -> MJPEG HTTP relay for Yawcam
 # Reads credentials from cam2.conf, starts VLC relay on http://127.0.0.1:8161/
 # Registered as startup entry: HKCU:\...\Run\YawcamCam2Relay
-# Logs to C:\Sync\Logs\camera\cam2_relay_YYYY-MM-DD.log
+# Logs to C:\Sync\Logs\services\cam2_relay.log (single rolling file, 7-day retention)
 
-$ConfFile  = "C:\Sync\Config\cam2.conf"
-$VlcExe    = "C:\Program Files\VideoLAN\VLC\vlc.exe"
-$RelayPort = 8161
-$RelayHost = "127.0.0.1"
-$LogFile   = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
-$CheckSecs = 30
+$ConfFile       = "C:\Sync\Config\cam2.conf"
+$VlcExe         = "C:\Program Files\VideoLAN\VLC\vlc.exe"
+$RelayPort      = 8161
+$RelayHost      = "127.0.0.1"
+$LogFile        = "C:\Sync\Logs\services\cam2_relay.log"
+$CheckSecs      = 30   # health check interval
+$MaxRestarts    = 5    # max restarts per hour before giving up
+$RestartWindow  = 3600 # seconds (1 hour)
+
+$restartTimes = [System.Collections.Generic.List[datetime]]::new()
 
 function Write-Log($msg) {
     $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     "$ts  $msg" | Add-Content -LiteralPath $LogFile
 }
 
+function Invoke-LogRotation {
+    if (-not (Test-Path $LogFile)) { return }
+    $cutoff = (Get-Date).AddDays(-7)
+    $lines = Get-Content -LiteralPath $LogFile -ErrorAction SilentlyContinue
+    if (-not $lines) { return }
+    $kept = $lines | Where-Object {
+        if ($_ -match '^(\d{4}-\d{2}-\d{2})') {
+            try { [datetime]$matches[1] -ge $cutoff } catch { $true }
+        } else { $true }
+    }
+    $kept | Set-Content -LiteralPath $LogFile -Force
+}
+
+function Test-PortListening {
+    $result = Test-NetConnection -ComputerName $RelayHost -Port $RelayPort -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+    return $result.TcpTestSucceeded
+}
+
+# ---------------------------------------------------------------------------
+# Read credentials from cam2.conf
+# ---------------------------------------------------------------------------
 if (-not (Test-Path $ConfFile)) {
-    Write-Log "FAIL  cam2.conf not found at $ConfFile — relay cannot start"
+    Write-Log "FAIL  cam2.conf not found at $ConfFile  - relay cannot start"
     exit 1
 }
 
@@ -3321,18 +4117,22 @@ if (-not $user -or -not $pass -or -not $ip) {
     exit 1
 }
 
-$RtspUrl  = "rtsp://${user}:${pass}@${ip}:${port}/${stream}"
-$SoutDst  = "${RelayHost}:${RelayPort}/"
-$SoutArg  = "#transcode{vcodec=MJPG,fps=10,acodec=none}:std{access=http,mux=mpjpeg,dst=${SoutDst}}"
+$RtspUrl = "rtsp://${user}:${pass}@${ip}:${port}/${stream}"
+$SoutDst = "${RelayHost}:${RelayPort}/"
+$SoutArg = "#transcode{vcodec=MJPG,fps=10,acodec=none}:std{access=http,mux=mpjpeg,dst=${SoutDst}}"
 
+Invoke-LogRotation
 Write-Log "START  CAM-2 relay starting  ->  http://${RelayHost}:${RelayPort}/"
 Write-Log "INFO   Source: rtsp://${user}:***@${ip}:${port}/${stream}"
 
+# ---------------------------------------------------------------------------
+# Relay loop  - start VLC, monitor, restart on death
+# ---------------------------------------------------------------------------
 $vlcProc = $null
 
 function Start-VlcRelay {
     Write-Log "INFO   Launching VLC relay"
-    $args = @(
+    $vlcArgs = @(
         "-I", "dummy",
         "--no-one-instance",
         "--loop",
@@ -3340,19 +4140,48 @@ function Start-VlcRelay {
         $RtspUrl,
         "--sout=$SoutArg"
     )
-    return Start-Process -FilePath $VlcExe -ArgumentList $args -PassThru -WindowStyle Hidden
+    return Start-Process -FilePath $VlcExe -ArgumentList $vlcArgs -PassThru -WindowStyle Hidden
 }
 
 $vlcProc = Start-VlcRelay
 
+$lastRotation = Get-Date
+
 while ($true) {
     Start-Sleep -Seconds $CheckSecs
-    $LogFile = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+
+    # Daily log rotation (prune entries older than 7 days)
+    if (((Get-Date) - $lastRotation).TotalHours -ge 24) {
+        Invoke-LogRotation
+        $lastRotation = Get-Date
+    }
+
     if ($vlcProc -eq $null -or $vlcProc.HasExited) {
-        Write-Log "WARN   VLC relay process died  - restarting"
+        Write-Log "WARN   VLC relay process died  - checking restart rate"
+
+        # Prune restart timestamps outside the window
+        $cutoff = (Get-Date).AddSeconds(-$RestartWindow)
+        $restartTimes.RemoveAll([System.Predicate[datetime]]{ param($t) $t -lt $cutoff }) | Out-Null
+
+        if ($restartTimes.Count -ge $MaxRestarts) {
+            Write-Log "RELAY-GIVINGUP  $MaxRestarts restarts in last hour  - relay exiting"
+            exit 1
+        }
+
+        $restartTimes.Add((Get-Date))
+        Write-Log "WARN   Restarting VLC (attempt $($restartTimes.Count) of $MaxRestarts in current window)"
         $vlcProc = Start-VlcRelay
+
+        # Wait for VLC to bind the port
+        Start-Sleep -Seconds 5
+        if (Test-PortListening) {
+            Write-Log "INFO   Port $RelayPort listening - relay confirmed up"
+        } else {
+            Write-Log "WARN   Port $RelayPort not yet listening after restart"
+        }
     }
 }
+
 ```
 
 ---
@@ -3719,19 +4548,148 @@ start "" "Yawcam.exe"
 ---
 
 ### `C:\Sync\Config\yawcam_monitor_v4.ps1`
-> Relocated from `C:\Program Files (x86)\Yawcam\`. Infinite-loop monitor.
-> Checks `C:\TEMP\motion_videos` (symlink to Bois) for .avi files. Restarts Yawcam if > 15 min without recording.
+> Active Yawcam monitor (in C:\Sync\Config\). Scans C:\Users\helde\Repos\Bois recursively for latest .avi every 60s. Logs to C:\Sync\Logs\services\yawcam_monitor.log (T023). Restart failure writes sentinel .camera_restart_failed (T034). 600s cooldown. Starts Yawcam via start_yawcam.bat. (T022/T023/T034, 2026-06-02)
+> Active Yawcam monitor (in C:\Sync\Config\). Scans C:\Users\helde\Repos\Bois recursively for latest .avi every 60s. Logs to C:\Sync\Logs\services\yawcam_monitor.log (T023). Restart failure writes sentinel .camera_restart_failed (T034). 600s cooldown. Starts Yawcam via start_yawcam.bat. (T022/T023/T034, 2026-06-02)
 
 ```powershell
-# yawcam_monitor_v4.ps1 -- Relocated to C:\Sync\Config\
-# Full source committed to git. Key parameters:
-$YawcamPath      = "C:\Program Files (x86)\Yawcam\yawcam.exe"
-$VideoPath       = "C:\TEMP\motion_videos"  # should be symlink to C:\Users\helde\Repos\Bois
-$CheckInterval   = 60     # seconds between checks
-$MaxMinutesWithoutVideo = 15   # threshold before restart
-$RestartCooldown = 600    # seconds between restarts (10 min)
-# Loop: if latest .avi > 15 min old AND not in cooldown -> Restart-YawcamSafely
-# Restart sequence: kill Yawcam -> disable/enable webcam PnP -> start Yawcam
+# ========================================
+# MONITOR YAWCAM - BASEADO EM GRAVACAO
+# ========================================
+# Relocated to C:\Sync\Config\ (was: C:\Program Files (x86)\Yawcam\)
+# Scans C:\Users\helde\Repos\Bois recursively for latest *.avi across all date subdirs.
+
+$YawcamPath      = "C:\Sync\Config\start_yawcam.bat"
+$VideoPath       = "C:\Users\helde\Repos\Bois"
+$LogFile         = "C:\Sync\Logs\services\yawcam_monitor.log"
+$SentinelFail    = "C:\Sync\Config\.camera_restart_failed"
+$CheckInterval   = 60
+$MaxMinutesWithoutVideo = 15
+$LastRestartTime = $null
+$RestartCooldown = 600
+
+function Write-Log($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
+
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "  MONITOR YAWCAM - BASEADO EM GRAVACAO" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Verificacao: a cada $CheckInterval segundos" -ForegroundColor White
+Write-Host "Alerta se: ficar $MaxMinutesWithoutVideo min sem gravar" -ForegroundColor White
+Write-Host "Cooldown: $($RestartCooldown/60) minutos entre reinicos" -ForegroundColor White
+Write-Host ""
+Write-Host "Pressione Ctrl+C para parar" -ForegroundColor Yellow
+Write-Host ""
+Write-Log "START  monitor starting  VideoPath=$VideoPath  interval=${CheckInterval}s"
+
+function Test-YawcamRunning {
+    $yawcam = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
+    if ($yawcam) { return $true }
+
+    $javaw = Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
+             Where-Object { $_.MainWindowTitle -like "*Yawcam*" }
+    if ($javaw) { return $true }
+
+    return $false
+}
+
+function Restart-YawcamSafely {
+    Write-Host ""
+    Write-Host ">>> REINICIANDO YAWCAM..." -ForegroundColor Cyan
+    Write-Log "RESTART  beginning Yawcam restart sequence"
+
+    Write-Host "   [1/5] Fechando Yawcam..." -ForegroundColor Gray
+    Get-Process -Name "yawcam" -ErrorAction SilentlyContinue | Stop-Process -Force
+    Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
+        Where-Object { $_.MainWindowTitle -like "*Yawcam*" } |
+        Stop-Process -Force
+    Start-Sleep -Seconds 5
+
+    Write-Host "   [2/5] Liberando camera..." -ForegroundColor Gray
+    Get-PnpDevice | Where-Object { $_.FriendlyName -like "*HD User*" } |
+        ForEach-Object {
+            Disable-PnpDevice -InstanceId $_.InstanceId -Confirm:$false -ErrorAction SilentlyContinue
+            Start-Sleep -Seconds 2
+            Enable-PnpDevice -InstanceId $_.InstanceId -Confirm:$false -ErrorAction SilentlyContinue
+        }
+    Start-Sleep -Seconds 3
+
+    Write-Host "   [3/5] Aguardando estabilizacao..." -ForegroundColor Gray
+    Start-Sleep -Seconds 5
+
+    Write-Host "   [4/5] Iniciando Yawcam..." -ForegroundColor Gray
+    Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$YawcamPath`""
+    Start-Sleep -Seconds 10
+
+    Write-Host "   [5/5] Verificando..." -ForegroundColor Gray
+    if (Test-YawcamRunning) {
+        Write-Host "   [OK] Yawcam reiniciado!" -ForegroundColor Green
+        Write-Log "RESTART-OK  Yawcam process confirmed after restart"
+        if (Test-Path $SentinelFail) { Remove-Item -LiteralPath $SentinelFail -Force -ErrorAction SilentlyContinue }
+    } else {
+        Write-Host "   [FAIL] Yawcam processo nao detectado apos reinicio" -ForegroundColor Red
+        Write-Log "CAMERA-RESTART-FAILED  Yawcam process not detected after restart sequence"
+        $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $ts | Set-Content -LiteralPath $SentinelFail -Force
+    }
+    Write-Host ""
+
+    $script:LastRestartTime = Get-Date
+}
+
+while ($true) {
+    $Timestamp = Get-Date -Format "HH:mm:ss"
+
+    # PRIORIDADE 1: Verificar se esta gravando (mais importante!)
+    $LatestVideo = Get-ChildItem -Path $VideoPath -Recurse -Filter "*.avi" -ErrorAction SilentlyContinue |
+                   Sort-Object LastWriteTime -Descending |
+                   Select-Object -First 1
+
+    if ($LatestVideo) {
+        $MinutesAgo = [math]::Round(((Get-Date) - $LatestVideo.LastWriteTime).TotalMinutes, 1)
+
+        if ($MinutesAgo -le 5) {
+            Write-Host "[$Timestamp] [OK] Gravando - ultimo video: $MinutesAgo min atras" -ForegroundColor Green
+            Write-Log "OK  recording active  latest=$($LatestVideo.Name)  age=${MinutesAgo}min"
+        }
+        elseif ($MinutesAgo -le $MaxMinutesWithoutVideo) {
+            Write-Host "[$Timestamp] [INFO] Ultimo video: $MinutesAgo min atras" -ForegroundColor Cyan
+            Write-Log "INFO  no recent recording  latest=$($LatestVideo.Name)  age=${MinutesAgo}min"
+        }
+        else {
+            Write-Host "[$Timestamp] [AVISO] SEM novos videos ha $MinutesAgo minutos!" -ForegroundColor Yellow
+            Write-Log "WARN  no video for ${MinutesAgo}min  latest=$($LatestVideo.Name)"
+
+            if ($LastRestartTime -eq $null -or ((Get-Date) - $LastRestartTime).TotalSeconds -gt $RestartCooldown) {
+                Write-Host "[$Timestamp] [ACAO] Yawcam provavelmente congelado - reiniciando..." -ForegroundColor Magenta
+                Write-Log "ACTION  triggering restart  reason=no-video-${MinutesAgo}min"
+                Restart-YawcamSafely
+            } else {
+                $WaitTime = [math]::Round(($RestartCooldown - ((Get-Date) - $LastRestartTime).TotalSeconds) / 60, 1)
+                Write-Host "[$Timestamp] [WAIT] Cooldown ativo - $WaitTime min restantes" -ForegroundColor Yellow
+                Write-Log "WAIT  cooldown active  remaining=${WaitTime}min"
+            }
+        }
+    } else {
+        Write-Host "[$Timestamp] [AVISO] Nenhum video em $VideoPath" -ForegroundColor Yellow
+        Write-Log "WARN  no *.avi files found under $VideoPath"
+
+        if (-not (Test-YawcamRunning)) {
+            Write-Host "[$Timestamp] [ERRO] Yawcam nao esta rodando!" -ForegroundColor Red
+            Write-Log "ERROR  Yawcam not running"
+
+            if ($LastRestartTime -eq $null -or ((Get-Date) - $LastRestartTime).TotalSeconds -gt $RestartCooldown) {
+                Write-Log "ACTION  triggering restart  reason=process-not-running"
+                Restart-YawcamSafely
+            }
+        }
+    }
+
+    Start-Sleep -Seconds $CheckInterval
+}
+
 ```
 
 ---
@@ -3808,6 +4766,212 @@ if ($LASTEXITCODE -eq 0) {
 
 ---
 
+
+---
+
+### `C:\Sync\Config\run_tests.ps1`
+> Tier 1-4 automated test orchestrator for T010-T034 changes. Tier 1: parse checks for 6 key scripts. Tier 2: safe live runs (DailySecurityCheck, check_camera). Tier 3: sentinel file verification (.last_sync_ok, .sync_failed, .camera_restart_failed). Tier 4: behavioral log checks (watchdog heartbeat, auditor job cleanup). Logs to C:\Sync\Logs\security\test_results_YYYY-MM-DD.log. (T035, 2026-06-02)
+```powershell
+#Requires -Version 5.1
+# run_tests.ps1 - Tier 1-4 automated validation for T010-T034 changes
+# Usage: powershell -ExecutionPolicy Bypass -File run_tests.ps1
+# Results written to C:\Sync\Logs\security\test_results_YYYY-MM-DD.log
+
+$LogFile = "C:\Sync\Logs\security\test_results_$(Get-Date -Format 'yyyy-MM-dd').log"
+$pass = 0; $fail = 0; $warn = 0
+
+function Write-Result($tier, $name, $status, $detail = '') {
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    $line = "$ts  [$tier]  $status  $name$(if ($detail) { "  - $detail" })"
+    Add-Content -LiteralPath $LogFile -Value $line
+    $color = switch ($status) { 'PASS' { 'Green' } 'FAIL' { 'Red' } 'WARN' { 'Yellow' } default { 'White' } }
+    Write-Host $line -ForegroundColor $color
+    switch ($status) { 'PASS' { $script:pass++ } 'FAIL' { $script:fail++ } 'WARN' { $script:warn++ } }
+}
+
+Add-Content -LiteralPath $LogFile -Value "`n=== TEST RUN $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==="
+
+# --- TIER 1: Parse Checks ---
+Write-Host "`n>>> TIER 1 - Parse Checks" -ForegroundColor Cyan
+$t1scripts = @('DailySecurityCheck.ps1','yawcam_monitor_v4.ps1','cam2_relay.ps1','wdog.ps1','auditor.ps1','cloud_sync.ps1')
+foreach ($s in $t1scripts) {
+    $path = "C:\Sync\Config\$s"
+    $t = $null; $e = $null
+    [System.Management.Automation.Language.Parser]::ParseFile($path,[ref]$t,[ref]$e) | Out-Null
+    if ($e.Count -eq 0) {
+        Write-Result 'T1' $s 'PASS'
+    } else {
+        $errs = ($e | ForEach-Object { "L$($_.Extent.StartLineNumber): $($_.Message)" }) -join '; '
+        Write-Result 'T1' $s 'FAIL' $errs
+    }
+}
+
+# --- TIER 2: Safe Live Runs ---
+Write-Host "`n>>> TIER 2 - Safe Live Runs" -ForegroundColor Cyan
+
+# DailySecurityCheck - run non-interactively, check log written
+$today = Get-Date -Format 'yyyy-MM-dd'
+$dscLog = "C:\Sync\Logs\security\security_check_$today.log"
+try {
+    $output = & powershell -NoProfile -ExecutionPolicy Bypass -NonInteractive -File "C:\Sync\Config\DailySecurityCheck.ps1" 2>&1
+    if (Test-Path $dscLog) {
+        Write-Result 'T2' 'DailySecurityCheck - log written' 'PASS'
+        # Verify new check sections present in log
+        $logContent = Get-Content -LiteralPath $dscLog -Raw
+        # Verify script ran to completion
+        if ($logContent -match 'SCAN-END') {
+            Write-Result 'T2' 'DailySecurityCheck - ran to completion' 'PASS'
+        } else {
+            Write-Result 'T2' 'DailySecurityCheck - ran to completion' 'FAIL' 'SCAN-END not found in log'
+        }
+        # Checks that always log (B2, RunKey, TaskIntegrity)
+        foreach ($keyword in @('B2Connectivity','RunKey','TaskTamper|TaskMissing|TaskOK')) {
+            if ($logContent -match $keyword) {
+                Write-Result 'T2' "DailySecurityCheck - $keyword logged" 'PASS'
+            } else {
+                Write-Result 'T2' "DailySecurityCheck - $keyword logged" 'FAIL' 'keyword missing from log'
+            }
+        }
+        # Alert-only checks (FirewallBlock, HostsPoison, EventLog) only log when triggered
+        $alerts = @($logContent | Select-String 'ALERT')
+        if ($alerts.Count -eq 0) {
+            Write-Result 'T2' 'DailySecurityCheck - 0 alerts on clean system' 'PASS'
+        } else {
+            Write-Result 'T2' "DailySecurityCheck - $($alerts.Count) alerts fired" 'WARN' 'review log - may be real issues'
+        }
+    } else {
+        Write-Result 'T2' 'DailySecurityCheck - log written' 'FAIL' 'log file not found after run'
+    }
+} catch {
+    Write-Result 'T2' 'DailySecurityCheck - execution' 'FAIL' $_.Exception.Message
+}
+
+# check_camera.ps1 - verify new sections present
+try {
+    $camOut = & powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Sync\Config\check_camera.ps1" 2>&1 | Out-String
+    if ($camOut -match 'CAM-2|cam2|relay|8161') {
+        Write-Result 'T2' 'check_camera - CAM-2 relay section present' 'PASS'
+    } else {
+        Write-Result 'T2' 'check_camera - CAM-2 relay section present' 'FAIL' 'no CAM-2/relay output found'
+    }
+    if ($camOut -match 'camera_restart_failed|restart.failed') {
+        Write-Result 'T2' 'check_camera - restart_failed sentinel check present' 'PASS'
+    } else {
+        Write-Result 'T2' 'check_camera - restart_failed sentinel check present' 'WARN' 'sentinel check not detected in output'
+    }
+} catch {
+    Write-Result 'T2' 'check_camera - execution' 'FAIL' $_.Exception.Message
+}
+
+# --- TIER 3: Sentinel File Checks ---
+Write-Host "`n>>> TIER 3 - Sentinel File Verification" -ForegroundColor Cyan
+
+# .last_sync_ok
+$lastSyncOk = 'C:\Sync\Config\.last_sync_ok'
+if (Test-Path $lastSyncOk) {
+    $ts = (Get-Content -LiteralPath $lastSyncOk -Raw).Trim()
+    try {
+        $age = (Get-Date) - [datetime]$ts
+        if ($age.TotalMinutes -lt 15) {
+            Write-Result 'T3' '.last_sync_ok - recent timestamp' 'PASS' "age: $([int]$age.TotalMinutes) min"
+        } else {
+            Write-Result 'T3' '.last_sync_ok - recent timestamp' 'WARN' "age: $([int]$age.TotalMinutes) min - cloud sync may not have run yet"
+        }
+    } catch {
+        Write-Result 'T3' '.last_sync_ok - readable timestamp' 'FAIL' "content: $ts"
+    }
+} else {
+    Write-Result 'T3' '.last_sync_ok - exists' 'WARN' 'not yet created - wait for next cloud_sync run (every 5 min)'
+}
+
+# .sync_failed should NOT exist on healthy system
+if (Test-Path 'C:\Sync\Config\.sync_failed') {
+    $reason = (Get-Content -LiteralPath 'C:\Sync\Config\.sync_failed' -Raw).Trim()
+    Write-Result 'T3' '.sync_failed - not present on healthy system' 'FAIL' $reason
+} else {
+    Write-Result 'T3' '.sync_failed - not present on healthy system' 'PASS'
+}
+
+# .camera_restart_failed should NOT exist on healthy system
+if (Test-Path 'C:\Sync\Config\.camera_restart_failed') {
+    $ts = (Get-Content -LiteralPath 'C:\Sync\Config\.camera_restart_failed' -Raw).Trim()
+    Write-Result 'T3' '.camera_restart_failed - not present on healthy system' 'WARN' "exists since: $ts - check if expected"
+} else {
+    Write-Result 'T3' '.camera_restart_failed - not present on healthy system' 'PASS'
+}
+
+# Monitor log - check path correctness
+$monLog = 'C:\Sync\Logs\services\yawcam_monitor.log'
+if (Test-Path $monLog) {
+    $recentLines = Get-Content -LiteralPath $monLog -Tail 20 | Out-String
+    if ($recentLines -match 'C:\\TEMP\\motion_videos') {
+        Write-Result 'T3' 'yawcam_monitor.log - correct path (no TEMP reference)' 'FAIL' 'old path still appearing in recent log entries'
+    } else {
+        Write-Result 'T3' 'yawcam_monitor.log - correct path (no TEMP reference)' 'PASS'
+    }
+    if ($recentLines -match 'Bois') {
+        Write-Result 'T3' 'yawcam_monitor.log - Bois path in log' 'PASS'
+    } else {
+        Write-Result 'T3' 'yawcam_monitor.log - Bois path in log' 'WARN' 'not yet seen - monitor may not have cycled'
+    }
+} else {
+    Write-Result 'T3' 'yawcam_monitor.log - exists' 'WARN' 'not yet created - monitor must run one cycle first'
+}
+
+# --- TIER 4: Behavioral Log Checks ---
+Write-Host "`n>>> TIER 4 - Behavioral Log Checks" -ForegroundColor Cyan
+
+# Watchdog heartbeat
+$wdogLog = 'C:\Sync\Logs\services\watchdog.log'
+if (Test-Path $wdogLog) {
+    $todayHB = Select-String -LiteralPath $wdogLog -Pattern "WATCHDOG-HEARTBEAT" | Where-Object { $_.Line -match $today }
+    if ($todayHB) {
+        Write-Result 'T4' 'watchdog.log - HEARTBEAT today' 'PASS' "$($todayHB.Count) entries"
+    } else {
+        Write-Result 'T4' 'watchdog.log - HEARTBEAT today' 'WARN' 'no heartbeat yet today - wait 3 min after service restart'
+    }
+} else {
+    Write-Result 'T4' 'watchdog.log - exists' 'FAIL' 'log file missing'
+}
+
+# Auditor job cleanup
+$auditLog = "C:\Sync\Logs\security\security_audit_$today.log"
+if (Test-Path $auditLog) {
+    $jobClean = Select-String -LiteralPath $auditLog -Pattern 'JOB-CLEANUP' -ErrorAction SilentlyContinue
+    if ($jobClean) {
+        Write-Result 'T4' 'auditor - JOB-CLEANUP entries present' 'PASS' "$($jobClean.Count) entries"
+    } else {
+        Write-Result 'T4' 'auditor - JOB-CLEANUP entries present' 'WARN' 'not yet seen - auditor needs ~60 loop iterations'
+    }
+} else {
+    Write-Result 'T4' "security_audit_$today.log - exists" 'WARN' 'no audit log today yet'
+}
+
+# Summary
+Write-Host "`n=== RESULTS: $pass PASS  $warn WARN  $fail FAIL ===" -ForegroundColor $(if ($fail -gt 0) { 'Red' } elseif ($warn -gt 0) { 'Yellow' } else { 'Green' })
+Add-Content -LiteralPath $LogFile -Value "=== RESULTS: $pass PASS  $warn WARN  $fail FAIL ==="
+exit $(if ($fail -gt 0) { 1 } else { 0 })
+
+```
+
+---
+
+### `C:\Sync\Config\run_parse_check.ps1`
+> Quick parse-only check for 6 key scripts: DailySecurityCheck, yawcam_monitor_v4, cam2_relay, wdog, auditor, cloud_sync. Exits 0 if all parse cleanly. (T035, 2026-06-02)
+```powershell
+$scripts = @('DailySecurityCheck.ps1','yawcam_monitor_v4.ps1','cam2_relay.ps1','wdog.ps1','auditor.ps1','cloud_sync.ps1')
+$allPass = $true
+foreach ($s in $scripts) {
+    $path = "C:\Sync\Config\$s"
+    $t = $null; $e = $null
+    [System.Management.Automation.Language.Parser]::ParseFile($path,[ref]$t,[ref]$e) | Out-Null
+    $status = if ($e.Count -eq 0) { 'PASS' } else { 'FAIL'; $allPass = $false }
+    Write-Host "$status  $s  ($($e.Count) errors)"
+    if ($e.Count -gt 0) { $e | ForEach-Object { Write-Host "  L$($_.Extent.StartLineNumber): $($_.Message)" } }
+}
+exit $(if ($allPass) { 0 } else { 1 })
+
+```
 *Generated by Claude (claude-sonnet-4-6)*
 *Safe to upload to GitHub Gist - contains no secrets.*
 *Do NOT include `rclone.conf` in any gist.*
