@@ -15,6 +15,8 @@ function Write-Log($msg) {
 Write-Log "Watchdog started."
 
 while ($true) {
+    Write-Log "WATCHDOG-HEARTBEAT"
+
     # --- Check RealTimeSync ---
     $rts = Get-Process -Name "RealTimeSync" -ErrorAction SilentlyContinue
     if (-not $rts) {

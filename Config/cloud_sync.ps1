@@ -1,17 +1,19 @@
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
+# Last updated: 2026-06-02 - T026/T030/T031/T032: failure sentinel, lag alert, English comments, ACL logging
 
-$Rclone           = 'C:\Tools\Rclone\rclone.exe'
-$Config           = 'C:\Sync\Config\rclone.conf'
-$Source           = 'C:\Users\helde\Repos\Bois'
-$Remote           = 'cloudsync:helder-sync-mirror'
-$Mirror           = 'C:\Sync\Mirror'
-$LogDir           = 'C:\Sync\Logs\cloud_sync'
-$Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
-$DaysToKeepMirror = 7
-$DaysToKeepLogs   = 30
+$Rclone             = 'C:\Tools\Rclone\rclone.exe'
+$Config             = 'C:\Sync\Config\rclone.conf'
+$Source             = 'C:\Users\helde\Repos\Bois'
+$Remote             = 'cloudsync:helder-sync-mirror'
+$Mirror             = 'C:\Sync\Mirror'
+$LogDir             = 'C:\Sync\Logs\cloud_sync'
+$Log                = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$DaysToKeepMirror   = 7
+$DaysToKeepLogs     = 30
+$SyncFailedSentinel = 'C:\Sync\Config\.sync_failed'
+$LastSyncOkFile     = 'C:\Sync\Config\.last_sync_ok'
 
 # Known malicious firewall rules that block Backblaze B2 sync
 $MaliciousFirewallRules = @(
@@ -47,6 +49,17 @@ function Remove-MaliciousFirewallRules {
         }
     }
     return $removed
+}
+
+# ============================================================
+# T030 - B2 lag alert: warn if last successful sync is stale
+# ============================================================
+if (Test-Path $LastSyncOkFile) {
+    $lastOk = [datetime](Get-Content -LiteralPath $LastSyncOkFile -Raw).Trim()
+    $lagMinutes = [math]::Round(((Get-Date) - $lastOk).TotalMinutes, 1)
+    if ($lagMinutes -gt 15) {
+        Write-SyncLog "B2-LAG-ALERT  Last successful sync was $lagMinutes minutes ago (threshold: 15)"
+    }
 }
 
 # ============================================================
@@ -108,9 +121,16 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
 
         if ($LASTEXITCODE -eq 0) {
             Write-SyncLog "FIREWALL-HEAL  Retry SUCCESS - sync completed after firewall repair"
+            # T026: clear failure sentinel on successful retry
+            if (Test-Path $SyncFailedSentinel) { Remove-Item -LiteralPath $SyncFailedSentinel -Force -ErrorAction SilentlyContinue }
+            # T030: record successful sync timestamp
+            (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') | Set-Content -LiteralPath $LastSyncOkFile -NoNewline
         } else {
             Write-SyncLog "FIREWALL-HEAL  Retry FAILED (exit $LASTEXITCODE) - sync still failing after firewall repair"
             Write-SyncLog "FIREWALL-HEAL  Manual investigation required"
+            # T026: write failure sentinel
+            "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  FIREWALL-HEAL Retry FAILED (exit $LASTEXITCODE)" |
+                Set-Content -LiteralPath $SyncFailedSentinel -NoNewline
         }
     } else {
         Write-SyncLog "FIREWALL-DETECT  No known malicious rules found - unknown blocking cause"
@@ -118,13 +138,20 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
     }
 } elseif ($rcloneExitCode -eq 0) {
     Write-SyncLog "SYNC-OK  Sync completed successfully (exit 0)"
+    # T026: clear failure sentinel on success
+    if (Test-Path $SyncFailedSentinel) { Remove-Item -LiteralPath $SyncFailedSentinel -Force -ErrorAction SilentlyContinue }
+    # T030: record successful sync timestamp
+    (Get-Date -Format 'yyyy-MM-dd HH:mm:ss') | Set-Content -LiteralPath $LastSyncOkFile -NoNewline
 } else {
     Write-SyncLog "SYNC-FAIL  Sync failed (exit $rcloneExitCode) - not a firewall error"
+    # T026: write failure sentinel
+    "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  SYNC-FAIL (exit $rcloneExitCode)" |
+        Set-Content -LiteralPath $SyncFailedSentinel -NoNewline
 }
 
 # ============================================================
-# FASE 0 - Aplicar ACL Deny Delete em arquivos < 7 dias
-# Protege cada arquivo que ainda nao atingiu 7 dias de idade
+# PHASE 0 - Apply Deny Delete ACL to files younger than 7 days
+# Protects each file that has not yet reached 7 days of age
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -135,7 +162,7 @@ if (Test-Path $Mirror) {
             try {
                 $acl = Get-Acl $_.FullName -ErrorAction Stop
 
-                # Verificar se ja tem ACL Deny Delete (evitar duplicado)
+                # Check if file already has Deny Delete ACL (avoid duplicate)
                 $hasDeny = $acl.Access | Where-Object {
                     $_.AccessControlType -eq 'Deny' -and
                     $_.IdentityReference -like '*Everyone*' -and
@@ -143,7 +170,7 @@ if (Test-Path $Mirror) {
                 }
 
                 if (-not $hasDeny) {
-                    # Aplicar ACL Deny Delete
+                    # Apply Deny Delete ACL
                     $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
                         [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
                         'Delete',
@@ -155,15 +182,16 @@ if (Test-Path $Mirror) {
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
             } catch {
-                # Silencioso - arquivo pode ter sido deletado/movido
+                # T032: surface ACL set failures
+                Write-SyncLog "ACL-WARN  Failed to set ACL on $($_.FullName): $($_.Exception.Message)"
             }
         }
 }
 
 # ============================================================
-# FASE 1 - Remover ACL Deny Delete de arquivos >= 7 dias
-# Remove protecao de arquivos que atingiram 7 dias
-# CRITICO: Fazer ANTES de tentar deletar (Fase 2)
+# PHASE 1 - Remove Deny Delete ACL from files >= 7 days old
+# Strips protection from files that have reached 7 days
+# CRITICAL: Must run BEFORE attempting deletion (Phase 2)
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -174,7 +202,7 @@ if (Test-Path $Mirror) {
             try {
                 $acl = Get-Acl $_.FullName -ErrorAction Stop
 
-                # Encontrar regras Deny Delete de "Everyone"
+                # Find Deny Delete rules belonging to Everyone
                 $denyRules = $acl.Access | Where-Object {
                     $_.AccessControlType -eq 'Deny' -and
                     $_.IdentityReference -like '*Everyone*' -and
@@ -182,21 +210,22 @@ if (Test-Path $Mirror) {
                 }
 
                 if ($denyRules) {
-                    # Remover cada regra Deny Delete encontrada
+                    # Remove each Deny Delete rule found
                     foreach ($rule in $denyRules) {
                         $acl.RemoveAccessRule($rule) | Out-Null
                     }
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
             } catch {
-                # Silencioso - arquivo pode ter sido deletado
+                # T032: surface ACL removal failures
+                Write-SyncLog "ACL-WARN  Failed to remove ACL on $($_.FullName): $($_.Exception.Message)"
             }
         }
 }
 
 # ============================================================
-# FASE 2 - Deletar arquivos >= 7 dias
-# Agora ACL foi removido em FASE 1, delete pode executar sem ERROR 5
+# PHASE 2 - Delete files >= 7 days old
+# ACL was already stripped in PHASE 1, so delete runs without ERROR 5
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -204,7 +233,7 @@ if (Test-Path $Mirror) {
         Where-Object { $_.LastWriteTime -lt $threshold } |
         Remove-Item -Force -ErrorAction SilentlyContinue
 
-    # Cleanup de pastas vazias (apos deletar arquivos)
+    # Clean up empty folders (after deleting files)
     Get-ChildItem -Path $Mirror -Recurse -Directory -ErrorAction SilentlyContinue |
         Sort-Object FullName -Descending |
         Where-Object { @(Get-ChildItem -Path $_.FullName -ErrorAction SilentlyContinue).Count -eq 0 } |
@@ -212,7 +241,7 @@ if (Test-Path $Mirror) {
 }
 
 # ============================================================
-# FASE 3 - Source folder retention
+# PHASE 3 - Source folder retention
 # Delete date-named subdirs in $Source older than $DaysToKeepMirror calendar days.
 # Uses folder NAME as date (yyyy-MM-dd), ignoring file timestamps entirely,
 # so whole-day folders are removed in one sync cycle with no B2 churn.
