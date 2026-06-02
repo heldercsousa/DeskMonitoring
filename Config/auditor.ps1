@@ -87,6 +87,27 @@ function Write-ForensicReport([double]$GapSeconds, [datetime]$LastKnownTime) {
 }
 
 # ---------------------------------------------------------------------------
+# Log rotation (T033): delete audit logs older than 30 days
+# ---------------------------------------------------------------------------
+$script:LastLogRotation = [datetime]::MinValue
+
+function Invoke-AuditLogRotation {
+    if (([datetime]::Now - $script:LastLogRotation).TotalHours -lt 24) { return }
+    $script:LastLogRotation = [datetime]::Now
+    $cutoff = (Get-Date).AddDays(-30)
+
+    foreach ($pattern in @("$SecurityDir\security_audit_*.log", "$AuditDir\file_audit_*.log")) {
+        Get-ChildItem -LiteralPath (Split-Path $pattern) -Filter (Split-Path $pattern -Leaf) `
+            -ErrorAction SilentlyContinue |
+            Where-Object { $_.LastWriteTime -lt $cutoff } |
+            ForEach-Object {
+                Remove-Item -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue
+                Write-SecurityAudit "[LOG-ROTATE] Deleted old log: $($_.Name)"
+            }
+    }
+}
+
+# ---------------------------------------------------------------------------
 # A. FileSystemWatcher - event-driven file change detection
 # ---------------------------------------------------------------------------
 function Start-FileWatcher {
@@ -98,7 +119,7 @@ function Start-FileWatcher {
 
     $handler = {
         param($src, $e)
-        
+
         $now = Get-Date
         # Forçamos a conversão para String AQUI, antes de entrar no Job
         $changeTypeText = $e.ChangeType.ToString().ToUpper()
@@ -108,15 +129,15 @@ function Start-FileWatcher {
 
         Start-Job -ArgumentList $filePath, $fileName, $changeTypeText, $now, $oldName -ScriptBlock {
             param($path, $name, $type, $time, $old)
-            
-            Start-Sleep -Milliseconds 800 
+
+            Start-Sleep -Milliseconds 800
             $user = 'unknown'
-            
+
             try {
                 $searchName = [System.IO.Path]::GetFileName($path)
                 $evt = Get-WinEvent -FilterHashtable @{
                     LogName = 'Security'; Id = 4663, 4660; StartTime = $time.AddSeconds(-15)
-                } -ErrorAction SilentlyContinue | 
+                } -ErrorAction SilentlyContinue |
                 Where-Object { $_.Message -like "*$searchName*" } | Select-Object -First 1
 
                 if ($evt -and $evt.Message -match '(Nome da Conta|Account Name):\s+(\S+)') { $user = $Matches[2] }
@@ -124,14 +145,27 @@ function Start-FileWatcher {
 
             $logFile = "C:\Sync\Logs\audit\file_audit_$($time.ToString('yyyy-MM-dd')).log"
             $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
-            
-            # Formatação garantida como texto
-            $detail = if ($old) { "RENAMED: $old -> $name" } else { $type }
-            $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
-            
-            $line | Add-Content -LiteralPath $logFile -Encoding UTF8
-            
-            if ($type -eq 'DELETED') { & 'C:\Sync\Config\cloud_sync.ps1' }
+
+            # T029: distinguish routine AVI aging from suspicious deletions
+            if ($type -eq 'DELETED') {
+                if ($name -like 'motion_*.avi') {
+                    $detail = 'DELETED-ROUTINE'
+                    $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
+                    $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+                } else {
+                    $detail = 'DELETED-SUSPICIOUS'
+                    $line = "$ts | ALERT  $($detail.PadRight(18)) | user=$user | path=$path"
+                    $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+                    $secLog = "C:\Sync\Logs\security\security_audit_$($time.ToString('yyyy-MM-dd')).log"
+                    $line | Add-Content -LiteralPath $secLog -Encoding UTF8
+                    & 'C:\Sync\Config\cloud_sync.ps1'
+                }
+            } else {
+                # Formatação garantida como texto
+                $detail = if ($old) { "RENAMED: $old -> $name" } else { $type }
+                $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
+                $line | Add-Content -LiteralPath $logFile -Encoding UTF8
+            }
         } | Out-Null
     }
 
@@ -249,16 +283,29 @@ Write-FileAudit     "[AUDITOR] Starting up (PID $PID)"
 # Check for startup gap and write forensic report if needed
 Invoke-StartupGapCheck
 
+# T033: rotate old audit logs at startup
+Invoke-AuditLogRotation
+
 # Start file system watcher
 $fsw = Start-FileWatcher
 Write-FileAudit "[AUDITOR] FileSystemWatcher active on $WatchedFolder"
 
 # Main polling loop
+$script:LoopIteration = 0
 try {
     while ($true) {
         Check-RemoteAccess
         Check-Services
         Check-SystemEvents
+
+        # T028: clean up completed/failed background jobs every 60 iterations (~60s)
+        $script:LoopIteration++
+        if ($script:LoopIteration % 60 -eq 0) {
+            Get-Job | Where-Object { $_.State -in 'Completed', 'Failed' } | Remove-Job -Force -ErrorAction SilentlyContinue
+        }
+
+        # T033: daily log rotation check
+        Invoke-AuditLogRotation
 
         # Process queued FSW events
         $null = [System.Threading.Thread]::Sleep(1000)
