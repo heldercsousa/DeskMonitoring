@@ -490,20 +490,13 @@ if (-not $existingBackup -or $needsRecreate) {
 }
 
 # =============================================================================
-# STEP 11 - Register FolderSync-Watchdog task (current user, interactive)
+# STEP 11 - Remove FolderSync-Watchdog scheduled task (NSSM service is canonical)
+# The NSSM FolderSyncWatchdog service (Step 12) is the proper watchdog mechanism.
+# Having both caused duplicate wdog.ps1 processes + flashing blue PS windows.
 # =============================================================================
-Write-Step "Step 11 - FolderSync-Watchdog task (current user, every 3 min)"
-$action2   = New-ScheduledTaskAction -Execute 'powershell.exe' `
-    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\wdog.ps1'
-$trigger2  = @(
-    $(New-ScheduledTaskTrigger -AtLogOn),
-    $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 3) -Once -At (Get-Date))
-)
-$settings2 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 2) -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1)
-$principal2= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+Write-Step "Step 11 - Remove FolderSync-Watchdog task (NSSM service handles this)"
 Unregister-ScheduledTask -TaskName "FolderSync-Watchdog" -Confirm:$false -ErrorAction SilentlyContinue
-Register-ScheduledTask -TaskName "FolderSync-Watchdog" -Action $action2 -Trigger $trigger2 -Settings $settings2 -Principal $principal2 -Force | Out-Null
-Write-OK "Task FolderSync-Watchdog registered ($currentUser)"
+Write-OK "FolderSync-Watchdog task removed - NSSM FolderSyncWatchdog service is the watchdog"
 
 # =============================================================================
 # STEP 12 - Install FolderSyncWatchdog NSSM service
@@ -632,7 +625,7 @@ $action17   = New-ScheduledTaskAction -Execute 'powershell.exe' `
     -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1'
 $trigger17  = New-ScheduledTaskTrigger -Daily -At "23:30"
 $settings17 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
-$principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+$principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType S4U -RunLevel Highest
 Unregister-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Confirm:$false -ErrorAction SilentlyContinue
 Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -Trigger $trigger17 -Settings $settings17 -Principal $principal17 -Force | Out-Null
 Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, daily 23:30)"
@@ -693,9 +686,19 @@ try {
 
 # =============================================================================
 # STEP 19 - FolderSync-AuditFilter task (every 5 min — suspicious-only 4663 filter)
-# Runs as current user (InteractiveToken) so DPAPI credential decryption works
+# Must run as current user (InteractiveToken) — send_alert.ps1 uses DPAPI CurrentUser scope.
+# Uses a VBScript launcher so wscript.exe (GUI, no console) spawns pwsh with SW_HIDE (0),
+# suppressing the white console window flash that InteractiveToken tasks show on creation.
 # =============================================================================
-Write-Step "Step 19 - FolderSync-AuditFilter task (every 5 min, current user)"
+Write-Step "Step 19 - FolderSync-AuditFilter task (every 5 min, current user, VBS launcher)"
+
+# Write the VBScript launcher (runs pwsh hidden at Win32 level, before window is created)
+$vbsPath = 'C:\Sync\Config\audit_filter_launcher.vbs'
+Set-Content -Path $vbsPath -Encoding ASCII -Value @'
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run "pwsh.exe -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File ""C:\Sync\Config\audit_filter.ps1""", 0, False
+'@
+Write-OK "audit_filter_launcher.vbs written -> $vbsPath"
 
 $userSid  = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
 $taskXml19 = @"
@@ -729,8 +732,8 @@ $taskXml19 = @"
   </Settings>
   <Actions>
     <Exec>
-      <Command>pwsh.exe</Command>
-      <Arguments>-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\audit_filter.ps1</Arguments>
+      <Command>wscript.exe</Command>
+      <Arguments>"C:\Sync\Config\audit_filter_launcher.vbs" //B //NoLogo</Arguments>
     </Exec>
   </Actions>
 </Task>
@@ -771,7 +774,7 @@ Write-Host "  Step  7 - Account lockout (5 attempts, 30 min)" -ForegroundColor G
 Write-Host "  Step  8 - Screen auto-lock (5 min)" -ForegroundColor Gray
 Write-Host "  Step  9 - Firewall logging -> C:\Sync\Logs\firewall.log" -ForegroundColor Gray
 Write-Host "  Step 10 - FolderSync-CloudBackup task (SYSTEM)" -ForegroundColor Gray
-Write-Host "  Step 11 - FolderSync-Watchdog task (current user)" -ForegroundColor Gray
+Write-Host "  Step 11 - FolderSync-Watchdog task REMOVED (NSSM service is canonical, no duplicate)" -ForegroundColor Gray
 Write-Host "  Step 12 - FolderSyncWatchdog NSSM service (installed, not started)" -ForegroundColor Gray
 Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)" -ForegroundColor Gray
 Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
@@ -781,7 +784,7 @@ Write-Host "  Step 16b- SACL on Config\+Evidence\+.git\ + 512 MB Security log" -
 Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
 Write-Host "  Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)" -ForegroundColor Gray
 Write-Host "  Step 18b- Power settings applied (Balanced plan, USB Suspend disabled)" -ForegroundColor Gray
-Write-Host "  Step 19 - FolderSync-AuditFilter task (SYSTEM, every 5 min - suspicious writes to Evidence\)" -ForegroundColor Gray
+Write-Host "  Step 19 - FolderSync-AuditFilter task (current user, VBS launcher - no window flash)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
