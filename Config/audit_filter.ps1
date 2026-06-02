@@ -160,7 +160,7 @@ Machine: $env:COMPUTERNAME
 
 $b2Key = "suspicious_writes_$(Get-Date -Format 'yyyy-MM-dd_HH-mm-ss').md"
 
-& pwsh.exe -NonInteractive -ExecutionPolicy Bypass -File 'C:\Sync\Config\send_alert.ps1' `
+& pwsh.exe -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File 'C:\Sync\Config\send_alert.ps1' `
     -Subject "SUSPICIOUS WRITES on $env:COMPUTERNAME - $($suspicious.Count) event(s)" `
     -Body $emailBody `
     -AttachFile $OutFile `

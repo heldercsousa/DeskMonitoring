@@ -41,4 +41,4 @@ Subagents may be used for tasks with independent parallel workstreams.
 | T006 | - | Research and install MCP servers that enhance the security and automation capabilities of the ecosystem | 2026-06-01 | - | Pending |
 | T007 | - | Review the daily security check script using available tools; identify and register improvements as new tasks | 2026-06-01 | - | Pending |
 | T008 | - | Review the entire solution end-to-end (recording, mirroring, cloud sync, evidence collection, committing); identify and register improvements as new tasks | 2026-06-01 | - | Pending |
-| T009 | - | Investigate two recurring processes that flash brief PowerShell windows (white BG = pwsh.exe, blue BG = powershell.exe) - identify their origin, whether they are legitimate ecosystem components or suspicious activity, and silence them if benign | 2026-06-01 | - | Pending |
+| T009 | - | Investigate two recurring processes that flash brief PowerShell windows (white BG = pwsh.exe, blue BG = powershell.exe) - identify their origin, whether they are legitimate ecosystem components or suspicious activity, and silence them if benign | 2026-06-01 | - | Blocked |
