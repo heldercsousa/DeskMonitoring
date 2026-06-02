@@ -19,8 +19,8 @@ if (Test-Path $lockFile) {
     exit 0
 }
 
-# Check for dirty Logs/ files
-$statusLines = & git -C $RepoRoot status --porcelain -- Logs/ 2>&1
+# Check for dirty Logs/ and Evidence/ files
+$statusLines = & git -C $RepoRoot status --porcelain -- Logs/ Evidence/ 2>&1
 if ($LASTEXITCODE -ne 0) {
     Write-EcoLog "GIT-COMMIT-LOGS  FAIL  git status failed: $statusLines"
     exit 1
@@ -28,14 +28,14 @@ if ($LASTEXITCODE -ne 0) {
 
 $dirty = $statusLines | Where-Object { $_ -match '\S' }
 if (-not $dirty) {
-    Write-EcoLog "GIT-COMMIT-LOGS  SKIP  no Logs/ changes"
+    Write-EcoLog "GIT-COMMIT-LOGS  SKIP  no Logs/ or Evidence/ changes"
     exit 0
 }
 
 # Stage and commit
 $commitMsg = "logs: auto-commit $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 
-& git -C $RepoRoot add Logs/ 2>&1 | Out-Null
+& git -C $RepoRoot add Logs/ Evidence/ 2>&1 | Out-Null
 if ($LASTEXITCODE -ne 0) {
     Write-EcoLog "GIT-COMMIT-LOGS  FAIL  git add failed"
     exit 1

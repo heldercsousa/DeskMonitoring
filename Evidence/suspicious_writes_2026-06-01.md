@@ -32,3 +32,23 @@
 |------|---------|---------|--------|--------|
 | 2026-06-01 18:45:37 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-01 18:45:37 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\stop_commit_check.ps1.tmp.18904.25722003d023` |
+
+## 2026-06-01 22:05:04 - 5 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-01 22:05:02 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 22:05:02 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.920bf15d8045` |
+| 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\audit_filter.ps1.tmp.18904.4a672dd7b7c4` |
+| 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\audit_filter.ps1.tmp.18904.4a672dd7b7c4` |
+
+## 2026-06-01 22:10:08 - 5 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-01 22:05:02 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 22:05:02 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.920bf15d8045` |
+| 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\audit_filter.ps1.tmp.18904.4a672dd7b7c4` |
+| 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\audit_filter.ps1.tmp.18904.4a672dd7b7c4` |
