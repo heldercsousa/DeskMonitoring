@@ -117,27 +117,48 @@ foreach ($dir in $allDirs) {
 
 # =============================================================================
 Write-Host "`n=== CAM-2 RELAY (VLC: RTSP -> MJPEG http://127.0.0.1:8161/) ===" -ForegroundColor Cyan
+
+# VLC process check
 $relayProc = Get-CimInstance Win32_Process -Filter "Name = 'vlc.exe'" -ErrorAction SilentlyContinue |
              Where-Object { $_.CommandLine -like "*cam2_relay*" -or $_.CommandLine -like "*8161*" }
 if ($relayProc) {
-    Write-Host "  VLC relay  : RUNNING (PID $($relayProc.ProcessId))" -ForegroundColor Green
+    Write-Host "  VLC process : PASS  (PID $($relayProc.ProcessId))" -ForegroundColor Green
 } else {
-    # Any VLC running (relay may have been started without cam2_relay in cmdline)
     $vlcAny = Get-Process -Name "vlc" -ErrorAction SilentlyContinue
     if ($vlcAny) {
-        Write-Host "  VLC relay  : VLC running (PID $($vlcAny.Id)) — verify it is the cam2 relay" -ForegroundColor Yellow
+        Write-Host "  VLC process : PASS  VLC running (PID $($vlcAny.Id)) - verify it is the cam2 relay" -ForegroundColor Yellow
     } else {
-        Write-Host "  VLC relay  : NOT RUNNING — run cam2_relay.ps1 or reboot to auto-start" -ForegroundColor Red
+        Write-Host "  VLC process : FAIL  NOT RUNNING - run cam2_relay.ps1 or reboot to auto-start" -ForegroundColor Red
     }
 }
+
+# Port 8161 check
+$port8161 = Test-NetConnection -ComputerName "127.0.0.1" -Port 8161 -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+if ($port8161.TcpTestSucceeded) {
+    Write-Host "  Port 8161   : PASS  listening" -ForegroundColor Green
+} else {
+    Write-Host "  Port 8161   : FAIL  nothing listening on 127.0.0.1:8161" -ForegroundColor Red
+}
+
+# Sentinel: restart failure flag
+$sentinelFail = "C:\Sync\Config\.camera_restart_failed"
+if (Test-Path $sentinelFail) {
+    $sentinelTs = Get-Content -LiteralPath $sentinelFail -ErrorAction SilentlyContinue
+    Write-Host "  Restart sentinel : FAIL  .camera_restart_failed exists (timestamp: $sentinelTs)" -ForegroundColor Red
+    Write-Host "                     Yawcam failed to recover after last restart attempt." -ForegroundColor Red
+    Write-Host "                     Remove C:\Sync\Config\.camera_restart_failed after manual fix." -ForegroundColor Gray
+} else {
+    Write-Host "  Restart sentinel : PASS  no failure flag" -ForegroundColor Green
+}
+
 $cam2Reachable = Test-Connection -ComputerName "192.168.0.109" -Count 1 -Quiet -ErrorAction SilentlyContinue
-Write-Host "  C100 ping  : $(if ($cam2Reachable) { 'REACHABLE (192.168.0.109)' } else { 'UNREACHABLE — camera offline or IP changed?' })" -ForegroundColor $(if ($cam2Reachable) { 'Green' } else { 'Red' })
-$relayLog = "C:\Sync\Logs\camera\cam2_relay_$(Get-Date -Format 'yyyy-MM-dd').log"
+Write-Host "  C100 ping   : $(if ($cam2Reachable) { 'REACHABLE (192.168.0.109)' } else { 'UNREACHABLE - camera offline or IP changed?' })" -ForegroundColor $(if ($cam2Reachable) { 'Green' } else { 'Red' })
+$relayLog = "C:\Sync\Logs\services\cam2_relay.log"
 if (Test-Path $relayLog) {
     $lastLine = Get-Content $relayLog -Tail 1
-    Write-Host "  Last log   : $lastLine"
+    Write-Host "  Last log    : $lastLine"
 } else {
-    Write-Host "  Relay log  : no log for today yet" -ForegroundColor Yellow
+    Write-Host "  Relay log   : no log yet at $relayLog" -ForegroundColor Yellow
 }
 
 # =============================================================================

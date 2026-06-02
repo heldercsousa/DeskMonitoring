@@ -2,17 +2,21 @@
 # MONITOR YAWCAM - BASEADO EM GRAVACAO
 # ========================================
 # Relocated to C:\Sync\Config\ (was: C:\Program Files (x86)\Yawcam\)
-# Checks C:\TEMP\motion_videos for recent .avi files.
-# NOTE: C:\TEMP\motion_videos should be a symlink to C:\Users\helde\Repos\Bois
-#       so the monitor sees actual recordings. Create with:
-#       cmd /c mklink /D C:\TEMP\motion_videos C:\Users\helde\Repos\Bois
+# Scans C:\Users\helde\Repos\Bois recursively for latest *.avi across all date subdirs.
 
 $YawcamPath      = "C:\Sync\Config\start_yawcam.bat"
-$VideoPath       = "C:\TEMP\motion_videos"
+$VideoPath       = "C:\Users\helde\Repos\Bois"
+$LogFile         = "C:\Sync\Logs\services\yawcam_monitor.log"
+$SentinelFail    = "C:\Sync\Config\.camera_restart_failed"
 $CheckInterval   = 60
 $MaxMinutesWithoutVideo = 15
 $LastRestartTime = $null
 $RestartCooldown = 600
+
+function Write-Log($msg) {
+    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
 
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "  MONITOR YAWCAM - BASEADO EM GRAVACAO" -ForegroundColor Cyan
@@ -24,6 +28,7 @@ Write-Host "Cooldown: $($RestartCooldown/60) minutos entre reinicos" -Foreground
 Write-Host ""
 Write-Host "Pressione Ctrl+C para parar" -ForegroundColor Yellow
 Write-Host ""
+Write-Log "START  monitor starting  VideoPath=$VideoPath  interval=${CheckInterval}s"
 
 function Test-YawcamRunning {
     $yawcam = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
@@ -39,6 +44,7 @@ function Test-YawcamRunning {
 function Restart-YawcamSafely {
     Write-Host ""
     Write-Host ">>> REINICIANDO YAWCAM..." -ForegroundColor Cyan
+    Write-Log "RESTART  beginning Yawcam restart sequence"
 
     Write-Host "   [1/5] Fechando Yawcam..." -ForegroundColor Gray
     Get-Process -Name "yawcam" -ErrorAction SilentlyContinue | Stop-Process -Force
@@ -66,8 +72,13 @@ function Restart-YawcamSafely {
     Write-Host "   [5/5] Verificando..." -ForegroundColor Gray
     if (Test-YawcamRunning) {
         Write-Host "   [OK] Yawcam reiniciado!" -ForegroundColor Green
+        Write-Log "RESTART-OK  Yawcam process confirmed after restart"
+        if (Test-Path $SentinelFail) { Remove-Item -LiteralPath $SentinelFail -Force -ErrorAction SilentlyContinue }
     } else {
-        Write-Host "   [AVISO] Processo nao detectado (pode ser normal)" -ForegroundColor Yellow
+        Write-Host "   [FAIL] Yawcam processo nao detectado apos reinicio" -ForegroundColor Red
+        Write-Log "CAMERA-RESTART-FAILED  Yawcam process not detected after restart sequence"
+        $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        $ts | Set-Content -LiteralPath $SentinelFail -Force
     }
     Write-Host ""
 
@@ -87,28 +98,36 @@ while ($true) {
 
         if ($MinutesAgo -le 5) {
             Write-Host "[$Timestamp] [OK] Gravando - ultimo video: $MinutesAgo min atras" -ForegroundColor Green
+            Write-Log "OK  recording active  latest=$($LatestVideo.Name)  age=${MinutesAgo}min"
         }
         elseif ($MinutesAgo -le $MaxMinutesWithoutVideo) {
             Write-Host "[$Timestamp] [INFO] Ultimo video: $MinutesAgo min atras" -ForegroundColor Cyan
+            Write-Log "INFO  no recent recording  latest=$($LatestVideo.Name)  age=${MinutesAgo}min"
         }
         else {
             Write-Host "[$Timestamp] [AVISO] SEM novos videos ha $MinutesAgo minutos!" -ForegroundColor Yellow
+            Write-Log "WARN  no video for ${MinutesAgo}min  latest=$($LatestVideo.Name)"
 
             if ($LastRestartTime -eq $null -or ((Get-Date) - $LastRestartTime).TotalSeconds -gt $RestartCooldown) {
                 Write-Host "[$Timestamp] [ACAO] Yawcam provavelmente congelado - reiniciando..." -ForegroundColor Magenta
+                Write-Log "ACTION  triggering restart  reason=no-video-${MinutesAgo}min"
                 Restart-YawcamSafely
             } else {
                 $WaitTime = [math]::Round(($RestartCooldown - ((Get-Date) - $LastRestartTime).TotalSeconds) / 60, 1)
                 Write-Host "[$Timestamp] [WAIT] Cooldown ativo - $WaitTime min restantes" -ForegroundColor Yellow
+                Write-Log "WAIT  cooldown active  remaining=${WaitTime}min"
             }
         }
     } else {
         Write-Host "[$Timestamp] [AVISO] Nenhum video em $VideoPath" -ForegroundColor Yellow
+        Write-Log "WARN  no *.avi files found under $VideoPath"
 
         if (-not (Test-YawcamRunning)) {
             Write-Host "[$Timestamp] [ERRO] Yawcam nao esta rodando!" -ForegroundColor Red
+            Write-Log "ERROR  Yawcam not running"
 
             if ($LastRestartTime -eq $null -or ((Get-Date) - $LastRestartTime).TotalSeconds -gt $RestartCooldown) {
+                Write-Log "ACTION  triggering restart  reason=process-not-running"
                 Restart-YawcamSafely
             }
         }
