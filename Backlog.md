@@ -34,14 +34,15 @@ Subagents may be used for tasks with independent parallel workstreams.
 | ID | Parent | Description | Created | Completed | Status |
 |----|--------|-------------|---------|-----------|--------|
 | T001 | - | Set up a rule so Claude always uses this Backlog to track activities and can resume interrupted work across sessions | 2026-06-01 | - | Done |
-| T002 | - | Find opportunities to turn repetitive Claude steps into commands or hooks, reducing token usage and improving efficiency | 2026-06-01 | - | Pending |
+| T002 | - | Find opportunities to turn repetitive Claude steps into commands or hooks, reducing token usage and improving efficiency | 2026-06-01 | - | In Progress |
 | T003 | - | Find and install an official Anthropic tool for maintaining the Claude configuration file for this project | 2026-06-01 | 2026-06-02 | Done |
-| T004 | - | Review and improve the ignore file so Claude does not load unnecessary files, saving tokens | 2026-06-01 | - | Pending |
+| T004 | - | Review and improve the ignore file so Claude does not load unnecessary files, saving tokens | 2026-06-01 | - | In Progress |
 | T005 | - | Research and install skills that strengthen our ability to detect and counter hacking attacks (Fing, Malwarebytes, VPN, dynamic IP, and others) | 2026-06-01 | 2026-06-02 | Done |
 | T018 | T005 | Install Fing MCP server (neuronine-ai/fing-mcp) for real-time LAN device querying from Claude - requires: install Fing Desktop, enable Local API in Settings > Integrations, then npm install + configure in settings.json mcpServers | 2026-06-02 | - | Blocked |
-| T019 | T005 | Install IPInfo MCP server for IP reputation/geolocation lookups from Claude - get free API key at ipinfo.io, add HTTP MCP entry to C:\Sync\.claude\settings.json mcpServers; use to check suspicious IPs found by firewall or ARP scans | 2026-06-02 | - | Pending |
-| T020 | T005 | Install mcp-threatintel (pete-builds) for IOC/CVE/breach lookups from Claude - requires Node.js; get free abuse.ch API key; clone repo, npm install, configure in settings.json; gives 12 tools: hash/IP/domain lookups, CISA KEV, OTX pulses | 2026-06-02 | - | Pending |
-| T006 | - | Research and install MCP servers that enhance the security and automation capabilities of the ecosystem | 2026-06-01 | - | Pending |
+| T019 | T005 | IPInfo MCP: No official MCP server exists (only Node.js client library). Deferred - no npm package to configure. Use mcp-threatintel-server (T020/T006) for IP lookups instead. | 2026-06-02 | 2026-06-02 | Cancelled |
+| T020 | T005 | mcp-threatintel-server (aplaceforallmystuff/mcp-threatintel on npm) installed as "threatintel" MCP in C:\Sync\.claude\settings.json. Tools: IP/domain/hash/URL lookups via Feodo Tracker (no key), AbuseIPDB, OTX, GreyNoise, URLhaus, MalwareBazaar, ThreatFox. Add free API keys to env for full coverage. | 2026-06-02 | 2026-06-02 | Done |
+| T006 | - | Research and install MCP servers that enhance the security and automation capabilities of the ecosystem | 2026-06-01 | 2026-06-02 | Done |
+| T021 | T006 | Add free API keys to mcp-threatintel-server config: OTX (AlienVault - free at otx.alienvault.com), AbuseIPDB (free at abuseipdb.com), abuse.ch (free at auth.abuse.ch). Update C:\Sync\.claude\settings.json env section for "threatintel" MCP. | 2026-06-02 | - | Pending |
 | T007 | - | Review the daily security check script using available tools; identify and register improvements as new tasks | 2026-06-01 | 2026-06-02 | Done |
 | T008 | - | Review the entire solution end-to-end (recording, mirroring, cloud sync, evidence collection, committing); identify and register improvements as new tasks | 2026-06-01 | - | Pending |
 | T009 | - | Investigate two recurring processes that flash brief PowerShell windows (white BG = pwsh.exe, blue BG = powershell.exe) - identify their origin, whether they are legitimate ecosystem components or suspicious activity, and silence them if benign | 2026-06-01 | 2026-06-01 | Done |

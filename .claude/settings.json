@@ -47,6 +47,12 @@
     ]
   },
   "mcpServers": {
+    "threatintel": {
+      "command": "npx",
+      "args": ["-y", "mcp-threatintel-server"],
+      "env": {},
+      "_note": "Threat intelligence: Feodo Tracker works with no key; add OTX_API_KEY/ABUSEIPDB_API_KEY/GREYNOISE_API_KEY/ABUSECH_AUTH_KEY for full coverage. All free tiers available."
+    },
     "filesystem": {
       "command": "npx",
       "args": [
