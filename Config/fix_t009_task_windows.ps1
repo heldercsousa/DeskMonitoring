@@ -5,10 +5,10 @@
 #
 # White window (pwsh.exe): FolderSync-AuditFilter runs as InteractiveToken/helde (needed
 #   for DPAPI credential decryption in send_alert.ps1). Can't change principal. Fix: use a
-#   VBScript launcher — wscript.exe is a GUI app (no console), WshShell.Run style=0 hides
+#   VBScript launcher  - wscript.exe is a GUI app (no console), WshShell.Run style=0 hides
 #   the child pwsh before the window is ever created.
 #
-# Blue window (powershell.exe): FolderSync-Watchdog task is redundant — NSSM service
+# Blue window (powershell.exe): FolderSync-Watchdog task is redundant  - NSSM service
 #   FolderSyncWatchdog already runs wdog.ps1. The duplicate task spawned new Interactive
 #   powershell.exe instances every 3 min. Fix: remove the task entirely.
 
@@ -19,8 +19,8 @@ function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
 function Write-Fail($msg) { Write-Host "  FAIL $msg" -ForegroundColor Red }
 function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 
-# ── Fix 1: AuditFilter — replace task action with VBScript launcher ──────────
-Write-Step "Fix 1: FolderSync-AuditFilter — use VBScript launcher (no console flash)"
+# ── Fix 1: AuditFilter  - replace task action with VBScript launcher ──────────
+Write-Step "Fix 1: FolderSync-AuditFilter  - use VBScript launcher (no console flash)"
 
 # Write the launcher
 $vbsPath = 'C:\Sync\Config\audit_filter_launcher.vbs'
@@ -36,25 +36,33 @@ $existing  = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 if (-not $existing) {
     Write-Fail "Task '$taskName' not found"
 } else {
-    $userSid  = $existing.Principal.UserId
-    $userName = (New-Object System.Security.Principal.SecurityIdentifier($userSid)).Translate([System.Security.Principal.NTAccount]).Value
+    $currentUser = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
     $newAction = New-ScheduledTaskAction `
         -Execute  'wscript.exe' `
         -Argument "`"$vbsPath`" //B //NoLogo"
 
-    Set-ScheduledTask -TaskName $taskName -Action $newAction | Out-Null
+    # Restore principal to current user InteractiveToken (broken by previous fix attempt)
+    $newPrincipal = New-ScheduledTaskPrincipal `
+        -UserId    $currentUser `
+        -LogonType Interactive `
+        -RunLevel  Highest
 
-    $updated = (Get-ScheduledTask -TaskName $taskName).Actions[0]
-    if ($updated.Execute -match 'wscript') {
-        Write-OK "Task action updated: wscript.exe -> audit_filter_launcher.vbs (user=$userName, DPAPI intact)"
+    Set-ScheduledTask -TaskName $taskName -Action $newAction -Principal $newPrincipal | Out-Null
+
+    $updated = Get-ScheduledTask -TaskName $taskName
+    $okAction    = $updated.Actions[0].Execute -match 'wscript'
+    $okPrincipal = $updated.Principal.LogonType -eq 'Interactive'
+    if ($okAction -and $okPrincipal) {
+        Write-OK "Action: wscript.exe -> audit_filter_launcher.vbs"
+        Write-OK "Principal restored: $($updated.Principal.UserId) / Interactive (DPAPI intact)"
     } else {
-        Write-Fail "Action update failed — Execute=$($updated.Execute)"
+        Write-Fail "Update incomplete  - Action=$($updated.Actions[0].Execute) Principal=$($updated.Principal.LogonType)"
     }
 }
 
-# ── Fix 2: Watchdog task — remove (NSSM service is canonical) ────────────────
-Write-Step "Fix 2: FolderSync-Watchdog scheduled task — remove"
+# ── Fix 2: Watchdog task  - remove (NSSM service is canonical) ────────────────
+Write-Step "Fix 2: FolderSync-Watchdog scheduled task  - remove"
 
 $wdTask = 'FolderSync-Watchdog'
 $wt = Get-ScheduledTask -TaskName $wdTask -ErrorAction SilentlyContinue
@@ -64,7 +72,7 @@ if (-not $wt) {
     Unregister-ScheduledTask -TaskName $wdTask -Confirm:$false
     $gone = -not (Get-ScheduledTask -TaskName $wdTask -ErrorAction SilentlyContinue)
     if ($gone) {
-        Write-OK "Task removed — NSSM FolderSyncWatchdog service is the sole watchdog"
+        Write-OK "Task removed  - NSSM FolderSyncWatchdog service is the sole watchdog"
     } else {
         Write-Fail "Task still present after removal attempt"
     }
@@ -84,7 +92,7 @@ foreach ($p in $wdogProcs) {
     $cl = (Get-CimInstance Win32_Process -Filter "ProcessId=$($p.Id)" -ErrorAction SilentlyContinue).CommandLine
     if ($cl -match 'wdog\.ps1') {
         if ($p.Id -eq $svcPid) {
-            Write-OK "PID $($p.Id) is the NSSM service — keeping"
+            Write-OK "PID $($p.Id) is the NSSM service  - keeping"
         } else {
             Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
             Write-OK "Stopped duplicate wdog.ps1 PID $($p.Id)"
