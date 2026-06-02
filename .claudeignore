@@ -1,7 +1,7 @@
 # =============================================================================
 # .claudeignore — C:\Sync FolderSync + Camera Ecosystem
 # Keeps Claude focused on Config\ scripts. Excludes logs, mirror, credentials,
-# video recordings, and Yawcam Java binaries.
+# video recordings, large reference docs, and Yawcam Java binaries.
 # =============================================================================
 
 # ---------------------------------------------------------------------------
@@ -11,27 +11,45 @@ Mirror/
 
 # ---------------------------------------------------------------------------
 # Log files — large, noisy, daily-rotating, not relevant for script editing
-# ---------------------------------------------------------------------------
 # OVERRIDE PATTERN: .claudeignore blocks auto-loading into context, but does NOT
 # block the Grep and Read tools. To diagnose issues without loading all logs:
 #   → Use /project:diagnose-logs  (greps only today's dated files for errors)
 #   → Or use Grep tool directly on C:\Sync\Logs\<component>_YYYY-MM-DD.log
 # This keeps normal sessions token-efficient while allowing targeted log reads.
-# Logs/
+# ---------------------------------------------------------------------------
+Logs/
 
 # ---------------------------------------------------------------------------
 # Credential and sensitive config files
 # ---------------------------------------------------------------------------
 # Plaintext Backblaze B2 credentials — never expose to context window
-# Config/rclone.conf
+Config/rclone.conf
 
 # DPAPI-encrypted binary blob — binary, meaningless without decryption
-# Config/credentials.enc
+Config/credentials.enc
 
 # ---------------------------------------------------------------------------
 # FreeFileSync binary config — not human-editable plain text
 # ---------------------------------------------------------------------------
-# Config/realtime.ffs_real
+Config/realtime.ffs_real
+
+# ---------------------------------------------------------------------------
+# ECOSYSTEM_REPORT.md — large reference doc (Section 15 = full script contents)
+# Read explicitly with the Read tool when doing guide-sync (RULE 1 tasks).
+# Auto-loading this file every session wastes hundreds of tokens.
+# ---------------------------------------------------------------------------
+Config/ECOSYSTEM_REPORT.md
+
+# ---------------------------------------------------------------------------
+# Evidence/ — forensic files, only needed during security investigations.
+# Read with Read/Grep tools explicitly. Not needed in normal coding context.
+# ---------------------------------------------------------------------------
+Evidence/
+
+# ---------------------------------------------------------------------------
+# Tasks/ — implementation plan docs, read explicitly per task as needed
+# ---------------------------------------------------------------------------
+Tasks/
 
 # ---------------------------------------------------------------------------
 # Source folder mapping (external path, outside repo)
@@ -62,15 +80,23 @@ Source/
 # ---------------------------------------------------------------------------
 *.txt
 *.reg
+*.stackdump
+
+# ---------------------------------------------------------------------------
+# Temp files left by Claude Code (accumulated session artifacts)
+# ---------------------------------------------------------------------------
+.claude/**/*.tmp.*
 
 # =============================================================================
 # KEPT VISIBLE (not ignored):
 #   Config/*.ps1            — the actual codebase (sync + camera)
 #   Config/*.bat            — generated bat wrappers
 #   Config/motion/*.md      — camera setup documentation
-#   Config/motion/*.txt     — camera quick-start guides
+#   Config/motion/*.txt     — camera quick-start guides (excluded by *.txt above
+#                             only at repo root — subdirs are visible)
 #   .claude/commands/*.md   — per-project slash commands
 #   .claude/settings.json   — project MCP and permission config
 #   .gitignore
 #   CLAUDE.md
+#   Backlog.md
 # =============================================================================

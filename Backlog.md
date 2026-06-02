@@ -34,9 +34,9 @@ Subagents may be used for tasks with independent parallel workstreams.
 | ID | Parent | Description | Created | Completed | Status |
 |----|--------|-------------|---------|-----------|--------|
 | T001 | - | Set up a rule so Claude always uses this Backlog to track activities and can resume interrupted work across sessions | 2026-06-01 | - | Done |
-| T002 | - | Find opportunities to turn repetitive Claude steps into commands or hooks, reducing token usage and improving efficiency | 2026-06-01 | - | In Progress |
+| T002 | - | Find opportunities to turn repetitive Claude steps into commands or hooks, reducing token usage and improving efficiency | 2026-06-01 | 2026-06-02 | Done |
 | T003 | - | Find and install an official Anthropic tool for maintaining the Claude configuration file for this project | 2026-06-01 | 2026-06-02 | Done |
-| T004 | - | Review and improve the ignore file so Claude does not load unnecessary files, saving tokens | 2026-06-01 | - | In Progress |
+| T004 | - | Review and improve the ignore file so Claude does not load unnecessary files, saving tokens | 2026-06-01 | 2026-06-02 | Done |
 | T005 | - | Research and install skills that strengthen our ability to detect and counter hacking attacks (Fing, Malwarebytes, VPN, dynamic IP, and others) | 2026-06-01 | 2026-06-02 | Done |
 | T018 | T005 | Install Fing MCP server (neuronine-ai/fing-mcp) for real-time LAN device querying from Claude - requires: install Fing Desktop, enable Local API in Settings > Integrations, then npm install + configure in settings.json mcpServers | 2026-06-02 | - | Blocked |
 | T019 | T005 | IPInfo MCP: No official MCP server exists (only Node.js client library). Deferred - no npm package to configure. Use mcp-threatintel-server (T020/T006) for IP lookups instead. | 2026-06-02 | 2026-06-02 | Cancelled |
@@ -44,7 +44,7 @@ Subagents may be used for tasks with independent parallel workstreams.
 | T006 | - | Research and install MCP servers that enhance the security and automation capabilities of the ecosystem | 2026-06-01 | 2026-06-02 | Done |
 | T021 | T006 | Add free API keys to mcp-threatintel-server config: OTX (AlienVault - free at otx.alienvault.com), AbuseIPDB (free at abuseipdb.com), abuse.ch (free at auth.abuse.ch). Update C:\Sync\.claude\settings.json env section for "threatintel" MCP. | 2026-06-02 | - | Pending |
 | T007 | - | Review the daily security check script using available tools; identify and register improvements as new tasks | 2026-06-01 | 2026-06-02 | Done |
-| T008 | - | Review the entire solution end-to-end (recording, mirroring, cloud sync, evidence collection, committing); identify and register improvements as new tasks | 2026-06-01 | - | Pending |
+| T008 | - | Review the entire solution end-to-end (recording, mirroring, cloud sync, evidence collection, committing); identify and register improvements as new tasks | 2026-06-01 | 2026-06-02 | Done |
 | T009 | - | Investigate two recurring processes that flash brief PowerShell windows (white BG = pwsh.exe, blue BG = powershell.exe) - identify their origin, whether they are legitimate ecosystem components or suspicious activity, and silence them if benign | 2026-06-01 | 2026-06-01 | Done |
 | T010 | T007 | Add firewall tamper detection to DailySecurityCheck.ps1 - scan for outbound BLOCK rules targeting B2 IPs (104.153.233.180, 149.137.142.15) and api.backblazeb2.com; alert and log with prefix FIREWALL-TAMPER if found | 2026-06-02 | - | Pending |
 | T011 | T007 | Add hosts-file and DNS poisoning detection to DailySecurityCheck.ps1 - check C:\Windows\System32\drivers\etc\hosts for api.backblazeb2.com overrides; check Get-DnsClientServerAddress for unexpected DNS servers on all adapters | 2026-06-02 | - | Pending |

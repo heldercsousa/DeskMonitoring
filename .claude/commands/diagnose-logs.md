@@ -5,8 +5,8 @@ description: "Token-efficient log scan for today's (or yesterday's) ecosystem lo
 
 # /project:diagnose-logs — Smart Log Diagnosis
 
-`Logs/` is excluded from `.claudeignore` to save tokens in normal sessions.
-This command overrides that exclusion by using the `Grep` and `Read` tools
+`Logs/` is excluded from `.claudeignore` so logs are never auto-loaded into context.
+This command reads logs on demand using the `Grep` and `Read` tools
 directly on specific dated files. Only matching lines are loaded — not full files.
 
 ---

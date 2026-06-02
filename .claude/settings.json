@@ -30,6 +30,18 @@
     "SYNC_MIRROR": "C:\\Sync\\Mirror"
   },
   "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\parse_check_hook.ps1\"",
+            "shell": "powershell"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
