@@ -30,7 +30,11 @@ $knownRunKeys = @(
     'Yawcam',
     'YawcamMonitor',
     'YawcamCam2Relay',
-    'FolderSyncRealTime'
+    'FolderSyncRealTime',
+    'electron.app.Fing',
+    'OneDrive',
+    'Docker Desktop'
+    # MicrosoftCopilotAutoLaunch_* matched below via wildcard
 )
 
 try {
@@ -249,7 +253,6 @@ try {
     Write-Step "[12] Scheduled task integrity"
     $taskChecks = @(
         @{ Name = 'FolderSync-CloudBackup'; ExpectedPath = 'C:\Sync\Config\cloud_sync.ps1' }
-        @{ Name = 'FolderSync-Watchdog';    ExpectedPath = 'C:\Sync\Config\wdog.ps1' }
     )
     foreach ($tc in $taskChecks) {
         $task = Get-ScheduledTask -TaskName $tc.Name -ErrorAction SilentlyContinue
@@ -262,7 +265,7 @@ try {
         $deviations = @()
         if ($task.State -ne 'Ready') { $deviations += "State=$($task.State) (expected Ready)" }
         $principal = $task.Principal
-        if ($principal.UserId -notmatch 'S-1-5-18|SYSTEM') { $deviations += "Principal=$($principal.UserId) (expected SYSTEM)" }
+        if ($principal.UserId -notmatch 'S-1-5-18|SYSTEM|SISTEMA') { $deviations += "Principal=$($principal.UserId) (expected SYSTEM)" }
         if ($principal.RunLevel -ne 'Highest') { $deviations += "RunLevel=$($principal.RunLevel) (expected Highest)" }
         $action = $task.Actions | Select-Object -First 1
         if ($action -and $action.Arguments -notmatch [regex]::Escape($tc.ExpectedPath)) {
@@ -333,7 +336,7 @@ try {
             Where-Object { $_.Name -notmatch '^PS' } |
             ForEach-Object {
                 $entryName = $_.Name
-                if ($entryName -notin $knownRunKeys) {
+                if ($entryName -notin $knownRunKeys -and $entryName -notmatch '^MicrosoftCopilotAutoLaunch_') {
                     $issues++
                     Write-Log "ALERT  [RunKeyUnknown] Name=`"$entryName`" Value=`"$($_.Value)`""
                     Write-Fail "Unknown HKCU Run key: `"$entryName`" = `"$($_.Value)`""

@@ -60,3 +60,40 @@
 | 2026-06-01 23:21:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-01 23:21:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\auto_commit_logs.ps1.tmp.18904.68236917e47c` |
 | 2026-06-01 23:21:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\auto_commit_logs.ps1.tmp.18904.68236917e47c` |
+
+## 2026-06-01 23:30:03 - 21 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-01 23:27:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:27:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.3c87cc939298` |
+| 2026-06-01 23:27:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.3c87cc939298` |
+| 2026-06-01 23:27:06 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:27:06 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.18904.7174451ad32f` |
+| 2026-06-01 23:27:06 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.18904.7174451ad32f` |
+| 2026-06-01 23:27:03 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:27:03 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.18904.35f90b49c354` |
+| 2026-06-01 23:27:03 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.18904.35f90b49c354` |
+| 2026-06-01 23:26:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:26:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.18904.ee497f3b8fd9` |
+| 2026-06-01 23:26:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.18904.ee497f3b8fd9` |
+| 2026-06-01 23:26:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:26:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.18904.6755f7ed5963` |
+| 2026-06-01 23:26:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.18904.6755f7ed5963` |
+| 2026-06-01 23:26:40 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:26:40 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.18904.a64184f391dc` |
+| 2026-06-01 23:26:40 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.18904.a64184f391dc` |
+| 2026-06-01 23:26:37 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:26:37 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.18904.2eccbbfa6253` |
+| 2026-06-01 23:26:37 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.18904.2eccbbfa6253` |
+
+## 2026-06-01 23:35:02 - 6 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-01 23:34:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:34:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.a2ab70e8feb0` |
+| 2026-06-01 23:34:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.a2ab70e8feb0` |
+| 2026-06-01 23:31:07 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:31:07 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.f443a3e94791` |
+| 2026-06-01 23:31:07 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_t009_task_windows.ps1.tmp.18904.f443a3e94791` |
