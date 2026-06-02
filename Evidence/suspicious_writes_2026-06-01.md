@@ -52,3 +52,11 @@
 | 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\audit_filter.ps1.tmp.18904.4a672dd7b7c4` |
 | 2026-06-01 22:04:44 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\audit_filter.ps1.tmp.18904.4a672dd7b7c4` |
+
+## 2026-06-01 23:25:02 - 3 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-01 23:21:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-01 23:21:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\auto_commit_logs.ps1.tmp.18904.68236917e47c` |
+| 2026-06-01 23:21:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\auto_commit_logs.ps1.tmp.18904.68236917e47c` |

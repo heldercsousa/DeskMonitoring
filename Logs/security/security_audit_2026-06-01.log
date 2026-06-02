@@ -1,0 +1,9 @@
+2026-06-01 11:47:43  [AUDITOR] Starting up (PID 21220)
+2026-06-01 11:47:43  [CRITICAL] Service FolderSyncAuditor is StartPending - expected Running
+2026-06-01 12:05:07  AUDIT-FILTER  SUSPICIOUS-WRITES  2 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-01.md
+2026-06-01 12:30:03  AUDIT-FILTER  SUSPICIOUS-WRITES  5 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-01.md
+2026-06-01 12:35:03  AUDIT-FILTER  SUSPICIOUS-WRITES  5 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-01.md
+2026-06-01 18:50:07  AUDIT-FILTER  SUSPICIOUS-WRITES  2 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-01.md
+2026-06-01 22:05:04  AUDIT-FILTER  SUSPICIOUS-WRITES  5 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-01.md
+2026-06-01 22:10:08  AUDIT-FILTER  SUSPICIOUS-WRITES  5 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-01.md
+2026-06-01 23:25:02  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-01.md
