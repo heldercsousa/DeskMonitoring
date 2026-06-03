@@ -1,9 +1,26 @@
 /Mirror
-/Logs
+
+# Operational noise logs — no forensic value
+/Logs/camera/
+/Logs/ecosystem/
+/Logs/services/
+/Logs/mirror*/
+/Logs/power_check/
+/Logs/watchdog.log
+/Logs/watchdog_svc.log
+/Logs/watchdog_svc_err.log
+/Logs/auditor_svc.log
+/Logs/auditor_svc_err.log
+/Logs/cloud_sync_.log
+
+# Security/audit/sync logs ARE committed (forensic evidence)
+# Logs/security/, Logs/audit/, Logs/cloud_sync/ — tracked
+
 *.tmp.*
 *.stackdump
 /Evidence/Capture*.*
 /Config/alert_credentials.enc
+/Config/cam2.conf
 /Config/.ecosystem_state
 /Config/.camera_paused
 /Config/.sync_failed
