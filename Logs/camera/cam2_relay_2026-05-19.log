@@ -1,8 +1,0 @@
-2026-05-19 00:05:56  START  CAM-2 relay starting  ->  http://127.0.0.1:8161/
-2026-05-19 00:05:56  INFO   Source: rtsp://C100Kitchen:***@192.168.0.109:554/stream1
-2026-05-19 00:05:56  INFO   Launching VLC relay
-2026-05-19 08:44:35  START  CAM-2 relay starting  ->  http://127.0.0.1:8161/
-2026-05-19 08:44:35  INFO   Source: rtsp://C100Kitchen:***@192.168.0.109:554/stream1
-2026-05-19 08:44:35  INFO   Launching VLC relay
-2026-05-19 08:51:35  WARN   VLC relay process died  - restarting
-2026-05-19 08:51:35  INFO   Launching VLC relay

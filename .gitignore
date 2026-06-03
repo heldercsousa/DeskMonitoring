@@ -1,6 +1,10 @@
 /Mirror
+/Logs
 *.tmp.*
+*.stackdump
 /Evidence/Capture*.*
 /Config/alert_credentials.enc
 /Config/.ecosystem_state
 /Config/.camera_paused
+/Config/.sync_failed
+/Config/.camera_restart_failed
