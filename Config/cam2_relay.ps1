@@ -34,8 +34,15 @@ function Invoke-LogRotation {
 }
 
 function Test-PortListening {
-    $result = Test-NetConnection -ComputerName $RelayHost -Port $RelayPort -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
-    return $result.TcpTestSucceeded
+    $job = Start-Job {
+        param($h,$p)
+        $r = Test-NetConnection -ComputerName $h -Port $p -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+        $r.TcpTestSucceeded
+    } -ArgumentList $RelayHost, $RelayPort
+    $done = Wait-Job $job -Timeout 3
+    if ($done) { $result = Receive-Job $job } else { $result = $false }
+    Remove-Job $job -Force
+    return [bool]$result
 }
 
 # ---------------------------------------------------------------------------

@@ -133,8 +133,11 @@ if ($relayProc) {
 }
 
 # Port 8161 check
-$port8161 = Test-NetConnection -ComputerName "127.0.0.1" -Port 8161 -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
-if ($port8161.TcpTestSucceeded) {
+$_job8161 = Start-Job { $r = Test-NetConnection -ComputerName "127.0.0.1" -Port 8161 -WarningAction SilentlyContinue -ErrorAction SilentlyContinue; $r.TcpTestSucceeded }
+$_done8161 = Wait-Job $_job8161 -Timeout 3
+$port8161Result = if ($_done8161) { [bool](Receive-Job $_job8161) } else { $false }
+Remove-Job $_job8161 -Force
+if ($port8161Result) {
     Write-Host "  Port 8161   : PASS  listening" -ForegroundColor Green
 } else {
     Write-Host "  Port 8161   : FAIL  nothing listening on 127.0.0.1:8161" -ForegroundColor Red
