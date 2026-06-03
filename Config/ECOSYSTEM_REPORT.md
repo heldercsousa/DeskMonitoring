@@ -434,8 +434,12 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 
 | File | Used by | Purpose |
 |---|---|---|
-| `rclone.conf` | `cloud_sync.ps1` | Rclone B2 remote definition + API key |
-| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + log rotation + mirror cleanup (7-day) + source folder retention (7-day, date-name based) + self-healing firewall+DNS attack detection + failure sentinel (`.sync_failed`) + B2 lag alert (`.last_sync_ok`) + English comments + ACL failure logging (T026/T030/T031/T032, 2026-06-02) |
+| `rclone.conf` | `cloud_sync.ps1` | Rclone B2 remote definition (credentials removed — now in `b2_creds.dpapi`) |
+| `store_b2_creds.ps1` | Run once by Helder | T048: one-time migration — reads B2 account+key (from rclone.conf or prompt), encrypts with DPAPI LocalMachine scope, writes `b2_creds.dpapi` |
+| `b2_creds.dpapi` | `cloud_sync.ps1` at runtime | T048: DPAPI-encrypted B2 account+key blob (LocalMachine scope, SYSTEM-accessible, **gitignored**) |
+| `migrate_cam2_creds.ps1` | Run once by Helder | T049: one-time migration — reads cam2.conf, encrypts with DPAPI CurrentUser scope, writes `cam2_creds.dpapi` |
+| `cam2_creds.dpapi` | `cam2_relay.ps1` at runtime | T049: DPAPI-encrypted CAM-2 user+pass+ip+port+stream blob (CurrentUser scope, **gitignored**) |
+| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + DPAPI B2 credential loading (`b2_creds.dpapi`, LocalMachine) + log rotation + mirror cleanup (7-day) + source folder retention (7-day) + self-healing firewall+DNS detection + failure sentinel + B2 lag alert + ACL failure logging (T026/T030–T032, 2026-06-02; T048, 2026-06-03) |
 | `cloud_sync.bat` | Manual trigger | Same as .ps1 but via cmd (manual use only) |
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
@@ -445,8 +449,8 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
 | `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup, CAM-2 relay; VLC process + port 8161 + restart sentinel checks added (T025, 2026-06-02) |
-| `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam; max 5 restarts/hour circuit breaker; 7-day log rotation; port-listening verification after restart (T024, 2026-06-02) |
-| `cam2.conf` | Read by `cam2_relay.ps1` | CAM-2 credentials (plaintext, ACL-protected, **gitignored**) |
+| `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam; DPAPI credential loading (`cam2_creds.dpapi`, CurrentUser) with cam2.conf fallback; max 5 restarts/hour circuit breaker; 7-day log rotation; port-listening verification after restart (T024, 2026-06-02; T049, 2026-06-03) |
+| `cam2.conf` | Fallback for `cam2_relay.ps1` | CAM-2 credentials (plaintext fallback — migrate with `migrate_cam2_creds.ps1` then delete, **gitignored**) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry (Step 14 uses `start_yawcam.bat` wrapper to set correct working dir) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
@@ -1593,14 +1597,144 @@ if ($remaining.Count -eq 0) {
 ---
 
 ### `C:\Sync\Config\rclone.conf`
-> ⚠ Replace values with actual credentials from backblaze.com → App Keys
+> ⚠ Credentials removed (T048, 2026-06-03) — stored in `b2_creds.dpapi` (DPAPI, LocalMachine). Run `store_b2_creds.ps1` once after reinstall.
 
 ```ini
 [cloudsync]
 type = b2
-account = YOUR_KEY_ID_HERE
-key = YOUR_APP_KEY_HERE
 hard_delete = false
+```
+
+---
+
+### `C:\Sync\Config\store_b2_creds.ps1`
+> T048 (2026-06-03): One-time migration — reads B2 account+key (from rclone.conf or prompt), encrypts with DPAPI LocalMachine scope, writes `b2_creds.dpapi`. Run once as any user after reinstall.
+
+```powershell
+# store_b2_creds.ps1
+# One-time migration: reads B2 credentials from rclone.conf and stores them
+# as a DPAPI-encrypted blob (LocalMachine scope) in b2_creds.dpapi.
+# Run once as any user. After running, remove account/key from rclone.conf.
+# Last updated: 2026-06-03 - T048: migrate B2 credentials to DPAPI
+
+Add-Type -AssemblyName System.Security
+
+$RcloneConf = 'C:\Sync\Config\rclone.conf'
+$OutputFile  = 'C:\Sync\Config\b2_creds.dpapi'
+
+# --- Read current credentials from rclone.conf ---
+if (-not (Test-Path $RcloneConf)) {
+    Write-Host "  FAIL  rclone.conf not found at $RcloneConf" -ForegroundColor Red
+    exit 1
+}
+
+$confContent = Get-Content -LiteralPath $RcloneConf -Raw
+$accountMatch = [regex]::Match($confContent, '(?m)^\s*account\s*=\s*(.+)$')
+$keyMatch     = [regex]::Match($confContent, '(?m)^\s*key\s*=\s*(.+)$')
+
+if (-not $accountMatch.Success -or -not $keyMatch.Success) {
+    Write-Host "  FAIL  Could not find account or key in rclone.conf." -ForegroundColor Red
+    Write-Host "        Has it already been stripped? If so, enter credentials manually." -ForegroundColor Yellow
+    $account = Read-Host "  Enter B2 account (application key ID)"
+    $key     = Read-Host "  Enter B2 key (application key)"
+} else {
+    $account = $accountMatch.Groups[1].Value.Trim()
+    $key     = $keyMatch.Groups[1].Value.Trim()
+    Write-Host "  OK    Read credentials from rclone.conf (account: $($account.Substring(0,8))...)" -ForegroundColor Green
+}
+
+# --- Encrypt with DPAPI LocalMachine scope ---
+$json      = [System.Text.Encoding]::UTF8.GetBytes("{`"account`":`"$account`",`"key`":`"$key`"}")
+$encrypted = [System.Security.Cryptography.ProtectedData]::Protect(
+    $json,
+    $null,
+    [System.Security.Cryptography.DataProtectionScope]::LocalMachine
+)
+$base64 = [Convert]::ToBase64String($encrypted)
+
+# --- Write to output file ---
+$base64 | Set-Content -LiteralPath $OutputFile -NoNewline -Encoding ASCII
+Write-Host "  OK    Encrypted credentials written to $OutputFile" -ForegroundColor Green
+Write-Host ""
+Write-Host "  NEXT STEPS:" -ForegroundColor Cyan
+Write-Host "    1. Verify cloud sync still works (next scheduled run or manual test)" -ForegroundColor Cyan
+Write-Host "    2. account/key have been removed from rclone.conf (T048 migration complete)." -ForegroundColor Cyan
+Write-Host "       cloud_sync.ps1 now reads credentials exclusively from b2_creds.dpapi." -ForegroundColor Cyan
+Write-Host "    3. Verify the next scheduled sync completes with SYNC-OK in cloud_sync log." -ForegroundColor Cyan
+```
+
+---
+
+### `C:\Sync\Config\migrate_cam2_creds.ps1`
+> T049 (2026-06-03): One-time migration — reads cam2.conf, encrypts user+pass+ip+port+stream with DPAPI CurrentUser scope, writes `cam2_creds.dpapi`. Must run as Helder user (not SYSTEM).
+
+```powershell
+# migrate_cam2_creds.ps1
+# One-time migration: encrypts CAM-2 credentials from cam2.conf into DPAPI blob.
+# Run once as Helder (user session) - uses CurrentUser scope so only this account can decrypt.
+# Output: C:\Sync\Config\cam2_creds.dpapi (Base64-encoded DPAPI-encrypted JSON)
+
+Add-Type -AssemblyName System.Security
+
+$ConfFile  = "C:\Sync\Config\cam2.conf"
+$DpapiFile = "C:\Sync\Config\cam2_creds.dpapi"
+
+if (-not (Test-Path $ConfFile)) {
+    Write-Host "FAIL  cam2.conf not found at $ConfFile" -ForegroundColor Red
+    exit 1
+}
+
+# Parse cam2.conf
+$conf = @{}
+Get-Content $ConfFile | Where-Object { $_ -match '^\s*[^#]' -and $_ -match '=' } | ForEach-Object {
+    $parts = $_ -split '=', 2
+    $conf[$parts[0].Trim()] = $parts[1].Trim()
+}
+
+$user   = $conf['CAM2_USER']
+$pass   = $conf['CAM2_PASS']
+$ip     = $conf['CAM2_IP']
+$port   = $conf['CAM2_PORT']
+$stream = $conf['CAM2_STREAM']
+
+if (-not $user -or -not $pass -or -not $ip) {
+    Write-Host "FAIL  cam2.conf missing required fields (CAM2_USER, CAM2_PASS, CAM2_IP)" -ForegroundColor Red
+    exit 1
+}
+
+# Build JSON payload (all fields, IP/port/stream kept for completeness)
+$payload = [ordered]@{
+    user   = $user
+    pass   = $pass
+    ip     = $ip
+    port   = if ($port) { $port } else { "554" }
+    stream = if ($stream) { $stream } else { "stream1" }
+}
+$json = $payload | ConvertTo-Json -Compress
+
+# DPAPI encrypt (CurrentUser scope - only Helder's account can decrypt)
+$plainBytes     = [System.Text.Encoding]::UTF8.GetBytes($json)
+$entropyBytes   = $null
+$encryptedBytes = [System.Security.Cryptography.ProtectedData]::Protect(
+    $plainBytes,
+    $entropyBytes,
+    [System.Security.Cryptography.DataProtectionScope]::CurrentUser
+)
+
+# Base64-encode and write to file
+$base64 = [Convert]::ToBase64String($encryptedBytes)
+[System.IO.File]::WriteAllText($DpapiFile, $base64, [System.Text.Encoding]::ASCII)
+
+Write-Host ""
+Write-Host "  OK   cam2_creds.dpapi created at: $DpapiFile" -ForegroundColor Green
+Write-Host "  OK   Encrypted fields: user, pass, ip, port, stream" -ForegroundColor Green
+Write-Host ""
+Write-Host "  cam2.conf can now be deleted. When ready, run:" -ForegroundColor Cyan
+Write-Host "       Remove-Item '$ConfFile'" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "  NOTE: cam2_creds.dpapi is gitignored and stays on this machine only." -ForegroundColor Yellow
+Write-Host "        If you reinstall Windows or migrate to a new user account, re-run" -ForegroundColor Yellow
+Write-Host "        this script (or setup_update.ps1 Step XX) to regenerate it." -ForegroundColor Yellow
 ```
 
 ---

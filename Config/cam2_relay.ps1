@@ -1,10 +1,13 @@
 # cam2_relay.ps1
 # CAM-2 RTSP -> MJPEG HTTP relay for Yawcam
-# Reads credentials from cam2.conf, starts VLC relay on http://127.0.0.1:8161/
+# Reads credentials from cam2_creds.dpapi (DPAPI-encrypted); falls back to cam2.conf.
 # Registered as startup entry: HKCU:\...\Run\YawcamCam2Relay
 # Logs to C:\Sync\Logs\services\cam2_relay.log (single rolling file, 7-day retention)
 
+Add-Type -AssemblyName System.Security
+
 $ConfFile       = "C:\Sync\Config\cam2.conf"
+$DpapiFile      = "C:\Sync\Config\cam2_creds.dpapi"
 $VlcExe         = "C:\Program Files\VideoLAN\VLC\vlc.exe"
 $RelayPort      = 8161
 $RelayHost      = "127.0.0.1"
@@ -46,27 +49,58 @@ function Test-PortListening {
 }
 
 # ---------------------------------------------------------------------------
-# Read credentials from cam2.conf
+# Load-Cam2Credentials: reads DPAPI blob; falls back to cam2.conf with WARN
 # ---------------------------------------------------------------------------
-if (-not (Test-Path $ConfFile)) {
-    Write-Log "FAIL  cam2.conf not found at $ConfFile  - relay cannot start"
+function Load-Cam2Credentials {
+    if (Test-Path $DpapiFile) {
+        try {
+            $base64        = [System.IO.File]::ReadAllText($DpapiFile, [System.Text.Encoding]::ASCII).Trim()
+            $encBytes      = [Convert]::FromBase64String($base64)
+            $plainBytes    = [System.Security.Cryptography.ProtectedData]::Unprotect(
+                $encBytes,
+                $null,
+                [System.Security.Cryptography.DataProtectionScope]::CurrentUser
+            )
+            $json          = [System.Text.Encoding]::UTF8.GetString($plainBytes)
+            $creds         = $json | ConvertFrom-Json
+            $script:user   = $creds.user
+            $script:pass   = $creds.pass
+            $script:ip     = $creds.ip
+            $script:port   = $creds.port
+            $script:stream = $creds.stream
+            Write-Log "INFO   Credentials loaded from cam2_creds.dpapi (DPAPI)"
+            return
+        } catch {
+            Write-Log "FAIL   cam2_creds.dpapi found but decryption failed - $_"
+            exit 1
+        }
+    }
+
+    # Fallback: cam2.conf (legacy plaintext - migrate with migrate_cam2_creds.ps1)
+    if (Test-Path $ConfFile) {
+        Write-Log "WARN   cam2_creds.dpapi not found - falling back to plaintext cam2.conf"
+        Write-Log "WARN   Run migrate_cam2_creds.ps1 to encrypt credentials"
+        $conf = @{}
+        Get-Content $ConfFile | Where-Object { $_ -match '^\s*[^#]' -and $_ -match '=' } | ForEach-Object {
+            $parts = $_ -split '=', 2
+            $conf[$parts[0].Trim()] = $parts[1].Trim()
+        }
+        $script:user   = $conf['CAM2_USER']
+        $script:pass   = $conf['CAM2_PASS']
+        $script:ip     = $conf['CAM2_IP']
+        $script:port   = $conf['CAM2_PORT']
+        $script:stream = $conf['CAM2_STREAM']
+        return
+    }
+
+    Write-Log "FAIL   cam2_creds.dpapi not found - run migrate_cam2_creds.ps1"
     exit 1
 }
 
-$conf = @{}
-Get-Content $ConfFile | Where-Object { $_ -match '^\s*[^#]' -and $_ -match '=' } | ForEach-Object {
-    $parts = $_ -split '=', 2
-    $conf[$parts[0].Trim()] = $parts[1].Trim()
-}
-
-$user   = $conf['CAM2_USER']
-$pass   = $conf['CAM2_PASS']
-$ip     = $conf['CAM2_IP']
-$port   = $conf['CAM2_PORT']
-$stream = $conf['CAM2_STREAM']
+Load-Cam2Credentials
 
 if (-not $user -or -not $pass -or -not $ip) {
-    Write-Log "FAIL  cam2.conf missing required fields (CAM2_USER, CAM2_PASS, CAM2_IP)"
+    Write-Log "FAIL  credentials missing required fields (user, pass, ip)"
     exit 1
 }
 

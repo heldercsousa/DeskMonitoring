@@ -1,7 +1,7 @@
 # =============================================================================
 # .claudeignore — C:\Sync FolderSync + Camera Ecosystem
-# Keeps Claude focused on Config\ scripts. Excludes logs, mirror, credentials,
-# video recordings, large reference docs, and Yawcam Java binaries.
+# Keeps Claude focused on Config\ scripts and task planning docs.
+# Excludes logs, mirror, credentials, video recordings, and temp artifacts.
 # =============================================================================
 
 # ---------------------------------------------------------------------------
@@ -25,8 +25,14 @@ Logs/
 # Plaintext Backblaze B2 credentials — never expose to context window
 Config/rclone.conf
 
-# DPAPI-encrypted binary blob — binary, meaningless without decryption
+# DPAPI-encrypted binary blobs — binary, meaningless without decryption
 Config/credentials.enc
+Config/alert_credentials.enc
+Config/b2_creds.dpapi
+Config/cam2_creds.dpapi
+
+# Camera credentials — plaintext, ACL-protected, never expose to context
+Config/cam2.conf
 
 # ---------------------------------------------------------------------------
 # FreeFileSync binary config — not human-editable plain text
@@ -47,12 +53,7 @@ Config/ECOSYSTEM_REPORT.md
 Evidence/
 
 # ---------------------------------------------------------------------------
-# Tasks/ — implementation plan docs, read explicitly per task as needed
-# ---------------------------------------------------------------------------
-Tasks/
-
-# ---------------------------------------------------------------------------
-# Source folder mapping (external path, outside repo)
+# Source/ — external path mapping, not part of the repo
 # ---------------------------------------------------------------------------
 Source/
 
@@ -70,32 +71,36 @@ Source/
 *.mkv
 
 # ---------------------------------------------------------------------------
-# Config/motion/ — human-readable setup docs, KEPT VISIBLE
-# (these are the camera architecture reference, not ignored)
-# ---------------------------------------------------------------------------
-# Config/motion/ is intentionally NOT ignored
-
-# ---------------------------------------------------------------------------
 # Runtime forensic artifacts and registry dumps at repo root level
+# Root-anchored (leading slash) so Config/motion/*.txt guides remain visible
 # ---------------------------------------------------------------------------
-*.txt
-*.reg
+/*.txt
+/*.reg
 *.stackdump
 
 # ---------------------------------------------------------------------------
-# Temp files left by Claude Code (accumulated session artifacts)
+# Temp files left by Claude Code editor — repo-wide pattern covers:
+#   *.tmp.<PID>.<hash>  (e.g. setup_all.ps1.tmp.12784.1772863210786)
+# Applies to root level, Config/, and any subdirectory
 # ---------------------------------------------------------------------------
-.claude/**/*.tmp.*
+**/*.tmp.*
+
+# ---------------------------------------------------------------------------
+# Runtime state flags — written by start/stop scripts, not meaningful for editing
+# ---------------------------------------------------------------------------
+Config/.ecosystem_state
+Config/.sync_failed
 
 # =============================================================================
 # KEPT VISIBLE (not ignored):
 #   Config/*.ps1            — the actual codebase (sync + camera)
 #   Config/*.bat            — generated bat wrappers
 #   Config/motion/*.md      — camera setup documentation
-#   Config/motion/*.txt     — camera quick-start guides (excluded by *.txt above
-#                             only at repo root — subdirs are visible)
+#   Config/motion/*.txt     — camera quick-start guides (visible because /*.txt
+#                             is root-anchored, not recursive)
 #   .claude/commands/*.md   — per-project slash commands
 #   .claude/settings.json   — project MCP and permission config
+#   Tasks/                  — implementation plan docs (MUST be visible)
 #   .gitignore
 #   CLAUDE.md
 #   Backlog.md

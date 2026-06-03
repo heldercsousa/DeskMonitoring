@@ -696,6 +696,35 @@ if (-not (Test-Path $symlinkPath)) {
 }
 
 # =============================================================================
+# STEP 18d - B2 credential DPAPI migration (T048)
+# Encrypts B2 account+key with LocalMachine DPAPI for SYSTEM-accessible storage.
+# Skip if b2_creds.dpapi already exists.
+# =============================================================================
+Write-Step "Step 18d - B2 credentials: migrate to DPAPI (b2_creds.dpapi)"
+$B2CredsFile = 'C:\Sync\Config\b2_creds.dpapi'
+if (-not (Test-Path $B2CredsFile)) {
+    Write-Warn "b2_creds.dpapi not found - run store_b2_creds.ps1 manually before first sync"
+    Write-Host "          Command: powershell -ExecutionPolicy Bypass -File 'C:\Sync\Config\store_b2_creds.ps1'" -ForegroundColor Yellow
+} else {
+    Write-OK "b2_creds.dpapi exists - B2 credentials stored securely"
+}
+
+# =============================================================================
+# STEP 18e - CAM-2 credential DPAPI migration (T049)
+# Encrypts Tapo C100 user+pass+ip with CurrentUser DPAPI.
+# Skip if cam2_creds.dpapi already exists.
+# Note: must be run as Helder user (CurrentUser scope) — SYSTEM cannot create this.
+# =============================================================================
+Write-Step "Step 18e - CAM-2 credentials: migrate to DPAPI (cam2_creds.dpapi)"
+$Cam2CredsFile = 'C:\Sync\Config\cam2_creds.dpapi'
+if (-not (Test-Path $Cam2CredsFile)) {
+    Write-Warn "cam2_creds.dpapi not found - run migrate_cam2_creds.ps1 as Helder before starting cam2 relay"
+    Write-Host "          Command: powershell -ExecutionPolicy Bypass -File 'C:\Sync\Config\migrate_cam2_creds.ps1'" -ForegroundColor Yellow
+} else {
+    Write-OK "cam2_creds.dpapi exists - CAM-2 credentials stored securely"
+}
+
+# =============================================================================
 # STEP 19 - FolderSync-AuditFilter task (every 5 min — suspicious-only 4663 filter)
 # Must run as current user (InteractiveToken) — send_alert.ps1 uses DPAPI CurrentUser scope.
 # Uses a VBScript launcher so wscript.exe (GUI, no console) spawns pwsh with SW_HIDE (0),
@@ -795,6 +824,8 @@ Write-Host "  Step 16b- SACL on Config\+Evidence\+.git\ + 512 MB Security log" -
 Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
 Write-Host "  Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)" -ForegroundColor Gray
 Write-Host "  Step 18b- Power settings applied (Balanced plan, USB Suspend disabled)" -ForegroundColor Gray
+Write-Host "  Step 18d- B2 credentials: checked/warned if b2_creds.dpapi missing" -ForegroundColor Gray
+Write-Host "  Step 18e- CAM-2 credentials: checked/warned if cam2_creds.dpapi missing" -ForegroundColor Gray
 Write-Host "  Step 19 - FolderSync-AuditFilter task (current user, VBS launcher - no window flash)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow

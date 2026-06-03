@@ -1,7 +1,9 @@
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-06-02 - T026/T030/T031/T032: failure sentinel, lag alert, English comments, ACL logging
+# Last updated: 2026-06-03 - T048: load B2 credentials from DPAPI blob
+
+Add-Type -AssemblyName System.Security
 
 $Rclone             = 'C:\Tools\Rclone\rclone.exe'
 $Config             = 'C:\Sync\Config\rclone.conf'
@@ -20,6 +22,31 @@ $MaliciousFirewallRules = @(
     'Block 104.153.233.180',
     'Block 149.137.142.15'
 )
+
+$B2CredsFile = 'C:\Sync\Config\b2_creds.dpapi'
+
+function Load-B2Credentials {
+    if (-not (Test-Path $B2CredsFile)) {
+        Write-SyncLog "SYNC-FAIL  b2_creds.dpapi not found - run store_b2_creds.ps1 to migrate credentials"
+        exit 1
+    }
+    try {
+        $base64    = Get-Content -LiteralPath $B2CredsFile -Raw -Encoding ASCII
+        $encrypted = [Convert]::FromBase64String($base64.Trim())
+        $jsonBytes = [System.Security.Cryptography.ProtectedData]::Unprotect(
+            $encrypted,
+            $null,
+            [System.Security.Cryptography.DataProtectionScope]::LocalMachine
+        )
+        $json    = [System.Text.Encoding]::UTF8.GetString($jsonBytes)
+        $creds   = $json | ConvertFrom-Json
+        $env:RCLONE_CONFIG_CLOUDSYNC_ACCOUNT = $creds.account
+        $env:RCLONE_CONFIG_CLOUDSYNC_KEY     = $creds.key
+    } catch {
+        Write-SyncLog "SYNC-FAIL  Failed to decrypt b2_creds.dpapi: $($_.Exception.Message)"
+        exit 1
+    }
+}
 
 function Write-SyncLog($msg) {
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
@@ -50,6 +77,12 @@ function Remove-MaliciousFirewallRules {
     }
     return $removed
 }
+
+# ============================================================
+# INIT - Load B2 credentials from DPAPI-encrypted blob
+# Sets RCLONE_CONFIG_CLOUDSYNC_ACCOUNT / _KEY env vars
+# ============================================================
+Load-B2Credentials
 
 # ============================================================
 # T030 - B2 lag alert: warn if last successful sync is stale

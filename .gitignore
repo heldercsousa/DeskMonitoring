@@ -20,7 +20,9 @@
 *.stackdump
 /Evidence/Capture*.*
 /Config/alert_credentials.enc
+/Config/b2_creds.dpapi
 /Config/cam2.conf
+/Config/cam2_creds.dpapi
 /Config/.ecosystem_state
 /Config/.camera_paused
 /Config/.sync_failed
