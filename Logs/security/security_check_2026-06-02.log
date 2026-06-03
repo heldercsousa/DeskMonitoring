@@ -1,0 +1,16 @@
+2026-06-02 09:00:02  Issues: 1 | Registro: C:#Users#helde#AppData#Local#CapCut#7.5.0.3053#VEDetector.exe,C:#Users#helde#AppData#Local#CapCut#7.9.0.3294#VEDetector.exe,C:#Users#helde#AppData#Local#CapCut#8.3.0.3497#VEDetector.exe,C:#Users#helde#AppData#Local#CapCut#8.4.0.3562#VEDetector.exe,C:#Users#helde#AppData#Local#CapCut#8.5.0.3590#VEDetector.exe
+2026-06-02 12:30:36  SCAN-START  DailySecurityCheck v9
+2026-06-02 12:31:07  ALERT  [TaskTamper] Task=FolderSync-CloudBackup Deviation=Principal=SISTEMA (expected SYSTEM)
+2026-06-02 12:31:08  ALERT  [TaskMissing] Task=FolderSync-Watchdog
+2026-06-02 12:31:19  INFO  [B2Connectivity] Host=api.backblazeb2.com Port=443 Result=OK
+2026-06-02 12:31:21  ALERT  [RunKeyUnknown] Name="electron.app.Fing" Value="C:\Program Files\Fing\Fing.exe --processStart "Fing.exe" --process-start-args "--hidden""
+2026-06-02 12:31:21  ALERT  [RunKeyUnknown] Name="OneDrive" Value=""C:\Program Files\Microsoft OneDrive\OneDrive.exe" /background"
+2026-06-02 12:31:21  ALERT  [RunKeyUnknown] Name="Docker Desktop" Value="C:\Program Files\Docker\Docker\Docker Desktop.exe"
+2026-06-02 12:31:21  ALERT  [RunKeyUnknown] Name="MicrosoftCopilotAutoLaunch_D243A198D3E178678DD2E5147249E6F4" Value=""C:\Program Files (x86)\Microsoft\Copilot\Application\mscopilot.exe" --no-startup-window --win-session-start"
+2026-06-02 12:31:21  SCAN-END  Issues=6
+2026-06-02 12:34:07  SCAN-START  DailySecurityCheck v9
+2026-06-02 12:34:36  INFO  [B2Connectivity] Host=api.backblazeb2.com Port=443 Result=OK
+2026-06-02 12:34:36  SCAN-END  Issues=0
+2026-06-02 12:36:01  SCAN-START  DailySecurityCheck v9
+2026-06-02 12:36:30  INFO  [B2Connectivity] Host=api.backblazeb2.com Port=443 Result=OK
+2026-06-02 12:36:31  SCAN-END  Issues=0

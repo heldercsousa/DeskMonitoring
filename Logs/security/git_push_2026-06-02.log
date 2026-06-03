@@ -1,0 +1,30 @@
+2026-06-02 11:50:59  GIT-PUSH  Pushing 002225b - chore(T007): review DailySecurityCheck.ps1; register improvement tasks
+2026-06-02 11:51:08  GIT-PUSH  OK  002225b pushed to origin/master
+2026-06-02 11:51:34  GIT-PUSH  Pushing 7fa9830 - chore(T003): research Anthropic Claude config tool - already installed
+2026-06-02 11:51:39  GIT-PUSH  OK  7fa9830 pushed to origin/master
+2026-06-02 11:53:07  GIT-PUSH  Pushing ee5e41e - chore(T005): research security skills - Malwarebytes active, Fing/IPInfo/threatintel as next steps
+2026-06-02 11:53:10  GIT-PUSH  OK  ee5e41e pushed to origin/master
+2026-06-02 11:58:59  GIT-PUSH  Pushing 337c43c - feat(T006): install mcp-threatintel-server; cancel T019 (no IPInfo MCP); add T021
+2026-06-02 11:59:02  GIT-PUSH  OK  337c43c pushed to origin/master
+2026-06-02 12:00:37  GIT-PUSH  Pushing c69a193 - feat(T002+T004): add ParseFile hook; fix .claudeignore exclusions
+2026-06-02 12:00:41  GIT-PUSH  OK  c69a193 pushed to origin/master
+2026-06-02 12:01:17  GIT-PUSH  Pushing d183289 - chore(T008): end-to-end ecosystem review; register improvement tasks
+2026-06-02 12:01:20  GIT-PUSH  OK  d183289 pushed to origin/master
+2026-06-02 12:18:43  GIT-PUSH  Pushing c0fc7bc - feat(T010-T017): add firewall/DNS/task/B2/EventLog/RunKey detection; fix logging quality
+2026-06-02 12:18:50  GIT-PUSH  Pushing dd6dca7 - feat(T010-T017): add firewall/DNS/task/B2/EventLog/RunKey detection; fix logging quality
+2026-06-02 12:18:53  GIT-PUSH  OK  c0fc7bc pushed to origin/master
+2026-06-02 12:18:59  GIT-PUSH  FAIL  exit 1 : To https://github.com/heldercsousa/DeskMonitoring.git  ! [remote rejected] master -> master (cannot lock ref 'refs/heads/master': is at dd6dca79be7120b8be948cbbbcc5df8fdc5b46db but expected d183289cf0ca2f13199acf13785f6d9fda4140c0) error: failed to push some refs to 'https://github.com/heldercsousa/DeskMonitoring.git'
+2026-06-02 12:19:24  GIT-PUSH  Pushing 24ada59 - feat(T028-T029,T033): fix Job leak; suspicious-delete alert; audit log rotation
+2026-06-02 12:19:27  GIT-PUSH  OK  24ada59 pushed to origin/master
+2026-06-02 12:19:42  GIT-PUSH  Pushing 91fabcd - feat(T022-T025,T034): fix monitor blind path; add logging; cam2 relay hardening; restart alerting
+2026-06-02 12:19:45  GIT-PUSH  OK  91fabcd pushed to origin/master
+2026-06-02 12:30:48  GIT-PUSH  Pushing 4ba93e8 - chore: commit settings, parse-check helper, and evidence file
+2026-06-02 12:30:58  GIT-PUSH  OK  4ba93e8 pushed to origin/master
+2026-06-02 12:52:31  GIT-PUSH  Pushing 41313b1 - docs(RULE1): sync ECOSYSTEM_REPORT + Backlog for T022-T035
+2026-06-02 12:52:34  GIT-PUSH  OK  41313b1 pushed to origin/master
+2026-06-02 20:32:22  GIT-PUSH  Pushing 0d51a98 - chore(T035-T041): register manual tests T036-T040; add T041 Yawcam/B2/audio task
+2026-06-02 20:32:28  GIT-PUSH  OK  0d51a98 pushed to origin/master
+2026-06-02 20:32:37  GIT-PUSH  Pushing 1ac35de - feat(security): harden DailySecurityCheck; add run_tests.ps1; commit evidence
+2026-06-02 20:32:40  GIT-PUSH  OK  1ac35de pushed to origin/master
+2026-06-02 21:31:38  GIT-PUSH  Pushing 5321b4e - chore(T041-T042): update T041 to Planned; add T042 auto-failover idea
+2026-06-02 21:31:44  GIT-PUSH  OK  5321b4e pushed to origin/master

@@ -1,0 +1,8 @@
+﻿2026-06-03 00:33:14 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-03\motion_2026-06-03_00.33.12_637.avi
+2026-06-03 00:33:17 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-03\motion_2026-06-03_00.33.17_612.avi
+2026-06-03 00:33:38  [AUDITOR] Shutting down
+2026-06-03 00:45:03  AUDIT-FILTER  SUSPICIOUS-WRITES  6 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-03.md
+2026-06-03 00:50:06  AUDIT-FILTER  SUSPICIOUS-WRITES  9542 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-03.md
+2026-06-03 00:55:05  AUDIT-FILTER  SUSPICIOUS-WRITES  8942 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-03.md
+2026-06-03 01:35:04  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-03.md
+2026-06-03 01:40:03  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-03.md

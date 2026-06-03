@@ -1,0 +1,28 @@
+2026-06-01 12:34:20  GIT-PUSH  Pushing a3b266d - security: email+B2 alert chain - send_alert.ps1, post_commit_push.ps1, audit_filter wired to off-machine delivery
+2026-06-01 12:34:27  GIT-PUSH  OK  a3b266d pushed to origin/master
+2026-06-01 16:33:14  GIT-PUSH  Pushing 396690c - fix: FolderSync-AuditFilter runs as helde/InteractiveToken so DPAPI decryption works for email alerts
+2026-06-01 16:33:21  GIT-PUSH  OK  396690c pushed to origin/master
+2026-06-01 18:01:12  GIT-PUSH  Pushing 59c583e - feat: add TASKS.md persistent task backlog + CLAUDE.md tracking rule
+2026-06-01 18:01:15  GIT-PUSH  OK  59c583e pushed to origin/master
+2026-06-01 18:41:06  GIT-PUSH  Pushing 3c4f8e2 - refactor: rename TASKS.md to Backlog.md; redesign as business-level tracker
+2026-06-01 18:41:09  GIT-PUSH  OK  3c4f8e2 pushed to origin/master
+2026-06-01 18:42:30  GIT-PUSH  Pushing 7e6c1a6 - feat(backlog): add Planned status; update on every transition not just Done
+2026-06-01 18:42:33  GIT-PUSH  OK  7e6c1a6 pushed to origin/master
+2026-06-01 18:45:28  GIT-PUSH  Pushing f1e0ad1 - evidence: log suspicious write events 2026-06-01
+2026-06-01 18:45:31  GIT-PUSH  OK  f1e0ad1 pushed to origin/master
+2026-06-01 19:15:12  GIT-PUSH  Pushing 0c8b5d7 - feat: Stop hook auto-wakes Claude when uncommitted project files exist
+2026-06-01 19:15:21  GIT-PUSH  OK  0c8b5d7 pushed to origin/master
+2026-06-01 19:16:41  GIT-PUSH  Pushing cc6aee5 - fix: gitignore alert_credentials.enc + runtime state flags; commit evidence update
+2026-06-01 19:16:44  GIT-PUSH  OK  cc6aee5 pushed to origin/master
+2026-06-01 19:20:09  GIT-PUSH  Pushing a09db4b - feat(backlog): add T009 - investigate flashing PS window processes
+2026-06-01 19:20:13  GIT-PUSH  OK  a09db4b pushed to origin/master
+2026-06-01 22:06:33  GIT-PUSH  Pushing d6e080d - fix(T009): silence audit_filter child pwsh window; add admin fix script for task principals
+2026-06-01 22:06:37  GIT-PUSH  OK  d6e080d pushed to origin/master
+2026-06-01 23:21:52  GIT-PUSH  Pushing 1d8e0cc - fix(auto-commit): include Evidence/ in daily auto-commit alongside Logs/
+2026-06-01 23:21:55  GIT-PUSH  OK  1d8e0cc pushed to origin/master
+2026-06-01 23:29:27  GIT-PUSH  Pushing 10c7eb7 - fix(T009): bake window-flash fixes into setup_update.ps1; correct fix script
+2026-06-01 23:29:31  GIT-PUSH  OK  10c7eb7 pushed to origin/master
+2026-06-01 23:30:05  GIT-PUSH  Pushing aed0935 - logs: auto-commit 2026-06-01 23:30
+2026-06-01 23:30:09  GIT-PUSH  OK  aed0935 pushed to origin/master
+2026-06-01 23:37:40  GIT-PUSH  Pushing aac94e1 - fix(T009): apply VBScript launcher fix; add launcher vbs; close task
+2026-06-01 23:37:50  GIT-PUSH  OK  aac94e1 pushed to origin/master

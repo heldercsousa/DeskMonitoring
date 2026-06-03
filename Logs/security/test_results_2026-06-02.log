@@ -1,0 +1,73 @@
+
+=== TEST RUN 2026-06-02 12:30:35 ===
+2026-06-02 12:30:35  [T1]  PASS  DailySecurityCheck.ps1
+2026-06-02 12:30:35  [T1]  PASS  yawcam_monitor_v4.ps1
+2026-06-02 12:30:35  [T1]  PASS  cam2_relay.ps1
+2026-06-02 12:30:35  [T1]  PASS  wdog.ps1
+2026-06-02 12:30:35  [T1]  PASS  auditor.ps1
+2026-06-02 12:30:35  [T1]  PASS  cloud_sync.ps1
+2026-06-02 12:31:37  [T2]  PASS  DailySecurityCheck - log written
+2026-06-02 12:31:37  [T2]  FAIL  DailySecurityCheck - FIREWALL-CHECK present  - keyword missing from log
+2026-06-02 12:31:37  [T2]  FAIL  DailySecurityCheck - HOSTS-CHECK present  - keyword missing from log
+2026-06-02 12:31:37  [T2]  FAIL  DailySecurityCheck - TASK-INTEGRITY present  - keyword missing from log
+2026-06-02 12:31:37  [T2]  FAIL  DailySecurityCheck - B2-PROBE present  - keyword missing from log
+2026-06-02 12:31:37  [T2]  FAIL  DailySecurityCheck - EVENTLOG-AUDIT present  - keyword missing from log
+2026-06-02 12:31:37  [T2]  FAIL  DailySecurityCheck - RUNKEY-CHECK present  - keyword missing from log
+2026-06-02 12:31:37  [T2]  WARN  DailySecurityCheck - 1 alerts fired  - review log - may be real issues
+2026-06-02 12:32:12  [T2]  PASS  check_camera - CAM-2 relay section present
+2026-06-02 12:32:12  [T2]  WARN  check_camera - restart_failed sentinel check present  - sentinel check not detected in output
+2026-06-02 12:32:12  [T3]  WARN  .last_sync_ok - exists  - not yet created - wait for next cloud_sync run (every 5 min)
+2026-06-02 12:32:12  [T3]  PASS  .sync_failed - not present on healthy system
+2026-06-02 12:32:12  [T3]  PASS  .camera_restart_failed - not present on healthy system
+2026-06-02 12:32:12  [T3]  WARN  yawcam_monitor.log - exists  - not yet created - monitor must run one cycle first
+2026-06-02 12:32:12  [T4]  WARN  watchdog.log - HEARTBEAT today  - no heartbeat yet today - wait 3 min after service restart
+2026-06-02 12:32:12  [T4]  WARN  auditor - JOB-CLEANUP entries present  - not yet seen - auditor needs ~60 loop iterations
+=== RESULTS: 10 PASS  6 WARN  6 FAIL ===
+
+=== TEST RUN 2026-06-02 12:34:06 ===
+2026-06-02 12:34:06  [T1]  PASS  DailySecurityCheck.ps1
+2026-06-02 12:34:06  [T1]  PASS  yawcam_monitor_v4.ps1
+2026-06-02 12:34:06  [T1]  PASS  cam2_relay.ps1
+2026-06-02 12:34:06  [T1]  PASS  wdog.ps1
+2026-06-02 12:34:06  [T1]  PASS  auditor.ps1
+2026-06-02 12:34:06  [T1]  PASS  cloud_sync.ps1
+2026-06-02 12:34:40  [T2]  PASS  DailySecurityCheck - log written
+2026-06-02 12:34:40  [T2]  FAIL  DailySecurityCheck - FirewallBlock present  - keyword missing from log
+2026-06-02 12:34:40  [T2]  FAIL  DailySecurityCheck - HostsPoison present  - keyword missing from log
+2026-06-02 12:34:41  [T2]  PASS  DailySecurityCheck - TaskTamper|TaskMissing|TaskOK present
+2026-06-02 12:34:41  [T2]  PASS  DailySecurityCheck - B2Connectivity present
+2026-06-02 12:34:41  [T2]  FAIL  DailySecurityCheck - EventLog present  - keyword missing from log
+2026-06-02 12:34:41  [T2]  PASS  DailySecurityCheck - RunKey present
+2026-06-02 12:34:41  [T2]  WARN  DailySecurityCheck - 1 alerts fired  - review log - may be real issues
+2026-06-02 12:35:16  [T2]  PASS  check_camera - CAM-2 relay section present
+2026-06-02 12:35:16  [T2]  WARN  check_camera - restart_failed sentinel check present  - sentinel check not detected in output
+2026-06-02 12:35:16  [T3]  WARN  .last_sync_ok - exists  - not yet created - wait for next cloud_sync run (every 5 min)
+2026-06-02 12:35:16  [T3]  PASS  .sync_failed - not present on healthy system
+2026-06-02 12:35:16  [T3]  PASS  .camera_restart_failed - not present on healthy system
+2026-06-02 12:35:16  [T3]  WARN  yawcam_monitor.log - exists  - not yet created - monitor must run one cycle first
+2026-06-02 12:35:16  [T4]  WARN  watchdog.log - HEARTBEAT today  - no heartbeat yet today - wait 3 min after service restart
+2026-06-02 12:35:16  [T4]  WARN  auditor - JOB-CLEANUP entries present  - not yet seen - auditor needs ~60 loop iterations
+=== RESULTS: 13 PASS  6 WARN  3 FAIL ===
+
+=== TEST RUN 2026-06-02 12:36:01 ===
+2026-06-02 12:36:01  [T1]  PASS  DailySecurityCheck.ps1
+2026-06-02 12:36:01  [T1]  PASS  yawcam_monitor_v4.ps1
+2026-06-02 12:36:01  [T1]  PASS  cam2_relay.ps1
+2026-06-02 12:36:01  [T1]  PASS  wdog.ps1
+2026-06-02 12:36:01  [T1]  PASS  auditor.ps1
+2026-06-02 12:36:01  [T1]  PASS  cloud_sync.ps1
+2026-06-02 12:36:40  [T2]  PASS  DailySecurityCheck - log written
+2026-06-02 12:36:40  [T2]  PASS  DailySecurityCheck - ran to completion
+2026-06-02 12:36:40  [T2]  PASS  DailySecurityCheck - B2Connectivity logged
+2026-06-02 12:36:40  [T2]  PASS  DailySecurityCheck - RunKey logged
+2026-06-02 12:36:40  [T2]  PASS  DailySecurityCheck - TaskTamper|TaskMissing|TaskOK logged
+2026-06-02 12:36:40  [T2]  WARN  DailySecurityCheck - 1 alerts fired  - review log - may be real issues
+2026-06-02 12:37:14  [T2]  PASS  check_camera - CAM-2 relay section present
+2026-06-02 12:37:14  [T2]  WARN  check_camera - restart_failed sentinel check present  - sentinel check not detected in output
+2026-06-02 12:37:14  [T3]  WARN  .last_sync_ok - exists  - not yet created - wait for next cloud_sync run (every 5 min)
+2026-06-02 12:37:14  [T3]  PASS  .sync_failed - not present on healthy system
+2026-06-02 12:37:14  [T3]  PASS  .camera_restart_failed - not present on healthy system
+2026-06-02 12:37:14  [T3]  WARN  yawcam_monitor.log - exists  - not yet created - monitor must run one cycle first
+2026-06-02 12:37:14  [T4]  WARN  watchdog.log - HEARTBEAT today  - no heartbeat yet today - wait 3 min after service restart
+2026-06-02 12:37:14  [T4]  WARN  auditor - JOB-CLEANUP entries present  - not yet seen - auditor needs ~60 loop iterations
+=== RESULTS: 14 PASS  6 WARN  0 FAIL ===

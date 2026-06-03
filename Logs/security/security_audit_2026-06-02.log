@@ -1,0 +1,85 @@
+2026-06-02 12:00:04  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:15:10  AUDIT-FILTER  SUSPICIOUS-WRITES  11 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:20:02  AUDIT-FILTER  SUSPICIOUS-WRITES  27 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:30:03  AUDIT-FILTER  SUSPICIOUS-WRITES  2 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:35:02  AUDIT-FILTER  SUSPICIOUS-WRITES  21 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:40:02  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:45:02  AUDIT-FILTER  SUSPICIOUS-WRITES  21 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:50:03  AUDIT-FILTER  SUSPICIOUS-WRITES  11 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 12:55:02  AUDIT-FILTER  SUSPICIOUS-WRITES  5 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-02.md
+2026-06-02 22:30:46  [AUDITOR] Starting up (PID 4912)
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-02-25.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-02-26.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-02-27.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-02-28.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-01.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-02.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-03.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-05.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-06.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-07.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-08.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-09.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-10.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-11.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-13.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-15.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-16.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-17.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-18.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-19.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-20.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-21.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-22.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-23.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-24.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-27.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-29.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-30.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-03-31.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-04-02.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-04-06.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-04-08.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-04-09.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-04-30.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-05-01.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: security_audit_2026-05-02.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-02-25.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-02-26.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-02-27.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-02-28.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-01.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-02.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-03.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-05.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-06.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-07.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-08.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-09.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-10.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-11.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-12.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-13.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-14.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-15.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-16.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-17.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-18.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-19.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-20.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-21.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-22.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-23.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-24.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-27.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-29.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-30.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-03-31.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-04-02.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-04-06.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-04-08.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-04-09.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-04-30.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-05-01.log
+2026-06-02 22:30:46  [LOG-ROTATE] Deleted old log: file_audit_2026-05-02.log

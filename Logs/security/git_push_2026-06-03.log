@@ -1,0 +1,8 @@
+2026-06-03 00:51:52  GIT-PUSH  Pushing c792518 - fix(cam2): wrap Test-NetConnection in 3s job timeout to prevent login freeze
+2026-06-03 00:51:55  GIT-PUSH  OK  c792518 pushed to origin/master
+2026-06-03 01:14:12  GIT-PUSH  Pushing 7a9b0c6 - chore(git): untrack Logs/ dir and fix .gitignore
+2026-06-03 01:14:16  GIT-PUSH  OK  7a9b0c6 pushed to origin/master
+2026-06-03 01:35:04  GIT-PUSH  Pushing 4e9e885 - chore(backlog+setup): register T043-T047; add symlink step 18c; cancel T047
+2026-06-03 01:35:07  GIT-PUSH  OK  4e9e885 pushed to origin/master
+2026-06-03 01:58:13  GIT-PUSH  Pushing c7f1a0c - security: add cam2.conf to gitignore; restore forensic log tracking; register T048-T049
+2026-06-03 01:58:15  GIT-PUSH  OK  c7f1a0c pushed to origin/master

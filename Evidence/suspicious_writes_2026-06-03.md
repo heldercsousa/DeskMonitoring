@@ -18503,3 +18503,19 @@
 | 2026-06-03 00:49:03 | `C:\Windows\System32\icacls.exe` | helde | WRITE_DAC | `C:\Sync\.git\description` |
 | 2026-06-03 00:49:03 | `C:\Windows\System32\icacls.exe` | helde | WRITE_DAC | `C:\Sync\.git\config` |
 | 2026-06-03 00:49:03 | `C:\Windows\System32\icacls.exe` | helde | WRITE_DAC | `C:\Sync\.git\COMMIT_EDITMSG` |
+
+## 2026-06-03 01:35:04 - 3 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.6252.c0ffcf0ed501` |
+| 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.6252.c0ffcf0ed501` |
+
+## 2026-06-03 01:40:03 - 3 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.6252.c0ffcf0ed501` |
+| 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.6252.c0ffcf0ed501` |
