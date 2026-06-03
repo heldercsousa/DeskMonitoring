@@ -684,6 +684,17 @@ try {
     Write-Warn "fix_power_motion.ps1 failed: $_ - run manually after setup"
 }
 
+# Create motion_videos symlink for yawcam_monitor_v4.ps1
+Write-Step "Step 18c - Motion videos symlink (C:\TEMP\motion_videos -> Bois)"
+$symlinkPath = "C:\TEMP\motion_videos"
+if (-not (Test-Path $symlinkPath)) {
+    New-Item -ItemType SymbolicLink -Path $symlinkPath -Target "C:\Users\helde\Repos\Bois" -ErrorAction SilentlyContinue | Out-Null
+    if (Test-Path $symlinkPath) { Write-OK "Symlink created: $symlinkPath" }
+    else { Write-Warn "Symlink creation failed - create manually: mklink /D C:\TEMP\motion_videos C:\Users\helde\Repos\Bois" }
+} else {
+    Write-OK "Symlink already exists: $symlinkPath"
+}
+
 # =============================================================================
 # STEP 19 - FolderSync-AuditFilter task (every 5 min — suspicious-only 4663 filter)
 # Must run as current user (InteractiveToken) — send_alert.ps1 uses DPAPI CurrentUser scope.
