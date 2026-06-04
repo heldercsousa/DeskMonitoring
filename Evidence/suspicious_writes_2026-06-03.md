@@ -18605,3 +18605,10 @@
 | 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.39f2c74ff307` |
 | 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.39f2c74ff307` |
+
+## 2026-06-03 23:45:04 - 2 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-03 23:42:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 23:42:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_b2_dpapi.ps1.tmp.6252.9aaba2a38cc6` |
