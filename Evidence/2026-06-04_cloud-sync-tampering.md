@@ -8,11 +8,19 @@ via RULE 6 pre-commit integrity check. Files have been **restored from git HEAD*
 
 ## Attack Window
 
-| File | Tampered timestamp |
-|------|--------------------|
-| `Config/cloud_sync.ps1` | 2026-06-04 09:30:57 |
-| `Config/run_mirror.bat` | 2026-06-04 09:30:57 |
-| `Config/audit_filter_launcher.vbs` | 2026-06-04 09:31:49 — CRLF-only diff, NOT content-tampered |
+File timestamps show 09:30:57, but cloud sync failures begin at **04:45 AM** in the log —
+confirming the tampered script was already active ~5 hours earlier. The 09:30 timestamp
+coincides with Helder manually stopping the ecosystem (confirmed by him); the attacker likely
+struck overnight and the timestamp was overwritten or coincidentally matches the stop action.
+
+**Real attack time: overnight 2026-06-03 → 2026-06-04, before 04:45 AM.**
+**B2 sync was broken for ~5 hours before detection.**
+
+| File | Disk timestamp | Notes |
+|------|---------------|-------|
+| `Config/cloud_sync.ps1` | 2026-06-04 09:30:57 | Real attack earlier — log evidence from 04:45 |
+| `Config/run_mirror.bat` | 2026-06-04 09:30:57 | Same |
+| `Config/audit_filter_launcher.vbs` | 2026-06-04 09:31:49 | CRLF-only diff, NOT content-tampered |
 
 ## Files NOT Tampered
 
