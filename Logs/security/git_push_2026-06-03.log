@@ -6,3 +6,7 @@
 2026-06-03 01:35:07  GIT-PUSH  OK  4e9e885 pushed to origin/master
 2026-06-03 01:58:13  GIT-PUSH  Pushing c7f1a0c - security: add cam2.conf to gitignore; restore forensic log tracking; register T048-T049
 2026-06-03 01:58:15  GIT-PUSH  OK  c7f1a0c pushed to origin/master
+2026-06-03 02:01:05  GIT-PUSH  Pushing d19289d - fix(git): restore forensic log tracking; untrack cam2.conf
+2026-06-03 02:01:09  GIT-PUSH  OK  d19289d pushed to origin/master
+2026-06-03 20:36:11  GIT-PUSH  Pushing b32995c - security(T046/T048/T049): migrate B2+CAM-2 creds to DPAPI; fix .claudeignore
+2026-06-03 20:36:17  GIT-PUSH  OK  b32995c pushed to origin/master

@@ -1,0 +1,796 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: s†bado, 21 de maráo de 2026 01:27:27
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        12         3         9         0         0         0
+ Arquivos:      1303       795       508         0         0       168
+    Bytes:   3.338 g   2.053 g   1.285 g         0         0  401.37 m
+N.ß de Vezes:   0:00:09   0:00:09                       0:00:00   0:00:00
+
+
+Velocidade:           243.375.651 Bytes/s.
+Velocidade:             13926,066 MegaBytes/min.
+   Finalizado em: s†bado, 21 de maráo de 2026 01:27:36
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: s†bado, 21 de maráo de 2026 01:28:14
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/03/21 01:28:18 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.24.55_968.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:20 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.24.55_968.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:20 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.05_745.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:22 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.05_745.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:22 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.30_428.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:24 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.30_428.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:24 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.37_251.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:26 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.37_251.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:26 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.43_193.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:28 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.43_193.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:28 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.52_228.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:30 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_12.25.52_228.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:30 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.16_511.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:32 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.16_511.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:32 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.27_991.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:34 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.27_991.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:34 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.44_844.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:36 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.44_844.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:36 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.57_983.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:38 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-11\motion_2026-03-11_19.26.57_983.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.57.20_858.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.57.20_858.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.57.28_942.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.57.28_942.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.57.57_270.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.57.57_270.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.58.33_010.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.58.33_010.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.58.44_991.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.58.44_991.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.59.10_154.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:51 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.59.10_154.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:51 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.59.42_070.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:53 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_01.59.42_070.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:53 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.00.16_220.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:55 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.00.16_220.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:55 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.01.33_412.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:57 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.01.33_412.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:57 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.01.43_348.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:28:59 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.01.43_348.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:28:59 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.02.08_123.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:01 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.02.08_123.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:01 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.02.24_126.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:03 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.02.24_126.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:03 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.02.50_175.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:05 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.02.50_175.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:05 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.03.04_732.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:07 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.03.04_732.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:07 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.03.26_633.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:09 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.03.26_633.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:09 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.03.37_210.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:11 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_02.03.37_210.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:11 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.12.52_660.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:13 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.12.52_660.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:13 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.13.05_091.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:15 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.13.05_091.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:15 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.14.11_488.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:17 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.14.11_488.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:17 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.14.20_225.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:19 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.14.20_225.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:19 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.15.04_208.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:21 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.15.04_208.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:21 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.15.31_832.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:23 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.15.31_832.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:23 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.16.25_009.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:25 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.16.25_009.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:25 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.16.35_207.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:27 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.16.35_207.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:27 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.24.36_795.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:29 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.24.36_795.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:29 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.24.42_672.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_10.24.42_672.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.15.48_246.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.15.48_246.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.15.53_223.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.15.53_223.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.16.17_547.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.16.17_547.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.16.26_282.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.16.26_282.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.16.47_804.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.16.47_804.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.17.22_998.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.17.22_998.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.17.36_284.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_12.17.36_284.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:45 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_17.59.14_858.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_17.59.14_858.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:47 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.01.14_222.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.01.14_222.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:49 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.01.37_113.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:51 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.01.37_113.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:51 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.01.53_621.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:53 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.01.53_621.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:53 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.00_298.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:55 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.00_298.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:55 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.10_823.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:57 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.10_823.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:57 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.38_840.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:29:59 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.38_840.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:29:59 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.48_017.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:01 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.02.48_017.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:01 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.04.03_443.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:03 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.04.03_443.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:03 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.27.53_087.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:05 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.27.53_087.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:05 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.28.19_594.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:07 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.28.19_594.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:07 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.30.55_738.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:09 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.30.55_738.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:09 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.31.06_248.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:11 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.31.06_248.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:11 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.31.22_353.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:13 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.31.22_353.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:13 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.31.30_885.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:15 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.31.30_885.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:15 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.32.23_967.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:17 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.32.23_967.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:17 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.32.32_902.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:19 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_18.32.32_902.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:19 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.27.53_285.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:21 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.27.53_285.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:21 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.28.18_308.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:23 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.28.18_308.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:23 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.28.26_603.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:25 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.28.26_603.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:25 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.28.47_929.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:27 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.28.47_929.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:27 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.31.22_154.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:29 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.31.22_154.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:29 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.32.11_834.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.32.11_834.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:31 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.32.23_999.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.32.23_999.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:33 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.33.22_643.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-13\motion_2026-03-13_19.33.22_643.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:35 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.34.28_247.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.34.28_247.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:37 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.34.44_023.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.34.44_023.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:39 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.03_232.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.03_232.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:41 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.16_369.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.16_369.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:43 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.45_836.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:46 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.45_836.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:46 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.57_407.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:48 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.35.57_407.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:48 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.09_158.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:50 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.09_158.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:50 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.28_374.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:52 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.28_374.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:52 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.42_315.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:54 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.42_315.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:54 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.55_397.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:56 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.36.55_397.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:56 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.05_304.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:30:58 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.05_304.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:30:58 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.20_210.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:31:00 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.20_210.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:31:00 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.33_233.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:31:02 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.33_233.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:31:02 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.48_499.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:31:04 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.37.48_499.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:31:04 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.38.08_597.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:31:06 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.38.08_597.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:31:06 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.38.29_044.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:31:08 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.38.29_044.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+2026/03/21 01:31:08 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.38.39_004.avi
+O sistema n∆o pode encontrar o caminho especificado.
+Aguardando 2 segundos... Repetindo...
+2026/03/21 01:31:10 ERRO 3 (0x00000003) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-03-14\motion_2026-03-14_00.38.39_004.avi
+O sistema n∆o pode encontrar o caminho especificado.
+
+ERRO: LIMITE DE REPETIÄ«O EXCEDIDO.
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        13         1         8         0         4         0
+ Arquivos:      1311       452       774         0        85       168
+    Bytes:   3.361 g   1.185 g   1.878 g         0  304.12 m  401.37 m
+N.ß de Vezes:   0:02:55   0:00:05                       0:02:50   0:00:00
+
+
+Velocidade:           241.314.763 Bytes/s.
+Velocidade:             13808,142 MegaBytes/min.
+   Finalizado em: s†bado, 21 de maráo de 2026 01:31:10
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: s†bado, 21 de maráo de 2026 01:31:47
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        13         6         7         0         0         0
+ Arquivos:      1316       909       407         0         0       168
+    Bytes:   3.369 g   2.405 g  987.29 m         0         0  401.37 m
+N.ß de Vezes:   0:00:09   0:00:09                       0:00:00   0:00:00
+
+
+Velocidade:           262.317.770 Bytes/s.
+Velocidade:             15009,943 MegaBytes/min.
+   Finalizado em: s†bado, 21 de maráo de 2026 01:31:57
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: s†bado, 21 de maráo de 2026 07:51:46
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Opá‰es: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        13         6         7         0         0         0
+ Arquivos:      1318       906       412         0         0       168
+    Bytes:   3.372 g   2.400 g  995.69 m         0         0  401.37 m
+N.ß de Vezes:  34:06:25  34:06:25                       0:00:00   0:00:00
+
+
+Velocidade:              20.991 Bytes/s.
+Velocidade:               1,201 MegaBytes/min.
+   Finalizado em: domingo, 22 de maráo de 2026 17:58:12
+

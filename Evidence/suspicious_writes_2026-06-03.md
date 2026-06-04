@@ -18519,3 +18519,89 @@
 | 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.6252.c0ffcf0ed501` |
 | 2026-06-03 01:34:39 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.6252.c0ffcf0ed501` |
+
+## 2026-06-03 19:00:27 - 22 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-03 19:00:19 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:19 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\rclone.conf.tmp.6252.4461e285c1c0` |
+| 2026-06-03 19:00:19 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\rclone.conf.tmp.6252.4461e285c1c0` |
+| 2026-06-03 19:00:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.3dec549b3b21` |
+| 2026-06-03 19:00:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.3dec549b3b21` |
+| 2026-06-03 19:00:09 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:09 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.9d5c056f7422` |
+| 2026-06-03 19:00:08 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.9d5c056f7422` |
+| 2026-06-03 19:00:01 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:01 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.8c614636c2ea` |
+| 2026-06-03 19:00:01 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.8c614636c2ea` |
+| 2026-06-03 18:59:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 18:59:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.932c025d395b` |
+| 2026-06-03 18:59:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.932c025d395b` |
+| 2026-06-03 18:59:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 18:59:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.c2cd4d04ee73` |
+| 2026-06-03 18:59:34 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.c2cd4d04ee73` |
+| 2026-06-03 18:59:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 18:59:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\migrate_cam2_creds.ps1.tmp.6252.b5acab97abe7` |
+| 2026-06-03 18:59:10 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 18:59:10 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\store_b2_creds.ps1.tmp.6252.0f93209b003e` |
+
+## 2026-06-03 19:05:18 - 29 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-03 19:03:05 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:03:05 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.6252.7b8517df6c5a` |
+| 2026-06-03 19:03:05 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.6252.7b8517df6c5a` |
+| 2026-06-03 19:02:55 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:02:55 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.6252.734cd6696209` |
+| 2026-06-03 19:02:55 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.6252.734cd6696209` |
+| 2026-06-03 19:02:11 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:02:11 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\store_b2_creds.ps1.tmp.6252.1ec0c2748c50` |
+| 2026-06-03 19:02:11 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\store_b2_creds.ps1.tmp.6252.1ec0c2748c50` |
+| 2026-06-03 19:00:19 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:19 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\rclone.conf.tmp.6252.4461e285c1c0` |
+| 2026-06-03 19:00:19 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\rclone.conf.tmp.6252.4461e285c1c0` |
+| 2026-06-03 19:00:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.3dec549b3b21` |
+| 2026-06-03 19:00:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.3dec549b3b21` |
+| 2026-06-03 19:00:09 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:09 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.9d5c056f7422` |
+| 2026-06-03 19:00:08 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.9d5c056f7422` |
+| 2026-06-03 19:00:01 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 19:00:01 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.8c614636c2ea` |
+| 2026-06-03 19:00:01 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.8c614636c2ea` |
+| 2026-06-03 18:59:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 18:59:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.932c025d395b` |
+| 2026-06-03 18:59:57 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cam2_relay.ps1.tmp.6252.932c025d395b` |
+| 2026-06-03 18:59:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 18:59:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.c2cd4d04ee73` |
+| 2026-06-03 18:59:34 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync.ps1.tmp.6252.c2cd4d04ee73` |
+| 2026-06-03 18:59:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 18:59:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\migrate_cam2_creds.ps1.tmp.6252.b5acab97abe7` |
+
+## 2026-06-03 20:35:03 - 6 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-03 20:35:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 20:35:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.4e4ba621f10e` |
+| 2026-06-03 20:35:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.4e4ba621f10e` |
+| 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.39f2c74ff307` |
+| 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.39f2c74ff307` |
+
+## 2026-06-03 20:40:04 - 9 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-03 20:35:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 20:35:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.257e545a78f3` |
+| 2026-06-03 20:35:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.257e545a78f3` |
+| 2026-06-03 20:35:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 20:35:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.4e4ba621f10e` |
+| 2026-06-03 20:35:00 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.4e4ba621f10e` |
+| 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.39f2c74ff307` |
+| 2026-06-03 20:34:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.6252.39f2c74ff307` |

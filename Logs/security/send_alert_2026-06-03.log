@@ -4,3 +4,11 @@
 2026-06-03 01:35:24  SEND-ALERT  FAIL  B2 upload failed: 2026/06/03 01:35:24 ERROR : suspicious_writes_2026-06-03.md: Failed to copy: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded) 2026/06/03 01:35:24 ERROR : Fatal error received - not attempting retries 2026/06/03 01:35:24 NOTICE: Failed to copyto: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
 2026-06-03 01:40:28  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 3 event(s)
 2026-06-03 01:40:31  SEND-ALERT  FAIL  B2 upload failed: 2026/06/03 01:40:30 ERROR : suspicious_writes_2026-06-03.md: Failed to copy: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded) 2026/06/03 01:40:31 ERROR : Fatal error received - not attempting retries 2026/06/03 01:40:31 NOTICE: Failed to copyto: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
+2026-06-03 19:00:52  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 22 event(s)
+2026-06-03 19:00:56  SEND-ALERT  FAIL  B2 upload failed: 2026/06/03 19:00:56 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-03 19:06:00  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 29 event(s)
+2026-06-03 19:06:04  SEND-ALERT  FAIL  B2 upload failed: 2026/06/03 19:06:02 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-03 20:35:29  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 6 event(s)
+2026-06-03 20:35:30  SEND-ALERT  FAIL  B2 upload failed: 2026/06/03 20:35:30 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-03 20:40:31  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 9 event(s)
+2026-06-03 20:40:32  SEND-ALERT  FAIL  B2 upload failed: 2026/06/03 20:40:32 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found

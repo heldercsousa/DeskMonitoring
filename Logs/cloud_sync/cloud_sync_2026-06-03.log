@@ -34,3 +34,8 @@ Elapsed time:         1.3s
 
 2026/06/03 00:33:35 NOTICE: Failed to sync with 4 errors: last error was: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
 2026-06-03 00:33:35  SYNC-FAIL  Sync failed (exit 7) - not a firewall error
+2026-06-03 22:49:48  SYNC-START  Beginning cloud sync run
+2026-06-03 22:50:03  SYNC-START  Beginning cloud sync run
+2026/06/03 22:50:27 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Unknown 401  (401 bad_auth_token)
+2026-06-03 22:50:27  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-06-03 22:50:38  SYNC-END  Cloud sync run complete

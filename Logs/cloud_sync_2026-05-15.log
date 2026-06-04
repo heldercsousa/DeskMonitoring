@@ -1,0 +1,36 @@
+2026-05-15 05:42:04  SYNC-START  Beginning cloud sync run
+2026-05-15 05:42:15  SYNC-START  Beginning cloud sync run
+2026/05/15 05:42:33 ERROR : 2026-05-13/motion_2026-05-13_09.17.55_052.avi: Failed to copy: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
+2026/05/15 05:42:34 ERROR : Cancelling sync due to fatal error: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
+2026/05/15 05:42:34 ERROR : 2026-05-13/motion_2026-05-13_09.17.44_498.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": context canceled
+2026/05/15 05:42:34 ERROR : 2026-05-13/motion_2026-05-13_09.17.59_744.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": context canceled
+2026/05/15 05:42:34 ERROR : 2026-05-13/motion_2026-05-13_09.18.14_033.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": context canceled
+2026/05/15 05:42:34 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/05/15 05:42:34 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/05/15 05:42:34 ERROR : Fatal error received - not attempting retries
+2026/05/15 05:42:34 INFO  : 
+Transferred:   	          0 B / 425.426 MiB, 0%, 0 B/s, ETA -
+Errors:                 4 (fatal error encountered)
+Checks:               359 / 359, 100%, Listed 836
+Transferred:            0 / 110, 0%
+Elapsed time:         1.6s
+
+2026/05/15 05:42:34 NOTICE: Failed to sync with 4 errors: last error was: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
+2026-05-15 05:42:34  SYNC-FAIL  Sync failed (exit 7) - not a firewall error
+2026/05/15 05:42:41 ERROR : 2026-05-13/motion_2026-05-13_09.17.55_052.avi: Failed to copy: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
+2026/05/15 05:42:41 ERROR : Cancelling sync due to fatal error: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
+2026/05/15 05:42:42 ERROR : 2026-05-15/motion_2026-05-15_05.41.52_690.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": context canceled
+2026/05/15 05:42:42 ERROR : 2026-05-13/motion_2026-05-13_09.17.44_498.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": context canceled
+2026/05/15 05:42:42 ERROR : 2026-05-15/motion_2026-05-15_05.42.05_576.avi: Failed to copy: failed to get upload URL: Post "https://api005.backblazeb2.com/b2api/v1/b2_get_upload_url": context canceled
+2026/05/15 05:42:42 ERROR : B2 bucket helder-sync-mirror: not deleting files as there were IO errors
+2026/05/15 05:42:42 ERROR : B2 bucket helder-sync-mirror: not deleting directories as there were IO errors
+2026/05/15 05:42:42 ERROR : Fatal error received - not attempting retries
+2026/05/15 05:42:42 INFO  : 
+Transferred:   	          0 B / 427.292 MiB, 0%, 0 B/s, ETA -
+Errors:                 4 (fatal error encountered)
+Checks:               359 / 359, 100%, Listed 836
+Transferred:            0 / 110, 0%
+Elapsed time:         1.5s
+
+2026/05/15 05:42:42 NOTICE: Failed to sync with 4 errors: last error was: failed to get upload URL: Cannot upload files, storage cap exceeded. See the Caps & Alerts page to increase your cap. (403 storage_cap_exceeded)
+2026-05-15 05:42:42  SYNC-FAIL  Sync failed (exit 7) - not a firewall error
