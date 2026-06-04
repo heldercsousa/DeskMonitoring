@@ -606,6 +606,17 @@ if (Test-Path $auditScript) {
 }
 
 # =============================================================================
+# STEP 16a2 - Process creation auditing (event 4688 - identifies parent of any process)
+# =============================================================================
+Write-Step "Step 16a2 - Enable process creation auditing (event 4688)"
+auditpol /set /subcategory:"{0CCE922B-69AE-11D9-BED3-505054503030}" /success:enable | Out-Null
+if ($LASTEXITCODE -eq 0) {
+    Write-OK "Process creation auditing enabled - spawned processes logged as event 4688"
+} else {
+    Write-Warn "auditpol failed - run manually: auditpol /set /subcategory:`"{0CCE922B-69AE-11D9-BED3-505054503030}`" /success:enable"
+}
+
+# =============================================================================
 # STEP 16b - SACL write auditing on C:\Sync\Config\ (catches tampering process via event 4663)
 # =============================================================================
 Write-Step "Step 16b - SACL write auditing on Config\, Evidence\, .git\ + 512 MB Security log"
