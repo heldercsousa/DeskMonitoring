@@ -102,6 +102,9 @@ foreach ($ev in $events) {
     }
     if ($isKnownGood) { continue }
 
+    # icacls liberating C:\Sync\.git is routine (setup_all.ps1 Step 4.3); suppress to prevent bloat
+    if ($processBasename -ieq 'icacls' -and $objectName -like 'C:\Sync\.git*') { continue }
+
     # Extract account name
     $account = ''
     if ($msg -match 'Nome da Conta\s*:\s*(\S+)') {
