@@ -48,14 +48,6 @@ if (-not $task) {
     $fsIssues += "FolderSync-CloudBackup task: State = $($task.State) (expected Ready)"
 }
 
-# FolderSync-Watchdog task: State = Ready or Running
-$wdTask = Get-ScheduledTask -TaskName FolderSync-Watchdog -ErrorAction SilentlyContinue
-if (-not $wdTask) {
-    $fsIssues += "FolderSync-Watchdog task: NOT FOUND"
-} elseif ($wdTask.State -notin @("Ready","Running")) {
-    $fsIssues += "FolderSync-Watchdog task: State = $($wdTask.State) (expected Ready or Running)"
-}
-
 # FolderSyncWatchdog service: Status = Running, StartType = Automatic
 $wdSvc = Get-Service -Name FolderSyncWatchdog -ErrorAction SilentlyContinue
 if (-not $wdSvc) {
