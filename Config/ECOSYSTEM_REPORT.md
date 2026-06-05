@@ -148,8 +148,10 @@ function Start-FileWatcher {
             $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
 
             # T029: distinguish routine AVI aging from suspicious deletions
+            # $name includes subdirectory when IncludeSubdirectories=true (e.g. "2026-06-05\motion_*.avi")
+            # so extract just the filename before pattern-matching
             if ($type -eq 'DELETED') {
-                if ($name -like 'motion_*.avi') {
+                if (([System.IO.Path]::GetFileName($name)) -like 'motion_*.avi') {
                     $detail = 'DELETED-ROUTINE'
                     $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
                     $line | Add-Content -LiteralPath $logFile -Encoding UTF8
@@ -444,7 +446,8 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
-| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029); 30-day audit log rotation (T033, 2026-06-02) |
+| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 30-day audit log rotation (T033, 2026-06-02) |
+| `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores `cloud_sync.ps1` and `run_mirror.bat` from git HEAD on any modification. Keep-alive loop (30s sleep). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
@@ -452,7 +455,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam; DPAPI credential loading (`cam2_creds.dpapi`, CurrentUser) with cam2.conf fallback; max 5 restarts/hour circuit breaker; 7-day log rotation; port-listening verification after restart (T024, 2026-06-02; T049, 2026-06-03) |
 | `cam2.conf` | Fallback for `cam2_relay.ps1` | CAM-2 credentials (plaintext fallback — migrate with `migrate_cam2_creds.ps1` then delete, **gitignored**) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
-| `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3: state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry (Step 14 uses `start_yawcam.bat` wrapper to set correct working dir) |
+| `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3 (Steps 1-20): state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry. Step 20: FolderSync-ConfigGuard task (config tamper auto-restore) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
 | `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs; enforces HKCU\Run entries. Yawcam wait 8s + checks both yawcam/javaw process names; CAM-2 wait 5s (2026-03-15). |
 | `stop_ecosystem.ps1` | `/motionSentinel-stop` / Manual / `setup_update.ps1` | Stops all components in reverse; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = stopped` |
@@ -2363,8 +2366,10 @@ function Start-FileWatcher {
             $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
 
             # T029: distinguish routine AVI aging from suspicious deletions
+            # $name includes subdirectory when IncludeSubdirectories=true (e.g. "2026-06-05\motion_*.avi")
+            # so extract just the filename before pattern-matching
             if ($type -eq 'DELETED') {
-                if ($name -like 'motion_*.avi') {
+                if (([System.IO.Path]::GetFileName($name)) -like 'motion_*.avi') {
                     $detail = 'DELETED-ROUTINE'
                     $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
                     $line | Add-Content -LiteralPath $logFile -Encoding UTF8
@@ -2540,6 +2545,73 @@ try {
 ```
 
 ---
+
+### `C:\Sync\Config\config_guard.ps1`
+> FileSystemWatcher on `Config\` — auto-restores `cloud_sync.ps1` and `run_mirror.bat` from git HEAD the instant any process modifies them. Runs as a persistent hidden background process (keep-alive 30s sleep loop). Registered as `FolderSync-ConfigGuard` scheduled task (at logon, current user, no time limit) via `setup_update.ps1` Step 20. Logs to `C:\Sync\Logs\security\config_guard_YYYY-MM-DD.log`.
+```powershell
+# config_guard.ps1
+# FileSystemWatcher on Config\ — auto-restores cloud_sync.ps1 and run_mirror.bat
+# via git restore the moment they are modified by any process.
+# Runs hidden at login via registry Run key or Task Scheduler.
+
+$RepoRoot  = 'C:\Sync'
+$ConfigDir = 'C:\Sync\Config'
+$LogFile   = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
+$GuardedFiles = @('cloud_sync.ps1', 'run_mirror.bat')
+
+function Write-Log($msg) {
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile
+}
+
+Write-Log "CONFIG-GUARD  START  watching $ConfigDir for changes to: $($GuardedFiles -join ', ')"
+
+$watcher = New-Object System.IO.FileSystemWatcher
+$watcher.Path   = $ConfigDir
+$watcher.Filter = '*.*'
+$watcher.NotifyFilter = [System.IO.NotifyFilters]::LastWrite -bor [System.IO.NotifyFilters]::FileName
+$watcher.EnableRaisingEvents = $true
+
+$action = {
+    $name = $Event.SourceEventArgs.Name
+    $full = $Event.SourceEventArgs.FullPath
+    $type = $Event.SourceEventArgs.ChangeType
+
+    $guarded = @('cloud_sync.ps1', 'run_mirror.bat')
+    if ($guarded -notcontains $name) { return }
+
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    $logLine = "$ts  CONFIG-GUARD  ALERT  $type detected on $name - restoring from git"
+    $logLine | Add-Content -LiteralPath "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
+
+    # Remove index.lock if present
+    $lock = 'C:\Sync\.git\index.lock'
+    if (Test-Path $lock) {
+        Remove-Item -Force $lock -ErrorAction SilentlyContinue
+        "$ts  CONFIG-GUARD  INFO  removed stale index.lock before restore" | Add-Content -LiteralPath "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
+    }
+
+    # Restore the file — use full path relative to repo root (Config/<name>)
+    $repoRelPath = "Config/$name"
+    $out = & git -C 'C:\Sync' restore $repoRelPath 2>&1
+    $result = if ($LASTEXITCODE -eq 0) { "RESTORED" } else { "RESTORE-FAILED: $out" }
+    "$ts  CONFIG-GUARD  $result  $name" | Add-Content -LiteralPath "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
+}
+
+Register-ObjectEvent $watcher Changed -Action $action | Out-Null
+Register-ObjectEvent $watcher Created -Action $action | Out-Null
+
+Write-Log "CONFIG-GUARD  READY  watcher active"
+
+# Keep alive
+while ($true) {
+    Start-Sleep -Seconds 30
+
+    # Daily log rotation
+    $newLog = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
+    if ($newLog -ne $LogFile) { $LogFile = $newLog }
+}
+```
 
 ---
 
@@ -3845,6 +3917,52 @@ $principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interac
 Unregister-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Confirm:$false -ErrorAction SilentlyContinue
 Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -Trigger $trigger17 -Settings $settings17 -Principal $principal17 -Force | Out-Null
 Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, daily 23:30)"
+
+# =============================================================================
+# STEP 20 - FolderSync-ConfigGuard task (at logon, current user, hidden)
+# Watches Config\cloud_sync.ps1 and run_mirror.bat via FileSystemWatcher.
+# Restores them from git HEAD the instant any process modifies them.
+# Runs as a persistent background process (keep-alive loop inside the script).
+# =============================================================================
+Write-Step "Step 20 - FolderSync-ConfigGuard task (at logon, current user, hidden)"
+
+$userSid20 = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+$taskXml20 = @"
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+      <UserId>$currentUser</UserId>
+    </LogonTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>$userSid20</UserId>
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <Hidden>true</Hidden>
+    <ExecutionTimeLimit>PT0S</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions>
+    <Exec>
+      <Command>pwsh.exe</Command>
+      <Arguments>-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Sync\Config\config_guard.ps1"</Arguments>
+    </Exec>
+  </Actions>
+</Task>
+"@
+
+Unregister-ScheduledTask -TaskName "FolderSync-ConfigGuard" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-ConfigGuard" -Xml $taskXml20 -Force | Out-Null
+Write-OK "Task FolderSync-ConfigGuard registered ($currentUser / InteractiveToken, at logon, no time limit)"
 
 # =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
