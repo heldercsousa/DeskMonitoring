@@ -441,7 +441,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `b2_creds.dpapi` | `cloud_sync.ps1` at runtime | T048: DPAPI-encrypted B2 account+key blob (LocalMachine scope, SYSTEM-accessible, **gitignored**) |
 | `migrate_cam2_creds.ps1` | Run once by Helder | T049: one-time migration — reads cam2.conf, encrypts with DPAPI CurrentUser scope, writes `cam2_creds.dpapi` |
 | `cam2_creds.dpapi` | `cam2_relay.ps1` at runtime | T049: DPAPI-encrypted CAM-2 user+pass+ip+port+stream blob (CurrentUser scope, **gitignored**) |
-| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + DPAPI B2 credential loading (`b2_creds.dpapi`, LocalMachine) + log rotation + mirror cleanup (7-day) + source folder retention (7-day) + self-healing firewall+DNS detection + failure sentinel + B2 lag alert + ACL failure logging (T026/T030–T032, 2026-06-02; T048, 2026-06-03) |
+| `cloud_sync.ps1` | Task `FolderSync-CloudBackup` | Rclone sync + DPAPI B2 credential loading (`b2_creds.dpapi`, LocalMachine) + log rotation + mirror cleanup (7-day) + source folder retention (7-day) + self-healing firewall+DNS detection + failure sentinel + B2 lag alert + ACL failure logging + `Import-Module Microsoft.PowerShell.Security` for SYSTEM PS5 compatibility (T026/T030–T032, 2026-06-02; T048, 2026-06-03; T050, 2026-06-05) |
 | `cloud_sync.bat` | Manual trigger | Same as .ps1 but via cmd (manual use only) |
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
@@ -1743,14 +1743,16 @@ Write-Host "        this script (or setup_update.ps1 Step XX) to regenerate it."
 ---
 
 ### `C:\Sync\Config\cloud_sync.ps1`
-> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, failure sentinel (.sync_failed), B2 lag alert (.last_sync_ok), 3-phase ACL protection (7 days), source folder retention (7 days, date-name based), log rotation (30 days), mirror cleanup. ACL failures logged with ACL-WARN prefix. All comments in English. (T026/T030/T031/T032, 2026-06-02)
-> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, failure sentinel (.sync_failed), B2 lag alert (.last_sync_ok), 3-phase ACL protection (7 days), source folder retention (7 days, date-name based), log rotation (30 days), mirror cleanup. ACL failures logged with ACL-WARN prefix. All comments in English. (T026/T030/T031/T032, 2026-06-02)
+> Rclone sync to Backblaze B2. Includes self-healing firewall detection+removal+retry, failure sentinel (.sync_failed), B2 lag alert (.last_sync_ok), 3-phase ACL protection (7 days), source folder retention (7 days, date-name based), log rotation (30 days), mirror cleanup. ACL failures logged with ACL-WARN prefix. All comments in English. Import-Module Microsoft.PowerShell.Security added for SYSTEM/PS5 compatibility (T050, 2026-06-05). (T026/T030/T031/T032, 2026-06-02; T048, 2026-06-03)
 
 ```powershell
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-06-02 - T026/T030/T031/T032: failure sentinel, lag alert, English comments, ACL logging
+# Last updated: 2026-06-05 - T050: add Import-Module Security for SYSTEM PS5 ACL fix
+
+Add-Type -AssemblyName System.Security
+Import-Module Microsoft.PowerShell.Security -ErrorAction SilentlyContinue
 
 $Rclone             = 'C:\Tools\Rclone\rclone.exe'
 $Config             = 'C:\Sync\Config\rclone.conf'
@@ -1769,6 +1771,31 @@ $MaliciousFirewallRules = @(
     'Block 104.153.233.180',
     'Block 149.137.142.15'
 )
+
+$B2CredsFile = 'C:\Sync\Config\b2_creds.dpapi'
+
+function Load-B2Credentials {
+    if (-not (Test-Path $B2CredsFile)) {
+        Write-SyncLog "SYNC-FAIL  b2_creds.dpapi not found - run store_b2_creds.ps1 to migrate credentials"
+        exit 1
+    }
+    try {
+        $base64    = Get-Content -LiteralPath $B2CredsFile -Raw -Encoding ASCII
+        $encrypted = [Convert]::FromBase64String($base64.Trim())
+        $jsonBytes = [System.Security.Cryptography.ProtectedData]::Unprotect(
+            $encrypted,
+            $null,
+            [System.Security.Cryptography.DataProtectionScope]::LocalMachine
+        )
+        $json    = [System.Text.Encoding]::UTF8.GetString($jsonBytes)
+        $creds   = $json | ConvertFrom-Json
+        $env:RCLONE_CONFIG_CLOUDSYNC_ACCOUNT = $creds.account
+        $env:RCLONE_CONFIG_CLOUDSYNC_KEY     = $creds.key
+    } catch {
+        Write-SyncLog "SYNC-FAIL  Failed to decrypt b2_creds.dpapi: $($_.Exception.Message)"
+        exit 1
+    }
+}
 
 function Write-SyncLog($msg) {
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
@@ -1799,6 +1826,12 @@ function Remove-MaliciousFirewallRules {
     }
     return $removed
 }
+
+# ============================================================
+# INIT - Load B2 credentials from DPAPI-encrypted blob
+# Sets RCLONE_CONFIG_CLOUDSYNC_ACCOUNT / _KEY env vars
+# ============================================================
+Load-B2Credentials
 
 # ============================================================
 # T030 - B2 lag alert: warn if last successful sync is stale

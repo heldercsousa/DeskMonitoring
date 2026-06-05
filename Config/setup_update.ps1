@@ -96,23 +96,53 @@ Set-Content -Path $cloudSyncPs1 -Encoding UTF8 -Value @'
 # cloud_sync.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
-# Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
+# Last updated: 2026-06-05 - T050: add Import-Module Security for SYSTEM PS5 ACL fix
 
-$Rclone           = 'C:\Tools\Rclone\rclone.exe'
-$Config           = 'C:\Sync\Config\rclone.conf'
-$Source           = 'C:\Users\helde\Repos\Bois'
-$Remote           = 'cloudsync:helder-sync-mirror'
-$Mirror           = 'C:\Sync\Mirror'
-$LogDir           = 'C:\Sync\Logs'
-$Log              = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
-$DaysToKeepMirror = 7
-$DaysToKeepLogs   = 30
+Add-Type -AssemblyName System.Security
+Import-Module Microsoft.PowerShell.Security -ErrorAction SilentlyContinue
+
+$Rclone             = 'C:\Tools\Rclone\rclone.exe'
+$Config             = 'C:\Sync\Config\rclone.conf'
+$Source             = 'C:\Users\helde\Repos\Bois'
+$Remote             = 'cloudsync:helder-sync-mirror'
+$Mirror             = 'C:\Sync\Mirror'
+$LogDir             = 'C:\Sync\Logs\cloud_sync'
+$Log                = "$LogDir\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
+$DaysToKeepMirror   = 7
+$DaysToKeepLogs     = 30
+$SyncFailedSentinel = 'C:\Sync\Config\.sync_failed'
+$LastSyncOkFile     = 'C:\Sync\Config\.last_sync_ok'
 
 # Known malicious firewall rules that block Backblaze B2 sync
 $MaliciousFirewallRules = @(
     'Block 104.153.233.180',
     'Block 149.137.142.15'
 )
+
+$B2CredsFile = 'C:\Sync\Config\b2_creds.dpapi'
+
+function Load-B2Credentials {
+    if (-not (Test-Path $B2CredsFile)) {
+        Write-SyncLog "SYNC-FAIL  b2_creds.dpapi not found - run store_b2_creds.ps1 to migrate credentials"
+        exit 1
+    }
+    try {
+        $base64    = Get-Content -LiteralPath $B2CredsFile -Raw -Encoding ASCII
+        $encrypted = [Convert]::FromBase64String($base64.Trim())
+        $jsonBytes = [System.Security.Cryptography.ProtectedData]::Unprotect(
+            $encrypted,
+            $null,
+            [System.Security.Cryptography.DataProtectionScope]::LocalMachine
+        )
+        $json    = [System.Text.Encoding]::UTF8.GetString($jsonBytes)
+        $creds   = $json | ConvertFrom-Json
+        $env:RCLONE_CONFIG_CLOUDSYNC_ACCOUNT = $creds.account
+        $env:RCLONE_CONFIG_CLOUDSYNC_KEY     = $creds.key
+    } catch {
+        Write-SyncLog "SYNC-FAIL  Failed to decrypt b2_creds.dpapi: $($_.Exception.Message)"
+        exit 1
+    }
+}
 
 function Write-SyncLog($msg) {
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
@@ -142,6 +172,23 @@ function Remove-MaliciousFirewallRules {
         }
     }
     return $removed
+}
+
+# ============================================================
+# INIT - Load B2 credentials from DPAPI-encrypted blob
+# Sets RCLONE_CONFIG_CLOUDSYNC_ACCOUNT / _KEY env vars
+# ============================================================
+Load-B2Credentials
+
+# ============================================================
+# T030 - B2 lag alert: warn if last successful sync is stale
+# ============================================================
+if (Test-Path $LastSyncOkFile) {
+    $lastOk = [datetime](Get-Content -LiteralPath $LastSyncOkFile -Raw).Trim()
+    $lagMinutes = [math]::Round(((Get-Date) - $lastOk).TotalMinutes, 1)
+    if ($lagMinutes -gt 15) {
+        Write-SyncLog "B2-LAG-ALERT  Last successful sync was $lagMinutes minutes ago (threshold: 15)"
+    }
 }
 
 # ============================================================

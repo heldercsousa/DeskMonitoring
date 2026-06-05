@@ -4,6 +4,7 @@
 # Last updated: 2026-06-03 - T048: load B2 credentials from DPAPI blob
 
 Add-Type -AssemblyName System.Security
+Import-Module Microsoft.PowerShell.Security -ErrorAction SilentlyContinue
 
 $Rclone             = 'C:\Tools\Rclone\rclone.exe'
 $Config             = 'C:\Sync\Config\rclone.conf'
