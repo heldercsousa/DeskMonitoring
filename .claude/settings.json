@@ -30,6 +30,18 @@
     "SYNC_MIRROR": "C:\\Sync\\Mirror"
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(.*git (add|commit).*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\.claude\\hooks\\rule6_integrity_check.ps1\"",
+            "shell": "powershell"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
@@ -37,6 +49,11 @@
           {
             "type": "command",
             "command": "powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\Config\\parse_check_hook.ps1\"",
+            "shell": "powershell"
+          },
+          {
+            "type": "command",
+            "command": "powershell -ExecutionPolicy Bypass -File \"C:\\Sync\\.claude\\hooks\\rule1_reminder.ps1\"",
             "shell": "powershell"
           }
         ]

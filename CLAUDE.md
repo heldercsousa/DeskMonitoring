@@ -506,49 +506,7 @@ Root cause: only occurs if `setup_all.ps1` was run with an older version that la
 
 ## PowerShell Conventions
 
-**Error handling:**
-```powershell
-$ErrorActionPreference = 'SilentlyContinue'  # top of orchestration scripts
-# Sensitive operations:
-try { ... } catch { Write-Fail "..." }  # with -ErrorAction Stop on the cmdlet
-```
-
-**Logging pattern** — always use `Add-Content` with `-LiteralPath`:
-```powershell
-function Write-Log($msg) {
-    $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    "$ts  $msg" | Add-Content -LiteralPath $LogFile
-}
-```
-Two spaces between timestamp and message. Never use `Write-Output` for log entries.
-
-**Console output helpers:**
-```powershell
-function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
-function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
-function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
-function Write-Fail($msg) { Write-Host "  FAIL $msg" -ForegroundColor Red }
-```
-
-**SIDs over names** — use well-known SIDs to ensure scripts work on non-English Windows:
-- `S-1-1-0` = Everyone
-- `S-1-5-32-544` = Administrators
-- `S-1-5-18` = SYSTEM
-
-**Date-stamped log files** — evaluated at runtime, rolls at midnight automatically:
-```powershell
-$LogFile = "C:\Sync\Logs\cloud_sync_$(Get-Date -Format 'yyyy-MM-dd').log"
-```
-
-**Backtick line continuation** for multi-line rclone calls:
-```powershell
-& $Rclone sync $Source $Remote `
-    --config $Config `
-    --log-file $Log `
-    --log-level INFO
-```
-
-**Script root** — scripts use absolute paths rooted at `C:\Sync\Config\`, not `$PSScriptRoot`, except where `Split-Path -Parent $MyInvocation.MyCommand.Path` is explicitly used.
+See `.claude/rules/powershell-security.md` for PowerShell conventions.
 
 ---
 
