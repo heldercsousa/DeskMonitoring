@@ -325,7 +325,7 @@ try {
 ```
 > Security monitor: startup gap forensics, FileSystemWatcher on source folder, remote logon/service/system event polling. Background job cleanup every ~60s (T028); motion AVI vs suspicious delete distinction (T029); 30-day log rotation for audit logs (T033, 2026-06-02). Writes to security_audit_YYYY-MM-DD.log and file_audit_YYYY-MM-DD.log.
 
-**Last updated:** 2026-03-02
+**Last updated:** 2026-06-05
 **Machine:** Windows 11 Home Single Language 24H2 — user: `helde` (`LAP\helde`)
 
 > This document is self-contained. Every config and script file's full content is

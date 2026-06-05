@@ -115,6 +115,17 @@ All scripts live in `C:\Sync\Config\`. Camera setup docs live in `C:\Sync\Config
 
 ---
 
+## Key Documents
+
+| Document | Purpose |
+|---|---|
+| `README.md` | Navigation hub and quick command reference |
+| `PURPOSE.md` | Why this exists and what threat it defends against |
+| `THREAT_MODEL.md` | Adversary profile, attack vectors, current threat level |
+| `HISTORY.md` | How the project evolved - every component traces to a real attack |
+
+---
+
 ## Operating Rules
 
 These rules govern how Claude Code must behave in every session for this project. They are mandatory, not optional.
@@ -551,7 +562,7 @@ Retention: 7 days (ACL-protected then cleaned by cloud_sync.ps1)
 | `C:\Sync\Config\yawcam_monitor_v4.ps1` | Active monitor script (recovery loop) — relocated from Yawcam dir |
 | `C:\Sync\Config\start_monitor.ps1` | Boot launcher — waits 30s then starts monitor hidden — relocated from Yawcam dir |
 | `C:\Users\helde\Repos\Bois\YYYY-MM-DD\` | Recording output (date-stamped subdirectory) |
-| `C:\TEMP\motion_videos` | Legacy path watched by monitor v4 — not the actual recording path; may need a symlink |
+| `C:\TEMP\motion_videos` | Symlink deployed (T022): C:\TEMP\motion_videos -> C:\Users\helde\Repos\Bois; monitor and recording path now aligned |
 | `C:\Sync\Config\cam2_relay.ps1` | CAM-2 VLC relay — converts RTSP from C100 to MJPEG HTTP on `127.0.0.1:8161` |
 | `C:\Sync\Config\cam2.conf` | CAM-2 credentials (plaintext, ACL-protected, gitignored) |
 | `C:\Sync\Config\.ecosystem_state` | Runtime state flag written by start/stop scripts ("running" or "stopped"). Gitignored. |
