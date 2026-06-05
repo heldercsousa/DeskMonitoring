@@ -23,6 +23,8 @@
 
 **Phase 0 — Load context**
 Before anything else: invoke relevant skills, load project commands, review CLAUDE.md rules.
+Then read `THREAT_MODEL.md` to confirm current threat level and any open detection gaps.
+If session involves a new security incident (new tampering, new attack vector, physical damage): update THREAT_MODEL.md and HISTORY.md before committing.
 
 **Phase 1 — Plan**
 EnterPlanMode. Plan must list all RULE 1 follow-up steps explicitly.
@@ -124,6 +126,18 @@ All scripts live in `C:\Sync\Config\`. Camera setup docs live in `C:\Sync\Config
 | `THREAT_MODEL.md` | Adversary profile, attack vectors, current threat level |
 | `HISTORY.md` | How the project evolved - every component traces to a real attack |
 
+## Live Threat Digest (update this section each session if threat state changes)
+
+**As of:** 2026-06-05
+**Threat level:** CRITICAL - ONGOING
+**Active attack:** Nightly automated overwrite of `Config/cloud_sync.ps1` and `Config/run_mirror.bat` with payload that strips DPAPI credential loading, silences monitoring, and injects Portuguese comments. Two consecutive nights confirmed (2026-06-04, 2026-06-05).
+**Open gap:** Write process identity unknown - SACL auditing deployed on `Config\` but event logs not yet analyzed.
+**Physical:** Wardrobe door forced past pivot (2026-06-05), router reset button glued (pre-2026-03-06). Physical access unresolved.
+**B2 sync:** Operational (restored each morning via RULE 6 + git checkout HEAD).
+**Cameras:** CAM-1 and CAM-2 operational.
+
+See `THREAT_MODEL.md` for full adversary profile and `Evidence/MUST-CHECK-URGENT.md` for open threads.
+
 ---
 
 ## Operating Rules
@@ -142,6 +156,10 @@ These rules govern how Claude Code must behave in every session for this project
 | New or modified script in `C:\Program Files (x86)\Yawcam\` | `ECOSYSTEM_REPORT.md` Section 5 (Camera scripts table) + Section 15 |
 | New Claude Code tool (command, skill, settings) | `ECOSYSTEM_REPORT.md` Section 5 (Claude Code tooling table) |
 | Any architectural change | `CLAUDE.md` relevant section + `ECOSYSTEM_REPORT.md` |
+| New security incident confirmed (new attack vector, new tampering, physical damage) | `THREAT_MODEL.md` Attack Vector History table + `HISTORY.md` Phase 4 current section |
+| Incident closed / attack vector fully remediated | `THREAT_MODEL.md` Status column for that row (change to "Closed - ...") |
+| Threat level changes | `THREAT_MODEL.md` Current Threat Level section + `CLAUDE.md` Live Threat Digest (below) |
+| New capability added that defends against a documented threat | `THREAT_MODEL.md` Detection Matrix row + `HISTORY.md` Phase 4 |
 | New camera added | `CLAUDE.md` Camera Inventory table + `check_camera.ps1` summary section + `camera-ecosystem` skill inventory |
 | New health check logic | Corresponding `/project:check` or `/project:camera-check` command baseline table |
 | Any fix, new behavior, or security hardening | `setup_all.ps1` — reflect the fix so it survives a full reinstall |
