@@ -1,0 +1,39 @@
+2026-06-04 04:45:47  SYNC-START  Beginning cloud sync run
+2026-06-04 04:45:53  SYNC-START  Beginning cloud sync run
+2026-06-04 04:46:22  SYNC-START  Beginning cloud sync run
+2026/06/04 04:46:31 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026/06/04 04:46:31 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 04:46:33  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-06-04 04:46:33  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/06/04 04:46:39 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 04:46:39  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-06-04 04:47:37  SYNC-START  Beginning cloud sync run
+2026/06/04 04:47:52 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 04:47:53  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-06-04 04:51:08  SYNC-START  Beginning cloud sync run
+2026/06/04 04:51:22 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 04:51:22  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-06-04 06:34:08  SYNC-START  Beginning cloud sync run
+2026-06-04 06:34:20  SYNC-START  Beginning cloud sync run
+2026-06-04 06:34:21  SYNC-START  Beginning cloud sync run
+2026-06-04 06:34:29  SYNC-START  Beginning cloud sync run
+2026/06/04 06:34:29 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:34:29  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-06-04 06:34:37  SYNC-START  Beginning cloud sync run
+2026/06/04 06:34:44 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:34:44  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/06/04 06:34:45 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:34:45  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/06/04 06:34:48 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:34:48  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/06/04 06:34:53 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:34:53  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-06-04 06:35:12  SYNC-START  Beginning cloud sync run
+2026-06-04 06:35:21  SYNC-START  Beginning cloud sync run
+2026-06-04 06:35:27  SYNC-START  Beginning cloud sync run
+2026/06/04 06:35:32 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:35:32  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/06/04 06:35:40 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:35:40  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026/06/04 06:35:42 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": account not found
+2026-06-04 06:35:42  SYNC-FAIL  Sync failed (exit 1) - not a firewall error

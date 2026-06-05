@@ -1,0 +1,10 @@
+2026-06-04 06:49:26  GIT-PUSH  Pushing a5f08fa - fix(audit_filter): suppress icacls WRITE_DAC noise on .git to prevent evidence bloat
+2026-06-04 06:49:30  GIT-PUSH  OK  a5f08fa pushed to origin/master
+2026-06-04 09:13:38  GIT-PUSH  Pushing 563c809 - fix(audit_filter): correct deprecated setup_all reference to setup_update in comment
+2026-06-04 09:13:41  GIT-PUSH  OK  563c809 pushed to origin/master
+2026-06-04 09:22:25  GIT-PUSH  Pushing 6307d44 - feat(setup_update): enable process creation auditing (event 4688) in Step 16a2
+2026-06-04 09:22:29  GIT-PUSH  OK  6307d44 pushed to origin/master
+2026-06-04 09:42:09  GIT-PUSH  Pushing b4e4d97 - security: document cloud_sync.ps1 tampering detected 2026-06-04
+2026-06-04 09:42:13  GIT-PUSH  OK  b4e4d97 pushed to origin/master
+2026-06-04 11:22:11  GIT-PUSH  Pushing 8242e98 - security: correct attack timeline in tampering evidence (04:45 not 09:30)
+2026-06-04 11:22:15  GIT-PUSH  OK  8242e98 pushed to origin/master

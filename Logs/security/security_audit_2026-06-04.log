@@ -1,0 +1,26 @@
+2026-06-04 04:44:49  [AUDITOR] Shutting down
+2026-06-04 04:45:20  AUDIT-FILTER  SUSPICIOUS-WRITES  27741 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-04.md
+2026-06-04 04:45:30  [AUDITOR] Starting up (PID 16448)
+2026-06-04 04:45:31  [CRITICAL] Service FolderSyncAuditor is StartPending - expected Running
+2026-06-04 04:45:41 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_04.45.39_719.avi
+2026-06-04 04:45:48 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_04.45.48_364.avi
+2026-06-04 04:46:17 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_04.46.14_623.avi
+2026-06-04 04:47:34 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_04.47.34_083.avi
+2026-06-04 04:50:59 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_04.50.57_452.avi
+2026-06-04 06:33:58 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.33.57_388.avi
+2026-06-04 06:34:07 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.34.02_682.avi
+2026-06-04 06:34:18 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.34.15_338.avi
+2026-06-04 06:34:24 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.34.23_772.avi
+2026-06-04 06:34:31 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.34.30_782.avi
+2026-06-04 06:35:09 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.35.09_338.avi
+2026-06-04 06:35:18 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.35.18_379.avi
+2026-06-04 06:35:25 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-04\motion_2026-06-04_06.35.24_487.avi
+2026-06-04 06:50:04  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-04.md
+2026-06-04 09:15:03  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-04.md
+2026-06-04 09:25:03  AUDIT-FILTER  SUSPICIOUS-WRITES  6 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-04.md
+2026-06-04 09:30:07  [AUDITOR] Shutting down
+2026-06-04 09:32:18  [AUDITOR] Starting up (PID 26444)
+2026-06-04 09:32:18  [CRITICAL] Service FolderSyncAuditor is StartPending - expected Running
+2026-06-04 09:34:54  [AUDITOR] Shutting down
+2026-06-04 09:45:03  AUDIT-FILTER  SUSPICIOUS-WRITES  2 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-04.md
+2026-06-04 11:25:05  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-04.md

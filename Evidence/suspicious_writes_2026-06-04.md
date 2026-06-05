@@ -27771,3 +27771,18 @@
 | 2026-06-04 09:21:09 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-04 09:21:09 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.6252.3a5cfed38af9` |
 | 2026-06-04 09:21:09 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.6252.3a5cfed38af9` |
+
+## 2026-06-04 09:45:03 - 2 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-04 09:41:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence` |
+| 2026-06-04 09:41:49 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence\2026-06-04_cloud-sync-tampering.md.tmp.6252.0787da05684a` |
+
+## 2026-06-04 11:25:05 - 3 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-04 11:21:54 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence` |
+| 2026-06-04 11:21:54 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Evidence\2026-06-04_cloud-sync-tampering.md.tmp.6252.8d6ebcdb4ed8` |
+| 2026-06-04 11:21:54 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence\2026-06-04_cloud-sync-tampering.md.tmp.6252.8d6ebcdb4ed8` |
