@@ -1,5 +1,5 @@
 # FolderSync Watchdog
-# Ensures RealTimeSync and cloud sync scheduled task are alive.
+# Ensures RealTimeSync, cloud sync scheduled task, and config_guard are alive.
 # Runs as "FolderSync Watchdog Service" via NSSM.
 
 $LogFile = "C:\Sync\Logs\services\watchdog.log"
@@ -29,6 +29,18 @@ while ($true) {
     if ($task -and $task.State -eq 'Disabled') {
         Write-Log "Task $TaskName was disabled — re-enabling."
         Enable-ScheduledTask -TaskName $TaskName | Out-Null
+    }
+
+    # --- Check config_guard is running ---
+    # config_guard.ps1 watches cloud_sync.ps1 and run_mirror.bat for tampering.
+    # The attacker kills it before modifying files. Wdog restarts it within 180s.
+    $guard = Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*config_guard.ps1*' }
+    if (-not $guard) {
+        Write-Log "WATCHDOG  config_guard.ps1 not running - restarting"
+        Start-Process -FilePath 'powershell.exe' `
+            -ArgumentList '-NonInteractive', '-WindowStyle', 'Hidden', '-ExecutionPolicy', 'Bypass', '-File', 'C:\Sync\Config\config_guard.ps1' `
+            -WindowStyle Hidden
+        Write-Log "WATCHDOG  config_guard.ps1 restarted"
     }
 
     Start-Sleep -Seconds 180
