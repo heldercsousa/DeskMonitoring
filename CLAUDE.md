@@ -54,7 +54,18 @@ Update setup_update.ps1 so fix survives full reinstall.
 **Phase 6 — Commit**
 Run `/project:commit`. Never raw git commands, never `Skill("commit")`.
 
-### RULE 5 — Autonomous Mode (within C:\Sync)
+### RULE 5 — Ecosystem Operations Convention
+
+**Always direct Helder to run `setup_update.ps1` as Administrator for any operation that reconfigures, restarts, or applies fixes to the ecosystem.**
+
+Never suggest running individual scripts (wdog.ps1, start_ecosystem.ps1, install_service.ps1, etc.) directly. `setup_update.ps1` is the single entry point: it stops the ecosystem if running, applies all configuration, and restarts everything via `start_ecosystem.ps1` automatically. Calling individual scripts skips steps and creates inconsistent state.
+
+**Any time a change to a Config/ script requires the ecosystem to reload it, end with:**
+> "Run `setup_update.ps1` as Administrator to apply."
+
+---
+
+### RULE 5b — Autonomous Mode (within C:\Sync)
 
 **Helder has granted full autonomy for all operations scoped to `C:\Sync\`.**
 

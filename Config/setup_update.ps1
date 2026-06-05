@@ -795,6 +795,52 @@ Register-ScheduledTask -TaskName "FolderSync-AuditFilter" -Xml $taskXml19 -Force
 Write-OK "Task FolderSync-AuditFilter registered ($currentUser / InteractiveToken, every 5 min)"
 
 # =============================================================================
+# STEP 20 - FolderSync-ConfigGuard task (at logon, current user, hidden)
+# Watches Config\cloud_sync.ps1 and run_mirror.bat via FileSystemWatcher.
+# Restores them from git HEAD the instant any process modifies them.
+# Runs as a persistent background process (keep-alive loop inside the script).
+# =============================================================================
+Write-Step "Step 20 - FolderSync-ConfigGuard task (at logon, current user, hidden)"
+
+$userSid20 = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+$taskXml20 = @"
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+      <UserId>$currentUser</UserId>
+    </LogonTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>$userSid20</UserId>
+      <LogonType>InteractiveToken</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <Hidden>true</Hidden>
+    <ExecutionTimeLimit>PT0S</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions>
+    <Exec>
+      <Command>pwsh.exe</Command>
+      <Arguments>-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\Sync\Config\config_guard.ps1"</Arguments>
+    </Exec>
+  </Actions>
+</Task>
+"@
+
+Unregister-ScheduledTask -TaskName "FolderSync-ConfigGuard" -Confirm:$false -ErrorAction SilentlyContinue
+Register-ScheduledTask -TaskName "FolderSync-ConfigGuard" -Xml $taskXml20 -Force | Out-Null
+Write-OK "Task FolderSync-ConfigGuard registered ($currentUser / InteractiveToken, at logon, no time limit)"
+
+# =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
 # =============================================================================
 if ($wasRunning) {
@@ -838,6 +884,7 @@ Write-Host "  Step 18b- Power settings applied (Balanced plan, USB Suspend disab
 Write-Host "  Step 18d- B2 credentials: checked/warned if b2_creds.dpapi missing" -ForegroundColor Gray
 Write-Host "  Step 18e- CAM-2 credentials: checked/warned if cam2_creds.dpapi missing" -ForegroundColor Gray
 Write-Host "  Step 19 - FolderSync-AuditFilter task (current user, VBS launcher - no window flash)" -ForegroundColor Gray
+Write-Host "  Step 20 - FolderSync-ConfigGuard task (current user, at logon, watches Config\ for tampering)" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow

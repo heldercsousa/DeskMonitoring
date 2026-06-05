@@ -147,8 +147,10 @@ function Start-FileWatcher {
             $ts = $time.ToString("yyyy-MM-dd HH:mm:ss")
 
             # T029: distinguish routine AVI aging from suspicious deletions
+            # $name includes subdirectory when IncludeSubdirectories=true (e.g. "2026-06-05\motion_*.avi")
+            # so extract just the filename before pattern-matching
             if ($type -eq 'DELETED') {
-                if ($name -like 'motion_*.avi') {
+                if (([System.IO.Path]::GetFileName($name)) -like 'motion_*.avi') {
                     $detail = 'DELETED-ROUTINE'
                     $line = "$ts | $($detail.PadRight(25)) | user=$user | path=$path"
                     $line | Add-Content -LiteralPath $logFile -Encoding UTF8
