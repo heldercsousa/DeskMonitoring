@@ -130,8 +130,8 @@ All scripts live in `C:\Sync\Config\`. Camera setup docs live in `C:\Sync\Config
 
 **As of:** 2026-06-05
 **Threat level:** CRITICAL - ONGOING
-**Active attack:** Nightly automated overwrite of `Config/cloud_sync.ps1` and `Config/run_mirror.bat` with payload that strips DPAPI credential loading, silences monitoring, and injects Portuguese comments. Two consecutive nights confirmed (2026-06-04, 2026-06-05).
-**Open gap:** Write process identity unknown - SACL auditing deployed on `Config\` but event logs not yet analyzed.
+**Active attack:** Nightly automated overwrite of `Config/cloud_sync.ps1` and `Config/run_mirror.bat` with payload that strips DPAPI credential loading, silences monitoring, and injects Portuguese comments. Three consecutive nights (2026-06-04, 2026-06-05 x2). **LOCAL EXECUTION CONFIRMED** - attack fires with WiFi off; the tampering agent is a process already running on this machine (scheduled task, service, or WMI subscription), not a remote actor.
+**Open gap:** Tampering process identity unknown - read Security EventLog Event 4663 on Config\cloud_sync.ps1 to find the exact process. SACL deployed but logs not yet analyzed.
 **Physical:** Wardrobe door forced past pivot (2026-06-05), router reset button glued (pre-2026-03-06). Physical access unresolved.
 **B2 sync:** Operational (restored each morning via RULE 6 + git checkout HEAD).
 **Cameras:** CAM-1 and CAM-2 operational.

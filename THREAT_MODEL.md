@@ -42,7 +42,7 @@
 | USB Selective Suspend enabled (webcam power sabotage) | 2026-05-28 | check_power_motion.ps1 | Power settings restored; check_power_motion.ps1 added to health checks | Closed - detected on next check |
 | cloud_sync.ps1 + run_mirror.bat overwritten in-place | 2026-05-28 to 2026-05-29 | RULE 6 pre-commit integrity check | Files restored from git; config_guard.ps1 deployed | Closed - RULE 6 now mandatory |
 | git rm on 437 tracked files (staged mass deletion) | 2026-05-31 | git status check before commit | git restore --staged recovered all files | Closed - no history lost |
-| Nightly automated config re-tampering (DPAPI stripped, Portuguese comments, monitoring silenced) | 2026-06-04 to present | RULE 6 pre-commit integrity check; auditor.ps1 | Files restored; SACL auditing deployed on Config\ to identify the process | Open - process not yet identified |
+| Nightly automated config re-tampering (DPAPI stripped, Portuguese comments, monitoring silenced) | 2026-06-04 to present | RULE 6 pre-commit integrity check; auditor.ps1 | Files restored; SACL auditing deployed on Config\ to identify the process | Open - LOCAL EXECUTION CONFIRMED (fires with WiFi off; persistent process on machine) |
 | Physical wardrobe damage (door forced past pivot limit) | Unknown | Physical inspection | Documented as evidence | Open - physical access unresolved |
 
 ---
