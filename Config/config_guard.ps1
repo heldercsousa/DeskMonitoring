@@ -1,12 +1,12 @@
 # config_guard.ps1
-# FileSystemWatcher on Config\ — auto-restores cloud_sync.ps1 and run_mirror.bat
-# via git restore the moment they are modified by any process.
+# FileSystemWatcher on Config\ — auto-restores cloud_sync.ps1, run_mirror.bat,
+# auditor.ps1, and setup_update.ps1 via git restore the moment they are modified.
 # Runs hidden at login via registry Run key or Task Scheduler.
 
 $RepoRoot  = 'C:\Sync'
 $ConfigDir = 'C:\Sync\Config'
 $LogFile   = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
-$GuardedFiles = @('cloud_sync.ps1', 'run_mirror.bat')
+$GuardedFiles = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
 
 function Write-Log($msg) {
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
@@ -26,7 +26,7 @@ $action = {
     $full = $Event.SourceEventArgs.FullPath
     $type = $Event.SourceEventArgs.ChangeType
 
-    $guarded = @('cloud_sync.ps1', 'run_mirror.bat')
+    $guarded = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
     if ($guarded -notcontains $name) { return }
 
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'

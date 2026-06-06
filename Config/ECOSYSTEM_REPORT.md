@@ -447,7 +447,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
 | `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 30-day audit log rotation (T033, 2026-06-02) |
-| `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores `cloud_sync.ps1` and `run_mirror.bat` from git HEAD on any modification. Keep-alive loop (30s sleep). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
+| `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores `cloud_sync.ps1`, `run_mirror.bat`, `auditor.ps1`, and `setup_update.ps1` from git HEAD on any modification (T051, 2026-06-05). Keep-alive loop (30s sleep). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
@@ -2580,17 +2580,17 @@ try {
 ---
 
 ### `C:\Sync\Config\config_guard.ps1`
-> FileSystemWatcher on `Config\` — auto-restores `cloud_sync.ps1` and `run_mirror.bat` from git HEAD the instant any process modifies them. Runs as a persistent hidden background process (keep-alive 30s sleep loop). Registered as `FolderSync-ConfigGuard` scheduled task (at logon, current user, no time limit) via `setup_update.ps1` Step 20. Logs to `C:\Sync\Logs\security\config_guard_YYYY-MM-DD.log`.
+> FileSystemWatcher on `Config\` — auto-restores `cloud_sync.ps1`, `run_mirror.bat`, `auditor.ps1`, and `setup_update.ps1` from git HEAD the instant any process modifies them (T051, 2026-06-05). Runs as a persistent hidden background process (keep-alive 30s sleep loop). Registered as `FolderSync-ConfigGuard` scheduled task (at logon, current user, no time limit) via `setup_update.ps1` Step 20. Logs to `C:\Sync\Logs\security\config_guard_YYYY-MM-DD.log`.
 ```powershell
 # config_guard.ps1
-# FileSystemWatcher on Config\ — auto-restores cloud_sync.ps1 and run_mirror.bat
-# via git restore the moment they are modified by any process.
+# FileSystemWatcher on Config\ — auto-restores cloud_sync.ps1, run_mirror.bat,
+# auditor.ps1, and setup_update.ps1 via git restore the moment they are modified.
 # Runs hidden at login via registry Run key or Task Scheduler.
 
 $RepoRoot  = 'C:\Sync'
 $ConfigDir = 'C:\Sync\Config'
 $LogFile   = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
-$GuardedFiles = @('cloud_sync.ps1', 'run_mirror.bat')
+$GuardedFiles = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
 
 function Write-Log($msg) {
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
@@ -2610,7 +2610,7 @@ $action = {
     $full = $Event.SourceEventArgs.FullPath
     $type = $Event.SourceEventArgs.ChangeType
 
-    $guarded = @('cloud_sync.ps1', 'run_mirror.bat')
+    $guarded = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
     if ($guarded -notcontains $name) { return }
 
     $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
