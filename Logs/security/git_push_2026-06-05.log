@@ -1,0 +1,30 @@
+2026-06-05 07:53:48  GIT-PUSH  Pushing 8b2220d - security: restore cloud_sync.ps1+run_mirror.bat after repeat tampering 2026-06-05
+2026-06-05 07:53:51  GIT-PUSH  OK  8b2220d pushed to origin/master
+2026-06-05 13:03:27  GIT-PUSH  Pushing 77fa19e - docs: add PURPOSE, THREAT_MODEL, HISTORY, README; patch CLAUDE.md and ECOSYSTEM_REPORT
+2026-06-05 13:03:31  GIT-PUSH  OK  77fa19e pushed to origin/master
+2026-06-05 13:25:34  GIT-PUSH  Pushing 508c7ef - docs(claude-md): add Live Threat Digest, Phase 0 THREAT_MODEL read, RULE 1 incident triggers
+2026-06-05 13:25:36  GIT-PUSH  OK  508c7ef pushed to origin/master
+2026-06-05 13:31:05  GIT-PUSH  Pushing e6d9a2e - security: restore tampered files; document local execution confirmed (WiFi-off attack)
+2026-06-05 13:31:08  GIT-PUSH  OK  e6d9a2e pushed to origin/master
+2026-06-05 13:37:45  GIT-PUSH  Pushing 2999968 - fix(wdog): add config_guard.ps1 watchdog - restarts guard within 180s if killed
+2026-06-05 13:37:48  GIT-PUSH  OK  2999968 pushed to origin/master
+2026-06-05 14:15:54  GIT-PUSH  Pushing 463e965 - docs(CLAUDE.md): add RULE 5 - always use setup_update.ps1 as Admin entry point
+2026-06-05 14:15:57  GIT-PUSH  OK  463e965 pushed to origin/master
+2026-06-05 14:20:29  GIT-PUSH  Pushing 33abb33 - docs(ECOSYSTEM_REPORT): add config_guard.ps1 to Section 5+15; fix T029 auditor comment
+2026-06-05 14:20:32  GIT-PUSH  OK  33abb33 pushed to origin/master
+2026-06-05 18:58:29  GIT-PUSH  Pushing f3141b1 - feat(.claude): add hooks + skills + rules for mechanical RULE enforcement
+2026-06-05 18:58:33  GIT-PUSH  OK  f3141b1 pushed to origin/master
+2026-06-05 19:07:30  GIT-PUSH  Pushing 0431e1d - backlog: register T051 - extend config_guard to guard auditor.ps1 + setup_update.ps1
+2026-06-05 19:07:33  GIT-PUSH  OK  0431e1d pushed to origin/master
+2026-06-05 20:50:32  GIT-PUSH  Pushing 308deed - fix(health_check): check FolderSyncWatchdog service not nonexistent task
+2026-06-05 20:50:39  GIT-PUSH  OK  308deed pushed to origin/master
+2026-06-05 20:51:37  GIT-PUSH  Pushing 068721b - fix(cloud_sync): add Import-Module Security to fix SYSTEM ACL failure (T050)
+2026-06-05 20:51:40  GIT-PUSH  OK  068721b pushed to origin/master
+2026-06-05 21:28:14  GIT-PUSH  Pushing c6795c3 - arquivos com commit p├®ndente
+2026-06-05 21:28:17  GIT-PUSH  OK  c6795c3 pushed to origin/master
+2026-06-05 21:33:44  GIT-PUSH  Pushing e9c4c25 - feat(config_guard): extend guard to auditor.ps1 and setup_update.ps1 (T051)
+2026-06-05 21:33:47  GIT-PUSH  OK  e9c4c25 pushed to origin/master
+2026-06-05 21:48:24  GIT-PUSH  Pushing 49bf4e7 - evidence(tampering): document 3rd nightly config overwrite attack (2026-06-05)
+2026-06-05 21:48:27  GIT-PUSH  OK  49bf4e7 pushed to origin/master
+2026-06-05 22:31:37  GIT-PUSH  Pushing 1f900bc - plan(T054): register config_guard auto-restore task and brief
+2026-06-05 22:31:40  GIT-PUSH  OK  1f900bc pushed to origin/master

@@ -1,0 +1,3 @@
+2026-06-05 09:00:01  SCAN-START  DailySecurityCheck v9
+2026-06-05 09:00:21  ALERT  [B2Connectivity] Host=api.backblazeb2.com Port=443 Result=FAIL - B2 outbound blocked or unreachable
+2026-06-05 09:00:23  SCAN-END  Issues=1
