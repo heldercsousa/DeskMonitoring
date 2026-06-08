@@ -6,5 +6,9 @@
 :: /W:2  = Short wait between retries
 :: /NFL  = No File List - suppresses per-file output, keeps summary only (prevents log bloat)
 :: /LOG+ = Append to DAILY rotating log (mirror_YYYY-MM-DD.log)
+
+:: Ensure log directory exists
+if not exist "C:\Sync\Logs\mirror" mkdir "C:\Sync\Logs\mirror"
+
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set DATE=%%d
 robocopy "C:\Users\helde\Repos\Bois" "C:\Sync\Mirror" /E /Z /R:1 /W:2 /LOG+:"C:\Sync\Logs\mirror\mirror_%DATE%.log" /NP /NDL /NC /NS /NFL

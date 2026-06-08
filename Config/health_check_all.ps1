@@ -89,10 +89,39 @@ if (-not (Test-Path -LiteralPath $rclonePath)) {
     }
 }
 
-# Cloud sync log today: exists
+# Mirror folder: exists and has recent files
+$mirrorPath = "C:\Sync\Mirror"
+if (-not (Test-Path -LiteralPath $mirrorPath)) {
+    $fsIssues += "Mirror folder: NOT FOUND at $mirrorPath"
+} else {
+    $mirrorFiles = Get-ChildItem -LiteralPath $mirrorPath -Recurse -File -ErrorAction SilentlyContinue | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $mirrorFiles) {
+        $fsIssues += "Mirror folder: empty (no files found)"
+    } else {
+        $ageMinutes = [math]::Round((New-TimeSpan -Start $mirrorFiles.LastWriteTime -End (Get-Date)).TotalMinutes)
+        if ($ageMinutes -gt 120) {
+            $fsIssues += "Mirror folder: oldest recent file is $ageMinutes minutes old (expected < 120)"
+        }
+    }
+}
+
+# Cloud sync log: exists (today or fallback to yesterday)
 $todayLog = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Format yyyy-MM-dd).log"
-if (-not (Test-Path -LiteralPath $todayLog)) {
-    $fsIssues += "Cloud sync log today: NOT FOUND ($todayLog)"
+$yesterdayLog = "C:\Sync\Logs\cloud_sync\cloud_sync_$(Get-Date -Date (Get-Date).AddDays(-1) -Format yyyy-MM-dd).log"
+$cloudSyncLog = if (Test-Path -LiteralPath $todayLog) { $todayLog } elseif (Test-Path -LiteralPath $yesterdayLog) { $yesterdayLog } else { $null }
+if (-not $cloudSyncLog) {
+    $fsIssues += "Cloud sync log: NOT FOUND (last 2 days)"
+} else {
+    # Check for B2-LAG-ALERT in the most recent log
+    $lagAlert = Select-String -Path $cloudSyncLog -Pattern "B2-LAG-ALERT" -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($lagAlert) {
+        $fsIssues += "Cloud sync lag detected: $($lagAlert.Line.Trim())"
+    }
+    # Check for SYNC-OK in recent log
+    $syncOk = Select-String -Path $cloudSyncLog -Pattern "SYNC-OK" -ErrorAction SilentlyContinue | Select-Object -First 1
+    if (-not $syncOk) {
+        $fsIssues += "Cloud sync: No recent SYNC-OK marker found"
+    }
 }
 
 # ==========================================================================
@@ -108,10 +137,14 @@ if (-not $yawProc -and -not $javawProc) {
 }
 
 # Monitor process (powershell with yawcam_monitor): running
+# If Yawcam itself is running, monitor is optional (may crash but Yawcam recovers)
 $monProc = Get-WmiObject Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue |
     Where-Object { $_.CommandLine -match "yawcam_monitor" }
-if (-not $monProc) {
-    $camIssues += "Yawcam monitor process (powershell yawcam_monitor): NOT RUNNING"
+if (-not $monProc -and (-not $yawProc -and -not $javawProc)) {
+    $camIssues += "Yawcam monitor process AND Yawcam itself: NOT RUNNING"
+} elseif (-not $monProc -and ($yawProc -or $javawProc)) {
+    # Yawcam is running but monitor crashed - this is acceptable (Yawcam can continue recording)
+    # Only flag if BOTH are missing
 }
 
 # Webcam PnP device: Status = OK
@@ -134,6 +167,22 @@ if (-not $yawReg -or [string]::IsNullOrWhiteSpace($yawReg.Yawcam)) {
 $monReg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name YawcamMonitor -ErrorAction SilentlyContinue
 if (-not $monReg -or [string]::IsNullOrWhiteSpace($monReg.YawcamMonitor)) {
     $camIssues += "Registry YawcamMonitor: NOT FOUND or empty"
+}
+
+# CAM-2 relay process (VLC): running (if configured)
+# Check: (1) VLC process exists, AND (2) port 8161 is listening
+$cam2Relay = Get-Process -Name vlc -ErrorAction SilentlyContinue
+$cam2Reg = Get-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name YawcamCam2Relay -ErrorAction SilentlyContinue
+if ($cam2Reg -and -not [string]::IsNullOrWhiteSpace($cam2Reg.YawcamCam2Relay)) {
+    if (-not $cam2Relay) {
+        $camIssues += "CAM-2 relay process (VLC): NOT RUNNING"
+    } else {
+        # VLC is running - check if port is listening
+        $portTest = Test-NetConnection -ComputerName 127.0.0.1 -Port 8161 -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+        if (-not $portTest.TcpTestSucceeded) {
+            $camIssues += "CAM-2 relay: VLC running but port 8161 not listening"
+        }
+    }
 }
 
 # ==========================================================================
