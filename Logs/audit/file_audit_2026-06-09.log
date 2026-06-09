@@ -1,0 +1,19 @@
+2026-06-09 09:20:56  [AUDITOR] Starting up (PID 11228)
+2026-06-09 09:20:56  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-06-09 09:21:07 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.21.06_458.avi
+2026-06-09 09:21:07 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09
+2026-06-09 09:21:07 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.21.06_458.avi
+2026-06-09 09:21:08 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.21.06_458.avi
+2026-06-09 09:21:22 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.21.21_305.avi
+2026-06-09 09:21:22 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.21.21_305.avi
+2026-06-09 09:21:22 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.21.21_305.avi
+2026-06-09 09:25:52 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.25.52_547.avi
+2026-06-09 09:25:53 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.25.52_547.avi
+2026-06-09 09:25:53 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.25.52_547.avi
+2026-06-09 09:26:02 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.26.02_217.avi
+2026-06-09 09:26:02 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.26.02_217.avi
+2026-06-09 09:26:02 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.26.02_217.avi
+2026-06-09 09:27:29 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.27.29_319.avi
+2026-06-09 09:27:29 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.27.29_319.avi
+2026-06-09 09:27:29 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09\motion_2026-06-09_09.27.29_319.avi
+2026-06-09 09:29:36  [AUDITOR] Shutting down

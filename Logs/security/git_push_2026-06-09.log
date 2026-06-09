@@ -1,0 +1,8 @@
+2026-06-09 09:00:52  GIT-PUSH  Pushing 18d6139 - fix(power): enhance fix_power_motion.ps1 to disable webcam device power management
+2026-06-09 09:00:55  GIT-PUSH  OK  18d6139 pushed to origin/master
+2026-06-09 09:10:53  GIT-PUSH  Pushing 8288251 - feat(setup): add -NoWait parameter to skip final prompt for automated pipelines
+2026-06-09 09:10:56  GIT-PUSH  OK  8288251 pushed to origin/master
+2026-06-09 09:26:20  GIT-PUSH  Pushing 19c6ea8 - security(config_guard): monitor and auto-restore FolderSync-CloudBackup task state
+2026-06-09 09:26:23  GIT-PUSH  OK  19c6ea8 pushed to origin/master
+2026-06-09 09:28:23  GIT-PUSH  Pushing bfb7bed - docs(security): record attacker tampering pattern and task guarding enhancements
+2026-06-09 09:28:26  GIT-PUSH  OK  bfb7bed pushed to origin/master
