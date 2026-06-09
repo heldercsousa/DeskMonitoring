@@ -89,11 +89,27 @@ Register-ObjectEvent $watcher Created -Action $action | Out-Null
 
 Write-Log "CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor"
 
-# Keep alive
+# Keep alive - also monitor critical task state
+$lastTaskCheck = $null
 while ($true) {
     Start-Sleep -Seconds 30
 
     # Roll log path at midnight.
     $newLog = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
     if ($newLog -ne $LogFile) { $LogFile = $newLog }
+
+    # Check every 60s if FolderSync-CloudBackup is disabled (attacker tampering with task state)
+    if ($null -eq $lastTaskCheck -or ((Get-Date) - $lastTaskCheck).TotalSeconds -ge 60) {
+        try {
+            $task = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
+            if ($task -and $task.State -eq "Disabled") {
+                Write-Log "TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling"
+                Enable-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
+                Write-Log "TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled"
+            }
+        } catch {
+            # Silently continue if task check fails
+        }
+        $lastTaskCheck = Get-Date
+    }
 }
