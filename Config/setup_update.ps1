@@ -1,4 +1,7 @@
 #Requires -RunAsAdministrator
+param(
+    [switch]$NoWait = $false
+)
 # =============================================================================
 # setup_update.ps1 v3
 # Centralized setup for FolderSync Ecosystem + Security Hardening
@@ -6,6 +9,9 @@
 #   - Stops ecosystem before reconfiguring if currently running
 #   - Restarts after config if it was running before
 # Run as Administrator from C:\Sync\Config\
+#
+# Parameters:
+#   -NoWait    Skip the final "Press ENTER to close" prompt (for automated pipelines)
 # =============================================================================
 
 $ErrorActionPreference = 'SilentlyContinue'
@@ -943,4 +949,6 @@ Write-Host "  Start : powershell -ExecutionPolicy Bypass -File C:\Sync\Config\st
 Write-Host "  Stop  : powershell -ExecutionPolicy Bypass -File C:\Sync\Config\stop_ecosystem.ps1" -ForegroundColor Cyan
 Write-Host "  Health: /project:health" -ForegroundColor Cyan
 Write-Host ""
-Read-Host "Press ENTER to close"
+if (-not $NoWait) {
+    Read-Host "Press ENTER to close"
+}
