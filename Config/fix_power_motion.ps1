@@ -66,16 +66,46 @@ try {
     exit 1
 }
 
-# 6. Apply all changes
+# 6. Disable webcam device power management (Device Manager setting)
+Write-Step "Disabling webcam device power management"
+$webcamFound = $false
+try {
+    Get-WmiObject Win32_PnPEntity -ErrorAction Stop | Where-Object { $_.Description -match 'camera|webcam|RGB|integrated' } | ForEach-Object {
+        $device = $_
+        $instanceName = $device.Name
+        Write-Host "  Found webcam: $instanceName" -ForegroundColor Gray
+        $webcamFound = $true
+        # Disable via registry key PowerDownLevel = 0
+        $regPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($device.PNPDeviceID)\Device Parameters"
+        if (Test-Path $regPath) {
+            Set-ItemProperty -Path $regPath -Name "PowerDownLevel" -Value 0 -ErrorAction SilentlyContinue
+            Write-Host "  OK   Device power management disabled: $instanceName" -ForegroundColor Green
+        } else {
+            Write-Host "  WARN Registry path not found for $instanceName (device may not support power control)" -ForegroundColor Yellow
+        }
+    }
+} catch {
+    # Continue — device may not be enumerable or no webcam attached
+}
+if (-not $webcamFound) {
+    Write-Host "  WARN No webcam device found via WMI (this is ok if device is disabled in BIOS)" -ForegroundColor Yellow
+}
+
+# 7. Apply all changes
 Write-Step "Applying changes (powercfg /setactive SCHEME_CURRENT)"
 powercfg /setactive SCHEME_CURRENT
 
 Write-Host ""
 Write-Host "=== Repair complete ===" -ForegroundColor Green
 Write-Host ""
-Write-Host "Verify USB Selective Suspend (both indexes must show 0x00000000):" -ForegroundColor Cyan
-Write-Host "  powercfg /query SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226" -ForegroundColor Gray
+Write-Host "Verify settings were applied:" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "Also verify webcam device power management in Device Manager:" -ForegroundColor Cyan
-Write-Host "  Cameras -> right-click webcam -> Properties -> Power Management tab" -ForegroundColor Gray
-Write-Host "  Uncheck: 'Allow the computer to turn off this device to save power'" -ForegroundColor Gray
+Write-Host "  USB Selective Suspend (both values must be 0x00000000):" -ForegroundColor Gray
+Write-Host "    powercfg /query SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226" -ForegroundColor Gray
+Write-Host ""
+Write-Host "  Sleep setting (must be 0x00000000 for both AC and DC):" -ForegroundColor Gray
+Write-Host "    powercfg /query SCHEME_CURRENT 238c9fa8-0aad-41ed-83f4-97be242c8f20 29f6c1db-86da-48c5-9fdb-f2b67b1f44da" -ForegroundColor Gray
+Write-Host ""
+Write-Host "  Device Manager alternative check:" -ForegroundColor Gray
+Write-Host "    Win+X → Device Manager → Cameras → right-click webcam → Properties" -ForegroundColor Gray
+Write-Host "    Power Management tab should be unchecked (script above attempted to set this)" -ForegroundColor Gray
