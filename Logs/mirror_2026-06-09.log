@@ -1,0 +1,58 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 9 de junho de 2026 09:30:31
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         3         0         3         0         0         4
+ Arquivos:       116         2       114         0         0         0
+    Bytes:  317.73 m   35.63 m  282.10 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           633.257.389 Bytes/s.
+Velocidade:             36235,277 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 9 de junho de 2026 09:30:31
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 9 de junho de 2026 09:30:31
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         3         0         3         0         0         4
+ Arquivos:       116         1       115         0         0         0
+    Bytes:  319.24 m    1.51 m  317.73 m         0         0         0
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           316.907.200 Bytes/s.
+Velocidade:             18133,576 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 9 de junho de 2026 09:30:31
+
