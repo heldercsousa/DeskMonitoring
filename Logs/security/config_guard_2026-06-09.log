@@ -70,3 +70,9 @@
 2026-06-09 09:30:37  CONFIG-GUARD  CHANGE  Changed on cloud_sync.ps1  foreground=SearchHost
 2026-06-09 09:30:37  CONFIG-GUARD  TAMPER  foreground=SearchHost not a trusted editor - restoring cloud_sync.ps1 from git HEAD
 2026-06-09 09:30:37  CONFIG-GUARD  AUTO-RESTORED  cloud_sync.ps1  foreground-was=SearchHost
+2026-06-09 15:17:15  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-06-09 15:17:15  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-06-09 20:09:45  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-09 20:09:45  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-09 20:10:46  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-09 20:10:46  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled

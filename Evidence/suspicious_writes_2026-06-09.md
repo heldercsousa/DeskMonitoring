@@ -41,3 +41,29 @@
 | 2026-06-09 09:26:04 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-09 09:26:04 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\config_guard.ps1.tmp.29804.6c5ffbdc6e9f` |
 | 2026-06-09 09:26:04 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\config_guard.ps1.tmp.29804.6c5ffbdc6e9f` |
+
+## 2026-06-09 09:40:06 - 2 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-09 09:37:58 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence` |
+| 2026-06-09 09:37:58 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence\2026-06-09_camera-outage-and-recovery.md.tmp.29804.e80d28454824` |
+
+## 2026-06-09 09:45:12 - 7 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-09 09:44:26 | `C:\Program Files\VideoLAN\VLC\vlc.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\vlc_test_error.log` |
+| 2026-06-09 09:42:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-09 09:42:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cam2.conf.tmp.29804.9499a28bd309` |
+| 2026-06-09 09:42:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cam2.conf.tmp.29804.9499a28bd309` |
+| 2026-06-09 09:41:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-09 09:41:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cam2.conf.tmp.29804.987b2392de0f` |
+| 2026-06-09 09:41:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cam2.conf.tmp.29804.987b2392de0f` |
+
+## 2026-06-09 09:50:53 - 2 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-09 09:45:33 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence` |
+| 2026-06-09 09:45:33 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence\2026-06-09_cam2-integration-status.md.tmp.29804.4eb75143c71d` |
