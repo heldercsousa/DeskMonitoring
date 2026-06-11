@@ -1,0 +1,14 @@
+2026-06-10 01:44:10  [AUDITOR] Starting up (PID 4828)
+2026-06-10 01:44:12  [LOG-ROTATE] Deleted old log: security_audit_2026-05-10.log
+2026-06-10 01:44:12  [LOG-ROTATE] Deleted old log: file_audit_2026-05-10.log
+2026-06-10 01:46:51 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-09
+2026-06-10 01:54:09  [AUDITOR] Shutting down
+2026-06-10 04:16:15  [AUDITOR] Starting up (PID 8428)
+2026-06-10 04:16:15  [LOG-ROTATE] Deleted old log: security_audit_2026-05-10.log
+2026-06-10 04:16:15  [LOG-ROTATE] Deleted old log: file_audit_2026-05-10.log
+2026-06-10 14:48:59  [AUDITOR] Shutting down
+2026-06-10 18:16:56  [AUDITOR] Starting up (PID 5612)
+2026-06-10 18:19:32  [AUDITOR] Shutting down
+2026-06-10 18:20:00  [AUDITOR] Starting up (PID 5204)
+2026-06-10 18:20:08  [SHUTDOWN] Initiated by unknown - type=?
+2026-06-10 18:37:18  [AUDITOR] Shutting down
