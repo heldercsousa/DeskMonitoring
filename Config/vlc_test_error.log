@@ -1,0 +1,4 @@
+[000002c1e3cb81f0] dummy interface: using the dummy interface module...
+[000002c1e2131270] main input error: A entrada não pode ser aberta
+[000002c1e2131270] main input error: O VLC não é capaz de abrir o MRL ''rtsp://:@:554/''. Verifique o registro de erros para maiores detalhes.
+[000002c1e3caf160] idummy demux: command `quit'
