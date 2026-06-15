@@ -253,27 +253,54 @@ function Check-Services {
 # D. Physical/system events (every 60s)
 # ---------------------------------------------------------------------------
 $script:LastSystemCheck = [datetime]::MinValue
+# Watermark for sleep (Event 42). A 60s look-back window misses sleeps because the
+# event fires AS the system suspends and is far older than 60s once it resumes.
+# Initialised to startup time so historical sleeps do not re-alert on every restart.
+$script:LastSleepEventTime = [datetime]::Now
 
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
-    $since = (Get-Date).AddSeconds(-60)
 
+    # --- Event 42 (sleep) via persistent watermark so it fires after resume ---
+    # Power/sleep buttons are configured to "Do nothing" (setup_update.ps1), so a
+    # "Button or Lid" sleep is anomalous and a known power-sabotage vector
+    # (see THREAT_MODEL.md) - escalate to [ALERT] and best-effort send_alert.
+    try {
+        $latest42 = Get-WinEvent -FilterHashtable @{
+            LogName = 'System'; ProviderName = 'Microsoft-Windows-Kernel-Power'; Id = 42
+        } -MaxEvents 1 -ErrorAction SilentlyContinue
+        if ($latest42 -and $latest42.TimeCreated -gt $script:LastSleepEventTime) {
+            $script:LastSleepEventTime = $latest42.TimeCreated
+            $reason = 'unknown'
+            # Match English "Reason:" and Portuguese "Motivo da Suspensao:"
+            if ($latest42.Message -match '(?:Reason|Motivo)[^:]*:\s+(.+)') { $reason = $Matches[1].Trim() }
+            if ($reason -match 'Button|Lid|Bot') {
+                Write-SecurityAudit "[ALERT] [BUTTON-SLEEP] Power button/lid sleep at $($latest42.TimeCreated) reason=$reason - buttons set to Do nothing, possible physical tampering"
+                try {
+                    & 'C:\Sync\Config\send_alert.ps1' `
+                        -Subject 'Button/Lid sleep detected' `
+                        -Body "Power button or lid initiated a sleep at $($latest42.TimeCreated). The power and sleep buttons are configured to Do nothing, so this indicates a physical power-button press - possible physical access to the machine. Reason text: $reason" `
+                        -B2Key "button_sleep_$($latest42.TimeCreated.ToString('yyyyMMdd_HHmmss')).txt"
+                } catch {}
+            } else {
+                Write-SecurityAudit "[SLEEP] System entered sleep/hibernate at $($latest42.TimeCreated) reason=$reason"
+            }
+        }
+    } catch {}
+
+    # --- Event 1074 (shutdown/restart) within last 60s window ---
+    $since = (Get-Date).AddSeconds(-60)
     try {
         $evts = Get-WinEvent -FilterHashtable @{
             LogName   = 'System'
-            Id        = 42, 1074
+            Id        = 1074
             StartTime = $since
         } -ErrorAction SilentlyContinue
         foreach ($evt in $evts) {
-            if ($evt.Id -eq 42) {
-                $reason = if ($evt.Message -match 'Reason.*?:\s+(.+)') { $Matches[1].Trim() } else { 'unknown' }
-                Write-SecurityAudit "[SLEEP] System entering sleep/hibernate - reason: $reason"
-            } elseif ($evt.Id -eq 1074) {
-                $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
-                $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
-                Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
-            }
+            $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
+            $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
+            Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
         }
     } catch {}
 }

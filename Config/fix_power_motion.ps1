@@ -66,6 +66,16 @@ try {
     exit 1
 }
 
+# 5b. Disk turn-off - Never (0 seconds) so active recording is never interrupted
+Write-Step "Setting Disk turn-off to Never (AC + DC)"
+try {
+    powercfg /setacvalueindex SCHEME_CURRENT 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0
+    Write-OK "Disk turn-off = Never (AC + DC)"
+} catch {
+    Write-Fail "Disk turn-off setting failed: $_"
+}
+
 # 6. Disable webcam device power management (Device Manager setting)
 Write-Step "Disabling webcam device power management"
 $webcamFound = $false
@@ -89,6 +99,26 @@ try {
 }
 if (-not $webcamFound) {
     Write-Host "  WARN No webcam device found via WMI (this is ok if device is disabled in BIOS)" -ForegroundColor Yellow
+}
+
+# 6b. Power button + sleep button + lid = Do nothing (AC + DC)
+# Context: Event 42 "Button or Lid" sleeps confirmed 2026-06-15 were stopping
+# recording. Power-button press is a physical power-sabotage vector (THREAT_MODEL).
+# Setting buttons to Do nothing (0) neutralises it. Shutdown is via Start menu only.
+Write-Step "Disabling power/sleep button and lid sleep actions (Do nothing, AC + DC)"
+try {
+    # PBUTTONACTION
+    powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 0
+    # SBUTTONACTION
+    powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 96996bc0-ad50-47ec-923b-6f41874dd9eb 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 96996bc0-ad50-47ec-923b-6f41874dd9eb 0
+    # LIDACTION
+    powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
+    Write-OK "Power button / sleep button / lid = Do nothing (AC + DC)"
+} catch {
+    Write-Fail "Button/lid action update failed: $_"
 }
 
 # 7. Apply all changes

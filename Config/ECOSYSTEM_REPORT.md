@@ -254,27 +254,54 @@ function Check-Services {
 # D. Physical/system events (every 60s)
 # ---------------------------------------------------------------------------
 $script:LastSystemCheck = [datetime]::MinValue
+# Watermark for sleep (Event 42). A 60s look-back window misses sleeps because the
+# event fires AS the system suspends and is far older than 60s once it resumes.
+# Initialised to startup time so historical sleeps do not re-alert on every restart.
+$script:LastSleepEventTime = [datetime]::Now
 
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
-    $since = (Get-Date).AddSeconds(-60)
 
+    # --- Event 42 (sleep) via persistent watermark so it fires after resume ---
+    # Power/sleep buttons are configured to "Do nothing" (setup_update.ps1), so a
+    # "Button or Lid" sleep is anomalous and a known power-sabotage vector
+    # (see THREAT_MODEL.md) - escalate to [ALERT] and best-effort send_alert.
+    try {
+        $latest42 = Get-WinEvent -FilterHashtable @{
+            LogName = 'System'; ProviderName = 'Microsoft-Windows-Kernel-Power'; Id = 42
+        } -MaxEvents 1 -ErrorAction SilentlyContinue
+        if ($latest42 -and $latest42.TimeCreated -gt $script:LastSleepEventTime) {
+            $script:LastSleepEventTime = $latest42.TimeCreated
+            $reason = 'unknown'
+            # Match English "Reason:" and Portuguese "Motivo da Suspensao:"
+            if ($latest42.Message -match '(?:Reason|Motivo)[^:]*:\s+(.+)') { $reason = $Matches[1].Trim() }
+            if ($reason -match 'Button|Lid|Bot') {
+                Write-SecurityAudit "[ALERT] [BUTTON-SLEEP] Power button/lid sleep at $($latest42.TimeCreated) reason=$reason - buttons set to Do nothing, possible physical tampering"
+                try {
+                    & 'C:\Sync\Config\send_alert.ps1' `
+                        -Subject 'Button/Lid sleep detected' `
+                        -Body "Power button or lid initiated a sleep at $($latest42.TimeCreated). The power and sleep buttons are configured to Do nothing, so this indicates a physical power-button press - possible physical access to the machine. Reason text: $reason" `
+                        -B2Key "button_sleep_$($latest42.TimeCreated.ToString('yyyyMMdd_HHmmss')).txt"
+                } catch {}
+            } else {
+                Write-SecurityAudit "[SLEEP] System entered sleep/hibernate at $($latest42.TimeCreated) reason=$reason"
+            }
+        }
+    } catch {}
+
+    # --- Event 1074 (shutdown/restart) within last 60s window ---
+    $since = (Get-Date).AddSeconds(-60)
     try {
         $evts = Get-WinEvent -FilterHashtable @{
             LogName   = 'System'
-            Id        = 42, 1074
+            Id        = 1074
             StartTime = $since
         } -ErrorAction SilentlyContinue
         foreach ($evt in $evts) {
-            if ($evt.Id -eq 42) {
-                $reason = if ($evt.Message -match 'Reason.*?:\s+(.+)') { $Matches[1].Trim() } else { 'unknown' }
-                Write-SecurityAudit "[SLEEP] System entering sleep/hibernate - reason: $reason"
-            } elseif ($evt.Id -eq 1074) {
-                $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
-                $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
-                Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
-            }
+            $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
+            $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
+            Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
         }
     } catch {}
 }
@@ -448,7 +475,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
-| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 30-day audit log rotation (T033, 2026-06-02) |
+| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15) |
 | `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores guarded files from git HEAD when foreground process is not a known editor/Claude (T054, 2026-06-06). Win32 P/Invoke foreground check; log prefixes: CHANGE / SKIP / TAMPER / AUTO-RESTORED. Keep-alive 30s loop. Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
@@ -465,7 +492,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
-| `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: switches to Balanced plan, disables USB Selective Suspend (AC+DC), sleep/hibernate=Never, display=600s AC |
+| `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: Balanced plan, USB Selective Suspend disabled (AC+DC), sleep/hibernate/disk=Never (AC+DC), display=600s AC, webcam device power mgmt off, power+sleep buttons & lid = Do nothing (AC+DC, 2026-06-15 anti power-button sabotage) |
 | `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s; logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
 | `auto_commit_logs.ps1` | Task `FolderSync-GitCommitLogs` (daily 23:30) | Commits dirty Logs/ files to git; skips if nothing changed or git is locked; logs to `ecosystem_YYYY-MM-DD.log` |
 | `ECOSYSTEM_REPORT.md` | — | This document |
@@ -510,7 +537,7 @@ These scripts were relocated from `C:\Program Files (x86)\Yawcam\` to `C:\Sync\C
 
 | File | Used by | Purpose |
 |---|---|---|
-| `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: scans Bois dir recursively for latest .avi (T022), timestamped log to `C:\Sync\Logs\services\yawcam_monitor.log` (T023), restart failure sentinel `.camera_restart_failed` (T034). 60s interval, 600s cooldown. |
+| `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: scans Bois dir recursively for latest .avi (T022), timestamped log to `C:\Sync\Logs\services\yawcam_monitor.log` (T023), restart failure sentinel `.camera_restart_failed` (T034). 60s interval, 600s cooldown. Keep-awake guard: SetThreadExecutionState(ES_CONTINUOUS\|ES_SYSTEM_REQUIRED) asserted at startup + each loop to block idle/away sleep (2026-06-15). |
 | `start_monitor.ps1` | Registry Run `YawcamMonitor` | Boot launcher: waits 30s for system to stabilize, then starts `C:\Sync\Config\yawcam_monitor_v4.ps1` hidden |
 | `start_yawcam.bat` | Registry Run `Yawcam` (replaces direct .exe entry) | `cd /d` to Yawcam dir then starts Yawcam.exe — fixes launcher.cfg not found error on boot |
 
@@ -1259,11 +1286,31 @@ function Get-PowerSetting {
     param($SubGroup, $Setting, $AcOrDc)
     $output = powercfg /query SCHEME_CURRENT $SubGroup $Setting 2>$null
     if (-not $output) { return $null }
-    $label = if ($AcOrDc -eq 'AC') { 'Current AC Power Setting Index' } else { 'Current DC Power Setting Index' }
+    # Locale-robust: match English ("Current AC Power Setting Index") AND
+    # Portuguese ("...Correntes Alternadas Atuais" / "...Correntes Cont nuas Atuais").
+    # Without this, powercfg output on non-English Windows never matched and every
+    # check silently passed - the auto-heal was a no-op (fixed 2026-06-15).
+    $label = if ($AcOrDc -eq 'AC') { 'AC Power Setting Index|Alternadas Atuais' } else { 'DC Power Setting Index|Cont.+Atuais' }
     $line = $output | Where-Object { $_ -match $label }
     if (-not $line) { return $null }
     if ($line -match '0x([0-9a-fA-F]+)') { return [Convert]::ToInt64($Matches[1], 16) }
     return $null
+}
+
+# --- Helper: read a button action from the registry ---
+# powercfg /query does not emit hidden button settings, so read them directly.
+# Returns $null when no override key exists - which means the hardware DEFAULT
+# (Sleep on this laptop) applies, i.e. the vulnerable state - so callers must
+# treat $null as an anomaly and (re)apply 0 = Do nothing.
+function Get-ButtonActionReg {
+    param($Setting, $AcOrDc)
+    $act = (powercfg /getactivescheme) -join ' '
+    if ($act -notmatch '([0-9a-fA-F-]{36})') { return $null }
+    $guid = $Matches[1]
+    $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\$BTN_SG\$Setting"
+    if (-not (Test-Path $p)) { return $null }
+    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+    if ($AcOrDc -eq 'AC') { return $v.ACSettingIndex } else { return $v.DCSettingIndex }
 }
 
 $activeLine = powercfg /getactivescheme 2>$null
@@ -1300,6 +1347,55 @@ if ($dispAC -ne $null -and $dispAC -lt 600) {
     powercfg /setactive SCHEME_CURRENT 2>$null
     Write-Log "POWER-CORRECTED  Display timeout AC set to 600"
 } else { Write-Log "POWER-OK  Display timeout AC = $dispAC (>= 600)" }
+
+# --- 9. Power button action (must be 0 = Do nothing) AC + DC ---
+# A power button mapped to Sleep was confirmed stopping recording on 2026-06-15
+# (Event 42 "Button or Lid"). Auto-heal back to Do nothing to defeat re-tampering.
+foreach ($dc in @('AC','DC')) {
+    $v = Get-ButtonActionReg -Setting $PBTN_SET -AcOrDc $dc
+    if ($v -ne 0) {   # $null (no override = default Sleep) or non-zero both need correcting
+        $shown = if ($v -eq $null) { 'default(Sleep)' } else { $v }
+        Write-Log "POWER-ANOMALY  Power button $dc = $shown (expected 0=Do nothing)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $BTN_SG $PBTN_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Power button $dc set to 0 (Do nothing)"
+    } else {
+        Write-Log "POWER-OK  Power button $dc = 0 (Do nothing)"
+    }
+}
+
+# --- 10. Sleep button action (must be 0 = Do nothing) AC + DC ---
+foreach ($dc in @('AC','DC')) {
+    $v = Get-ButtonActionReg -Setting $SBTN_SET -AcOrDc $dc
+    if ($v -ne 0) {
+        $shown = if ($v -eq $null) { 'default(Sleep)' } else { $v }
+        Write-Log "POWER-ANOMALY  Sleep button $dc = $shown (expected 0=Do nothing)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $BTN_SG $SBTN_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Sleep button $dc set to 0 (Do nothing)"
+    } else {
+        Write-Log "POWER-OK  Sleep button $dc = 0 (Do nothing)"
+    }
+}
+
+# --- 11. Disk turn-off (must be 0 = Never) AC + DC ---
+foreach ($dc in @('AC','DC')) {
+    $v = Get-PowerSetting -SubGroup $DISK_SG -Setting $DISK_SET -AcOrDc $dc
+    if ($v -ne $null -and $v -ne 0) {
+        Write-Log "POWER-ANOMALY  Disk turn-off $dc = $v seconds (expected 0=Never)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $DISK_SG $DISK_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Disk turn-off $dc set to 0 (Never)"
+    } else {
+        Write-Log "POWER-OK  Disk turn-off $dc = 0 (Never)"
+    }
+}
 
 if (-not $anyAnomaly) {
     Write-Log "POWER-CHECK-END  ALL_OK - no anomalies detected"
@@ -1384,7 +1480,58 @@ try {
     exit 1
 }
 
-# 6. Apply all changes
+# 5b. Disk turn-off - Never (0 seconds) so active recording is never interrupted
+Write-Step "Setting Disk turn-off to Never (AC + DC)"
+try {
+    powercfg /setacvalueindex SCHEME_CURRENT 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0
+    Write-OK "Disk turn-off = Never (AC + DC)"
+} catch {
+    Write-Fail "Disk turn-off setting failed: $_"
+}
+
+# 6. Disable webcam device power management (Device Manager setting)
+Write-Step "Disabling webcam device power management"
+$webcamFound = $false
+try {
+    Get-WmiObject Win32_PnPEntity -ErrorAction Stop | Where-Object { $_.Description -match 'camera|webcam|RGB|integrated' } | ForEach-Object {
+        $device = $_
+        $instanceName = $device.Name
+        Write-Host "  Found webcam: $instanceName" -ForegroundColor Gray
+        $webcamFound = $true
+        $regPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($device.PNPDeviceID)\Device Parameters"
+        if (Test-Path $regPath) {
+            Set-ItemProperty -Path $regPath -Name "PowerDownLevel" -Value 0 -ErrorAction SilentlyContinue
+            Write-Host "  OK   Device power management disabled: $instanceName" -ForegroundColor Green
+        } else {
+            Write-Host "  WARN Registry path not found for $instanceName (device may not support power control)" -ForegroundColor Yellow
+        }
+    }
+} catch {
+    # Continue - device may not be enumerable or no webcam attached
+}
+if (-not $webcamFound) {
+    Write-Host "  WARN No webcam device found via WMI (this is ok if device is disabled in BIOS)" -ForegroundColor Yellow
+}
+
+# 6b. Power button + sleep button + lid = Do nothing (AC + DC)
+# Context: Event 42 "Button or Lid" sleeps confirmed 2026-06-15 were stopping
+# recording. Power-button press is a physical power-sabotage vector (THREAT_MODEL).
+# Setting buttons to Do nothing (0) neutralises it. Shutdown is via Start menu only.
+Write-Step "Disabling power/sleep button and lid sleep actions (Do nothing, AC + DC)"
+try {
+    powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 0
+    powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 96996bc0-ad50-47ec-923b-6f41874dd9eb 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 96996bc0-ad50-47ec-923b-6f41874dd9eb 0
+    powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
+    Write-OK "Power button / sleep button / lid = Do nothing (AC + DC)"
+} catch {
+    Write-Fail "Button/lid action update failed: $_"
+}
+
+# 7. Apply all changes
 Write-Step "Applying changes (powercfg /setactive SCHEME_CURRENT)"
 powercfg /setactive SCHEME_CURRENT
 
@@ -1428,6 +1575,11 @@ $SLEEP_SET = '29f6c1db-86da-48c5-9fdb-f2b67b1f44da'
 $HIB_SET  = '9d7815a6-7ee4-497e-8888-515a05f02364'
 $DISP_SG  = '7516b95f-f776-4464-8c53-06167f40cc99'
 $DISP_SET = '3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e'
+$DISK_SG  = '0012ee47-9041-4b5d-9b77-535fba8b1442'
+$DISK_SET = '6738e2c4-e8a5-4a42-b16a-e040e769756e'
+$BTN_SG   = '4f971e89-eebd-4455-a8de-9e59040e7347'
+$PBTN_SET = '7648efa3-dd9c-4e3e-b566-50f929386280'   # power button action
+$SBTN_SET = '96996bc0-ad50-47ec-923b-6f41874dd9eb'   # sleep button action
 $SCHEME_MAX     = 'a1841308-3541-4fab-bc81-f71556f20b4a'
 
 Write-Log "POWER-CHECK-START"
@@ -1440,11 +1592,31 @@ function Get-PowerSetting {
     # AcOrDc: 'AC' or 'DC'
     $output = powercfg /query SCHEME_CURRENT $SubGroup $Setting 2>$null
     if (-not $output) { return $null }
-    $label = if ($AcOrDc -eq 'AC') { 'Current AC Power Setting Index' } else { 'Current DC Power Setting Index' }
+    # Locale-robust: match English ("Current AC Power Setting Index") AND
+    # Portuguese ("...Correntes Alternadas Atuais" / "...Correntes Cont nuas Atuais").
+    # Without this, powercfg output on non-English Windows never matched and every
+    # check silently passed - the auto-heal was a no-op (fixed 2026-06-15).
+    $label = if ($AcOrDc -eq 'AC') { 'AC Power Setting Index|Alternadas Atuais' } else { 'DC Power Setting Index|Cont.+Atuais' }
     $line = $output | Where-Object { $_ -match $label }
     if (-not $line) { return $null }
     if ($line -match '0x([0-9a-fA-F]+)') { return [Convert]::ToInt64($Matches[1], 16) }
     return $null
+}
+
+# --- Helper: read a button action from the registry ---
+# powercfg /query does not emit hidden button settings, so read them directly.
+# Returns $null when no override key exists - which means the hardware DEFAULT
+# (Sleep on this laptop) applies, i.e. the vulnerable state - so callers must
+# treat $null as an anomaly and (re)apply 0 = Do nothing.
+function Get-ButtonActionReg {
+    param($Setting, $AcOrDc)
+    $act = (powercfg /getactivescheme) -join ' '
+    if ($act -notmatch '([0-9a-fA-F-]{36})') { return $null }
+    $guid = $Matches[1]
+    $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\$BTN_SG\$Setting"
+    if (-not (Test-Path $p)) { return $null }
+    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+    if ($AcOrDc -eq 'AC') { return $v.ACSettingIndex } else { return $v.DCSettingIndex }
 }
 
 # --- 1. Active power plan ---
@@ -1541,6 +1713,55 @@ if ($dispAC -ne $null -and $dispAC -lt 600) {
     Write-Log "POWER-CORRECTED  Display timeout AC set to 600"
 } else {
     Write-Log "POWER-OK  Display timeout AC = $dispAC (>= 600)"
+}
+
+# --- 9. Power button action (must be 0 = Do nothing) AC + DC ---
+# A power button mapped to Sleep was confirmed stopping recording on 2026-06-15
+# (Event 42 "Button or Lid"). Auto-heal back to Do nothing to defeat re-tampering.
+foreach ($dc in @('AC','DC')) {
+    $v = Get-ButtonActionReg -Setting $PBTN_SET -AcOrDc $dc
+    if ($v -ne 0) {   # $null (no override = default Sleep) or non-zero both need correcting
+        $shown = if ($v -eq $null) { 'default(Sleep)' } else { $v }
+        Write-Log "POWER-ANOMALY  Power button $dc = $shown (expected 0=Do nothing)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $BTN_SG $PBTN_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Power button $dc set to 0 (Do nothing)"
+    } else {
+        Write-Log "POWER-OK  Power button $dc = 0 (Do nothing)"
+    }
+}
+
+# --- 10. Sleep button action (must be 0 = Do nothing) AC + DC ---
+foreach ($dc in @('AC','DC')) {
+    $v = Get-ButtonActionReg -Setting $SBTN_SET -AcOrDc $dc
+    if ($v -ne 0) {
+        $shown = if ($v -eq $null) { 'default(Sleep)' } else { $v }
+        Write-Log "POWER-ANOMALY  Sleep button $dc = $shown (expected 0=Do nothing)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $BTN_SG $SBTN_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Sleep button $dc set to 0 (Do nothing)"
+    } else {
+        Write-Log "POWER-OK  Sleep button $dc = 0 (Do nothing)"
+    }
+}
+
+# --- 11. Disk turn-off (must be 0 = Never) AC + DC ---
+foreach ($dc in @('AC','DC')) {
+    $v = Get-PowerSetting -SubGroup $DISK_SG -Setting $DISK_SET -AcOrDc $dc
+    if ($v -ne $null -and $v -ne 0) {
+        Write-Log "POWER-ANOMALY  Disk turn-off $dc = $v seconds (expected 0=Never)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $DISK_SG $DISK_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Disk turn-off $dc set to 0 (Never)"
+    } else {
+        Write-Log "POWER-OK  Disk turn-off $dc = 0 (Never)"
+    }
 }
 
 if (-not $anyAnomaly) {
@@ -2507,27 +2728,54 @@ function Check-Services {
 # D. Physical/system events (every 60s)
 # ---------------------------------------------------------------------------
 $script:LastSystemCheck = [datetime]::MinValue
+# Watermark for sleep (Event 42). A 60s look-back window misses sleeps because the
+# event fires AS the system suspends and is far older than 60s once it resumes.
+# Initialised to startup time so historical sleeps do not re-alert on every restart.
+$script:LastSleepEventTime = [datetime]::Now
 
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
-    $since = (Get-Date).AddSeconds(-60)
 
+    # --- Event 42 (sleep) via persistent watermark so it fires after resume ---
+    # Power/sleep buttons are configured to "Do nothing" (setup_update.ps1), so a
+    # "Button or Lid" sleep is anomalous and a known power-sabotage vector
+    # (see THREAT_MODEL.md) - escalate to [ALERT] and best-effort send_alert.
+    try {
+        $latest42 = Get-WinEvent -FilterHashtable @{
+            LogName = 'System'; ProviderName = 'Microsoft-Windows-Kernel-Power'; Id = 42
+        } -MaxEvents 1 -ErrorAction SilentlyContinue
+        if ($latest42 -and $latest42.TimeCreated -gt $script:LastSleepEventTime) {
+            $script:LastSleepEventTime = $latest42.TimeCreated
+            $reason = 'unknown'
+            # Match English "Reason:" and Portuguese "Motivo da Suspensao:"
+            if ($latest42.Message -match '(?:Reason|Motivo)[^:]*:\s+(.+)') { $reason = $Matches[1].Trim() }
+            if ($reason -match 'Button|Lid|Bot') {
+                Write-SecurityAudit "[ALERT] [BUTTON-SLEEP] Power button/lid sleep at $($latest42.TimeCreated) reason=$reason - buttons set to Do nothing, possible physical tampering"
+                try {
+                    & 'C:\Sync\Config\send_alert.ps1' `
+                        -Subject 'Button/Lid sleep detected' `
+                        -Body "Power button or lid initiated a sleep at $($latest42.TimeCreated). The power and sleep buttons are configured to Do nothing, so this indicates a physical power-button press - possible physical access to the machine. Reason text: $reason" `
+                        -B2Key "button_sleep_$($latest42.TimeCreated.ToString('yyyyMMdd_HHmmss')).txt"
+                } catch {}
+            } else {
+                Write-SecurityAudit "[SLEEP] System entered sleep/hibernate at $($latest42.TimeCreated) reason=$reason"
+            }
+        }
+    } catch {}
+
+    # --- Event 1074 (shutdown/restart) within last 60s window ---
+    $since = (Get-Date).AddSeconds(-60)
     try {
         $evts = Get-WinEvent -FilterHashtable @{
             LogName   = 'System'
-            Id        = 42, 1074
+            Id        = 1074
             StartTime = $since
         } -ErrorAction SilentlyContinue
         foreach ($evt in $evts) {
-            if ($evt.Id -eq 42) {
-                $reason = if ($evt.Message -match 'Reason.*?:\s+(.+)') { $Matches[1].Trim() } else { 'unknown' }
-                Write-SecurityAudit "[SLEEP] System entering sleep/hibernate - reason: $reason"
-            } elseif ($evt.Id -eq 1074) {
-                $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
-                $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
-                Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
-            }
+            $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
+            $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
+            Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
         }
     } catch {}
 }
@@ -4898,6 +5146,24 @@ function Write-Log($msg) {
     "$ts  $msg" | Add-Content -LiteralPath $LogFile
 }
 
+# ----------------------------------------------------------------------------
+# Keep-awake guard: tell Windows to refuse idle/away sleep while monitoring.
+# Defense-in-depth against power-based sabotage (see THREAT_MODEL.md). NOTE: this
+# blocks idle/unattended/away sleep only - it cannot block a physical power-button
+# press (that is handled by setting buttons to Do nothing in setup_update.ps1).
+# ES_CONTINUOUS=0x80000000  ES_SYSTEM_REQUIRED=0x00000001
+# ----------------------------------------------------------------------------
+$script:ES_CONTINUOUS      = [uint32]'0x80000000'
+$script:ES_SYSTEM_REQUIRED = [uint32]'0x00000001'
+Add-Type -Namespace PInvoke -Name Power -MemberDefinition @'
+[System.Runtime.InteropServices.DllImport("kernel32.dll", SetLastError=true)]
+public static extern uint SetThreadExecutionState(uint esFlags);
+'@ -ErrorAction SilentlyContinue
+
+function Assert-StayAwake {
+    try { [void][PInvoke.Power]::SetThreadExecutionState($script:ES_CONTINUOUS -bor $script:ES_SYSTEM_REQUIRED) } catch {}
+}
+
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "  MONITOR YAWCAM - BASEADO EM GRAVACAO" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
@@ -4909,6 +5175,8 @@ Write-Host ""
 Write-Host "Pressione Ctrl+C para parar" -ForegroundColor Yellow
 Write-Host ""
 Write-Log "START  monitor starting  VideoPath=$VideoPath  interval=${CheckInterval}s"
+Assert-StayAwake
+Write-Log "KEEP-AWAKE  ES_CONTINUOUS|ES_SYSTEM_REQUIRED asserted - system will refuse idle/away sleep"
 
 function Test-YawcamRunning {
     $yawcam = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
@@ -4967,6 +5235,9 @@ function Restart-YawcamSafely {
 
 while ($true) {
     $Timestamp = Get-Date -Format "HH:mm:ss"
+
+    # Re-assert keep-awake every loop (cheap; survives any state reset)
+    Assert-StayAwake
 
     # PRIORIDADE 1: Verificar se esta gravando (mais importante!)
     $LatestVideo = Get-ChildItem -Path $VideoPath -Recurse -Filter "*.avi" -ErrorAction SilentlyContinue |

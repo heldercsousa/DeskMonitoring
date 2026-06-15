@@ -1,6 +1,6 @@
 # Threat Model - C:\Sync Ecosystem
 
-**Last updated:** 2026-06-05
+**Last updated:** 2026-06-15
 **Current threat level:** CRITICAL - ONGOING
 
 ---
@@ -44,6 +44,7 @@
 | git rm on 437 tracked files (staged mass deletion) | 2026-05-31 | git status check before commit | git restore --staged recovered all files | Closed - no history lost |
 | Nightly automated config re-tampering (DPAPI stripped, Portuguese comments, monitoring silenced) | 2026-06-04 to present | RULE 6 pre-commit integrity check; auditor.ps1 | Files restored; SACL auditing deployed on Config\ to identify the process | Open - LOCAL EXECUTION CONFIRMED (fires with WiFi off; persistent process on machine) |
 | Physical wardrobe damage (door forced past pivot limit) | Unknown | Physical inspection | Documented as evidence | Open - physical access unresolved |
+| Power-button sleep sabotage (physical power-button press suspends machine, stopping recording) | 2026-06-15 | Kernel-Power Event 42 reason "Button or Lid" (4 sleeps: 11/06 05:46 & 12:47, 13/06 17:06 & 22:07) - lid action was already Do nothing, isolating the physical power button | Power + sleep buttons & lid set to Do nothing (fix_power_motion.ps1); keep-awake guard added to yawcam_monitor_v4.ps1; auditor.ps1 [BUTTON-SLEEP] alert; check_power_motion.ps1 hourly auto-heal | Closed - buttons neutralised + hourly auto-heal + alerting |
 
 ---
 
@@ -56,7 +57,8 @@
 | Config file overwrite | Yes - per commit | RULE 6 requires re-reading every file before git add and comparing to session writes | Write access not blocked (Deny Delete ACL != Deny Write); attacker can overwrite in-place |
 | Git mass deletion | Yes - per commit | git status checked before every commit; staged deletions visible | None known - git detects this |
 | Camera freeze | Yes - automated | yawcam_monitor_v4.ps1 polls every 60s; auto-restarts Yawcam | Symlink C:\TEMP\motion_videos required for monitor to see recordings (deployed T022) |
-| Power settings manipulation | Yes - on check | check_power_motion.ps1; runs as part of health checks | Not continuous - only detected on next manual or scheduled check |
+| Power settings manipulation | Yes - hourly auto-heal | check_power_motion.ps1 (FolderSync-PowerCheck, hourly SYSTEM) now reads values locale-robustly (was a no-op on Portuguese Windows before 2026-06-15) and auto-reverts USB-suspend, sleep, hibernate, disk-off, and power/sleep button actions | Heal cadence hourly, not instant |
+| Power-button / lid sleep sabotage | Yes - alert + auto-heal | auditor.ps1 Event-42 watermark escalates "Button or Lid" sleeps to [ALERT] [BUTTON-SLEEP] + best-effort send_alert; buttons set to Do nothing; check_power_motion.ps1 reverts any re-enable | Detection fires only after resume (the whole system is frozen while asleep); send_alert email needs user-context DPAPI (auditor runs as SYSTEM) so email may not deliver - the security-log [ALERT] is the reliable channel |
 | Remote access tools | Yes - on check | DailySecurityCheck 14-point scan for suspicious processes and network connections | Not real-time; daily cadence |
 | Service/startup tampering | Yes - continuous | auditor.ps1 service monitors startup entries and service state | Gap identification of exact tampering process pending SACL log analysis |
 | Physical intrusion | Partial | Camera recordings if camera is operational | Camera is the primary target - if disabled, physical intrusion goes unrecorded |

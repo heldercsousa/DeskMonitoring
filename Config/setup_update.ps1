@@ -743,7 +743,7 @@ Write-OK "Task FolderSync-PowerCheck registered (SYSTEM, hourly + AtLogon + AtBo
 Write-Step "Step 18b - Apply motion-detection power settings (fix_power_motion.ps1)"
 try {
     & powershell.exe -ExecutionPolicy Bypass -File "$scriptDir\fix_power_motion.ps1"
-    Write-OK "Power settings applied (Balanced plan, USB Suspend disabled, sleep/hibernate Never)"
+    Write-OK "Power settings applied (Balanced, USB Suspend off, sleep/hibernate/disk Never, power+sleep buttons & lid Do nothing)"
 } catch {
     Write-Warn "fix_power_motion.ps1 failed: $_ - run manually after setup"
 }

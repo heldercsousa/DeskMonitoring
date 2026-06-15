@@ -25,6 +25,11 @@ $SLEEP_SET = '29f6c1db-86da-48c5-9fdb-f2b67b1f44da'
 $HIB_SET  = '9d7815a6-7ee4-497e-8888-515a05f02364'
 $DISP_SG  = '7516b95f-f776-4464-8c53-06167f40cc99'
 $DISP_SET = '3c0bc021-c8a8-4e07-a973-6b14cbcb2b7e'
+$DISK_SG  = '0012ee47-9041-4b5d-9b77-535fba8b1442'
+$DISK_SET = '6738e2c4-e8a5-4a42-b16a-e040e769756e'
+$BTN_SG   = '4f971e89-eebd-4455-a8de-9e59040e7347'
+$PBTN_SET = '7648efa3-dd9c-4e3e-b566-50f929386280'   # power button action
+$SBTN_SET = '96996bc0-ad50-47ec-923b-6f41874dd9eb'   # sleep button action
 $SCHEME_MAX     = 'a1841308-3541-4fab-bc81-f71556f20b4a'
 
 Write-Log "POWER-CHECK-START"
@@ -37,11 +42,31 @@ function Get-PowerSetting {
     # AcOrDc: 'AC' or 'DC'
     $output = powercfg /query SCHEME_CURRENT $SubGroup $Setting 2>$null
     if (-not $output) { return $null }
-    $label = if ($AcOrDc -eq 'AC') { 'Current AC Power Setting Index' } else { 'Current DC Power Setting Index' }
+    # Locale-robust: match English ("Current AC Power Setting Index") AND
+    # Portuguese ("...Correntes Alternadas Atuais" / "...Correntes Cont nuas Atuais").
+    # Without this, powercfg output on non-English Windows never matched and every
+    # check silently passed - the auto-heal was a no-op (fixed 2026-06-15).
+    $label = if ($AcOrDc -eq 'AC') { 'AC Power Setting Index|Alternadas Atuais' } else { 'DC Power Setting Index|Cont.+Atuais' }
     $line = $output | Where-Object { $_ -match $label }
     if (-not $line) { return $null }
     if ($line -match '0x([0-9a-fA-F]+)') { return [Convert]::ToInt64($Matches[1], 16) }
     return $null
+}
+
+# --- Helper: read a button action from the registry ---
+# powercfg /query does not emit hidden button settings, so read them directly.
+# Returns $null when no override key exists - which means the hardware DEFAULT
+# (Sleep on this laptop) applies, i.e. the vulnerable state - so callers must
+# treat $null as an anomaly and (re)apply 0 = Do nothing.
+function Get-ButtonActionReg {
+    param($Setting, $AcOrDc)
+    $act = (powercfg /getactivescheme) -join ' '
+    if ($act -notmatch '([0-9a-fA-F-]{36})') { return $null }
+    $guid = $Matches[1]
+    $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\$BTN_SG\$Setting"
+    if (-not (Test-Path $p)) { return $null }
+    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+    if ($AcOrDc -eq 'AC') { return $v.ACSettingIndex } else { return $v.DCSettingIndex }
 }
 
 # --- 1. Active power plan ---
@@ -138,6 +163,55 @@ if ($dispAC -ne $null -and $dispAC -lt 600) {
     Write-Log "POWER-CORRECTED  Display timeout AC set to 600"
 } else {
     Write-Log "POWER-OK  Display timeout AC = $dispAC (>= 600)"
+}
+
+# --- 9. Power button action (must be 0 = Do nothing) AC + DC ---
+# A power button mapped to Sleep was confirmed stopping recording on 2026-06-15
+# (Event 42 "Button or Lid"). Auto-heal back to Do nothing to defeat re-tampering.
+foreach ($dc in @('AC','DC')) {
+    $v = Get-ButtonActionReg -Setting $PBTN_SET -AcOrDc $dc
+    if ($v -ne 0) {   # $null (no override = default Sleep) or non-zero both need correcting
+        $shown = if ($v -eq $null) { 'default(Sleep)' } else { $v }
+        Write-Log "POWER-ANOMALY  Power button $dc = $shown (expected 0=Do nothing)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $BTN_SG $PBTN_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Power button $dc set to 0 (Do nothing)"
+    } else {
+        Write-Log "POWER-OK  Power button $dc = 0 (Do nothing)"
+    }
+}
+
+# --- 10. Sleep button action (must be 0 = Do nothing) AC + DC ---
+foreach ($dc in @('AC','DC')) {
+    $v = Get-ButtonActionReg -Setting $SBTN_SET -AcOrDc $dc
+    if ($v -ne 0) {
+        $shown = if ($v -eq $null) { 'default(Sleep)' } else { $v }
+        Write-Log "POWER-ANOMALY  Sleep button $dc = $shown (expected 0=Do nothing)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $BTN_SG $SBTN_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Sleep button $dc set to 0 (Do nothing)"
+    } else {
+        Write-Log "POWER-OK  Sleep button $dc = 0 (Do nothing)"
+    }
+}
+
+# --- 11. Disk turn-off (must be 0 = Never) AC + DC ---
+foreach ($dc in @('AC','DC')) {
+    $v = Get-PowerSetting -SubGroup $DISK_SG -Setting $DISK_SET -AcOrDc $dc
+    if ($v -ne $null -and $v -ne 0) {
+        Write-Log "POWER-ANOMALY  Disk turn-off $dc = $v seconds (expected 0=Never)"
+        $anyAnomaly = $true
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $DISK_SG $DISK_SET 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Disk turn-off $dc set to 0 (Never)"
+    } else {
+        Write-Log "POWER-OK  Disk turn-off $dc = 0 (Never)"
+    }
 }
 
 if (-not $anyAnomaly) {

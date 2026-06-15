@@ -18,6 +18,24 @@ function Write-Log($msg) {
     "$ts  $msg" | Add-Content -LiteralPath $LogFile
 }
 
+# ----------------------------------------------------------------------------
+# Keep-awake guard: tell Windows to refuse idle/away sleep while monitoring.
+# Defense-in-depth against power-based sabotage (see THREAT_MODEL.md). NOTE: this
+# blocks idle/unattended/away sleep only - it cannot block a physical power-button
+# press (that is handled by setting buttons to Do nothing in setup_update.ps1).
+# ES_CONTINUOUS=0x80000000  ES_SYSTEM_REQUIRED=0x00000001
+# ----------------------------------------------------------------------------
+$script:ES_CONTINUOUS      = [uint32]'0x80000000'
+$script:ES_SYSTEM_REQUIRED = [uint32]'0x00000001'
+Add-Type -Namespace PInvoke -Name Power -MemberDefinition @'
+[System.Runtime.InteropServices.DllImport("kernel32.dll", SetLastError=true)]
+public static extern uint SetThreadExecutionState(uint esFlags);
+'@ -ErrorAction SilentlyContinue
+
+function Assert-StayAwake {
+    try { [void][PInvoke.Power]::SetThreadExecutionState($script:ES_CONTINUOUS -bor $script:ES_SYSTEM_REQUIRED) } catch {}
+}
+
 Write-Host "========================================" -ForegroundColor Cyan
 Write-Host "  MONITOR YAWCAM - BASEADO EM GRAVACAO" -ForegroundColor Cyan
 Write-Host "========================================" -ForegroundColor Cyan
@@ -29,6 +47,8 @@ Write-Host ""
 Write-Host "Pressione Ctrl+C para parar" -ForegroundColor Yellow
 Write-Host ""
 Write-Log "START  monitor starting  VideoPath=$VideoPath  interval=${CheckInterval}s"
+Assert-StayAwake
+Write-Log "KEEP-AWAKE  ES_CONTINUOUS|ES_SYSTEM_REQUIRED asserted - system will refuse idle/away sleep"
 
 function Test-YawcamRunning {
     $yawcam = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
@@ -87,6 +107,9 @@ function Restart-YawcamSafely {
 
 while ($true) {
     $Timestamp = Get-Date -Format "HH:mm:ss"
+
+    # Re-assert keep-awake every loop (cheap; survives any state reset)
+    Assert-StayAwake
 
     # PRIORIDADE 1: Verificar se esta gravando (mais importante!)
     $LatestVideo = Get-ChildItem -Path $VideoPath -Recurse -Filter "*.avi" -ErrorAction SilentlyContinue |
