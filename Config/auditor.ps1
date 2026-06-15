@@ -87,14 +87,16 @@ function Write-ForensicReport([double]$GapSeconds, [datetime]$LastKnownTime) {
 }
 
 # ---------------------------------------------------------------------------
-# Log rotation (T033): delete audit logs older than 30 days
+# Log rotation (T033): delete audit logs older than 365 days
+# Forensic logs retained 1 year (raised from 30 days 2026-06-15) to preserve
+# evidence of [SHUTDOWN]/DELETED-SUSPICIOUS events across long investigations.
 # ---------------------------------------------------------------------------
 $script:LastLogRotation = [datetime]::MinValue
 
 function Invoke-AuditLogRotation {
     if (([datetime]::Now - $script:LastLogRotation).TotalHours -lt 24) { return }
     $script:LastLogRotation = [datetime]::Now
-    $cutoff = (Get-Date).AddDays(-30)
+    $cutoff = (Get-Date).AddDays(-365)
 
     foreach ($pattern in @("$SecurityDir\security_audit_*.log", "$AuditDir\file_audit_*.log")) {
         Get-ChildItem -LiteralPath (Split-Path $pattern) -Filter (Split-Path $pattern -Leaf) `
