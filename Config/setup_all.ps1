@@ -77,12 +77,12 @@ if (Test-Path $oldMirror) {
 }
 
 # =============================================================================
-# STEP 3 - Update cloud_sync.ps1 with self-healing firewall + 3-phase ACL
+# STEP 3 - Update cloud_sync_helderTest.ps1 with self-healing firewall + 3-phase ACL
 # =============================================================================
-Write-Step "Step 3 - Update cloud_sync.ps1 (firewall self-healing + 3-phase ACL protection)"
-$cloudSyncPs1 = "C:\Sync\Config\cloud_sync.ps1"
+Write-Step "Step 3 - Update cloud_sync_helderTest.ps1 (firewall self-healing + 3-phase ACL protection)"
+$cloudSyncPs1 = "C:\Sync\Config\cloud_sync_helderTest.ps1"
 Set-Content -Path $cloudSyncPs1 -Encoding UTF8 -Value @'
-# cloud_sync.ps1
+# cloud_sync_helderTest.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
 # Last updated: 2026-03-07 - Added self-healing firewall detection+removal+retry
@@ -307,7 +307,7 @@ Get-ChildItem -Path $LogDir -Filter "mirror_*.log" |
 
 Write-SyncLog "SYNC-END  Cloud sync run complete"
 '@
-Write-OK "cloud_sync.ps1 updated (self-healing firewall + 3-phase ACL protection)"
+Write-OK "cloud_sync_helderTest.ps1 updated (self-healing firewall + 3-phase ACL protection)"
 
 # =============================================================================
 # STEP 4 - SINGLE AUTHORITY: all Deny Delete ACL rules for C:\Sync
@@ -319,7 +319,7 @@ Write-OK "cloud_sync.ps1 updated (self-healing firewall + 3-phase ACL protection
 #   C:\Sync\Logs      Deny Delete + Children (full inherit)  -- logs tamper-proof
 #   C:\Sync\Evidence  Deny Delete + Children (full inherit)  -- forensic tamper-proof
 #   C:\Sync\.git      NONE (liberated via icacls /T)         -- git needs full write
-#   C:\Sync\Mirror    NONE at folder level                   -- cloud_sync.ps1 manages per-file ACLs
+#   C:\Sync\Mirror    NONE at folder level                   -- cloud_sync_helderTest.ps1 manages per-file ACLs
 # =============================================================================
 Write-Step "Step 4 - Apply all Deny Delete ACL rules (single authority)"
 
@@ -369,7 +369,7 @@ if (Test-Path 'C:\Sync\.git') {
         Write-OK "C:\Sync\.git verified clean (zero Deny rules)"
     }
 }
-Write-OK "C:\Sync\Mirror - no folder ACL (cloud_sync.ps1 manages per-file ACLs)"
+Write-OK "C:\Sync\Mirror - no folder ACL (cloud_sync_helderTest.ps1 manages per-file ACLs)"
 
 # =============================================================================
 # STEP 5 - DailySecurityCheck v8
@@ -492,7 +492,7 @@ if (-not $existingBackup -or $needsRecreate) {
     
     # Create with POWERSHELL (not .bat) and -NoWindow flag
     $action1   = New-ScheduledTaskAction -Execute 'powershell.exe' `
-        -Argument '-NoWindow -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
+        -Argument '-NoWindow -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync_helderTest.ps1'
     $trigger1  = @(
         $(New-ScheduledTaskTrigger -AtStartup),
         $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 5) -Once -At (Get-Date))
@@ -640,7 +640,7 @@ Write-Host ""
 Write-Host "Applied:" -ForegroundColor White
 Write-Host "  Step  1 - Firewall log read permissions" -ForegroundColor Gray
 Write-Host "  Step  2 - run_mirror.bat with /E flag (no delete mirroring)" -ForegroundColor Gray
-Write-Host "  Step  3 - cloud_sync.ps1 with firewall self-healing + 3-phase ACL (7d retention)" -ForegroundColor Gray
+Write-Host "  Step  3 - cloud_sync_helderTest.ps1 with firewall self-healing + 3-phase ACL (7d retention)" -ForegroundColor Gray
 Write-Host "  Step  4 - ACL: root(folder-only), Config+Logs+Evidence(recursive), .git liberated, Mirror unmanaged" -ForegroundColor Gray
 Write-Host "  Step  5 - DailySecurityCheck v8 + FolderSync-DailyCheck task + shortcut (C:\Sync\Config\)" -ForegroundColor Gray
 Write-Host "  Step  6 - Remote access disabled (RDP/WinRM/SMB2/RemoteRegistry)" -ForegroundColor Gray

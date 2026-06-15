@@ -1,0 +1,4 @@
+2026-06-15 18:59:28  GIT-PUSH  Pushing 6f6915b - feat(auditor): raise forensic log retention 30->365 days
+2026-06-15 18:59:37  GIT-PUSH  OK  6f6915b pushed to origin/master
+2026-06-15 20:18:44  GIT-PUSH  Pushing 1a5fdd6 - fix(power): disable power-button sleep that stopped recording
+2026-06-15 20:18:46  GIT-PUSH  OK  1a5fdd6 pushed to origin/master

@@ -6,7 +6,7 @@
 $RepoRoot     = 'C:\Sync'
 $ConfigDir    = 'C:\Sync\Config'
 $LogFile      = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
-$GuardedFiles = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
+$GuardedFiles = @('cloud_sync_helderTest.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
 
 # Process names that indicate a legitimate human edit - do NOT restore if any is foreground.
 $EditorProcesses = @('claude', 'Code', 'code', 'notepad', 'notepad++', 'sublime_text',
@@ -39,7 +39,7 @@ $action = {
     $name = $Event.SourceEventArgs.Name
     $type = $Event.SourceEventArgs.ChangeType
 
-    $guarded = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
+    $guarded = @('cloud_sync_helderTest.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
     if ($guarded -notcontains $name) { return }
 
     $editors = @('claude', 'Code', 'code', 'notepad', 'notepad++', 'sublime_text',

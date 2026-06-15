@@ -46,5 +46,5 @@ Write-Host ""
 Write-Host "  NEXT STEPS:" -ForegroundColor Cyan
 Write-Host "    1. Verify cloud sync still works (next scheduled run or manual test)" -ForegroundColor Cyan
 Write-Host "    2. account/key have been removed from rclone.conf (T048 migration complete)." -ForegroundColor Cyan
-Write-Host "       cloud_sync.ps1 now reads credentials exclusively from b2_creds.dpapi." -ForegroundColor Cyan
+Write-Host "       cloud_sync_helderTest.ps1 now reads credentials exclusively from b2_creds.dpapi." -ForegroundColor Cyan
 Write-Host "    3. Verify the next scheduled sync completes with SYNC-OK in cloud_sync log." -ForegroundColor Cyan

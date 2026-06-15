@@ -252,7 +252,7 @@ try {
     # -----------------------------------------------------------------------
     Write-Step "[12] Scheduled task integrity"
     $taskChecks = @(
-        @{ Name = 'FolderSync-CloudBackup'; ExpectedPath = 'C:\Sync\Config\cloud_sync.ps1' }
+        @{ Name = 'FolderSync-CloudBackup'; ExpectedPath = 'C:\Sync\Config\cloud_sync_helderTest.ps1' }
     )
     foreach ($tc in $taskChecks) {
         $task = Get-ScheduledTask -TaskName $tc.Name -ErrorAction SilentlyContinue

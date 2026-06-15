@@ -32,7 +32,7 @@ while ($true) {
     }
 
     # --- Check config_guard is running ---
-    # config_guard.ps1 watches cloud_sync.ps1 and run_mirror.bat for tampering.
+    # config_guard.ps1 watches cloud_sync_helderTest.ps1 and run_mirror.bat for tampering.
     # The attacker kills it before modifying files. Wdog restarts it within 180s.
     $guard = Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*config_guard.ps1*' }
     if (-not $guard) {

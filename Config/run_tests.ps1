@@ -19,7 +19,7 @@ Add-Content -LiteralPath $LogFile -Value "`n=== TEST RUN $(Get-Date -Format 'yyy
 
 # --- TIER 1: Parse Checks ---
 Write-Host "`n>>> TIER 1 - Parse Checks" -ForegroundColor Cyan
-$t1scripts = @('DailySecurityCheck.ps1','yawcam_monitor_v4.ps1','cam2_relay.ps1','wdog.ps1','auditor.ps1','cloud_sync.ps1')
+$t1scripts = @('DailySecurityCheck.ps1','yawcam_monitor_v4.ps1','cam2_relay.ps1','wdog.ps1','auditor.ps1','cloud_sync_helderTest.ps1')
 foreach ($s in $t1scripts) {
     $path = "C:\Sync\Config\$s"
     $t = $null; $e = $null

@@ -1,4 +1,4 @@
-$scripts = @('DailySecurityCheck.ps1','yawcam_monitor_v4.ps1','cam2_relay.ps1','wdog.ps1','auditor.ps1','cloud_sync.ps1')
+$scripts = @('DailySecurityCheck.ps1','yawcam_monitor_v4.ps1','cam2_relay.ps1','wdog.ps1','auditor.ps1','cloud_sync_helderTest.ps1')
 $allPass = $true
 foreach ($s in $scripts) {
     $path = "C:\Sync\Config\$s"

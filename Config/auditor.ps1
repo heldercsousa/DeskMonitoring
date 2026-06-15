@@ -162,7 +162,7 @@ function Start-FileWatcher {
                     $line | Add-Content -LiteralPath $logFile -Encoding UTF8
                     $secLog = "C:\Sync\Logs\security\security_audit_$($time.ToString('yyyy-MM-dd')).log"
                     $line | Add-Content -LiteralPath $secLog -Encoding UTF8
-                    & 'C:\Sync\Config\cloud_sync.ps1'
+                    & 'C:\Sync\Config\cloud_sync_helderTest.ps1'
                 }
             } else {
                 # Formatação garantida como texto

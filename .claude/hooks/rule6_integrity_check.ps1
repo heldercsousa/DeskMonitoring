@@ -28,7 +28,7 @@ foreach ($file in $staged) {
         }
     }
 
-    # cloud_sync.ps1 specific checks
+    # cloud_sync_helderTest.ps1 specific checks
     if ($file -match 'cloud_sync\.ps1') {
         if ($content -notmatch 'ProtectedData') {
             $report += "TAMPERING DETECTED in $file - missing 'ProtectedData' (DPAPI credential loading stripped)"

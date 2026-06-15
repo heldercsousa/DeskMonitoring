@@ -1,10 +1,10 @@
 # Register FolderSync scheduled tasks
 
 # Task 1: Cloud sync via Rclone every 5 minutes
-# Uses cloud_sync.ps1 (not .bat) to avoid the cmd.exe console window flash when running as SYSTEM
+# Uses cloud_sync_helderTest.ps1 (not .bat) to avoid the cmd.exe console window flash when running as SYSTEM
 $action1 = New-ScheduledTaskAction `
     -Execute 'powershell.exe' `
-    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1'
+    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync_helderTest.ps1'
 $trigger1 = @(
     $(New-ScheduledTaskTrigger -AtStartup),
     $(New-ScheduledTaskTrigger -RepetitionInterval (New-TimeSpan -Minutes 5) -Once -At (Get-Date))
