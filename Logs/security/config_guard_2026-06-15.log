@@ -236,3 +236,7 @@
 2026-06-15 20:56:26  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
 2026-06-15 20:56:27  CONFIG-GUARD  CHANGE  Changed on auditor.ps1  foreground=Code
 2026-06-15 20:56:27  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-06-15 20:58:59  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-06-15 20:58:59  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-06-15 20:58:59  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-06-15 20:58:59  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
