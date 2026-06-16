@@ -10,3 +10,5 @@
 2026-06-15 20:20:10  SEND-ALERT  FAIL  B2 upload failed: 2026/06/15 20:20:10 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
 2026-06-15 20:57:53  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
 2026-06-15 20:57:54  SEND-ALERT  FAIL  B2 upload failed: 2026/06/15 20:57:53 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-15 21:01:05  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
+2026-06-15 21:01:05  SEND-ALERT  FAIL  B2 upload failed: 2026/06/15 21:01:05 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
