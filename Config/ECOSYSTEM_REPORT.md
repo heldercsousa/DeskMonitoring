@@ -492,8 +492,8 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
-| `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: Balanced plan, USB Selective Suspend disabled (AC+DC), sleep/hibernate/disk=Never (AC+DC), display=600s AC, webcam device power mgmt off, power+sleep buttons & lid = Do nothing (AC+DC, 2026-06-15 anti power-button sabotage) |
-| `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s; logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
+| `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: Balanced plan, USB Selective Suspend disabled (AC+DC), sleep/hibernate/disk=Never (AC+DC), display=600s AC, webcam device power mgmt off, power+sleep buttons & lid = Do nothing (AC+DC, 2026-06-15 anti power-button sabotage), System unattended sleep timeout=Never (AC+DC, 2026-06-17 anti sleep-on-lock). Verifies compliance at end and exits non-zero if sleep/unattended/USB settings are not 0 |
+| `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s, power/sleep button AC+DC=0, disk turn-off AC+DC=0, System unattended sleep timeout AC+DC=0 (2026-06-17); logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
 | `auto_commit_logs.ps1` | Task `FolderSync-GitCommitLogs` (daily 23:30) | Commits dirty Logs/ files to git; skips if nothing changed or git is locked; logs to `ecosystem_YYYY-MM-DD.log` |
 | `ECOSYSTEM_REPORT.md` | — | This document |
 
@@ -1531,9 +1531,55 @@ try {
     Write-Fail "Button/lid action update failed: $_"
 }
 
+# 6c. System unattended sleep timeout = Never (0) AC + DC
+# Context: confirmed 2026-06-17 - locking the session (Ctrl+L) and walking away
+# slept the machine ~2 min later, stopping recording, even with Sleep = Never.
+# Windows treats a locked session as "unattended" and applies this hidden timeout
+# (default 120s), which overrides the normal Sleep-after value. Unhide + set 0.
+Write-Step "Setting System unattended sleep timeout to Never (AC + DC)"
+try {
+    powercfg /attributes 238c9fa8-0aad-41ed-83f4-97be242c8f20 7bc4a2f9-d8fc-4469-b07b-33eb785aaca0 -ATTRIB_HIDE | Out-Null
+    powercfg /setacvalueindex SCHEME_CURRENT 238c9fa8-0aad-41ed-83f4-97be242c8f20 7bc4a2f9-d8fc-4469-b07b-33eb785aaca0 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 238c9fa8-0aad-41ed-83f4-97be242c8f20 7bc4a2f9-d8fc-4469-b07b-33eb785aaca0 0
+    Write-OK "Unattended sleep timeout = Never (AC + DC)"
+} catch {
+    Write-Fail "Unattended sleep timeout update failed: $_"
+    exit 1
+}
+
 # 7. Apply all changes
 Write-Step "Applying changes (powercfg /setactive SCHEME_CURRENT)"
 powercfg /setactive SCHEME_CURRENT
+
+# 8. Verify compliance - read settings back and FAIL LOUDLY if any non-compliant.
+# This non-zero exit is what lets setup_update.ps1 Step 18b detect a failed apply.
+Write-Step "Verifying power compliance"
+$active = (powercfg /getactivescheme) -join ' '
+$schemeGuid = if ($active -match '([0-9a-fA-F-]{36})') { $Matches[1] } else { $null }
+$compliant = $true
+function Test-RegSetting($sub, $set, $expect, $label) {
+    $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$schemeGuid\$sub\$set"
+    if (-not (Test-Path $p)) {
+        Write-Fail "$label : key absent (Windows default applies) - expected $expect"
+        $script:compliant = $false; return
+    }
+    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+    if ($v.ACSettingIndex -ne $expect -or $v.DCSettingIndex -ne $expect) {
+        Write-Fail "$label : AC=$($v.ACSettingIndex) DC=$($v.DCSettingIndex) - expected $expect"
+        $script:compliant = $false
+    } else { Write-OK "$label : AC=$expect DC=$expect" }
+}
+if ($schemeGuid) {
+    Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '29f6c1db-86da-48c5-9fdb-f2b67b1f44da' 0 'Sleep after'
+    Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0' 0 'Unattended sleep timeout'
+    Test-RegSetting '2a737441-1930-4402-8d77-b2bebba308a3' '48e6b7a6-50f5-4782-a5d4-53bb8f07e226' 0 'USB Selective Suspend'
+} else {
+    Write-Fail "Could not resolve active scheme GUID - cannot verify compliance"; $compliant = $false
+}
+if (-not $compliant) {
+    Write-Fail "POWER SETTINGS NOT COMPLIANT - motion capture is at risk of interruption"
+    exit 1
+}
 
 Write-Host ""
 Write-Host "=== Repair complete ===" -ForegroundColor Green
@@ -1580,6 +1626,7 @@ $DISK_SET = '6738e2c4-e8a5-4a42-b16a-e040e769756e'
 $BTN_SG   = '4f971e89-eebd-4455-a8de-9e59040e7347'
 $PBTN_SET = '7648efa3-dd9c-4e3e-b566-50f929386280'   # power button action
 $SBTN_SET = '96996bc0-ad50-47ec-923b-6f41874dd9eb'   # sleep button action
+$UNATTEND = '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0'   # system unattended sleep timeout
 $SCHEME_MAX     = 'a1841308-3541-4fab-bc81-f71556f20b4a'
 
 Write-Log "POWER-CHECK-START"
@@ -1614,6 +1661,22 @@ function Get-ButtonActionReg {
     if ($act -notmatch '([0-9a-fA-F-]{36})') { return $null }
     $guid = $Matches[1]
     $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\$BTN_SG\$Setting"
+    if (-not (Test-Path $p)) { return $null }
+    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+    if ($AcOrDc -eq 'AC') { return $v.ACSettingIndex } else { return $v.DCSettingIndex }
+}
+
+# --- Helper: read any scheme setting index straight from the registry ---
+# Used for hidden settings (e.g. unattended sleep timeout) that powercfg /query
+# omits. Returns $null when the override key is absent - meaning the Windows
+# DEFAULT applies (120s for unattended sleep = the vulnerable state) - so callers
+# must treat $null as an anomaly and (re)apply 0.
+function Get-SchemeRegIndex {
+    param($SubGroup, $Setting, $AcOrDc)
+    $act = (powercfg /getactivescheme) -join ' '
+    if ($act -notmatch '([0-9a-fA-F-]{36})') { return $null }
+    $guid = $Matches[1]
+    $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\$SubGroup\$Setting"
     if (-not (Test-Path $p)) { return $null }
     $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
     if ($AcOrDc -eq 'AC') { return $v.ACSettingIndex } else { return $v.DCSettingIndex }
@@ -1761,6 +1824,26 @@ foreach ($dc in @('AC','DC')) {
         Write-Log "POWER-CORRECTED  Disk turn-off $dc set to 0 (Never)"
     } else {
         Write-Log "POWER-OK  Disk turn-off $dc = 0 (Never)"
+    }
+}
+
+# --- 12. System unattended sleep timeout (must be 0 = Never) AC + DC ---
+# Locking the session (Ctrl+L) puts Windows in "unattended" mode; this hidden
+# timeout (default 120s) then sleeps the machine, stopping recording, even with
+# Sleep after = Never. Confirmed 2026-06-17. Absent key = default = anomaly.
+foreach ($dc in @('AC','DC')) {
+    $v = Get-SchemeRegIndex -SubGroup $SLEEP_SG -Setting $UNATTEND -AcOrDc $dc
+    if ($v -ne 0) {   # $null (default 120s) or non-zero both need correcting
+        $shown = if ($v -eq $null) { 'default(120s)' } else { $v }
+        Write-Log "POWER-ANOMALY  Unattended sleep timeout $dc = $shown (expected 0=Never)"
+        $anyAnomaly = $true
+        powercfg /attributes $SLEEP_SG $UNATTEND -ATTRIB_HIDE 2>$null
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $SLEEP_SG $UNATTEND 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Unattended sleep timeout $dc set to 0 (Never)"
+    } else {
+        Write-Log "POWER-OK  Unattended sleep timeout $dc = 0 (Never)"
     }
 }
 

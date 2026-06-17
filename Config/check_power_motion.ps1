@@ -30,6 +30,7 @@ $DISK_SET = '6738e2c4-e8a5-4a42-b16a-e040e769756e'
 $BTN_SG   = '4f971e89-eebd-4455-a8de-9e59040e7347'
 $PBTN_SET = '7648efa3-dd9c-4e3e-b566-50f929386280'   # power button action
 $SBTN_SET = '96996bc0-ad50-47ec-923b-6f41874dd9eb'   # sleep button action
+$UNATTEND = '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0'   # system unattended sleep timeout
 $SCHEME_MAX     = 'a1841308-3541-4fab-bc81-f71556f20b4a'
 
 Write-Log "POWER-CHECK-START"
@@ -64,6 +65,22 @@ function Get-ButtonActionReg {
     if ($act -notmatch '([0-9a-fA-F-]{36})') { return $null }
     $guid = $Matches[1]
     $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\$BTN_SG\$Setting"
+    if (-not (Test-Path $p)) { return $null }
+    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+    if ($AcOrDc -eq 'AC') { return $v.ACSettingIndex } else { return $v.DCSettingIndex }
+}
+
+# --- Helper: read any scheme setting index straight from the registry ---
+# Used for hidden settings (e.g. unattended sleep timeout) that powercfg /query
+# omits. Returns $null when the override key is absent - meaning the Windows
+# DEFAULT applies (120s for unattended sleep = the vulnerable state) - so callers
+# must treat $null as an anomaly and (re)apply 0.
+function Get-SchemeRegIndex {
+    param($SubGroup, $Setting, $AcOrDc)
+    $act = (powercfg /getactivescheme) -join ' '
+    if ($act -notmatch '([0-9a-fA-F-]{36})') { return $null }
+    $guid = $Matches[1]
+    $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\$SubGroup\$Setting"
     if (-not (Test-Path $p)) { return $null }
     $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
     if ($AcOrDc -eq 'AC') { return $v.ACSettingIndex } else { return $v.DCSettingIndex }
@@ -211,6 +228,26 @@ foreach ($dc in @('AC','DC')) {
         Write-Log "POWER-CORRECTED  Disk turn-off $dc set to 0 (Never)"
     } else {
         Write-Log "POWER-OK  Disk turn-off $dc = 0 (Never)"
+    }
+}
+
+# --- 12. System unattended sleep timeout (must be 0 = Never) AC + DC ---
+# Locking the session (Ctrl+L) puts Windows in "unattended" mode; this hidden
+# timeout (default 120s) then sleeps the machine, stopping recording, even with
+# Sleep after = Never. Confirmed 2026-06-17. Absent key = default = anomaly.
+foreach ($dc in @('AC','DC')) {
+    $v = Get-SchemeRegIndex -SubGroup $SLEEP_SG -Setting $UNATTEND -AcOrDc $dc
+    if ($v -ne 0) {   # $null (default 120s) or non-zero both need correcting
+        $shown = if ($v -eq $null) { 'default(120s)' } else { $v }
+        Write-Log "POWER-ANOMALY  Unattended sleep timeout $dc = $shown (expected 0=Never)"
+        $anyAnomaly = $true
+        powercfg /attributes $SLEEP_SG $UNATTEND -ATTRIB_HIDE 2>$null
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $SLEEP_SG $UNATTEND 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Unattended sleep timeout $dc set to 0 (Never)"
+    } else {
+        Write-Log "POWER-OK  Unattended sleep timeout $dc = 0 (Never)"
     }
 }
 

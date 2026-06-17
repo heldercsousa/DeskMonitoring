@@ -121,9 +121,61 @@ try {
     Write-Fail "Button/lid action update failed: $_"
 }
 
+# 6c. System unattended sleep timeout = Never (0) AC + DC
+# Context: confirmed 2026-06-17 - locking the session (Ctrl+L) and walking away
+# slept the machine ~2 min later, stopping recording, even with Sleep = Never.
+# Windows treats a locked session as "unattended" and applies this hidden timeout
+# (default 120s), which overrides the normal Sleep-after value. Unhide + set 0.
+Write-Step "Setting System unattended sleep timeout to Never (AC + DC)"
+try {
+    powercfg /attributes 238c9fa8-0aad-41ed-83f4-97be242c8f20 7bc4a2f9-d8fc-4469-b07b-33eb785aaca0 -ATTRIB_HIDE | Out-Null
+    powercfg /setacvalueindex SCHEME_CURRENT 238c9fa8-0aad-41ed-83f4-97be242c8f20 7bc4a2f9-d8fc-4469-b07b-33eb785aaca0 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 238c9fa8-0aad-41ed-83f4-97be242c8f20 7bc4a2f9-d8fc-4469-b07b-33eb785aaca0 0
+    Write-OK "Unattended sleep timeout = Never (AC + DC)"
+} catch {
+    Write-Fail "Unattended sleep timeout update failed: $_"
+    exit 1
+}
+
 # 7. Apply all changes
 Write-Step "Applying changes (powercfg /setactive SCHEME_CURRENT)"
 powercfg /setactive SCHEME_CURRENT
+
+# 8. Verify compliance - read settings back and FAIL LOUDLY if any non-compliant.
+# This non-zero exit is what lets setup_update.ps1 Step 18b detect a failed apply
+# instead of silently warning. Read from registry under the active scheme GUID
+# (locale-independent, and works for hidden settings powercfg /query omits).
+Write-Step "Verifying power compliance"
+$active = (powercfg /getactivescheme) -join ' '
+$schemeGuid = if ($active -match '([0-9a-fA-F-]{36})') { $Matches[1] } else { $null }
+$compliant = $true
+function Test-RegSetting($sub, $set, $expect, $label) {
+    $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$schemeGuid\$sub\$set"
+    if (-not (Test-Path $p)) {
+        Write-Fail "$label : key absent (Windows default applies) - expected $expect"
+        $script:compliant = $false
+        return
+    }
+    $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+    if ($v.ACSettingIndex -ne $expect -or $v.DCSettingIndex -ne $expect) {
+        Write-Fail "$label : AC=$($v.ACSettingIndex) DC=$($v.DCSettingIndex) - expected $expect"
+        $script:compliant = $false
+    } else {
+        Write-OK "$label : AC=$expect DC=$expect"
+    }
+}
+if ($schemeGuid) {
+    Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '29f6c1db-86da-48c5-9fdb-f2b67b1f44da' 0 'Sleep after'
+    Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0' 0 'Unattended sleep timeout'
+    Test-RegSetting '2a737441-1930-4402-8d77-b2bebba308a3' '48e6b7a6-50f5-4782-a5d4-53bb8f07e226' 0 'USB Selective Suspend'
+} else {
+    Write-Fail "Could not resolve active scheme GUID - cannot verify compliance"
+    $compliant = $false
+}
+if (-not $compliant) {
+    Write-Fail "POWER SETTINGS NOT COMPLIANT - motion capture is at risk of interruption"
+    exit 1
+}
 
 Write-Host ""
 Write-Host "=== Repair complete ===" -ForegroundColor Green

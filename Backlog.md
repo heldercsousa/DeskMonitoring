@@ -100,3 +100,19 @@ Subagents may be used for tasks with independent parallel workstreams.
 | T065 | T064 | Debug CAM-2 VLC relay: (1) Test VLC manually with exact RTSP URL from cam2_creds.dpapi + transcoding args; (2) capture stderr output to understand crash; (3) check Windows Event Log for VLC process exit code; (4) try simpler VLC command without transcoding to isolate issue; (5) verify VLC plugins installed (MJPEG codec, HTTP output). | 2026-06-09 | - | Pending |
 | T066 | T064 | Once CAM-2 relay works, configure Yawcam to use relay as second camera input. Yawcam must be set to record from http://127.0.0.1:8161/ to capture Tapo C100 stream and save as motion_*.avi alongside CAM-1 recordings. | 2026-06-09 | - | Pending |
 | T067 | - | Camera stopped recording when laptop left idle. Root cause: physical power-button press suspended the machine (Kernel-Power Event 42 "Button or Lid", 4 events 11-13 Jun). Power plan was already correct. Fixed: power/sleep buttons & lid set to Do nothing, keep-awake guard in monitor, [BUTTON-SLEEP] alert in auditor, hourly auto-heal in check_power_motion (also fixed a locale bug that made that auto-heal a silent no-op). Evidence: 2026-06-15_power-button-sleep-sabotage.md. Pending: Helder to run setup_update.ps1 as Admin to persist. | 2026-06-15 | 2026-06-15 | Done |
+| T068 | - | There are some weird accounts in c:\users folder. See them : 
+
+ "TEMP
+ TEMP.Font Driver Host
+ TEMP.Font Driver Host.000
+ TEMP.Font Driver Host.001
+ TEMP.Font Driver Host.002
+ UMFD-0
+ UMFD-0.Font Driver Host
+ UMFD-0.Font Driver Host.000
+ UMFD-0.Font Driver Host.001
+ UMFD-0.Font Driver Host.002
+ WsiAccount"; Evaluate if they're not a concern
+
+| 2026-06-15 | 2026-06-15 | Pending |
+| T069 | - | Camera stopped recording when session locked and left idle (Ctrl+L). Root cause: hidden "System unattended sleep timeout" was unset, so Windows applied its 120s default and slept the locked machine in ~2 min despite Sleep=Never; the hourly power auditor never checked it so it logged ALL_OK while recording stopped. Fixed: unattended timeout set to Never (fix_power_motion.ps1 Step 6c), hourly auto-heal added (check_power_motion.ps1 block 12), setup_update.ps1 Step 18c now verifies sleep compliance and fails loudly. Live value confirmed AC=0/DC=0. | 2026-06-17 | 2026-06-17 | Done |

@@ -35,6 +35,7 @@ With the attack surface now well-mapped, the focus shifted from reactive fixes t
 - **DPAPI credential migration** was completed for both B2 credentials and CAM-2 (TP-LINK Tapo C100) credentials, replacing plaintext storage with user-scoped encrypted blobs.
 - **50+ remediation tasks** are now tracked in `Backlog.md` with full phase history in `Tasks/T###/` folders.
 - **Nightly tampering of `cloud_sync.ps1` continues as of 2026-06-05.** This is an active, ongoing attack. See `Evidence/` for the daily incident record and `MUST-CHECK-URGENT.md` for open threads.
+- **Power sabotage hardening (June 2026).** USB Selective Suspend re-enablement (05-28), then physical power-button sleeps (06-15) were closed by setting buttons/lid to Do nothing with hourly auto-heal. On 06-17 a quieter variant surfaced: locking the session (Ctrl+L) slept the machine in ~2 minutes despite Sleep=Never, because the hidden "System unattended sleep timeout" was unset and Windows applied its 120s default - and the hourly power auditor never checked it, so it reported ALL_OK while recording stopped. Closed by setting the unattended timeout to Never, adding it to the hourly auto-heal, and making `setup_update.ps1` verify sleep compliance and fail loudly rather than assume the apply worked.
 
 ## Key Insight
 

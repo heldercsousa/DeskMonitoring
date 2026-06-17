@@ -139,10 +139,11 @@ All scripts live in `C:\Sync\Config\`. Camera setup docs live in `C:\Sync\Config
 
 ## Live Threat Digest (update this section each session if threat state changes)
 
-**As of:** 2026-06-15
+**As of:** 2026-06-17
 **Threat level:** CRITICAL - ONGOING
 **Active attack:** Nightly automated overwrite of `Config/cloud_sync.ps1` and `Config/run_mirror.bat` with payload that strips DPAPI credential loading, silences monitoring, and injects Portuguese comments. Three consecutive nights (2026-06-04, 2026-06-05 x2). **LOCAL EXECUTION CONFIRMED** - attack fires with WiFi off; the tampering agent is a process already running on this machine (scheduled task, service, or WMI subscription), not a remote actor.
 **New vector (2026-06-15):** Power-button sleep sabotage. Kernel-Power Event 42 "Button or Lid" suspended the machine 4 times (11/06 + 13/06), stopping recording while idle (one at 05:46 off-hours, on AC). Lid action was already Do nothing, isolating the physical power button (defaulted to Sleep). Remediated: power+sleep buttons & lid set to Do nothing (`fix_power_motion.ps1`), keep-awake guard in `yawcam_monitor_v4.ps1`, `[BUTTON-SLEEP]` alert in `auditor.ps1`, hourly auto-heal in `check_power_motion.ps1` (which was also found to be a silent no-op on Portuguese Windows - fixed). Shutdown is now Start-menu only.
+**New vector/gap (2026-06-17):** Sleep-on-lock. Locking the session (Ctrl+L) and walking away slept the machine in ~2 min, stopping recording, despite "Sleep after = Never". Root cause: the hidden **System unattended sleep timeout** was unset, so Windows applied its 120s default (a locked session is treated as "unattended"). Neither power script covered it, so `check_power_motion.ps1` logged ALL_OK while the machine slept. Most likely a hardening gap (absent key = Windows default), not confirmed tampering, but now treated as an audited lever. Remediated: unattended timeout set to Never (`fix_power_motion.ps1` Step 6c), hourly auto-heal added (`check_power_motion.ps1` block 12), and `setup_update.ps1` now verifies sleep compliance and fails loudly (Step 18c). Live value confirmed AC=0/DC=0.
 **Open gap:** Tampering process identity unknown - read Security EventLog Event 4663 on Config\cloud_sync.ps1 to find the exact process. SACL deployed but logs not yet analyzed.
 **Physical:** Wardrobe door forced past pivot (2026-06-05), router reset button glued (pre-2026-03-06), power-button sleep sabotage (2026-06-15). Physical access unresolved.
 **B2 sync:** Operational (restored each morning via RULE 6 + git checkout HEAD).
@@ -601,9 +602,10 @@ Webcam drops during screen lock unless these Windows power settings are applied:
 | Power button action | **Do nothing** (anti power-button sleep sabotage, 2026-06-15) |
 | Sleep button action | **Do nothing** |
 | Lid close action | **Do nothing** |
+| System unattended sleep timeout | **Never (0)** (anti sleep-on-lock; Ctrl+L was sleeping the machine in ~2 min, 2026-06-17) |
 | Webcam device power management | **Disabled** (Device Manager) |
 
-All of the above are enforced idempotently by `fix_power_motion.ps1` (run via `setup_update.ps1` Step 18b) and auto-healed hourly by `check_power_motion.ps1` (task `FolderSync-PowerCheck`). With the power/sleep buttons disabled, **shut down via the Start menu only**. The `yawcam_monitor_v4.ps1` keep-awake guard additionally blocks idle/away sleep while monitoring.
+All of the above are enforced idempotently by `fix_power_motion.ps1` (run via `setup_update.ps1` Step 18b) and auto-healed hourly by `check_power_motion.ps1` (task `FolderSync-PowerCheck`). `fix_power_motion.ps1` verifies compliance at the end and exits non-zero if sleep/unattended/USB are not 0; `setup_update.ps1` Step 18c re-verifies sleep + unattended timeout and fails loudly if not compliant. With the power/sleep buttons disabled, **shut down via the Start menu only**. The `yawcam_monitor_v4.ps1` keep-awake guard additionally blocks idle/away sleep while monitoring.
 
 Full checklist: `C:\Sync\Config\motion\motion-detection-power-settings-quick-reference.md`
 Full setup guide: `C:\Sync\Config\motion\acer-nitro5-motion-detection-setup.md`

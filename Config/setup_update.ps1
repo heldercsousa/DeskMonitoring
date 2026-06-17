@@ -741,11 +741,44 @@ Write-OK "Task FolderSync-PowerCheck registered (SYSTEM, hourly + AtLogon + AtBo
 
 # Apply power settings immediately on reinstall
 Write-Step "Step 18b - Apply motion-detection power settings (fix_power_motion.ps1)"
-try {
-    & powershell.exe -ExecutionPolicy Bypass -File "$scriptDir\fix_power_motion.ps1"
-    Write-OK "Power settings applied (Balanced, USB Suspend off, sleep/hibernate/disk Never, power+sleep buttons & lid Do nothing)"
-} catch {
-    Write-Warn "fix_power_motion.ps1 failed: $_ - run manually after setup"
+& powershell.exe -ExecutionPolicy Bypass -File "$scriptDir\fix_power_motion.ps1"
+$powerExit = $LASTEXITCODE
+if ($powerExit -eq 0) {
+    Write-OK "Power settings applied (Balanced, USB Suspend off, sleep/hibernate/disk Never, unattended sleep timeout Never, power+sleep buttons & lid Do nothing)"
+} else {
+    Write-Fail "fix_power_motion.ps1 reported NON-COMPLIANT power settings (exit $powerExit)"
+}
+
+# Step 18c - Verify the sleep-critical settings actually landed. A locked-session
+# sleep (unattended timeout) silently stopped recording before this was enforced
+# (2026-06-17), so reinstall MUST confirm compliance rather than assume it.
+Write-Step "Step 18c - Verify sleep-critical power compliance"
+$active = (powercfg /getactivescheme) -join ' '
+$schemeGuid = if ($active -match '([0-9a-fA-F-]{36})') { $Matches[1] } else { $null }
+$powerCompliant = $true
+$sleepChecks = @(
+    @{ Sub='238c9fa8-0aad-41ed-83f4-97be242c8f20'; Set='29f6c1db-86da-48c5-9fdb-f2b67b1f44da'; Label='Sleep after' },
+    @{ Sub='238c9fa8-0aad-41ed-83f4-97be242c8f20'; Set='7bc4a2f9-d8fc-4469-b07b-33eb785aaca0'; Label='Unattended sleep timeout' }
+)
+if ($schemeGuid) {
+    foreach ($c in $sleepChecks) {
+        $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$schemeGuid\$($c.Sub)\$($c.Set)"
+        $v = if (Test-Path $p) { Get-ItemProperty -Path $p -ErrorAction SilentlyContinue } else { $null }
+        if ($null -eq $v -or $v.ACSettingIndex -ne 0 -or $v.DCSettingIndex -ne 0) {
+            $acv = if ($v) { $v.ACSettingIndex } else { 'absent(default)' }
+            $dcv = if ($v) { $v.DCSettingIndex } else { 'absent(default)' }
+            Write-Fail "$($c.Label) NON-COMPLIANT: AC=$acv DC=$dcv (expected 0) - sleep can still interrupt recording"
+            $powerCompliant = $false
+        } else {
+            Write-OK "$($c.Label) = Never (AC + DC)"
+        }
+    }
+} else {
+    Write-Fail "Could not resolve active power scheme GUID - cannot verify sleep compliance"
+    $powerCompliant = $false
+}
+if (-not $powerCompliant) {
+    Write-Fail "POWER COMPLIANCE CHECK FAILED - rerun fix_power_motion.ps1 as Administrator and re-verify before relying on motion capture"
 }
 
 # Create motion_videos symlink for yawcam_monitor_v4.ps1
