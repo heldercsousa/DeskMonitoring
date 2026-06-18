@@ -339,12 +339,16 @@ The ecosystem has four layers that work together continuously:
   Writes forensic reports on startup gap detection
 ```
 
-### Scheduled Tasks (run as SYSTEM)
+### Scheduled Tasks
 
-| Task | Script | Schedule |
-|---|---|---|
-| `FolderSync-CloudBackup` | `cloud_sync.ps1` | Every 5 minutes |
-| `FolderSync-DailyCheck` | `DailySecurityCheck.ps1` | Daily 09:00 |
+| Task | Script | Schedule | Runs as |
+|---|---|---|---|
+| `FolderSync-CloudBackup` | `cloud_sync.ps1` | Every 5 minutes | SYSTEM |
+| `FolderSync-DailyCheck` | `DailySecurityCheck.ps1` | Daily 09:00 | helde |
+| `FolderSync-ConfigGuard` | `config_guard.ps1` (pwsh) | Continuous guard on Config/ | helde |
+| `FolderSync-AuditFilter` | `audit_filter_launcher.vbs` (wscript) | Audit event filter | helde |
+| `FolderSync-GitCommitLogs` | `auto_commit_logs.ps1` | Daily 23:30 | helde |
+| `FolderSync-PowerCheck` | `check_power_motion.ps1` | Hourly (power/sleep auto-heal) | SYSTEM |
 
 ### NSSM Services
 
