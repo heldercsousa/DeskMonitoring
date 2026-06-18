@@ -33,16 +33,41 @@ SACL / Event 4663 work tracked in THREAT_MODEL.md.
 It is possible the user disabled it manually while investigating; pending user confirmation.
 If not user-initiated, treat as a live tampering event.
 
+### Corroborating event (raises suspicion of tampering)
+
+config_guard.ps1's log shows that at **2026-06-18 19:20:20** - within ~2 minutes of the
+DailyCheck XML modification (19:18:32) - `FolderSync-CloudBackup` was **also** found Disabled
+and auto-restored by the guard:
+
+```
+2026-06-18 19:20:20  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-18 19:20:20  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+```
+
+So **two** defensive scheduled tasks were disabled in the same short window. CloudBackup was
+caught and reverted automatically because it was the only task in the old guard list;
+DailyCheck was NOT guarded, so its disable persisted until this manual audit. Two
+near-simultaneous disables of defensive tasks is more consistent with a tampering action
+than incidental user toggling - flagged for the user's confirmation.
+
 ## Remediation applied
 
 - `Enable-ScheduledTask -TaskName 'FolderSync-DailyCheck'` → State=Ready, Enabled=True (confirmed).
+- **Task-change auditing enabled**: `auditpol /set /subcategory:"{0CCE9227-69AE-11D9-BED3-505054503030}" /success:enable /failure:enable`
+  ("Other Object Access Events", language-independent GUID). Confirmed "Êxito e Falha".
+  Future task disable/delete now logged as events 4701/4699/4702. Added to
+  `setup_update.ps1` Step 16a3 so it survives a reinstall.
+- **config_guard.ps1 extended**: the 30s keep-alive loop now iterates `$GuardedTasks`
+  (all six FolderSync tasks) and re-enables any found Disabled, logging
+  `TASK-TAMPER` / `TASK-AUTO-RESTORED` (previously only FolderSync-CloudBackup was guarded).
+  ConfigGuard task restarted to load the new code (START logged 2026-06-18 20:52:44).
+- Docs synced: ECOSYSTEM_REPORT.md Section 5 + 15, CLAUDE.md (task table + Live Threat
+  Digest), THREAT_MODEL.md (Attack Vector History + Detection Matrix).
 
-## Follow-up recommended
+## Status: all follow-ups implemented
 
-- Enable auditing of scheduled-task object changes (4699/4701/4702) so future
-  enable/disable events are attributable.
-- Consider having `config_guard.ps1` / `check_status.ps1` assert that all FolderSync
-  defensive tasks are Enabled, and alert + auto-heal if any is found Disabled.
+Both originally-recommended follow-ups (task-change auditing; config_guard assertion +
+auto-heal of all defensive tasks) are now in place.
 
 ## Other items reviewed in same sweep (no action needed)
 

@@ -8,6 +8,11 @@ $ConfigDir    = 'C:\Sync\Config'
 $LogFile      = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
 $GuardedFiles = @('cloud_sync_helderTest.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
 
+# Defensive scheduled tasks that must never be left Disabled. If an attacker disables
+# any of these to silence monitoring, the guard loop below re-enables it and alerts.
+$GuardedTasks = @('FolderSync-CloudBackup', 'FolderSync-DailyCheck', 'FolderSync-ConfigGuard',
+                  'FolderSync-AuditFilter', 'FolderSync-GitCommitLogs', 'FolderSync-PowerCheck')
+
 # Process names that indicate a legitimate human edit - do NOT restore if any is foreground.
 $EditorProcesses = @('claude', 'Code', 'code', 'notepad', 'notepad++', 'sublime_text',
                      'vim', 'nvim', 'nano', 'wordpad', 'WINWORD', 'devenv')
@@ -98,17 +103,24 @@ while ($true) {
     $newLog = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
     if ($newLog -ne $LogFile) { $LogFile = $newLog }
 
-    # Check every 60s if FolderSync-CloudBackup is disabled (attacker tampering with task state)
+    # Check every 60s whether any guarded defensive task was disabled (attacker silencing monitoring).
     if ($null -eq $lastTaskCheck -or ((Get-Date) - $lastTaskCheck).TotalSeconds -ge 60) {
-        try {
-            $task = Get-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
-            if ($task -and $task.State -eq "Disabled") {
-                Write-Log "TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling"
-                Enable-ScheduledTask -TaskName "FolderSync-CloudBackup" -ErrorAction SilentlyContinue
-                Write-Log "TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled"
+        foreach ($taskName in $GuardedTasks) {
+            try {
+                $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                if ($task -and $task.State -eq "Disabled") {
+                    Write-Log "TASK-TAMPER  $taskName disabled - attacker attempt detected, re-enabling"
+                    Enable-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                    $recheck = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                    if ($recheck -and $recheck.State -ne "Disabled") {
+                        Write-Log "TASK-AUTO-RESTORED  $taskName re-enabled"
+                    } else {
+                        Write-Log "TASK-RESTORE-FAILED  $taskName still Disabled after Enable attempt - manual action required"
+                    }
+                }
+            } catch {
+                # Silently continue if task check fails
             }
-        } catch {
-            # Silently continue if task check fails
         }
         $lastTaskCheck = Get-Date
     }

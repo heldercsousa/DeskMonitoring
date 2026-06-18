@@ -476,7 +476,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
 | `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15); real-time (60s) System unattended sleep timeout watcher with edge-triggered [ALERT] [UNATTEND-SLEEP] + [RECOVERED] + send_alert (2026-06-17) |
-| `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores guarded files from git HEAD when foreground process is not a known editor/Claude (T054, 2026-06-06). Win32 P/Invoke foreground check; log prefixes: CHANGE / SKIP / TAMPER / AUTO-RESTORED. Keep-alive 30s loop. Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
+| `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores guarded files from git HEAD when foreground process is not a known editor/Claude (T054, 2026-06-06). Win32 P/Invoke foreground check; log prefixes: CHANGE / SKIP / TAMPER / AUTO-RESTORED. Keep-alive 30s loop also re-enables any of the six FolderSync defensive tasks if found Disabled (TASK-TAMPER / TASK-AUTO-RESTORED, 2026-06-18). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
@@ -2954,7 +2954,7 @@ try {
 ---
 
 ### `C:\Sync\Config\config_guard.ps1`
-> FileSystemWatcher on `Config\` — auto-restores `cloud_sync.ps1`, `run_mirror.bat`, `auditor.ps1`, and `setup_update.ps1` from git HEAD when a change is not attributable to a legitimate actor. Uses Win32 P/Invoke (`GetForegroundWindow` + `GetWindowThreadProcessId`) to identify the foreground process at the moment of the write: if it is NOT a known editor (claude, code, notepad, etc.) the file is restored within milliseconds. T054, 2026-06-06. Runs as `FolderSync-ConfigGuard` scheduled task (at logon) via `setup_update.ps1` Step 20. Logs to `Logs\security\config_guard_YYYY-MM-DD.log` with prefixes CHANGE / SKIP / TAMPER / AUTO-RESTORED.
+> FileSystemWatcher on `Config\` — auto-restores guarded files (`cloud_sync_helderTest.ps1`, `run_mirror.bat`, `auditor.ps1`, `setup_update.ps1`) from git HEAD when a change is not attributable to a legitimate actor. Uses Win32 P/Invoke (`GetForegroundWindow` + `GetWindowThreadProcessId`) to identify the foreground process at the moment of the write: if it is NOT a known editor (claude, code, notepad, etc.) the file is restored within milliseconds. T054, 2026-06-06. The 30s keep-alive loop also guards `$GuardedTasks` (all six FolderSync scheduled tasks) — if any is found Disabled it is re-enabled and logged as TASK-TAMPER / TASK-AUTO-RESTORED (extended 2026-06-18 after FolderSync-DailyCheck was found disabled). Runs as `FolderSync-ConfigGuard` scheduled task (at logon) via `setup_update.ps1` Step 20. Logs to `Logs\security\config_guard_YYYY-MM-DD.log` with prefixes CHANGE / SKIP / TAMPER / AUTO-RESTORED / TASK-TAMPER.
 ```powershell
 # config_guard.ps1
 # FileSystemWatcher on Config\ — auto-restores guarded files from git HEAD when
@@ -2964,7 +2964,12 @@ try {
 $RepoRoot     = 'C:\Sync'
 $ConfigDir    = 'C:\Sync\Config'
 $LogFile      = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
-$GuardedFiles = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
+$GuardedFiles = @('cloud_sync_helderTest.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
+
+# Defensive scheduled tasks that must never be left Disabled. If an attacker disables
+# any of these to silence monitoring, the guard loop below re-enables it and alerts.
+$GuardedTasks = @('FolderSync-CloudBackup', 'FolderSync-DailyCheck', 'FolderSync-ConfigGuard',
+                  'FolderSync-AuditFilter', 'FolderSync-GitCommitLogs', 'FolderSync-PowerCheck')
 
 # Process names that indicate a legitimate human edit - do NOT restore if any is foreground.
 $EditorProcesses = @('claude', 'Code', 'code', 'notepad', 'notepad++', 'sublime_text',
@@ -2997,7 +3002,7 @@ $action = {
     $name = $Event.SourceEventArgs.Name
     $type = $Event.SourceEventArgs.ChangeType
 
-    $guarded = @('cloud_sync.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
+    $guarded = @('cloud_sync_helderTest.ps1', 'run_mirror.bat', 'auditor.ps1', 'setup_update.ps1')
     if ($guarded -notcontains $name) { return }
 
     $editors = @('claude', 'Code', 'code', 'notepad', 'notepad++', 'sublime_text',
@@ -3047,13 +3052,36 @@ Register-ObjectEvent $watcher Created -Action $action | Out-Null
 
 Write-Log "CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor"
 
-# Keep alive
+# Keep alive - also monitor critical task state
+$lastTaskCheck = $null
 while ($true) {
     Start-Sleep -Seconds 30
 
     # Roll log path at midnight.
     $newLog = "C:\Sync\Logs\security\config_guard_$(Get-Date -Format 'yyyy-MM-dd').log"
     if ($newLog -ne $LogFile) { $LogFile = $newLog }
+
+    # Check every 60s whether any guarded defensive task was disabled (attacker silencing monitoring).
+    if ($null -eq $lastTaskCheck -or ((Get-Date) - $lastTaskCheck).TotalSeconds -ge 60) {
+        foreach ($taskName in $GuardedTasks) {
+            try {
+                $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                if ($task -and $task.State -eq "Disabled") {
+                    Write-Log "TASK-TAMPER  $taskName disabled - attacker attempt detected, re-enabling"
+                    Enable-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                    $recheck = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                    if ($recheck -and $recheck.State -ne "Disabled") {
+                        Write-Log "TASK-AUTO-RESTORED  $taskName re-enabled"
+                    } else {
+                        Write-Log "TASK-RESTORE-FAILED  $taskName still Disabled after Enable attempt - manual action required"
+                    }
+                }
+            } catch {
+                # Silently continue if task check fails
+            }
+        }
+        $lastTaskCheck = Get-Date
+    }
 }
 ```
 

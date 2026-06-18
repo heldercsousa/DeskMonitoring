@@ -670,6 +670,17 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 # =============================================================================
+# STEP 16a3 - Scheduled-task change auditing (events 4698-4702 - task create/delete/enable/disable)
+# =============================================================================
+Write-Step "Step 16a3 - Enable scheduled-task change auditing (events 4698-4702)"
+auditpol /set /subcategory:"{0CCE9227-69AE-11D9-BED3-505054503030}" /success:enable /failure:enable | Out-Null
+if ($LASTEXITCODE -eq 0) {
+    Write-OK "Task-change auditing enabled - task disable/delete logged as event 4701/4699/4702"
+} else {
+    Write-Warn "auditpol failed - run manually: auditpol /set /subcategory:`"{0CCE9227-69AE-11D9-BED3-505054503030}`" /success:enable /failure:enable"
+}
+
+# =============================================================================
 # STEP 16b - SACL write auditing on C:\Sync\Config\ (catches tampering process via event 4663)
 # =============================================================================
 Write-Step "Step 16b - SACL write auditing on Config\, Evidence\, .git\ + 512 MB Security log"
