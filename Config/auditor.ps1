@@ -257,6 +257,10 @@ $script:LastSystemCheck = [datetime]::MinValue
 # event fires AS the system suspends and is far older than 60s once it resumes.
 # Initialised to startup time so historical sleeps do not re-alert on every restart.
 $script:LastSleepEventTime = [datetime]::Now
+# Edge-triggered state for the unattended sleep timeout watcher: alert once when it
+# leaves the compliant value (0=Never), log [RECOVERED] once when it returns, so a
+# persistent non-compliant value does not re-alert every 60s before the hourly heal.
+$script:UnattendNonCompliant = $false
 
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
@@ -301,6 +305,41 @@ function Check-SystemEvents {
             $who = if ($evt.Message -match 'User:\s+(\S+)') { $Matches[1] } else { 'unknown' }
             $type = if ($evt.Message -match 'shutdown type:\s+(\S+)') { $Matches[1] } else { '?' }
             Write-SecurityAudit "[SHUTDOWN] Initiated by $who - type=$type"
+        }
+    } catch {}
+
+    # --- System unattended sleep timeout tampering (real-time, 60s) ---
+    # This hidden setting (default 120s) sleeps a LOCKED session even with Sleep=Never,
+    # stopping recording (confirmed 2026-06-17). It must stay 0=Never. Read it live from
+    # the active scheme; alert the moment it leaves 0 (or its key is removed => default
+    # 120s applies). The hourly FolderSync-PowerCheck heal reverts it; this gives instant
+    # visibility instead of waiting up to an hour. Edge-triggered to avoid 60s spam.
+    try {
+        $act = (powercfg /getactivescheme) -join ' '
+        if ($act -match '([0-9a-fA-F-]{36})') {
+            $guid = $Matches[1]
+            $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$guid\238c9fa8-0aad-41ed-83f4-97be242c8f20\7bc4a2f9-d8fc-4469-b07b-33eb785aaca0"
+            $ac = $null; $dc = $null
+            if (Test-Path $p) {
+                $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
+                $ac = $v.ACSettingIndex; $dc = $v.DCSettingIndex
+            }
+            $bad = ($ac -ne 0) -or ($dc -ne 0)   # $null (key absent) => default 120s => non-compliant
+            if ($bad -and -not $script:UnattendNonCompliant) {
+                $script:UnattendNonCompliant = $true
+                $shownAc = if ($ac -eq $null) { 'absent(default 120s)' } else { $ac }
+                $shownDc = if ($dc -eq $null) { 'absent(default 120s)' } else { $dc }
+                Write-SecurityAudit "[ALERT] [UNATTEND-SLEEP] System unattended sleep timeout changed to AC=$shownAc DC=$shownDc (expected 0=Never) - locked-session sleep risk, hourly auto-heal will revert"
+                try {
+                    & 'C:\Sync\Config\send_alert.ps1' `
+                        -Subject 'Unattended sleep timeout changed' `
+                        -Body "The System unattended sleep timeout changed to AC=$shownAc DC=$shownDc (expected 0=Never). This setting sleeps a locked session even with Sleep=Never, which stops motion recording. The hourly FolderSync-PowerCheck task will revert it; investigate what changed it." `
+                        -B2Key "unattend_sleep_$([datetime]::Now.ToString('yyyyMMdd_HHmmss')).txt"
+                } catch {}
+            } elseif (-not $bad -and $script:UnattendNonCompliant) {
+                $script:UnattendNonCompliant = $false
+                Write-SecurityAudit "[RECOVERED] System unattended sleep timeout back to Never (AC=0 DC=0)"
+            }
         }
     } catch {}
 }
