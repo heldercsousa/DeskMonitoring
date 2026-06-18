@@ -64,6 +64,61 @@ foreach ($task in @('FolderSync-CloudBackup', 'FolderSync-Watchdog', 'FolderSync
     }
 }
 
+# --- FolderSync-PowerCheck (must always be live + actually firing) ---
+# Unlike the tasks above, this one is NOT re-registered by start; and a broken
+# hourly trigger leaves State=Ready while NextRunTime is blank (the task never
+# fires). So: re-register from canonical XML whenever it is absent OR its
+# repeating TimeTrigger is not scheduling a next run. Keeps sleep auto-heal alive
+# whenever the ecosystem is running, without waiting for a full setup_update run.
+Write-Step "FolderSync-PowerCheck (sleep auto-heal)"
+$pcXml = @'
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <TimeTrigger>
+      <Repetition><Interval>PT1H</Interval><StopAtDurationEnd>false</StopAtDurationEnd></Repetition>
+      <StartBoundary>2026-01-01T00:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+    <LogonTrigger><Enabled>true</Enabled></LogonTrigger>
+    <BootTrigger><Enabled>true</Enabled></BootTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <Hidden>true</Hidden>
+    <ExecutionTimeLimit>PT5M</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions>
+    <Exec>
+      <Command>powershell.exe</Command>
+      <Arguments>-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\check_power_motion.ps1</Arguments>
+    </Exec>
+  </Actions>
+</Task>
+'@
+$pcTask = Get-ScheduledTask -TaskName "FolderSync-PowerCheck" -ErrorAction SilentlyContinue
+$pcNext = if ($pcTask) { (Get-ScheduledTaskInfo -TaskName "FolderSync-PowerCheck" -ErrorAction SilentlyContinue).NextRunTime } else { $null }
+if (-not $pcTask -or $pcTask.State -eq 'Disabled' -or -not $pcNext) {
+    $reason = if (-not $pcTask) { 'absent' } elseif ($pcTask.State -eq 'Disabled') { 'disabled' } else { 'no NextRunTime (dead trigger)' }
+    Unregister-ScheduledTask -TaskName "FolderSync-PowerCheck" -Confirm:$false -ErrorAction SilentlyContinue
+    Register-ScheduledTask -TaskName "FolderSync-PowerCheck" -Xml $pcXml -Force | Out-Null
+    Start-ScheduledTask -TaskName "FolderSync-PowerCheck" -ErrorAction SilentlyContinue
+    Write-OK "FolderSync-PowerCheck re-registered ($reason) and kicked once"
+    Write-Log "ECOSYSTEM-START  FolderSync-PowerCheck re-registered ($reason)"
+} else {
+    Write-OK "FolderSync-PowerCheck healthy (next run $pcNext)"
+    Write-Log "ECOSYSTEM-START  FolderSync-PowerCheck healthy, next run $pcNext"
+}
+
 # --- RealTimeSync ---
 Write-Step "RealTimeSync"
 $rts = Get-Process RealTimeSync -ErrorAction SilentlyContinue
