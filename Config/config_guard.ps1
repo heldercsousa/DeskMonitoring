@@ -108,7 +108,22 @@ while ($true) {
         foreach ($taskName in $GuardedTasks) {
             try {
                 $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
-                if ($task -and $task.State -eq "Disabled") {
+                if (-not $task) {
+                    # Task deleted entirely - re-register from the version-controlled backup XML.
+                    $backup = "C:\Sync\Config\task_backups\$taskName.xml"
+                    if (Test-Path $backup) {
+                        Write-Log "TASK-TAMPER  $taskName MISSING (deleted) - restoring from backup XML"
+                        & schtasks.exe /Create /TN $taskName /XML $backup /F 2>&1 | Out-Null
+                        $recheck = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                        if ($recheck) {
+                            Write-Log "TASK-AUTO-RESTORED  $taskName re-registered from backup ($($recheck.State))"
+                        } else {
+                            Write-Log "TASK-RESTORE-FAILED  $taskName could not be re-registered from backup - manual action required"
+                        }
+                    } else {
+                        Write-Log "TASK-TAMPER  $taskName MISSING and no backup XML at $backup - manual action required"
+                    }
+                } elseif ($task.State -eq "Disabled") {
                     Write-Log "TASK-TAMPER  $taskName disabled - attacker attempt detected, re-enabling"
                     Enable-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
                     $recheck = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue

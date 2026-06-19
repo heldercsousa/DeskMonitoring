@@ -1,0 +1,16 @@
+2026-06-18 13:47:59  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 6 event(s)
+2026-06-18 13:48:13  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 13:48:12 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-18 19:55:11  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 2 event(s)
+2026-06-18 19:55:12  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 19:55:12 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-18 20:50:11  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 9 event(s)
+2026-06-18 20:50:12  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 20:50:12 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-18 20:55:09  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 24 event(s)
+2026-06-18 20:55:10  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 20:55:09 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-18 21:15:12  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 2 event(s)
+2026-06-18 21:15:13  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 21:15:13 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-18 21:25:13  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 7 event(s)
+2026-06-18 21:25:14  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 21:25:14 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-18 21:30:10  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 13 event(s)
+2026-06-18 21:30:11  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 21:30:11 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-18 21:35:13  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 3 event(s)
+2026-06-18 21:35:14  SEND-ALERT  FAIL  B2 upload failed: 2026/06/18 21:35:14 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found

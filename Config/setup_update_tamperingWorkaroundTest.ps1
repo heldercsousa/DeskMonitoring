@@ -91,7 +91,7 @@ $oldMirror = "C:\Sync\Logs\mirror"
 if (Test-Path $oldMirror) {
     Rename-Item $oldMirror "C:\Sync\Logs\mirror_archive_$(Get-Date -Format 'yyyy-MM-dd').log" -ErrorAction SilentlyContinue
     Write-OK "Old mirror log archived"
-}
+}   
 
 # =============================================================================
 # STEP 3 - Update cloud_sync_helderTest.ps1 with self-healing firewall + 3-phase ACL

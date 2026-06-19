@@ -1,0 +1,5 @@
+2026-06-18 09:00:08  SCAN-START  DailySecurityCheck v9
+2026-06-18 09:01:37  ALERT  [TaskTamper] Task=FolderSync-CloudBackup Deviation=Arguments="-NoWindow -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\cloud_sync.ps1" (expected to contain C:\Sync\Config\cloud_sync_helderTest.ps1)
+2026-06-18 09:02:17  INFO  [B2Connectivity] Host=api.backblazeb2.com Port=443 Result=OK
+2026-06-18 09:02:44  ALERT  [RunKeyUnknown] Name="MicrosoftEdgeAutoLaunch_4717F1F9F2763686856C51E3910D38DA" Value=""C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start"
+2026-06-18 09:02:44  SCAN-END  Issues=2

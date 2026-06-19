@@ -262,6 +262,11 @@ $script:LastSleepEventTime = [datetime]::Now
 # persistent non-compliant value does not re-alert every 60s before the hourly heal.
 $script:UnattendNonCompliant = $false
 
+# Watermark for the scheduled-task tamper watcher: only alert on task change events
+# (4699 delete / 4701 disable / 4702 update) that occur after the auditor starts, so
+# historical events do not re-fire on every boot.
+$script:LastTaskEventTime = [datetime]::Now
+
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
@@ -340,6 +345,41 @@ function Check-SystemEvents {
                 $script:UnattendNonCompliant = $false
                 Write-SecurityAudit "[RECOVERED] System unattended sleep timeout back to Never (AC=0 DC=0)"
             }
+        }
+    } catch {}
+
+    # --- Scheduled-task tamper (real-time, events 4699/4701/4702 on FolderSync-* tasks) ---
+    # A resident process disabled FolderSync-DailyCheck + FolderSync-CloudBackup in-process
+    # on 2026-06-18 with no spawned schtasks/powershell (confirmed tampering, see
+    # THREAT_MODEL.md). Task-change auditing is now on, so a disable/delete/update of a
+    # defensive task emits 4701/4699/4702 with the Subject account. Alert the instant it
+    # happens and capture that account; config_guard.ps1 handles the auto-heal. Watermarked
+    # so each event alerts once.
+    try {
+        $taskEvents = Get-WinEvent -FilterHashtable @{
+            LogName = 'Security'; Id = 4699, 4701, 4702; StartTime = $script:LastTaskEventTime
+        } -ErrorAction SilentlyContinue
+        foreach ($te in ($taskEvents | Sort-Object TimeCreated)) {
+            if ($te.TimeCreated -le $script:LastTaskEventTime) { continue }
+            $msg = $te.Message
+            # Task path: match \FolderSync-XXX in either language
+            if ($msg -notmatch '\\?(FolderSync-\S+)') { continue }
+            $taskName = ($Matches[1]).TrimEnd('.', '"', "'")
+            # Subject account that made the change (PT "Nome da Conta:" / EN "Account Name:")
+            $acct = 'unknown'
+            if ($msg -match '(?:Account Name|Nome da Conta)[^:]*:\s+(\S+)') { $acct = $Matches[1] }
+            $verb = switch ($te.Id) { 4699 {'DELETED'} 4701 {'DISABLED'} 4702 {'UPDATED'} default {"id$($te.Id)"} }
+            Write-SecurityAudit "[ALERT] [TASK-TAMPER] Defensive task $taskName was $verb at $($te.TimeCreated) by account=$acct (event $($te.Id)) - config_guard auto-heal will re-enable if disabled"
+            try {
+                & 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "Defensive task ${verb}: $taskName" `
+                    -Body "Scheduled task $taskName was $verb at $($te.TimeCreated) by account=$acct (Security event $($te.Id)). This is one of the FolderSync defensive tasks. The 2026-06-18 incident disabled two of these in-process with no spawned process - this alert captures the Subject account responsible. config_guard.ps1 re-enables disabled tasks automatically; investigate the account/process." `
+                    -B2Key "task_tamper_$($te.TimeCreated.ToString('yyyyMMdd_HHmmss'))_$taskName.txt"
+            } catch {}
+        }
+        if ($taskEvents) {
+            $newest = ($taskEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
+            if ($newest -gt $script:LastTaskEventTime) { $script:LastTaskEventTime = $newest }
         }
     } catch {}
 }

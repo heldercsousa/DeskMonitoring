@@ -1,0 +1,43 @@
+# icacls backup of FolderSync task definition ACLs - 06/18/2026 21:23:41
+==== FolderSync-CloudBackup ====
+C:\Windows\System32\Tasks\FolderSync-CloudBackup AUTORIDADE NT\SISTEMA:(R)
+                                                 BUILTIN\Administradores:(I)(R,W,D,WDAC,WO)
+                                                 AUTORIDADE NT\SISTEMA:(I)(R,W,D,WDAC,WO)
+                                                 BUILTIN\Administradores:(I)(F)
+
+Processados com sucesso 1 arquivos; falha no processamento de 0 arquivos
+==== FolderSync-DailyCheck ====
+C:\Windows\System32\Tasks\FolderSync-DailyCheck LAP\helde:(R)
+                                                BUILTIN\Administradores:(I)(R,W,D,WDAC,WO)
+                                                AUTORIDADE NT\SISTEMA:(I)(R,W,D,WDAC,WO)
+                                                LAP\helde:(I)(F)
+
+Processados com sucesso 1 arquivos; falha no processamento de 0 arquivos
+==== FolderSync-ConfigGuard ====
+C:\Windows\System32\Tasks\FolderSync-ConfigGuard LAP\helde:(R)
+                                                 BUILTIN\Administradores:(I)(R,W,D,WDAC,WO)
+                                                 AUTORIDADE NT\SISTEMA:(I)(R,W,D,WDAC,WO)
+                                                 BUILTIN\Administradores:(I)(F)
+
+Processados com sucesso 1 arquivos; falha no processamento de 0 arquivos
+==== FolderSync-AuditFilter ====
+C:\Windows\System32\Tasks\FolderSync-AuditFilter LAP\helde:(R)
+                                                 BUILTIN\Administradores:(I)(R,W,D,WDAC,WO)
+                                                 AUTORIDADE NT\SISTEMA:(I)(R,W,D,WDAC,WO)
+                                                 BUILTIN\Administradores:(I)(F)
+
+Processados com sucesso 1 arquivos; falha no processamento de 0 arquivos
+==== FolderSync-GitCommitLogs ====
+C:\Windows\System32\Tasks\FolderSync-GitCommitLogs LAP\helde:(R)
+                                                   BUILTIN\Administradores:(I)(R,W,D,WDAC,WO)
+                                                   AUTORIDADE NT\SISTEMA:(I)(R,W,D,WDAC,WO)
+                                                   BUILTIN\Administradores:(I)(F)
+
+Processados com sucesso 1 arquivos; falha no processamento de 0 arquivos
+==== FolderSync-PowerCheck ====
+C:\Windows\System32\Tasks\FolderSync-PowerCheck AUTORIDADE NT\SISTEMA:(R)
+                                                BUILTIN\Administradores:(I)(R,W,D,WDAC,WO)
+                                                AUTORIDADE NT\SISTEMA:(I)(R,W,D,WDAC,WO)
+                                                BUILTIN\Administradores:(I)(F)
+
+Processados com sucesso 1 arquivos; falha no processamento de 0 arquivos
