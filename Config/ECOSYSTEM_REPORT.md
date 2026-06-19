@@ -475,8 +475,9 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
-| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15); real-time (60s) System unattended sleep timeout watcher with edge-triggered [ALERT] [UNATTEND-SLEEP] + [RECOVERED] + send_alert (2026-06-17) |
-| `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores guarded files from git HEAD when foreground process is not a known editor/Claude (T054, 2026-06-06). Win32 P/Invoke foreground check; log prefixes: CHANGE / SKIP / TAMPER / AUTO-RESTORED. Keep-alive 30s loop also re-enables any of the six FolderSync defensive tasks if found Disabled (TASK-TAMPER / TASK-AUTO-RESTORED, 2026-06-18). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
+| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15); real-time (60s) System unattended sleep timeout watcher with edge-triggered [ALERT] [UNATTEND-SLEEP] + [RECOVERED] + send_alert (2026-06-17); real-time scheduled-task tamper watcher - polls Security events 4699/4701/4702 on FolderSync-* tasks and raises [ALERT] [TASK-TAMPER] with the Subject account + send_alert, watermarked (2026-06-18) |
+| `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores guarded files from git HEAD when foreground process is not a known editor/Claude (T054, 2026-06-06). Win32 P/Invoke foreground check; log prefixes: CHANGE / SKIP / TAMPER / AUTO-RESTORED. Keep-alive 30s loop also re-enables any of the six FolderSync defensive tasks if found Disabled, AND re-registers any found deleted from its `Config\task_backups\<name>.xml` backup via schtasks (TASK-TAMPER / TASK-AUTO-RESTORED, 2026-06-18). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
+| `task_backups\*.xml` (6 files) | Exported by `setup_update.ps1` Step 20b | Version-controlled XML backups of the six FolderSync task definitions. `config_guard.ps1` restores a task from its backup if it is found deleted (file-level Deny-Delete ACLs do NOT stop deletion - parent Tasks folder grants Administrators delete-child). Regenerated on every setup run. |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
@@ -2820,6 +2821,11 @@ $script:LastSleepEventTime = [datetime]::Now
 # persistent non-compliant value does not re-alert every 60s before the hourly heal.
 $script:UnattendNonCompliant = $false
 
+# Watermark for the scheduled-task tamper watcher: only alert on task change events
+# (4699 delete / 4701 disable / 4702 update) that occur after the auditor starts, so
+# historical events do not re-fire on every boot.
+$script:LastTaskEventTime = [datetime]::Now
+
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
@@ -2898,6 +2904,39 @@ function Check-SystemEvents {
                 $script:UnattendNonCompliant = $false
                 Write-SecurityAudit "[RECOVERED] System unattended sleep timeout back to Never (AC=0 DC=0)"
             }
+        }
+    } catch {}
+
+    # --- Scheduled-task tamper (real-time, events 4699/4701/4702 on FolderSync-* tasks) ---
+    # A resident process disabled FolderSync-DailyCheck + FolderSync-CloudBackup in-process
+    # on 2026-06-18 with no spawned schtasks/powershell (confirmed tampering, see
+    # THREAT_MODEL.md). Task-change auditing is now on, so a disable/delete/update of a
+    # defensive task emits 4701/4699/4702 with the Subject account. Alert the instant it
+    # happens and capture that account; config_guard.ps1 handles the auto-heal. Watermarked
+    # so each event alerts once.
+    try {
+        $taskEvents = Get-WinEvent -FilterHashtable @{
+            LogName = 'Security'; Id = 4699, 4701, 4702; StartTime = $script:LastTaskEventTime
+        } -ErrorAction SilentlyContinue
+        foreach ($te in ($taskEvents | Sort-Object TimeCreated)) {
+            if ($te.TimeCreated -le $script:LastTaskEventTime) { continue }
+            $msg = $te.Message
+            if ($msg -notmatch '\\?(FolderSync-\S+)') { continue }
+            $taskName = ($Matches[1]).TrimEnd('.', '"', "'")
+            $acct = 'unknown'
+            if ($msg -match '(?:Account Name|Nome da Conta)[^:]*:\s+(\S+)') { $acct = $Matches[1] }
+            $verb = switch ($te.Id) { 4699 {'DELETED'} 4701 {'DISABLED'} 4702 {'UPDATED'} default {"id$($te.Id)"} }
+            Write-SecurityAudit "[ALERT] [TASK-TAMPER] Defensive task $taskName was $verb at $($te.TimeCreated) by account=$acct (event $($te.Id)) - config_guard auto-heal will re-enable if disabled"
+            try {
+                & 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "Defensive task ${verb}: $taskName" `
+                    -Body "Scheduled task $taskName was $verb at $($te.TimeCreated) by account=$acct (Security event $($te.Id)). This is one of the FolderSync defensive tasks. The 2026-06-18 incident disabled two of these in-process with no spawned process - this alert captures the Subject account responsible. config_guard.ps1 re-enables disabled tasks automatically; investigate the account/process." `
+                    -B2Key "task_tamper_$($te.TimeCreated.ToString('yyyyMMdd_HHmmss'))_$taskName.txt"
+            } catch {}
+        }
+        if ($taskEvents) {
+            $newest = ($taskEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
+            if ($newest -gt $script:LastTaskEventTime) { $script:LastTaskEventTime = $newest }
         }
     } catch {}
 }
@@ -3066,7 +3105,22 @@ while ($true) {
         foreach ($taskName in $GuardedTasks) {
             try {
                 $task = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
-                if ($task -and $task.State -eq "Disabled") {
+                if (-not $task) {
+                    # Task deleted entirely - re-register from the version-controlled backup XML.
+                    $backup = "C:\Sync\Config\task_backups\$taskName.xml"
+                    if (Test-Path $backup) {
+                        Write-Log "TASK-TAMPER  $taskName MISSING (deleted) - restoring from backup XML"
+                        & schtasks.exe /Create /TN $taskName /XML $backup /F 2>&1 | Out-Null
+                        $recheck = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+                        if ($recheck) {
+                            Write-Log "TASK-AUTO-RESTORED  $taskName re-registered from backup ($($recheck.State))"
+                        } else {
+                            Write-Log "TASK-RESTORE-FAILED  $taskName could not be re-registered from backup - manual action required"
+                        }
+                    } else {
+                        Write-Log "TASK-TAMPER  $taskName MISSING and no backup XML at $backup - manual action required"
+                    }
+                } elseif ($task.State -eq "Disabled") {
                     Write-Log "TASK-TAMPER  $taskName disabled - attacker attempt detected, re-enabling"
                     Enable-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
                     $recheck = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue

@@ -938,6 +938,28 @@ Register-ScheduledTask -TaskName "FolderSync-ConfigGuard" -Xml $taskXml20 -Force
 Write-OK "Task FolderSync-ConfigGuard registered ($currentUser / InteractiveToken, at logon, no time limit)"
 
 # =============================================================================
+# STEP 20b - Export defensive task definitions to version-controlled backups
+# =============================================================================
+# config_guard.ps1 re-registers a defensive task from these XML backups if it is
+# found deleted (the 2026-06-18 incident disabled tasks; a delete is the worse case
+# and file-level Deny-Delete ACLs do NOT stop it - the parent Tasks folder grants
+# Administrators "delete child"). Backups live under Config\ (Deny-Delete protected,
+# git-tracked) so they survive and are restorable. Re-export here so the backups
+# always match the just-registered definitions.
+Write-Step "Step 20b - Export defensive task definitions to Config\task_backups\"
+$taskBackupDir = "C:\Sync\Config\task_backups"
+New-Item -ItemType Directory -Force -Path $taskBackupDir | Out-Null
+$defensiveTasks = @('FolderSync-CloudBackup','FolderSync-DailyCheck','FolderSync-ConfigGuard',
+                    'FolderSync-AuditFilter','FolderSync-GitCommitLogs','FolderSync-PowerCheck')
+foreach ($dt in $defensiveTasks) {
+    if (Get-ScheduledTask -TaskName $dt -ErrorAction SilentlyContinue) {
+        $xml = Export-ScheduledTask -TaskName $dt
+        [System.IO.File]::WriteAllText((Join-Path $taskBackupDir "$dt.xml"), $xml, [System.Text.Encoding]::Unicode)
+    }
+}
+Write-OK "Task definition backups exported ($($defensiveTasks.Count) tasks) - config_guard restores from these if a task is deleted"
+
+# =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
 # =============================================================================
 if ($wasRunning) {
