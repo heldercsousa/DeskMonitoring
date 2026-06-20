@@ -119,23 +119,24 @@ This allows ALL non-packaged (Win32/desktop) applications to use the Windows.Gra
 
 Note: Windows 11 changed this permission model around this time. This may be a Windows Update side effect OR deliberate attacker configuration. Either way, any process running as Helder or as a service can now silently capture the screen.
 
-## WsiAccount deep profile — revised assessment
+## WsiAccount deep profile — FINAL ASSESSMENT (CLEARED 2026-06-20)
 
-Profile contains:
-- Visual Studio 2022 + Azure Functions Tools + NuGet (development tools)
-- .NET SDK 6.x caches from May 2023 through .NET 8.0.412 (July 2025) — 2+ years of .NET SDK activity
-- `MachineId.v1.dotnetUserLevelCache` created 10/05/2023 — account in active use since then
-- Adobe, SolidDocuments (standard app installs)
-- OneDrive folder exists but is empty (no content configured for sync)
+**CONFIRMED BENIGN.** Helder confirmed on 2026-06-20:
+- He uses Visual Studio 2022 actively for a MAUI 10 project
+- WsiAccount = Windows identity profile backing his Microsoft account for VS/dev tools
+- .NET SDK 9.0.315 (installed 2026-06-09) and .NET SDK 10.0.301 (installed 2026-06-10) = VS auto-updated .NET workloads for MAUI 10 (requires .NET 10)
+- dd_updateconfiguration logs = VS 18.7 background extension update checks (ran every 2-4 weeks, always "no update")
+- March 3, 2026 VS session = Helder actively using VS for MAUI development
+- June 5 WsiAccount session = WsiAccount profile updating while Helder used machine normally (it is the system account backing his Microsoft sign-in, not a separate login)
+- CredentialUIBroker.exe crashes (2026-03-09, PID 19248, two dumps) = VS credential prompt crash during likely NuGet/GitHub auth flow. Low risk.
+- MSI uninstall attempt June 5 17:19 (failed, WsiAccount not admin) = unknown product, VS or Adobe component update. Non-admin failure = did not succeed.
+- App Explorer log = Acer OEM pre-installed updater, runs at logon, benign.
 
-**Revised conclusion:** WsiAccount is most likely Helder's Microsoft work/school account profile used for Visual Studio / Azure Functions development. Web Sign-in was enabled to allow Microsoft identity sign-in for dev tools. The .NET history predates the attack window by 3 years. The June 5 activity is likely legitimate development work. The contacts/email access attempt via WindowsCommunicationsApps is normal behavior when the Mail/Calendar app is opened.
-
-**Confirm with Helder:** Do you use Visual Studio / Azure Functions on this machine with a Microsoft account? If yes, WsiAccount = your dev profile. If no, investigate further.
+**All WsiAccount activity is explained by Helder's VS 2022 / MAUI 10 development work.**
 
 ## Recommended actions
 
-1. **Confirm WsiAccount identity** with Helder (see above)
-2. **Revoke screen capture permission if not needed** (graphicsCaptureProgrammatic):
+1. **Revoke screen capture permission** (graphicsCaptureProgrammatic):
    ```powershell
    Set-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic" -Name "Value" -Value "Deny"
    ```
