@@ -4,3 +4,5 @@
 2026-06-19 17:00:15  SEND-ALERT  FAIL  B2 upload failed: 2026/06/19 17:00:15 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
 2026-06-19 17:05:20  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 18 event(s)
 2026-06-19 17:05:21  SEND-ALERT  FAIL  B2 upload failed: 2026/06/19 17:05:21 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
+2026-06-19 23:30:05  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
+2026-06-19 23:30:06  SEND-ALERT  FAIL  B2 upload failed: 2026/06/19 23:30:06 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": account not found
