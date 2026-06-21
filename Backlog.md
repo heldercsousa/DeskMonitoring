@@ -100,25 +100,12 @@ Subagents may be used for tasks with independent parallel workstreams.
 | T065 | T064 | Debug CAM-2 VLC relay: (1) Test VLC manually with exact RTSP URL from cam2_creds.dpapi + transcoding args; (2) capture stderr output to understand crash; (3) check Windows Event Log for VLC process exit code; (4) try simpler VLC command without transcoding to isolate issue; (5) verify VLC plugins installed (MJPEG codec, HTTP output). | 2026-06-09 | - | Pending |
 | T066 | T064 | Once CAM-2 relay works, configure Yawcam to use relay as second camera input. Yawcam must be set to record from http://127.0.0.1:8161/ to capture Tapo C100 stream and save as motion_*.avi alongside CAM-1 recordings. | 2026-06-09 | - | Pending |
 | T067 | - | Camera stopped recording when laptop left idle. Root cause: physical power-button press suspended the machine (Kernel-Power Event 42 "Button or Lid", 4 events 11-13 Jun). Power plan was already correct. Fixed: power/sleep buttons & lid set to Do nothing, keep-awake guard in monitor, [BUTTON-SLEEP] alert in auditor, hourly auto-heal in check_power_motion (also fixed a locale bug that made that auto-heal a silent no-op). Evidence: 2026-06-15_power-button-sleep-sabotage.md. Pending: Helder to run setup_update.ps1 as Admin to persist. | 2026-06-15 | 2026-06-15 | Done |
-| T068 | - | There are some weird accounts in c:\users folder. See them : 
-
- "TEMP
- TEMP.Font Driver Host
- TEMP.Font Driver Host.000
- TEMP.Font Driver Host.001
- TEMP.Font Driver Host.002
- UMFD-0
- UMFD-0.Font Driver Host
- UMFD-0.Font Driver Host.000
- UMFD-0.Font Driver Host.001
- UMFD-0.Font Driver Host.002
- WsiAccount"; Evaluate if they're not a concern
-
-| 2026-06-15 | 2026-06-15 | Pending |
+| T068 | - | Investigate unusual accounts in C:\Users (TEMP, UMFD-0, WsiAccount and Font Driver Host variants). RESOLVED: TEMP/UMFD-* = Windows Font Driver Host sandboxed accounts, normal on Win11. WsiAccount = Helder's Microsoft account profile for VS 2022 MAUI development (confirmed). All cleared. | 2026-06-15 | 2026-06-21 | Done |
 | T069 | - | Camera stopped recording when session locked and left idle (Ctrl+L). Root cause: hidden "System unattended sleep timeout" was unset, so Windows applied its 120s default and slept the locked machine in ~2 min despite Sleep=Never; the hourly power auditor never checked it so it logged ALL_OK while recording stopped. Fixed: unattended timeout set to Never (fix_power_motion.ps1 Step 6c), hourly auto-heal added (check_power_motion.ps1 block 12), setup_update.ps1 Step 18c now verifies sleep compliance and fails loudly. Live value confirmed AC=0/DC=0. | 2026-06-17 | 2026-06-17 | Done |
 | T070 | - | [INVESTIGATION] Identify the resident process that disables defensive scheduled tasks. On 2026-06-18 ~19:18-19:20 FolderSync-DailyCheck + FolderSync-CloudBackup were both disabled (user confirmed NOT them); process-creation audit (4688) for that window showed NO schtasks/powershell/pwsh/cmd/mmc/taskmgr spawned, so the disable was done in-process by an already-running resident process (matches the persistent-local-agent hypothesis). Detection is now armed: task-change auditing (4698-4702) enabled, auditor.ps1 raises real-time [ALERT] [TASK-TAMPER] capturing the Subject account, config_guard.ps1 auto-heals disable + restores deletion from Config\task_backups\. ACTION when next event fires: read the 4701/4699 Subject account, cross-reference with running processes and the SACL/event-4663 work on cloud_sync.ps1 (open gap) to pin the exact process. Evidence: Evidence/2026-06-18_defensive-tasks-disabled-confirmed-tampering.md. | 2026-06-19 | - | Pending |
 
 
-| T071 | - | Evidence -there is 2 new files showing hacker manipulation to avoid me turn off wi-fi when I turn on the ecosystem. I currently turn off the wifi to avoid hacker disable the ecosystem and allowing mafia member to access my apartment when I'm out or sleeping. Bunch of motherfuckers. Deserve a huge wood with lots os tips diving in their asses. Siblings of true sluts! Fuck them!  The files are "Evidence/Hacker tentando evitar que eu desligue o wi-fi ao sair de casa 2026-06-20" prefixed.
-
-Hacker tentando evitar que eu desligue o wi-fi ao sair de casa 2026-06-20
+| T071 | - | [EVIDENCE] Attacker manipulation preventing WiFi disable when leaving home. Evidence files: Evidence/Hacker tentando evitar que eu desligue o wi-fi ao sair de casa 2026-06-20 (prefixed). Helder currently disables WiFi when activating ecosystem to prevent remote attacker access to apartment. | 2026-06-20 | - | Pending |
+| T072 | - | [INVESTIGATION] Screen blinks without user interaction: periodic single-frame screen blink observed even without mouse/keyboard input. Privacy Auditing log clean. WAL locked/inaccessible. GDI-based capture (BitBlt) cannot be ruled out - leaves no log trail. Next step: Procmon capture during a blink event to identify process. Evidence: Evidence/2026-06-20_CapabilityAccessManager-WAL-anomaly.md. | 2026-06-21 | - | Pending |
+| T073 | - | Uninstall CopyFileTo.WS (c:\CopyFilesToWS\CopyFileToWindowsService.exe) - Helder's old software predecessor to TelemetryBridgeService. Currently disabled/stopped. Admin PS: sc delete "CopyFileTo.WS" then Remove-Item -Recurse -Force "c:\CopyFilesToWS\". | 2026-06-21 | - | Pending |
+| T074 | - | Decide graphicsCaptureProgrammatic permission: currently Allow since 2026-05-11. No confirmed abuse. Revoking won't break PrintScreen; Snipping Tool re-prompts once. GDI capture unaffected. Command: Set-ItemProperty "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic" -Name "Value" -Value "Deny". Pending Helder decision. | 2026-06-21 | - | Pending |

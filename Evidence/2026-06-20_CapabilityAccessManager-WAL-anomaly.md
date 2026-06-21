@@ -161,3 +161,43 @@ Note: Windows 11 changed this permission model around this time. This may be a W
 | WER kernel crash burst 13:22 | Not confirmed - agent timestamp error |
 | OEM files dated 2092/2098 | Acer factory EC-programmer legacy timestamps |
 | xml_file (N).xml 60s loop, 850 files | Windows Task Scheduler XML temp staging, 0 bytes |
+
+---
+
+## Session 2 findings (2026-06-21) — Service and process audit
+
+### WAL checkpoint investigation (final)
+- `handle64.exe` confirmed: only `svchost.exe` PID 20092 (camsvc) holds the WAL open
+- Checkpoint failed after `Restart-Service camsvc` because new camsvc instance re-opened DB before 4.76 GB could flush
+- **CLOSED: WAL size is a Windows design flaw** — camsvc never releases the DB; WAL accumulates indefinitely. Not attacker activity.
+
+### Service audit results
+
+| Process/Service | Path | Verdict |
+|---|---|---|
+| `TelemetryBridgeService` | `C:\Services\TelemetryBridgeService\` | **Helder's own project** — unsigned by design |
+| `CopyFileTo.WS` | `c:\CopyFilesToWS\CopyFileToWindowsService.exe` | **Helder's old software** — predecessor to TelemetryBridgeService. Currently disabled. Uninstall pending (T073). |
+| `Fing.exe` / `fingagent.exe` | `C:\Program Files\Fing\` | **Helder installed** — signed by Lansweeper. Legitimate network scanner. |
+| `cowork-svc.exe` | `C:\Program Files\WindowsApps\Claude_...\` | **Claude desktop app** — signed by Anthropic, PBC. Cleared. |
+| PS/QA agents (PSAdminAgent, QAAgent etc.) | `C:\Program Files\Acer\` | **Acer NitroSense + Quick Access** — cleared |
+| `FileCoAuth.exe` | `C:\Program Files\Microsoft OneDrive\` | **Microsoft OneDrive co-auth** — cleared |
+
+### 1-CPU boot limit (screenshot 192053, June 18)
+- msconfig advanced boot showed "Número de processadores: 1" checked
+- **Current state confirmed NOT active**: Windows sees all 8 logical processors; BCD has no numproc entry
+- Screenshot likely captured a momentary UI state; setting was not saved (Cancel pressed) or was never applied
+
+### Screen blinks without user interaction — OPEN
+- Privacy Auditing log (last 20 events): no `graphicsCaptureProgrammatic` grants to any suspicious process
+- Only screen capture event: Snipping Tool (ScreenSketch) prompted June 12 — Helder's own use
+- WAL holds no inspectable records (locked, access denied even to Admin)
+- **GDI-based screen capture (BitBlt) leaves no log trail** — cannot be ruled out
+- Blinks occur without mouse/keyboard interaction — eliminates user-triggered shortcuts
+- **Next step**: Run Procmon during a blink event to capture API-level activity by process name (T072)
+
+### `graphicsCaptureProgrammatic = Allow` — OPEN DECISION
+- Set 2026-05-11 11:55:18 UTC (both HKCU and HKLM)
+- No confirmed abuse in Privacy Auditing log
+- Revoking will NOT break PrintScreen; Snipping Tool will re-prompt once
+- GDI capture is unaffected by this permission regardless
+- **Pending Helder's decision** — see T074
