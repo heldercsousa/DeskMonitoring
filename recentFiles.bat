@@ -16,8 +16,7 @@
 ::   recentFiles.bat -Top 50 -Drive "D:\"
 ::       Top 50 on D:\, display only
 ::
-::   recentFiles.bat -Save
-::       Top 100, drive C:\, display + save CSV in script's own folder
+::   recentFiles.bat -Save Top 100, drive C:\, display + save CSV in script's own folder
 ::
 ::   recentFiles.bat -Path "C:\Reports"
 ::       Top 100, drive C:\, display + save CSV in C:\Reports
