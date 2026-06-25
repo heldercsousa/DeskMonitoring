@@ -1,0 +1,26 @@
+2026-06-24 05:47:33  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-06-24 05:47:33  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-06-24 05:48:08  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-24 05:48:08  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-24 05:50:40  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-06-24 05:50:40  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-06-24 12:14:47  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-06-24 12:14:47  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-06-24 12:16:54  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-24 12:16:57  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-24 12:16:58  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-24 12:17:00  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-24 12:27:25  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-24 12:27:26  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-24 12:27:28  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-24 12:27:29  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-24 20:30:50  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-06-24 20:30:50  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-06-24 20:45:01  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-24 20:45:04  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-24 20:45:05  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-24 20:45:07  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-24 20:46:13  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-24 20:46:14  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-24 20:46:15  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-24 20:46:16  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
