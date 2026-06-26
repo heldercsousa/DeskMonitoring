@@ -1,0 +1,38 @@
+2026-06-25 14:52:16  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-25 14:52:17  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-25 14:52:18  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-25 14:52:19  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-25 15:18:15  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-06-25 15:18:15  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-06-25 15:22:20  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-25 15:22:21  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-25 15:22:23  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-25 15:22:24  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-25 15:44:41  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-25 15:44:42  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-25 15:44:42  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-25 15:44:43  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-25 16:25:27  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=LockApp
+2026-06-25 16:25:27  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-25 16:25:27  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-25 16:25:29  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-25 16:25:29  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-25 16:25:29  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-25 16:25:29  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-25 16:25:29  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-25 16:25:29  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=LockApp
+2026-06-25 16:25:29  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-25 16:25:29  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=LockApp
