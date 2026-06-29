@@ -103,6 +103,39 @@
       },
       "disabled": true,
       "_note": "Enable after: npm install -g win-cli-mcp-server — adds native PowerShell tool (Get-PSVersion, OS info, etc.)"
+    },
+    "virustotal": {
+      "command": "npx",
+      "args": ["-y", "@burtthecoder/mcp-virustotal"],
+      "env": {
+        "VIRUSTOTAL_API_KEY": "${VIRUSTOTAL_API_KEY}"
+      },
+      "disabled": true,
+      "_note": "T080 VirusTotal MCP (BurtTheCoder/mcp-virustotal): file/URL/domain/IP reports + relationship pivoting. ACTION FOR HELDER: 1) get free Public API key at virustotal.com (Profile > API key; 500 req/day, 4 req/min, non-commercial). 2) set OS env var VIRUSTOTAL_API_KEY (setx VIRUSTOTAL_API_KEY <key>) so it stays out of git. 3) set disabled=false. CAVEAT: never upload confidential files; analyze hashes/IOCs only, from trusted/forwarded logs."
+    },
+    "shodan": {
+      "command": "npx",
+      "args": ["-y", "@burtthecoder/mcp-shodan"],
+      "env": {
+        "SHODAN_API_KEY": "${SHODAN_API_KEY}"
+      },
+      "disabled": true,
+      "_note": "T080 Shodan MCP (BurtTheCoder/mcp-shodan): host/IP recon, DNS, CVE/CPE intel. ACTION FOR HELDER: 1) get free API key at account.shodan.io. 2) set OS env var SHODAN_API_KEY (setx SHODAN_API_KEY <key>). 3) set disabled=false."
+    },
+    "cve": {
+      "command": "python",
+      "args": ["-m", "cve_mcp.server"],
+      "cwd": "C:\\Tools\\cve-mcp-server",
+      "env": {
+        "NVD_API_KEY": "${NVD_API_KEY}",
+        "SHODAN_KEY": "${SHODAN_API_KEY}",
+        "VIRUSTOTAL_KEY": "${VIRUSTOTAL_API_KEY}",
+        "ABUSEIPDB_KEY": "${ABUSEIPDB_API_KEY}",
+        "GREYNOISE_API_KEY": "${GREYNOISE_API_KEY}",
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "disabled": true,
+      "_note": "T080 CVE MCP Server (mukul975/cve-mcp-server): 27 tools / 21 APIs (NVD, EPSS, CISA KEV, MITRE ATT&CK, Shodan, VT, GreyNoise, AbuseIPDB, MalwareBazaar, ThreatFox, URLScan, OSV); 8 tools work keyless (EPSS, CISA KEV, OSV, ATT&CK, CWE, CVSS, Ransomwhere, NVD@reduced-rate). ACTION FOR HELDER: 1) git clone https://github.com/mukul975/cve-mcp-server.git C:\\Tools\\cve-mcp-server. 2) cd there, python -m venv .venv (or use uv), pip install -e . . 3) optional: set NVD_API_KEY/GITHUB_TOKEN OS env vars for higher rate limits (keys reused from VT/Shodan above). 4) set disabled=false. Empty ${VAR} = that API is simply unavailable; keyless tools still work."
     }
   }
 }

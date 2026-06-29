@@ -549,6 +549,19 @@ These files configure the Claude Code AI assistant for this project. Restore fro
 | File | Purpose |
 |---|---|
 | `.claude/settings.json` | Per-project permissions (allow/deny), env vars for key paths, MCP server config |
+
+**MCP servers (in `.claude/settings.json` `mcpServers`):**
+
+| Server | Package / source | Status | Purpose / keys |
+|---|---|---|---|
+| `threatintel` | npm `mcp-threatintel-server` (T020) | Active (env keys optional) | IP/domain/hash/URL lookups (Feodo no-key; OTX/AbuseIPDB/GreyNoise/abuse.ch with keys) |
+| `filesystem` | npm `@modelcontextprotocol/server-filesystem` | disabled | Scoped FS access; enable after global install |
+| `win-cli` | npm `win-cli-mcp-server` | disabled | Native PowerShell tool; enable after global install |
+| `virustotal` | npm `@burtthecoder/mcp-virustotal` (T080) | disabled (needs key) | File/URL/domain/IP reports + relationship pivoting. Env `VIRUSTOTAL_API_KEY` (free 500/day, non-commercial). Never upload confidential files |
+| `shodan` | npm `@burtthecoder/mcp-shodan` (T080) | disabled (needs key) | Host/IP recon, DNS, CVE/CPE. Env `SHODAN_API_KEY` (free at account.shodan.io) |
+| `cve` | `mukul975/cve-mcp-server` Python/FastMCP (T080) | disabled (needs clone) | 27 tools / 21 APIs (NVD, EPSS, CISA KEV, MITRE ATT&CK, Shodan, VT, GreyNoise, AbuseIPDB, MalwareBazaar, ThreatFox, URLScan, OSV); 8 keyless. Clone to `C:\Tools\cve-mcp-server`, `pip install -e .` |
+
+**Key handling:** API keys are referenced via `${VAR}` expansion from OS environment variables (`setx VIRUSTOTAL_API_KEY ...` etc.), so no secrets are committed to `settings.json`. All three T080 servers ship `disabled: true`; each entry's `_note` carries the exact "ACTION FOR HELDER" enable steps.
 | `.claude/commands/commit.md` | `/project:commit` slash command — minimal-token git commit workflow |
 | `.claude/commands/check.md` | `/project:check` slash command — FolderSync health check + auto-diagnosis (still active; health.md is primary) |
 | `.claude/commands/camera-check.md` | `/project:camera-check` slash command — camera health check + auto-diagnosis (still active; health.md is primary) |
