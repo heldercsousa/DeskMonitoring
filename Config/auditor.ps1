@@ -364,6 +364,14 @@ $script:GuardedRegPatterns = @(
     '\CurrentVersion\Run'                       # HKCU/HKLM autostart Run keys
 )
 
+# T091 tuning: reporters that legitimately write HKCU Run key entries (e.g. Chrome updating
+# its own autostart entry). Matched by suffix against the ProcessName field of Security 4663.
+# Only suppresses Run key writes - power subgroup writes are never suppressed regardless of reporter.
+$script:RunKeyReporterWhitelist = @(
+    '\chrome.exe',
+    '\GoogleUpdater.exe'
+)
+
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
@@ -559,6 +567,17 @@ function Check-SystemEvents {
 
             $regProc    = Get-EvtData $re 'ProcessName'
             if (-not $regProc) { $regProc = 'unknown' }
+            # T091: suppress Run-key writes from known-benign reporters to reduce noise
+            if ($objName -like '*\CurrentVersion\Run*') {
+                $benignReporter = $false
+                foreach ($w in $script:RunKeyReporterWhitelist) {
+                    if ($regProc -like "*$w") { $benignReporter = $true; break }
+                }
+                if ($benignReporter) {
+                    Write-SecurityAudit "[REG-INFO] Run key written by whitelisted reporter '$regProc' at $($re.TimeCreated) - no alert"
+                    continue
+                }
+            }
             $candidates = Get-CorrelatedProcesses $re.TimeCreated
             $suspect    = @($candidates | Where-Object { -not (Test-WhitelistedProc $_) })
 
