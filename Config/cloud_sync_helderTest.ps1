@@ -1,4 +1,4 @@
-# cloud_sync_helderTest.ps1
+﻿# cloud_sync_helderTest.ps1
 # Rclone sync: C:\Users\helde\Repos\Bois -> Backblaze B2
 # Manages Mirror cleanup and Log rotation automatically.
 # Last updated: 2026-06-05 - T050: add Import-Module Security for SYSTEM PS5 ACL fix
@@ -170,7 +170,7 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
 }
 
 # ============================================================
-# FASE 0 - Aplicar ACL Deny Delete em arquivos < 7 dias
+# PHASE 0 - Apply Deny Delete ACL to files younger than 7 days
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -199,13 +199,13 @@ if (Test-Path $Mirror) {
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
             } catch {
-                # Silencioso
+                # Silent
             }
         }
 }
 
 # ============================================================
-# FASE 1 - Remover ACL Deny Delete de arquivos >= 7 dias
+# PHASE 1 - Remove Deny Delete ACL from files >= 7 days old
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -229,13 +229,13 @@ if (Test-Path $Mirror) {
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
             } catch {
-                # Silencioso
+                # Silent
             }
         }
 }
 
 # ============================================================
-# FASE 2 - Deletar arquivos >= 7 dias
+# PHASE 2 - Delete files >= 7 days old
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
