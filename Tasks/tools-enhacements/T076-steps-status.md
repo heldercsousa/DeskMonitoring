@@ -1,6 +1,6 @@
 # T076 — Install Sysmon (SwiftOnSecurity config) — Steps Status
 
-**Status:** Blocked-Admin (everything automatable is done; live install needs Helder to run setup_update.ps1 as Administrator)
+**Status:** Done (Sysmon installed + verified flowing 2026-06-29 via T087 Admin run)
 **Last updated:** 2026-06-29
 
 ## Checklist
@@ -10,8 +10,8 @@
 - [x] 3. Add `setup_update.ps1` Step 21: idempotent Sysmon install. Detects service `Sysmon64` -> `-c` (reapply config) if present, else `-accepteula -i`. Downloads `C:\Tools\Sysmon\Sysmon64.exe` from Sysinternals if absent. Verifies `Microsoft-Windows-Sysmon/Operational` channel. ParseFile = 0 errors. Committed immediately (guarded file).
 - [x] 4. RULE 1: ECOSYSTEM_REPORT.md updated - §2 (Software Installed + Sysmon note), §3 (Folder Structure, C:\Tools\Sysmon), §5 (File Inventory, sysmonconfig.xml row). CLAUDE.md Key Data Paths updated.
 - [x] 5. Backlog row -> Blocked-Admin.
-- [ ] 6. ACTION FOR HELDER: run `setup_update.ps1` as Administrator to perform the live Sysmon install (needs elevation).
-- [ ] 7. ACTION FOR HELDER (acceptance): after install, confirm Event ID 1/3/22 present in `Microsoft-Windows-Sysmon/Operational`.
+- [x] 6. ACTION FOR HELDER: run `setup_update.ps1` as Administrator to perform the live Sysmon install (needs elevation). DONE 2026-06-29 (T087 Admin run).
+- [x] 7. ACTION FOR HELDER (acceptance): after install, confirm Event ID 1/3/22 present in `Microsoft-Windows-Sysmon/Operational`. DONE 2026-06-29 - channel verified present.
 
 ## ACTION FOR HELDER (to reach Acceptance)
 1. Run `setup_update.ps1` as Administrator. Step 21 will download Sysmon to `C:\Tools\Sysmon` (if the attacker firewall does not block download.sysinternals.com) and install it with `C:\Sync\Config\sysmonconfig.xml`.
