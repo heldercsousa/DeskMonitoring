@@ -14,49 +14,50 @@
 
 ## 1. Run `setup_update.ps1` as Administrator  ← highest leverage (unblocks T078, T076, T075, T079, T077)
 
-One elevated run applies all the staged hardening. Right-click PowerShell ->
-"Run as administrator", then:
+> **First run done 2026-06-29 12:07.** Most steps succeeded; two had errors the
+> script masked with a false "OK" (now fixed in commit `ce466ba`). **A second
+> elevated run is required** to apply the corrected Step 17 hourly task. Status of
+> each item below records the 2026-06-29 result.
 
 ```powershell
 & "C:\Sync\Config\setup_update.ps1"
 ```
 
-It will (idempotently) do all of the below. After it finishes, run the verifications.
-
-- [ ] **T078 - firewall-tamper auditing** (Step 16a4): enables the "MPSSVC Rule-Level
-      Policy Change" audit subcategory and restarts `FolderSyncAuditor`.
-      **Verify:**
+- [x] **T078 - firewall-tamper auditing** (Step 16a4): enabled OK on 2026-06-29.
+      **Still to verify (optional):**
       ```powershell
       auditpol /get /subcategory:"MPSSVC Rule-Level Policy Change"
       ```
-      Expect **Success and Failure** enabled. Then acceptance test - add+remove a dummy
-      outbound block rule and confirm a `[FIREWALL-TAMPER]` line appears in today's
-      `Logs/security/security_audit_*.log` (exact steps: `T078-steps-status.md`).
+      Expect **Success and Failure**. Then acceptance test - add+remove a dummy
+      outbound block rule and confirm a `[FIREWALL-TAMPER]` line in today's
+      `Logs/security/security_audit_*.log` (steps: `T078-steps-status.md`).
 
-- [ ] **T076 - Sysmon install** (Step 21): downloads Sysmon + applies the staged
-      SwiftOnSecurity config.
-      **Verify:** Event Viewer -> Applications and Services Logs ->
+- [x] **T076 - Sysmon install** (Step 21): installed OK on 2026-06-29; channel present.
+      **Still to verify (optional):** Event Viewer -> Applications and Services Logs ->
       `Microsoft-Windows-Sysmon/Operational` shows Event IDs **1 / 3 / 22**.
 
-- [ ] **T075 - registry-tamper auditing** (Step 16a5): enables registry auditing + SACLs
-      on the guarded power/Run keys. (Correlation needs Sysmon from T076 - do this in
-      the same run.)
-      **Verify (acceptance test):** make a deliberate `powercfg` change to USB Selective
-      Suspend, then confirm a `[REG-TAMPER]` / `[REG-WRITE]` line in the security audit
-      log naming the calling process + parent (steps: `T075-steps-status.md`).
+- [~] **T075 - registry-tamper auditing** (Step 16a5): **PARTIAL on 2026-06-29.**
+      Subcategory enabled + both **Run-key SACLs applied** (the autostart-persistence
+      vectors). The **PowerSchemes SACL was DENIED** ("Acesso ao Registro ... não é
+      permitido") - a protected HKLM\SYSTEM key an elevated user cannot SACL without
+      SeSecurityPrivilege/ownership. Tracked separately as **T089**. The false "OK"
+      that hid this is fixed; a re-run will now print WARN honestly for that key.
+      **Acceptance test (after Sysmon):** deliberate `powercfg` USB-Suspend change ->
+      expect `[REG-TAMPER]`/`[REG-WRITE]` naming the caller (works for the Run keys;
+      power-key coverage pending T089). Steps: `T075-steps-status.md`.
 
-- [ ] **T079 - Autoruns baseline** (Step 22): downloads `autorunsc64.exe`, registers the
-      `FolderSync-AutoRunsCheck` task (SYSTEM, daily 08:45), and captures
-      `Config\autoruns\baseline.csv`.
-      **Then commit the baseline** (it is the diff reference):
+- [x] **T079 - Autoruns baseline** (Step 22): task registered + baseline captured OK on
+      2026-06-29; **baseline.csv committed** (`aec520d`, 1788 entries). Daily diff runs
+      08:45. Nothing left here.
+
+- [ ] **T077 - hourly off-box log push** (Step 17): **FAILED on 2026-06-29** - the task
+      XML had an out-of-range Duration, so the old **daily** definition stayed (and
+      config_guard restored it). **Fixed in `ce466ba`.** ** -> RE-RUN setup_update.ps1
+      as Admin** to register the hourly version, then confirm:
       ```powershell
-      cd C:\Sync
-      git add Config/autoruns/baseline.csv
-      git commit -m "T079: capture Autoruns persistence baseline"
+      (Get-ScheduledTask FolderSync-GitCommitLogs).Triggers
       ```
-
-- [ ] **T077 - hourly off-box log push** (Step 17): tightens `auto_commit_logs.ps1`
-      cadence to hourly. No extra verification beyond setup_update printing OK.
+      should show an **hourly Repetition (PT1H)**, not a DailyTrigger.
 
 ---
 
