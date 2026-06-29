@@ -242,3 +242,37 @@
 | 2026-06-29 16:50:46 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-29 16:50:45 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\send_alert.ps1.tmp.18800.de2e82d435c4` |
 | 2026-06-29 16:50:45 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\send_alert.ps1.tmp.18800.de2e82d435c4` |
+
+## 2026-06-29 17:10:08 - 12 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 17:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.2e0f952a5bed` |
+| 2026-06-29 17:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.2e0f952a5bed` |
+| 2026-06-29 17:09:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.ff3a18ae8126` |
+| 2026-06-29 17:09:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.ff3a18ae8126` |
+| 2026-06-29 17:09:23 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:23 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.a2bf40d7ee61` |
+| 2026-06-29 17:09:23 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.a2bf40d7ee61` |
+| 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.caace4f4d734` |
+| 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.caace4f4d734` |
+
+## 2026-06-29 17:15:04 - 12 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 17:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.2e0f952a5bed` |
+| 2026-06-29 17:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.2e0f952a5bed` |
+| 2026-06-29 17:09:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.ff3a18ae8126` |
+| 2026-06-29 17:09:30 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.ff3a18ae8126` |
+| 2026-06-29 17:09:23 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:23 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.a2bf40d7ee61` |
+| 2026-06-29 17:09:23 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.a2bf40d7ee61` |
+| 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.caace4f4d734` |
+| 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.caace4f4d734` |

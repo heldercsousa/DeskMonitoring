@@ -25,3 +25,7 @@
 2026-06-29 16:47:42  [ALERT] [TASK-TAMPER] Defensive task FolderSync-CloudBackup was UPDATED at 06/29/2026 16:47:19 by account=helde (event 4702) - config_guard auto-heal will re-enable if disabled
 2026-06-29 16:50:04  AUDIT-FILTER  SUSPICIOUS-WRITES  5 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-29.md
 2026-06-29 16:55:07  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-29.md
+2026-06-29 17:08:56  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\USER\S-1-5-21-583231401-428563657-1696801058-1001\Software\Microsoft\Windows\CurrentVersion\Run' written by C:\Program Files\Google\Chrome\Application\chrome.exe at 06/29/2026 17:07:57 (event 4663); correlated process(es): C:\Program Files\Google\Chrome\Application\chrome.exe (pid 0x54a0, parent C:\Program Files\Google\Chrome\Application\chrome.exe, via Sec-4688)
+2026-06-29 17:08:56  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-06-29_reg-tamper_20260629_170757.md
+2026-06-29 17:10:08  AUDIT-FILTER  SUSPICIOUS-WRITES  12 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-29.md
+2026-06-29 17:15:04  AUDIT-FILTER  SUSPICIOUS-WRITES  12 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-29.md
