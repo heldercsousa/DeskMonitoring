@@ -722,17 +722,21 @@ if (Test-Path $configAuditScript) {
 }
 
 # =============================================================================
-# STEP 17 - FolderSync-GitCommitLogs task (current user, daily 23:30)
+# STEP 17 - FolderSync-GitCommitLogs task (current user, hourly off-box push)
+# T077 interim mitigation: tighten Logs/+Evidence/ off-box (git push) cadence
+# from daily to hourly so tamper evidence reaches GitHub within ~1h, until a
+# real WEF collector host exists.
 # =============================================================================
-Write-Step "Step 17 - FolderSync-GitCommitLogs task (daily 23:30)"
+Write-Step "Step 17 - FolderSync-GitCommitLogs task (hourly off-box push)"
 $action17   = New-ScheduledTaskAction -Execute 'powershell.exe' `
     -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1'
-$trigger17  = New-ScheduledTaskTrigger -Daily -At "23:30"
+$trigger17  = New-ScheduledTaskTrigger -Once -At (Get-Date) `
+    -RepetitionInterval (New-TimeSpan -Hours 1) -RepetitionDuration ([System.TimeSpan]::MaxValue)
 $settings17 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
 $principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType S4U -RunLevel Highest
 Unregister-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Confirm:$false -ErrorAction SilentlyContinue
 Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -Trigger $trigger17 -Settings $settings17 -Principal $principal17 -Force | Out-Null
-Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, daily 23:30)"
+Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, hourly off-box push)"
 
 # =============================================================================
 # STEP 18 - FolderSync-PowerCheck task (SYSTEM, every 1h + AtLogon + AtBoot)
@@ -1118,7 +1122,7 @@ Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -Fore
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
 Write-Host "  Step 16a5- Registry auditing on power/Run keys (events 4657/4663, T075)" -ForegroundColor Gray
 Write-Host "  Step 16b- SACL on Config\+Evidence\+.git\ + 512 MB Security log" -ForegroundColor Gray
-Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
+Write-Host "  Step 17 - FolderSync-GitCommitLogs task (hourly off-box push)" -ForegroundColor Gray
 Write-Host "  Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)" -ForegroundColor Gray
 Write-Host "  Step 18b- Power settings applied (Balanced plan, USB Suspend disabled)" -ForegroundColor Gray
 Write-Host "  Step 18d- B2 credentials: checked/warned if b2_creds.dpapi missing" -ForegroundColor Gray
