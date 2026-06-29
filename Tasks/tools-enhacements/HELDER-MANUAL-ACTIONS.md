@@ -36,15 +36,12 @@
       **Still to verify (optional):** Event Viewer -> Applications and Services Logs ->
       `Microsoft-Windows-Sysmon/Operational` shows Event IDs **1 / 3 / 22**.
 
-- [~] **T075 - registry-tamper auditing** (Step 16a5): **PARTIAL on 2026-06-29.**
-      Subcategory enabled + both **Run-key SACLs applied** (the autostart-persistence
-      vectors). The **PowerSchemes SACL was DENIED** ("Acesso ao Registro ... não é
-      permitido") - a protected HKLM\SYSTEM key an elevated user cannot SACL without
-      SeSecurityPrivilege/ownership. Tracked separately as **T089**. The false "OK"
-      that hid this is fixed; a re-run will now print WARN honestly for that key.
-      **Acceptance test (after Sysmon):** deliberate `powercfg` USB-Suspend change ->
-      expect `[REG-TAMPER]`/`[REG-WRITE]` naming the caller (works for the Run keys;
-      power-key coverage pending T089). Steps: `T075-steps-status.md`.
+- [x] **T075 - registry-tamper auditing** (Step 16a5): subcategory + all SACLs applied.
+      The PowerSchemes SACL initially failed (T089) but is now **FIXED & verified live**
+      (`6428325` - native RegSetKeySecurity). All 3 guarded keys audit writes (4657/4663).
+      **Acceptance test (needs the ecosystem RUNNING so FolderSyncAuditor catches it):**
+      deliberate `powercfg` USB-Suspend change -> expect `[REG-TAMPER]`/`[REG-WRITE]`
+      naming the caller (Sysmon Event 1 / 4688). Steps: `T075-steps-status.md`.
 
 - [x] **T079 - Autoruns baseline** (Step 22): task registered + baseline captured OK on
       2026-06-29; **baseline.csv committed** (`aec520d`, 1788 entries). Daily diff runs
