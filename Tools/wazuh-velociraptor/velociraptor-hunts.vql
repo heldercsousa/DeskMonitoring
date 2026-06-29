@@ -1,0 +1,118 @@
+# Velociraptor custom hunt ARTIFACTS - PRE-AUTHORED for T084 (deploy on clean rebuild).
+#
+# These are Velociraptor "artifact" definitions (YAML + embedded VQL). Each maps to a
+# DOCUMENTED incident in this ecosystem's threat model so that a Wazuh alert can trigger
+# the matching Velociraptor hunt ("Wazuh alert -> Velociraptor hunt: what and why").
+#
+# How to load (on the SERVER, after the N100 build):
+#   - GUI: View Artifacts -> Add an Artifact -> paste ONE artifact block below.
+#   - or: velociraptor --config server.config.yaml artifacts upload <thisfile-split>.
+# Each "name: Custom.FolderSync.*" block is one artifact; split on the '---' separators.
+#
+# All queries are READ-ONLY collection/hunt VQL. No active remediation (assume-breach:
+# observe + hunt from off-host; remediate manually).
+
+---
+name: Custom.FolderSync.DefensiveTaskTamper
+description: |
+  Lists scheduled tasks and flags the six FolderSync defensive tasks if Disabled,
+  missing, or no longer running as SYSTEM/Highest. Maps to T070 (in-process disable of
+  FolderSync-DailyCheck + FolderSync-CloudBackup, 2026-06-18, confirmed tampering).
+type: CLIENT
+parameters:
+  - name: DefensiveTasks
+    default: 'FolderSync-CloudBackup,FolderSync-DailyCheck,FolderSync-ConfigGuard,FolderSync-AuditFilter,FolderSync-GitCommitLogs,FolderSync-PowerCheck'
+sources:
+  - query: |
+      LET wanted = SELECT _value AS TaskName FROM foreach(row=split(string=DefensiveTasks, sep=","))
+      SELECT *
+      FROM foreach(row=wanted,
+        query={
+          SELECT TaskName,
+                 { SELECT Enabled, State, Principal FROM Artifact.Windows.System.TaskScheduler(TaskName=TaskName) } AS Detail
+          FROM scope()
+        })
+
+---
+name: Custom.FolderSync.RunKeyPersistence
+description: |
+  Enumerates HKLM + all HKU Run/RunOnce keys and flags any value NOT in the known-good
+  whitelist (Yawcam, YawcamMonitor, YawcamCam2Relay, FolderSyncRealTime). Maps to T017
+  (HKCU Run-key persistence check) and the resident-agent hypothesis (T070).
+type: CLIENT
+parameters:
+  - name: Whitelist
+    default: 'Yawcam,YawcamMonitor,YawcamCam2Relay,FolderSyncRealTime'
+sources:
+  - query: |
+      LET allow = SELECT lowcase(string=_value) AS n FROM foreach(row=split(string=Whitelist, sep=","))
+      LET runkeys = SELECT * FROM glob(
+        globs=[
+          "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\*",
+          "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\*",
+          "HKEY_USERS\\*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\*",
+          "HKEY_USERS\\*\\Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\*"
+        ],
+        accessor="registry")
+      SELECT Name, FullPath, Data.value AS Command
+      FROM runkeys
+      WHERE NOT lowcase(string=Name) IN allow
+
+---
+name: Custom.FolderSync.ConfigScriptTamper
+description: |
+  Hashes the guarded Config scripts and lists the last writer via USN/MFT timestamps.
+  Maps to the nightly overwrite of cloud_sync.ps1 / run_mirror.bat / auditor.ps1 /
+  setup_update.ps1 that strips DPAPI loading and injects Portuguese comments. Cross-check
+  the hash against the git-HEAD known-good and grep the content for tamper signatures.
+type: CLIENT
+parameters:
+  - name: ConfigDir
+    default: 'C:\Sync\Config'
+sources:
+  - query: |
+      SELECT FullPath, Size, Mtime, Btime,
+             hash(path=FullPath, accessor="file").SHA256 AS SHA256,
+             if(condition=FullPath =~ "(?i)\\.(ps1|bat)$"
+                AND NOT read_file(filename=FullPath) =~ "ProtectedData"
+                AND FullPath =~ "(?i)cloud_sync\\.ps1$",
+                then="MISSING-DPAPI") AS DpapiCheck,
+             if(condition=read_file(filename=FullPath) =~ "(?i)\\bFASE\\b",
+                then="PORTUGUESE-TAMPER-MARKER") AS LangCheck
+      FROM glob(globs=ConfigDir + "\\*.ps1", accessor="file")
+      ORDER BY Mtime DESC
+
+---
+name: Custom.FolderSync.PowerRegistryFlip
+description: |
+  Reads the power/sleep/USB-selective-suspend values that must stay at Never/Disabled
+  to keep the camera recording. Flags any non-compliant value. Maps to T058 (webcam
+  power mgmt), T067 (power-button sleep), T069 (unattended sleep timeout).
+type: CLIENT
+sources:
+  - query: |
+      SELECT FullPath, Name, Data.value AS Value
+      FROM glob(
+        globs=[
+          "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerSettings\\**\\*",
+          "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\USB\\*"
+        ],
+        accessor="registry")
+      WHERE Name =~ "(?i)(SelectiveSuspend|StandbyTimeout|UnattendIdleTimeout|HibernateTimeout|DCSettingIndex|ACSettingIndex)"
+
+---
+name: Custom.FolderSync.ResidentSuspectProcesses
+description: |
+  Lists running processes with full command line, parent, and binary hash, then flags
+  long-lived powershell/pwsh/svchost children with no visible window - candidates for
+  the resident process that disables tasks in-process (T060, T070). Feed hashes to the
+  VirusTotal MCP (T080) / file-triage (T081) for enrichment.
+type: CLIENT
+sources:
+  - query: |
+      SELECT Pid, Ppid, Name, CommandLine, CreateTime, Username,
+             hash(path=Exe, accessor="file").SHA256 AS SHA256, Exe
+      FROM pslist()
+      WHERE Name =~ "(?i)^(powershell|pwsh|wscript|cscript|mshta|rundll32)\\.exe$"
+         OR (Name =~ "(?i)^svchost\\.exe$" AND CommandLine =~ "(?i)-k\\s+netsvcs")
+      ORDER BY CreateTime
