@@ -1,0 +1,47 @@
+<!--
+  FolderSync-TamperEvidence - source-initiated WEF subscription (T077)
+  Import on the COLLECTOR host:  wecutil cs wef_subscription_template.xml
+  PRE-AUTHORED / NOT YET ACTIVE - requires a collector host (T083 N100 or any
+  clean second machine). Replace COLLECTOR-FQDN placeholders before import.
+  Source-initiated push: the laptop forwards OUT to the collector, so disabling
+  forwarding on the laptop is itself visible as a heartbeat gap on the collector.
+-->
+<Subscription xmlns="http://schemas.microsoft.com/2006/03/windows/events/subscription">
+  <SubscriptionId>FolderSync-TamperEvidence</SubscriptionId>
+  <SubscriptionType>SourceInitiated</SubscriptionType>
+  <Description>Forward Security audit + Sysmon tamper-evidence events off-box (T077)</Description>
+  <Enabled>true</Enabled>
+  <Uri>http://schemas.microsoft.com/wbem/wsman/1/windows/EventLog</Uri>
+  <ConfigurationMode>Custom</ConfigurationMode>
+  <Delivery Mode="Push">
+    <Batching>
+      <MaxItems>1</MaxItems>
+      <MaxLatencyTime>5000</MaxLatencyTime>
+    </Batching>
+    <PushSettings>
+      <Heartbeat Interval="60000"/>
+    </PushSettings>
+  </Delivery>
+  <Query>
+    <![CDATA[
+      <QueryList>
+        <Query Id="0">
+          <Select Path="Security">*[System[(EventID=4657 or EventID=4663 or EventID=4688 or (EventID&gt;=4698 and EventID&lt;=4702) or (EventID&gt;=4946 and EventID&lt;=4950) or EventID=5025)]]</Select>
+          <Select Path="Microsoft-Windows-Sysmon/Operational">*</Select>
+        </Query>
+      </QueryList>
+    ]]>
+  </Query>
+  <ReadExistingEvents>true</ReadExistingEvents>
+  <TransportName>HTTPS</TransportName>
+  <ContentFormat>RenderedText</ContentFormat>
+  <Locale Language="en-US"/>
+  <LogFile>ForwardedEvents</LogFile>
+  <AllowedSourceNonDomainComputers>
+    <Issuer>CA-THUMBPRINT-PLACEHOLDER</Issuer>
+    <AllowedSubjectList>
+      <Subject>LAP*</Subject>
+    </AllowedSubjectList>
+  </AllowedSourceNonDomainComputers>
+  <AllowedSourceDomainComputers></AllowedSourceDomainComputers>
+</Subscription>

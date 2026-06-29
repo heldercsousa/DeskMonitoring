@@ -349,7 +349,7 @@ The ecosystem has four layers that work together continuously:
 | `FolderSync-DailyCheck` | `DailySecurityCheck.ps1` | Daily 09:00 | helde |
 | `FolderSync-ConfigGuard` | `config_guard.ps1` (pwsh) | Continuous guard on Config/ | helde |
 | `FolderSync-AuditFilter` | `audit_filter_launcher.vbs` (wscript) | Audit event filter | helde |
-| `FolderSync-GitCommitLogs` | `auto_commit_logs.ps1` | Daily 23:30 | helde |
+| `FolderSync-GitCommitLogs` | `auto_commit_logs.ps1` | Hourly (commit + off-box git push of Logs/+Evidence/, T077) | helde |
 | `FolderSync-PowerCheck` | `check_power_motion.ps1` | Hourly (power/sleep auto-heal) | SYSTEM |
 | `FolderSync-AutoRunsCheck` | `check_autoruns.ps1` | Daily 08:45 (autoruns persistence baseline diff) | SYSTEM |
 

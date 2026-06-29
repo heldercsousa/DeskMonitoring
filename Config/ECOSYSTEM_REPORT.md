@@ -503,7 +503,9 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s, power/sleep button AC+DC=0, disk turn-off AC+DC=0, System unattended sleep timeout AC+DC=0 (2026-06-17); logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
 | `check_autoruns.ps1` | Task `FolderSync-AutoRunsCheck` (daily 08:45, SYSTEM) | T079: Autoruns persistence baseline + daily diff. Runs Sysinternals `autorunsc64.exe` (auto-downloaded to `C:\Tools\Sysinternals`), captures the full autostart surface (Run keys, services, drivers, scheduled tasks, WMI, Winlogon, codecs) with SHA-256 + signature verification, diffs vs `Config\autoruns\baseline.csv`; new/changed/removed persistence logged as `[AUTORUN-DELTA]` + Evidence file + `send_alert.ps1`. Optional VirusTotal HASH-ONLY enrichment (disabled until `VIRUSTOTAL_API_KEY` set, T080 hook). `-UpdateBaseline` re-baselines. EVIDENCE-ONLY (live OS; corroborate via offline mount T082). Feeds T070/T072. Logs to `Logs\security\autoruns_YYYY-MM-DD.log` (30-day rotation) (2026-06-29) |
 | `autoruns\baseline.csv` | `check_autoruns.ps1` | T079: known-good autostart-surface snapshot (CSV w/ hashes + signatures). Version-controlled so the diff baseline survives reinstall. Captured by `setup_update.ps1` Step 22 on first run; re-baseline after a reviewed change via `check_autoruns.ps1 -UpdateBaseline` |
-| `auto_commit_logs.ps1` | Task `FolderSync-GitCommitLogs` (daily 23:30) | Commits dirty Logs/ files to git; skips if nothing changed or git is locked; logs to `ecosystem_YYYY-MM-DD.log` |
+| `auto_commit_logs.ps1` | Task `FolderSync-GitCommitLogs` (hourly) | Commits dirty Logs/+Evidence/ to git then PUSHES to GitHub origin off-box (T077 interim mitigation); skips if nothing changed or git is locked; logs `GIT-COMMIT-LOGS`/`LOG-FORWARD` to `ecosystem_YYYY-MM-DD.log` |
+| `wef/wef_subscription_template.xml` | Pre-authored (T077, not active) | Source-initiated WEF subscription for Security audit + Sysmon events; import on a collector host via `wecutil cs`. Blocked on a second machine. |
+| `wef/README-WEF-collector-setup.md` | Pre-authored (T077, not active) | Collector + source setup steps and ACTION FOR HELDER for activating off-box WEF when a collector exists. |
 | `ECOSYSTEM_REPORT.md` | — | This document |
 
 ### Remediation scripts (root of `C:\Sync\`)
@@ -5038,17 +5040,21 @@ if ($LASTEXITCODE -eq 0) { Write-OK "Firewall-change auditing enabled - rule add
 else { Write-Warn "auditpol failed - run manually: auditpol /set /subcategory:`"{0CCE9232-69AE-11D9-BED3-505054503030}`" /success:enable /failure:enable" }
 
 # =============================================================================
-# STEP 17 - FolderSync-GitCommitLogs task (current user, daily 23:30)
+# STEP 17 - FolderSync-GitCommitLogs task (current user, hourly off-box push)
+# T077 interim mitigation: tighten Logs/+Evidence/ off-box (git push) cadence
+# from daily to hourly so tamper evidence reaches GitHub within ~1h, until a
+# real WEF collector host exists.
 # =============================================================================
-Write-Step "Step 17 - FolderSync-GitCommitLogs task (daily 23:30)"
+Write-Step "Step 17 - FolderSync-GitCommitLogs task (hourly off-box push)"
 $action17   = New-ScheduledTaskAction -Execute 'powershell.exe' `
     -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1'
-$trigger17  = New-ScheduledTaskTrigger -Daily -At "23:30"
+$trigger17  = New-ScheduledTaskTrigger -Once -At (Get-Date) `
+    -RepetitionInterval (New-TimeSpan -Hours 1) -RepetitionDuration ([System.TimeSpan]::MaxValue)
 $settings17 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
-$principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType Interactive -RunLevel Highest
+$principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType S4U -RunLevel Highest
 Unregister-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Confirm:$false -ErrorAction SilentlyContinue
 Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -Trigger $trigger17 -Settings $settings17 -Principal $principal17 -Force | Out-Null
-Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, daily 23:30)"
+Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, hourly off-box push)"
 
 # =============================================================================
 # STEP 20 - FolderSync-ConfigGuard task (at logon, current user, hidden)
@@ -6114,15 +6120,19 @@ Start-Process powershell.exe `
 ```
 
 ### `C:\Sync\Config\auto_commit_logs.ps1`
-> Daily git commit of Logs/ files. Runs via Task Scheduler as `LAP\helde` at 23:30.
-> Skips silently if nothing changed or if `git index.lock` exists.
-> Logs one line to `ecosystem_YYYY-MM-DD.log` on each run.
+> Hourly git commit + off-box PUSH of Logs/+Evidence/ files (T077 interim mitigation).
+> Runs via Task Scheduler as `LAP\helde` hourly. Pushes to GitHub origin so evidence
+> survives local `.git` tampering. Skips silently if nothing changed or if
+> `git index.lock` exists; push failure is non-fatal.
+> Logs `GIT-COMMIT-LOGS` / `LOG-FORWARD` lines to `ecosystem_YYYY-MM-DD.log`.
 
 ```powershell
 # auto_commit_logs.ps1
-# Commits any dirty Logs/ files to git once per day.
-# Runs as LAP\helde (interactive) via Task Scheduler at 23:30.
-# Skips silently if nothing changed or if git is locked.
+# Commits dirty Logs/ and Evidence/ files to git, then PUSHES them off-box to
+# the GitHub origin remote so a local-admin attacker cannot retroactively erase
+# tamper evidence (T077 interim mitigation until a real WEF collector exists).
+# Runs as LAP\helde (interactive) via Task Scheduler hourly.
+# Skips silently if nothing changed or if git is locked. Push failure is non-fatal.
 
 $RepoRoot = 'C:\Sync'
 $LogDir   = 'C:\Sync\Logs'
@@ -6140,34 +6150,53 @@ if (Test-Path $lockFile) {
     exit 0
 }
 
-# Check for dirty Logs/ files
-$statusLines = & git -C $RepoRoot status --porcelain -- Logs/ 2>&1
+# Resolve current branch once (used for both commit context and push target)
+$branch = (& git -C $RepoRoot rev-parse --abbrev-ref HEAD 2>$null)
+if (-not $branch) { $branch = 'master' }
+
+# Check for dirty Logs/ and Evidence/ files
+$statusLines = & git -C $RepoRoot status --porcelain -- Logs/ Evidence/ 2>&1
 if ($LASTEXITCODE -ne 0) {
     Write-EcoLog "GIT-COMMIT-LOGS  FAIL  git status failed: $statusLines"
     exit 1
 }
 
 $dirty = $statusLines | Where-Object { $_ -match '\S' }
-if (-not $dirty) {
-    Write-EcoLog "GIT-COMMIT-LOGS  SKIP  no Logs/ changes"
-    exit 0
-}
 
-# Stage and commit
-$commitMsg = "logs: auto-commit $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
+if ($dirty) {
+    # Stage and commit
+    $commitMsg = "logs: auto-commit $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 
-& git -C $RepoRoot add Logs/ 2>&1 | Out-Null
-if ($LASTEXITCODE -ne 0) {
-    Write-EcoLog "GIT-COMMIT-LOGS  FAIL  git add failed"
-    exit 1
-}
+    & git -C $RepoRoot add Logs/ Evidence/ 2>&1 | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        Write-EcoLog "GIT-COMMIT-LOGS  FAIL  git add failed"
+        exit 1
+    }
 
-$commitOut = & git -C $RepoRoot commit -m $commitMsg 2>&1
-if ($LASTEXITCODE -eq 0) {
-    Write-EcoLog "GIT-COMMIT-LOGS  OK  committed $($dirty.Count) Logs/ file(s): $commitMsg"
+    $commitOut = & git -C $RepoRoot commit -m $commitMsg 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-EcoLog "GIT-COMMIT-LOGS  OK  committed $($dirty.Count) Logs/+Evidence/ file(s): $commitMsg"
+    } else {
+        Write-EcoLog "GIT-COMMIT-LOGS  FAIL  git commit failed: $commitOut"
+        exit 1
+    }
 } else {
-    Write-EcoLog "GIT-COMMIT-LOGS  FAIL  git commit failed: $commitOut"
-    exit 1
+    Write-EcoLog "GIT-COMMIT-LOGS  SKIP  no Logs/ or Evidence/ changes"
+}
+
+# Off-box forwarding (T077 interim mitigation): push to GitHub so the committed
+# evidence survives local tampering / .git history rewrite. Push every run even
+# when nothing new was committed, in case a prior run committed but failed to push.
+$ahead = (& git -C $RepoRoot rev-list --count "origin/$branch..$branch" 2>$null)
+if ($ahead -and ($ahead -as [int]) -gt 0) {
+    $pushOut = & git -C $RepoRoot push origin $branch 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-EcoLog "LOG-FORWARD  OK  pushed $ahead commit(s) off-box to origin/$branch"
+    } else {
+        Write-EcoLog "LOG-FORWARD  WARN  push to origin/$branch failed (off-box copy stale): $pushOut"
+    }
+} else {
+    Write-EcoLog "LOG-FORWARD  SKIP  local branch not ahead of origin/$branch - already off-box"
 }
 ```
 
