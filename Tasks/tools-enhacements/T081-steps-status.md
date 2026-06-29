@@ -1,6 +1,6 @@
 # T081 - Python file-triage tool (oletools + vt-py + pdfid) - Steps Status
 
-**Status:** Done (static triage fully working + tested; VirusTotal hash lookup wired but needs free API key to go live)
+**Status:** Done (all steps complete; live VT enrichment confirmed in two sessions)
 **Last updated:** 2026-06-29
 
 ## Checklist
@@ -17,7 +17,7 @@
 - [x] 5. `requirements.txt` + `.gitignore` (excludes dropbox/test_samples/logs/pycache)
 - [x] 6. ACCEPTANCE TEST: EICAR file -> verdict CRITICAL, exit 3 (non-zero); clean .txt -> verdict LOW, exit 0; synthetic /JS+/OpenAction PDF -> verdict HIGH, exit 3. PASS.
 - [x] 7. RULE 1: ECOSYSTEM_REPORT.md Section 5 - added "Standalone Python tools" inventory row; CLAUDE.md Key Data Paths - added `C:\Sync\Tools\` row
-- [ ] 8. Enable live VirusTotal lookups - ACTION FOR HELDER (free key)
+- [x] 8. Enable live VirusTotal lookups - DONE 2026-06-29: VIRUSTOTAL_API_KEY set (64-char); triage.py --vt confirmed performed=true in both prior session (EICAR: 65 malicious) and this session (cloud_sync.ps1: performed=true, found=false as expected for private file)
 - [ ] 9. (Optional / Pending-Decision) Wire triage into DailySecurityCheck.ps1 drop-folder scan - see note
 
 ## ACTION FOR HELDER (to enable VT enrichment)

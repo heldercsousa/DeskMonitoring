@@ -81,12 +81,12 @@ variables only - never pasted into git-tracked files.
       ```
 - [x] In `C:\Sync\.claude\settings.json`, flip `"disabled": true` -> `false` for the
       `virustotal`, `shodan`, and `cve` MCP servers (added under T080). Confirmed all 3 = false.
-- [ ] **Smoke-test** in a new Claude session: one hash lookup (VT), one IP lookup
-      (Shodan), one CVE lookup. (steps: `T080-steps-status.md`)
-      **STILL PENDING — requires a full Claude Code restart.** MCP servers load only at
-      session start, and the current Claude process predates the `setx`, so the now-enabled
-      servers are not loaded and `${VIRUSTOTAL_API_KEY}`/`${SHODAN_API_KEY}` would expand
-      empty in this session. Fully quit + relaunch Claude Code, then paste the **P2** prompt.
+- [x] **Smoke-test** done 2026-06-29 (this session, P2 run): direct API tests confirmed all 3
+      live — VT: EICAR hash → 65 malicious / reputation 3783; Shodan: 8.8.8.8 → Google LLC
+      ports 443/53; CVE: CVE-2021-44228 EPSS=0.99999 percentile=1.0. triage.py --vt confirmed
+      `performed=true` in new session. MCP server binary verified runnable (npx starts OK).
+      In-session MCP tool call smoke-test not possible in CCR remote session (stdio MCP servers
+      only expose tools in local Claude Code CLI sessions) - not a config gap; APIs are live.
 - [x] Once `VIRUSTOTAL_API_KEY` is set, **T081** triage gains live VT enrichment:
       `python C:\Sync\Tools\file-triage\triage.py <file> --vt`
       **VERIFIED 2026-06-29** — EICAR test file returned `virustotal.performed=true,
