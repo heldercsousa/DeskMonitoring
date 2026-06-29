@@ -695,6 +695,21 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 # =============================================================================
+# STEP 16a5 - Registry auditing on guarded power/Run keys (T075 - events 4657/4663)
+# Enables the Registry audit subcategory and SACLs the USB Selective Suspend / sleep
+# power keys + autostart Run keys, so a write fires 4657/4663. auditor.ps1 then
+# correlates against Sysmon Event 1 (T076, fallback 4688) to unmask the true caller.
+# =============================================================================
+Write-Step "Step 16a5 - Enable registry auditing on guarded power/Run keys (events 4657/4663)"
+$regAuditScript = "C:\Sync\Config\enable_registry_auditing.ps1"
+if (Test-Path $regAuditScript) {
+    & powershell.exe -ExecutionPolicy Bypass -File $regAuditScript
+    Write-OK "Registry auditing (subcategory + SACL) configured on power/Run keys"
+} else {
+    Write-Warn "enable_registry_auditing.ps1 not found - run manually when available"
+}
+
+# =============================================================================
 # STEP 16b - SACL write auditing on C:\Sync\Config\ (catches tampering process via event 4663)
 # =============================================================================
 Write-Step "Step 16b - SACL write auditing on Config\, Evidence\, .git\ + 512 MB Security log"
@@ -1063,6 +1078,7 @@ Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)"
 Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
+Write-Host "  Step 16a5- Registry auditing on power/Run keys (events 4657/4663, T075)" -ForegroundColor Gray
 Write-Host "  Step 16b- SACL on Config\+Evidence\+.git\ + 512 MB Security log" -ForegroundColor Gray
 Write-Host "  Step 17 - FolderSync-GitCommitLogs task (daily 23:30)" -ForegroundColor Gray
 Write-Host "  Step 18 - FolderSync-PowerCheck task (SYSTEM, hourly + AtLogon + AtBoot)" -ForegroundColor Gray
