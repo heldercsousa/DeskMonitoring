@@ -31,6 +31,81 @@ function Write-BothLogs($msg) {
 }
 
 # ---------------------------------------------------------------------------
+# Process-correlation helpers (T075)
+# Registry writes to power keys (USB Selective Suspend, sleep timeouts) surface
+# as svchost.exe; the true caller is only visible by correlating process-creation
+# telemetry in the same time window. Prefer Sysmon Event 1 (T076), fall back to
+# Security 4688 (enabled T014/setup Step 16a2).
+# ---------------------------------------------------------------------------
+function Get-EvtData($evt, [string]$name) {
+    # Locale-independent read of an EventData <Data Name='X'> node via ToXml().
+    try {
+        $x = [xml]$evt.ToXml()
+        $node = $x.Event.EventData.Data | Where-Object { $_.Name -eq $name }
+        if ($node) { return [string]($node.'#text') }
+    } catch {}
+    return ''
+}
+
+function Get-CorrelatedProcesses([datetime]$eventTime) {
+    # Returns process-creation candidates within eventTime +/- 5s.
+    # Prefers Sysmon Operational Event 1; falls back to Security 4688.
+    $start   = $eventTime.AddSeconds(-5)
+    $end     = $eventTime.AddSeconds(5)
+    $results = @()
+
+    try {
+        $sm = Get-WinEvent -FilterHashtable @{
+            LogName = 'Microsoft-Windows-Sysmon/Operational'; Id = 1; StartTime = $start; EndTime = $end
+        } -ErrorAction SilentlyContinue
+        foreach ($e in $sm) {
+            $results += [pscustomobject]@{
+                Source            = 'Sysmon-1'
+                Image             = (Get-EvtData $e 'Image')
+                CommandLine       = (Get-EvtData $e 'CommandLine')
+                ParentImage       = (Get-EvtData $e 'ParentImage')
+                ParentCommandLine = (Get-EvtData $e 'ParentCommandLine')
+                User              = (Get-EvtData $e 'User')
+                ProcessId         = (Get-EvtData $e 'ProcessId')
+                TimeCreated       = $e.TimeCreated
+            }
+        }
+    } catch {}
+
+    if (-not $results -or @($results).Count -eq 0) {
+        try {
+            $sec = Get-WinEvent -FilterHashtable @{
+                LogName = 'Security'; Id = 4688; StartTime = $start; EndTime = $end
+            } -ErrorAction SilentlyContinue
+            foreach ($e in $sec) {
+                $results += [pscustomobject]@{
+                    Source            = 'Sec-4688'
+                    Image             = (Get-EvtData $e 'NewProcessName')
+                    CommandLine       = (Get-EvtData $e 'CommandLine')
+                    ParentImage       = (Get-EvtData $e 'ParentProcessName')
+                    ParentCommandLine = ''
+                    User              = (Get-EvtData $e 'SubjectUserName')
+                    ProcessId         = (Get-EvtData $e 'NewProcessId')
+                    TimeCreated       = $e.TimeCreated
+                }
+            }
+        } catch {}
+    }
+    return $results
+}
+
+function Test-WhitelistedProc($p) {
+    # Known-good: our own ecosystem scripts (powershell/pwsh/powercfg launched by a
+    # C:\Sync\Config script). The hourly FolderSync-PowerCheck heal legitimately
+    # rewrites these power keys; whitelist via the C:\Sync\Config marker on either the
+    # process or its parent command line so the heal does not self-trigger [REG-TAMPER].
+    $marker = 'C:\Sync\Config'
+    if (($p.CommandLine       -and $p.CommandLine       -like "*$marker*") -or
+        ($p.ParentCommandLine -and $p.ParentCommandLine -like "*$marker*")) { return $true }
+    return $false
+}
+
+# ---------------------------------------------------------------------------
 # Startup gap detection + forensic dump
 # ---------------------------------------------------------------------------
 function Invoke-StartupGapCheck {
@@ -272,6 +347,23 @@ $script:LastTaskEventTime = [datetime]::Now
 # that occur after the auditor starts, so historical events do not re-fire on boot.
 $script:LastFwEventTime = [datetime]::Now
 
+# Watermark for the registry-tamper watcher (T075): only alert on registry write
+# events (4657 value-modified / 4663 access) on guarded keys that occur after the
+# auditor starts, so historical events do not re-fire on boot.
+$script:LastRegEventTime = [datetime]::Now
+
+# Guarded registry keys for T075. A write here is correlated against process-creation
+# telemetry (Sysmon 1 / 4688) to unmask the true caller behind the svchost.exe proxy.
+# Power subgroups: USB Selective Suspend + Sleep (unattended sleep timeout) - the known
+# re-enable-between-corrections vector (T070); plus autostart Run keys.
+$script:GuardedRegPatterns = @(
+    '2a737441-1930-4402-8d77-b2bebba308a3',   # USB Selective Suspend power subgroup
+    '238c9fa8-0aad-41ed-83f4-97be242c8f20',   # Sleep subgroup (unattended sleep timeout parent)
+    '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0',   # System unattended sleep timeout setting
+    '\Power\User\PowerSchemes\',               # any active power-scheme value (catch-all)
+    '\CurrentVersion\Run'                       # HKCU/HKLM autostart Run keys
+)
+
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
@@ -439,6 +531,84 @@ function Check-SystemEvents {
         if ($fwEvents) {
             $newest = ($fwEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
             if ($newest -gt $script:LastFwEventTime) { $script:LastFwEventTime = $newest }
+        }
+    } catch {}
+
+    # --- Registry tamper on guarded keys (T075, events 4657 value-modified / 4663 access) ---
+    # Power-service registry writes (USB Selective Suspend, sleep timeouts) surface as
+    # svchost.exe; the true caller is only visible by correlating process-creation
+    # telemetry in the same +/-5s window. Requires the Registry audit subcategory plus a
+    # SACL on the guarded keys (setup_update.ps1 Step 16a5 / enable_registry_auditing.ps1)
+    # AND, ideally, Sysmon Event 1 (T076) for full command line + parent; falls back to
+    # Security 4688. Whitelisted: our own ecosystem scripts (e.g. the hourly power heal).
+    # Watermarked so each event alerts once.
+    try {
+        $regEvents = Get-WinEvent -FilterHashtable @{
+            LogName = 'Security'; Id = 4657, 4663; StartTime = $script:LastRegEventTime
+        } -ErrorAction SilentlyContinue
+        foreach ($re in ($regEvents | Sort-Object TimeCreated)) {
+            if ($re.TimeCreated -le $script:LastRegEventTime) { continue }
+            $objName = Get-EvtData $re 'ObjectName'
+            if (-not $objName) { continue }
+            # Only registry objects (4663 also fires for files); guarded keys only
+            $isGuarded = $false
+            foreach ($pat in $script:GuardedRegPatterns) {
+                if ($objName -like "*$pat*") { $isGuarded = $true; break }
+            }
+            if (-not $isGuarded) { continue }
+
+            $regProc    = Get-EvtData $re 'ProcessName'
+            if (-not $regProc) { $regProc = 'unknown' }
+            $candidates = Get-CorrelatedProcesses $re.TimeCreated
+            $suspect    = @($candidates | Where-Object { -not (Test-WhitelistedProc $_) })
+
+            if ($suspect.Count -eq 0) {
+                # Either no correlation telemetry yet (Sysmon/T076 not live) or only our
+                # own scripts ran in-window (benign power heal). Log INFO, do not alert.
+                $note = if (@($candidates).Count -eq 0) { 'no process-creation telemetry in window (Sysmon/4688)' } else { 'correlated only with own ecosystem scripts' }
+                Write-SecurityAudit "[REG-WRITE] Guarded key '$objName' written by $regProc at $($re.TimeCreated) (event $($re.Id)) - $note, no alert"
+                continue
+            }
+
+            $names = ($suspect | ForEach-Object {
+                "$($_.Image) (pid $($_.ProcessId), parent $($_.ParentImage), via $($_.Source))"
+            }) -join '; '
+            Write-SecurityAudit "[ALERT] [REG-TAMPER] Guarded key '$objName' written by $regProc at $($re.TimeCreated) (event $($re.Id)); correlated process(es): $names"
+
+            # Evidence file (forensic record of the unmasked caller)
+            try {
+                $evStamp = $re.TimeCreated.ToString('yyyyMMdd_HHmmss')
+                $evPath  = "C:\Sync\Evidence\$($re.TimeCreated.ToString('yyyy-MM-dd'))_reg-tamper_$evStamp.md"
+                $ev = @()
+                $ev += "# REG-TAMPER - guarded registry key written"
+                $ev += ""
+                $ev += "- Detected      : $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+                $ev += "- Event time    : $($re.TimeCreated)"
+                $ev += "- Security event: $($re.Id)"
+                $ev += "- Guarded key   : $objName"
+                $ev += "- Reporting proc: $regProc (svchost proxy expected for power writes)"
+                $ev += ""
+                $ev += "## Correlated process-creation candidates (+/-5s, non-whitelisted)"
+                foreach ($s in $suspect) {
+                    $ev += "- [$($s.Source)] Image=$($s.Image) PID=$($s.ProcessId) User=$($s.User)"
+                    $ev += "    CommandLine      : $($s.CommandLine)"
+                    $ev += "    ParentImage      : $($s.ParentImage)"
+                    $ev += "    ParentCommandLine: $($s.ParentCommandLine)"
+                }
+                $ev | Set-Content -LiteralPath $evPath -Encoding UTF8
+                Write-SecurityAudit "[FORENSIC] REG-TAMPER evidence written: $evPath"
+            } catch {}
+
+            try {
+                & 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "Registry tamper on guarded key" `
+                    -Body "A write to a guarded registry key was detected at $($re.TimeCreated) (Security event $($re.Id)). Key: $objName. The write was reported by $regProc (svchost.exe is the expected proxy for Power-service writes such as USB Selective Suspend / sleep timeouts). Correlating process-creation telemetry in the same +/-5s window unmasked the following non-whitelisted process(es): $names. This is the T070 vector (a resident process re-enabling USB Selective Suspend / sleep between corrections). Investigate the named process and its parent." `
+                    -B2Key "reg_tamper_$($re.TimeCreated.ToString('yyyyMMdd_HHmmss'))_$($re.Id).txt"
+            } catch {}
+        }
+        if ($regEvents) {
+            $newest = ($regEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
+            if ($newest -gt $script:LastRegEventTime) { $script:LastRegEventTime = $newest }
         }
     } catch {}
 }
