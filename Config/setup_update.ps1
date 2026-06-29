@@ -728,15 +728,51 @@ if (Test-Path $configAuditScript) {
 # real WEF collector host exists.
 # =============================================================================
 Write-Step "Step 17 - FolderSync-GitCommitLogs task (hourly off-box push)"
-$action17   = New-ScheduledTaskAction -Execute 'powershell.exe' `
-    -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1'
-$trigger17  = New-ScheduledTaskTrigger -Once -At (Get-Date) `
-    -RepetitionInterval (New-TimeSpan -Hours 1) -RepetitionDuration ([System.TimeSpan]::MaxValue)
-$settings17 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
-$principal17= New-ScheduledTaskPrincipal -UserId $currentUser -LogonType S4U -RunLevel Highest
+# Raw XML (matches Step 18/19): an empty/absent <Duration> means repeat
+# indefinitely. The previous cmdlet form used -RepetitionDuration [TimeSpan]::MaxValue,
+# which serializes to the out-of-range P99999999DT23H59M59S and Task Scheduler
+# rejects it, leaving the prior daily definition in place (config_guard restores it).
+$userSid17 = [System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+$taskXml17 = @"
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <Triggers>
+    <TimeTrigger>
+      <Repetition><Interval>PT1H</Interval><StopAtDurationEnd>false</StopAtDurationEnd></Repetition>
+      <StartBoundary>2026-01-01T00:00:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimeTrigger>
+    <LogonTrigger>
+      <Enabled>true</Enabled>
+      <UserId>$currentUser</UserId>
+    </LogonTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>$userSid17</UserId>
+      <LogonType>S4U</LogonType>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <Hidden>true</Hidden>
+    <ExecutionTimeLimit>PT5M</ExecutionTimeLimit>
+    <Enabled>true</Enabled>
+  </Settings>
+  <Actions>
+    <Exec>
+      <Command>powershell.exe</Command>
+      <Arguments>-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\auto_commit_logs.ps1</Arguments>
+    </Exec>
+  </Actions>
+</Task>
+"@
 Unregister-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Confirm:$false -ErrorAction SilentlyContinue
-Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Action $action17 -Trigger $trigger17 -Settings $settings17 -Principal $principal17 -Force | Out-Null
-Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser, hourly off-box push)"
+Register-ScheduledTask -TaskName "FolderSync-GitCommitLogs" -Xml $taskXml17 -Force | Out-Null
+Write-OK "Task FolderSync-GitCommitLogs registered ($currentUser / S4U, hourly off-box push)"
 
 # =============================================================================
 # STEP 18 - FolderSync-PowerCheck task (SYSTEM, every 1h + AtLogon + AtBoot)

@@ -39,8 +39,12 @@ function Set-RegSACL($regPath) {
         Write-Warn "$regPath does not exist - skipping"
         return
     }
+    # -ErrorAction Stop is required: Set-Acl/Get-Acl raise NON-terminating errors,
+    # so without it the catch never fires and a denied SACL still prints OK
+    # (observed 2026-06-29 on the protected HKLM\SYSTEM PowerSchemes key, which an
+    # elevated user cannot SACL without SeSecurityPrivilege/ownership).
     try {
-        $acl  = Get-Acl -Path $regPath -Audit
+        $acl  = Get-Acl -Path $regPath -Audit -ErrorAction Stop
         $rule = New-Object System.Security.AccessControl.RegistryAuditRule(
             [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
             [System.Security.AccessControl.RegistryRights]'SetValue,CreateSubKey,Delete,WriteKey,ChangePermissions,TakeOwnership',
@@ -50,7 +54,7 @@ function Set-RegSACL($regPath) {
         )
         $acl.RemoveAuditRule($rule) | Out-Null
         $acl.AddAuditRule($rule)
-        Set-Acl -Path $regPath -AclObject $acl
+        Set-Acl -Path $regPath -AclObject $acl -ErrorAction Stop
         Write-OK "SACL applied: $regPath"
     } catch {
         Write-Warn "Failed to apply SACL to $regPath : $($_.Exception.Message)"
