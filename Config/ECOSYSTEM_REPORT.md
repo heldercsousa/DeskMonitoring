@@ -3277,10 +3277,42 @@ try {
 #   HKCU\...\CurrentVersion\Run    (user autostart)
 #
 # Events -> Windows Security log (4657/4663). No file written under C:\Sync.
+#
+# SACL write uses advapi32 RegSetKeySecurity via P/Invoke (T089, 2026-06-29):
+# the protected HKLM\SYSTEM PowerSchemes key cannot be SACL'd through Get-Acl/Set-Acl
+# (the elevated user lacks WRITE_DAC, and that managed path also depends on the
+# Microsoft.PowerShell.Security module which does not load in every context, e.g.
+# SYSTEM). The native path enables SeSecurityPrivilege and opens the key with
+# ACCESS_SYSTEM_SECURITY, which is the only access a SACL write actually requires.
 
 function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
 function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+
+# ============================================================
+# 0. Native helpers: enable SeSecurityPrivilege + RegSetKeySecurity
+#    (no Microsoft.PowerShell.Security dependency - works under SYSTEM too)
+# ============================================================
+$regSecSig = @"
+using System;
+using System.Runtime.InteropServices;
+public static class RegSec {
+    [DllImport("ntdll.dll")]
+    public static extern int RtlAdjustPrivilege(int Privilege, bool bEnablePrivilege, bool IsThreadPrivilege, out bool PreviousValue);
+    [DllImport("advapi32.dll", CharSet=CharSet.Unicode, SetLastError=true)]
+    public static extern int RegOpenKeyEx(IntPtr hKey, string subKey, int options, int samDesired, out IntPtr phkResult);
+    [DllImport("advapi32.dll", SetLastError=true)]
+    public static extern int RegSetKeySecurity(IntPtr hKey, int SecurityInformation, byte[] pSecurityDescriptor);
+    [DllImport("advapi32.dll", SetLastError=true)]
+    public static extern int RegCloseKey(IntPtr hKey);
+}
+"@
+Add-Type -TypeDefinition $regSecSig
+$prevPriv = $false
+[RegSec]::RtlAdjustPrivilege(8, $true, $false, [ref]$prevPriv) | Out-Null   # 8 = SeSecurityPrivilege
+
+$ACCESS_SYSTEM_SECURITY = 0x01000000
+$SACL_SECURITY_INFO     = 0x00000008
 
 # ============================================================
 # 1. Enable Registry audit policy (locale-safe GUID)
@@ -3297,18 +3329,21 @@ if ($LASTEXITCODE -eq 0) {
 # ============================================================
 # 2. Helper: apply registry SACL (audit every value write / subkey change)
 #    S-1-1-0 = Everyone; ContainerInherit so child scheme keys are covered.
+#    Builds the SACL in managed code, persists it natively via RegSetKeySecurity.
 # ============================================================
-function Set-RegSACL($regPath) {
-    if (-not (Test-Path $regPath)) {
-        Write-Warn "$regPath does not exist - skipping"
-        return
+function Set-RegSACL($psPath) {
+    if ($psPath -match '^HKLM:\\(.+)$') {
+        $baseKey = [Microsoft.Win32.Registry]::LocalMachine; $hive = [IntPtr](-2147483646); $sub = $Matches[1]
+    } elseif ($psPath -match '^HKCU:\\(.+)$') {
+        $baseKey = [Microsoft.Win32.Registry]::CurrentUser;  $hive = [IntPtr](-2147483647); $sub = $Matches[1]
+    } else {
+        Write-Warn "Unsupported registry root: $psPath"; return
     }
-    # -ErrorAction Stop is required: Set-Acl/Get-Acl raise NON-terminating errors,
-    # so without it the catch never fires and a denied SACL still prints OK
-    # (observed 2026-06-29 on the protected HKLM\SYSTEM PowerSchemes key, which an
-    # elevated user cannot SACL without SeSecurityPrivilege/ownership).
+
+    $read = $baseKey.OpenSubKey($sub, $false)
+    if (-not $read) { Write-Warn "$psPath does not exist - skipping"; return }
     try {
-        $acl  = Get-Acl -Path $regPath -Audit -ErrorAction Stop
+        $sec  = $read.GetAccessControl([System.Security.AccessControl.AccessControlSections]::Audit)
         $rule = New-Object System.Security.AccessControl.RegistryAuditRule(
             [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
             [System.Security.AccessControl.RegistryRights]'SetValue,CreateSubKey,Delete,WriteKey,ChangePermissions,TakeOwnership',
@@ -3316,12 +3351,30 @@ function Set-RegSACL($regPath) {
             [System.Security.AccessControl.PropagationFlags]'None',
             [System.Security.AccessControl.AuditFlags]'Success,Failure'
         )
-        $acl.RemoveAuditRule($rule) | Out-Null
-        $acl.AddAuditRule($rule)
-        Set-Acl -Path $regPath -AclObject $acl -ErrorAction Stop
-        Write-OK "SACL applied: $regPath"
+        $sec.RemoveAuditRule($rule) | Out-Null
+        $sec.AddAuditRule($rule)
+        $bin = $sec.GetSecurityDescriptorBinaryForm()
     } catch {
-        Write-Warn "Failed to apply SACL to $regPath : $($_.Exception.Message)"
+        Write-Warn "Failed to build SACL for $psPath : $($_.Exception.Message)"; $read.Close(); return
+    } finally {
+        if ($read) { $read.Close() }
+    }
+
+    $h = [IntPtr]::Zero
+    $rc = [RegSec]::RegOpenKeyEx($hive, $sub, 0, $ACCESS_SYSTEM_SECURITY, [ref]$h)
+    if ($rc -ne 0) { Write-Warn "RegOpenKeyEx failed (rc=$rc) for $psPath"; return }
+    $rc2 = [RegSec]::RegSetKeySecurity($h, $SACL_SECURITY_INFO, $bin)
+    [RegSec]::RegCloseKey($h) | Out-Null
+    if ($rc2 -ne 0) { Write-Warn "RegSetKeySecurity failed (rc=$rc2) for $psPath"; return }
+
+    # Verify the audit rule actually landed
+    $v  = $baseKey.OpenSubKey($sub, $false)
+    $au = $v.GetAccessControl([System.Security.AccessControl.AccessControlSections]::Audit).GetAuditRules($true, $true, [System.Security.Principal.SecurityIdentifier])
+    $v.Close()
+    if ($au | Where-Object { $_.IdentityReference.Value -eq 'S-1-1-0' }) {
+        Write-OK "SACL applied + verified: $psPath"
+    } else {
+        Write-Warn "SACL set but verify found no Everyone rule: $psPath"
     }
 }
 
