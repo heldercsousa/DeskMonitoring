@@ -20,5 +20,5 @@
 | 7 | T077 | Blocked-Hardware | 2026-06-29 | Interim hourly log git-push done (run setup_update.ps1 as Admin). Full WEF needs a collector host (N100/T083); follow Config/wef/README |
 | 8 | T083 | Blocked-Hardware | 2026-06-29 | tc-mirror init + EVE parser pre-authored & tested; deploy needs Intel N100 + AX3000T port-mirror wiring (see Tools/netsensor/README) |
 | 9 | T084 | Blocked-Hardware | 2026-06-29 | Wazuh/Velociraptor kit pre-authored (Tools/wazuh-velociraptor/); deploy on clean rebuild + N100 (T083) per README |
-| 10 | T085 | Pending | - | Managed-EDR decision doc (Huntress vs Defender for Business) |
+| 10 | T085 | Pending-Decision | 2026-06-29 | Decision doc done (verdict: Defender for Business default). Helder: confirm M365 status + BRL pricing, buy at rebuild |
 | 11 | T082 | Pending | - | Offline rescue-scan checklist (manual/physical) |
