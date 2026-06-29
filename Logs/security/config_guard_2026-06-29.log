@@ -48,3 +48,31 @@
 2026-06-29 12:24:10  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=pwsh
 2026-06-29 12:24:10  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
 2026-06-29 12:24:10  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=pwsh
+2026-06-29 13:08:50  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=chrome
+2026-06-29 13:08:50  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-29 13:08:50  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-29 13:08:51  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-29 13:08:51  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-29 13:08:51  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-29 13:08:51  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=chrome
+2026-06-29 13:08:51  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-06-29 13:08:51  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=chrome
+2026-06-29 13:08:52  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=chrome
+2026-06-29 13:08:52  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-29 13:08:52  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=chrome
+2026-06-29 13:08:52  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=chrome
+2026-06-29 13:08:52  CONFIG-GUARD  TAMPER  foreground=chrome not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-06-29 13:08:52  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=chrome
+2026-06-29 13:29:48  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-06-29 13:29:49  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-06-29 13:29:50  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-06-29 13:29:50  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled

@@ -15,3 +15,7 @@
 2026-06-29 12:25:28  AUDIT-FILTER  SUSPICIOUS-WRITES  1 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-29.md
 2026-06-29 12:30:06  AUDIT-FILTER  SUSPICIOUS-WRITES  1 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-29.md
 2026-06-29 12:40:04  AUDIT-FILTER  SUSPICIOUS-WRITES  4 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-06-29.md
+2026-06-29 13:09:53  [AUDITOR] Starting up (PID 15540)
+2026-06-29 13:28:15  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\USER\S-1-5-21-583231401-428563657-1696801058-1001\Software\Microsoft\Windows\CurrentVersion\Run' written by C:\Program Files\Google\Chrome\Application\chrome.exe at 06/29/2026 13:28:07 (event 4663); correlated process(es): C:\Windows\System32\reg.exe (pid 17088, parent C:\Users\helde\.local\bin\claude.exe, via Sysmon-1); C:\Windows\System32\reg.exe (pid 24628, parent C:\Users\helde\.local\bin\claude.exe, via Sysmon-1); C:\Windows\UUS\amd64\MoUsoCoreWorker.exe (pid 11384, parent C:\Windows\System32\svchost.exe, via Sysmon-1)
+2026-06-29 13:28:15  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-06-29_reg-tamper_20260629_132807.md
+2026-06-29 13:29:15  [AUDITOR] Shutting down
