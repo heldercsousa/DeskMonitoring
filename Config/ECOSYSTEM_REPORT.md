@@ -402,6 +402,9 @@ Monitoring        → FolderSyncAuditor service + DailySecurityCheck task
 | FreeFileSync | 14.7 | `C:\Program Files\FreeFileSync\FreeFileSync.exe` |
 | RealTimeSync | 14.7 | `C:\Program Files\FreeFileSync\RealTimeSync.exe` |
 | NSSM | 2.24 | `C:\Tools\NSSM\nssm.exe` |
+| Sysmon (Sysinternals) | latest (auto-downloaded) | `C:\Tools\Sysmon\Sysmon64.exe` (T076) |
+
+**Sysmon (T076):** Installed by `setup_update.ps1` Step 21 with the SwiftOnSecurity config (`C:\Sync\Config\sysmonconfig.xml`, git-tracked). Emits process-create (Event ID 1), network-connect (3) and DNS-query (22) telemetry to the `Microsoft-Windows-Sysmon/Operational` log. Feeds T075 correlation and (pending) T077 off-box forwarding. CAVEAT: not hardened against an admin attacker - value realized only once events are forwarded off-box.
 
 `C:\Tools\Rclone` is on the **system PATH** (registry: `HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment`).
 
@@ -417,6 +420,7 @@ Monitoring        → FolderSyncAuditor service + DailySecurityCheck task
 | `C:\Sync\Config` | All scripts, configs, encrypted credentials — **ACL locked** |
 | `C:\Tools\Rclone\` | Rclone binary |
 | `C:\Tools\NSSM\` | NSSM binary |
+| `C:\Tools\Sysmon\` | Sysmon binary (T076, auto-downloaded by setup Step 21) |
 | `%USERPROFILE%\Documents\SecurityScripts\` | DailySecurityCheck + AutoCleanup scripts |
 
 ---
@@ -484,6 +488,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup, CAM-2 relay; VLC process + port 8161 + restart sentinel checks added (T025, 2026-06-02) |
 | `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam; DPAPI credential loading (`cam2_creds.dpapi`, CurrentUser) with cam2.conf fallback; max 5 restarts/hour circuit breaker; 7-day log rotation; port-listening verification after restart (T024, 2026-06-02; T049, 2026-06-03) |
 | `cam2.conf` | Fallback for `cam2_relay.ps1` | CAM-2 credentials (plaintext fallback — migrate with `migrate_cam2_creds.ps1` then delete, **gitignored**) |
+| `sysmonconfig.xml` | `setup_update.ps1` Step 21 (Sysmon `-i`/`-c`) | SwiftOnSecurity Sysmon config (schemaversion 4.50, 1200 lines) — defines high-quality process/network/DNS event tracing. Git-tracked so the config survives reinstall and the binary is auto-downloaded to `C:\Tools\Sysmon` (T076, 2026-06-29) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3 (Steps 1-20): state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry. Step 20: FolderSync-ConfigGuard task (config tamper auto-restore) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
