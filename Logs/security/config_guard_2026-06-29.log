@@ -76,3 +76,11 @@
 2026-06-29 13:29:49  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
 2026-06-29 13:29:50  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
 2026-06-29 13:29:50  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-06-29 16:25:38  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-06-29 16:25:38  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-06-29 16:25:38  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=Code
+2026-06-29 16:25:38  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-06-29 16:25:38  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-06-29 16:25:38  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-06-29 16:25:38  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=Code
+2026-06-29 16:25:38  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore

@@ -82,3 +82,19 @@
 2026-06-29 14:00:07  GIT-PUSH  OK  7416025 pushed to origin/master
 2026-06-29 15:00:04  GIT-PUSH  Pushing c2372ce - logs: auto-commit 2026-06-29 15:00
 2026-06-29 15:00:07  GIT-PUSH  OK  c2372ce pushed to origin/master
+2026-06-29 16:00:04  GIT-PUSH  Pushing f201990 - logs: auto-commit 2026-06-29 16:00
+2026-06-29 16:00:07  GIT-PUSH  OK  f201990 pushed to origin/master
+2026-06-29 16:10:49  GIT-PUSH  Pushing 4d99046 - docs(ecosystem-report): resync enable_registry_auditing.ps1 (T089 native SACL)
+2026-06-29 16:10:52  GIT-PUSH  OK  4d99046 pushed to origin/master
+2026-06-29 16:11:32  GIT-PUSH  Pushing 1401da1 - backlog: T089 Done (native PowerSchemes SACL verified); refresh checklist
+2026-06-29 16:11:34  GIT-PUSH  OK  1401da1 pushed to origin/master
+2026-06-29 16:13:10  GIT-PUSH  Pushing 8e0c453 - backlog: T087 Done - both Admin runs applied; hardening verified live
+2026-06-29 16:13:13  GIT-PUSH  OK  8e0c453 pushed to origin/master
+2026-06-29 16:26:09  GIT-PUSH  Pushing 2c6d0ee - docs: add fresh-session prompt playbook + model guidance (P1-P6)
+2026-06-29 16:26:12  GIT-PUSH  OK  2c6d0ee pushed to origin/master
+2026-06-29 16:49:02  GIT-PUSH  Pushing 18e515c - fix(setup_update): Step 10 repoints CloudBackup task to guarded cloud_sync_helderTest.ps1
+2026-06-29 16:49:05  GIT-PUSH  OK  18e515c pushed to origin/master
+2026-06-29 16:51:24  GIT-PUSH  Pushing 69d51a9 - fix(T086): send_alert.ps1 loads B2 creds from DPAPI before rclone upload
+2026-06-29 16:51:27  GIT-PUSH  OK  69d51a9 pushed to origin/master
+2026-06-29 16:52:58  GIT-PUSH  Pushing 322717c - docs: T086 Done + T090 (CloudBackup repoint); sync CLAUDE.md task table + playbook
+2026-06-29 16:53:02  GIT-PUSH  OK  322717c pushed to origin/master

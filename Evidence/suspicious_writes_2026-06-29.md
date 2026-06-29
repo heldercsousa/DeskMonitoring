@@ -224,3 +224,21 @@
 | 2026-06-29 12:35:42 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-29 12:35:42 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\enable_registry_auditing.ps1.tmp.18800.5266c6554871` |
 | 2026-06-29 12:35:42 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\enable_registry_auditing.ps1.tmp.18800.5266c6554871` |
+
+## 2026-06-29 16:50:04 - 5 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 16:48:07 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence` |
+| 2026-06-29 16:48:06 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Evidence\2026-06-29_cloudsync-task-mispoint-and-FASE-signature.md.tmp.18800.a96490863576` |
+| 2026-06-29 16:46:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 16:46:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\setup_update.ps1.tmp.18800.f0499e38f1dc` |
+| 2026-06-29 16:46:52 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\setup_update.ps1.tmp.18800.f0499e38f1dc` |
+
+## 2026-06-29 16:55:07 - 3 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 16:50:46 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 16:50:45 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\send_alert.ps1.tmp.18800.de2e82d435c4` |
+| 2026-06-29 16:50:45 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\send_alert.ps1.tmp.18800.de2e82d435c4` |
