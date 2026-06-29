@@ -18,6 +18,10 @@
 
 *.tmp.*
 *.stackdump
+
+# Python build artifacts (compiled bytecode — auto-generated, never committed)
+__pycache__/
+*.pyc
 /Evidence/Capture*.*
 /Config/alert_credentials.enc
 /Config/b2_creds.dpapi
