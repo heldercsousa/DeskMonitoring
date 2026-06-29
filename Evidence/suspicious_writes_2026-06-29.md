@@ -276,3 +276,47 @@
 | 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.caace4f4d734` |
 | 2026-06-29 17:09:16 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\cloud_sync_helderTest.ps1.tmp.18800.caace4f4d734` |
+
+## 2026-06-29 19:20:07 - 6 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 19:19:02 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:19:02 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\auditor.ps1.tmp.16672.76b3c5eecda4` |
+| 2026-06-29 19:19:02 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\auditor.ps1.tmp.16672.76b3c5eecda4` |
+| 2026-06-29 19:18:55 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:18:55 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\auditor.ps1.tmp.16672.fd899a5a5f19` |
+| 2026-06-29 19:18:55 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\auditor.ps1.tmp.16672.fd899a5a5f19` |
+
+## 2026-06-29 19:25:06 - 12 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 19:21:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:21:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.bc952548f198` |
+| 2026-06-29 19:21:53 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.bc952548f198` |
+| 2026-06-29 19:21:29 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:21:29 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.6a4d0de1e9cd` |
+| 2026-06-29 19:21:29 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.6a4d0de1e9cd` |
+| 2026-06-29 19:21:05 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:21:05 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.2b8e34fb45f2` |
+| 2026-06-29 19:21:05 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.2b8e34fb45f2` |
+| 2026-06-29 19:20:50 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:20:50 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.ef9643b23673` |
+| 2026-06-29 19:20:50 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.ef9643b23673` |
+
+## 2026-06-29 19:50:04 - 3 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 19:47:08 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:47:08 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\auditor.ps1.tmp.16672.6b14f7bd3dfb` |
+| 2026-06-29 19:47:08 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\auditor.ps1.tmp.16672.6b14f7bd3dfb` |
+
+## 2026-06-29 19:55:04 - 3 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-06-29 19:50:31 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-06-29 19:50:31 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.95086ffcbfd2` |
+| 2026-06-29 19:50:31 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\ECOSYSTEM_REPORT.md.tmp.16672.95086ffcbfd2` |
