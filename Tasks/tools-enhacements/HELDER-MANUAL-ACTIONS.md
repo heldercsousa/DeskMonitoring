@@ -63,26 +63,37 @@
 All free tiers; user-level (no admin needed). Keys are read from environment
 variables only - never pasted into git-tracked files.
 
-- [ ] Get a free **VirusTotal** API key: https://www.virustotal.com (account -> API key).
-- [ ] Get a free **Shodan** API key: https://account.shodan.io
-- [ ] Set them as user env vars (new terminal needed afterwards):
+- [x] Get a free **VirusTotal** API key: https://www.virustotal.com (account -> API key).
+      Verified set at user level (`VIRUSTOTAL_API_KEY`, 64-char key, 2026-06-29).
+- [x] Get a free **Shodan** API key: https://account.shodan.io
+      Verified set at user level (`SHODAN_API_KEY`, 32-char key, 2026-06-29).
+- [x] Set them as user env vars (new terminal needed afterwards):
       ```powershell
       setx VIRUSTOTAL_API_KEY "<your-vt-key>"
       setx SHODAN_API_KEY "<your-shodan-key>"
       ```
-- [ ] Clone + install the CVE MCP server:
+- [x] Clone + install the CVE MCP server (done 2026-06-29 — repo git-clean on `main`,
+      `cve-mcp-server 0.2.0` editable-installed, `import cve_mcp` OK):
       ```powershell
       git clone https://github.com/mukul975/cve-mcp-server C:\Tools\cve-mcp-server
       cd C:\Tools\cve-mcp-server
       pip install -e .
       ```
-- [ ] In `C:\Sync\.claude\settings.json`, flip `"disabled": true` -> `false` for the
-      `virustotal`, `shodan`, and `cve` MCP servers (added under T080).
+- [x] In `C:\Sync\.claude\settings.json`, flip `"disabled": true` -> `false` for the
+      `virustotal`, `shodan`, and `cve` MCP servers (added under T080). Confirmed all 3 = false.
 - [ ] **Smoke-test** in a new Claude session: one hash lookup (VT), one IP lookup
       (Shodan), one CVE lookup. (steps: `T080-steps-status.md`)
-- [ ] Once `VIRUSTOTAL_API_KEY` is set, **T081** triage gains live VT enrichment:
+      **STILL PENDING — requires a full Claude Code restart.** MCP servers load only at
+      session start, and the current Claude process predates the `setx`, so the now-enabled
+      servers are not loaded and `${VIRUSTOTAL_API_KEY}`/`${SHODAN_API_KEY}` would expand
+      empty in this session. Fully quit + relaunch Claude Code, then paste the **P2** prompt.
+- [x] Once `VIRUSTOTAL_API_KEY` is set, **T081** triage gains live VT enrichment:
       `python C:\Sync\Tools\file-triage\triage.py <file> --vt`
-- [ ] Same key lets **T079** Autoruns diff add optional VirusTotal hash enrichment.
+      **VERIFIED 2026-06-29** — EICAR test file returned `virustotal.performed=true,
+      malicious=65, reputation=3783`; verdict CRITICAL with "VirusTotal: 65 engines flag
+      malicious" reason. (Key injected from user registry since this shell predates setx.)
+- [x] Same key lets **T079** Autoruns diff add optional VirusTotal hash enrichment
+      (same VT key path now proven live via the T081 triage test above).
 
 ---
 
