@@ -1,0 +1,5 @@
+﻿2026-06-29 12:07:57  AUTORUN-START  check_autoruns.ps1 (UpdateBaseline=False)
+2026-06-29 12:07:57  AUTORUN-TOOL  autorunsc64.exe absent - downloading from Sysinternals
+2026-06-29 12:09:07  AUTORUN-CAPTURE  1787 autostart entries captured
+2026-06-29 12:09:07  AUTORUN-BASELINE  baseline created (first run) - 1787 entries -> C:\Sync\Config\autoruns\baseline.csv
+2026-06-29 12:09:07  AUTORUN-END  no diff performed (baseline write)

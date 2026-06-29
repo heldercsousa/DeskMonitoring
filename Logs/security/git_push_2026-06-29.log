@@ -1,0 +1,78 @@
+2026-06-29 06:01:40  GIT-PUSH  Pushing 1011516 - new files
+2026-06-29 06:01:46  GIT-PUSH  OK  1011516 pushed to origin/master
+2026-06-29 06:19:39  GIT-PUSH  Pushing 7854076 - backlog: add reviewed Win11 hardening tasks T075-T085
+2026-06-29 06:19:43  GIT-PUSH  OK  7854076 pushed to origin/master
+2026-06-29 06:47:58  GIT-PUSH  Pushing d8a3910 - track: scaffold sequential install progress tracker (T075-T085)
+2026-06-29 06:48:01  GIT-PUSH  OK  d8a3910 pushed to origin/master
+2026-06-29 06:49:59  GIT-PUSH  Pushing 0ea9a7e - docs: add sequential-install orchestrator prompt for T075-T085
+2026-06-29 06:50:02  GIT-PUSH  OK  0ea9a7e pushed to origin/master
+2026-06-29 06:59:24  GIT-PUSH  Pushing a778724 - feat(auditor): add real-time firewall-tamper watcher (T078)
+2026-06-29 06:59:27  GIT-PUSH  OK  a778724 pushed to origin/master
+2026-06-29 06:59:58  GIT-PUSH  Pushing c61080b - track: T078 -> Blocked-Admin
+2026-06-29 07:00:00  GIT-PUSH  OK  c61080b pushed to origin/master
+2026-06-29 07:04:50  GIT-PUSH  Pushing 771b9f5 - T080: wire VirusTotal + Shodan + CVE MCP servers into settings.json
+2026-06-29 07:04:57  GIT-PUSH  OK  771b9f5 pushed to origin/master
+2026-06-29 07:05:17  GIT-PUSH  Pushing e0a8543 - track: T080 -> Pending-Manual
+2026-06-29 07:05:19  GIT-PUSH  OK  e0a8543 pushed to origin/master
+2026-06-29 07:12:38  GIT-PUSH  Pushing d4380e7 - feat(T081): add Python file-triage tool (oletools+pdfid+vt-py)
+2026-06-29 07:12:42  GIT-PUSH  OK  d4380e7 pushed to origin/master
+2026-06-29 07:13:05  GIT-PUSH  Pushing 019cca0 - track: T081 -> Done
+2026-06-29 07:13:08  GIT-PUSH  OK  019cca0 pushed to origin/master
+2026-06-29 07:17:21  GIT-PUSH  Pushing 0854519 - feat(setup): T076 install Sysmon with SwiftOnSecurity config
+2026-06-29 07:17:24  GIT-PUSH  OK  0854519 pushed to origin/master
+2026-06-29 07:18:54  GIT-PUSH  Pushing b143d25 - docs(T076): sync guides for Sysmon install (Step 21)
+2026-06-29 07:18:57  GIT-PUSH  OK  b143d25 pushed to origin/master
+2026-06-29 07:19:27  GIT-PUSH  Pushing 59eaaa3 - track: T076 -> Blocked-Admin
+2026-06-29 07:19:29  GIT-PUSH  OK  59eaaa3 pushed to origin/master
+2026-06-29 07:25:14  GIT-PUSH  Pushing 68fe5c6 - feat(auditor): add T075 Sysmon/4688 registry-tamper correlation
+2026-06-29 07:25:17  GIT-PUSH  OK  68fe5c6 pushed to origin/master
+2026-06-29 07:26:55  GIT-PUSH  Pushing 15d31ce - feat(setup): T075 Step 16a5 - registry auditing on power/Run keys
+2026-06-29 07:26:58  GIT-PUSH  OK  15d31ce pushed to origin/master
+2026-06-29 07:31:25  GIT-PUSH  Pushing e3eb405 - docs(T075): sync ECOSYSTEM_REPORT + backlog for REG-TAMPER correlation
+2026-06-29 07:31:27  GIT-PUSH  OK  e3eb405 pushed to origin/master
+2026-06-29 07:31:55  GIT-PUSH  Pushing bb6c85f - track: T075 -> Blocked-Admin
+2026-06-29 07:31:58  GIT-PUSH  OK  bb6c85f pushed to origin/master
+2026-06-29 09:50:37  GIT-PUSH  Pushing a96266a - track: T079 -> In Progress (resume)
+2026-06-29 09:50:40  GIT-PUSH  OK  a96266a pushed to origin/master
+2026-06-29 09:56:21  GIT-PUSH  Pushing c9daf4a - feat(T079): autoruns persistence baseline + daily diff
+2026-06-29 09:56:24  GIT-PUSH  OK  c9daf4a pushed to origin/master
+2026-06-29 09:57:07  GIT-PUSH  Pushing 36f2489 - track: T079 -> Blocked-Admin
+2026-06-29 09:57:10  GIT-PUSH  OK  36f2489 pushed to origin/master
+2026-06-29 10:00:55  GIT-PUSH  Pushing 7b97373 - feat(T077): push Logs/+Evidence/ off-box hourly via git (WEF interim)
+2026-06-29 10:00:58  GIT-PUSH  OK  7b97373 pushed to origin/master
+2026-06-29 10:03:38  GIT-PUSH  Pushing 3817f7e - docs(T077): pre-author WEF subscription + sync guides for off-box mitigation
+2026-06-29 10:03:40  GIT-PUSH  OK  3817f7e pushed to origin/master
+2026-06-29 10:04:21  GIT-PUSH  Pushing 5c6b768 - track: T077 -> Blocked-Hardware
+2026-06-29 10:04:23  GIT-PUSH  OK  5c6b768 pushed to origin/master
+2026-06-29 10:11:15  GIT-PUSH  Pushing 520aa9b - T083: pre-author out-of-band N100 sensor artifacts
+2026-06-29 10:11:18  GIT-PUSH  OK  520aa9b pushed to origin/master
+2026-06-29 10:11:42  GIT-PUSH  Pushing af4aa8c - track: T083 -> Blocked-Hardware
+2026-06-29 10:11:44  GIT-PUSH  OK  af4aa8c pushed to origin/master
+2026-06-29 10:17:33  GIT-PUSH  Pushing 503ccdd - T084: pre-author Wazuh agent + Velociraptor hunt artifacts
+2026-06-29 10:17:36  GIT-PUSH  OK  503ccdd pushed to origin/master
+2026-06-29 10:18:04  GIT-PUSH  Pushing d70c0eb - track: T084 -> Blocked-Hardware
+2026-06-29 10:18:07  GIT-PUSH  OK  d70c0eb pushed to origin/master
+2026-06-29 10:20:58  GIT-PUSH  Pushing 26e9db8 - T085: managed-EDR decision (Defender for Business default, Huntress upgrade)
+2026-06-29 10:21:02  GIT-PUSH  OK  26e9db8 pushed to origin/master
+2026-06-29 10:21:23  GIT-PUSH  Pushing 1438ec7 - track: T085 -> Pending-Decision
+2026-06-29 10:21:25  GIT-PUSH  OK  1438ec7 pushed to origin/master
+2026-06-29 10:23:11  GIT-PUSH  Pushing 2edbc4c - docs: pre-author T082 offline rescue scan runbook + evidence template
+2026-06-29 10:23:13  GIT-PUSH  OK  2edbc4c pushed to origin/master
+2026-06-29 10:23:33  GIT-PUSH  Pushing 3d9e94c - track: T082 -> Pending-Manual
+2026-06-29 10:23:36  GIT-PUSH  OK  3d9e94c pushed to origin/master
+2026-06-29 11:46:42  GIT-PUSH  Pushing 600d0da - chore(gitignore): ignore Python __pycache__/*.pyc build artifacts
+2026-06-29 11:46:45  GIT-PUSH  OK  600d0da pushed to origin/master
+2026-06-29 11:51:08  GIT-PUSH  Pushing 652bd21 - backlog: register T086 send_alert.ps1 B2 upload failure (possible tamper)
+2026-06-29 11:51:11  GIT-PUSH  OK  652bd21 pushed to origin/master
+2026-06-29 12:06:10  GIT-PUSH  Pushing dec6c19 - backlog: register manual Admin/key/hardware actions (T087, T088 + checklist)
+2026-06-29 12:06:13  GIT-PUSH  OK  dec6c19 pushed to origin/master
+2026-06-29 12:18:24  GIT-PUSH  Pushing ce466ba - fix(setup_update): Step 17 task XML (no out-of-range Duration); honest registry SACL reporting
+2026-06-29 12:18:26  GIT-PUSH  OK  ce466ba pushed to origin/master
+2026-06-29 12:19:27  GIT-PUSH  Pushing aec520d - T079: capture Autoruns persistence baseline (1788 entries, daily-diff reference)
+2026-06-29 12:19:30  GIT-PUSH  OK  aec520d pushed to origin/master
+2026-06-29 12:21:45  GIT-PUSH  Pushing 5d84e9e - backlog: record 2026-06-29 Admin run results; T079 Done, T089 PowerSchemes SACL gap
+2026-06-29 12:21:48  GIT-PUSH  OK  5d84e9e pushed to origin/master
+2026-06-29 12:26:48  GIT-PUSH  Pushing 42472b3 - docs(ecosystem-report): resync Section 15 for setup_update.ps1 + enable_registry_auditing.ps1
+2026-06-29 12:26:50  GIT-PUSH  OK  42472b3 pushed to origin/master
+2026-06-29 12:36:37  GIT-PUSH  Pushing 6428325 - fix(T089): apply registry SACL to protected PowerSchemes via RegSetKeySecurity
+2026-06-29 12:36:41  GIT-PUSH  OK  6428325 pushed to origin/master
