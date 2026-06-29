@@ -1,0 +1,5 @@
+# T079 autoruns baseline directory.
+# baseline.csv is captured by setup_update.ps1 Step 22 on first admin run
+# (downloads autorunsc64.exe to C:\Tools\Sysinternals), then committed to git
+# so the persistence diff baseline survives a reinstall.
+# Re-baseline after a reviewed change: check_autoruns.ps1 -UpdateBaseline

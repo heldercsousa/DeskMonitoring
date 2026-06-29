@@ -1042,6 +1042,44 @@ if (-not (Test-Path -LiteralPath $sysmonCfg)) {
 }
 
 # =============================================================================
+# STEP 22 - Autoruns persistence baseline + daily diff task (T079)
+# =============================================================================
+# autorunsc captures the full autostart surface (Run keys, services, drivers,
+# scheduled tasks, WMI, Winlogon, codecs). check_autoruns.ps1 diffs it against a
+# stored baseline (Config\autoruns\baseline.csv) and logs new/changed persistence
+# as [AUTORUN-DELTA] + Evidence + alert. Feeds T070/T072. EVIDENCE-ONLY (live OS) -
+# corroborate suspicious deltas against an offline mount (T082). Runs as SYSTEM
+# daily for full HKLM/service/signature coverage.
+Write-Step "Step 22 - FolderSync-AutoRunsCheck task + baseline capture (T079)"
+$autorunsScript = "C:\Sync\Config\check_autoruns.ps1"
+if (Test-Path $autorunsScript) {
+    $action22   = New-ScheduledTaskAction -Execute 'powershell.exe' `
+        -Argument '-NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\Sync\Config\check_autoruns.ps1'
+    $trigger22  = New-ScheduledTaskTrigger -Daily -At "08:45"
+    $settings22 = New-ScheduledTaskSettingsSet -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 10) `
+        -RunOnlyIfNetworkAvailable:$false
+    $principal22= New-ScheduledTaskPrincipal -UserId "S-1-5-18" -RunLevel Highest
+    Unregister-ScheduledTask -TaskName "FolderSync-AutoRunsCheck" -Confirm:$false -ErrorAction SilentlyContinue
+    Register-ScheduledTask -TaskName "FolderSync-AutoRunsCheck" -Action $action22 -Trigger $trigger22 -Settings $settings22 -Principal $principal22 -Force | Out-Null
+    Write-OK "Task FolderSync-AutoRunsCheck registered (SYSTEM, daily 08:45)"
+
+    # Capture the baseline now if it does not exist yet (downloads autorunsc on first run)
+    if (-not (Test-Path "C:\Sync\Config\autoruns\baseline.csv")) {
+        Write-Host "  ..   Capturing initial autoruns baseline (downloads autorunsc if absent)" -ForegroundColor Gray
+        & powershell.exe -ExecutionPolicy Bypass -File $autorunsScript | Out-Null
+        if (Test-Path "C:\Sync\Config\autoruns\baseline.csv") {
+            Write-OK "Autoruns baseline captured -> Config\autoruns\baseline.csv (commit it to git)"
+        } else {
+            Write-Warn "Baseline not captured - check C:\Sync\Logs\security\autoruns_*.log (autorunsc download may have failed)"
+        }
+    } else {
+        Write-OK "Autoruns baseline already present - left unchanged (re-baseline via check_autoruns.ps1 -UpdateBaseline)"
+    }
+} else {
+    Write-Warn "check_autoruns.ps1 not found - run manually when available"
+}
+
+# =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
 # =============================================================================
 if ($wasRunning) {

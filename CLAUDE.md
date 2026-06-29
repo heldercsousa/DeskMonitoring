@@ -213,6 +213,7 @@ After successfully implementing any fix, new behavior, security hardening, or ec
    | Security scan | `C:\Sync\Logs\security\security_audit_YYYY-MM-DD.log` |
    | Local mirror | `C:\Sync\Logs\mirror\mirror_YYYY-MM-DD.log` |
    | Watchdog | `C:\Sync\Logs\services\watchdog.log` (no date suffix — single file) |
+   | Autoruns persistence diff | `C:\Sync\Logs\security\autoruns_YYYY-MM-DD.log` |
 
 2. **If today's log has no relevant entry:** read the prior day's log (`YYYY-MM-(DD-1)`).
 3. **Repeat** for up to **4 prior days maximum** (stepping back one day at a time), stopping as soon as the relevant error or event is found.
@@ -350,6 +351,7 @@ The ecosystem has four layers that work together continuously:
 | `FolderSync-AuditFilter` | `audit_filter_launcher.vbs` (wscript) | Audit event filter | helde |
 | `FolderSync-GitCommitLogs` | `auto_commit_logs.ps1` | Daily 23:30 | helde |
 | `FolderSync-PowerCheck` | `check_power_motion.ps1` | Hourly (power/sleep auto-heal) | SYSTEM |
+| `FolderSync-AutoRunsCheck` | `check_autoruns.ps1` | Daily 08:45 (autoruns persistence baseline diff) | SYSTEM |
 
 ### NSSM Services
 
