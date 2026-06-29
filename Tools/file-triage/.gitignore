@@ -1,0 +1,6 @@
+# runtime / test artifacts - never commit
+dropbox/
+test_samples/
+*.log
+__pycache__/
+*.pyc

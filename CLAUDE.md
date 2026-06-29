@@ -391,6 +391,7 @@ NSSM services + Task Scheduler at-startup provide system-level activation before
 | `C:\Sync\Mirror\` | Local rolling mirror (7-day retention, date-organized) |
 | `C:\Sync\Config\` | All scripts and config files |
 | `C:\Sync\Logs\` | All log output (daily rotation, 30-day retention) |
+| `C:\Sync\Tools\` | Standalone tools (git-tracked source). `file-triage/triage.py` = T081 static+VT-hash file triage (Python) |
 | `C:\Tools\Rclone\rclone.exe` | Rclone binary (external, not in repo) |
 | `C:\Tools\NSSM\nssm.exe` | NSSM service manager (external, not in repo) |
 | `C:\Program Files\FreeFileSync\RealTimeSync.exe` | RealTimeSync binary (external, not in repo) |

@@ -562,6 +562,14 @@ These files configure the Claude Code AI assistant for this project. Restore fro
 | `cve` | `mukul975/cve-mcp-server` Python/FastMCP (T080) | disabled (needs clone) | 27 tools / 21 APIs (NVD, EPSS, CISA KEV, MITRE ATT&CK, Shodan, VT, GreyNoise, AbuseIPDB, MalwareBazaar, ThreatFox, URLScan, OSV); 8 keyless. Clone to `C:\Tools\cve-mcp-server`, `pip install -e .` |
 
 **Key handling:** API keys are referenced via `${VAR}` expansion from OS environment variables (`setx VIRUSTOTAL_API_KEY ...` etc.), so no secrets are committed to `settings.json`. All three T080 servers ship `disabled: true`; each entry's `_note` carries the exact "ACTION FOR HELDER" enable steps.
+
+### Standalone Python tools (in `C:\Sync\Tools\`)
+
+These are git-tracked source scripts (not ecosystem .ps1 - no Section 15 full-content mirror; restore from git). Dependencies install per-user via pip, not bundled.
+
+| Tool | Source | Status | Purpose / deps |
+|---|---|---|---|
+| `Tools/file-triage/triage.py` (T081) | `Tools/file-triage/` + `requirements.txt` | Active (static); VT lookup needs key | Static + VirusTotal-HASH-ONLY file triage -> JSON risk summary. oletools (oleid/olevba) for Office macros, pdfid for PDF active content, EICAR signature scan (offline), hashlib SHA-256. VT lookup is opt-in (`--vt`, env `VIRUSTOTAL_API_KEY`, throttled to 4 req/min). NEVER uploads file content - hash only. `--watch FOLDER` drop-folder mode. Exit codes: 0 clean/low, 2 medium, 3 high/critical, 1 error. Install: `python -m pip install --user -r Tools/file-triage/requirements.txt` (oletools, vt-py, pdfid) |
 | `.claude/commands/commit.md` | `/project:commit` slash command — minimal-token git commit workflow |
 | `.claude/commands/check.md` | `/project:check` slash command — FolderSync health check + auto-diagnosis (still active; health.md is primary) |
 | `.claude/commands/camera-check.md` | `/project:camera-check` slash command — camera health check + auto-diagnosis (still active; health.md is primary) |
