@@ -13,7 +13,7 @@
 |-------|------|--------|------------|-----------------------|
 | 1 | T078 | Blocked-Admin | 2026-06-29 | Run setup_update.ps1 as Admin to enable MPSSVC firewall-audit subcategory + restart FolderSyncAuditor; then dummy-rule test |
 | 2 | T080 | Pending-Manual | 2026-06-29 | Helder: get free VT+Shodan keys, setx them, clone+pip cve-mcp-server, flip disabled=false, smoke-test |
-| 3 | T081 | Pending | - | Python oletools+vt-py triage tool |
+| 3 | T081 | Done | 2026-06-29 | Tools/file-triage/triage.py built+tested; optional: set VIRUSTOTAL_API_KEY for --vt live lookups |
 | 4 | T076 | Pending | - | Install Sysmon (admin) + stage config + setup_update.ps1 step |
 | 5 | T075 | Pending | - | Sysmon Event 1 correlation in auditor.ps1 (depends on T076) |
 | 6 | T079 | Pending | - | Autoruns baseline + daily diff |
