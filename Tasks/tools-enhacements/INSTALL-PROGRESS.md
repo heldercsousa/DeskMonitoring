@@ -16,7 +16,7 @@
 | 3 | T081 | Done | 2026-06-29 | Tools/file-triage/triage.py built+tested; optional: set VIRUSTOTAL_API_KEY for --vt live lookups |
 | 4 | T076 | Blocked-Admin | 2026-06-29 | Run setup_update.ps1 as Admin for live Sysmon install; confirm Event 1/3/22 in Sysmon/Operational |
 | 5 | T075 | Blocked-Admin | 2026-06-29 | Code authored; run setup_update.ps1 as Admin (Sysmon+reg auditing Step 16a5), then powercfg-change acceptance test |
-| 6 | T079 | In Progress | 2026-06-29 | Prior subagent hit session limit mid-task; re-dispatched to resume from steps-status |
+| 6 | T079 | Blocked-Admin | 2026-06-29 | Run setup_update.ps1 as Admin (Step 22: download autorunsc64, register task, capture baseline.csv), then commit baseline.csv |
 | 7 | T077 | Pending | - | WEF off-box forwarding (blocked on collector; interim git push) |
 | 8 | T083 | Pending | - | Pre-author N100 sensor tc script + EVE parser (deploy on hardware) |
 | 9 | T084 | Pending | - | Pre-author Wazuh+Velociraptor notes (deploy on rebuild) |
