@@ -479,7 +479,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
-| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15); real-time (60s) System unattended sleep timeout watcher with edge-triggered [ALERT] [UNATTEND-SLEEP] + [RECOVERED] + send_alert (2026-06-17); real-time scheduled-task tamper watcher - polls Security events 4699/4701/4702 on FolderSync-* tasks and raises [ALERT] [TASK-TAMPER] with the Subject account + send_alert, watermarked (2026-06-18); real-time firewall-tamper watcher - polls Security events 4946/4947/4948/4950/5025 and raises [ALERT] [FIREWALL-TAMPER] with rule name + Subject account + send_alert, watermarked, whitelists own firewall scripts via fresh `Config\.fw_expected` sentinel (logs [FW-CHANGE] INFO instead), event-based complement to T010 (T078, 2026-06-29) |
+| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15); real-time (60s) System unattended sleep timeout watcher with edge-triggered [ALERT] [UNATTEND-SLEEP] + [RECOVERED] + send_alert (2026-06-17); real-time scheduled-task tamper watcher - polls Security events 4699/4701/4702 on FolderSync-* tasks and raises [ALERT] [TASK-TAMPER] with the Subject account + send_alert, watermarked (2026-06-18); real-time firewall-tamper watcher - polls Security events 4946/4947/4948/4950/5025 and raises [ALERT] [FIREWALL-TAMPER] with rule name + Subject account + send_alert, watermarked, whitelists own firewall scripts via fresh `Config\.fw_expected` sentinel (logs [FW-CHANGE] INFO instead), event-based complement to T010 (T078, 2026-06-29); real-time registry-tamper watcher - polls Security events 4657/4663 on guarded power keys (USB Selective Suspend / sleep subgroups in `Power\User\PowerSchemes\`) + autostart Run keys, correlates each write against process-creation telemetry (Sysmon Event 1, fallback Security 4688) in a +/-5s window to unmask the true caller behind the svchost.exe Power-service proxy, raises [ALERT] [REG-TAMPER] (or [REG-WRITE] INFO when only own scripts / no telemetry) with the correlated Image/PID/Parent + Evidence file + send_alert, whitelists own ecosystem scripts via the `C:\Sync\Config` command-line marker, watermarked (T075, 2026-06-29) |
 | `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores guarded files from git HEAD when foreground process is not a known editor/Claude (T054, 2026-06-06). Win32 P/Invoke foreground check; log prefixes: CHANGE / SKIP / TAMPER / AUTO-RESTORED. Keep-alive 30s loop also re-enables any of the six FolderSync defensive tasks if found Disabled, AND re-registers any found deleted from its `Config\task_backups\<name>.xml` backup via schtasks (TASK-TAMPER / TASK-AUTO-RESTORED, 2026-06-18). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
 | `task_backups\*.xml` (6 files) | Exported by `setup_update.ps1` Step 20b | Version-controlled XML backups of the six FolderSync task definitions. `config_guard.ps1` restores a task from its backup if it is found deleted (file-level Deny-Delete ACLs do NOT stop deletion - parent Tasks folder grants Administrators delete-child). Regenerated on every setup run. |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
@@ -497,6 +497,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `pause_camera.ps1` | `/motionSentinel-pause` / Manual | Stops Yawcam; gate: `#Requires -RunAsAdministrator`; sets `.camera_paused` flag |
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
+| `enable_registry_auditing.ps1` | `setup_update.ps1` Step 16a5 (admin) | T075: enables the Registry audit subcategory ({0CCE921E-...}) and applies a Success+Failure SACL (Everyone) to `HKLM\...\Power\User\PowerSchemes`, `HKLM\...\CurrentVersion\Run`, `HKCU\...\CurrentVersion\Run`, so a write fires Security event 4657/4663. auditor.ps1 correlates those against Sysmon Event 1 (fallback 4688) to unmask the true caller (2026-06-29) |
 | `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
 | `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: Balanced plan, USB Selective Suspend disabled (AC+DC), sleep/hibernate/disk=Never (AC+DC), display=600s AC, webcam device power mgmt off, power+sleep buttons & lid = Do nothing (AC+DC, 2026-06-15 anti power-button sabotage), System unattended sleep timeout=Never (AC+DC, 2026-06-17 anti sleep-on-lock). Verifies compliance at end and exits non-zero if sleep/unattended/USB settings are not 0 |
 | `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s, power/sleep button AC+DC=0, disk turn-off AC+DC=0, System unattended sleep timeout AC+DC=0 (2026-06-17); logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
@@ -2584,7 +2585,7 @@ Write-Host "Service '$svcName' installed and started"
 ```
 
 ### `C:\Sync\Config\auditor.ps1`
-> Security monitor: startup gap forensics, FileSystemWatcher on source folder, remote logon/service/system event polling. Background job cleanup every ~60s (T028); motion AVI vs suspicious delete distinction (T029); 30-day log rotation for audit logs (T033, 2026-06-02). Writes to security_audit_YYYY-MM-DD.log and file_audit_YYYY-MM-DD.log.
+> Security monitor: startup gap forensics, FileSystemWatcher on source folder, remote logon/service/system event polling. Background job cleanup every ~60s (T028); motion AVI vs suspicious delete distinction (T029); 365-day log rotation for audit logs (T033). Real-time watchers: Event-42 sleep [BUTTON-SLEEP], unattended-sleep-timeout [UNATTEND-SLEEP], scheduled-task [TASK-TAMPER], firewall [FIREWALL-TAMPER], and registry-tamper [REG-TAMPER] (T075 - correlates 4657/4663 writes on guarded power/Run keys against Sysmon Event 1 / 4688 to unmask the svchost proxy caller). Writes to security_audit_YYYY-MM-DD.log and file_audit_YYYY-MM-DD.log.
 ```powershell
 # auditor.ps1
 # FolderSync Security Auditor
@@ -2616,6 +2617,81 @@ function Write-SecurityAudit($msg) {
 function Write-BothLogs($msg) {
     Write-FileAudit    $msg
     Write-SecurityAudit $msg
+}
+
+# ---------------------------------------------------------------------------
+# Process-correlation helpers (T075)
+# Registry writes to power keys (USB Selective Suspend, sleep timeouts) surface
+# as svchost.exe; the true caller is only visible by correlating process-creation
+# telemetry in the same time window. Prefer Sysmon Event 1 (T076), fall back to
+# Security 4688 (enabled T014/setup Step 16a2).
+# ---------------------------------------------------------------------------
+function Get-EvtData($evt, [string]$name) {
+    # Locale-independent read of an EventData <Data Name='X'> node via ToXml().
+    try {
+        $x = [xml]$evt.ToXml()
+        $node = $x.Event.EventData.Data | Where-Object { $_.Name -eq $name }
+        if ($node) { return [string]($node.'#text') }
+    } catch {}
+    return ''
+}
+
+function Get-CorrelatedProcesses([datetime]$eventTime) {
+    # Returns process-creation candidates within eventTime +/- 5s.
+    # Prefers Sysmon Operational Event 1; falls back to Security 4688.
+    $start   = $eventTime.AddSeconds(-5)
+    $end     = $eventTime.AddSeconds(5)
+    $results = @()
+
+    try {
+        $sm = Get-WinEvent -FilterHashtable @{
+            LogName = 'Microsoft-Windows-Sysmon/Operational'; Id = 1; StartTime = $start; EndTime = $end
+        } -ErrorAction SilentlyContinue
+        foreach ($e in $sm) {
+            $results += [pscustomobject]@{
+                Source            = 'Sysmon-1'
+                Image             = (Get-EvtData $e 'Image')
+                CommandLine       = (Get-EvtData $e 'CommandLine')
+                ParentImage       = (Get-EvtData $e 'ParentImage')
+                ParentCommandLine = (Get-EvtData $e 'ParentCommandLine')
+                User              = (Get-EvtData $e 'User')
+                ProcessId         = (Get-EvtData $e 'ProcessId')
+                TimeCreated       = $e.TimeCreated
+            }
+        }
+    } catch {}
+
+    if (-not $results -or @($results).Count -eq 0) {
+        try {
+            $sec = Get-WinEvent -FilterHashtable @{
+                LogName = 'Security'; Id = 4688; StartTime = $start; EndTime = $end
+            } -ErrorAction SilentlyContinue
+            foreach ($e in $sec) {
+                $results += [pscustomobject]@{
+                    Source            = 'Sec-4688'
+                    Image             = (Get-EvtData $e 'NewProcessName')
+                    CommandLine       = (Get-EvtData $e 'CommandLine')
+                    ParentImage       = (Get-EvtData $e 'ParentProcessName')
+                    ParentCommandLine = ''
+                    User              = (Get-EvtData $e 'SubjectUserName')
+                    ProcessId         = (Get-EvtData $e 'NewProcessId')
+                    TimeCreated       = $e.TimeCreated
+                }
+            }
+        } catch {}
+    }
+    return $results
+}
+
+function Test-WhitelistedProc($p) {
+    # Known-good: our own ecosystem scripts (powershell/pwsh/powercfg launched by a
+    # C:\Sync\Config script). The hourly FolderSync-PowerCheck heal legitimately
+    # rewrites these power keys; whitelist via the C:\Sync\Config marker on either the
+    # process or its parent command line so the heal does not self-trigger [REG-TAMPER].
+    $marker = 'C:\Sync\Config'
+    if (($p.CommandLine       -and $p.CommandLine       -like "*$marker*") -or
+        ($p.ParentCommandLine -and $p.ParentCommandLine -like "*$marker*")) { return $true }
+    return $false
 }
 
 # ---------------------------------------------------------------------------
@@ -2860,6 +2936,23 @@ $script:LastTaskEventTime = [datetime]::Now
 # that occur after the auditor starts, so historical events do not re-fire on boot.
 $script:LastFwEventTime = [datetime]::Now
 
+# Watermark for the registry-tamper watcher (T075): only alert on registry write
+# events (4657 value-modified / 4663 access) on guarded keys that occur after the
+# auditor starts, so historical events do not re-fire on boot.
+$script:LastRegEventTime = [datetime]::Now
+
+# Guarded registry keys for T075. A write here is correlated against process-creation
+# telemetry (Sysmon 1 / 4688) to unmask the true caller behind the svchost.exe proxy.
+# Power subgroups: USB Selective Suspend + Sleep (unattended sleep timeout) - the known
+# re-enable-between-corrections vector (T070); plus autostart Run keys.
+$script:GuardedRegPatterns = @(
+    '2a737441-1930-4402-8d77-b2bebba308a3',   # USB Selective Suspend power subgroup
+    '238c9fa8-0aad-41ed-83f4-97be242c8f20',   # Sleep subgroup (unattended sleep timeout parent)
+    '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0',   # System unattended sleep timeout setting
+    '\Power\User\PowerSchemes\',               # any active power-scheme value (catch-all)
+    '\CurrentVersion\Run'                       # HKCU/HKLM autostart Run keys
+)
+
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
@@ -3029,6 +3122,84 @@ function Check-SystemEvents {
             if ($newest -gt $script:LastFwEventTime) { $script:LastFwEventTime = $newest }
         }
     } catch {}
+
+    # --- Registry tamper on guarded keys (T075, events 4657 value-modified / 4663 access) ---
+    # Power-service registry writes (USB Selective Suspend, sleep timeouts) surface as
+    # svchost.exe; the true caller is only visible by correlating process-creation
+    # telemetry in the same +/-5s window. Requires the Registry audit subcategory plus a
+    # SACL on the guarded keys (setup_update.ps1 Step 16a5 / enable_registry_auditing.ps1)
+    # AND, ideally, Sysmon Event 1 (T076) for full command line + parent; falls back to
+    # Security 4688. Whitelisted: our own ecosystem scripts (e.g. the hourly power heal).
+    # Watermarked so each event alerts once.
+    try {
+        $regEvents = Get-WinEvent -FilterHashtable @{
+            LogName = 'Security'; Id = 4657, 4663; StartTime = $script:LastRegEventTime
+        } -ErrorAction SilentlyContinue
+        foreach ($re in ($regEvents | Sort-Object TimeCreated)) {
+            if ($re.TimeCreated -le $script:LastRegEventTime) { continue }
+            $objName = Get-EvtData $re 'ObjectName'
+            if (-not $objName) { continue }
+            # Only registry objects (4663 also fires for files); guarded keys only
+            $isGuarded = $false
+            foreach ($pat in $script:GuardedRegPatterns) {
+                if ($objName -like "*$pat*") { $isGuarded = $true; break }
+            }
+            if (-not $isGuarded) { continue }
+
+            $regProc    = Get-EvtData $re 'ProcessName'
+            if (-not $regProc) { $regProc = 'unknown' }
+            $candidates = Get-CorrelatedProcesses $re.TimeCreated
+            $suspect    = @($candidates | Where-Object { -not (Test-WhitelistedProc $_) })
+
+            if ($suspect.Count -eq 0) {
+                # Either no correlation telemetry yet (Sysmon/T076 not live) or only our
+                # own scripts ran in-window (benign power heal). Log INFO, do not alert.
+                $note = if (@($candidates).Count -eq 0) { 'no process-creation telemetry in window (Sysmon/4688)' } else { 'correlated only with own ecosystem scripts' }
+                Write-SecurityAudit "[REG-WRITE] Guarded key '$objName' written by $regProc at $($re.TimeCreated) (event $($re.Id)) - $note, no alert"
+                continue
+            }
+
+            $names = ($suspect | ForEach-Object {
+                "$($_.Image) (pid $($_.ProcessId), parent $($_.ParentImage), via $($_.Source))"
+            }) -join '; '
+            Write-SecurityAudit "[ALERT] [REG-TAMPER] Guarded key '$objName' written by $regProc at $($re.TimeCreated) (event $($re.Id)); correlated process(es): $names"
+
+            # Evidence file (forensic record of the unmasked caller)
+            try {
+                $evStamp = $re.TimeCreated.ToString('yyyyMMdd_HHmmss')
+                $evPath  = "C:\Sync\Evidence\$($re.TimeCreated.ToString('yyyy-MM-dd'))_reg-tamper_$evStamp.md"
+                $ev = @()
+                $ev += "# REG-TAMPER - guarded registry key written"
+                $ev += ""
+                $ev += "- Detected      : $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
+                $ev += "- Event time    : $($re.TimeCreated)"
+                $ev += "- Security event: $($re.Id)"
+                $ev += "- Guarded key   : $objName"
+                $ev += "- Reporting proc: $regProc (svchost proxy expected for power writes)"
+                $ev += ""
+                $ev += "## Correlated process-creation candidates (+/-5s, non-whitelisted)"
+                foreach ($s in $suspect) {
+                    $ev += "- [$($s.Source)] Image=$($s.Image) PID=$($s.ProcessId) User=$($s.User)"
+                    $ev += "    CommandLine      : $($s.CommandLine)"
+                    $ev += "    ParentImage      : $($s.ParentImage)"
+                    $ev += "    ParentCommandLine: $($s.ParentCommandLine)"
+                }
+                $ev | Set-Content -LiteralPath $evPath -Encoding UTF8
+                Write-SecurityAudit "[FORENSIC] REG-TAMPER evidence written: $evPath"
+            } catch {}
+
+            try {
+                & 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "Registry tamper on guarded key" `
+                    -Body "A write to a guarded registry key was detected at $($re.TimeCreated) (Security event $($re.Id)). Key: $objName. The write was reported by $regProc (svchost.exe is the expected proxy for Power-service writes such as USB Selective Suspend / sleep timeouts). Correlating process-creation telemetry in the same +/-5s window unmasked the following non-whitelisted process(es): $names. This is the T070 vector (a resident process re-enabling USB Selective Suspend / sleep between corrections). Investigate the named process and its parent." `
+                    -B2Key "reg_tamper_$($re.TimeCreated.ToString('yyyyMMdd_HHmmss'))_$($re.Id).txt"
+            } catch {}
+        }
+        if ($regEvents) {
+            $newest = ($regEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
+            if ($newest -gt $script:LastRegEventTime) { $script:LastRegEventTime = $newest }
+        }
+    } catch {}
 }
 
 # ---------------------------------------------------------------------------
@@ -3078,6 +3249,87 @@ try {
     Write-SecurityAudit "[AUDITOR] Shutting down"
     Write-FileAudit     "[AUDITOR] Shutting down"
 }
+```
+
+---
+
+### `C:\Sync\Config\enable_registry_auditing.ps1`
+> T075: enables the Registry audit subcategory and applies a Success+Failure SACL (Everyone) to the guarded power/Run registry keys so a write fires Security event 4657/4663, which auditor.ps1 correlates against Sysmon Event 1 (fallback 4688). Run by `setup_update.ps1` Step 16a5 as Administrator.
+```powershell
+#Requires -RunAsAdministrator
+# enable_registry_auditing.ps1 (T075)
+# Enables the Registry audit subcategory and applies a SACL (write/value audit)
+# to the guarded registry keys so a write produces Windows Security event 4657
+# (value modified) / 4663 (object access). auditor.ps1 then correlates the event
+# against process-creation telemetry (Sysmon Event 1, fallback 4688) to unmask
+# the true caller behind the svchost.exe Power-service proxy.
+#
+# Guarded keys:
+#   HKLM\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes  (USB Selective
+#       Suspend, sleep / unattended-sleep timeouts - the T070 re-enable vector)
+#   HKLM\...\CurrentVersion\Run    (machine autostart)
+#   HKCU\...\CurrentVersion\Run    (user autostart)
+#
+# Events -> Windows Security log (4657/4663). No file written under C:\Sync.
+
+function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
+function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
+function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
+
+# ============================================================
+# 1. Enable Registry audit policy (locale-safe GUID)
+#    {0CCE921E-69AE-11D9-BED3-505054503030} = Registry (Object Access)
+# ============================================================
+Write-Step "Enabling Registry audit policy"
+auditpol /set /subcategory:"{0CCE921E-69AE-11D9-BED3-505054503030}" /success:enable /failure:enable | Out-Null
+if ($LASTEXITCODE -eq 0) {
+    Write-OK "auditpol: Registry auditing enabled (success + failure)"
+} else {
+    Write-Warn "auditpol returned $LASTEXITCODE - continuing"
+}
+
+# ============================================================
+# 2. Helper: apply registry SACL (audit every value write / subkey change)
+#    S-1-1-0 = Everyone; ContainerInherit so child scheme keys are covered.
+# ============================================================
+function Set-RegSACL($regPath) {
+    if (-not (Test-Path $regPath)) {
+        Write-Warn "$regPath does not exist - skipping"
+        return
+    }
+    try {
+        $acl  = Get-Acl -Path $regPath -Audit
+        $rule = New-Object System.Security.AccessControl.RegistryAuditRule(
+            [System.Security.Principal.SecurityIdentifier]'S-1-1-0',
+            [System.Security.AccessControl.RegistryRights]'SetValue,CreateSubKey,Delete,WriteKey,ChangePermissions,TakeOwnership',
+            [System.Security.AccessControl.InheritanceFlags]'ContainerInherit',
+            [System.Security.AccessControl.PropagationFlags]'None',
+            [System.Security.AccessControl.AuditFlags]'Success,Failure'
+        )
+        $acl.RemoveAuditRule($rule) | Out-Null
+        $acl.AddAuditRule($rule)
+        Set-Acl -Path $regPath -AclObject $acl
+        Write-OK "SACL applied: $regPath"
+    } catch {
+        Write-Warn "Failed to apply SACL to $regPath : $($_.Exception.Message)"
+    }
+}
+
+# ============================================================
+# 3. Apply SACL to each guarded key
+# ============================================================
+Write-Step "Applying SACL to guarded registry keys"
+Set-RegSACL 'HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes'
+Set-RegSACL 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+Set-RegSACL 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+
+Write-Host ""
+Write-Host "============================================================" -ForegroundColor Green
+Write-Host "  Registry SACL auditing active on Power\PowerSchemes + Run keys" -ForegroundColor Green
+Write-Host "  Writes -> Windows Security log (event 4657 / 4663)" -ForegroundColor Green
+Write-Host "  auditor.ps1 correlates against Sysmon Event 1 (fallback 4688)" -ForegroundColor Green
+Write-Host "============================================================" -ForegroundColor Green
+Write-Host ""
 ```
 
 ---
