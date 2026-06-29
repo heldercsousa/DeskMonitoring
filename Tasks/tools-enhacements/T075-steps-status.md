@@ -1,6 +1,6 @@
 # T075 - Sysmon Event 1 correlation in auditor.ps1 - steps status
 
-**Status:** Blocked-Admin (code authored + committed; live test needs Sysmon T076 + Admin setup run)
+**Status:** Done (acceptance test PASSED 2026-06-29; bug fix for PowerSchemes pattern also committed)
 **Last updated:** 2026-06-29
 
 ## Checklist
@@ -13,13 +13,17 @@
 - [x] Wired into `setup_update.ps1` Step 16a5 + summary line; ParseFile = 0 errors; committed (guarded file)
 - [x] RULE 1: ECOSYSTEM_REPORT.md §5 auditor row updated + new enable_registry_auditing.ps1 row; §15 auditor.ps1 full block re-synced + new enable_registry_auditing.ps1 block + descriptor updated
 - [x] Backlog row updated
-- [ ] LIVE TEST (Blocked-Admin) - see below
+- [x] LIVE TEST - PASSED 2026-06-29
 
-## BLOCKER - ACTION FOR HELDER
-1. **Run `setup_update.ps1` as Administrator** to: (a) install Sysmon (Step 21, T076) and (b) enable registry auditing + SACLs (new Step 16a5). Both require elevation; the Claude Bash tool runs as non-admin.
-2. After that, run the acceptance test (Admin shell): deliberately change USB Selective Suspend, e.g.
-   `powercfg /setacvalueindex SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 1` then `powercfg /setactive SCHEME_CURRENT`
-   Then check `C:\Sync\Logs\security\security_audit_YYYY-MM-DD.log` for a `[REG-TAMPER]` (or `[REG-WRITE]`) line naming the correlated process + parent. (Re-run the power heal afterwards to restore USB=0.)
+## ACCEPTANCE TEST RESULT (2026-06-29 19:48:55)
+- Set USB Selective Suspend=1 via powercfg; auditor fired [ALERT] [REG-TAMPER] on
+  `\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes` at 19:48:55
+  naming bash.exe (parent: claude.exe) as correlated process (via Sysmon-1).
+- Revert (USB=0) fired [REG-WRITE] INFO (no processes in +/-5s window) — correct.
+- T078 also PASSED same session: dummy BLOCK rule -> [ALERT][FIREWALL-TAMPER] RULE-ADDED
+  + RULE-DELETED both detected.
+- Bug found+fixed: GuardedRegPatterns had trailing '\' on PowerSchemes pattern but
+  ObjectName in 4663 event has no trailing '\'. Fixed pattern in auditor.ps1 + ECOSYSTEM_REPORT.
 
 ## Dependency note
 T075 depends on T076 (Sysmon) which is Blocked-Admin (not live-installed). Until Sysmon is live, the correlation falls back to Security 4688 (already enabled, Step 16a2). The auditor logs `[REG-WRITE] ... no process-creation telemetry in window` if neither source has data. No live test was run by Claude (requires Sysmon events + Admin).

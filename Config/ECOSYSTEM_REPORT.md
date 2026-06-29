@@ -2955,7 +2955,7 @@ $script:GuardedRegPatterns = @(
     '2a737441-1930-4402-8d77-b2bebba308a3',   # USB Selective Suspend power subgroup
     '238c9fa8-0aad-41ed-83f4-97be242c8f20',   # Sleep subgroup (unattended sleep timeout parent)
     '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0',   # System unattended sleep timeout setting
-    '\Power\User\PowerSchemes\',               # any active power-scheme value (catch-all)
+    '\Power\User\PowerSchemes',                # any active power-scheme value (catch-all; no trailing \ in ObjectName)
     '\CurrentVersion\Run'                       # HKCU/HKLM autostart Run keys
 )
 
