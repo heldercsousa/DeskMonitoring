@@ -1,9 +1,26 @@
 # T086 — send_alert.ps1 B2 archive upload failing ("account not found")
 
-**Status:** Pending
+**Status:** DONE 2026-06-29 (commit 69d51a9)
 **Created:** 2026-06-29
 **Severity:** Medium (email alerting still works; only the off-box B2 archive copy fails)
-**Possible-tampering:** YES — treat as a candidate adversary action (see "Adversary hypothesis" below)
+**Possible-tampering:** NO (ruled out) - benign refactor gap from T048, see Resolution below.
+
+## RESOLUTION (2026-06-29)
+
+Root cause: `rclone.conf` is intentionally credential-less (T048 moved B2 creds to DPAPI
+`b2_creds.dpapi`). `cloud_sync` injects `RCLONE_CONFIG_CLOUDSYNC_ACCOUNT/_KEY` env vars at
+runtime; `send_alert.ps1` was never updated to do the same, so its bare `rclone copyto`
+hit "account not found". NOT tampering, NOT a B2 key-scope problem.
+
+Validated live (safe repro): without creds -> account not found; after loading DPAPI creds
+-> bucket lists, dummy upload to `alerts/` exit 0, cleanup exit 0.
+
+Fix (commit 69d51a9): `send_alert.ps1` now loads `b2_creds.dpapi` and sets the same env
+vars before the rclone call. The `-B2Key` upload path will now log `SEND-ALERT OK B2 upload`.
+
+Side-discovery while investigating: the `FolderSync-CloudBackup` task was running the
+UNGUARDED `cloud_sync.ps1` instead of the guarded `cloud_sync_helderTest.ps1` -> tracked +
+fixed as Backlog T090 (Evidence/2026-06-29_cloudsync-task-mispoint-and-FASE-signature.md).
 
 ---
 

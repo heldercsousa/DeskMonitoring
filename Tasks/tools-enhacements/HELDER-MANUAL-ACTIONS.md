@@ -144,7 +144,7 @@ variables only - never pasted into git-tracked files.
 
 ---
 
-### P1 - Investigate the B2 alert-upload bug (T086)  · **run NOW, no prereq** · model: **Sonnet** (escalate to Opus only if it looks like tampering)
+### P1 - Investigate the B2 alert-upload bug (T086)  · **DONE 2026-06-29 (69d51a9)** - benign refactor gap, not tampering; send_alert.ps1 now loads DPAPI creds. While here, also found+fixed T090 (CloudBackup task ran the unguarded cloud_sync.ps1). No need to re-run unless you want to re-verify.  · model: **Sonnet** (escalate to Opus only if it looks like tampering)
 
 ```
 Read Tasks/T086-send-alert-b2-upload-fail/spec.md and the CLAUDE.md rules (RULE 1/3/6).

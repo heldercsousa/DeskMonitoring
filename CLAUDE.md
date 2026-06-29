@@ -345,7 +345,7 @@ The ecosystem has four layers that work together continuously:
 
 | Task | Script | Schedule | Runs as |
 |---|---|---|---|
-| `FolderSync-CloudBackup` | `cloud_sync.ps1` | Every 5 minutes | SYSTEM |
+| `FolderSync-CloudBackup` | `cloud_sync_helderTest.ps1` (guarded anti-tamper rename; was mis-pointed at `cloud_sync.ps1` until T090, 2026-06-29) | Every 5 minutes | SYSTEM |
 | `FolderSync-DailyCheck` | `DailySecurityCheck.ps1` | Daily 09:00 | helde |
 | `FolderSync-ConfigGuard` | `config_guard.ps1` (pwsh) | Continuous guard on Config/ | helde |
 | `FolderSync-AuditFilter` | `audit_filter_launcher.vbs` (wscript) | Audit event filter | helde |
