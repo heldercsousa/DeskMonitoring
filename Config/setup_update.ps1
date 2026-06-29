@@ -516,8 +516,8 @@ if ($existingBackup) {
     $currentArgs = $existingBackup.Actions[0].Arguments
     $currentExec = $existingBackup.Actions[0].Execute
 
-    if ($currentExec -like "*.bat" -or $currentArgs -notlike "*-NoWindow*") {
-        Write-Warn "Task exists but uses .bat or missing -NoWindow - will recreate"
+    if ($currentExec -like "*.bat" -or $currentArgs -notlike "*-NoWindow*" -or $currentArgs -notlike "*cloud_sync_helderTest.ps1*") {
+        Write-Warn "Task exists but uses .bat, missing -NoWindow, or points at the wrong script - will recreate to run cloud_sync_helderTest.ps1"
         $needsRecreate = $true
     }
 }
