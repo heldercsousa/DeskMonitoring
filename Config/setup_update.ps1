@@ -974,6 +974,59 @@ foreach ($dt in $defensiveTasks) {
 Write-OK "Task definition backups exported ($($defensiveTasks.Count) tasks) - config_guard restores from these if a task is deleted"
 
 # =============================================================================
+# STEP 21 - Install / update Sysmon (SwiftOnSecurity config) (T076)
+# =============================================================================
+# Sysmon gives authoritative on-host process (Event ID 1), network (3) and DNS (22)
+# telemetry that feeds the T075 correlation rules and (once built) T077 off-box
+# forwarding. The config lives in git (C:\Sync\Config\sysmonconfig.xml, ACL-locked)
+# so it survives reinstall; the binary is staged under C:\Tools\Sysmon (downloaded
+# from Sysinternals on first run if absent). Idempotent: if Sysmon is already
+# installed we just push the current config (-c); otherwise we install it (-i).
+# CAVEAT (T076 plan): Sysmon is NOT hardened against an admin attacker - its value
+# is only realized once events are forwarded off-box (T077). On its own it can be
+# blinded by the same resident process that disables tasks.
+Write-Step "Step 21 - Install / update Sysmon (SwiftOnSecurity config)"
+$sysmonDir = "C:\Tools\Sysmon"
+$sysmonExe = "$sysmonDir\Sysmon64.exe"
+$sysmonCfg = "C:\Sync\Config\sysmonconfig.xml"
+$sysmonLog = "Microsoft-Windows-Sysmon/Operational"
+if (-not (Test-Path -LiteralPath $sysmonCfg)) {
+    Write-Fail "Sysmon config not found at $sysmonCfg - cannot install (restore from git)"
+} else {
+    try {
+        New-Item -ItemType Directory -Force -Path $sysmonDir | Out-Null
+        if (-not (Test-Path -LiteralPath $sysmonExe)) {
+            Write-Host "  ..   Sysmon64.exe absent - downloading from Sysinternals" -ForegroundColor Gray
+            $zip = Join-Path $env:TEMP "Sysmon.zip"
+            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+            Invoke-WebRequest -Uri "https://download.sysinternals.com/files/Sysmon.zip" -OutFile $zip -UseBasicParsing -ErrorAction Stop
+            Expand-Archive -LiteralPath $zip -DestinationPath $sysmonDir -Force
+            Remove-Item -LiteralPath $zip -Force -ErrorAction SilentlyContinue
+        }
+        if (-not (Test-Path -LiteralPath $sysmonExe)) {
+            Write-Fail "Sysmon64.exe still missing after download attempt - install manually"
+        } else {
+            $svc = Get-Service -Name "Sysmon64" -ErrorAction SilentlyContinue
+            if ($svc) {
+                & $sysmonExe -c $sysmonCfg | Out-Null
+                Write-OK "Sysmon already installed - config reapplied from sysmonconfig.xml"
+            } else {
+                & $sysmonExe -accepteula -i $sysmonCfg | Out-Null
+                Write-OK "Sysmon installed (-accepteula -i) with SwiftOnSecurity config"
+            }
+            $ch = Get-WinEvent -ListLog $sysmonLog -ErrorAction SilentlyContinue
+            if ($ch -and $ch.IsEnabled) {
+                Write-OK "Event channel '$sysmonLog' present and enabled (Event ID 1/3/22 will flow here)"
+            } else {
+                Write-Warn "Event channel '$sysmonLog' not found/enabled yet - re-check after a process spawns"
+            }
+        }
+    } catch {
+        Write-Fail "Sysmon install/update failed: $($_.Exception.Message)"
+    }
+}
+
+# =============================================================================
 # STATE MANAGEMENT - start ecosystem if it was running before config
 # =============================================================================
 if ($wasRunning) {
@@ -1018,6 +1071,7 @@ Write-Host "  Step 18d- B2 credentials: checked/warned if b2_creds.dpapi missing
 Write-Host "  Step 18e- CAM-2 credentials: checked/warned if cam2_creds.dpapi missing" -ForegroundColor Gray
 Write-Host "  Step 19 - FolderSync-AuditFilter task (current user, VBS launcher - no window flash)" -ForegroundColor Gray
 Write-Host "  Step 20 - FolderSync-ConfigGuard task (current user, at logon, watches Config\ for tampering)" -ForegroundColor Gray
+Write-Host "  Step 21 - Sysmon installed/updated (SwiftOnSecurity config) - process/network/DNS telemetry" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pending (manual - requires web UI or physical access):" -ForegroundColor Yellow
 Write-Host "  - B2 Lifecycle Rules (versioning) via backblaze.com" -ForegroundColor Yellow
