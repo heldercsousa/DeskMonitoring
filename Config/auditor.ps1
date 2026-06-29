@@ -267,6 +267,11 @@ $script:UnattendNonCompliant = $false
 # historical events do not re-fire on every boot.
 $script:LastTaskEventTime = [datetime]::Now
 
+# Watermark for the firewall-tamper watcher (T078): only alert on firewall change
+# events (4946 add / 4947 modify / 4948 delete / 4950 setting / 5025 service stop)
+# that occur after the auditor starts, so historical events do not re-fire on boot.
+$script:LastFwEventTime = [datetime]::Now
+
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
@@ -380,6 +385,60 @@ function Check-SystemEvents {
         if ($taskEvents) {
             $newest = ($taskEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
             if ($newest -gt $script:LastTaskEventTime) { $script:LastTaskEventTime = $newest }
+        }
+    } catch {}
+
+    # --- Firewall tamper (T078, real-time, events 4946/4947/4948/4950/5025) ---
+    # Event-based complement to T010 (which only scans for known B2 BLOCK rules after
+    # the fact). Catches a live add/modify/delete of any firewall rule, a firewall
+    # setting change, and a firewall service stop, naming the Subject account. Requires
+    # the "MPSSVC Rule-Level Policy Change" audit subcategory (setup_update.ps1 Step
+    # 16a4). Whitelisted: when our own firewall scripts (setup_update.ps1 /
+    # fix_firewall_b2.ps1) run they touch C:\Sync\Config\.fw_expected; a firewall event
+    # within 300s of that touch is logged as [FW-CHANGE] INFO instead of an alert, to
+    # avoid self-inflicted [FIREWALL-TAMPER] noise during remediation. Watermarked so
+    # each event alerts once.
+    try {
+        $fwEvents = Get-WinEvent -FilterHashtable @{
+            LogName = 'Security'; Id = 4946, 4947, 4948, 4950, 5025; StartTime = $script:LastFwEventTime
+        } -ErrorAction SilentlyContinue
+        # Is one of our own firewall scripts active right now? (sentinel fresh < 300s)
+        $expected = $false
+        $sentinel = 'C:\Sync\Config\.fw_expected'
+        if (Test-Path $sentinel) {
+            try { if (((Get-Date) - (Get-Item $sentinel).LastWriteTime).TotalSeconds -lt 300) { $expected = $true } } catch {}
+        }
+        foreach ($fe in ($fwEvents | Sort-Object TimeCreated)) {
+            if ($fe.TimeCreated -le $script:LastFwEventTime) { continue }
+            $msg = $fe.Message
+            # Subject account that made the change (EN "Account Name:" / PT "Nome da Conta:")
+            # 4946/4947/4948 use "Modifying User"/"Modifying Application"; the Subject block
+            # carries the Account Name regardless, so match that.
+            $acct = 'unknown'
+            if ($msg -match '(?:Account Name|Nome da Conta)[^:]*:\s+(\S+)') { $acct = $Matches[1] }
+            # Rule name / setting, where present
+            $ruleName = 'n/a'
+            if ($msg -match '(?:Rule Name|Nome da Regra)[^:]*:\s+(.+)') { $ruleName = ($Matches[1].Trim()) }
+            elseif ($msg -match '(?:Rule ID|ID da Regra)[^:]*:\s+(.+)') { $ruleName = ($Matches[1].Trim()) }
+            $verb = switch ($fe.Id) {
+                4946 {'RULE-ADDED'} 4947 {'RULE-MODIFIED'} 4948 {'RULE-DELETED'}
+                4950 {'SETTING-CHANGED'} 5025 {'SERVICE-STOPPED'} default {"id$($fe.Id)"}
+            }
+            if ($expected) {
+                Write-SecurityAudit "[FW-CHANGE] $verb rule='$ruleName' at $($fe.TimeCreated) by account=$acct (event $($fe.Id)) - expected (own firewall script active), no alert"
+                continue
+            }
+            Write-SecurityAudit "[ALERT] [FIREWALL-TAMPER] $verb rule='$ruleName' at $($fe.TimeCreated) by account=$acct (event $($fe.Id)) - no own firewall script active, possible tampering"
+            try {
+                & 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "Firewall tamper ${verb}: $ruleName" `
+                    -Body "A Windows Firewall change ($verb) occurred at $($fe.TimeCreated) by account=$acct (Security event $($fe.Id)), rule='$ruleName'. No FolderSync firewall script was active (sentinel .fw_expected not fresh), so this is unexpected. The attacker has previously added outbound BLOCK rules for Backblaze B2 IPs (104.153.233.180 / 149.137.142.15) to silently kill cloud sync - cross-reference with SYNC-FAIL / connectex errors in the cloud_sync log. Event 5025 (firewall service stopped) is especially high severity." `
+                    -B2Key "firewall_tamper_$($fe.TimeCreated.ToString('yyyyMMdd_HHmmss'))_$($fe.Id).txt"
+            } catch {}
+        }
+        if ($fwEvents) {
+            $newest = ($fwEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
+            if ($newest -gt $script:LastFwEventTime) { $script:LastFwEventTime = $newest }
         }
     } catch {}
 }

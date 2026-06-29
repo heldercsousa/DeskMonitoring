@@ -475,7 +475,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `run_mirror.bat` | RealTimeSync | Runs robocopy mirror on file change (daily log rotation) |
 | `realtime.ffs_real` | RealTimeSync at startup | Watcher config — folder + delay + command |
 | `wdog.ps1` | Task `FolderSync-Watchdog` + NSSM service | Watchdog loop with WATCHDOG-HEARTBEAT log every cycle (T027, 2026-06-02) |
-| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15); real-time (60s) System unattended sleep timeout watcher with edge-triggered [ALERT] [UNATTEND-SLEEP] + [RECOVERED] + send_alert (2026-06-17); real-time scheduled-task tamper watcher - polls Security events 4699/4701/4702 on FolderSync-* tasks and raises [ALERT] [TASK-TAMPER] with the Subject account + send_alert, watermarked (2026-06-18) |
+| `auditor.ps1` | NSSM service `FolderSyncAuditor` | Monitors file changes, remote access, service tampering; job cleanup (T028); motion AVI vs suspicious delete distinction (T029 - fixed: GetFileName to handle subdirectory prefix); 365-day audit log rotation (T033); Event-42 sleep detection via persistent watermark with [ALERT] [BUTTON-SLEEP] escalation + send_alert on power-button/lid sleep (2026-06-15); real-time (60s) System unattended sleep timeout watcher with edge-triggered [ALERT] [UNATTEND-SLEEP] + [RECOVERED] + send_alert (2026-06-17); real-time scheduled-task tamper watcher - polls Security events 4699/4701/4702 on FolderSync-* tasks and raises [ALERT] [TASK-TAMPER] with the Subject account + send_alert, watermarked (2026-06-18); real-time firewall-tamper watcher - polls Security events 4946/4947/4948/4950/5025 and raises [ALERT] [FIREWALL-TAMPER] with rule name + Subject account + send_alert, watermarked, whitelists own firewall scripts via fresh `Config\.fw_expected` sentinel (logs [FW-CHANGE] INFO instead), event-based complement to T010 (T078, 2026-06-29) |
 | `config_guard.ps1` | Task `FolderSync-ConfigGuard` (at logon, Step 20) | FileSystemWatcher on `Config\` — auto-restores guarded files from git HEAD when foreground process is not a known editor/Claude (T054, 2026-06-06). Win32 P/Invoke foreground check; log prefixes: CHANGE / SKIP / TAMPER / AUTO-RESTORED. Keep-alive 30s loop also re-enables any of the six FolderSync defensive tasks if found Disabled, AND re-registers any found deleted from its `Config\task_backups\<name>.xml` backup via schtasks (TASK-TAMPER / TASK-AUTO-RESTORED, 2026-06-18). Logs to `Logs\security\config_guard_YYYY-MM-DD.log` |
 | `task_backups\*.xml` (6 files) | Exported by `setup_update.ps1` Step 20b | Version-controlled XML backups of the six FolderSync task definitions. `config_guard.ps1` restores a task from its backup if it is found deleted (file-level Deny-Delete ACLs do NOT stop deletion - parent Tasks folder grants Administrators delete-child). Regenerated on every setup run. |
 | `credentials.enc` | `read_credentials.ps1` | Only copy of encrypted credentials |
@@ -1874,6 +1874,9 @@ function Write-Log($msg) {
 Write-Host ""
 Write-Host ">>> Removing malicious B2 firewall block rules" -ForegroundColor Cyan
 
+# T078: touch firewall-expected sentinel so auditor logs own removals as [FW-CHANGE] INFO
+try { Set-Content -LiteralPath 'C:\Sync\Config\.fw_expected' -Value (Get-Date -Format 'o') -ErrorAction SilentlyContinue } catch {}
+
 $rulesToRemove = @("Block 104.153.233.180", "Block 149.137.142.15")
 
 foreach ($rule in $rulesToRemove) {
@@ -2721,7 +2724,7 @@ function Start-FileWatcher {
                     $line | Add-Content -LiteralPath $logFile -Encoding UTF8
                     $secLog = "C:\Sync\Logs\security\security_audit_$($time.ToString('yyyy-MM-dd')).log"
                     $line | Add-Content -LiteralPath $secLog -Encoding UTF8
-                    & 'C:\Sync\Config\cloud_sync.ps1'
+                    & 'C:\Sync\Config\cloud_sync_helderTest.ps1'
                 }
             } else {
                 # FormataÃ§Ã£o garantida como texto
@@ -2826,6 +2829,11 @@ $script:UnattendNonCompliant = $false
 # historical events do not re-fire on every boot.
 $script:LastTaskEventTime = [datetime]::Now
 
+# Watermark for the firewall-tamper watcher (T078): only alert on firewall change
+# events (4946 add / 4947 modify / 4948 delete / 4950 setting / 5025 service stop)
+# that occur after the auditor starts, so historical events do not re-fire on boot.
+$script:LastFwEventTime = [datetime]::Now
+
 function Check-SystemEvents {
     if (([datetime]::Now - $script:LastSystemCheck).TotalSeconds -lt 60) { return }
     $script:LastSystemCheck = [datetime]::Now
@@ -2921,8 +2929,10 @@ function Check-SystemEvents {
         foreach ($te in ($taskEvents | Sort-Object TimeCreated)) {
             if ($te.TimeCreated -le $script:LastTaskEventTime) { continue }
             $msg = $te.Message
+            # Task path: match \FolderSync-XXX in either language
             if ($msg -notmatch '\\?(FolderSync-\S+)') { continue }
             $taskName = ($Matches[1]).TrimEnd('.', '"', "'")
+            # Subject account that made the change (PT "Nome da Conta:" / EN "Account Name:")
             $acct = 'unknown'
             if ($msg -match '(?:Account Name|Nome da Conta)[^:]*:\s+(\S+)') { $acct = $Matches[1] }
             $verb = switch ($te.Id) { 4699 {'DELETED'} 4701 {'DISABLED'} 4702 {'UPDATED'} default {"id$($te.Id)"} }
@@ -2937,6 +2947,60 @@ function Check-SystemEvents {
         if ($taskEvents) {
             $newest = ($taskEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
             if ($newest -gt $script:LastTaskEventTime) { $script:LastTaskEventTime = $newest }
+        }
+    } catch {}
+
+    # --- Firewall tamper (T078, real-time, events 4946/4947/4948/4950/5025) ---
+    # Event-based complement to T010 (which only scans for known B2 BLOCK rules after
+    # the fact). Catches a live add/modify/delete of any firewall rule, a firewall
+    # setting change, and a firewall service stop, naming the Subject account. Requires
+    # the "MPSSVC Rule-Level Policy Change" audit subcategory (setup_update.ps1 Step
+    # 16a4). Whitelisted: when our own firewall scripts (setup_update.ps1 /
+    # fix_firewall_b2.ps1) run they touch C:\Sync\Config\.fw_expected; a firewall event
+    # within 300s of that touch is logged as [FW-CHANGE] INFO instead of an alert, to
+    # avoid self-inflicted [FIREWALL-TAMPER] noise during remediation. Watermarked so
+    # each event alerts once.
+    try {
+        $fwEvents = Get-WinEvent -FilterHashtable @{
+            LogName = 'Security'; Id = 4946, 4947, 4948, 4950, 5025; StartTime = $script:LastFwEventTime
+        } -ErrorAction SilentlyContinue
+        # Is one of our own firewall scripts active right now? (sentinel fresh < 300s)
+        $expected = $false
+        $sentinel = 'C:\Sync\Config\.fw_expected'
+        if (Test-Path $sentinel) {
+            try { if (((Get-Date) - (Get-Item $sentinel).LastWriteTime).TotalSeconds -lt 300) { $expected = $true } } catch {}
+        }
+        foreach ($fe in ($fwEvents | Sort-Object TimeCreated)) {
+            if ($fe.TimeCreated -le $script:LastFwEventTime) { continue }
+            $msg = $fe.Message
+            # Subject account that made the change (EN "Account Name:" / PT "Nome da Conta:")
+            # 4946/4947/4948 use "Modifying User"/"Modifying Application"; the Subject block
+            # carries the Account Name regardless, so match that.
+            $acct = 'unknown'
+            if ($msg -match '(?:Account Name|Nome da Conta)[^:]*:\s+(\S+)') { $acct = $Matches[1] }
+            # Rule name / setting, where present
+            $ruleName = 'n/a'
+            if ($msg -match '(?:Rule Name|Nome da Regra)[^:]*:\s+(.+)') { $ruleName = ($Matches[1].Trim()) }
+            elseif ($msg -match '(?:Rule ID|ID da Regra)[^:]*:\s+(.+)') { $ruleName = ($Matches[1].Trim()) }
+            $verb = switch ($fe.Id) {
+                4946 {'RULE-ADDED'} 4947 {'RULE-MODIFIED'} 4948 {'RULE-DELETED'}
+                4950 {'SETTING-CHANGED'} 5025 {'SERVICE-STOPPED'} default {"id$($fe.Id)"}
+            }
+            if ($expected) {
+                Write-SecurityAudit "[FW-CHANGE] $verb rule='$ruleName' at $($fe.TimeCreated) by account=$acct (event $($fe.Id)) - expected (own firewall script active), no alert"
+                continue
+            }
+            Write-SecurityAudit "[ALERT] [FIREWALL-TAMPER] $verb rule='$ruleName' at $($fe.TimeCreated) by account=$acct (event $($fe.Id)) - no own firewall script active, possible tampering"
+            try {
+                & 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "Firewall tamper ${verb}: $ruleName" `
+                    -Body "A Windows Firewall change ($verb) occurred at $($fe.TimeCreated) by account=$acct (Security event $($fe.Id)), rule='$ruleName'. No FolderSync firewall script was active (sentinel .fw_expected not fresh), so this is unexpected. The attacker has previously added outbound BLOCK rules for Backblaze B2 IPs (104.153.233.180 / 149.137.142.15) to silently kill cloud sync - cross-reference with SYNC-FAIL / connectex errors in the cloud_sync log. Event 5025 (firewall service stopped) is especially high severity." `
+                    -B2Key "firewall_tamper_$($fe.TimeCreated.ToString('yyyyMMdd_HHmmss'))_$($fe.Id).txt"
+            } catch {}
+        }
+        if ($fwEvents) {
+            $newest = ($fwEvents | Sort-Object TimeCreated | Select-Object -Last 1).TimeCreated
+            if ($newest -gt $script:LastFwEventTime) { $script:LastFwEventTime = $newest }
         }
     } catch {}
 }
@@ -4430,6 +4494,17 @@ if (Test-Path $auditScript) {
 } else {
     Write-Warn "enable_file_auditing.ps1 not found - run manually when available"
 }
+
+# (Steps 16a2 process-creation 4688, 16a3 task-change 4698-4702, 16b SACL omitted here for brevity - see live script)
+
+# =============================================================================
+# STEP 16a4 - Firewall rule-change auditing (events 4946-4950/5025) [T078]
+# =============================================================================
+Write-Step "Step 16a4 - Enable firewall rule-change auditing (events 4946-4950/5025)"
+try { Set-Content -LiteralPath 'C:\Sync\Config\.fw_expected' -Value (Get-Date -Format 'o') -ErrorAction SilentlyContinue } catch {}
+auditpol /set /subcategory:"{0CCE9232-69AE-11D9-BED3-505054503030}" /success:enable /failure:enable | Out-Null
+if ($LASTEXITCODE -eq 0) { Write-OK "Firewall-change auditing enabled - rule add/modify/delete 4946/4947/4948, setting/service 4950/5025" }
+else { Write-Warn "auditpol failed - run manually: auditpol /set /subcategory:`"{0CCE9232-69AE-11D9-BED3-505054503030}`" /success:enable /failure:enable" }
 
 # =============================================================================
 # STEP 17 - FolderSync-GitCommitLogs task (current user, daily 23:30)

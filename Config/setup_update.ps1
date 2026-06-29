@@ -681,6 +681,20 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 # =============================================================================
+# STEP 16a4 - Firewall rule-change auditing (events 4946-4950/5025 - rule add/modify/delete, setting/service)
+# =============================================================================
+Write-Step "Step 16a4 - Enable firewall rule-change auditing (events 4946-4950/5025)"
+# Touch the firewall-expected sentinel so auditor.ps1 treats any firewall change this
+# setup run triggers as [FW-CHANGE] INFO (own script) rather than [FIREWALL-TAMPER].
+try { Set-Content -LiteralPath 'C:\Sync\Config\.fw_expected' -Value (Get-Date -Format 'o') -ErrorAction SilentlyContinue } catch {}
+auditpol /set /subcategory:"{0CCE9232-69AE-11D9-BED3-505054503030}" /success:enable /failure:enable | Out-Null
+if ($LASTEXITCODE -eq 0) {
+    Write-OK "Firewall-change auditing enabled - rule add/modify/delete logged as event 4946/4947/4948, setting/service as 4950/5025"
+} else {
+    Write-Warn "auditpol failed - run manually: auditpol /set /subcategory:`"{0CCE9232-69AE-11D9-BED3-505054503030}`" /success:enable /failure:enable"
+}
+
+# =============================================================================
 # STEP 16b - SACL write auditing on C:\Sync\Config\ (catches tampering process via event 4663)
 # =============================================================================
 Write-Step "Step 16b - SACL write auditing on Config\, Evidence\, .git\ + 512 MB Security log"

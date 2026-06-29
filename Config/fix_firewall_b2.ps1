@@ -13,6 +13,10 @@ function Write-Log($msg) {
 Write-Host ""
 Write-Host ">>> Removing malicious B2 firewall block rules" -ForegroundColor Cyan
 
+# T078: touch the firewall-expected sentinel so the auditor logs our own rule
+# removals as [FW-CHANGE] INFO rather than raising a [FIREWALL-TAMPER] alert.
+try { Set-Content -LiteralPath 'C:\Sync\Config\.fw_expected' -Value (Get-Date -Format 'o') -ErrorAction SilentlyContinue } catch {}
+
 $rulesToRemove = @(
     "Block 104.153.233.180",
     "Block 149.137.142.15"
