@@ -1,0 +1,110 @@
+#!/bin/sh /etc/rc.common
+# openwrt-tc-mirror.init - persistent WAN port mirror for the out-of-band sensor.
+#
+# Part of the C:\Sync security ecosystem (Backlog task T083).
+#
+# Goal
+# ----
+# Mirror all WAN ingress + egress traffic of the Xiaomi AX3000T (OpenWrt 23.05+,
+# MT7531 DSA switch) to a dedicated physical SPAN port (default LAN4), so an
+# out-of-band Intel N100 running Security Onion (Suricata + Zeek) gets a
+# tamper-proof copy of every packet the compromised laptop sends/receives.
+#
+# Why an init script
+# ------------------
+# DSA removed the old swconfig port-mirror knobs. The replacement is `tc mirred`
+# with ASIC offload (skip_sw = hardware offload, line rate, near-zero CPU). Those
+# `tc` commands DO NOT survive a reboot - hence this /etc/init.d service that
+# re-applies them on every boot (START=99, after the network is up).
+#
+# Hardware note: the MT7531 switch supports exactly ONE monitor (analyzer) port.
+# The SPAN port must be REMOVED from br-lan first (a mirror port must not also be
+# a forwarding bridge member) - see README-netsensor.md "ACTION FOR HELDER".
+#
+# Install (on the router, as root):
+#   scp openwrt-tc-mirror.init root@192.168.0.1:/etc/init.d/tc-mirror
+#   ssh root@192.168.0.1 'chmod +x /etc/init.d/tc-mirror; /etc/init.d/tc-mirror enable; /etc/init.d/tc-mirror start'
+#
+# Verify:
+#   tc filter show dev wan ingress
+#   tc -s filter show dev wan egress     # watch the counters climb
+#
+# Tunables (override in /etc/config or by editing the two vars below):
+#   WAN_IF    - the WAN netdev as seen by tc (often "wan", sometimes "eth1"/"wan.2")
+#   SPAN_IF   - the dedicated mirror/analyzer port feeding the N100 (default lan4)
+
+START=99
+STOP=10
+USE_PROCD=1
+
+WAN_IF="wan"
+SPAN_IF="lan4"
+LOGTAG="tc-mirror"
+
+# --- helpers -------------------------------------------------------------
+
+have_cmd() { command -v "$1" >/dev/null 2>&1; }
+
+ensure_pkgs() {
+    # tc-full + ip-full provide the mirred action and clsact qdisc; install once.
+    if ! tc actions list action mirred >/dev/null 2>&1; then
+        logger -t "$LOGTAG" "mirred action unavailable - installing tc-full ip-full"
+        opkg update >/dev/null 2>&1
+        opkg install tc-full ip-full kmod-sched-core kmod-sched-act-mirred >/dev/null 2>&1
+    fi
+}
+
+apply_mirror() {
+    # Bring the SPAN port up (it carries no IP - it is a one-way feed to the N100).
+    ip link set up dev "$SPAN_IF" 2>/dev/null
+
+    # clsact qdisc gives us both an ingress and an egress hook on the WAN device.
+    tc qdisc replace dev "$WAN_IF" clsact 2>/dev/null
+
+    # WAN ingress (Internet -> LAN) mirrored to the SPAN port.
+    tc filter replace dev "$WAN_IF" ingress \
+        matchall skip_sw \
+        action mirred egress mirror dev "$SPAN_IF" 2>/dev/null
+
+    # WAN egress (LAN -> Internet) mirrored to the SPAN port - this is the
+    # direction that carries C2 beacons / data exfiltration.
+    tc filter replace dev "$WAN_IF" egress \
+        matchall skip_sw \
+        action mirred egress mirror dev "$SPAN_IF" 2>/dev/null
+
+    # Verify hardware offload took (skip_sw fails closed if the ASIC refused it).
+    if tc filter show dev "$WAN_IF" ingress 2>/dev/null | grep -q "in_hw"; then
+        logger -t "$LOGTAG" "WAN mirror active (HW offload) -> $SPAN_IF"
+    else
+        logger -t "$LOGTAG" "WARN: WAN mirror applied but NOT confirmed in_hw - check ASIC offload / WAN_IF=$WAN_IF"
+    fi
+}
+
+remove_mirror() {
+    tc filter del dev "$WAN_IF" ingress 2>/dev/null
+    tc filter del dev "$WAN_IF" egress 2>/dev/null
+    tc qdisc del dev "$WAN_IF" clsact 2>/dev/null
+    logger -t "$LOGTAG" "WAN mirror removed"
+}
+
+# --- procd service hooks -------------------------------------------------
+
+start_service() {
+    have_cmd tc || ensure_pkgs
+    ensure_pkgs
+    apply_mirror
+    # procd needs a long-running child to track; this service is one-shot
+    # (the tc rules persist in the kernel), so we register a no-op instance
+    # only to mark the service "running" - the real work is done above.
+    procd_open_instance
+    procd_set_param command /bin/true
+    procd_close_instance
+}
+
+stop_service() {
+    remove_mirror
+}
+
+reload_service() {
+    apply_mirror
+}
