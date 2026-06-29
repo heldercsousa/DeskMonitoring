@@ -81,6 +81,26 @@ try {
 # 3. Upload to B2 (append-only alerts/ prefix)
 # ============================================================
 if ($B2Key -and (Test-Path $Rclone)) {
+    # rclone.conf is intentionally credential-less (T048 - creds live in DPAPI).
+    # cloud_sync injects the B2 account/key as env vars at runtime; send_alert must do
+    # the same or rclone reports "account not found" for the cloudsync: remote (T086).
+    $B2CredsFile = 'C:\Sync\Config\b2_creds.dpapi'
+    if (Test-Path $B2CredsFile) {
+        try {
+            $b64 = (Get-Content -LiteralPath $B2CredsFile -Raw -Encoding ASCII).Trim()
+            $dec = [System.Security.Cryptography.ProtectedData]::Unprotect(
+                [Convert]::FromBase64String($b64), $null,
+                [System.Security.Cryptography.DataProtectionScope]::LocalMachine)
+            $b2  = [System.Text.Encoding]::UTF8.GetString($dec) | ConvertFrom-Json
+            $env:RCLONE_CONFIG_CLOUDSYNC_ACCOUNT = $b2.account
+            $env:RCLONE_CONFIG_CLOUDSYNC_KEY     = $b2.key
+        } catch {
+            Write-Log "SEND-ALERT  WARN  could not load b2_creds.dpapi for B2 upload: $($_.Exception.Message)"
+        }
+    } else {
+        Write-Log "SEND-ALERT  WARN  b2_creds.dpapi missing - B2 upload will fail (account not found)"
+    }
+
     $dest = "cloudsync:helder-sync-mirror/alerts/$B2Key"
     $src  = if ($AttachFile -and (Test-Path $AttachFile)) { $AttachFile } else {
         # Write body to temp file and upload that
