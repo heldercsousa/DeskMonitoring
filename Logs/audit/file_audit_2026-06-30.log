@@ -1,1 +1,10 @@
 2026-06-30 00:26:41  [AUDITOR] Shutting down
+2026-06-30 00:30:46  [AUDITOR] Starting up (PID 5932)
+2026-06-30 00:30:46  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-06-30 00:30:59 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-30
+2026-06-30 00:30:59 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-30\motion_2026-06-30_00.30.58_282.avi
+2026-06-30 00:30:59 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-30\motion_2026-06-30_00.30.58_282.avi
+2026-06-30 00:31:00 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-30\motion_2026-06-30_00.30.58_282.avi
+2026-06-30 00:31:22 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-30\motion_2026-06-30_00.31.22_956.avi
+2026-06-30 00:31:23 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-30\motion_2026-06-30_00.31.22_956.avi
+2026-06-30 00:31:23 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-06-30\motion_2026-06-30_00.31.22_956.avi
