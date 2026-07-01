@@ -211,9 +211,13 @@ After successfully implementing any fix, new behavior, security hardening, or ec
    | Cloud sync / rclone | `C:\Sync\Logs\cloud_sync\cloud_sync_YYYY-MM-DD.log` |
    | FolderSyncAuditor | `C:\Sync\Logs\audit\file_audit_YYYY-MM-DD.log` |
    | Security scan | `C:\Sync\Logs\security\security_audit_YYYY-MM-DD.log` |
-   | Local mirror | `C:\Sync\Logs\mirror\mirror_YYYY-MM-DD.log` |
+   | Local mirror | `C:\Sync\Logs\mirror_YYYY-MM-DD.log` (root, no subdir) |
    | Watchdog | `C:\Sync\Logs\services\watchdog.log` (no date suffix — single file) |
    | Autoruns persistence diff | `C:\Sync\Logs\security\autoruns_YYYY-MM-DD.log` |
+   | Registry-run alerts / DailySecurityCheck | `C:\Sync\Logs\security\security_check_YYYY-MM-DD.log` |
+   | Config guard reverts | `C:\Sync\Logs\security\config_guard_YYYY-MM-DD.log` |
+   | Ecosystem start/stop | `C:\Sync\Logs\ecosystem\ecosystem_YYYY-MM-DD.log` |
+   | Power/sleep auto-heal | `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log` |
 
 2. **If today's log has no relevant entry:** read the prior day's log (`YYYY-MM-(DD-1)`).
 3. **Repeat** for up to **4 prior days maximum** (stepping back one day at a time), stopping as soon as the relevant error or event is found.
