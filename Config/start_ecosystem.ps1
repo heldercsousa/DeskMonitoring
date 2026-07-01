@@ -143,8 +143,8 @@ if (-not $rts) {
 Write-Step "Yawcam (CAM-1)"
 $yawcam = Get-Process yawcam -ErrorAction SilentlyContinue
 if (-not $yawcam) {
-    $yawcam = Get-Process javaw -ErrorAction SilentlyContinue |
-              Where-Object { $_.MainWindowTitle -like '*Yawcam*' }
+    $yawcam = Get-CimInstance Win32_Process -Filter "Name = 'javaw.exe'" -ErrorAction SilentlyContinue |
+              Where-Object { $_.CommandLine -like '*yawcam*' }
 }
 if (-not $yawcam) {
     Start-Process "C:\Program Files (x86)\Yawcam\Yawcam.exe" `
@@ -153,18 +153,18 @@ if (-not $yawcam) {
     Start-Sleep -Seconds 8
     $yawcam = Get-Process yawcam -ErrorAction SilentlyContinue
     if (-not $yawcam) {
-        $yawcam = Get-Process javaw -ErrorAction SilentlyContinue |
-                  Where-Object { $_.MainWindowTitle -like '*Yawcam*' }
+        $yawcam = Get-CimInstance Win32_Process -Filter "Name = 'javaw.exe'" -ErrorAction SilentlyContinue |
+                  Where-Object { $_.CommandLine -like '*yawcam*' }
     }
     if ($yawcam) {
-        Write-OK "Yawcam started (PID $($yawcam.Id))"
+        Write-OK "Yawcam started (PID $(if ($yawcam.Id) { $yawcam.Id } else { $yawcam.ProcessId }))"
         Write-Log "ECOSYSTEM-START  Yawcam started"
     } else {
         Write-Warn "Yawcam did not start - check C:\Program Files (x86)\Yawcam\Yawcam.exe"
         Write-Log "ECOSYSTEM-START  WARN Yawcam did not start"
     }
 } else {
-    Write-OK "Yawcam already running (PID $($yawcam.Id))"
+    Write-OK "Yawcam already running (PID $(if ($yawcam.Id) { $yawcam.Id } else { $yawcam.ProcessId }))"
     Write-Log "ECOSYSTEM-START  Yawcam already running"
 }
 
