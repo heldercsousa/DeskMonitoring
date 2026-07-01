@@ -561,7 +561,7 @@ Retention: 7 days (ACL-protected then cleaned by cloud_sync.ps1)
 |---|---|
 | `C:\Program Files (x86)\Yawcam\Yawcam.exe` | Main executable |
 | `C:\Sync\Config\yawcam_monitor_v4.ps1` | Active monitor script (recovery loop) — relocated from Yawcam dir |
-| `C:\Sync\Config\start_monitor.ps1` | Boot launcher — waits 30s then starts monitor hidden — relocated from Yawcam dir |
+| `C:\Sync\Config\start_monitor.ps1` | Boot launcher — waits 30s then starts monitor hidden — relocated from Yawcam dir. **Orphaned as of 2026-07-01**: no longer invoked by anything (its Run key was removed); `start_ecosystem.ps1` now launches `yawcam_monitor_v4.ps1` directly. Kept for reference only. |
 | `C:\Users\helde\Repos\Bois\YYYY-MM-DD\` | Recording output (date-stamped subdirectory) |
 | `C:\TEMP\motion_videos` | Symlink deployed (T022): C:\TEMP\motion_videos -> C:\Users\helde\Repos\Bois; monitor and recording path now aligned |
 | `C:\Sync\Config\cam2_relay.ps1` | CAM-2 VLC relay — converts RTSP from C100 to MJPEG HTTP on `127.0.0.1:8161` |

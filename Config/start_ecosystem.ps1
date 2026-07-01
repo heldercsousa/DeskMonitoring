@@ -190,6 +190,29 @@ if (-not $vlc) {
     Write-Log "ECOSYSTEM-START  CAM-2 relay already running"
 }
 
+# --- YawcamMonitor (keep-awake guard + restart-on-freeze watchdog) ---
+Write-Step "YawcamMonitor"
+$monitor = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue |
+           Where-Object { $_.CommandLine -like '*yawcam_monitor*' }
+if (-not $monitor) {
+    Start-Process powershell.exe `
+        -ArgumentList '-ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\yawcam_monitor_v4.ps1"' `
+        -WindowStyle Hidden -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 2
+    $monitor = Get-CimInstance Win32_Process -Filter "Name = 'powershell.exe'" -ErrorAction SilentlyContinue |
+               Where-Object { $_.CommandLine -like '*yawcam_monitor*' }
+    if ($monitor) {
+        Write-OK "YawcamMonitor started"
+        Write-Log "ECOSYSTEM-START  YawcamMonitor started"
+    } else {
+        Write-Warn "YawcamMonitor did not start - check yawcam_monitor_v4.ps1"
+        Write-Log "ECOSYSTEM-START  WARN YawcamMonitor did not start"
+    }
+} else {
+    Write-OK "YawcamMonitor already running (PID $($monitor.ProcessId))"
+    Write-Log "ECOSYSTEM-START  YawcamMonitor already running"
+}
+
 # --- Remove .camera_paused flag if present ---
 $pausedFlag = "C:\Sync\Config\.camera_paused"
 if (Test-Path $pausedFlag) {

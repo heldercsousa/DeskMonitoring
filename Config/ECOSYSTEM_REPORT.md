@@ -492,7 +492,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3 (Steps 1-20): state-aware (stops/restarts ecosystem), all hardening + task registration + RealTimeSync registry entry. Step 20: FolderSync-ConfigGuard task (config tamper auto-restore). Yawcam/YawcamMonitor/YawcamCam2Relay registry entries removed 2026-07-01 (no longer auto-start at login — see start_ecosystem.ps1) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
-| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs. Yawcam wait 8s + checks both yawcam/javaw process names; CAM-2 wait 5s (2026-03-15). No longer enforces HKCU\Run entries (2026-07-01 — Yawcam/monitor/CAM-2 relay start exclusively via this script, no login auto-start). |
+| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs. Yawcam wait 8s + checks both yawcam/javaw process names; CAM-2 wait 5s (2026-03-15). No longer enforces HKCU\Run entries (2026-07-01 — Yawcam/monitor/CAM-2 relay start exclusively via this script, no login auto-start). Now also launches YawcamMonitor directly via `Get-CimInstance Win32_Process` detection + `Start-Process yawcam_monitor_v4.ps1` (2026-07-01 fix — the Run key removal above had left the monitor with no launcher at all). |
 | `stop_ecosystem.ps1` | `/motionSentinel-stop` / Manual / `setup_update.ps1` | Stops all components in reverse; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = stopped` |
 | `pause_camera.ps1` | `/motionSentinel-pause` / Manual | Stops Yawcam; gate: `#Requires -RunAsAdministrator`; sets `.camera_paused` flag |
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
@@ -6413,7 +6413,7 @@ function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $
 function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
 function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
 function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
-# Starts: FolderSyncWatchdog, FolderSyncAuditor, scheduled tasks, RealTimeSync, Yawcam (with PID confirm), CAM-2 relay (with VLC PID confirm)
+# Starts: FolderSyncWatchdog, FolderSyncAuditor, scheduled tasks, RealTimeSync, Yawcam (with PID confirm), CAM-2 relay (with VLC PID confirm), YawcamMonitor (Get-CimInstance Win32_Process detection + Start-Process, 2026-07-01 fix)
 # Clears .camera_paused flag if present
 # Writes: 'running' | Set-Content -LiteralPath $StateFile -Encoding UTF8
 # Full source: C:\Sync\Config\start_ecosystem.ps1 (committed to git)
