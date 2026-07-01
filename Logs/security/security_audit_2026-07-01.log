@@ -264,3 +264,12 @@
 2026-07-01 16:57:41  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-01_reg-tamper_20260701_165720.md
 2026-07-01 17:52:12  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/01/2026 17:51:20 - no alert
 2026-07-01 17:53:26  [AUDITOR] Shutting down
+2026-07-01 18:12:03  AUDIT-FILTER  SUSPICIOUS-WRITES  21 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-01.md
+2026-07-01 18:18:25  [AUDITOR] Starting up (PID 16292)
+2026-07-01 18:30:44  AUDIT-FILTER  SUSPICIOUS-WRITES  9 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-01.md
+2026-07-01 18:35:05  AUDIT-FILTER  SUSPICIOUS-WRITES  9 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-01.md
+2026-07-01 18:39:28  [AUDITOR] Starting up (PID 14860)
+2026-07-01 18:48:42  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/01/2026 18:47:51 - no alert
+2026-07-01 18:50:11  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-01.md
+2026-07-01 18:55:07  AUDIT-FILTER  SUSPICIOUS-WRITES  6 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-01.md
+2026-07-01 18:57:48  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/01/2026 18:57:40 - no alert

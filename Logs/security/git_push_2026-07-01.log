@@ -1,2 +1,12 @@
 2026-07-01 17:47:01  GIT-PUSH  Pushing cb5449a - Sync diagnose-logs and CLAUDE.md to current log layout
 2026-07-01 17:47:06  GIT-PUSH  OK  cb5449a pushed to origin/master
+2026-07-01 18:00:15  GIT-PUSH  Pushing f196425 - logs: auto-commit 2026-07-01 18:00
+2026-07-01 18:00:23  GIT-PUSH  OK  f196425 pushed to origin/master
+2026-07-01 18:10:27  GIT-PUSH  Pushing 1798307 - Remove redundant Yawcam HKCU\Run auto-start entries
+2026-07-01 18:10:32  GIT-PUSH  OK  1798307 pushed to origin/master
+2026-07-01 18:32:02  GIT-PUSH  Pushing 4601f32 - Start YawcamMonitor directly in start_ecosystem.ps1
+2026-07-01 18:32:05  GIT-PUSH  OK  4601f32 pushed to origin/master
+2026-07-01 18:52:04  GIT-PUSH  Pushing c457e4d - Fix false-negative Yawcam detection in start_ecosystem
+2026-07-01 18:52:07  GIT-PUSH  OK  c457e4d pushed to origin/master
+2026-07-01 18:55:06  GIT-PUSH  Pushing f5fa94f - backlog: register T092/T093 Yawcam WMI detection follow-ups
+2026-07-01 18:55:09  GIT-PUSH  OK  f5fa94f pushed to origin/master
