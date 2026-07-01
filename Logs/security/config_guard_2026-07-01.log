@@ -1,0 +1,36 @@
+2026-07-01 12:01:21  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-01 12:01:23  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-01 12:01:24  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-01 12:01:25  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-07-01 12:39:36  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 12:39:36  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 12:41:08  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 12:41:08  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 12:59:25  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 12:59:25  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 12:59:35  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 12:59:35  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 13:02:25  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 13:02:25  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 13:05:25  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 13:05:25  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 13:08:25  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 13:08:25  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 13:11:25  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 13:11:25  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 13:14:25  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 13:14:25  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 13:17:38  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-01 13:17:38  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-01 13:21:02  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-07-01 13:21:02  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-07-01 13:21:02  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=Code
+2026-07-01 13:21:02  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-07-01 13:21:02  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-07-01 13:21:02  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-07-01 13:21:02  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=Code
+2026-07-01 13:21:02  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-07-01 17:54:04  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-01 17:54:06  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-01 17:54:08  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-01 17:54:09  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
