@@ -598,8 +598,11 @@ if (Test-Path $nssm) {
 }
 
 # =============================================================================
-# STEP 14 - Startup registry entries (RealTimeSync + Yawcam + Monitor + CAM-2)
+# STEP 14 - Startup registry entries (RealTimeSync only)
 # =============================================================================
+# Yawcam/YawcamMonitor/YawcamCam2Relay no longer auto-start at login - they start
+# exclusively via start_ecosystem.ps1 (Helder's manual per-session Administrator
+# shortcut), which made a separate HKCU\Run auto-start redundant.
 Write-Step "Step 14 - Startup registry entries"
 $runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 
@@ -607,21 +610,6 @@ $runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 $rtsPath = '"C:\Program Files\FreeFileSync\RealTimeSync.exe" "C:\Sync\Config\realtime.ffs_real"'
 Set-ItemProperty $runKey -Name "FolderSyncRealTime" -Value $rtsPath -ErrorAction SilentlyContinue
 Write-OK "Registry: FolderSyncRealTime -> RealTimeSync.exe"
-
-# Yawcam - use bat wrapper so working dir is set correctly (prevents launcher.cfg error)
-Set-ItemProperty $runKey -Name "Yawcam" `
-    -Value '"C:\Sync\Config\start_yawcam.bat"' -ErrorAction SilentlyContinue
-Write-OK "Registry: Yawcam -> C:\Sync\Config\start_yawcam.bat"
-
-# YawcamMonitor (uses relocated start_monitor.ps1 in C:\Sync\Config\)
-$monitorCmd = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\start_monitor.ps1"'
-Set-ItemProperty $runKey -Name "YawcamMonitor" -Value $monitorCmd -ErrorAction SilentlyContinue
-Write-OK "Registry: YawcamMonitor -> C:\Sync\Config\start_monitor.ps1"
-
-# YawcamCam2Relay
-$cam2Cmd = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"'
-Set-ItemProperty $runKey -Name "YawcamCam2Relay" -Value $cam2Cmd -ErrorAction SilentlyContinue
-Write-OK "Registry: YawcamCam2Relay -> C:\Sync\Config\cam2_relay.ps1"
 
 # =============================================================================
 # STEP 15 - Remove any known malicious firewall rules
@@ -1153,7 +1141,7 @@ Write-Host "  Step 10 - FolderSync-CloudBackup task (SYSTEM)" -ForegroundColor G
 Write-Host "  Step 11 - FolderSync-Watchdog task REMOVED (NSSM service is canonical, no duplicate)" -ForegroundColor Gray
 Write-Host "  Step 12 - FolderSyncWatchdog NSSM service (installed, not started)" -ForegroundColor Gray
 Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)" -ForegroundColor Gray
-Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
+Write-Host "  Step 14 - Startup registry: RealTimeSync only (Yawcam/monitor/CAM-2 relay start via start_ecosystem.ps1, no login auto-start)" -ForegroundColor Gray
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
 Write-Host "  Step 16a5- Registry auditing on power/Run keys (events 4657/4663, T075)" -ForegroundColor Gray

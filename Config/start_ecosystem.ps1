@@ -198,30 +198,6 @@ if (Test-Path $pausedFlag) {
     Write-Log "ECOSYSTEM-START  .camera_paused flag cleared"
 }
 
-# --- Ensure HKCU\Run autostart entries ---
-Write-Step "HKCU Run registry entries"
-$runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
-$entries = @{
-    "Yawcam"          = '"C:\Sync\Config\start_yawcam.bat"'
-    "YawcamMonitor"   = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\start_monitor.ps1"'
-    "YawcamCam2Relay" = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"'
-}
-foreach ($name in $entries.Keys) {
-    $current = (Get-ItemProperty $runKey -Name $name -ErrorAction SilentlyContinue).$name
-    if ($current -ne $entries[$name]) {
-        Set-ItemProperty $runKey -Name $name -Value $entries[$name] -ErrorAction SilentlyContinue
-        if ($current) {
-            Write-OK "$name registry entry corrected (was: $current)"
-            Write-Log "ECOSYSTEM-START  $name registry entry corrected"
-        } else {
-            Write-OK "$name registry entry restored"
-            Write-Log "ECOSYSTEM-START  $name registry entry restored"
-        }
-    } else {
-        Write-OK "$name registry entry correct"
-    }
-}
-
 # --- Write state flag ---
 'running' | Set-Content -LiteralPath $StateFile -Encoding UTF8
 Write-Log "ECOSYSTEM-START  State set to running"

@@ -373,11 +373,9 @@ The ecosystem has four layers that work together continuously:
 | Task Scheduler (at startup) | FolderSync-CloudBackup | SYSTEM | System startup |
 | Task Scheduler (at logon) | FolderSync-Watchdog | SYSTEM | User logon |
 | HKCU\Run: FolderSyncRealTime | RealTimeSync.exe | Helder | User login |
-| HKCU\Run: Yawcam | Yawcam.exe | Helder | User login |
-| HKCU\Run: YawcamMonitor | start_monitor.ps1 | Helder | User login |
-| HKCU\Run: YawcamCam2Relay | cam2_relay.ps1 | Helder | User login |
+| Manual (Administrator) | `start_ecosystem.ps1` starts Yawcam, YawcamMonitor, CAM-2 relay | Helder | Helder's per-session start shortcut (`setup_update.ps1` + `start_ecosystem.ps1`) |
 
-NSSM services + Task Scheduler at-startup provide system-level activation before login. Cloud sync, RealTimeSync, and camera components require a user session and are correctly login-triggered.
+NSSM services + Task Scheduler at-startup provide system-level activation before login. Cloud sync and RealTimeSync are correctly login-triggered. Yawcam/monitor/CAM-2 relay were removed from `HKCU\Run` (2026-07-01) — they no longer auto-start at Windows login; they start only when `start_ecosystem.ps1` runs. **Trade-off:** if the machine reboots unexpectedly while Helder is away, cameras will NOT resume automatically until he manually re-runs the start shortcut — an intentional simplification, not an oversight.
 
 ### Lifecycle Control (/project: commands)
 
@@ -597,11 +595,13 @@ The monitor runs in an infinite loop (60s interval):
 ### Auto-Start Chain (boot sequence)
 
 ```
-Windows login
-    → Registry Run: Yawcam.exe         (starts Yawcam with motion detection enabled)
-    → Registry Run: YawcamMonitor      (start_monitor.ps1, 30s delay, then monitor v4 hidden)
-    → Registry Run: YawcamCam2Relay    (cam2_relay.ps1 hidden — VLC RTSP->MJPEG relay for CAM-2)
+Helder's Administrator start shortcut (setup_update.ps1 -> start_ecosystem.ps1)
+    → Yawcam.exe            (motion detection enabled)
+    → YawcamMonitor         (start_monitor.ps1 / monitor v4, hidden)
+    → YawcamCam2Relay       (cam2_relay.ps1 hidden — VLC RTSP->MJPEG relay for CAM-2)
 ```
+
+No longer triggered by Windows login (`HKCU\Run` entries removed 2026-07-01 — see Boot Chain table above for the trade-off this introduces).
 
 ### Critical Power Settings
 

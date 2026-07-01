@@ -490,9 +490,9 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `cam2.conf` | Fallback for `cam2_relay.ps1` | CAM-2 credentials (plaintext fallback — migrate with `migrate_cam2_creds.ps1` then delete, **gitignored**) |
 | `sysmonconfig.xml` | `setup_update.ps1` Step 21 (Sysmon `-i`/`-c`) | SwiftOnSecurity Sysmon config (schemaversion 4.50, 1200 lines) — defines high-quality process/network/DNS event tracing. Git-tracked so the config survives reinstall and the binary is auto-downloaded to `C:\Tools\Sysmon` (T076, 2026-06-29) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
-| `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3 (Steps 1-20): state-aware (stops/restarts ecosystem), all hardening + task registration + Yawcam registry. Step 20: FolderSync-ConfigGuard task (config tamper auto-restore) |
+| `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3 (Steps 1-20): state-aware (stops/restarts ecosystem), all hardening + task registration + RealTimeSync registry entry. Step 20: FolderSync-ConfigGuard task (config tamper auto-restore). Yawcam/YawcamMonitor/YawcamCam2Relay registry entries removed 2026-07-01 (no longer auto-start at login — see start_ecosystem.ps1) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
-| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs; enforces HKCU\Run entries. Yawcam wait 8s + checks both yawcam/javaw process names; CAM-2 wait 5s (2026-03-15). |
+| `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs. Yawcam wait 8s + checks both yawcam/javaw process names; CAM-2 wait 5s (2026-03-15). No longer enforces HKCU\Run entries (2026-07-01 — Yawcam/monitor/CAM-2 relay start exclusively via this script, no login auto-start). |
 | `stop_ecosystem.ps1` | `/motionSentinel-stop` / Manual / `setup_update.ps1` | Stops all components in reverse; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = stopped` |
 | `pause_camera.ps1` | `/motionSentinel-pause` / Manual | Stops Yawcam; gate: `#Requires -RunAsAdministrator`; sets `.camera_paused` flag |
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
@@ -5135,8 +5135,11 @@ if (Test-Path $nssm) {
 }
 
 # =============================================================================
-# STEP 14 - Startup registry entries (RealTimeSync + Yawcam + Monitor + CAM-2)
+# STEP 14 - Startup registry entries (RealTimeSync only)
 # =============================================================================
+# Yawcam/YawcamMonitor/YawcamCam2Relay no longer auto-start at login - they start
+# exclusively via start_ecosystem.ps1 (Helder's manual per-session Administrator
+# shortcut), which made a separate HKCU\Run auto-start redundant.
 Write-Step "Step 14 - Startup registry entries"
 $runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 
@@ -5144,21 +5147,6 @@ $runKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 $rtsPath = '"C:\Program Files\FreeFileSync\RealTimeSync.exe" "C:\Sync\Config\realtime.ffs_real"'
 Set-ItemProperty $runKey -Name "FolderSyncRealTime" -Value $rtsPath -ErrorAction SilentlyContinue
 Write-OK "Registry: FolderSyncRealTime -> RealTimeSync.exe"
-
-# Yawcam - use bat wrapper so working dir is set correctly (prevents launcher.cfg error)
-Set-ItemProperty $runKey -Name "Yawcam" `
-    -Value '"C:\Sync\Config\start_yawcam.bat"' -ErrorAction SilentlyContinue
-Write-OK "Registry: Yawcam -> C:\Sync\Config\start_yawcam.bat"
-
-# YawcamMonitor (uses relocated start_monitor.ps1 in C:\Sync\Config\)
-$monitorCmd = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\start_monitor.ps1"'
-Set-ItemProperty $runKey -Name "YawcamMonitor" -Value $monitorCmd -ErrorAction SilentlyContinue
-Write-OK "Registry: YawcamMonitor -> C:\Sync\Config\start_monitor.ps1"
-
-# YawcamCam2Relay
-$cam2Cmd = 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\Sync\Config\cam2_relay.ps1"'
-Set-ItemProperty $runKey -Name "YawcamCam2Relay" -Value $cam2Cmd -ErrorAction SilentlyContinue
-Write-OK "Registry: YawcamCam2Relay -> C:\Sync\Config\cam2_relay.ps1"
 
 # =============================================================================
 # STEP 15 - Remove any known malicious firewall rules
@@ -5690,7 +5678,7 @@ Write-Host "  Step 10 - FolderSync-CloudBackup task (SYSTEM)" -ForegroundColor G
 Write-Host "  Step 11 - FolderSync-Watchdog task REMOVED (NSSM service is canonical, no duplicate)" -ForegroundColor Gray
 Write-Host "  Step 12 - FolderSyncWatchdog NSSM service (installed, not started)" -ForegroundColor Gray
 Write-Host "  Step 13 - FolderSyncAuditor NSSM service (installed, not started)" -ForegroundColor Gray
-Write-Host "  Step 14 - Startup registry: RealTimeSync + Yawcam + YawcamMonitor + YawcamCam2Relay" -ForegroundColor Gray
+Write-Host "  Step 14 - Startup registry: RealTimeSync only (Yawcam/monitor/CAM-2 relay start via start_ecosystem.ps1, no login auto-start)" -ForegroundColor Gray
 Write-Host "  Step 15 - Malicious firewall rules removed (B2 block rules)" -ForegroundColor Gray
 Write-Host "  Step 16 - File system auditing (SACL on Bois folder)" -ForegroundColor Gray
 Write-Host "  Step 16a5- Registry auditing on power/Run keys (events 4657/4663, T075)" -ForegroundColor Gray
@@ -6413,6 +6401,7 @@ pause
 > Starts all ecosystem components. Gate: `#Requires -RunAsAdministrator`. Writes `.ecosystem_state = running`.
 > Fixed 2026-03-08: Yawcam and CAM-2 relay now verified with Get-Process after Start-Process (no more false-positive OK). HKCU\Run registry entries auto-restored if missing.
 > Fixed 2026-03-10: HKCU\Run registry enforcement changed from "set if missing" to "set if missing or incorrect" — prevents Yawcam entry from silently staying as `Yawcam.exe` (no working dir) instead of `start_yawcam.bat` (correct working dir). Root cause of recurring launcher.cfg error at logon.
+> Changed 2026-07-01: HKCU\Run enforcement block removed entirely. Yawcam/YawcamMonitor/YawcamCam2Relay no longer auto-start at Windows login — Helder's existing per-session Administrator shortcut (`setup_update.ps1` + `start_ecosystem.ps1`) made the separate login auto-start redundant. Cameras now start exclusively when this script runs.
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -6425,7 +6414,6 @@ function Write-Step($msg) { Write-Host "`n>>> $msg" -ForegroundColor Cyan }
 function Write-OK($msg)   { Write-Host "  OK   $msg" -ForegroundColor Green }
 function Write-Warn($msg) { Write-Host "  WARN $msg" -ForegroundColor Yellow }
 # Starts: FolderSyncWatchdog, FolderSyncAuditor, scheduled tasks, RealTimeSync, Yawcam (with PID confirm), CAM-2 relay (with VLC PID confirm)
-# Enforces HKCU\Run entries (Yawcam -> start_yawcam.bat, YawcamMonitor, YawcamCam2Relay) - overwrites if wrong
 # Clears .camera_paused flag if present
 # Writes: 'running' | Set-Content -LiteralPath $StateFile -Encoding UTF8
 # Full source: C:\Sync\Config\start_ecosystem.ps1 (committed to git)
