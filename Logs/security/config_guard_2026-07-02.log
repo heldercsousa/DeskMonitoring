@@ -28,3 +28,7 @@
 2026-07-02 09:25:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
 2026-07-02 09:25:12  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
 2026-07-02 09:25:13  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-02 13:58:55  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-02 13:58:56  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-02 13:58:57  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-02 13:58:58  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
