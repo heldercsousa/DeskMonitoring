@@ -493,8 +493,8 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `setup_update.ps1` | Fresh install / new device (primary) | Centralized setup v3 (Steps 1-20): state-aware (stops/restarts ecosystem), all hardening + task registration + RealTimeSync registry entry. Step 20: FolderSync-ConfigGuard task (config tamper auto-restore). Yawcam/YawcamMonitor/YawcamCam2Relay registry entries removed 2026-07-01 (no longer auto-start at login — see start_ecosystem.ps1) |
 | `setup_all.ps1` | Legacy reference | Setup v2 — kept for reference; `setup_update.ps1` is now primary |
 | `start_ecosystem.ps1` | `/motionSentinel-start` / Manual / `setup_update.ps1` | Starts all components; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = running`; verifies Yawcam+VLC PIDs. Yawcam wait 8s + checks both yawcam/javaw process names; CAM-2 wait 5s (2026-03-15). No longer enforces HKCU\Run entries (2026-07-01 — Yawcam/monitor/CAM-2 relay start exclusively via this script, no login auto-start). Now also launches YawcamMonitor directly via `Get-CimInstance Win32_Process` detection + `Start-Process yawcam_monitor_v4.ps1` (2026-07-01 fix — the Run key removal above had left the monitor with no launcher at all). |
-| `stop_ecosystem.ps1` | `/motionSentinel-stop` / Manual / `setup_update.ps1` | Stops all components in reverse; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = stopped` |
-| `pause_camera.ps1` | `/motionSentinel-pause` / Manual | Stops Yawcam; gate: `#Requires -RunAsAdministrator`; sets `.camera_paused` flag |
+| `stop_ecosystem.ps1` | `/motionSentinel-stop` / Manual / `setup_update.ps1` | Stops all components in reverse; gate: `#Requires -RunAsAdministrator`; writes `.ecosystem_state = stopped`; Yawcam kill via CIM CommandLine match (T094, 2026-07-02) |
+| `pause_camera.ps1` | `/motionSentinel-pause` / Manual | Stops Yawcam; gate: `#Requires -RunAsAdministrator`; sets `.camera_paused` flag; Yawcam kill via CIM CommandLine match (T094, 2026-07-02) |
 | `resume_camera.ps1` | `/motionSentinel-resume` / Manual | Starts Yawcam; gate: `#Requires -RunAsAdministrator`; removes `.camera_paused` flag |
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `enable_registry_auditing.ps1` | `setup_update.ps1` Step 16a5 (admin) | T075: enables the Registry audit subcategory ({0CCE921E-...}) and applies a Success+Failure SACL (Everyone) to `HKLM\...\Power\User\PowerSchemes`, `HKLM\...\CurrentVersion\Run`, `HKCU\...\CurrentVersion\Run`, so a write fires Security event 4657/4663. auditor.ps1 correlates those against Sysmon Event 1 (fallback 4688) to unmask the true caller (2026-06-29) |
@@ -548,7 +548,7 @@ These scripts were relocated from `C:\Program Files (x86)\Yawcam\` to `C:\Sync\C
 
 | File | Used by | Purpose |
 |---|---|---|
-| `yawcam_monitor_v4.ps1` | Registry Run `YawcamMonitor` via `start_monitor.ps1` | Infinite-loop monitor: scans Bois dir recursively for latest .avi (T022), timestamped log to `C:\Sync\Logs\services\yawcam_monitor.log` (T023), restart failure sentinel `.camera_restart_failed` (T034). 60s interval, 600s cooldown. Keep-awake guard: SetThreadExecutionState(ES_CONTINUOUS\|ES_SYSTEM_REQUIRED) asserted at startup + each loop to block idle/away sleep (2026-06-15). |
+| `yawcam_monitor_v4.ps1` | Started directly by `start_ecosystem.ps1` | Infinite-loop monitor: scans Bois dir recursively for latest .avi (T022), timestamped log to `C:\Sync\Logs\services\yawcam_monitor.log` (T023), restart failure sentinel `.camera_restart_failed` (T034). 60s interval, 600s cooldown. Keep-awake guard: SetThreadExecutionState(ES_CONTINUOUS\|ES_SYSTEM_REQUIRED) asserted at startup + each loop to block idle/away sleep (2026-06-15). Yawcam detection + restart-kill via CIM Win32_Process CommandLine match, logs RESTART-KILL pids (T093/T094, 2026-07-02 - old MainWindowTitle check was always false-negative for tray-minimized javaw). |
 | `start_monitor.ps1` | Registry Run `YawcamMonitor` | Boot launcher: waits 30s for system to stabilize, then starts `C:\Sync\Config\yawcam_monitor_v4.ps1` hidden |
 | `start_yawcam.bat` | Registry Run `Yawcam` (replaces direct .exe entry) | `cd /d` to Yawcam dir then starts Yawcam.exe — fixes launcher.cfg not found error on boot |
 
@@ -6432,6 +6432,8 @@ $LogFile   = "C:\Sync\Logs\ecosystem\ecosystem_$(Get-Date -Format 'yyyy-MM-dd').
 $StateFile = "C:\Sync\Config\.ecosystem_state"
 # Stops in reverse order: CAM-2 relay (VLC), Yawcam, RealTimeSync, scheduled tasks (disable),
 #   FolderSyncAuditor, FolderSyncWatchdog
+# Yawcam kill matches javaw.exe by CIM CommandLine '*yawcam*' (T094 - MainWindowTitle is
+#   empty when tray-minimized and always missed the process)
 # Writes: 'stopped' | Set-Content -LiteralPath $StateFile -Encoding UTF8
 # Full source: C:\Sync\Config\stop_ecosystem.ps1 (committed to git)
 ```
@@ -6450,7 +6452,10 @@ $PausedFlag = "C:\Sync\Config\.camera_paused"
 function Write-Log($msg) { $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'; "$ts  $msg" | Add-Content -LiteralPath $LogFile }
 if (Test-Path $PausedFlag) { Write-Host "  WARN Camera already paused" -ForegroundColor Yellow; exit 0 }
 Get-Process yawcam -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-Get-Process javaw -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowTitle -like '*Yawcam*' } | Stop-Process -Force -ErrorAction SilentlyContinue
+# javaw MainWindowTitle is empty when tray-minimized; match CommandLine via CIM (T094)
+Get-CimInstance Win32_Process -Filter "Name = 'javaw.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -like '*yawcam*' } |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
 'paused' | Set-Content -LiteralPath $PausedFlag -Encoding UTF8
 Write-Log "CAMERA-PAUSE  Yawcam stopped, .camera_paused flag set"
 Write-Host "  OK   Camera paused. Run resume_camera.ps1 to restart." -ForegroundColor Green
@@ -6491,8 +6496,7 @@ start "" "Yawcam.exe"
 ---
 
 ### `C:\Sync\Config\yawcam_monitor_v4.ps1`
-> Active Yawcam monitor (in C:\Sync\Config\). Scans C:\Users\helde\Repos\Bois recursively for latest .avi every 60s. Logs to C:\Sync\Logs\services\yawcam_monitor.log (T023). Restart failure writes sentinel .camera_restart_failed (T034). 600s cooldown. Starts Yawcam via start_yawcam.bat. (T022/T023/T034, 2026-06-02)
-> Active Yawcam monitor (in C:\Sync\Config\). Scans C:\Users\helde\Repos\Bois recursively for latest .avi every 60s. Logs to C:\Sync\Logs\services\yawcam_monitor.log (T023). Restart failure writes sentinel .camera_restart_failed (T034). 600s cooldown. Starts Yawcam via start_yawcam.bat. (T022/T023/T034, 2026-06-02)
+> Active Yawcam monitor (in C:\Sync\Config\). Scans C:\Users\helde\Repos\Bois recursively for latest .avi every 60s. Logs to C:\Sync\Logs\services\yawcam_monitor.log (T023). Restart failure writes sentinel .camera_restart_failed (T034). 600s cooldown. Starts Yawcam via start_yawcam.bat. Detects/kills Yawcam via CIM CommandLine match (T093/T094, 2026-07-02). (T022/T023/T034, 2026-06-02)
 
 ```powershell
 # ========================================
@@ -6547,15 +6551,20 @@ Write-Log "START  monitor starting  VideoPath=$VideoPath  interval=${CheckInterv
 Assert-StayAwake
 Write-Log "KEEP-AWAKE  ES_CONTINUOUS|ES_SYSTEM_REQUIRED asserted - system will refuse idle/away sleep"
 
+# Yawcam runs as javaw.exe; MainWindowTitle is empty when tray-minimized, so
+# detection MUST match on CommandLine via CIM (T093/T094 - same fix as c457e4d).
+function Get-YawcamProcesses {
+    $procs = @()
+    $procs += @(Get-Process -Name "yawcam" -ErrorAction SilentlyContinue |
+                ForEach-Object { $_.Id })
+    $procs += @(Get-CimInstance Win32_Process -Filter "Name = 'javaw.exe'" -ErrorAction SilentlyContinue |
+                Where-Object { $_.CommandLine -like "*yawcam*" } |
+                ForEach-Object { $_.ProcessId })
+    return @($procs | Where-Object { $_ } | Select-Object -Unique)
+}
+
 function Test-YawcamRunning {
-    $yawcam = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
-    if ($yawcam) { return $true }
-
-    $javaw = Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
-             Where-Object { $_.MainWindowTitle -like "*Yawcam*" }
-    if ($javaw) { return $true }
-
-    return $false
+    return ((Get-YawcamProcesses).Count -gt 0)
 }
 
 function Restart-YawcamSafely {
@@ -6564,10 +6573,14 @@ function Restart-YawcamSafely {
     Write-Log "RESTART  beginning Yawcam restart sequence"
 
     Write-Host "   [1/5] Fechando Yawcam..." -ForegroundColor Gray
-    Get-Process -Name "yawcam" -ErrorAction SilentlyContinue | Stop-Process -Force
-    Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
-        Where-Object { $_.MainWindowTitle -like "*Yawcam*" } |
-        Stop-Process -Force
+    # Kill ALL Yawcam instances (incl. zombies) by CIM CommandLine match (T094)
+    $pids = Get-YawcamProcesses
+    if ($pids.Count -gt 0) {
+        Write-Log "RESTART-KILL  pids=$($pids -join ',')"
+        $pids | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }
+    } else {
+        Write-Log "RESTART-KILL  no Yawcam process found to kill"
+    }
     Start-Sleep -Seconds 5
 
     Write-Host "   [2/5] Liberando camera..." -ForegroundColor Gray
@@ -6587,9 +6600,10 @@ function Restart-YawcamSafely {
     Start-Sleep -Seconds 10
 
     Write-Host "   [5/5] Verificando..." -ForegroundColor Gray
-    if (Test-YawcamRunning) {
+    $newPids = Get-YawcamProcesses
+    if ($newPids.Count -gt 0) {
         Write-Host "   [OK] Yawcam reiniciado!" -ForegroundColor Green
-        Write-Log "RESTART-OK  Yawcam process confirmed after restart"
+        Write-Log "RESTART-OK  Yawcam process confirmed after restart  pids=$($newPids -join ',')"
         if (Test-Path $SentinelFail) { Remove-Item -LiteralPath $SentinelFail -Force -ErrorAction SilentlyContinue }
     } else {
         Write-Host "   [FAIL] Yawcam processo nao detectado apos reinicio" -ForegroundColor Red

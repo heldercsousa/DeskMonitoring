@@ -20,9 +20,10 @@ if (Test-Path $PausedFlag) {
 }
 
 Get-Process yawcam -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-Get-Process javaw -ErrorAction SilentlyContinue |
-    Where-Object { $_.MainWindowTitle -like '*Yawcam*' } |
-    Stop-Process -Force -ErrorAction SilentlyContinue
+# javaw MainWindowTitle is empty when tray-minimized; match CommandLine via CIM (T094)
+Get-CimInstance Win32_Process -Filter "Name = 'javaw.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -like '*yawcam*' } |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
 
 'paused' | Set-Content -LiteralPath $PausedFlag -Encoding UTF8
 Write-Log "CAMERA-PAUSE  Yawcam stopped, .camera_paused flag set"

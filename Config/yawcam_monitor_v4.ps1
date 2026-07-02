@@ -50,15 +50,20 @@ Write-Log "START  monitor starting  VideoPath=$VideoPath  interval=${CheckInterv
 Assert-StayAwake
 Write-Log "KEEP-AWAKE  ES_CONTINUOUS|ES_SYSTEM_REQUIRED asserted - system will refuse idle/away sleep"
 
+# Yawcam runs as javaw.exe; MainWindowTitle is empty when tray-minimized, so
+# detection MUST match on CommandLine via CIM (T093/T094 - same fix as c457e4d).
+function Get-YawcamProcesses {
+    $procs = @()
+    $procs += @(Get-Process -Name "yawcam" -ErrorAction SilentlyContinue |
+                ForEach-Object { $_.Id })
+    $procs += @(Get-CimInstance Win32_Process -Filter "Name = 'javaw.exe'" -ErrorAction SilentlyContinue |
+                Where-Object { $_.CommandLine -like "*yawcam*" } |
+                ForEach-Object { $_.ProcessId })
+    return @($procs | Where-Object { $_ } | Select-Object -Unique)
+}
+
 function Test-YawcamRunning {
-    $yawcam = Get-Process -Name "yawcam" -ErrorAction SilentlyContinue
-    if ($yawcam) { return $true }
-
-    $javaw = Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
-             Where-Object { $_.MainWindowTitle -like "*Yawcam*" }
-    if ($javaw) { return $true }
-
-    return $false
+    return ((Get-YawcamProcesses).Count -gt 0)
 }
 
 function Restart-YawcamSafely {
@@ -67,10 +72,14 @@ function Restart-YawcamSafely {
     Write-Log "RESTART  beginning Yawcam restart sequence"
 
     Write-Host "   [1/5] Fechando Yawcam..." -ForegroundColor Gray
-    Get-Process -Name "yawcam" -ErrorAction SilentlyContinue | Stop-Process -Force
-    Get-Process -Name "javaw" -ErrorAction SilentlyContinue |
-        Where-Object { $_.MainWindowTitle -like "*Yawcam*" } |
-        Stop-Process -Force
+    # Kill ALL Yawcam instances (incl. zombies) by CIM CommandLine match (T094)
+    $pids = Get-YawcamProcesses
+    if ($pids.Count -gt 0) {
+        Write-Log "RESTART-KILL  pids=$($pids -join ',')"
+        $pids | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }
+    } else {
+        Write-Log "RESTART-KILL  no Yawcam process found to kill"
+    }
     Start-Sleep -Seconds 5
 
     Write-Host "   [2/5] Liberando camera..." -ForegroundColor Gray
@@ -90,9 +99,10 @@ function Restart-YawcamSafely {
     Start-Sleep -Seconds 10
 
     Write-Host "   [5/5] Verificando..." -ForegroundColor Gray
-    if (Test-YawcamRunning) {
+    $newPids = Get-YawcamProcesses
+    if ($newPids.Count -gt 0) {
         Write-Host "   [OK] Yawcam reiniciado!" -ForegroundColor Green
-        Write-Log "RESTART-OK  Yawcam process confirmed after restart"
+        Write-Log "RESTART-OK  Yawcam process confirmed after restart  pids=$($newPids -join ',')"
         if (Test-Path $SentinelFail) { Remove-Item -LiteralPath $SentinelFail -Force -ErrorAction SilentlyContinue }
     } else {
         Write-Host "   [FAIL] Yawcam processo nao detectado apos reinicio" -ForegroundColor Red

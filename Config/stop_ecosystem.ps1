@@ -42,9 +42,10 @@ Write-Log "ECOSYSTEM-STOP  CAM-2 relay stopped"
 # --- Yawcam ---
 Write-Step "Yawcam"
 Get-Process yawcam -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
-Get-Process javaw -ErrorAction SilentlyContinue |
-    Where-Object { $_.MainWindowTitle -like '*Yawcam*' } |
-    Stop-Process -Force -ErrorAction SilentlyContinue
+# javaw MainWindowTitle is empty when tray-minimized; match CommandLine via CIM (T094)
+Get-CimInstance Win32_Process -Filter "Name = 'javaw.exe'" -ErrorAction SilentlyContinue |
+    Where-Object { $_.CommandLine -like '*yawcam*' } |
+    ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
 Write-OK "Yawcam stopped"
 Write-Log "ECOSYSTEM-STOP  Yawcam stopped"
 
