@@ -71,3 +71,25 @@
 | 2026-07-01 18:49:24 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
 | 2026-07-01 18:49:24 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\start_ecosystem.ps1.tmp.10648.18ac7cee2212` |
 | 2026-07-01 18:49:24 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\start_ecosystem.ps1.tmp.10648.18ac7cee2212` |
+
+## 2026-07-01 19:10:06 - 6 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-07-01 19:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-07-01 19:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.fe5be7b755d5` |
+| 2026-07-01 19:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.fe5be7b755d5` |
+| 2026-07-01 19:09:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-07-01 19:09:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.e1b1c37b6c04` |
+| 2026-07-01 19:09:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.e1b1c37b6c04` |
+
+## 2026-07-01 19:15:06 - 6 suspicious write(s) detected
+
+| Time | Process | Account | Access | Object |
+|------|---------|---------|--------|--------|
+| 2026-07-01 19:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-07-01 19:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.fe5be7b755d5` |
+| 2026-07-01 19:09:35 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.fe5be7b755d5` |
+| 2026-07-01 19:09:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config` |
+| 2026-07-01 19:09:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteAttributes | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.e1b1c37b6c04` |
+| 2026-07-01 19:09:12 | `C:\Users\helde\.local\bin\claude.exe` | helde | WriteData (ou AddFile) | `C:\Sync\Config\fix_power_motion.ps1.tmp.24980.e1b1c37b6c04` |
