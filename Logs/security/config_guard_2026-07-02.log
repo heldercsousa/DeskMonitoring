@@ -60,3 +60,7 @@
 2026-07-02 17:55:52  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=powershell
 2026-07-02 17:55:52  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
 2026-07-02 17:55:52  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
+2026-07-02 22:00:56  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-02 22:00:57  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-02 22:00:58  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-02 22:00:59  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
