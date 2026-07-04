@@ -1,0 +1,51 @@
+
+Microsoft Windows [versão 10.0.26200.8737]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Windows\System32>DISM /online /cleanup-image /restorehealth
+
+Ferramenta de Gerenciamento e Manutenção de Imagens de Implantação
+Versão: 10.0.26100.8737
+
+Versão da Imagem: 10.0.26200.8737
+
+[==========================100.0%==========================] Operação de restauração concluída com êxito.
+A operação foi concluída com êxito.
+
+C:\Windows\System32>
+C:\Windows\System32>sfc /scannow
+
+Iniciando verificação de arquivos. O processo levará alguns minutos para ser concluído.
+
+Iniciando fase de verificação de verificação do sistema.
+Verificação 100% concluída.
+
+A Proteção de Recursos do Windows encontrou arquivos corrompidos e os reparou com êxito.
+Para reparos online, os detalhes são incluídos no arquivo de log CBS localizado em
+windir\Logs\CBS\CBS.log. Por exemplo, C:\Windows\Logs\CBS\CBS.log. Para reparos
+offline, os detalhes são incluídos no arquivo de log fornecido pelo sinalizador /OFFLOGFILE.
+
+C:\Windows\System32>sfc /scannow
+
+Iniciando verificação de arquivos. O processo levará alguns minutos para ser concluído.
+
+Iniciando fase de verificação de verificação do sistema.
+Verificação 100% concluída.
+
+A Proteção de Recursos do Windows não encontrou nenhuma violação de integridade.
+
+C:\Windows\System32>chkdsk /R c:
+O tipo do sistema de arquivos é NTFS.
+Não é possível bloquear a unidade atual.
+
+Não é possível executar o CHKDSK porque o volume está sendo usado por outro
+processo. Deseja agendar a verificação
+deste volume para a próxima vez em que o sistema for reiniciado? (S/N)
+
+Não é possível executar o CHKDSK porque o volume está sendo usado por outro
+processo. Deseja agendar a verificação
+deste volume para a próxima vez em que o sistema for reiniciado? (S/N) s
+
+Este volume será verificado da próxima vez que o sistema for reiniciado.
+
+C:\Windows\System32>
