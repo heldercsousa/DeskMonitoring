@@ -34,7 +34,7 @@ Verificação 100% concluída.
 
 A Proteção de Recursos do Windows não encontrou nenhuma violação de integridade.
 
-C:\Windows\System32>chkdsk /R c:
+C:\Windows\System32>chkdsk /F c: ---nota:SSDdeve rodar com parametro /f
 O tipo do sistema de arquivos é NTFS.
 Não é possível bloquear a unidade atual.
 

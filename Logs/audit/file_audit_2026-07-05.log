@@ -1,0 +1,42 @@
+2026-07-05 06:35:21  [AUDITOR] Starting up (PID 7176)
+2026-07-05 06:35:23  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-07-05 15:06:50  [AUDITOR] Shutting down
+2026-07-05 15:08:11  [AUDITOR] Starting up (PID 9860)
+2026-07-05 15:08:12  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-07-05 15:08:24 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05
+2026-07-05 15:08:25 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.08.23_834.avi
+2026-07-05 15:08:25 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.08.23_834.avi
+2026-07-05 15:08:41 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.08.40_330.avi
+2026-07-05 15:08:40 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.08.40_330.avi
+2026-07-05 15:08:57 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.08.57_585.avi
+2026-07-05 15:08:58 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.08.57_585.avi
+2026-07-05 15:08:58 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.08.57_585.avi
+2026-07-05 15:09:39 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.09.38_558.avi
+2026-07-05 15:09:39 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.09.38_558.avi
+2026-07-05 15:09:39 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.09.38_558.avi
+2026-07-05 15:13:08 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.13.08_139.avi
+2026-07-05 15:13:08 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.13.08_139.avi
+2026-07-05 15:13:51 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.13.50_849.avi
+2026-07-05 15:13:52 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.13.50_849.avi
+2026-07-05 15:13:52 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.13.50_849.avi
+2026-07-05 15:14:15 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.14.14_667.avi
+2026-07-05 15:14:15 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.14.14_667.avi
+2026-07-05 15:15:03 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.02_583.avi
+2026-07-05 15:15:03 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.02_583.avi
+2026-07-05 15:15:16 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.16_483.avi
+2026-07-05 15:15:17 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.16_483.avi
+2026-07-05 15:15:17 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.16_483.avi
+2026-07-05 15:15:23 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.23_639.avi
+2026-07-05 15:15:24 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.23_639.avi
+2026-07-05 15:15:24 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.23_639.avi
+2026-07-05 15:15:33 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.33_270.avi
+2026-07-05 15:15:33 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.33_270.avi
+2026-07-05 15:15:33 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.33_270.avi
+2026-07-05 15:15:48 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.48_273.avi
+2026-07-05 15:15:49 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.48_273.avi
+2026-07-05 15:15:49 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.15.48_273.avi
+2026-07-05 15:55:43 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.55.43_256.avi
+2026-07-05 15:55:44 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.55.43_256.avi
+2026-07-05 15:56:14 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.56.14_056.avi
+2026-07-05 15:56:14 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.56.14_056.avi
+2026-07-05 15:56:15 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-05\motion_2026-07-05_15.56.14_056.avi

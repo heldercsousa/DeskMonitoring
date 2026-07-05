@@ -1,0 +1,31 @@
+2026-07-05 06:35:47  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-05 06:35:47  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-05 15:06:57  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-05 15:06:58  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=ShellExperienceHost
+2026-07-05 15:06:58  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-05 15:06:58  CONFIG-GUARD  INFO  removed stale index.lock before restore
+2026-07-05 15:06:58  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellExperienceHost
+2026-07-05 15:06:58  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=ShellExperienceHost
+2026-07-05 15:06:58  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-05 15:06:58  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellExperienceHost
+2026-07-05 15:06:58  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=ShellExperienceHost
+2026-07-05 15:06:58  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-05 15:06:58  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellExperienceHost
+2026-07-05 15:06:59  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=ShellExperienceHost
+2026-07-05 15:06:59  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-05 15:06:59  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-05 15:07:00  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-05 15:07:00  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-05 15:07:00  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=ShellExperienceHost
+2026-07-05 15:07:00  CONFIG-GUARD  TAMPER  foreground=ShellExperienceHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-05 15:07:00  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellExperienceHost
+2026-07-05 15:07:01  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-05 15:07:02  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-05 15:07:03  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
