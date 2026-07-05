@@ -309,3 +309,32 @@ Diret¢rios:         4         0         4         0         0        14
 N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
    Finalizado em: domingo, 5 de julho de 2026 15:56:20
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: domingo, 5 de julho de 2026 16:08:36
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         4         0         4         0         0        14
+ Arquivos:       170         2       168         0         0         7
+    Bytes:  142.45 m    1.06 m  141.39 m         0         0    5.75 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           279.486.500 Bytes/s.
+Velocidade:             15992,346 MegaBytes/min.
+   Finalizado em: domingo, 5 de julho de 2026 16:08:36
+
