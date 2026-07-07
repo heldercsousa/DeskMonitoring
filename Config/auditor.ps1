@@ -369,7 +369,8 @@ $script:GuardedRegPatterns = @(
 # Only suppresses Run key writes - power subgroup writes are never suppressed regardless of reporter.
 $script:RunKeyReporterWhitelist = @(
     '\chrome.exe',
-    '\GoogleUpdater.exe'
+    '\GoogleUpdater.exe',
+    '\msedge.exe'       # T097: Edge self-writes its Run entry, same benign pattern as chrome (evidence flood 06-29..07-07)
 )
 
 function Check-SystemEvents {
