@@ -77,28 +77,38 @@ try {
 }
 
 # 6. Disable webcam device power management (Device Manager setting)
+# T092: Description-based Win32_PnPEntity match failed on Portuguese Windows
+# (camera Description = "Dispositivo de video USB"). Use Get-PnpDevice with the
+# locale-independent Class filter proven in check_camera.ps1 instead.
 Write-Step "Disabling webcam device power management"
 $webcamFound = $false
 try {
-    Get-WmiObject Win32_PnPEntity -ErrorAction Stop | Where-Object { $_.Description -match 'camera|webcam|RGB|integrated' } | ForEach-Object {
-        $device = $_
-        $instanceName = $device.Name
-        Write-Host "  Found webcam: $instanceName" -ForegroundColor Gray
-        $webcamFound = $true
-        # Disable via registry key PowerDownLevel = 0
-        $regPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($device.PNPDeviceID)\Device Parameters"
-        if (Test-Path $regPath) {
-            Set-ItemProperty -Path $regPath -Name "PowerDownLevel" -Value 0 -ErrorAction SilentlyContinue
-            Write-Host "  OK   Device power management disabled: $instanceName" -ForegroundColor Green
-        } else {
-            Write-Host "  WARN Registry path not found for $instanceName (device may not support power control)" -ForegroundColor Yellow
+    Get-PnpDevice -ErrorAction Stop |
+        Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" } |
+        ForEach-Object {
+            $device = $_
+            $instanceName = $device.FriendlyName
+            Write-Host "  Found webcam: $instanceName [$($device.Class)] Status=$($device.Status)" -ForegroundColor Gray
+            $webcamFound = $true
+            # Disable via registry key PowerDownLevel = 0
+            $regPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($device.InstanceId)\Device Parameters"
+            if (Test-Path $regPath) {
+                Set-ItemProperty -Path $regPath -Name "PowerDownLevel" -Value 0 -ErrorAction Stop
+                $applied = (Get-ItemProperty -Path $regPath -Name "PowerDownLevel" -ErrorAction SilentlyContinue).PowerDownLevel
+                if ($applied -eq 0) {
+                    Write-Host "  OK   Device power management disabled (PowerDownLevel=0): $instanceName" -ForegroundColor Green
+                } else {
+                    Write-Host "  FAIL PowerDownLevel write did not persist for $instanceName (value=$applied)" -ForegroundColor Red
+                }
+            } else {
+                Write-Host "  WARN Registry path not found for $instanceName (device may not support power control)" -ForegroundColor Yellow
+            }
         }
-    }
 } catch {
-    # Continue — device may not be enumerable or no webcam attached
+    Write-Host "  FAIL Webcam power management step errored: $_" -ForegroundColor Red
 }
 if (-not $webcamFound) {
-    Write-Host "  WARN No webcam device found via WMI (this is ok if device is disabled in BIOS)" -ForegroundColor Yellow
+    Write-Host "  FAIL No webcam device found via Get-PnpDevice - webcam power hardening NOT applied. Investigate (device disabled/removed?)" -ForegroundColor Red
 }
 
 # 6b. Power button + sleep button + lid = Do nothing (AC + DC)
@@ -171,6 +181,24 @@ if ($schemeGuid) {
 } else {
     Write-Fail "Could not resolve active scheme GUID - cannot verify compliance"
     $compliant = $false
+}
+# T092: verify webcam device power management actually persisted (PowerDownLevel=0)
+$webcams = @(Get-PnpDevice -ErrorAction SilentlyContinue |
+    Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" })
+if ($webcams.Count -eq 0) {
+    Write-Fail "Webcam power mgmt : no webcam device found via Get-PnpDevice"
+    $compliant = $false
+} else {
+    foreach ($cam in $webcams) {
+        $rp = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($cam.InstanceId)\Device Parameters"
+        $pdl = (Get-ItemProperty -Path $rp -Name "PowerDownLevel" -ErrorAction SilentlyContinue).PowerDownLevel
+        if ($pdl -eq 0) {
+            Write-OK "Webcam power mgmt : PowerDownLevel=0 ($($cam.FriendlyName))"
+        } else {
+            Write-Fail "Webcam power mgmt : PowerDownLevel=$pdl ($($cam.FriendlyName)) - expected 0"
+            $compliant = $false
+        }
+    }
 }
 if (-not $compliant) {
     Write-Fail "POWER SETTINGS NOT COMPLIANT - motion capture is at risk of interruption"

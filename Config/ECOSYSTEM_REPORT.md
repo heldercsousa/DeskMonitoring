@@ -499,7 +499,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `enable_file_auditing.ps1` | One-time setup | Activates SACL on watched folder for user attribution in logs |
 | `enable_registry_auditing.ps1` | `setup_update.ps1` Step 16a5 (admin) | T075: enables the Registry audit subcategory ({0CCE921E-...}) and applies a Success+Failure SACL (Everyone) to `HKLM\...\Power\User\PowerSchemes`, `HKLM\...\CurrentVersion\Run`, `HKCU\...\CurrentVersion\Run`, so a write fires Security event 4657/4663. auditor.ps1 correlates those against Sysmon Event 1 (fallback 4688) to unmask the true caller (2026-06-29) |
 | `fix_firewall_b2.ps1` | `fix_b2_firewall.bat` (admin) | Removes malicious outbound BLOCK firewall rules targeting B2 IPs |
-| `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: Balanced plan, USB Selective Suspend disabled (AC+DC), sleep/hibernate/disk=Never (AC+DC), display=600s AC, webcam device power mgmt off, power+sleep buttons & lid = Do nothing (AC+DC, 2026-06-15 anti power-button sabotage), System unattended sleep timeout=Never (AC+DC, 2026-06-17 anti sleep-on-lock). Verifies compliance at end and exits non-zero if sleep/unattended/USB settings are not 0 |
+| `fix_power_motion.ps1` | Manual (admin) | Restores power settings for motion detection: Balanced plan, USB Selective Suspend disabled (AC+DC), sleep/hibernate/disk=Never (AC+DC), display=600s AC, webcam device power mgmt off, power+sleep buttons & lid = Do nothing (AC+DC, 2026-06-15 anti power-button sabotage), System unattended sleep timeout=Never (AC+DC, 2026-06-17 anti sleep-on-lock). T092 2026-07-07: webcam found via locale-independent Get-PnpDevice Class filter (Win32_PnPEntity Description match failed on pt-BR Windows) and PowerDownLevel=0 is write-verified. Verifies compliance at end and exits non-zero if sleep/unattended/USB/webcam-PowerDownLevel settings are not 0 |
 | `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s, power/sleep button AC+DC=0, disk turn-off AC+DC=0, System unattended sleep timeout AC+DC=0 (2026-06-17); logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
 | `check_autoruns.ps1` | Task `FolderSync-AutoRunsCheck` (daily 08:45, SYSTEM) | T079: Autoruns persistence baseline + daily diff. Runs Sysinternals `autorunsc64.exe` (auto-downloaded to `C:\Tools\Sysinternals`), captures the full autostart surface (Run keys, services, drivers, scheduled tasks, WMI, Winlogon, codecs) with SHA-256 + signature verification, diffs vs `Config\autoruns\baseline.csv`; new/changed/removed persistence logged as `[AUTORUN-DELTA]` + Evidence file + `send_alert.ps1`. Optional VirusTotal HASH-ONLY enrichment (disabled until `VIRUSTOTAL_API_KEY` set, T080 hook). `-UpdateBaseline` re-baselines. EVIDENCE-ONLY (live OS; corroborate via offline mount T082). Feeds T070/T072. Logs to `Logs\security\autoruns_YYYY-MM-DD.log` (30-day rotation) (2026-06-29) |
 | `autoruns\baseline.csv` | `check_autoruns.ps1` | T079: known-good autostart-surface snapshot (CSV w/ hashes + signatures). Version-controlled so the diff baseline survives reinstall. Captured by `setup_update.ps1` Step 22 on first run; re-baseline after a reviewed change via `check_autoruns.ps1 -UpdateBaseline` |
@@ -1444,6 +1444,7 @@ if (-not $anyAnomaly) {
 > Restores Windows power settings required for continuous motion detection.
 > Run as Administrator. Idempotent. Switches plan to Balanced, disables USB Selective Suspend (AC+DC), sets sleep/hibernate to Never, display timeout to 600s AC / 120s DC.
 > Evidence of tampering: 2026-05-28 power plan found as Power Saver (SCHEME_MAX), USB Suspend re-enabled.
+> T092 (2026-07-07): webcam detection now uses locale-independent Get-PnpDevice Class filter (old Win32_PnPEntity Description match failed on Portuguese Windows); PowerDownLevel=0 write is verified after apply and re-checked in the final compliance gate (FAIL + exit 1 if missing).
 
 ```powershell
 #Requires -RunAsAdministrator
@@ -1525,27 +1526,38 @@ try {
 }
 
 # 6. Disable webcam device power management (Device Manager setting)
+# T092: Description-based Win32_PnPEntity match failed on Portuguese Windows
+# (camera Description = "Dispositivo de video USB"). Use Get-PnpDevice with the
+# locale-independent Class filter proven in check_camera.ps1 instead.
 Write-Step "Disabling webcam device power management"
 $webcamFound = $false
 try {
-    Get-WmiObject Win32_PnPEntity -ErrorAction Stop | Where-Object { $_.Description -match 'camera|webcam|RGB|integrated' } | ForEach-Object {
-        $device = $_
-        $instanceName = $device.Name
-        Write-Host "  Found webcam: $instanceName" -ForegroundColor Gray
-        $webcamFound = $true
-        $regPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($device.PNPDeviceID)\Device Parameters"
-        if (Test-Path $regPath) {
-            Set-ItemProperty -Path $regPath -Name "PowerDownLevel" -Value 0 -ErrorAction SilentlyContinue
-            Write-Host "  OK   Device power management disabled: $instanceName" -ForegroundColor Green
-        } else {
-            Write-Host "  WARN Registry path not found for $instanceName (device may not support power control)" -ForegroundColor Yellow
+    Get-PnpDevice -ErrorAction Stop |
+        Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" } |
+        ForEach-Object {
+            $device = $_
+            $instanceName = $device.FriendlyName
+            Write-Host "  Found webcam: $instanceName [$($device.Class)] Status=$($device.Status)" -ForegroundColor Gray
+            $webcamFound = $true
+            # Disable via registry key PowerDownLevel = 0
+            $regPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($device.InstanceId)\Device Parameters"
+            if (Test-Path $regPath) {
+                Set-ItemProperty -Path $regPath -Name "PowerDownLevel" -Value 0 -ErrorAction Stop
+                $applied = (Get-ItemProperty -Path $regPath -Name "PowerDownLevel" -ErrorAction SilentlyContinue).PowerDownLevel
+                if ($applied -eq 0) {
+                    Write-Host "  OK   Device power management disabled (PowerDownLevel=0): $instanceName" -ForegroundColor Green
+                } else {
+                    Write-Host "  FAIL PowerDownLevel write did not persist for $instanceName (value=$applied)" -ForegroundColor Red
+                }
+            } else {
+                Write-Host "  WARN Registry path not found for $instanceName (device may not support power control)" -ForegroundColor Yellow
+            }
         }
-    }
 } catch {
-    # Continue - device may not be enumerable or no webcam attached
+    Write-Host "  FAIL Webcam power management step errored: $_" -ForegroundColor Red
 }
 if (-not $webcamFound) {
-    Write-Host "  WARN No webcam device found via WMI (this is ok if device is disabled in BIOS)" -ForegroundColor Yellow
+    Write-Host "  FAIL No webcam device found via Get-PnpDevice - webcam power hardening NOT applied. Investigate (device disabled/removed?)" -ForegroundColor Red
 }
 
 # 6b. Power button + sleep button + lid = Do nothing (AC + DC)
@@ -1554,10 +1566,13 @@ if (-not $webcamFound) {
 # Setting buttons to Do nothing (0) neutralises it. Shutdown is via Start menu only.
 Write-Step "Disabling power/sleep button and lid sleep actions (Do nothing, AC + DC)"
 try {
+    # PBUTTONACTION
     powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 0
     powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 0
+    # SBUTTONACTION
     powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 96996bc0-ad50-47ec-923b-6f41874dd9eb 0
     powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 96996bc0-ad50-47ec-923b-6f41874dd9eb 0
+    # LIDACTION
     powercfg /setacvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
     powercfg /setdcvalueindex SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
     Write-OK "Power button / sleep button / lid = Do nothing (AC + DC)"
@@ -1586,7 +1601,9 @@ Write-Step "Applying changes (powercfg /setactive SCHEME_CURRENT)"
 powercfg /setactive SCHEME_CURRENT
 
 # 8. Verify compliance - read settings back and FAIL LOUDLY if any non-compliant.
-# This non-zero exit is what lets setup_update.ps1 Step 18b detect a failed apply.
+# This non-zero exit is what lets setup_update.ps1 Step 18b detect a failed apply
+# instead of silently warning. Read from registry under the active scheme GUID
+# (locale-independent, and works for hidden settings powercfg /query omits).
 Write-Step "Verifying power compliance"
 $active = (powercfg /getactivescheme) -join ' '
 $schemeGuid = if ($active -match '([0-9a-fA-F-]{36})') { $Matches[1] } else { $null }
@@ -1595,20 +1612,42 @@ function Test-RegSetting($sub, $set, $expect, $label) {
     $p = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes\$schemeGuid\$sub\$set"
     if (-not (Test-Path $p)) {
         Write-Fail "$label : key absent (Windows default applies) - expected $expect"
-        $script:compliant = $false; return
+        $script:compliant = $false
+        return
     }
     $v = Get-ItemProperty -Path $p -ErrorAction SilentlyContinue
     if ($v.ACSettingIndex -ne $expect -or $v.DCSettingIndex -ne $expect) {
         Write-Fail "$label : AC=$($v.ACSettingIndex) DC=$($v.DCSettingIndex) - expected $expect"
         $script:compliant = $false
-    } else { Write-OK "$label : AC=$expect DC=$expect" }
+    } else {
+        Write-OK "$label : AC=$expect DC=$expect"
+    }
 }
 if ($schemeGuid) {
     Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '29f6c1db-86da-48c5-9fdb-f2b67b1f44da' 0 'Sleep after'
     Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0' 0 'Unattended sleep timeout'
     Test-RegSetting '2a737441-1930-4402-8d77-b2bebba308a3' '48e6b7a6-50f5-4782-a5d4-53bb8f07e226' 0 'USB Selective Suspend'
 } else {
-    Write-Fail "Could not resolve active scheme GUID - cannot verify compliance"; $compliant = $false
+    Write-Fail "Could not resolve active scheme GUID - cannot verify compliance"
+    $compliant = $false
+}
+# T092: verify webcam device power management actually persisted (PowerDownLevel=0)
+$webcams = @(Get-PnpDevice -ErrorAction SilentlyContinue |
+    Where-Object { $_.FriendlyName -like "*HD User*" -or $_.FriendlyName -like "*webcam*" -or $_.FriendlyName -like "*camera*" -or $_.Class -eq "Camera" -or $_.Class -eq "Image" })
+if ($webcams.Count -eq 0) {
+    Write-Fail "Webcam power mgmt : no webcam device found via Get-PnpDevice"
+    $compliant = $false
+} else {
+    foreach ($cam in $webcams) {
+        $rp = "HKLM:\SYSTEM\CurrentControlSet\Enum\$($cam.InstanceId)\Device Parameters"
+        $pdl = (Get-ItemProperty -Path $rp -Name "PowerDownLevel" -ErrorAction SilentlyContinue).PowerDownLevel
+        if ($pdl -eq 0) {
+            Write-OK "Webcam power mgmt : PowerDownLevel=0 ($($cam.FriendlyName))"
+        } else {
+            Write-Fail "Webcam power mgmt : PowerDownLevel=$pdl ($($cam.FriendlyName)) - expected 0"
+            $compliant = $false
+        }
+    }
 }
 if (-not $compliant) {
     Write-Fail "POWER SETTINGS NOT COMPLIANT - motion capture is at risk of interruption"
@@ -1617,6 +1656,18 @@ if (-not $compliant) {
 
 Write-Host ""
 Write-Host "=== Repair complete ===" -ForegroundColor Green
+Write-Host ""
+Write-Host "Verify settings were applied:" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "  USB Selective Suspend (both values must be 0x00000000):" -ForegroundColor Gray
+Write-Host "    powercfg /query SCHEME_CURRENT 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226" -ForegroundColor Gray
+Write-Host ""
+Write-Host "  Sleep setting (must be 0x00000000 for both AC and DC):" -ForegroundColor Gray
+Write-Host "    powercfg /query SCHEME_CURRENT 238c9fa8-0aad-41ed-83f4-97be242c8f20 29f6c1db-86da-48c5-9fdb-f2b67b1f44da" -ForegroundColor Gray
+Write-Host ""
+Write-Host "  Device Manager alternative check:" -ForegroundColor Gray
+Write-Host "    Win+X â†’ Device Manager â†’ Cameras â†’ right-click webcam â†’ Properties" -ForegroundColor Gray
+Write-Host "    Power Management tab should be unchecked (script above attempted to set this)" -ForegroundColor Gray
 ```
 
 ---
