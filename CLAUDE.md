@@ -617,9 +617,10 @@ Webcam drops during screen lock unless these Windows power settings are applied:
 | Sleep button action | **Do nothing** |
 | Lid close action | **Do nothing** |
 | System unattended sleep timeout | **Never (0)** (anti sleep-on-lock; Ctrl+L was sleeping the machine in ~2 min, 2026-06-17) |
+| Console lock display off timeout | **Never (0)** (T098 2026-07-07: hidden 300s timeout blacked the locked screen and webcam frame delivery died with it; lock screen must stay lit for capture to survive Win+L) |
 | Webcam device power management | **Disabled** (Device Manager) |
 
-All of the above are enforced idempotently by `fix_power_motion.ps1` (run via `setup_update.ps1` Step 18b) and auto-healed hourly by `check_power_motion.ps1` (task `FolderSync-PowerCheck`). `fix_power_motion.ps1` verifies compliance at the end and exits non-zero if sleep/unattended/USB are not 0; `setup_update.ps1` Step 18c re-verifies sleep + unattended timeout and fails loudly if not compliant. With the power/sleep buttons disabled, **shut down via the Start menu only**. The `yawcam_monitor_v4.ps1` keep-awake guard additionally blocks idle/away sleep while monitoring.
+All of the above are enforced idempotently by `fix_power_motion.ps1` (run via `setup_update.ps1` Step 18b) and auto-healed hourly by `check_power_motion.ps1` (task `FolderSync-PowerCheck`). `fix_power_motion.ps1` verifies compliance at the end and exits non-zero if sleep/unattended/USB/console-lock-display are not 0; `setup_update.ps1` Step 18c re-verifies sleep + unattended timeout and fails loudly if not compliant. With the power/sleep buttons disabled, **shut down via the Start menu only**. The `yawcam_monitor_v4.ps1` keep-awake guard additionally blocks idle/away sleep while monitoring.
 
 Full checklist: `C:\Sync\Config\motion\motion-detection-power-settings-quick-reference.md`
 Full setup guide: `C:\Sync\Config\motion\acer-nitro5-motion-detection-setup.md`

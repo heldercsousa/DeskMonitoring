@@ -31,6 +31,7 @@ $BTN_SG   = '4f971e89-eebd-4455-a8de-9e59040e7347'
 $PBTN_SET = '7648efa3-dd9c-4e3e-b566-50f929386280'   # power button action
 $SBTN_SET = '96996bc0-ad50-47ec-923b-6f41874dd9eb'   # sleep button action
 $UNATTEND = '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0'   # system unattended sleep timeout
+$CONLOCK  = '8ec4b3a5-6868-48c2-be75-4f3044be88a7'   # console lock display off timeout (T098)
 $SCHEME_MAX     = 'a1841308-3541-4fab-bc81-f71556f20b4a'
 
 Write-Log "POWER-CHECK-START"
@@ -248,6 +249,28 @@ foreach ($dc in @('AC','DC')) {
         Write-Log "POWER-CORRECTED  Unattended sleep timeout $dc set to 0 (Never)"
     } else {
         Write-Log "POWER-OK  Unattended sleep timeout $dc = 0 (Never)"
+    }
+}
+
+# --- 13. Console lock display off timeout (must be 0 = Never) AC + DC (T098) ---
+# After Win+L the display turns off on this hidden timeout (found at 300s on
+# 2026-07-07) and webcam frame delivery to Yawcam stops with it - confirmed by
+# controlled test: no clips while the locked screen was black despite motion,
+# instant resume at unlock. With 0 the lock screen stays lit ("blue") and
+# capture continues, matching the historical known-good behavior.
+foreach ($dc in @('AC','DC')) {
+    $v = Get-SchemeRegIndex -SubGroup $DISP_SG -Setting $CONLOCK -AcOrDc $dc
+    if ($v -ne 0) {   # $null (Windows default 60s) or non-zero both need correcting
+        $shown = if ($v -eq $null) { 'default(60s)' } else { $v }
+        Write-Log "POWER-ANOMALY  Console lock display off timeout $dc = $shown (expected 0=Never)"
+        $anyAnomaly = $true
+        powercfg /attributes $DISP_SG $CONLOCK -ATTRIB_HIDE 2>$null
+        $cmd = if ($dc -eq 'AC') { 'setacvalueindex' } else { 'setdcvalueindex' }
+        powercfg /$cmd SCHEME_CURRENT $DISP_SG $CONLOCK 0 2>$null
+        powercfg /setactive SCHEME_CURRENT 2>$null
+        Write-Log "POWER-CORRECTED  Console lock display off timeout $dc set to 0 (Never)"
+    } else {
+        Write-Log "POWER-OK  Console lock display off timeout $dc = 0 (Never)"
     }
 }
 

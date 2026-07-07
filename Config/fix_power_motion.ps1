@@ -76,6 +76,22 @@ try {
     Write-Fail "Disk turn-off setting failed: $_"
 }
 
+# 5c. Console lock display off timeout = Never (0) AC + DC (T098)
+# Context: confirmed 2026-07-07 - after Win+L this hidden timeout (found at 300s)
+# turns the display off and webcam frame delivery to Yawcam stops with it; even a
+# full Yawcam restart while locked cannot re-acquire frames. Capture resumes only
+# at unlock. With 0 the lock screen stays lit and recording continues while locked.
+Write-Step "Setting Console lock display off timeout to Never (AC + DC)"
+try {
+    powercfg /attributes 7516b95f-f776-4464-8c53-06167f40cc99 8ec4b3a5-6868-48c2-be75-4f3044be88a7 -ATTRIB_HIDE | Out-Null
+    powercfg /setacvalueindex SCHEME_CURRENT 7516b95f-f776-4464-8c53-06167f40cc99 8ec4b3a5-6868-48c2-be75-4f3044be88a7 0
+    powercfg /setdcvalueindex SCHEME_CURRENT 7516b95f-f776-4464-8c53-06167f40cc99 8ec4b3a5-6868-48c2-be75-4f3044be88a7 0
+    Write-OK "Console lock display off timeout = Never (AC + DC) - lock screen stays lit, capture survives Win+L"
+} catch {
+    Write-Fail "Console lock display off timeout update failed: $_"
+    exit 1
+}
+
 # 6. Disable webcam device power management (Device Manager setting)
 # T092: Description-based Win32_PnPEntity match failed on Portuguese Windows
 # (camera Description = "Dispositivo de video USB"). Use Get-PnpDevice with the
@@ -178,6 +194,7 @@ if ($schemeGuid) {
     Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '29f6c1db-86da-48c5-9fdb-f2b67b1f44da' 0 'Sleep after'
     Test-RegSetting '238c9fa8-0aad-41ed-83f4-97be242c8f20' '7bc4a2f9-d8fc-4469-b07b-33eb785aaca0' 0 'Unattended sleep timeout'
     Test-RegSetting '2a737441-1930-4402-8d77-b2bebba308a3' '48e6b7a6-50f5-4782-a5d4-53bb8f07e226' 0 'USB Selective Suspend'
+    Test-RegSetting '7516b95f-f776-4464-8c53-06167f40cc99' '8ec4b3a5-6868-48c2-be75-4f3044be88a7' 0 'Console lock display off'
 } else {
     Write-Fail "Could not resolve active scheme GUID - cannot verify compliance"
     $compliant = $false
