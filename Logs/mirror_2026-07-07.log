@@ -3770,3 +3770,61 @@ Velocidade:           117.883.200 Bytes/s.
 Velocidade:              6745,331 MegaBytes/min.
    Finalizado em: ter‡a-feira, 7 de julho de 2026 19:25:18
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 7 de julho de 2026 19:25:48
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         5         0         5         0         0        14
+ Arquivos:       229         2       227         0         0       229
+    Bytes:  179.44 m   411.8 k  179.04 m         0         0  191.00 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           105.426.500 Bytes/s.
+Velocidade:              6032,553 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 7 de julho de 2026 19:25:48
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 7 de julho de 2026 19:26:23
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         5         0         5         0         0        14
+ Arquivos:       232         4       228         0         0       229
+    Bytes:  180.71 m    1.27 m  179.44 m         0         0  191.00 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           166.609.000 Bytes/s.
+Velocidade:              9533,443 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 7 de julho de 2026 19:26:23
+
