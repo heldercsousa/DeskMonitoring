@@ -32,3 +32,4 @@ __pycache__/
 /Config/.sync_failed
 /Config/.camera_restart_failed
 /Config/.fw_expected
+/Config/.gitlock_skips

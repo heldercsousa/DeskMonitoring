@@ -503,7 +503,7 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `check_power_motion.ps1` | Task `FolderSync-PowerCheck` (every 1h + AtLogon + AtBoot, SYSTEM, RunLevel Highest) | Hourly audit + auto-heal of power settings required for motion detection: checks active plan (no SCHEME_MAX), USB Selective Suspend AC+DC=0, Sleep/Hibernate AC+DC=0, Display timeout AC>=600s, power/sleep button AC+DC=0, disk turn-off AC+DC=0, System unattended sleep timeout AC+DC=0 (2026-06-17); logs to `C:\Sync\Logs\power_check\power_check_YYYY-MM-DD.log`; prefixes: POWER-CHECK-START/OK/ANOMALY/CORRECTED/CHECK-END |
 | `check_autoruns.ps1` | Task `FolderSync-AutoRunsCheck` (daily 08:45, SYSTEM) | T079: Autoruns persistence baseline + daily diff. Runs Sysinternals `autorunsc64.exe` (auto-downloaded to `C:\Tools\Sysinternals`), captures the full autostart surface (Run keys, services, drivers, scheduled tasks, WMI, Winlogon, codecs) with SHA-256 + signature verification, diffs vs `Config\autoruns\baseline.csv`; new/changed/removed persistence logged as `[AUTORUN-DELTA]` + Evidence file + `send_alert.ps1`. Optional VirusTotal HASH-ONLY enrichment (disabled until `VIRUSTOTAL_API_KEY` set, T080 hook). `-UpdateBaseline` re-baselines. EVIDENCE-ONLY (live OS; corroborate via offline mount T082). Feeds T070/T072. Logs to `Logs\security\autoruns_YYYY-MM-DD.log` (30-day rotation) (2026-06-29) |
 | `autoruns\baseline.csv` | `check_autoruns.ps1` | T079: known-good autostart-surface snapshot (CSV w/ hashes + signatures). Version-controlled so the diff baseline survives reinstall. Captured by `setup_update.ps1` Step 22 on first run; re-baseline after a reviewed change via `check_autoruns.ps1 -UpdateBaseline` |
-| `auto_commit_logs.ps1` | Task `FolderSync-GitCommitLogs` (hourly) | Commits dirty Logs/+Evidence/ to git then PUSHES to GitHub origin off-box (T077 interim mitigation); skips if nothing changed or git is locked; logs `GIT-COMMIT-LOGS`/`LOG-FORWARD` to `ecosystem_YYYY-MM-DD.log` |
+| `auto_commit_logs.ps1` | Task `FolderSync-GitCommitLogs` (hourly) | Commits dirty Logs/+Evidence/ to git then PUSHES to GitHub origin off-box (T077 interim mitigation); skips if nothing changed. T096 (2026-07-07) stale index.lock self-heal: lock >10min with no git.exe is deleted (`GIT-LOCK-HEALED`) and the run continues; young lock/live git = SKIP with consecutive counter in `Config\.gitlock_skips` (gitignored), send_alert at 3 skips (`GIT-LOCK-SKIPS`) or if the stale lock cannot be removed (`GIT-LOCK-STUCK`). Logs `GIT-COMMIT-LOGS`/`LOG-FORWARD` to `ecosystem_YYYY-MM-DD.log` |
 | `wef/wef_subscription_template.xml` | Pre-authored (T077, not active) | Source-initiated WEF subscription for Security audit + Sysmon events; import on a collector host via `wecutil cs`. Blocked on a second machine. |
 | `wef/README-WEF-collector-setup.md` | Pre-authored (T077, not active) | Collector + source setup steps and ACTION FOR HELDER for activating off-box WEF when a collector exists. |
 | `ECOSYSTEM_REPORT.md` | — | This document |
@@ -6761,12 +6761,38 @@ function Write-EcoLog($msg) {
     "$ts  $msg" | Add-Content -LiteralPath $EcoLog
 }
 
-# Guard: abort if git index is locked (another git op in progress)
-$lockFile = "$RepoRoot\.git\index.lock"
+# Guard: stale index.lock self-heal (T096). A stale lock silently blocked this
+# task for ~26h on 2026-07-05/06, defeating the T077 off-box evidence push.
+# Young lock or live git.exe = legit operation in progress -> skip (but alert
+# after 3 consecutive skips). Lock older than 10 min with no git.exe = stale ->
+# remove it and continue; alert if removal fails (Deny-ACL trap on .git).
+$lockFile  = "$RepoRoot\.git\index.lock"
+$SkipsFile = "$RepoRoot\Config\.gitlock_skips"
 if (Test-Path $lockFile) {
-    Write-EcoLog "GIT-COMMIT-LOGS  SKIP  git index.lock exists - skipping this run"
-    exit 0
+    $lockAgeMin = [math]::Round(((Get-Date) - (Get-Item $lockFile).LastWriteTime).TotalMinutes, 1)
+    $gitAlive = @(Get-Process -Name git -ErrorAction SilentlyContinue).Count -gt 0
+    if ($lockAgeMin -gt 10 -and -not $gitAlive) {
+        Remove-Item -LiteralPath $lockFile -Force -ErrorAction SilentlyContinue
+        if (Test-Path $lockFile) {
+            Write-EcoLog "GIT-COMMIT-LOGS  FAIL  stale index.lock (age ${lockAgeMin}min) could not be removed - off-box evidence push blocked. Admin fix: icacls 'C:\Sync\.git' /remove:d (Everyone/Users/Admins) /T then delete the lock"
+            & "$RepoRoot\Config\send_alert.ps1" -Subject "GIT-LOCK-STUCK" -Body "auto_commit_logs: stale .git\index.lock (age ${lockAgeMin}min, no git process) cannot be removed. Hourly off-box evidence push is blocked until fixed." 2>&1 | Out-Null
+            exit 1
+        }
+        Write-EcoLog "GIT-COMMIT-LOGS  GIT-LOCK-HEALED  removed stale index.lock (age ${lockAgeMin}min, no git process) - continuing"
+    } else {
+        $skips = 0
+        if (Test-Path $SkipsFile) { $skips = [int]((Get-Content -LiteralPath $SkipsFile -ErrorAction SilentlyContinue | Select-Object -First 1) -as [int]) }
+        $skips++
+        Set-Content -LiteralPath $SkipsFile -Value $skips
+        Write-EcoLog "GIT-COMMIT-LOGS  SKIP  git index.lock exists (age ${lockAgeMin}min, gitAlive=$gitAlive) - skipping this run (consecutive=$skips)"
+        if ($skips -eq 3) {
+            & "$RepoRoot\Config\send_alert.ps1" -Subject "GIT-LOCK-SKIPS" -Body "auto_commit_logs: 3 consecutive hourly runs skipped on .git\index.lock (current age ${lockAgeMin}min, gitAlive=$gitAlive). Off-box evidence push is stalled - investigate." 2>&1 | Out-Null
+        }
+        exit 0
+    }
 }
+# Healthy run (or healed): reset the consecutive-skip counter
+if (Test-Path $SkipsFile) { Set-Content -LiteralPath $SkipsFile -Value 0 }
 
 # Resolve current branch once (used for both commit context and push target)
 $branch = (& git -C $RepoRoot rev-parse --abbrev-ref HEAD 2>$null)
