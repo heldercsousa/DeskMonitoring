@@ -1,0 +1,33 @@
+2026-07-07 15:41:46  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-07 15:41:46  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-07 15:42:19  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-07 15:42:20  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-07 17:20:46  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-07 17:20:47  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-07 17:20:48  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-07 17:20:49  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-07-07 17:24:04  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=powershell
+2026-07-07 17:24:04  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-07 17:24:04  CONFIG-GUARD  INFO  removed stale index.lock before restore
+2026-07-07 17:24:04  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-07 17:24:05  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-07 17:24:05  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-07 17:24:05  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-07 17:24:05  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=powershell
+2026-07-07 17:24:05  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-07 17:24:05  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-07-07 17:24:06  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=powershell
+2026-07-07 17:24:06  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-07 17:24:06  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
+2026-07-07 17:24:06  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=powershell
+2026-07-07 17:24:06  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-07 17:24:06  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
