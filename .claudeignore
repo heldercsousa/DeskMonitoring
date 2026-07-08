@@ -78,6 +78,7 @@ Source/
 /*.reg
 *.stackdump
 
+
 # ---------------------------------------------------------------------------
 # Temp files left by Claude Code editor — repo-wide pattern covers:
 #   *.tmp.<PID>.<hash>  (e.g. setup_all.ps1.tmp.12784.1772863210786)
@@ -90,6 +91,15 @@ Source/
 # ---------------------------------------------------------------------------
 Config/.ecosystem_state
 Config/.sync_failed
+
+
+
+# ---------------------------------------------------------------------------
+# PDF files left by Claude Code editor — repo-wide pattern covers:
+#   *.pdf  
+# Applies to root level and any subdirectory
+# ---------------------------------------------------------------------------
+*.pdf
 
 # =============================================================================
 # KEPT VISIBLE (not ignored):
@@ -105,3 +115,4 @@ Config/.sync_failed
 #   CLAUDE.md
 #   Backlog.md
 # =============================================================================
+
