@@ -24,3 +24,7 @@
 2026-07-07 19:31:49  GIT-PUSH  OK  42ddbe8 pushed to origin/master
 2026-07-07 19:34:52  GIT-PUSH  Pushing 09e531f - backlog: T095 resolved benign - Windows Update KB5095093/182 shortcut bug, repairs applied
 2026-07-07 19:34:54  GIT-PUSH  OK  09e531f pushed to origin/master
+2026-07-07 20:00:14  GIT-PUSH  Pushing 0ac9b7f - logs: auto-commit 2026-07-07 20:00
+2026-07-07 20:00:18  GIT-PUSH  OK  0ac9b7f pushed to origin/master
+2026-07-07 20:36:41  GIT-PUSH  Pushing 47985a6 - power: keep lock screen lit so webcam capture survives Win+L (T098)
+2026-07-07 20:36:45  GIT-PUSH  OK  47985a6 pushed to origin/master
