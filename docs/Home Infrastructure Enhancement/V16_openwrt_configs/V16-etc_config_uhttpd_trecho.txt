@@ -1,0 +1,13 @@
+# =====================================================================
+# /etc/config/uhttpd  —  V16  (LuCI so na VLAN de gestao 30, nunca na WAN)
+# Edite o objeto 'main': troque os listen 0.0.0.0/[::] pelo IP da vlan30.
+# =====================================================================
+
+config uhttpd 'main'
+	list listen_http '192.168.30.1:80'
+	list listen_https '192.168.30.1:443'
+	option redirect_https '1'
+	option home '/www'
+	option cert '/etc/uhttpd.crt'
+	option key '/etc/uhttpd.key'
+	# NAO deixe 0.0.0.0:80 nem [::]:80 -> isso exporia o LuCI em todas as redes.

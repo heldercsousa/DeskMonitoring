@@ -1,0 +1,12 @@
+# =====================================================================
+# /etc/config/dropbear  —  V16  (SSH so por chave, so na VLAN de gestao 30)
+# 1) Suba sua CHAVE PUBLICA em: LuCI > System > Administration > SSH-Keys
+#    (ou cole em /etc/dropbear/authorized_keys)
+# 2) So DEPOIS de testar login por chave, aplique PasswordAuth 'off'.
+# =====================================================================
+
+config dropbear
+	option PasswordAuth 'off'
+	option RootPasswordAuth 'off'
+	option Port '22'
+	option Interface 'vlan30'      # nunca ouve na WAN

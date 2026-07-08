@@ -1,0 +1,21 @@
+# =====================================================================
+# /etc/avahi/avahi-daemon.conf  —  V16  (mDNS refletido SO entre 30 e 40)
+# Instale: opkg update && opkg install avahi-daemon
+# VLAN 20 (work) e VLAN 50 (guest) ficam INVISIVEIS (nao listadas).
+# =====================================================================
+
+[server]
+use-ipv4=yes
+use-ipv6=yes
+allow-interfaces=br-lan.30,br-lan.40
+deny-interfaces=br-lan.20,br-lan.50,wan.10
+ratelimit-interval-usec=1000000
+ratelimit-burst=1000
+
+[publish]
+publish-hinfo=no
+publish-workstation=no
+
+[reflector]
+enable-reflector=yes
+reflect-ipv=no

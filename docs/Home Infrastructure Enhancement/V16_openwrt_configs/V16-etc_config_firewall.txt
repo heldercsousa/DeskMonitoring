@@ -1,0 +1,148 @@
+# =====================================================================
+# /etc/config/firewall  —  V16 Zero-Trust (fw4 / nftables, OpenWrt 24.10)
+# Zonas: work / home / iot / guest / wan  (NOMES NAO comecam com digito!)
+# Regras cobrem IPv4 E IPv6 (fw4 e agnostico de familia por padrao).
+# =====================================================================
+
+config defaults
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+	option synflood_protect '1'
+	option flow_offloading '1'        # obrigatorio p/ 600 Mbps
+	option flow_offloading_hw '1'     # hardware offload (MT7981B)
+
+# ---------------- WAN ----------------
+config zone
+	option name 'wan'
+	list network 'wan'
+	list network 'wan6'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+	option masq '1'
+	option mtu_fix '1'
+
+# ---------------- WORK-DEV (VLAN 20): so internet, zero lateral ----------------
+config zone
+	option name 'work'
+	list network 'vlan20'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config forwarding
+	option src 'work'
+	option dest 'wan'
+
+# ---------------- HOME-MAIN (VLAN 30): internet + inicia p/ IOT + GESTAO ----------------
+config zone
+	option name 'home'
+	list network 'vlan30'
+	option input 'ACCEPT'             # gestao do roteador vem daqui
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config forwarding
+	option src 'home'
+	option dest 'wan'
+
+config forwarding
+	option src 'home'
+	option dest 'iot'                 # 30 -> 40 permitido (retorno via conntrack)
+
+# ---------------- HOME-IOT (VLAN 40): isolada, so portas de saida ----------------
+config zone
+	option name 'iot'
+	list network 'vlan40'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config rule
+	option name 'iot-internet-limited'
+	option src 'iot'
+	option dest 'wan'
+	option proto 'tcp udp'
+	option dest_port '80 123 443 8883'
+	option target 'ACCEPT'
+
+# ---------------- GUEST-WIFI (VLAN 50): so web ----------------
+config zone
+	option name 'guest'
+	list network 'vlan50'
+	option input 'REJECT'
+	option output 'ACCEPT'
+	option forward 'REJECT'
+
+config rule
+	option name 'guest-web-only'
+	option src 'guest'
+	option dest 'wan'
+	option proto 'tcp udp'
+	option dest_port '80 443'
+	option target 'ACCEPT'
+
+# ---------------- DHCP + DNS p/ o roteador (zonas com input REJECT) ----------------
+# Sem estas regras, work/iot/guest NAO pegam IP nem resolvem nomes.
+config rule
+	option name 'allow-dhcp-restricted'
+	list src 'work'
+	list src 'iot'
+	list src 'guest'
+	option proto 'udp'
+	option dest_port '67 68'
+	option target 'ACCEPT'
+
+config rule
+	option name 'allow-dns-restricted'
+	list src 'work'
+	list src 'iot'
+	list src 'guest'
+	option proto 'tcp udp'
+	option dest_port '53'
+	option target 'ACCEPT'
+
+# (opcional) permitir ICMP p/ diagnostico a partir das zonas restritas
+config rule
+	option name 'allow-ping-restricted'
+	list src 'work'
+	list src 'iot'
+	list src 'guest'
+	option proto 'icmp'
+	option icmp_type 'echo-request'
+	option target 'ACCEPT'
+
+# ---------------- DNS forcado: intercepta porta 53 -> resolvedor local ----------------
+# Sem dest_ip -> redireciona p/ o proprio roteador. Repita por zona conforme desejar.
+config redirect
+	option name 'force-dns-work'
+	option src 'work'
+	option proto 'tcp udp'
+	option src_dport '53'
+	option target 'DNAT'
+
+config redirect
+	option name 'force-dns-iot'
+	option src 'iot'
+	option proto 'tcp udp'
+	option src_dport '53'
+	option target 'DNAT'
+
+config redirect
+	option name 'force-dns-guest'
+	option src 'guest'
+	option proto 'tcp udp'
+	option src_dport '53'
+	option target 'DNAT'
+
+# (opcional) barrar DNS-over-TLS externo (853) p/ evitar bypass do filtro
+config rule
+	option name 'block-external-dot'
+	list src 'work'
+	list src 'iot'
+	list src 'guest'
+	option dest 'wan'
+	option proto 'tcp'
+	option dest_port '853'
+	option target 'REJECT'

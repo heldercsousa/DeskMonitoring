@@ -1,0 +1,91 @@
+# =====================================================================
+# /etc/config/wireless  —  V16  (WPA3-SAE + PMF, WPS OFF, guest isolado)
+# PRE-REQUISITO: pacote wpad-openssl (ou wpad-wolfssl) instalado p/ SAE.
+#   opkg update && opkg install wpad-openssl   (remova wpad-basic-mbedtls antes)
+# Troque TODOS os "TROQUE_..." por PSKs FORTES e UNICOS gerados no Bitwarden.
+# radio0 = 2.4GHz | radio1 = 5GHz  (confirme com: iw dev / wifi status)
+# =====================================================================
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option path 'platform/soc/18000000.wifi'
+	option band '2g'
+	option channel 'auto'
+	option htmode 'HE40'
+	option country 'BR'
+	option cell_density '0'
+
+config wifi-device 'radio1'
+	option type 'mac80211'
+	option path 'platform/soc/18000000.wifi+1'
+	option band '5g'
+	option channel 'auto'
+	option htmode 'HE80'
+	option country 'BR'
+	option cell_density '0'
+
+# ---------------- HOME-MAIN (VLAN 30) — 2.4 + 5 GHz ----------------
+config wifi-iface 'home_2g'
+	option device 'radio0'
+	option mode 'ap'
+	option network 'vlan30'
+	option ssid 'CasaMain'
+	option encryption 'sae'
+	option ieee80211w '2'
+	option wps_pushbutton '0'
+	option key 'TROQUE_PSK_HOME'
+
+config wifi-iface 'home_5g'
+	option device 'radio1'
+	option mode 'ap'
+	option network 'vlan30'
+	option ssid 'CasaMain-5G'
+	option encryption 'sae'
+	option ieee80211w '2'
+	option wps_pushbutton '0'
+	option key 'TROQUE_PSK_HOME'
+
+# ---------------- WORK-DEV (VLAN 20) — 5 GHz ----------------
+config wifi-iface 'work_5g'
+	option device 'radio1'
+	option mode 'ap'
+	option network 'vlan20'
+	option ssid 'Work-DEV'
+	option encryption 'sae'
+	option ieee80211w '2'
+	option wps_pushbutton '0'
+	option key 'TROQUE_PSK_WORK'
+
+# ---------------- HOME-IOT (VLAN 40) — 2.4 GHz (IoT vive melhor no 2.4) ----------------
+config wifi-iface 'iot_2g'
+	option device 'radio0'
+	option mode 'ap'
+	option network 'vlan40'
+	option ssid 'CasaIoT'
+	option encryption 'sae-mixed'   # muitos IoT nao falam WPA3 puro
+	option ieee80211w '1'           # PMF opcional p/ compatibilidade
+	option wps_pushbutton '0'
+	option key 'TROQUE_PSK_IOT'
+
+# ---------------- GUEST (VLAN 50) — 2.4 + 5 GHz, CLIENTES ISOLADOS ----------------
+config wifi-iface 'guest_2g'
+	option device 'radio0'
+	option mode 'ap'
+	option network 'vlan50'
+	option ssid 'Visitantes'
+	option encryption 'sae-mixed'
+	option ieee80211w '1'
+	option wps_pushbutton '0'
+	option isolate '1'
+	option key 'TROQUE_PSK_GUEST'
+
+config wifi-iface 'guest_5g'
+	option device 'radio1'
+	option mode 'ap'
+	option network 'vlan50'
+	option ssid 'Visitantes-5G'
+	option encryption 'sae-mixed'
+	option ieee80211w '1'
+	option wps_pushbutton '0'
+	option isolate '1'
+	option key 'TROQUE_PSK_GUEST'
