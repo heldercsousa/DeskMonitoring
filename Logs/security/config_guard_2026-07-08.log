@@ -6,3 +6,27 @@
 2026-07-08 00:35:39  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
 2026-07-08 03:16:39  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
 2026-07-08 03:16:39  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-08 13:46:34  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=pwsh
+2026-07-08 13:46:34  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-08 13:46:34  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-08 13:46:36  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-08 13:46:36  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-08 13:46:36  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-08 13:46:36  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-08 13:46:36  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-08 13:46:36  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=pwsh
+2026-07-08 13:46:36  CONFIG-GUARD  TAMPER  foreground=pwsh not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-08 13:46:36  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=pwsh
