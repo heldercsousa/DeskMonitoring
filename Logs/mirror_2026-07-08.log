@@ -7569,3 +7569,57 @@ Diret¢rios:         6         0         6         0         0         1
 N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
    Finalizado em: quarta-feira, 8 de julho de 2026 21:30:44
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quarta-feira, 8 de julho de 2026 22:04:41
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quarta-feira, 8 de julho de 2026 22:04:41
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         6         0         6         0         0         1
+ Arquivos:       248         1       247         0         0       190
+    Bytes:  197.59 m         0  197.59 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quarta-feira, 8 de julho de 2026 22:04:41
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         6         0         6         0         0         1
+ Arquivos:       248         1       247         0         0       190
+    Bytes:  198.14 m   557.3 k  197.59 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           95.124.000 Bytes/s.
+Velocidade:             5443,039 MegaBytes/min.
+   Finalizado em: quarta-feira, 8 de julho de 2026 22:04:41
+
