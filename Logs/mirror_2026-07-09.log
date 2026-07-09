@@ -1922,3 +1922,912 @@ Velocidade:           340.964.500 Bytes/s.
 Velocidade:             19510,145 MegaBytes/min.
    Finalizado em: quinta-feira, 9 de julho de 2026 07:57:18
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:00:16
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       322         1       321         0         0       190
+    Bytes:  243.05 m         0  243.05 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:00:16
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:01:01
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       322         1       321         0         0       190
+    Bytes:  245.56 m    2.50 m  243.05 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           877.080.000 Bytes/s.
+Velocidade:             50186,922 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:01:01
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:03:39
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       323         1       322         0         0       190
+    Bytes:  245.56 m         0  245.56 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:03:39
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:04:20
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       324         2       322         0         0       190
+    Bytes:  246.67 m    1.10 m  245.56 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           193.198.000 Bytes/s.
+Velocidade:             11054,878 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:04:20
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:05:19
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       324         1       323         0         0       190
+    Bytes:  249.87 m    3.20 m  246.67 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           671.629.200 Bytes/s.
+Velocidade:             38430,930 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:05:19
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:06:17
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       325         1       324         0         0       190
+    Bytes:  249.87 m         0  249.87 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:06:17
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:06:40
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       325         1       324         0         0       190
+    Bytes:  251.24 m    1.36 m  249.87 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           716.289.000 Bytes/s.
+Velocidade:             40986,387 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:06:40
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:07:10
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       326         1       325         0         0       190
+    Bytes:  251.24 m         0  251.24 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:07:10
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:08:35
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       327         2       325         0         0       190
+    Bytes:  252.25 m    1.01 m  251.24 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           266.820.500 Bytes/s.
+Velocidade:             15267,592 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:08:35
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:12:27
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       328         1       327         0         0       190
+    Bytes:  252.25 m         0  252.25 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:12:27
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:13:04
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       328         1       327         0         0       190
+    Bytes:  254.36 m    2.10 m  252.25 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           552.986.000 Bytes/s.
+Velocidade:             31642,113 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:13:04
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:17:27
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       329         1       328         0         0       190
+    Bytes:  254.36 m         0  254.36 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:17:27
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:18:22
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       330         2       328         0         0       190
+    Bytes:  255.00 m   653.5 k  254.36 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           133.847.200 Bytes/s.
+Velocidade:              7658,798 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:18:23
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:19:40
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       331         2       329         0         0       190
+    Bytes:  255.67 m   689.1 k  255.00 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           176.435.000 Bytes/s.
+Velocidade:             10095,691 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:19:40
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:20:20
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       331         1       330         0         0       190
+    Bytes:  257.87 m    2.19 m  255.67 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           766.067.333 Bytes/s.
+Velocidade:             43834,723 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:20:20
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:21:21
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       332         1       331         0         0       190
+    Bytes:  257.87 m         0  257.87 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:21:21
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:22:05
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       333         2       331         0         0       190
+    Bytes:  258.90 m    1.03 m  257.87 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           216.138.000 Bytes/s.
+Velocidade:             12367,516 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:22:05
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:24:01
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       334         2       332         0         0       190
+    Bytes:  260.04 m    1.13 m  258.90 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           298.673.500 Bytes/s.
+Velocidade:             17090,234 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:24:01
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:24:52
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       335         1       334         0         0       190
+    Bytes:  260.04 m         0  260.04 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:24:52
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:25:16
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       335         1       334         0         0       190
+    Bytes:  261.44 m    1.40 m  260.04 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           490.514.666 Bytes/s.
+Velocidade:             28067,475 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:25:16
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:26:58
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       337         2       335         0         0       190
+    Bytes:  261.85 m   424.8 k  261.44 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           145.025.333 Bytes/s.
+Velocidade:              8298,416 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:26:58
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:29:47
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       338         2       336         0         0       190
+    Bytes:  262.85 m  1017.7 k  261.85 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           208.430.800 Bytes/s.
+Velocidade:             11926,506 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:29:47
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:30:20
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       338         1       337         0         0       190
+    Bytes:  264.70 m    1.84 m  262.85 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           646.246.666 Bytes/s.
+Velocidade:             36978,531 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:30:20
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:31:09
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       339         1       338         0         0       190
+    Bytes:  266.99 m    2.29 m  264.70 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           800.771.333 Bytes/s.
+Velocidade:             45820,504 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:31:09
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:32:25
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       340         1       339         0         0       190
+    Bytes:  266.99 m         0  266.99 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:32:25
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:33:20
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       340         1       339         0         0       190
+    Bytes:  270.02 m    3.02 m  266.99 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           793.754.500 Bytes/s.
+Velocidade:             45418,996 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:33:20
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:34:31
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       341         1       340         0         0       190
+    Bytes:  270.02 m         0  270.02 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:34:31
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:35:21
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       342         2       340         0         0       190
+    Bytes:  272.78 m    2.76 m  270.02 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           483.977.333 Bytes/s.
+Velocidade:             27693,404 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:35:21
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:36:17
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       343         2       341         0         0       190
+    Bytes:  275.70 m    2.91 m  272.78 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           611.218.800 Bytes/s.
+Velocidade:             34974,219 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:36:17
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:42:49
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       344         1       343         0         0       190
+    Bytes:  275.70 m         0  275.70 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:42:49
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:43:22
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       345         2       343         0         0       190
+    Bytes:  276.51 m   827.2 k  275.70 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           169.426.800 Bytes/s.
+Velocidade:              9694,680 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:43:22
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:44:21
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       345         1       344         0         0       190
+    Bytes:  279.77 m    3.26 m  276.51 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           855.780.000 Bytes/s.
+Velocidade:             48968,125 MegaBytes/min.
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:44:21
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quinta-feira, 9 de julho de 2026 08:46:12
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:         7         0         7         0         0         1
+ Arquivos:       346         1       345         0         0       190
+    Bytes:  279.77 m         0  279.77 m         0         0  170.38 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: quinta-feira, 9 de julho de 2026 08:46:12
+
