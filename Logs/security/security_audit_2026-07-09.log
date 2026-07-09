@@ -39,3 +39,4 @@
 2026-07-09 16:52:46  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 07/09/2026 16:52:42 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-07-09 16:52:46  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/09/2026 16:52:42 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-07-09 16:52:46  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/09/2026 16:52:42 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-09 17:41:10  [REG-WRITE] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/09/2026 17:40:56 (event 4663) - no process-creation telemetry in window (Sysmon/4688), no alert
