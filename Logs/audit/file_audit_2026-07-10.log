@@ -315,3 +315,10 @@
 2026-07-10 09:51:10 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_09.51.09_757.avi
 2026-07-10 09:51:11 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_09.51.09_757.avi
 2026-07-10 09:51:41  [AUDITOR] Shutting down
+2026-07-10 12:59:04  [AUDITOR] Starting up (PID 18968)
+2026-07-10 12:59:04  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-07-10 12:59:17 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_12.59.17_347.avi
+2026-07-10 12:59:17 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_12.59.17_347.avi
+2026-07-10 12:59:18 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_12.59.17_347.avi
+2026-07-10 12:59:27 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_12.59.27_136.avi
+2026-07-10 12:59:27 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_12.59.27_136.avi
