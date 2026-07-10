@@ -7,3 +7,4 @@
 2026-07-10 07:38:09  [ALERT] [TASK-TAMPER] Defensive task FolderSync-DailyCheck was UPDATED at 07/10/2026 07:38:02 by account=helde (event 4702) - config_guard auto-heal will re-enable if disabled
 2026-07-10 07:38:15  [AUDITOR] Shutting down
 2026-07-10 07:38:51  [AUDITOR] Starting up (PID 6728)
+2026-07-10 08:15:12  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 07/10/2026 08:15:05 by account=unknown (event 4946) - no own firewall script active, possible tampering
