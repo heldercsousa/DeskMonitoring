@@ -22,3 +22,7 @@
 2026-07-10 07:37:45  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=LockApp
 2026-07-10 07:37:45  CONFIG-GUARD  TAMPER  foreground=LockApp not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
 2026-07-10 07:37:45  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=LockApp
+2026-07-10 09:52:05  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-10 09:52:07  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-10 09:52:08  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-10 09:52:09  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
