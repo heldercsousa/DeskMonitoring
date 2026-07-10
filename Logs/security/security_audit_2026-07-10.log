@@ -10,3 +10,5 @@
 2026-07-10 08:15:12  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 07/10/2026 08:15:05 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-07-10 09:51:41  [AUDITOR] Shutting down
 2026-07-10 12:59:04  [AUDITOR] Starting up (PID 18968)
+2026-07-10 13:10:16  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/10/2026 13:09:54 (event 4663); correlated process(es): C:\Windows\System32\svchost.exe (pid 14556, parent C:\Windows\System32\services.exe, via Sysmon-1); C:\Windows\System32\wbem\WMIC.exe (pid 9444, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-07-10 13:10:16  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-10_reg-tamper_20260710_130954.md
