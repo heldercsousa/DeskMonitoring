@@ -1,0 +1,19 @@
+2026-07-11 04:21:45  [AUDITOR] Shutting down
+2026-07-11 04:22:22  [AUDITOR] Starting up (PID 16420)
+2026-07-11 04:22:22  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-07-11 04:22:34 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.22.33_817.jpg
+2026-07-11 04:22:34 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-11
+2026-07-11 04:22:34 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-11\motion_2026-07-11_04.22.33_877.avi
+2026-07-11 04:22:35 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-11\motion_2026-07-11_04.22.33_877.avi
+2026-07-11 04:22:35 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-11\motion_2026-07-11_04.22.33_877.avi
+2026-07-11 04:22:41 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.22.35_827.jpg
+2026-07-11 04:22:42 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.22.37_831.jpg
+2026-07-11 04:22:42 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10
+2026-07-11 04:23:35 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.23.34_747.jpg
+2026-07-11 04:23:36 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-11\motion_2026-07-11_04.23.34_800.avi
+2026-07-11 04:23:36 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-11\motion_2026-07-11_04.23.34_800.avi
+2026-07-11 04:23:36 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-11\motion_2026-07-11_04.23.34_800.avi
+2026-07-11 04:23:41 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.23.36_752.jpg
+2026-07-11 04:23:41 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.23.40_759.jpg
+2026-07-11 04:23:41 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.23.38_756.jpg
+2026-07-11 04:23:46 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-11_04.23.42_766.jpg

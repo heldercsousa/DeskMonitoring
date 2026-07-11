@@ -17,3 +17,21 @@
 2026-07-11 02:34:41  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-11_reg-tamper_20260711_023416.md
 2026-07-11 02:53:57  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/11/2026 02:53:45 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 9028, parent -, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 18180, parent -, via Sysmon-1)
 2026-07-11 02:53:57  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-11_reg-tamper_20260711_025345.md
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='a94f3714-1ada-4234-b5ae-ecf4b53bb8ba' at 07/11/2026 04:15:09 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='a94f3714-1ada-4234-b5ae-ecf4b53bb8ba' at 07/11/2026 04:15:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 07/11/2026 04:15:09 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft Edge' at 07/11/2026 04:15:14 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft Edge' at 07/11/2026 04:15:14 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge' at 07/11/2026 04:15:14 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge' at 07/11/2026 04:15:14 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='TikTok' at 07/11/2026 04:15:16 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='TikTok' at 07/11/2026 04:15:16 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='TikTok' at 07/11/2026 04:15:16 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='TikTok' at 07/11/2026 04:15:16 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Disney+' at 07/11/2026 04:15:17 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Disney+' at 07/11/2026 04:15:17 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Disney+' at 07/11/2026 04:15:17 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-11 04:15:26  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Disney+' at 07/11/2026 04:15:17 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-11 04:21:45  [AUDITOR] Shutting down
+2026-07-11 04:22:22  [AUDITOR] Starting up (PID 16420)
+2026-07-11 04:22:42 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10
