@@ -78,3 +78,6 @@
 2026-07-10 22:51:25  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 07/10/2026 22:51:03 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-07-10 22:51:25  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/10/2026 22:51:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-07-10 22:51:25  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/10/2026 22:51:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-10 23:04:31  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/10/2026 23:04:08 - no alert
+2026-07-10 23:34:44  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/10/2026 23:33:43 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 7128, parent -, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 11172, parent -, via Sysmon-1)
+2026-07-10 23:34:44  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-10_reg-tamper_20260710_233343.md
