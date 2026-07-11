@@ -448,3 +448,5 @@
 2026-07-10 20:54:31 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_20.54.30_971.avi
 2026-07-10 20:54:32 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-10\motion_2026-07-10_20.54.30_971.avi
 2026-07-10 20:55:15  [AUDITOR] Shutting down
+2026-07-10 22:39:05  [AUDITOR] Starting up (PID 4860)
+2026-07-10 22:39:05  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
