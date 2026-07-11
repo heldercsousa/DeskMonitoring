@@ -56,3 +56,31 @@
 2026-07-10 15:17:28  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
 2026-07-10 18:21:47  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
 2026-07-10 18:21:48  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-10 20:20:29  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=explorer
+2026-07-10 20:20:29  CONFIG-GUARD  TAMPER  foreground=explorer not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-10 20:20:29  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  TAMPER  foreground=explorer not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-10 20:20:30  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  TAMPER  foreground=explorer not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-10 20:20:30  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  TAMPER  foreground=explorer not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-10 20:20:30  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  TAMPER  foreground=explorer not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-10 20:20:30  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  TAMPER  foreground=explorer not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-10 20:20:30  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=explorer
+2026-07-10 20:20:30  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=ShellHost
+2026-07-10 20:20:30  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-10 20:20:30  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellHost
+2026-07-10 20:20:30  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=ShellHost
+2026-07-10 20:20:30  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-10 20:20:30  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellHost
+2026-07-10 20:56:21  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-10 20:56:23  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-10 20:56:24  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-10 20:56:25  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
