@@ -24,3 +24,5 @@
 2026-07-13 08:10:00  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-13_reg-tamper_20260713_080957.md
 2026-07-13 08:10:00  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' written by C:\Windows\System32\cleanmgr.exe at 07/13/2026 08:09:57 (event 4663); correlated process(es): C:\Windows\System32\svchost.exe (pid 2368, parent C:\Windows\System32\services.exe, via Sysmon-1); C:\Windows\System32\taskhostw.exe (pid 4644, parent C:\Windows\System32\svchost.exe, via Sysmon-1); C:\Windows\System32\wbem\WMIC.exe (pid 5004, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 12164, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
 2026-07-13 08:10:00  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-13_reg-tamper_20260713_080957.md
+2026-07-13 10:17:34  [AUDITOR] Shutting down
+2026-07-13 10:18:46  [AUDITOR] Starting up (PID 9332)
