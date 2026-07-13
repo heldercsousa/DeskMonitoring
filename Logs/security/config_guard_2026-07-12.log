@@ -30,3 +30,7 @@
 2026-07-12 21:26:35  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=WindowsTerminal
 2026-07-12 21:26:35  CONFIG-GUARD  TAMPER  foreground=WindowsTerminal not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
 2026-07-12 21:26:35  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=WindowsTerminal
+2026-07-12 23:57:24  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-12 23:57:25  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-12 23:57:26  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-12 23:57:27  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
