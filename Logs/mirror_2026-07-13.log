@@ -56,3 +56,32 @@ Velocidade:           16.003.200 Bytes/s.
 Velocidade:              915,710 MegaBytes/min.
    Finalizado em: segunda-feira, 13 de julho de 2026 04:49:10
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: segunda-feira, 13 de julho de 2026 06:10:58
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        10         0        10         0         0         2
+ Arquivos:      1462        11      1451         0         0       290
+    Bytes:  723.84 m    3.76 m  720.08 m         0         0  171.50 m
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           146.178.925 Bytes/s.
+Velocidade:              8364,425 MegaBytes/min.
+   Finalizado em: segunda-feira, 13 de julho de 2026 06:10:58
+
