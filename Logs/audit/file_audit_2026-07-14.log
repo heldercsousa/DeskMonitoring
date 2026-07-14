@@ -2016,3 +2016,5 @@
 2026-07-14 15:50:33 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-14_15.50.30_707.jpg
 2026-07-14 15:50:33 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-14_15.50.32_709.jpg
 2026-07-14 15:50:48  [AUDITOR] Shutting down
+2026-07-14 18:50:42  [AUDITOR] Starting up (PID 5400)
+2026-07-14 18:50:43  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
