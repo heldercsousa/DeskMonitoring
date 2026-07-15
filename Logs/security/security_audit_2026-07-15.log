@@ -42,3 +42,4 @@
 2026-07-15 04:52:10  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 07/15/2026 04:51:29 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-07-15 04:52:10  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/15/2026 04:51:29 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-07-15 04:52:10  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/15/2026 04:51:29 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-15 06:24:39  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/15/2026 06:24:09 - no alert
