@@ -1,1 +1,3 @@
 2026-07-16 04:25:06  [AUDITOR] Shutting down
+2026-07-16 17:47:19  [AUDITOR] Starting up (PID 5628)
+2026-07-16 17:47:27  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='-' at 07/16/2026 17:47:19 by account=unknown (event 4948) - no own firewall script active, possible tampering
