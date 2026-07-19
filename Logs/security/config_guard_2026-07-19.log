@@ -1,2 +1,4 @@
 2026-07-19 14:50:36  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
 2026-07-19 14:50:36  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-07-19 14:51:32  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-07-19 14:51:32  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
