@@ -399,7 +399,7 @@ NSSM services + Task Scheduler at-startup provide system-level activation before
 | `C:\Tools\Rclone\rclone.exe` | Rclone binary (external, not in repo) |
 | `C:\Tools\NSSM\nssm.exe` | NSSM service manager (external, not in repo) |
 | `C:\Tools\Sysmon\Sysmon64.exe` | Sysmon binary (T076, external, auto-downloaded by setup_update.ps1 Step 21) |
-| `C:\Sync\Config\sysmonconfig.xml` | SwiftOnSecurity Sysmon config (T076, git-tracked; process/network/DNS telemetry to `Microsoft-Windows-Sysmon/Operational`, Event ID 1/3/22) |
+| `C:\Sync\Config\sysmonconfig.xml` | SwiftOnSecurity Sysmon config (T076, git-tracked; process/network/DNS telemetry to `Microsoft-Windows-Sysmon/Operational`, Event ID 1/3/22; 2026-07-20 added scoped `FileDeleteDetected` Event ID 26 - log-only deletion attribution on Bois/Desktop/Downloads/Documents/Config/Evidence, excludes Mirror-git-temp) |
 | `C:\Program Files\FreeFileSync\RealTimeSync.exe` | RealTimeSync binary (external, not in repo) |
 
 ---

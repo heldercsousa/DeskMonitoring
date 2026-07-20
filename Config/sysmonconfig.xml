@@ -1149,12 +1149,30 @@
 
 		<!--DATA: RuleName, UtcTime, ProcessGuid, ProcessId, User, Image, TargetFilename, Hashes, IsExecutable, Archived -->
 
-	<!--
-	<RuleGroup name="" groupRelation="or">
-		<ClipboardChange onmatch="include">
-		</ClipboardChange>
-	</RuleGroup>
-	-->
+		<!-- LOCAL: scoped file-deletion attribution (log-only, no archive).
+		     Added to capture the process/user behind files vanishing after a copy.
+		     FileDeleteDetected = Event ID 26 (no ArchiveDirectory, no disk-fill). -->
+		<RuleGroup name="FileDeleteWatch" groupRelation="or">
+			<FileDeleteDetected onmatch="include">
+				<TargetFilename name="watch-bois" condition="begin with">C:\Users\helde\Repos\Bois</TargetFilename>
+				<TargetFilename name="watch-desktop" condition="begin with">C:\Users\helde\Desktop</TargetFilename>
+				<TargetFilename name="watch-downloads" condition="begin with">C:\Users\helde\Downloads</TargetFilename>
+				<TargetFilename name="watch-documents" condition="begin with">C:\Users\helde\Documents</TargetFilename>
+				<TargetFilename name="watch-config" condition="begin with">C:\Sync\Config</TargetFilename>
+				<TargetFilename name="watch-evidence" condition="begin with">C:\Sync\Evidence</TargetFilename>
+			</FileDeleteDetected>
+		</RuleGroup>
+
+		<RuleGroup name="FileDeleteWatchExclude" groupRelation="or">
+			<FileDeleteDetected onmatch="exclude">
+				<TargetFilename condition="end with">.tmp</TargetFilename>
+				<TargetFilename condition="contains">\Temp\</TargetFilename>
+				<TargetFilename condition="contains">\Cache\</TargetFilename>
+				<TargetFilename condition="contains">\INetCache</TargetFilename>
+				<TargetFilename condition="contains">\.git\</TargetFilename>
+				<TargetFilename condition="contains">\WER\</TargetFilename>
+			</FileDeleteDetected>
+		</RuleGroup>
 
 	<!--SYSMON EVENT ID 24 : CLIPBOARD EVENT MONITORING [ClipboardChange]-->
 		<!--EVENT 24: "Clipboard changed"-->
