@@ -212,3 +212,5 @@
 2026-07-19 20:39:12  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-19_reg-tamper_20260719_203839.md
 2026-07-19 21:39:17  [AUDITOR] Shutting down
 2026-07-19 21:40:35  [AUDITOR] Starting up (PID 19824)
+2026-07-19 23:15:18  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/19/2026 23:14:52 (event 4663); correlated process(es): C:\Windows\System32\cmd.exe (pid 13152, parent C:\Users\helde\.local\bin\claude.exe, via Sysmon-1); C:\Windows\System32\cmd.exe (pid 16612, parent C:\Users\helde\.local\bin\claude.exe, via Sysmon-1); C:\Windows\System32\wbem\WMIC.exe (pid 5440, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 7864, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-07-19 23:15:18  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-19_reg-tamper_20260719_231452.md
