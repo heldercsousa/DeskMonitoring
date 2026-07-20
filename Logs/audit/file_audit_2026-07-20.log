@@ -1371,3 +1371,11 @@
 2026-07-20 02:45:27 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-20\motion_2026-07-20_02.45.26_079.avi
 2026-07-20 02:45:39 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\motion_2026-07-20_02.45.27_988.jpg
 2026-07-20 02:46:02  [AUDITOR] Shutting down
+2026-07-20 06:30:28  [AUDITOR] Starting up (PID 4936)
+2026-07-20 06:30:28  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-07-20 06:32:18  [AUDITOR] Shutting down
+2026-07-20 06:32:55  [AUDITOR] Starting up (PID 6408)
+2026-07-20 06:32:56  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-07-20 06:33:12  [AUDITOR] Shutting down
+2026-07-20 06:33:48  [AUDITOR] Starting up (PID 5332)
+2026-07-20 06:33:49  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
