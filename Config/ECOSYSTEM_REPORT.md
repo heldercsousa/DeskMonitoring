@@ -2787,7 +2787,7 @@ Write-Host "Service '$svcName' installed and started"
 ```
 
 ### `C:\Sync\Config\auditor.ps1`
-> Security monitor: startup gap forensics, FileSystemWatcher on source folder, remote logon/service/system event polling. Background job cleanup every ~60s (T028); motion AVI vs suspicious delete distinction (T029); 365-day log rotation for audit logs (T033). Real-time watchers: Event-42 sleep [BUTTON-SLEEP], unattended-sleep-timeout [UNATTEND-SLEEP], scheduled-task [TASK-TAMPER], firewall [FIREWALL-TAMPER], and registry-tamper [REG-TAMPER] (T075 - correlates 4657/4663 writes on guarded power/Run keys against Sysmon Event 1 / 4688 to unmask the svchost proxy caller; T091/T097 - Run key writes from chrome.exe/GoogleUpdater.exe/msedge.exe log [REG-INFO] and skip alert). Writes to security_audit_YYYY-MM-DD.log and file_audit_YYYY-MM-DD.log.
+> Security monitor: startup gap forensics, FileSystemWatcher on source folder, remote logon/service/system event polling. Background job cleanup every ~60s (T028); motion AVI vs suspicious delete distinction (T029); 365-day log rotation for audit logs (T033). Real-time watchers: Event-42 sleep [BUTTON-SLEEP], unattended-sleep-timeout [UNATTEND-SLEEP], scheduled-task [TASK-TAMPER], firewall [FIREWALL-TAMPER], webcam-owner [CAM-HIJACK] (2026-07-21 - polls the per-user CapabilityAccessManager webcam ConsentStore every ~8s and alerts when any process other than Yawcam/javaw or the CAM-2 relay/vlc holds the camera, i.e. LastUsedTimeStop=0; edge-triggered per holder with [RECOVERED] on release), and registry-tamper [REG-TAMPER] (T075 - correlates 4657/4663 writes on guarded power/Run keys against Sysmon Event 1 / 4688 to unmask the svchost proxy caller; T091/T097 - Run key writes from chrome.exe/GoogleUpdater.exe/msedge.exe log [REG-INFO] and skip alert). Writes to security_audit_YYYY-MM-DD.log and file_audit_YYYY-MM-DD.log.
 ```powershell
 # auditor.ps1
 # FolderSync Security Auditor
@@ -3143,6 +3143,19 @@ $script:LastFwEventTime = [datetime]::Now
 # auditor starts, so historical events do not re-fire on boot.
 $script:LastRegEventTime = [datetime]::Now
 
+# Webcam-owner watcher (2026-07-21). The built-in webcam is single-owner: only
+# Yawcam (javaw/java) and the CAM-2 relay (vlc) should ever hold it. Any other
+# process opening the camera (OBS, the Windows Camera app, or a hostile blinder)
+# steals it and stops recording - Yawcam then reports "could not connect to the
+# webcam". Poll the per-user CapabilityAccessManager ConsentStore every ~8s; a
+# LastUsedTimeStop of 0 means "in use now". Edge-triggered per holder so a session
+# alerts once, with [RECOVERED] when it releases. auditor runs as SYSTEM and reads
+# the interactive user's hive via HKEY_USERS.
+$script:CamPollInterval = [TimeSpan]::FromSeconds(8)
+$script:LastCamPoll     = [datetime]::MinValue
+$script:CamHolders      = @{}   # holder-path -> $true while currently alerted
+$script:CamAllowLeaf    = @('javaw.exe', 'java.exe', 'yawcam.exe', 'vlc.exe')
+
 # Guarded registry keys for T075. A write here is correlated against process-creation
 # telemetry (Sysmon 1 / 4688) to unmask the true caller behind the svchost.exe proxy.
 # Power subgroups: USB Selective Suspend + Sleep (unattended sleep timeout) - the known
@@ -3425,6 +3438,60 @@ function Check-SystemEvents {
 }
 
 # ---------------------------------------------------------------------------
+# Webcam-owner watcher (2026-07-21)
+# Detects any non-Yawcam process holding the built-in webcam. The camera is
+# single-owner; a foreign holder stops motion recording. Reads the per-user
+# CapabilityAccessManager ConsentStore (LastUsedTimeStop == 0 => in use now).
+# ---------------------------------------------------------------------------
+function Check-WebcamOwner {
+    if (([datetime]::Now - $script:LastCamPoll) -lt $script:CamPollInterval) { return }
+    $script:LastCamPoll = [datetime]::Now
+
+    $seen = @{}   # holder-path -> leaf exe, for every process currently using the webcam
+    try {
+        # Real interactive user hives only (S-1-5-21-*), skip the _Classes shadow hives
+        $userHives = Get-ChildItem 'Registry::HKEY_USERS' -ErrorAction SilentlyContinue |
+            Where-Object { $_.PSChildName -match '^S-1-5-21-\d' -and $_.PSChildName -notmatch '_Classes$' }
+        foreach ($h in $userHives) {
+            $base = "Registry::HKEY_USERS\$($h.PSChildName)\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam"
+            foreach ($scope in @($base, "$base\NonPackaged")) {
+                if (-not (Test-Path $scope)) { continue }
+                foreach ($k in (Get-ChildItem $scope -ErrorAction SilentlyContinue)) {
+                    if ($k.PSChildName -eq 'NonPackaged') { continue }   # container, not an app
+                    $stop = (Get-ItemProperty $k.PSPath -Name LastUsedTimeStop -ErrorAction SilentlyContinue).LastUsedTimeStop
+                    if ($stop -ne 0) { continue }   # nonzero => released; 0 => in use now
+                    $raw  = $k.PSChildName -replace '#', '\'   # NonPackaged encodes '\' as '#'
+                    $leaf = ($raw -split '\\')[-1]
+                    $seen[$raw] = $leaf
+                }
+            }
+        }
+    } catch { return }
+
+    # New non-allowed holders => alert once
+    foreach ($path in $seen.Keys) {
+        if ($script:CamAllowLeaf -contains $seen[$path]) { continue }
+        if (-not $script:CamHolders.ContainsKey($path)) {
+            $script:CamHolders[$path] = $true
+            Write-SecurityAudit "[ALERT] [CAM-HIJACK] Non-Yawcam process is using the webcam: $path - this steals the camera from Yawcam and stops recording. Only Yawcam (javaw) and the CAM-2 relay (vlc) should hold the camera."
+            try {
+                & 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject 'Webcam opened by non-Yawcam process' `
+                    -Body "A process other than Yawcam opened the built-in webcam: $path. The camera is single-owner, so this stops motion recording (Yawcam reports 'could not connect to the webcam'). If this was you (e.g. OBS or the Windows Camera app), close it. If not, investigate - it may be an attempt to blind the camera." `
+                    -B2Key "cam_hijack_$([datetime]::Now.ToString('yyyyMMdd_HHmmss')).txt"
+            } catch {}
+        }
+    }
+    # Previously-alerted holders that have released => recovered
+    foreach ($path in @($script:CamHolders.Keys)) {
+        if (-not $seen.ContainsKey($path)) {
+            $script:CamHolders.Remove($path)
+            Write-SecurityAudit "[RECOVERED] [CAM-HIJACK] Webcam released by $path"
+        }
+    }
+}
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 Write-SecurityAudit "[AUDITOR] Starting up (PID $PID)"
@@ -3447,6 +3514,7 @@ try {
         Check-RemoteAccess
         Check-Services
         Check-SystemEvents
+        Check-WebcamOwner
 
         # T028: clean up completed/failed background jobs every 60 iterations (~60s)
         $script:LoopIteration++

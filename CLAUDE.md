@@ -341,7 +341,7 @@ The ecosystem has four layers that work together continuously:
 
 [FolderSyncAuditor service (NSSM)]
   FileSystemWatcher on source folder
-  Detects: file deletions, remote logins, service tampering
+  Detects: file deletions, remote logins, service tampering, webcam hijack (CAM-HIJACK, 2026-07-21: alerts when any non-Yawcam/non-vlc process opens the built-in camera)
   Writes forensic reports on startup gap detection
 ```
 
