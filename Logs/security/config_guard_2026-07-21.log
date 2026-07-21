@@ -1,0 +1,4 @@
+2026-07-21 00:36:11  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-21 00:36:12  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-21 00:36:13  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-21 00:36:14  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled

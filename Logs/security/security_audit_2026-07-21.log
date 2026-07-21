@@ -1,0 +1,7 @@
+2026-07-21 00:15:47  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/21/2026 00:15:33 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 9392, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 25500, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-07-21 00:15:47  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-21_reg-tamper_20260721_001533.md
+2026-07-21 00:24:53  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/21/2026 00:24:16 - no alert
+2026-07-21 00:30:04  AUDIT-FILTER  SUSPICIOUS-WRITES  2 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-21.md
+2026-07-21 00:35:55  [AUDITOR] Shutting down
+2026-07-21 00:45:04  AUDIT-FILTER  SUSPICIOUS-WRITES  12 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-21.md
+2026-07-21 00:50:04  AUDIT-FILTER  SUSPICIOUS-WRITES  9 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-21.md
