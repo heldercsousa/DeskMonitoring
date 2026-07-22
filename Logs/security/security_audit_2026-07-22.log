@@ -1,0 +1,5 @@
+2026-07-22 19:18:38  [AUDITOR] Starting up (PID 9168)
+2026-07-22 19:20:12  [ALERT] [CAM-HIJACK] Non-Yawcam process is using the webcam: C:\Program Files\obs-studio\bin\64bit\obs64.exe - this steals the camera from Yawcam and stops recording. Only Yawcam (javaw) and the CAM-2 relay (vlc) should hold the camera.
+2026-07-22 19:20:29  [RECOVERED] [CAM-HIJACK] Webcam released by C:\Program Files\obs-studio\bin\64bit\obs64.exe
+2026-07-22 19:30:41  [AUDITOR] Shutting down
+2026-07-22 19:34:43  [AUDITOR] Starting up (PID 24512)
