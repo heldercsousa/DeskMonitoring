@@ -411,3 +411,5 @@
 2026-07-23 00:37:06 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-07-23_00.37.04_590.jpg
 2026-07-23 00:37:06 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-07-23_00.37.05_098.jpg
 2026-07-23 00:37:19  [AUDITOR] Shutting down
+2026-07-23 21:48:15  [AUDITOR] Starting up (PID 4628)
+2026-07-23 21:48:16  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
