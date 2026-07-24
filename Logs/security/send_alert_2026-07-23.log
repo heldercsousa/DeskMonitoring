@@ -1,1 +1,5 @@
 2026-07-23 00:00:06  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
+2026-07-23 21:48:51  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 2 event(s)
+2026-07-23 21:48:55  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/suspicious_writes_2026-07-23_21-48-44.md
+2026-07-23 21:50:52  SEND-ALERT  OK  email sent: SUSPICIOUS WRITES on LAP - 2 event(s)
+2026-07-23 21:50:55  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/suspicious_writes_2026-07-23_21-50-45.md
