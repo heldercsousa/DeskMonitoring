@@ -715,6 +715,29 @@ if (Test-Path $configAuditScript) {
 # from daily to hourly so tamper evidence reaches GitHub within ~1h, until a
 # real WEF collector host exists.
 # =============================================================================
+Write-Step "Step 16c - Git credential helper chain (anti-hang)"
+# 2026-07-24 incident: the system gitconfig sets credential.helper=manager-core
+# while the user gitconfig sets wincred. Git runs BOTH. Under the hourly
+# FolderSync-GitCommitLogs task (pwsh -NonInteractive), GCM tried an interactive
+# browser OAuth flow, could not complete it, and blocked forever - leaking ~6
+# processes per hour (100 git + 20 pwsh found stuck). An empty helper value at
+# repo scope resets the inherited chain, leaving wincred as the only helper.
+try {
+    & git -C "C:\Sync" config --local --unset-all credential.helper 2>&1 | Out-Null
+    & git -C "C:\Sync" config --local credential.helper "" 2>&1 | Out-Null
+    & git -C "C:\Sync" config --local --add credential.helper wincred 2>&1 | Out-Null
+
+    $env:GIT_TERMINAL_PROMPT = '0'
+    $probe = & git -C "C:\Sync" ls-remote origin master 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-OK "Credential chain reset to wincred - non-interactive auth verified"
+    } else {
+        Write-Warn "Credential chain set, but ls-remote failed: $probe"
+    }
+} catch {
+    Write-Fail "Could not configure credential.helper - $_"
+}
+
 Write-Step "Step 17 - FolderSync-GitCommitLogs task (hourly off-box push)"
 # Raw XML (matches Step 18/19): an empty/absent <Duration> means repeat
 # indefinitely. The previous cmdlet form used -RepetitionDuration [TimeSpan]::MaxValue,

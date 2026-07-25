@@ -16,8 +16,32 @@ $commitMsg  = & git -C $RepoRoot log -1 --pretty=%s 2>&1
 
 Write-Log "GIT-PUSH  Pushing $commitHash - $commitMsg"
 
-$pushOut = & git -C $RepoRoot push origin master 2>&1
-$pushExit = $LASTEXITCODE
+# Never let a credential helper block this non-interactive hook.
+# 2026-07-24 incident: GCM (manager-core) tried an interactive browser OAuth flow
+# and blocked forever, hanging 20 hourly runs and leaking 100 git processes.
+$env:GIT_TERMINAL_PROMPT = '0'
+$env:GCM_INTERACTIVE     = 'never'
+
+$job = Start-Job -ScriptBlock {
+    param($root)
+    $out = & git -C $root push origin master 2>&1
+    [pscustomobject]@{ Out = ($out | Out-String); Code = $LASTEXITCODE }
+} -ArgumentList $RepoRoot
+
+if (Wait-Job $job -Timeout 120) {
+    $res      = Receive-Job $job
+    $pushOut  = $res.Out
+    $pushExit = $res.Code
+} else {
+    Stop-Job $job -ErrorAction SilentlyContinue
+    # Kill any git process this hook left behind so they cannot accumulate.
+    Get-CimInstance Win32_Process -Filter "Name='git.exe'" -ErrorAction SilentlyContinue |
+        Where-Object { $_.CommandLine -like "*$RepoRoot*" } |
+        ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+    $pushOut  = "push exceeded 120s timeout - job stopped, stray git processes killed"
+    $pushExit = 124
+}
+Remove-Job $job -Force -ErrorAction SilentlyContinue
 
 if ($pushExit -eq 0) {
     Write-Log "GIT-PUSH  OK  $commitHash pushed to origin/master"

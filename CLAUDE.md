@@ -535,7 +535,7 @@ The Bois source folder is **also** the output target for a motion-detection came
 | ID | Device | Software | Status |
 |---|---|---|---|
 | CAM-1 | Built-in laptop webcam — HD User Facing (720p @ 30fps) | Yawcam 0.6.2 | **Active** |
-| CAM-2 | TP-LINK Tapo C100 IP camera (LAN, 192.168.0.109) | VLC RTSP→MJPEG relay (`cam2_relay.ps1`) → Yawcam (`http://127.0.0.1:8161/`) | **Active** |
+| CAM-2 | TP-LINK Tapo C100 IP camera (LAN, 192.168.15.2) | VLC RTSP→MJPEG relay (`cam2_relay.ps1`) → Yawcam (`http://127.0.0.1:8161/`) | **Active** |
 
 More cameras will be added over time. Each new camera should be integrated as an additional Yawcam input and documented in this table.
 

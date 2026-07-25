@@ -15,8 +15,10 @@ $LogFile        = "C:\Sync\Logs\services\cam2_relay.log"
 $CheckSecs      = 30   # health check interval
 $MaxRestarts    = 5    # max restarts per hour before giving up
 $RestartWindow  = 3600 # seconds (1 hour)
+$MaxStalls      = 3    # consecutive frameless checks before forcing a restart
 
 $restartTimes = [System.Collections.Generic.List[datetime]]::new()
+$stallCount   = 0
 
 function Write-Log($msg) {
     $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -46,6 +48,35 @@ function Test-PortListening {
     if ($done) { $result = Receive-Job $job } else { $result = $false }
     Remove-Job $job -Force
     return [bool]$result
+}
+
+# ---------------------------------------------------------------------------
+# Get-RelayBytes: how many bytes the MJPEG endpoint actually delivers.
+# VLC is launched with --loop, so it stays alive retrying a dead RTSP source
+# while port 8161 remains bound and answers HTTP 200 with zero frames.
+# HasExited alone therefore cannot detect a dead camera (2026-07-24 incident:
+# CAM-2 silently captured nothing while this relay reported healthy).
+# ---------------------------------------------------------------------------
+function Get-RelayBytes {
+    param([int]$Seconds = 5)
+    try {
+        $req = [System.Net.HttpWebRequest]::Create("http://${RelayHost}:${RelayPort}/")
+        $req.Timeout          = 5000
+        $req.ReadWriteTimeout = $Seconds * 1000
+        $stream = $req.GetResponse().GetResponseStream()
+        $buf    = New-Object byte[] 65536
+        $total  = 0
+        $sw     = [Diagnostics.Stopwatch]::StartNew()
+        while ($sw.Elapsed.TotalSeconds -lt $Seconds) {
+            $n = $stream.Read($buf, 0, $buf.Length)
+            if ($n -le 0) { break }
+            $total += $n
+        }
+        $stream.Close()
+        return $total
+    } catch {
+        return 0
+    }
 }
 
 # ---------------------------------------------------------------------------
@@ -165,6 +196,30 @@ while ($true) {
             Write-Log "INFO   Port $RelayPort listening - relay confirmed up"
         } else {
             Write-Log "WARN   Port $RelayPort not yet listening after restart"
+        }
+        $stallCount = 0
+    }
+    else {
+        # VLC alive - but is it actually delivering frames?
+        if ((Get-RelayBytes -Seconds 5) -gt 0) {
+            if ($stallCount -gt 0) { Write-Log "INFO   Frames flowing again on port $RelayPort" }
+            $stallCount = 0
+        } else {
+            $stallCount++
+            Write-Log "WARN   No frames on port $RelayPort (stall $stallCount of $MaxStalls)"
+
+            if ($stallCount -ge $MaxStalls) {
+                Write-Log "RELAY-NOFRAMES  No frames for $MaxStalls checks - killing VLC to force restart"
+                $stallCount = 0
+                if ($vlcProc -and -not $vlcProc.HasExited) {
+                    Stop-Process -Id $vlcProc.Id -Force -ErrorAction SilentlyContinue
+                }
+                $alertBody = "CAM-2 relay on $env:COMPUTERNAME is bound to port $RelayPort but delivered no frames for $MaxStalls consecutive checks.`n`nSource: rtsp://${user}:***@${ip}:${port}/${stream}`n`nLikely causes:`n- Camera offline or moved to a different DHCP address`n- RTSP Camera Account credentials no longer valid`n- Camera factory-reset`n`nVLC has been killed to force a relay restart."
+                & pwsh.exe -NonInteractive -ExecutionPolicy Bypass -File 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "CAM-2 RELAY DELIVERING NO FRAMES on $env:COMPUTERNAME" `
+                    -Body $alertBody `
+                    -B2Key "cam2_noframes_$(Get-Date -Format 'yyyy-MM-dd_HH-mm-ss').txt"
+            }
         }
     }
 }
