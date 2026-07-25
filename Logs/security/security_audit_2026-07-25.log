@@ -1,0 +1,7 @@
+2026-07-25 00:03:49  [AUDITOR] Starting up (PID 49160)
+2026-07-25 00:06:41  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-25.md
+2026-07-25 00:10:08  AUDIT-FILTER  SUSPICIOUS-WRITES  21 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-25.md
+2026-07-25 00:15:49  AUDIT-FILTER  SUSPICIOUS-WRITES  9 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-25.md
+2026-07-25 00:23:09  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/25/2026 00:22:20 - no alert
+2026-07-25 00:43:39  [AUDITOR] Starting up (PID 18616)
+2026-07-25 00:55:08  [REG-WRITE] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/25/2026 00:54:42 (event 4663) - no process-creation telemetry in window (Sysmon/4688), no alert
