@@ -6546,6 +6546,14 @@ while ($true) {
 
         if ($restartTimes.Count -ge $MaxRestarts) {
             Write-Log "RELAY-GIVINGUP  $MaxRestarts restarts in last hour  - relay exiting"
+            # Do not exit silently: giving up means CAM-2 stops recording with no
+            # further log activity, which is exactly how the 2026-07-24 outage went
+            # unnoticed. Alert before terminating.
+            $giveUpBody = "CAM-2 relay on $env:COMPUTERNAME exceeded $MaxRestarts VLC restarts within the last hour and is shutting down.`n`nSource: rtsp://${user}:***@${ip}:${port}/${stream}`n`nCAM-2 IS NO LONGER RECORDING until the relay is restarted.`n`nLikely causes:`n- RTSP Camera Account credentials rejected (401)`n- Camera offline or moved to a different DHCP address`n- Camera factory-reset`n`nRun setup_update.ps1 as Administrator after fixing the cause."
+            & pwsh.exe -NonInteractive -ExecutionPolicy Bypass -File 'C:\Sync\Config\send_alert.ps1' `
+                -Subject "CAM-2 RELAY GAVE UP on $env:COMPUTERNAME - NOT RECORDING" `
+                -Body $giveUpBody `
+                -B2Key "cam2_giveup_$(Get-Date -Format 'yyyy-MM-dd_HH-mm-ss').txt"
             exit 1
         }
 
