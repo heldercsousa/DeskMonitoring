@@ -52,3 +52,27 @@
 2026-07-25 05:36:54  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
 2026-07-25 05:36:55  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
 2026-07-25 05:36:56  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
+2026-07-25 10:47:10  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=unknown
+2026-07-25 10:47:10  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-25 10:47:10  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-25 10:47:11  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-25 10:47:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-25 10:47:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-25 10:47:11  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-07-25 10:47:11  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-25 10:47:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=unknown
+2026-07-25 10:47:11  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-07-25 10:47:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=unknown
