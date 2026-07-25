@@ -102,3 +102,6 @@
 2026-07-24 19:38:24  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 07/24/2026 19:38:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-07-24 19:38:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/24/2026 19:38:02 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-07-24 19:38:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 07/24/2026 19:38:02 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-07-24 22:05:27  [AUDITOR] Shutting down
+2026-07-24 22:25:06  AUDIT-FILTER  SUSPICIOUS-WRITES  3 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-24.md
+2026-07-24 22:30:04  AUDIT-FILTER  SUSPICIOUS-WRITES  2 event(s) - see C:\Sync\Evidence\suspicious_writes_2026-07-24.md
