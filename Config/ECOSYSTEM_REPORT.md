@@ -486,7 +486,8 @@ powershell -ExecutionPolicy Bypass -File C:\Sync\Config\read_credentials.ps1
 | `read_credentials.ps1` | User on demand | Decrypts and prints credentials |
 | `check_status.ps1` | User on demand | FolderSync full health check — tasks, services, rclone, logs |
 | `check_camera.ps1` | User on demand | Camera/Yawcam health check — process, device, recordings, startup, CAM-2 relay; VLC process + port 8161 + restart sentinel checks added (T025, 2026-06-02) |
-| `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam; DPAPI credential loading (`cam2_creds.dpapi`, CurrentUser) with cam2.conf fallback; max 5 restarts/hour circuit breaker; 7-day log rotation; port-listening verification after restart (T024, 2026-06-02; T049, 2026-06-03) |
+| `cam2_relay.ps1` | Registry Run `YawcamCam2Relay` (hidden, at login) | VLC relay: Tapo C100 RTSP → MJPEG HTTP `127.0.0.1:8161` for Yawcam; DPAPI credential loading (`cam2_creds.dpapi`, CurrentUser) with cam2.conf fallback; max 5 restarts/hour circuit breaker; 7-day log rotation; port-listening verification after restart (T024, 2026-06-02; T049, 2026-06-03). **2026-07-24:** added `Get-RelayBytes` frame-flow health check - VLC runs with `--loop` so it stays alive retrying a dead RTSP source while port 8161 stays bound and returns HTTP 200 with **zero frames**, meaning `HasExited` alone could not detect a dead camera (CAM-2 captured nothing silently). After `$MaxStalls`=3 consecutive frameless 5s reads the relay kills VLC to force a restart and fires `send_alert.ps1` |
+| `post_commit_push.ps1` | `.git/hooks/post-commit` (after every commit) | Pushes `origin master` off-box; on failure emails alert + uploads to B2. **2026-07-24:** wrapped the push in a 120s `Start-Job`/`Wait-Job` timeout and set `GIT_TERMINAL_PROMPT=0` + `GCM_INTERACTIVE=never`. Root cause: the system gitconfig sets `credential.helper=manager-core` and the user gitconfig sets `wincred` - git chains BOTH, and under the hourly `FolderSync-GitCommitLogs` task (`pwsh -NonInteractive`) GCM attempted an interactive browser OAuth flow and blocked forever, leaking ~6 processes/hour (100 git + 20 pwsh found stuck). On timeout the hook now kills stray `git.exe` for this repo and logs exit 124. Chain itself is reset by `setup_update.ps1` Step 16c |
 | `cam2.conf` | Fallback for `cam2_relay.ps1` | CAM-2 credentials (plaintext fallback — migrate with `migrate_cam2_creds.ps1` then delete, **gitignored**) |
 | `sysmonconfig.xml` | `setup_update.ps1` Step 21 (Sysmon `-i`/`-c`) | SwiftOnSecurity Sysmon config (schemaversion 4.50) — defines high-quality process/network/DNS event tracing. Git-tracked so the config survives reinstall and the binary is auto-downloaded to `C:\Tools\Sysmon` (T076, 2026-06-29). 2026-07-20: added scoped `FileDeleteDetected` (Event ID 26) rule group for log-only deletion attribution on Bois/Desktop/Downloads/Documents/Config/Evidence (excludes Mirror/.git/temp) |
 | `health_check_all.ps1` | User on demand / `check_health.bat` / `/project:health` | Combined FolderSync + Camera health check; exits 0 all pass, 1 any fail; writes to `C:\Sync\Logs\ecosystem\health_check_YYYY-MM-DD.log` |
@@ -5318,8 +5319,8 @@ if ($existingBackup) {
     $currentArgs = $existingBackup.Actions[0].Arguments
     $currentExec = $existingBackup.Actions[0].Execute
 
-    if ($currentExec -like "*.bat" -or $currentArgs -notlike "*-NoWindow*") {
-        Write-Warn "Task exists but uses .bat or missing -NoWindow - will recreate"
+    if ($currentExec -like "*.bat" -or $currentArgs -notlike "*-NoWindow*" -or $currentArgs -notlike "*cloud_sync_helderTest.ps1*") {
+        Write-Warn "Task exists but uses .bat, missing -NoWindow, or points at the wrong script - will recreate to run cloud_sync_helderTest.ps1"
         $needsRecreate = $true
     }
 }
@@ -5517,6 +5518,29 @@ if (Test-Path $configAuditScript) {
 # from daily to hourly so tamper evidence reaches GitHub within ~1h, until a
 # real WEF collector host exists.
 # =============================================================================
+Write-Step "Step 16c - Git credential helper chain (anti-hang)"
+# 2026-07-24 incident: the system gitconfig sets credential.helper=manager-core
+# while the user gitconfig sets wincred. Git runs BOTH. Under the hourly
+# FolderSync-GitCommitLogs task (pwsh -NonInteractive), GCM tried an interactive
+# browser OAuth flow, could not complete it, and blocked forever - leaking ~6
+# processes per hour (100 git + 20 pwsh found stuck). An empty helper value at
+# repo scope resets the inherited chain, leaving wincred as the only helper.
+try {
+    & git -C "C:\Sync" config --local --unset-all credential.helper 2>&1 | Out-Null
+    & git -C "C:\Sync" config --local credential.helper "" 2>&1 | Out-Null
+    & git -C "C:\Sync" config --local --add credential.helper wincred 2>&1 | Out-Null
+
+    $env:GIT_TERMINAL_PROMPT = '0'
+    $probe = & git -C "C:\Sync" ls-remote origin master 2>&1
+    if ($LASTEXITCODE -eq 0) {
+        Write-OK "Credential chain reset to wincred - non-interactive auth verified"
+    } else {
+        Write-Warn "Credential chain set, but ls-remote failed: $probe"
+    }
+} catch {
+    Write-Fail "Could not configure credential.helper - $_"
+}
+
 Write-Step "Step 17 - FolderSync-GitCommitLogs task (hourly off-box push)"
 # Raw XML (matches Step 18/19): an empty/absent <Duration> means repeat
 # indefinitely. The previous cmdlet form used -RepetitionDuration [TimeSpan]::MaxValue,
@@ -5680,7 +5704,7 @@ if (-not (Test-Path $B2CredsFile)) {
 # STEP 18e - CAM-2 credential DPAPI migration (T049)
 # Encrypts Tapo C100 user+pass+ip with CurrentUser DPAPI.
 # Skip if cam2_creds.dpapi already exists.
-# Note: must be run as Helder user (CurrentUser scope) — SYSTEM cannot create this.
+# Note: must be run as Helder user (CurrentUser scope) â€” SYSTEM cannot create this.
 # =============================================================================
 Write-Step "Step 18e - CAM-2 credentials: migrate to DPAPI (cam2_creds.dpapi)"
 $Cam2CredsFile = 'C:\Sync\Config\cam2_creds.dpapi'
@@ -5692,8 +5716,8 @@ if (-not (Test-Path $Cam2CredsFile)) {
 }
 
 # =============================================================================
-# STEP 19 - FolderSync-AuditFilter task (every 5 min — suspicious-only 4663 filter)
-# Must run as current user (InteractiveToken) — send_alert.ps1 uses DPAPI CurrentUser scope.
+# STEP 19 - FolderSync-AuditFilter task (every 5 min â€” suspicious-only 4663 filter)
+# Must run as current user (InteractiveToken) â€” send_alert.ps1 uses DPAPI CurrentUser scope.
 # Uses a VBScript launcher so wscript.exe (GUI, no console) spawns pwsh with SW_HIDE (0),
 # suppressing the white console window flash that InteractiveToken tasks show on creation.
 # =============================================================================
@@ -6256,17 +6280,97 @@ Write-Host ""
 
 ---
 
+### `C:\Sync\Config\post_commit_push.ps1`
+
+```powershell
+# post_commit_push.ps1
+# Called by .git/hooks/post-commit after every commit.
+# Pushes to GitHub (origin master). On failure: emails alert + uploads to B2.
+
+$RepoRoot = 'C:\Sync'
+$LogFile  = "C:\Sync\Logs\security\git_push_$(Get-Date -Format 'yyyy-MM-dd').log"
+
+function Write-Log($msg) {
+    $ts = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    "$ts  $msg" | Add-Content -LiteralPath $LogFile -Encoding UTF8
+}
+
+# Get last commit info for the alert message
+$commitHash = & git -C $RepoRoot rev-parse --short HEAD 2>&1
+$commitMsg  = & git -C $RepoRoot log -1 --pretty=%s 2>&1
+
+Write-Log "GIT-PUSH  Pushing $commitHash - $commitMsg"
+
+# Never let a credential helper block this non-interactive hook.
+# 2026-07-24 incident: GCM (manager-core) tried an interactive browser OAuth flow
+# and blocked forever, hanging 20 hourly runs and leaking 100 git processes.
+$env:GIT_TERMINAL_PROMPT = '0'
+$env:GCM_INTERACTIVE     = 'never'
+
+$job = Start-Job -ScriptBlock {
+    param($root)
+    $out = & git -C $root push origin master 2>&1
+    [pscustomobject]@{ Out = ($out | Out-String); Code = $LASTEXITCODE }
+} -ArgumentList $RepoRoot
+
+if (Wait-Job $job -Timeout 120) {
+    $res      = Receive-Job $job
+    $pushOut  = $res.Out
+    $pushExit = $res.Code
+} else {
+    Stop-Job $job -ErrorAction SilentlyContinue
+    # Kill any git process this hook left behind so they cannot accumulate.
+    Get-CimInstance Win32_Process -Filter "Name='git.exe'" -ErrorAction SilentlyContinue |
+        Where-Object { $_.CommandLine -like "*$RepoRoot*" } |
+        ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+    $pushOut  = "push exceeded 120s timeout - job stopped, stray git processes killed"
+    $pushExit = 124
+}
+Remove-Job $job -Force -ErrorAction SilentlyContinue
+
+if ($pushExit -eq 0) {
+    Write-Log "GIT-PUSH  OK  $commitHash pushed to origin/master"
+    exit 0
+}
+
+# Push failed â€” alert immediately
+Write-Log "GIT-PUSH  FAIL  exit $pushExit : $pushOut"
+
+$body = @"
+GIT PUSH FAILED on $env:COMPUTERNAME
+Time: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
+Commit: $commitHash - $commitMsg
+Exit code: $pushExit
+
+Git output:
+$pushOut
+
+This may indicate:
+- Network blocked by attacker (B2/GitHub firewall rule)
+- Git credentials tampered
+- Repository state corrupted
+"@
+
+& pwsh.exe -NonInteractive -ExecutionPolicy Bypass -File 'C:\Sync\Config\send_alert.ps1' `
+    -Subject "GIT PUSH FAILED on $env:COMPUTERNAME" `
+    -Body $body `
+    -B2Key "git_push_fail_$(Get-Date -Format 'yyyy-MM-dd_HH-mm-ss').txt"
+```
+
 ### `C:\Sync\Config\cam2_relay.ps1`
 > CAM-2 VLC RTSP->MJPEG relay. Reads credentials from cam2.conf, starts VLC on http://127.0.0.1:8161/. Circuit breaker: max 5 restarts/hour. Port-listening verification after each restart. 7-day log rotation. Logs to C:\Sync\Logs\services\cam2_relay.log. (T024, 2026-06-02)
 
 ```powershell
 # cam2_relay.ps1
 # CAM-2 RTSP -> MJPEG HTTP relay for Yawcam
-# Reads credentials from cam2.conf, starts VLC relay on http://127.0.0.1:8161/
+# Reads credentials from cam2_creds.dpapi (DPAPI-encrypted); falls back to cam2.conf.
 # Registered as startup entry: HKCU:\...\Run\YawcamCam2Relay
 # Logs to C:\Sync\Logs\services\cam2_relay.log (single rolling file, 7-day retention)
 
+Add-Type -AssemblyName System.Security
+
 $ConfFile       = "C:\Sync\Config\cam2.conf"
+$DpapiFile      = "C:\Sync\Config\cam2_creds.dpapi"
 $VlcExe         = "C:\Program Files\VideoLAN\VLC\vlc.exe"
 $RelayPort      = 8161
 $RelayHost      = "127.0.0.1"
@@ -6274,8 +6378,10 @@ $LogFile        = "C:\Sync\Logs\services\cam2_relay.log"
 $CheckSecs      = 30   # health check interval
 $MaxRestarts    = 5    # max restarts per hour before giving up
 $RestartWindow  = 3600 # seconds (1 hour)
+$MaxStalls      = 3    # consecutive frameless checks before forcing a restart
 
 $restartTimes = [System.Collections.Generic.List[datetime]]::new()
+$stallCount   = 0
 
 function Write-Log($msg) {
     $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
@@ -6296,32 +6402,99 @@ function Invoke-LogRotation {
 }
 
 function Test-PortListening {
-    $result = Test-NetConnection -ComputerName $RelayHost -Port $RelayPort -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
-    return $result.TcpTestSucceeded
+    $job = Start-Job {
+        param($h,$p)
+        $r = Test-NetConnection -ComputerName $h -Port $p -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+        $r.TcpTestSucceeded
+    } -ArgumentList $RelayHost, $RelayPort
+    $done = Wait-Job $job -Timeout 3
+    if ($done) { $result = Receive-Job $job } else { $result = $false }
+    Remove-Job $job -Force
+    return [bool]$result
 }
 
 # ---------------------------------------------------------------------------
-# Read credentials from cam2.conf
+# Get-RelayBytes: how many bytes the MJPEG endpoint actually delivers.
+# VLC is launched with --loop, so it stays alive retrying a dead RTSP source
+# while port 8161 remains bound and answers HTTP 200 with zero frames.
+# HasExited alone therefore cannot detect a dead camera (2026-07-24 incident:
+# CAM-2 silently captured nothing while this relay reported healthy).
 # ---------------------------------------------------------------------------
-if (-not (Test-Path $ConfFile)) {
-    Write-Log "FAIL  cam2.conf not found at $ConfFile  - relay cannot start"
+function Get-RelayBytes {
+    param([int]$Seconds = 5)
+    try {
+        $req = [System.Net.HttpWebRequest]::Create("http://${RelayHost}:${RelayPort}/")
+        $req.Timeout          = 5000
+        $req.ReadWriteTimeout = $Seconds * 1000
+        $stream = $req.GetResponse().GetResponseStream()
+        $buf    = New-Object byte[] 65536
+        $total  = 0
+        $sw     = [Diagnostics.Stopwatch]::StartNew()
+        while ($sw.Elapsed.TotalSeconds -lt $Seconds) {
+            $n = $stream.Read($buf, 0, $buf.Length)
+            if ($n -le 0) { break }
+            $total += $n
+        }
+        $stream.Close()
+        return $total
+    } catch {
+        return 0
+    }
+}
+
+# ---------------------------------------------------------------------------
+# Load-Cam2Credentials: reads DPAPI blob; falls back to cam2.conf with WARN
+# ---------------------------------------------------------------------------
+function Load-Cam2Credentials {
+    if (Test-Path $DpapiFile) {
+        try {
+            $base64        = [System.IO.File]::ReadAllText($DpapiFile, [System.Text.Encoding]::ASCII).Trim()
+            $encBytes      = [Convert]::FromBase64String($base64)
+            $plainBytes    = [System.Security.Cryptography.ProtectedData]::Unprotect(
+                $encBytes,
+                $null,
+                [System.Security.Cryptography.DataProtectionScope]::CurrentUser
+            )
+            $json          = [System.Text.Encoding]::UTF8.GetString($plainBytes)
+            $creds         = $json | ConvertFrom-Json
+            $script:user   = $creds.user
+            $script:pass   = $creds.pass
+            $script:ip     = $creds.ip
+            $script:port   = $creds.port
+            $script:stream = $creds.stream
+            Write-Log "INFO   Credentials loaded from cam2_creds.dpapi (DPAPI)"
+            return
+        } catch {
+            Write-Log "FAIL   cam2_creds.dpapi found but decryption failed - $_"
+            exit 1
+        }
+    }
+
+    # Fallback: cam2.conf (legacy plaintext - migrate with migrate_cam2_creds.ps1)
+    if (Test-Path $ConfFile) {
+        Write-Log "WARN   cam2_creds.dpapi not found - falling back to plaintext cam2.conf"
+        Write-Log "WARN   Run migrate_cam2_creds.ps1 to encrypt credentials"
+        $conf = @{}
+        Get-Content $ConfFile | Where-Object { $_ -match '^\s*[^#]' -and $_ -match '=' } | ForEach-Object {
+            $parts = $_ -split '=', 2
+            $conf[$parts[0].Trim()] = $parts[1].Trim()
+        }
+        $script:user   = $conf['CAM2_USER']
+        $script:pass   = $conf['CAM2_PASS']
+        $script:ip     = $conf['CAM2_IP']
+        $script:port   = $conf['CAM2_PORT']
+        $script:stream = $conf['CAM2_STREAM']
+        return
+    }
+
+    Write-Log "FAIL   cam2_creds.dpapi not found - run migrate_cam2_creds.ps1"
     exit 1
 }
 
-$conf = @{}
-Get-Content $ConfFile | Where-Object { $_ -match '^\s*[^#]' -and $_ -match '=' } | ForEach-Object {
-    $parts = $_ -split '=', 2
-    $conf[$parts[0].Trim()] = $parts[1].Trim()
-}
-
-$user   = $conf['CAM2_USER']
-$pass   = $conf['CAM2_PASS']
-$ip     = $conf['CAM2_IP']
-$port   = $conf['CAM2_PORT']
-$stream = $conf['CAM2_STREAM']
+Load-Cam2Credentials
 
 if (-not $user -or -not $pass -or -not $ip) {
-    Write-Log "FAIL  cam2.conf missing required fields (CAM2_USER, CAM2_PASS, CAM2_IP)"
+    Write-Log "FAIL  credentials missing required fields (user, pass, ip)"
     exit 1
 }
 
@@ -6387,9 +6560,32 @@ while ($true) {
         } else {
             Write-Log "WARN   Port $RelayPort not yet listening after restart"
         }
+        $stallCount = 0
+    }
+    else {
+        # VLC alive - but is it actually delivering frames?
+        if ((Get-RelayBytes -Seconds 5) -gt 0) {
+            if ($stallCount -gt 0) { Write-Log "INFO   Frames flowing again on port $RelayPort" }
+            $stallCount = 0
+        } else {
+            $stallCount++
+            Write-Log "WARN   No frames on port $RelayPort (stall $stallCount of $MaxStalls)"
+
+            if ($stallCount -ge $MaxStalls) {
+                Write-Log "RELAY-NOFRAMES  No frames for $MaxStalls checks - killing VLC to force restart"
+                $stallCount = 0
+                if ($vlcProc -and -not $vlcProc.HasExited) {
+                    Stop-Process -Id $vlcProc.Id -Force -ErrorAction SilentlyContinue
+                }
+                $alertBody = "CAM-2 relay on $env:COMPUTERNAME is bound to port $RelayPort but delivered no frames for $MaxStalls consecutive checks.`n`nSource: rtsp://${user}:***@${ip}:${port}/${stream}`n`nLikely causes:`n- Camera offline or moved to a different DHCP address`n- RTSP Camera Account credentials no longer valid`n- Camera factory-reset`n`nVLC has been killed to force a relay restart."
+                & pwsh.exe -NonInteractive -ExecutionPolicy Bypass -File 'C:\Sync\Config\send_alert.ps1' `
+                    -Subject "CAM-2 RELAY DELIVERING NO FRAMES on $env:COMPUTERNAME" `
+                    -Body $alertBody `
+                    -B2Key "cam2_noframes_$(Get-Date -Format 'yyyy-MM-dd_HH-mm-ss').txt"
+            }
+        }
     }
 }
-
 ```
 
 ---
