@@ -46,3 +46,7 @@
 2026-07-27 21:48:15  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=unknown
 2026-07-27 21:48:15  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
 2026-07-27 21:48:15  CONFIG-GUARD  RESTORE-FAILED: fatal: detected dubious ownership in repository at 'C:/Sync' 'C:/Sync' is owned by: 	'S-1-5-21-583231401-428563657-1696801058-1001' but the current user is: 	'S-1-5-18' To add an exception for this directory, call: System.Management.Automation.RemoteException 	git config --global --add safe.directory C:/Sync  cloud_sync_helderTest.ps1  foreground-was=unknown
+2026-07-27 23:00:15  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-07-27 23:00:16  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-07-27 23:00:17  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-07-27 23:00:18  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
