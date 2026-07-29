@@ -112,3 +112,5 @@
 2026-07-29 13:45:17  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/29/2026 13:44:21 - no alert
 2026-07-29 13:46:18  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/29/2026 13:45:19 - no alert
 2026-07-29 14:26:48  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 07/29/2026 14:26:39 - no alert
+2026-07-29 16:32:56  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 07/29/2026 16:32:38 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 5548, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 13596, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-07-29 16:32:56  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-07-29_reg-tamper_20260729_163238.md
