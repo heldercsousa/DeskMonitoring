@@ -18,3 +18,6 @@
 2026-07-31 18:00:07  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
 2026-07-31 19:00:06  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
 2026-07-31 20:00:07  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
+2026-07-31 22:00:06  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
+2026-07-31 22:58:01  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
+2026-07-31 22:58:02  SEND-ALERT  FAIL  B2 upload failed: 2026/07/31 22:58:02 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
