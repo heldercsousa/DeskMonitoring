@@ -1,2 +1,5 @@
 2026-07-31 22:59:52  B2-LAG-ALERT  Last successful sync was 74712.5 minutes ago (threshold: 15)
 2026-07-31 22:59:52  SYNC-START  Beginning cloud sync run
+2026/07/31 23:00:33 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-07-31 23:00:33  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-07-31 23:03:17  SYNC-END  Cloud sync run complete
