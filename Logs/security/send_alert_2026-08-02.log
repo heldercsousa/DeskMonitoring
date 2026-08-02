@@ -4,3 +4,5 @@
 2026-08-02 01:00:10  SEND-ALERT  FAIL  B2 upload failed: 2026/08/02 01:00:10 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
 2026-08-02 18:22:12  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
 2026-08-02 18:22:13  SEND-ALERT  FAIL  B2 upload failed: 2026/08/02 18:22:13 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-08-02 19:00:13  SEND-ALERT  OK  email sent: GIT PUSH FAILED on LAP
+2026-08-02 19:00:16  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/git_push_fail_2026-08-02_19-00-06.txt
