@@ -23,3 +23,653 @@ Diret¢rios:        24         0        24         0         0         0
 N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
    Finalizado em: ter‡a-feira, 4 de agosto de 2026 22:35:44
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:35:40
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     33949         1     33948         0         0       254
+    Bytes:   8.469 g   11.59 m   8.458 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           1.013.439.750 Bytes/s.
+Velocidade:               57989,488 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:35:40
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:35:54
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         1        23         0         0         1
+ Arquivos:     33943         9     33934         0         0       254
+    Bytes:   8.446 g    2.10 m   8.444 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           122.458.222 Bytes/s.
+Velocidade:              7007,116 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:35:54
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:36:29
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         1
+ Arquivos:     33987        44     33943         0         0       254
+    Bytes:   8.459 g   12.44 m   8.446 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           171.739.631 Bytes/s.
+Velocidade:              9827,021 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:36:29
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:36:29
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         1
+ Arquivos:     33987         0     33987         0         0       254
+    Bytes:   8.459 g         0   8.459 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:36:29
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:36:52
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:36:52
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         1
+ Arquivos:     34012        25     33987         0         0       254
+    Bytes:   8.466 g    7.88 m   8.459 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           153.185.074 Bytes/s.
+Velocidade:              8765,320 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:36:52
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         1
+ Arquivos:     34012        23     33989         0         0       254
+    Bytes:   8.466 g    1.10 m   8.465 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           12.249.452 Bytes/s.
+Velocidade:              700,919 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:36:52
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:38:32
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:38:32
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         1
+ Arquivos:     34101        89     34012         0         0       254
+    Bytes:   8.491 g   25.16 m   8.466 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           99.187.060 Bytes/s.
+Velocidade:             5675,529 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:38:33
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         1
+ Arquivos:     34101         6     34095         0         0       254
+    Bytes:   8.491 g   293.8 k   8.491 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           6.267.875 Bytes/s.
+Velocidade:             358,651 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:38:33
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:46:03
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:46:03
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+2026/08/04 23:48:41 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-20\motion_2026-07-20_01.31.39_053.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:48:54 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-22\motion_2026-07-22_19.42.41_170.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:48:57 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-22\motion_2026-07-22_19.48.44_496.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:48:59 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-22\motion_2026-07-22_19.55.00_042.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:01 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-22\motion_2026-07-22_23.38.10_210.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:15 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-22\motion_2026-07-22_23.44.20_376.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:20 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-23\motion_2026-07-23_00.18.56_962.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:22 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-23\motion_2026-07-23_00.23.19_185.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:25 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-23\motion_2026-07-23_00.29.25_527.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:29 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-23\motion_2026-07-23_23.57.37_230.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:32 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_00.38.48_217.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:34 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_00.52.06_597.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:36 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_00.53.12_431.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:38 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_00.53.54_394.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:40 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.21.15_826.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:42 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.23.58_065.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:44 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.24.30_666.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:46 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.25.38_241.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:49 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.26.58_381.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:52 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.27.35_992.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:54 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.31.08_551.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:56 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_16.33.23_053.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:49:58 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_17.27.50_702.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:00 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_17.29.41_527.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:03 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_17.32.22_549.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:05 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_17.35.30_929.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:07 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_18.30.12_639.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:10 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_21.29.30_991.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:13 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_21.56.44_479.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:15 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_21.58.01_815.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:18 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_21.59.40_226.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:20 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_22.01.48_916.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:22 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-24\motion_2026-07-24_22.04.49_375.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:26 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_00.04.03_289.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:28 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_00.04.38_694.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:30 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_00.05.50_153.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:32 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_00.07.32_612.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:34 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_00.09.43_589.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:37 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_12.41.17_874.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:39 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_12.47.35_094.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:50:59 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_13.42.34_530.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:51:02 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_13.46.27_789.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:51:04 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_13.48.01_177.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos... Repetindo...
+2026/08/04 23:51:06 ERRO 32 (0x00000020) Copiando Arquivo C:\Users\helde\Repos\Bois\2026-07-25\motion_2026-07-25_13.57.53_524.avi
+O arquivo j  est  sendo usado por outro processo.
+Aguardando 2 segundos...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24        17         7         0         0         0
+ Arquivos:     34140     23759     10381         0         0       254
+    Bytes:   8.522 g   6.618 g   1.904 g         0         0   1.578 g
+N.§ de Vezes:   0:05:03   0:05:03                       0:00:00   0:00:00
+
+
+Velocidade:           23.447.077 Bytes/s.
+Velocidade:             1341,653 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:51:07
+
+ Repetindo...
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24        17         7         0         0         0
+ Arquivos:     34140     23749     10391         0         0       254
+    Bytes:   8.522 g   6.588 g   1.933 g         0         0   1.578 g
+N.§ de Vezes:   0:05:04   0:03:29                       0:01:34   0:00:00
+
+
+Velocidade:           33.689.115 Bytes/s.
+Velocidade:             1927,707 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:51:08
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:55:00
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:55:00
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34254       114     34140         0         0       254
+    Bytes:   8.526 g    4.76 m   8.522 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           21.893.605 Bytes/s.
+Velocidade:             1252,762 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:55:01
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34254       114     34140         0         0       254
+    Bytes:   8.533 g   11.71 m   8.522 g         0         0   1.578 g
+N.§ de Vezes:   0:00:01   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           29.610.597 Bytes/s.
+Velocidade:             1694,332 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:55:01
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:56:09
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:56:10
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34304        51     34253         0         0       254
+    Bytes:   8.545 g   19.18 m   8.526 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           166.235.892 Bytes/s.
+Velocidade:              9512,094 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:56:10
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34304        47     34257         0         0       254
+    Bytes:   8.545 g    1.79 m   8.543 g         0         0   1.578 g
+N.§ de Vezes:   0:00:01   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           12.631.067 Bytes/s.
+Velocidade:              722,755 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:56:11
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:56:45
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:56:46
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34333        29     34304         0         0       254
+    Bytes:   8.551 g    6.61 m   8.545 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           126.156.872 Bytes/s.
+Velocidade:              7218,754 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:56:46
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34334        28     34306         0         0       254
+    Bytes:   8.553 g    2.34 m   8.550 g         0         0   1.578 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           28.920.494 Bytes/s.
+Velocidade:             1654,844 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:56:46
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:57:32
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: ter‡a-feira, 4 de agosto de 2026 23:57:32
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34390        57     34333         0         0       254
+    Bytes:   8.564 g   13.19 m   8.551 g         0         0   1.578 g
+N.§ de Vezes:   0:00:01   0:00:00                       0:00:00   0:00:01
+
+
+Velocidade:           38.335.554 Bytes/s.
+Velocidade:             2193,578 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:57:34
+
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        24         0        24         0         0         0
+ Arquivos:     34390        54     34336         0         0       254
+    Bytes:   8.564 g    2.04 m   8.562 g         0         0   1.578 g
+N.§ de Vezes:   0:00:02   0:00:00                       0:00:00   0:00:01
+
+
+Velocidade:           2.697.767 Bytes/s.
+Velocidade:             154,367 MegaBytes/min.
+   Finalizado em: ter‡a-feira, 4 de agosto de 2026 23:57:34
+
