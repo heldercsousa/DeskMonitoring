@@ -54,3 +54,10 @@
 2026-08-07 19:45:39  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='235e873f-855e-451a-a7aa-40c9ef7bcc4a' at 08/07/2026 19:44:44 by account=unknown (event 4947) - no own firewall script active, possible tampering
 2026-08-07 19:45:39  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='235e873f-855e-451a-a7aa-40c9ef7bcc4a' at 08/07/2026 19:44:44 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-08-07 19:45:39  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Google Chrome (mDNS-In)' at 08/07/2026 19:44:44 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-07 20:37:07  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/07/2026 20:36:56 - no alert
+2026-08-07 20:38:07  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/07/2026 20:37:54 - no alert
+2026-08-07 20:45:11  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/07/2026 20:44:25 - no alert
+2026-08-07 20:46:12  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/07/2026 20:45:23 - no alert
+2026-08-07 20:48:12  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/07/2026 20:47:18 - no alert
+2026-08-07 20:48:12  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/07/2026 20:47:34 - no alert
+2026-08-07 20:48:12  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/07/2026 20:47:50 - no alert
