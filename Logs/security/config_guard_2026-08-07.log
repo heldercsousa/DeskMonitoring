@@ -2,3 +2,39 @@
 2026-08-07 13:13:29  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
 2026-08-07 13:14:04  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
 2026-08-07 13:14:04  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-08-07 21:35:09  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-08-07 21:35:09  CONFIG-GUARD  RESTORE-FAILED: fatal: detected dubious ownership in repository at 'C:/Sync' 'C:/Sync' is owned by: 	'S-1-5-21-583231401-428563657-1696801058-1001' but the current user is: 	'S-1-5-18' To add an exception for this directory, call: System.Management.Automation.RemoteException 	git config --global --add safe.directory C:/Sync  run_mirror.bat  foreground-was=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-08-07 21:35:09  CONFIG-GUARD  RESTORE-FAILED: fatal: detected dubious ownership in repository at 'C:/Sync' 'C:/Sync' is owned by: 	'S-1-5-21-583231401-428563657-1696801058-1001' but the current user is: 	'S-1-5-18' To add an exception for this directory, call: System.Management.Automation.RemoteException 	git config --global --add safe.directory C:/Sync  run_mirror.bat  foreground-was=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-08-07 21:35:09  CONFIG-GUARD  RESTORE-FAILED: fatal: detected dubious ownership in repository at 'C:/Sync' 'C:/Sync' is owned by: 	'S-1-5-21-583231401-428563657-1696801058-1001' but the current user is: 	'S-1-5-18' To add an exception for this directory, call: System.Management.Automation.RemoteException 	git config --global --add safe.directory C:/Sync  cloud_sync_helderTest.ps1  foreground-was=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  TAMPER  foreground=unknown not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-08-07 21:35:09  CONFIG-GUARD  RESTORE-FAILED: fatal: detected dubious ownership in repository at 'C:/Sync' 'C:/Sync' is owned by: 	'S-1-5-21-583231401-428563657-1696801058-1001' but the current user is: 	'S-1-5-18' To add an exception for this directory, call: System.Management.Automation.RemoteException 	git config --global --add safe.directory C:/Sync  cloud_sync_helderTest.ps1  foreground-was=unknown
+2026-08-07 21:35:09  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=powershell
+2026-08-07 21:35:09  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-08-07 21:35:09  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-08-07 21:35:11  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-08-07 21:35:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-08-07 21:35:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-08-07 21:35:11  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-08-07 21:35:11  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-08-07 21:35:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=powershell
+2026-08-07 21:35:11  CONFIG-GUARD  TAMPER  foreground=powershell not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-08-07 21:35:11  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=powershell
