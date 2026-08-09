@@ -194,3 +194,7 @@
 2026-08-08 14:20:25 | DELETED-ROUTINE           | user=unknown | path=C:\Users\helde\Repos\Bois\2026-07-09\motion_2026-07-09_11.47.56_137.avi
 2026-08-08 14:20:27 | DELETED-ROUTINE           | user=unknown | path=C:\Users\helde\Repos\Bois\2026-07-09\motion_2026-07-09_11.48.12_192.avi
 2026-08-08 14:22:34  [AUDITOR] Shutting down
+2026-08-08 22:42:02  [AUDITOR] Starting up (PID 4612)
+2026-08-08 22:42:03  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-08-08 22:59:09  [AUDITOR] Shutting down
+2026-08-08 23:00:03  [AUDITOR] Starting up (PID 11172)
