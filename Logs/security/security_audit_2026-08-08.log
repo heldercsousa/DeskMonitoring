@@ -39,3 +39,6 @@
 2026-08-08 22:44:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/08/2026 22:43:38 - no alert
 2026-08-08 22:59:09  [AUDITOR] Shutting down
 2026-08-08 23:00:03  [AUDITOR] Starting up (PID 11172)
+2026-08-08 23:00:37 | ALERT  DELETED-SUSPICIOUS | user=helde | path=C:\Users\helde\Repos\Bois\2026-07-09
+2026-08-08 23:11:16  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 08/08/2026 23:10:57 (event 4663); correlated process(es): C:\Windows\System32\svchost.exe (pid 13720, parent C:\Windows\System32\services.exe, via Sysmon-1)
+2026-08-08 23:11:17  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-08_reg-tamper_20260808_231057.md
