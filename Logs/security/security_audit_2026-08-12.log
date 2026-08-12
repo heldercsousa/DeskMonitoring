@@ -1,0 +1,36 @@
+2026-08-12 09:12:40  [AUDITOR] Starting up (PID 4900)
+2026-08-12 09:12:49  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='-' at 08/12/2026 09:12:40 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-12 09:20:55  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='25e3c58c-aec4-4cb2-a62a-6c13a6baae25' at 08/12/2026 09:20:42 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-08-12 09:20:55  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='25e3c58c-aec4-4cb2-a62a-6c13a6baae25' at 08/12/2026 09:20:42 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-12 09:20:55  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Google Chrome (mDNS-In)' at 08/12/2026 09:20:42 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:21:55  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='2e59347a-f7db-409d-b2b2-2e02246f587e' at 08/12/2026 09:21:24 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-08-12 09:21:55  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='2e59347a-f7db-409d-b2b2-2e02246f587e' at 08/12/2026 09:21:24 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-12 09:21:55  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 08/12/2026 09:21:24 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:21:55  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 08/12/2026 09:21:47 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:24:00  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 08/12/2026 09:23:08 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-12 09:24:00  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 08/12/2026 09:23:08 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-12 09:24:00  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 08/12/2026 09:23:08 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-12 09:24:00  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 08/12/2026 09:23:08 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-12 09:25:58  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 08/12/2026 09:25:50 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:25:58  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 08/12/2026 09:25:50 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:25:58  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 08/12/2026 09:25:50 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:25:58  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 08/12/2026 09:25:50 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:26:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 08/12/2026 09:26:00 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-12 09:56:53  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' written by C:\Windows\System32\MRT.exe at 08/12/2026 09:55:06 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 10576, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-08-12 09:56:53  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-12_reg-tamper_20260812_095506.md
+2026-08-12 09:56:53  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' written by C:\Windows\System32\MRT.exe at 08/12/2026 09:56:11 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 10824, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-08-12 09:56:53  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-12_reg-tamper_20260812_095611.md
+2026-08-12 09:56:54  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run' written by C:\Windows\System32\MRT.exe at 08/12/2026 09:56:11 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 10824, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-08-12 09:56:54  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-12_reg-tamper_20260812_095611.md
