@@ -169,3 +169,7 @@
 2026-08-12 19:23:17  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-12_reg-tamper_20260812_192314.md
 2026-08-12 19:30:50  [ALERT] [CAM-HIJACK] Non-Yawcam process is using the webcam: Microsoft.WindowsCamera_8wekyb3d8bbwe - this steals the camera from Yawcam and stops recording. Only Yawcam (javaw) and the CAM-2 relay (vlc) should hold the camera.
 2026-08-12 19:32:06  [RECOVERED] [CAM-HIJACK] Webcam released by Microsoft.WindowsCamera_8wekyb3d8bbwe
+2026-08-12 19:41:38  [AUDITOR] Shutting down
+2026-08-12 19:43:29  [AUDITOR] Starting up (PID 12708)
+2026-08-12 19:55:09  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 08/12/2026 19:54:30 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 12788, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 7680, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-08-12 19:55:09  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-12_reg-tamper_20260812_195430.md
