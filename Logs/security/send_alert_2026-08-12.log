@@ -3,3 +3,11 @@
 2026-08-12 12:00:06  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
 2026-08-12 13:00:06  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
 2026-08-12 14:00:12  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
+2026-08-12 17:08:55  SEND-ALERT  OK  email sent: GIT PUSH FAILED on LAP
+2026-08-12 17:09:00  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/git_push_fail_2026-08-12_17-08-49.txt
+2026-08-12 17:54:32  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
+2026-08-12 17:54:32  SEND-ALERT  FAIL  B2 upload failed: 2026/08/12 17:54:32 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-08-12 17:57:00  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
+2026-08-12 17:57:01  SEND-ALERT  FAIL  B2 upload failed: 2026/08/12 17:57:01 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-08-12 17:59:29  SEND-ALERT  FAIL  email send failed: Exception calling "Send" with "1" argument(s): "Failure sending mail."
+2026-08-12 17:59:31  SEND-ALERT  FAIL  B2 upload failed: 2026/08/12 17:59:31 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
