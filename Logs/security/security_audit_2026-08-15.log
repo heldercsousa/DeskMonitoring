@@ -42,3 +42,27 @@
 2026-08-15 01:51:14  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/15/2026 01:50:42 - no alert
 2026-08-15 02:39:43  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 08/15/2026 02:38:52 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 13140, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 15376, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
 2026-08-15 02:39:43  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-15_reg-tamper_20260815_023852.md
+2026-08-15 05:43:34  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='e4436c01-0299-4258-80ec-6a7aaa6fbc03' at 08/15/2026 05:43:26 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-08-15 05:43:34  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='e4436c01-0299-4258-80ec-6a7aaa6fbc03' at 08/15/2026 05:43:26 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:43:34  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 08/15/2026 05:43:26 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:43:34  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft Edge' at 08/15/2026 05:43:29 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:43:35  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft Edge' at 08/15/2026 05:43:29 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:43:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge' at 08/15/2026 05:43:29 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:43:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge' at 08/15/2026 05:43:29 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Prime Video for Windows' at 08/15/2026 05:43:31 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='TikTok' at 08/15/2026 05:43:35 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='TikTok' at 08/15/2026 05:43:35 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='TikTok' at 08/15/2026 05:43:35 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='TikTok' at 08/15/2026 05:43:35 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Disney+' at 08/15/2026 05:43:37 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Disney+' at 08/15/2026 05:43:37 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Disney+' at 08/15/2026 05:43:37 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Disney+' at 08/15/2026 05:43:37 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-15 05:44:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 08/15/2026 05:43:58 by account=unknown (event 4946) - no own firewall script active, possible tampering
