@@ -60,3 +60,14 @@
 2026-08-16 22:45:12  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 08/16/2026 22:44:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-08-16 22:45:12  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 08/16/2026 22:44:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-08-16 22:45:14  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/16/2026 22:45:01 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:52 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:52 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:52 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:52 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:52 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:52 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:53 - no alert
+2026-08-16 23:16:33  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/16/2026 23:15:53 - no alert
+2026-08-16 23:16:49  [AUDITOR] Shutting down
+2026-08-16 23:24:40  [AUDITOR] Starting up (PID 2868)
+2026-08-16 23:43:45  [AUDITOR] Starting up (PID 20172)
