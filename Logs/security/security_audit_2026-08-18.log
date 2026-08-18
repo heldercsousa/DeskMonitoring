@@ -1,0 +1,18 @@
+2026-08-18 02:43:28  [ALERT] [CAM-HIJACK] Non-Yawcam process is using the webcam: C:\Program Files\Google\Chrome\Application\chrome.exe - this steals the camera from Yawcam and stops recording. Only Yawcam (javaw) and the CAM-2 relay (vlc) should hold the camera.
+2026-08-18 02:43:37  [RECOVERED] [CAM-HIJACK] Webcam released by C:\Program Files\Google\Chrome\Application\chrome.exe
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-18 02:53:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/18/2026 02:53:09 by account=unknown (event 4948) - no own firewall script active, possible tampering
