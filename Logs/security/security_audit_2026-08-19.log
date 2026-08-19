@@ -18,3 +18,5 @@
 2026-08-19 08:54:01  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 08:53:23 - no alert
 2026-08-19 08:54:01  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 08:53:24 - no alert
 2026-08-19 08:54:01  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 08:53:24 - no alert
+2026-08-19 09:11:10  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 08/19/2026 09:11:04 (event 4663); correlated process(es): C:\Windows\System32\wbem\WMIC.exe (pid 26792, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 27228, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-08-19 09:11:10  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-08-19_reg-tamper_20260819_091104.md
