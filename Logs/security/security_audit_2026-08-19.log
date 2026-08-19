@@ -1,0 +1,16 @@
+2026-08-19 07:53:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:18 - no alert
+2026-08-19 07:53:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:18 - no alert
+2026-08-19 07:53:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:19 - no alert
+2026-08-19 07:53:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:19 - no alert
+2026-08-19 07:53:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:22 - no alert
+2026-08-19 07:53:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:22 - no alert
+2026-08-19 07:54:24  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 08/19/2026 07:53:33 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-19 07:54:24  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 08/19/2026 07:53:33 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-19 07:54:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 08/19/2026 07:53:33 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-19 07:54:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 08/19/2026 07:53:33 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-19 07:54:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:25 - no alert
+2026-08-19 07:54:27  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 07:53:25 - no alert
+2026-08-19 07:57:22  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Chrome Sandbox' at 08/19/2026 07:56:23 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-19 07:57:22  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Chrome Sandbox' at 08/19/2026 07:56:23 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-19 07:57:22  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Chrome Sandbox' at 08/19/2026 07:56:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-19 07:57:22  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Chrome Sandbox' at 08/19/2026 07:56:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
