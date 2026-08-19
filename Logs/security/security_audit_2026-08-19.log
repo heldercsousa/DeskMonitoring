@@ -14,3 +14,7 @@
 2026-08-19 07:57:22  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Chrome Sandbox' at 08/19/2026 07:56:23 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-08-19 07:57:22  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Chrome Sandbox' at 08/19/2026 07:56:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-08-19 07:57:22  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Chrome Sandbox' at 08/19/2026 07:56:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-19 08:54:01  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 08:53:23 - no alert
+2026-08-19 08:54:01  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 08:53:23 - no alert
+2026-08-19 08:54:01  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 08:53:24 - no alert
+2026-08-19 08:54:01  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe' at 08/19/2026 08:53:24 - no alert
