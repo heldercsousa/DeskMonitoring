@@ -1,0 +1,9 @@
+2026-08-20 22:50:04  B2-LAG-ALERT  Last successful sync was 103502.7 minutes ago (threshold: 15)
+2026-08-20 22:50:04  SYNC-START  Beginning cloud sync run
+2026-08-20 22:50:05  B2-LAG-ALERT  Last successful sync was 103502.7 minutes ago (threshold: 15)
+2026-08-20 22:50:05  SYNC-START  Beginning cloud sync run
+2026/08/20 22:50:23 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026/08/20 22:50:23 CRITICAL: Failed to create file system for "cloudsync:helder-sync-mirror": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
+2026-08-20 22:50:23  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-08-20 22:50:23  SYNC-FAIL  Sync failed (exit 1) - not a firewall error
+2026-08-20 22:52:26  SYNC-END  Cloud sync run complete
