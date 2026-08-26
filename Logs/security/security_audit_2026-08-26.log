@@ -49,3 +49,21 @@
 2026-08-26 11:18:57  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/26/2026 11:18:26 - no alert
 2026-08-26 11:39:11  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/26/2026 11:38:59 - no alert
 2026-08-26 11:40:13  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 08/26/2026 11:39:54 - no alert
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 08/26/2026 12:00:18 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:19 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:19 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:19 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:00:23  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 08/26/2026 12:00:19 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-08-26 12:53:24  [ALERT] [CAM-HIJACK] Non-Yawcam process is using the webcam: C:\Program Files\Google\Chrome\Application\chrome.exe - this steals the camera from Yawcam and stops recording. Only Yawcam (javaw) and the CAM-2 relay (vlc) should hold the camera.
+2026-08-26 12:54:35  [RECOVERED] [CAM-HIJACK] Webcam released by C:\Program Files\Google\Chrome\Application\chrome.exe
