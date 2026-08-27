@@ -6,3 +6,7 @@
 2026-08-26 06:52:27  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
 2026-08-26 20:08:23  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
 2026-08-26 20:08:23  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-08-26 21:03:36  TASK-TAMPER  FolderSync-CloudBackup disabled - attacker attempt detected, re-enabling
+2026-08-26 21:03:37  TASK-AUTO-RESTORED  FolderSync-CloudBackup re-enabled
+2026-08-26 21:03:37  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-08-26 21:03:38  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled

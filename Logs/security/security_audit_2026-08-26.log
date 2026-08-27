@@ -99,3 +99,4 @@
 2026-08-26 20:58:49  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 08/26/2026 20:57:55 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-08-26 20:58:49  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 08/26/2026 20:57:55 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-08-26 20:58:49  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 08/26/2026 20:57:55 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-08-26 21:03:26  [AUDITOR] Shutting down
