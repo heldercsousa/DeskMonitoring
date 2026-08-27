@@ -808,3 +808,6 @@
 2026-08-26 06:02:46 | CREATED                   | user=unknown | path=C:\Users\helde\Repos\Bois\shot_2026-08-26_06.02.23_587.jpg
 2026-08-26 06:52:01  [AUDITOR] Starting up (PID 4544)
 2026-08-26 06:52:01  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-08-26 13:20:48  [AUDITOR] Shutting down
+2026-08-26 20:08:00  [AUDITOR] Starting up (PID 5244)
+2026-08-26 20:08:01  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
