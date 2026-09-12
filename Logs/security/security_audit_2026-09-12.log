@@ -1,0 +1,3 @@
+2026-09-12 04:54:01  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='54a00ebb-db59-4e6b-a46e-1c98853831db' at 09/12/2026 04:53:54 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-09-12 04:54:01  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='54a00ebb-db59-4e6b-a46e-1c98853831db' at 09/12/2026 04:53:54 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-12 04:54:01  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 09/12/2026 04:53:54 by account=unknown (event 4946) - no own firewall script active, possible tampering
