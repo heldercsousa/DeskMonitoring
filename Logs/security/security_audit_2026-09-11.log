@@ -26,3 +26,20 @@
 2026-09-11 07:06:47  [AUDITOR] Shutting down
 2026-09-11 07:07:22  [AUDITOR] Starting up (PID 6480)
 2026-09-11 07:07:29  [SHUTDOWN] Initiated by unknown - type=?
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:10:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='ms-resource:AppTitle' at 09/11/2026 22:10:27 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:11:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/11/2026 22:10:52 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:11:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/11/2026 22:10:52 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:11:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/11/2026 22:10:52 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-11 22:11:35  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/11/2026 22:10:52 by account=unknown (event 4946) - no own firewall script active, possible tampering
