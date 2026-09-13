@@ -96,3 +96,19 @@
 2026-09-13 00:11:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Game Bar' at 09/13/2026 00:10:29 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-13 00:11:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Game Bar' at 09/13/2026 00:10:29 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-13 00:11:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Game Bar' at 09/13/2026 00:10:29 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:19 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:19 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:19 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='OfficePushNotificationsUtility' at 09/13/2026 08:30:19 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-13 08:30:47  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft.Office.ActionsServer' at 09/13/2026 08:30:21 by account=unknown (event 4946) - no own firewall script active, possible tampering
