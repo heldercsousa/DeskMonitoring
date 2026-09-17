@@ -5,3 +5,15 @@
 2026-09-17 07:55:46  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-17_reg-tamper_20260917_075447.md
 2026-09-17 09:37:07  [ALERT] [CAM-HIJACK] Non-Yawcam process is using the webcam: Microsoft.WindowsCamera_8wekyb3d8bbwe - this steals the camera from Yawcam and stops recording. Only Yawcam (javaw) and the CAM-2 relay (vlc) should hold the camera.
 2026-09-17 09:37:20  [RECOVERED] [CAM-HIJACK] Webcam released by Microsoft.WindowsCamera_8wekyb3d8bbwe
+2026-09-17 12:15:03  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Visual Studio Code' at 09/17/2026 12:14:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-17 12:15:03  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Visual Studio Code' at 09/17/2026 12:14:18 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-17 12:15:03  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Visual Studio Code' at 09/17/2026 12:14:25 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-17 12:15:03  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Visual Studio Code' at 09/17/2026 12:14:25 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-17 12:19:06  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 09/17/2026 12:18:46 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-17 12:19:06  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 09/17/2026 12:18:46 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-17 12:19:06  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 09/17/2026 12:18:46 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-17 12:19:06  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 09/17/2026 12:18:46 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-17 12:21:06  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Visual Studio Code' at 09/17/2026 12:20:32 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-17 12:21:06  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Visual Studio Code' at 09/17/2026 12:20:32 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-17 12:21:06  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Visual Studio Code' at 09/17/2026 12:20:37 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-17 12:21:06  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Visual Studio Code' at 09/17/2026 12:20:37 by account=unknown (event 4946) - no own firewall script active, possible tampering
