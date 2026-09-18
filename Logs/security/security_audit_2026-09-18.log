@@ -1,0 +1,11 @@
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='263713a6-0d04-487c-9ae3-d8814af4823c' at 09/18/2026 04:00:12 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='263713a6-0d04-487c-9ae3-d8814af4823c' at 09/18/2026 04:00:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Copilot (mDNS-In)' at 09/18/2026 04:00:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4946) - no own firewall script active, possible tampering
