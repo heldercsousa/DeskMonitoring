@@ -21,3 +21,4 @@
 2026-09-17 20:00:08  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
 2026-09-17 21:00:09  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
 2026-09-17 22:00:08  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
+2026-09-17 23:00:08  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
