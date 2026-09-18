@@ -10,3 +10,5 @@
 2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-18 04:00:27  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/18/2026 04:00:15 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-18 14:00:12  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 09/18/2026 13:59:25 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-18 18:50:04  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 09/18/2026 18:49:19 (event 4663); correlated process(es): C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 29244, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-09-18 18:50:04  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-18_reg-tamper_20260918_184919.md
