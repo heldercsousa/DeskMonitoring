@@ -15,3 +15,4 @@
 2026-09-19 01:18:03  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-19_reg-tamper_20260919_011731.md
 2026-09-19 01:32:47  [ALERT] [CAM-HIJACK] Non-Yawcam process is using the webcam: C:\Program Files\Google\Chrome\Application\chrome.exe - this steals the camera from Yawcam and stops recording. Only Yawcam (javaw) and the CAM-2 relay (vlc) should hold the camera.
 2026-09-19 01:32:56  [RECOVERED] [CAM-HIJACK] Webcam released by C:\Program Files\Google\Chrome\Application\chrome.exe
+2026-09-19 10:05:39  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 09/19/2026 10:04:43 by account=unknown (event 4946) - no own firewall script active, possible tampering
