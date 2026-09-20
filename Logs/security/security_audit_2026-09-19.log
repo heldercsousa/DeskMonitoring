@@ -19,3 +19,27 @@
 2026-09-19 21:05:49  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='5d4008f6-db85-417b-b03a-aed5e0bc2ca1' at 09/19/2026 21:05:16 by account=unknown (event 4947) - no own firewall script active, possible tampering
 2026-09-19 21:05:49  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='5d4008f6-db85-417b-b03a-aed5e0bc2ca1' at 09/19/2026 21:05:16 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-09-19 21:05:49  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 09/19/2026 21:05:16 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:02 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-19 22:54:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Microsoft 365 Copilot' at 09/19/2026 22:54:03 by account=unknown (event 4948) - no own firewall script active, possible tampering
