@@ -2,3 +2,19 @@
 2026-09-22 00:00:37  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-22_reg-tamper_20260922_000002.md
 2026-09-22 00:55:49  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 09/22/2026 00:54:47 (event 4663); correlated process(es): C:\Windows\UUS\amd64\MoUsoCoreWorker.exe (pid 7328, parent C:\Windows\System32\svchost.exe, via Sysmon-1); C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 44880, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\svchost.exe (pid 33776, parent C:\Windows\System32\services.exe, via Sysmon-1)
 2026-09-22 00:55:49  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-22_reg-tamper_20260922_005447.md
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Claude' at 09/22/2026 14:12:12 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:13 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:13 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:13 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-22 14:13:07  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/22/2026 14:12:13 by account=unknown (event 4948) - no own firewall script active, possible tampering
