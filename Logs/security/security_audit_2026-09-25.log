@@ -16,3 +16,5 @@
 2026-09-25 17:42:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 09/25/2026 17:41:23 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-09-25 17:42:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 09/25/2026 17:41:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-25 17:42:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 09/25/2026 17:41:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 18:06:28  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 09/25/2026 18:05:56 (event 4663); correlated process(es): C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 34500, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-09-25 18:06:28  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-25_reg-tamper_20260925_180556.md
