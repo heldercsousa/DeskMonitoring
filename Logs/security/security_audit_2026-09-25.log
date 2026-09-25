@@ -9,3 +9,10 @@
 2026-09-25 07:07:19  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/25/2026 07:06:59 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-25 07:07:19  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/25/2026 07:06:59 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-25 07:07:19  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Copilot' at 09/25/2026 07:06:59 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 17:04:53  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 09/25/2026 17:04:46 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 17:38:16  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 09/25/2026 17:37:40 - no alert
+2026-09-25 17:39:15  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 09/25/2026 17:38:37 - no alert
+2026-09-25 17:42:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 09/25/2026 17:41:23 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-25 17:42:13  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 09/25/2026 17:41:23 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-25 17:42:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 09/25/2026 17:41:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 17:42:13  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 09/25/2026 17:41:23 by account=unknown (event 4946) - no own firewall script active, possible tampering
