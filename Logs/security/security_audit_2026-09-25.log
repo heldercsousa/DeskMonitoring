@@ -39,3 +39,9 @@
 2026-09-25 20:22:34  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-25_reg-tamper_20260925_202137.md
 2026-09-25 20:24:35  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 09/25/2026 20:24:14 (event 4663); correlated process(es): C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 5052, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1); C:\Windows\System32\svchost.exe (pid 7380, parent C:\Windows\System32\services.exe, via Sysmon-1)
 2026-09-25 20:24:35  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-09-25_reg-tamper_20260925_202414.md
+2026-09-25 22:33:45  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-144' at 09/25/2026 22:33:01 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 22:33:45  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-145' at 09/25/2026 22:33:01 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 22:33:45  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-151' at 09/25/2026 22:33:01 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 22:46:53  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-144' at 09/25/2026 22:45:57 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 22:46:53  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-145' at 09/25/2026 22:45:57 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-25 22:46:53  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-151' at 09/25/2026 22:45:57 by account=unknown (event 4946) - no own firewall script active, possible tampering
