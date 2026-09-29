@@ -14,3 +14,6 @@
 2026-09-28 15:26:20  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/28/2026 15:26:15 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-09-28 15:26:20  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/28/2026 15:26:15 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-09-28 15:26:21  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Claude' at 09/28/2026 15:26:15 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-28 20:50:24  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='b92717b8-9049-4045-9167-3f3db963cead' at 09/28/2026 20:49:39 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-09-28 20:50:24  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='b92717b8-9049-4045-9167-3f3db963cead' at 09/28/2026 20:49:39 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-09-28 20:50:24  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Google Chrome (mDNS-In)' at 09/28/2026 20:49:39 by account=unknown (event 4946) - no own firewall script active, possible tampering
