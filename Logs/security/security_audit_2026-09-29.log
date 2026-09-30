@@ -1,2 +1,5 @@
 2026-09-29 02:08:43  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 09/29/2026 02:08:41 - no alert
 2026-09-29 02:08:43  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 09/29/2026 02:08:41 - no alert
+2026-09-29 08:59:12  [AUDITOR] Shutting down
+2026-09-29 22:59:12  [AUDITOR] Starting up (PID 5220)
+2026-09-29 22:59:21  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='-' at 09/29/2026 22:59:12 by account=unknown (event 4948) - no own firewall script active, possible tampering
