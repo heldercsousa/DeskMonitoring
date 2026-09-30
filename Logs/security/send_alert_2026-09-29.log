@@ -16,3 +16,4 @@
 2026-09-29 07:00:23  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/git_push_fail_2026-09-29_07-00-09.txt
 2026-09-29 08:00:20  SEND-ALERT  OK  email sent: GIT PUSH FAILED on LAP
 2026-09-29 08:00:25  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/git_push_fail_2026-09-29_08-00-09.txt
+2026-09-29 23:00:09  SEND-ALERT  FAIL  credential decryption failed: Exception calling "Unprotect" with "3" argument(s): "Chave inválida para uso no estado especificado."
