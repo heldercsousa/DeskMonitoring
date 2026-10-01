@@ -41,3 +41,4 @@
 2026-09-30 19:50:03  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Visual Studio Code' at 09/30/2026 19:49:28 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-09-30 19:50:03  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Visual Studio Code' at 09/30/2026 19:49:34 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-09-30 19:50:03  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Visual Studio Code' at 09/30/2026 19:49:34 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-09-30 22:26:55  [AUDITOR] Shutting down
