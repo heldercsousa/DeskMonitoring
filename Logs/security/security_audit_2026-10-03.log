@@ -1,0 +1,7 @@
+2026-10-03 17:18:44  [AUDITOR] Starting up (PID 4916)
+2026-10-03 17:26:55  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='2529c0ec-9c94-4fdd-b3ef-f20dee8f911e' at 10/03/2026 17:26:16 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-10-03 17:26:56  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='2529c0ec-9c94-4fdd-b3ef-f20dee8f911e' at 10/03/2026 17:26:16 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-10-03 17:26:56  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 10/03/2026 17:26:16 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-03 17:27:56  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='d4335f33-8e00-4dfc-a504-426d46f88375' at 10/03/2026 17:27:08 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-10-03 17:27:56  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='d4335f33-8e00-4dfc-a504-426d46f88375' at 10/03/2026 17:27:08 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-10-03 17:27:56  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Copilot (mDNS-In)' at 10/03/2026 17:27:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
