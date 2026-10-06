@@ -2,3 +2,6 @@
 2026-10-06 16:17:33  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='2a6b16c0-6a78-4b07-ad1f-119bc08ef5e8' at 10/06/2026 16:17:07 by account=unknown (event 4947) - no own firewall script active, possible tampering
 2026-10-06 16:17:33  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='2a6b16c0-6a78-4b07-ad1f-119bc08ef5e8' at 10/06/2026 16:17:07 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-10-06 16:17:33  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Edge (mDNS-in)' at 10/06/2026 16:17:07 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-06 18:49:18  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='77d19b64-15e3-404f-9d57-4cf7b7a0915a' at 10/06/2026 18:49:16 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-10-06 18:49:18  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='77d19b64-15e3-404f-9d57-4cf7b7a0915a' at 10/06/2026 18:49:16 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-10-06 18:49:18  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Google Chrome (mDNS-In)' at 10/06/2026 18:49:16 by account=unknown (event 4946) - no own firewall script active, possible tampering
