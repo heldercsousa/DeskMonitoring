@@ -1,0 +1,5 @@
+2026-10-07 06:15:09  [SHUTDOWN] Initiated by unknown - type=?
+2026-10-07 06:15:14  [AUDITOR] Shutting down
+2026-10-07 06:15:57  [AUDITOR] Starting up (PID 4604)
+2026-10-07 06:16:05  [SHUTDOWN] Initiated by unknown - type=?
+2026-10-07 06:16:08  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='-' at 10/07/2026 06:15:56 by account=unknown (event 4948) - no own firewall script active, possible tampering
