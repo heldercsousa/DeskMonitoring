@@ -3,3 +3,6 @@
 2026-10-07 06:15:57  [AUDITOR] Starting up (PID 4604)
 2026-10-07 06:16:05  [SHUTDOWN] Initiated by unknown - type=?
 2026-10-07 06:16:08  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='-' at 10/07/2026 06:15:56 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-10-07 12:17:54  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='7c5ee1e1-4242-4ee8-9cf7-d65748c4d70c' at 10/07/2026 12:17:19 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-10-07 12:17:54  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='7c5ee1e1-4242-4ee8-9cf7-d65748c4d70c' at 10/07/2026 12:17:19 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-10-07 12:17:54  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft Copilot (mDNS-In)' at 10/07/2026 12:17:19 by account=unknown (event 4946) - no own firewall script active, possible tampering
