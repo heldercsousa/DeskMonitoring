@@ -2,3 +2,4 @@
 2026-10-11 07:41:24  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-10-11_reg-tamper_20261011_074028.md
 2026-10-11 08:11:40  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='capcut.exe' at 10/11/2026 08:10:47 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-10-11 08:11:40  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='capcut.exe' at 10/11/2026 08:10:47 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-11 09:09:26  [AUDITOR] Shutting down
