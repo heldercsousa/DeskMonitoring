@@ -1,0 +1,8 @@
+2026-10-13 22:45:54  [AUDITOR] Starting up (PID 4336)
+2026-10-13 22:45:54  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-10-13 22:47:38 | ALERT  DELETED-SUSPICIOUS | user=unknown | path=C:\Users\helde\Repos\Bois\shot_2026-10-12_22.29.48_410.jpg
+2026-10-13 22:47:37 | ALERT  DELETED-SUSPICIOUS | user=unknown | path=C:\Users\helde\Repos\Bois\shot_2026-10-12_22.29.48_915.jpg
+2026-10-13 22:47:38 | ALERT  DELETED-SUSPICIOUS | user=unknown | path=C:\Users\helde\Repos\Bois\shot_2026-10-12_22.29.47_902.jpg
+2026-10-13 22:48:58  [AUDITOR] Shutting down
+2026-10-13 22:51:35  [AUDITOR] Starting up (PID 14104)
+2026-10-13 22:51:35  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois

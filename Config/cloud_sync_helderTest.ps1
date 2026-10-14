@@ -170,7 +170,7 @@ if ($rcloneOutput -match 'connectex|socket access forbidden|access is forbidden|
 }
 
 # ============================================================
-# PHASE 0 - Apply Deny Delete ACL to files younger than 7 days
+# FASE 0 - Aplicar ACL Deny Delete em arquivos < 7 dias
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -199,13 +199,13 @@ if (Test-Path $Mirror) {
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
             } catch {
-                # Silent
+                # Silencioso
             }
         }
 }
 
 # ============================================================
-# PHASE 1 - Remove Deny Delete ACL from files >= 7 days old
+# FASE 1 - Remover ACL Deny Delete de arquivos >= 7 dias
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)
@@ -229,13 +229,13 @@ if (Test-Path $Mirror) {
                     Set-Acl $_.FullName $acl -ErrorAction Stop
                 }
             } catch {
-                # Silent
+                # Silencioso
             }
         }
 }
 
 # ============================================================
-# PHASE 2 - Delete files >= 7 days old
+# FASE 2 - Deletar arquivos >= 7 dias
 # ============================================================
 if (Test-Path $Mirror) {
     $threshold = (Get-Date).AddDays(-$DaysToKeepMirror)

@@ -1,2 +1,29 @@
 2026-10-12 14:08:25  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
 2026-10-12 14:08:26  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-10-12 22:22:58  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=ShellHost
+2026-10-12 22:22:58  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-10-12 22:22:58  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellHost
+2026-10-12 22:22:59  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=ShellHost
+2026-10-12 22:22:59  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-10-12 22:22:59  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-10-12 22:23:00  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-10-12 22:23:00  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  CHANGE  Created on run_mirror.bat  foreground=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-10-12 22:23:00  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring run_mirror.bat from git HEAD
+2026-10-12 22:23:00  CONFIG-GUARD  AUTO-RESTORED  run_mirror.bat  foreground-was=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  CHANGE  Created on cloud_sync_helderTest.ps1  foreground=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-10-12 22:23:00  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=ShellHost
+2026-10-12 22:23:00  CONFIG-GUARD  TAMPER  foreground=ShellHost not a trusted editor - restoring cloud_sync_helderTest.ps1 from git HEAD
+2026-10-12 22:23:00  CONFIG-GUARD  AUTO-RESTORED  cloud_sync_helderTest.ps1  foreground-was=ShellHost
+2026-10-12 22:33:14  TASK-TAMPER  FolderSync-GitCommitLogs MISSING (deleted) - restoring from backup XML
+2026-10-12 22:33:16  TASK-RESTORE-FAILED  FolderSync-GitCommitLogs could not be re-registered from backup - manual action required
+2026-10-12 22:33:16  TASK-TAMPER  FolderSync-PowerCheck MISSING (deleted) - restoring from backup XML

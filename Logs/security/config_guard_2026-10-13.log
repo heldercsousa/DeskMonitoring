@@ -1,0 +1,12 @@
+2026-10-13 22:46:17  CONFIG-GUARD  START  watching C:\Sync\Config for: cloud_sync_helderTest.ps1, run_mirror.bat, auditor.ps1, setup_update.ps1
+2026-10-13 22:46:17  CONFIG-GUARD  READY  watcher active - restore triggered when foreground is not a trusted editor
+2026-10-13 22:49:06  TASK-TAMPER  FolderSync-DailyCheck disabled - attacker attempt detected, re-enabling
+2026-10-13 22:49:08  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-10-13 22:49:08  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-10-13 22:49:08  CONFIG-GUARD  CHANGE  Changed on run_mirror.bat  foreground=Code
+2026-10-13 22:49:08  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-10-13 22:49:08  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=Code
+2026-10-13 22:49:08  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-10-13 22:49:08  CONFIG-GUARD  CHANGE  Changed on cloud_sync_helderTest.ps1  foreground=Code
+2026-10-13 22:49:08  CONFIG-GUARD  SKIP  foreground=Code is a trusted editor - no restore
+2026-10-13 22:49:08  TASK-AUTO-RESTORED  FolderSync-DailyCheck re-enabled
