@@ -9,3 +9,7 @@
 2026-10-13 22:48:35  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-10-13_reg-tamper_20261013_224810.md
 2026-10-13 22:48:58  [AUDITOR] Shutting down
 2026-10-13 22:51:35  [AUDITOR] Starting up (PID 14104)
+2026-10-13 22:52:41  [FW-CHANGE] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 10/13/2026 22:52:06 by account=unknown (event 4948) - expected (own firewall script active), no alert
+2026-10-13 22:52:41  [FW-CHANGE] RULE-DELETED rule='Adobe Acrobat Reader Protected Mode' at 10/13/2026 22:52:06 by account=unknown (event 4948) - expected (own firewall script active), no alert
+2026-10-13 22:52:41  [FW-CHANGE] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 10/13/2026 22:52:06 by account=unknown (event 4946) - expected (own firewall script active), no alert
+2026-10-13 22:52:41  [FW-CHANGE] RULE-ADDED rule='Adobe Acrobat Reader Protected Mode' at 10/13/2026 22:52:06 by account=unknown (event 4946) - expected (own firewall script active), no alert
