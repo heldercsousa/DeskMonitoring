@@ -1,1 +1,33 @@
 2026-10-18 16:04:07  [AUDITOR] Shutting down
+2026-10-18 22:16:36  [AUDITOR] Starting up (PID 21384)
+2026-10-18 22:16:36  [AUDITOR] FileSystemWatcher active on C:\Users\helde\Repos\Bois
+2026-10-18 22:17:18 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18
+2026-10-18 22:17:17 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.17_552.jpg
+2026-10-18 22:17:18 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.17.17_646.avi
+2026-10-18 22:17:18 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.18_570.jpg
+2026-10-18 22:17:18 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.17.17_646.avi
+2026-10-18 22:17:18 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.17.17_646.avi
+2026-10-18 22:17:23 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.19_077.jpg
+2026-10-18 22:17:18 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.18_063.jpg
+2026-10-18 22:17:25 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.21_103.jpg
+2026-10-18 22:17:25 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.20_596.jpg
+2026-10-18 22:17:25 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.20_091.jpg
+2026-10-18 22:17:25 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.17.19_584.jpg
+2026-10-18 22:27:03 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.02_998.jpg
+2026-10-18 22:27:03 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.27.03_097.avi
+2026-10-18 22:27:03 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.27.03_097.avi
+2026-10-18 22:27:04 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.03_508.jpg
+2026-10-18 22:27:03 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.27.03_097.avi
+2026-10-18 22:27:07 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.04_015.jpg
+2026-10-18 22:27:11 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.04_522.jpg
+2026-10-18 22:27:11 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.05_532.jpg
+2026-10-18 22:27:11 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.06_037.jpg
+2026-10-18 22:27:11 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.05_027.jpg
+2026-10-18 22:27:13 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.27.12_834.avi
+2026-10-18 22:27:14 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.12_796.jpg
+2026-10-18 22:27:13 | DELETED-ROUTINE           | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.27.12_834.avi
+2026-10-18 22:27:14 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.14_126.jpg
+2026-10-18 22:27:13 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\2026-10-18\motion_2026-10-18_22.27.12_834.avi
+2026-10-18 22:27:15 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.15_149.jpg
+2026-10-18 22:27:14 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.14_636.jpg
+2026-10-18 22:27:16 | CREATED                   | user=helde | path=C:\Users\helde\Repos\Bois\shot_2026-10-18_22.27.15_657.jpg
