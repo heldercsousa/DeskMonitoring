@@ -1,1 +1,9 @@
 2026-10-20 09:00:02  SCAN-START  DailySecurityCheck v9
+2026-10-20 09:00:24  ALERT  [B2Connectivity] Host=api.backblazeb2.com Port=443 Result=FAIL - B2 outbound blocked or unreachable
+2026-10-20 09:00:28  ALERT  [RunKeyUnknown] Name="Adobe Acrobat Synchronizer" Value=""C:\Program Files\Adobe\Acrobat DC\Acrobat\AdobeCollabSync.exe""
+2026-10-20 09:00:28  ALERT  [RunKeyUnknown] Name="Fing" Value="C:\Program Files\Fing\Fing.exe "
+2026-10-20 09:00:28  ALERT  [RunKeyUnknown] Name="com.klingai.local.app" Value="C:\Program Files\KlingAI\KlingAI.exe"
+2026-10-20 09:00:28  ALERT  [RunKeyUnknown] Name="Discord" Value=""C:\Users\helde\AppData\Local\Discord\Discord.exe" --processStart Discord.exe --process-start-args "--start-inactive""
+2026-10-20 09:00:28  ALERT  [RunKeyUnknown] Name="MicrosoftEdgeAutoLaunch_4717F1F9F2763686856C51E3910D38DA" Value=""C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --no-startup-window --win-session-start"
+2026-10-20 09:00:28  ALERT  [RunKeyUnknown] Name="GoogleChromeAutoLaunch_0F5D42DE3AA9C828455E867A481F6735" Value=""C:\Program Files\Google\Chrome\Application\chrome.exe" --no-startup-window /prefetch:5"
+2026-10-20 09:00:28  SCAN-END  Issues=7
