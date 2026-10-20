@@ -1,0 +1,2 @@
+2026-10-20 00:00:49  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 10/20/2026 00:00:12 (event 4663); correlated process(es): C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 41768, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
+2026-10-20 00:00:49  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-10-20_reg-tamper_20261020_000012.md
