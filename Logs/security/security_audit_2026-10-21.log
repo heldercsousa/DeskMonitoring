@@ -7,3 +7,5 @@
 2026-10-21 16:36:15  [ALERT] [REG-TAMPER] Guarded key '\REGISTRY\MACHINE\SYSTEM\ControlSet001\Control\Power\User\PowerSchemes' written by C:\Windows\System32\svchost.exe at 10/21/2026 16:35:35 (event 4663); correlated process(es): C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe (pid 8440, parent C:\Windows\System32\drivers\RivetNetworks\Killer\KAPS.exe, via Sysmon-1)
 2026-10-21 16:36:15  [FORENSIC] REG-TAMPER evidence written: C:\Sync\Evidence\2026-10-21_reg-tamper_20261021_163535.md
 2026-10-21 16:36:16  [AUDITOR] Shutting down
+2026-10-21 21:08:57  [AUDITOR] Starting up (PID 41844)
+2026-10-21 21:16:16  [REG-INFO] Run key written by whitelisted reporter 'C:\Program Files\Google\Chrome\Application\chrome.exe' at 10/21/2026 21:15:15 - no alert
