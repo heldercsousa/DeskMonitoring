@@ -40,3 +40,5 @@
 2026-10-22 19:00:06  SEND-ALERT  FAIL  B2 upload failed: 2026/10/22 19:00:06 CRITICAL: Failed to create file system for destination "cloudsync:helder-sync-mirror/alerts/": failed to authorize account: failed to authenticate: Get "https://api.backblazeb2.com/b2api/v4/b2_authorize_account": dial tcp: lookup api.backblazeb2.com: no such host
 2026-10-22 20:00:14  SEND-ALERT  OK  email sent: GIT PUSH FAILED on LAP
 2026-10-22 20:00:18  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/git_push_fail_2026-10-22_20-00-07.txt
+2026-10-22 21:00:13  SEND-ALERT  OK  email sent: GIT PUSH FAILED on LAP
+2026-10-22 21:00:17  SEND-ALERT  OK  B2 upload: cloudsync:helder-sync-mirror/alerts/git_push_fail_2026-10-22_21-00-07.txt
