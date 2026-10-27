@@ -56,3 +56,6 @@
 2026-10-26 19:19:41  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft.Office.ActionsServer' at 10/26/2026 19:18:51 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-10-26 19:19:41  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft.Office.ActionsServer' at 10/26/2026 19:18:51 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-10-26 19:19:41  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Microsoft.Office.ActionsServer' at 10/26/2026 19:18:51 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-26 23:55:59  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='62ad139c-50f8-44cd-bd6a-4f66389e0dcf' at 10/26/2026 23:55:04 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-10-26 23:55:59  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='62ad139c-50f8-44cd-bd6a-4f66389e0dcf' at 10/26/2026 23:55:04 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-10-26 23:55:59  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Google Chrome (mDNS-In)' at 10/26/2026 23:55:04 by account=unknown (event 4946) - no own firewall script active, possible tampering
