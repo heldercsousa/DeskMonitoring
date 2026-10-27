@@ -92,3 +92,12 @@
 2026-10-27 04:40:30  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='Pacote de Experiência Local em Português (Brasil)' at 10/27/2026 04:39:46 by account=unknown (event 4948) - no own firewall script active, possible tampering
 2026-10-27 04:40:30  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Pacote de Experiência Local em Português (Brasil)' at 10/27/2026 04:39:46 by account=unknown (event 4946) - no own firewall script active, possible tampering
 2026-10-27 04:40:30  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Pacote de Experiência Local em Português (Brasil)' at 10/27/2026 04:39:46 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-27 19:09:43  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-144' at 10/27/2026 19:09:26 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-27 19:09:43  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-145' at 10/27/2026 19:09:26 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-27 19:09:43  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-151' at 10/27/2026 19:09:26 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-27 19:11:45  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-144' at 10/27/2026 19:11:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-27 19:11:45  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-145' at 10/27/2026 19:11:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-27 19:11:45  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='@ipnathlp.dll,-151' at 10/27/2026 19:11:08 by account=unknown (event 4946) - no own firewall script active, possible tampering
+2026-10-27 19:55:16  [ALERT] [FIREWALL-TAMPER] RULE-MODIFIED rule='0a2d0540-6832-40e3-beba-6d5a3c8efc84' at 10/27/2026 19:54:55 by account=unknown (event 4947) - no own firewall script active, possible tampering
+2026-10-27 19:55:16  [ALERT] [FIREWALL-TAMPER] RULE-DELETED rule='0a2d0540-6832-40e3-beba-6d5a3c8efc84' at 10/27/2026 19:54:55 by account=unknown (event 4948) - no own firewall script active, possible tampering
+2026-10-27 19:55:16  [ALERT] [FIREWALL-TAMPER] RULE-ADDED rule='Google Chrome (mDNS-In)' at 10/27/2026 19:54:55 by account=unknown (event 4946) - no own firewall script active, possible tampering
