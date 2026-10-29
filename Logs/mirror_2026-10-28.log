@@ -346,3 +346,119 @@ Velocidade:           197.963.428 Bytes/s.
 Velocidade:             11327,559 MegaBytes/min.
    Finalizado em: quarta-feira, 28 de outubro de 2026 01:53:51
 
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quarta-feira, 28 de outubro de 2026 02:09:27
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        12         0        12         0         0        24
+ Arquivos:     11759         9     11750         0         0     50694
+    Bytes:   3.291 g    1.66 m   3.290 g         0         0   1.752 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           97.021.611 Bytes/s.
+Velocidade:             5551,621 MegaBytes/min.
+   Finalizado em: quarta-feira, 28 de outubro de 2026 02:09:27
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quarta-feira, 28 de outubro de 2026 02:23:12
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        12         0        12         0         0        24
+ Arquivos:     11795        36     11759         0         0     50694
+    Bytes:   3.299 g    7.62 m   3.291 g         0         0   1.752 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           82.384.577 Bytes/s.
+Velocidade:             4714,083 MegaBytes/min.
+   Finalizado em: quarta-feira, 28 de outubro de 2026 02:23:13
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quarta-feira, 28 de outubro de 2026 02:26:50
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        12         0        12         0         0        24
+ Arquivos:     11835        41     11794         0         0     50694
+    Bytes:   3.304 g    4.91 m   3.299 g         0         0   1.752 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           80.462.796 Bytes/s.
+Velocidade:             4604,118 MegaBytes/min.
+   Finalizado em: quarta-feira, 28 de outubro de 2026 02:26:50
+
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy para Windows                              
+-------------------------------------------------------------------------------
+
+  Iniciado: quarta-feira, 28 de outubro de 2026 02:34:53
+   Origem : C:\Users\helde\Repos\Bois\
+     Destino : C:\Sync\Mirror\
+
+    Arquivos: *.*
+	    
+  Op‡äes: *.* /NS /NC /NDL /NFL /S /E /DCOPY:DA /COPY:DAT /Z /NP /R:1 /W:2 
+
+------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------
+
+               Total   Copiada  IgnoradaIncompatibilidade     FALHA    Extras
+Diret¢rios:        12         0        12         0         0        24
+ Arquivos:     11852        18     11834         0         0     50694
+    Bytes:   3.319 g   15.82 m   3.304 g         0         0   1.752 g
+N.§ de Vezes:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Velocidade:           436.627.921 Bytes/s.
+Velocidade:             24984,051 MegaBytes/min.
+   Finalizado em: quarta-feira, 28 de outubro de 2026 02:34:53
+
